@@ -62,6 +62,7 @@ class SourceEpisode:
     effectors: dict[str, Effector]
     objects: dict[str, ObjectTrack] = field(default_factory=dict)
     base: np.ndarray | None = None   # (T, 3) x, y, yaw in world; None = fixed base
+    base_hint: np.ndarray | None = None  # (3,) fixed source robot base x, y, yaw (placement prior)
     torso_height: np.ndarray | None = None
     articulations: dict[str, Articulation] = field(default_factory=dict)
     scene: SceneRef | None = None
@@ -101,6 +102,10 @@ class SourceEpisode:
             self.base = np.asarray(self.base, float)
             if self.base.shape != (T, 3):
                 raise ValueError("base must be (T, 3)")
+        if self.base_hint is not None:
+            self.base_hint = np.asarray(self.base_hint, float)
+            if self.base_hint.shape != (3,) or not np.all(np.isfinite(self.base_hint)):
+                raise ValueError("base_hint must be three finite values")
         for name, a in self.articulations.items():
             a.qpos = np.asarray(a.qpos, float)
             if a.qpos.shape != (T, len(a.joint_names)):
