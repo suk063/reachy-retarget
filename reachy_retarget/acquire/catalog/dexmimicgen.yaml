@@ -1,0 +1,42 @@
+# Pinned source files. Generated from publisher metadata (HF LFS oid = sha256,
+# PyPI digests; GitHub archive digests computed on download, see notes); edit by
+# regenerating, not by hand. Ids are '<family>/<path>'.
+# kind: low_dim (states/low-dim obs only), images_embedded (HDF5 also holds
+# image observations; fetch refuses these unless strip_images=True, which keeps a
+# state-only <stem>.state.hdf5 copy), assets (simulator models; asset_marker = the
+# path fragment of recorded MJCF file references that resolves into the archive).
+sources:
+- family: dexmimicgen
+  repo: https://huggingface.co/datasets/MimicGen/dexmimicgen_datasets
+  revision: 181967e10c6277a653e7c9761f3978312af3646a
+  license: CC-BY-NC-SA-4.0
+  note: 'DexMimicGen (ICRA 2025) generated datasets, robosuite 1.5.1, ~1000 MimicGen-generated demos per task (the
+    human source demos are not in this repository). Only bimanual Panda tasks with parallel-jaw grippers (env_configuration
+    single-arm-parallel) are catalogued. Excluded (env_args inspected by HTTP range reads 2026-10-07): two_arm_box_cleanup:
+    PandaDexRH+PandaDexLH (dexterous hands), 5.17 GB; two_arm_drawer_cleanup: PandaDexRH+PandaDexLH (dexterous hands),
+    5.09 GB; two_arm_lift_tray: PandaDexRH+PandaDexLH (dexterous hands), 9.76 GB; two_arm_can_sort_random: GR1ArmsOnly
+    humanoid (dexterous hands), 4.43 GB; two_arm_coffee: GR1FixedLowerBody humanoid (dexterous hands), 5.75 GB;
+    two_arm_pouring: GR1FixedLowerBody humanoid (dexterous hands), 6.32 GB. Files embed 84x84 RGB observations (fetch
+    with strip_images=True).'
+  files:
+  - path: generated/two_arm_threading.hdf5
+    url: https://huggingface.co/datasets/MimicGen/dexmimicgen_datasets/resolve/181967e10c6277a653e7c9761f3978312af3646a/generated/two_arm_threading.hdf5
+    sha256: 83ffc06f7bf2d11e83295252d7ec2b1ae50e93c96b12d0739078a371f3875b08
+    size: 3913396274
+    kind: images_embedded
+    dataset: dexmimicgen/two_arm_threading
+    note: env TwoArmThreading, robots Panda+Panda
+  - path: generated/two_arm_three_piece_assembly.hdf5
+    url: https://huggingface.co/datasets/MimicGen/dexmimicgen_datasets/resolve/181967e10c6277a653e7c9761f3978312af3646a/generated/two_arm_three_piece_assembly.hdf5
+    sha256: e12cf336e23b362d8c5317b6e195df472d32bb424a797ab1858e8aa20fabe752
+    size: 4322918683
+    kind: images_embedded
+    dataset: dexmimicgen/two_arm_three_piece_assembly
+    note: env TwoArmThreePieceAssembly, robots Panda+Panda
+  - path: generated/two_arm_transport.hdf5
+    url: https://huggingface.co/datasets/MimicGen/dexmimicgen_datasets/resolve/181967e10c6277a653e7c9761f3978312af3646a/generated/two_arm_transport.hdf5
+    sha256: 8eea65271eb21eabe6de1310cbc04b15f8f21343b59efc26b1f5cb4d54795f57
+    size: 15177869792
+    kind: images_embedded
+    dataset: dexmimicgen/two_arm_transport
+    note: env TwoArmTransport, robots Panda+Panda

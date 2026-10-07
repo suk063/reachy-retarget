@@ -1,7 +1,10 @@
 # Pinned source files. Generated from publisher metadata (HF LFS oid = sha256,
-# PyPI digests); edit by regenerating, not by hand. Ids are '<family>/<path>'.
+# PyPI digests; GitHub archive digests computed on download, see notes); edit by
+# regenerating, not by hand. Ids are '<family>/<path>'.
 # kind: low_dim (states/low-dim obs only), images_embedded (HDF5 also holds
-# image observations; fetch refuses these by default), assets (simulator models).
+# image observations; fetch refuses these unless strip_images=True, which keeps a
+# state-only <stem>.state.hdf5 copy), assets (simulator models; asset_marker = the
+# path fragment of recorded MJCF file references that resolves into the archive).
 sources:
 - family: robosuite
   repo: https://pypi.org/project/robosuite/
@@ -14,6 +17,7 @@ sources:
     sha256: 39810a9e9f193455fcb13a9b4846424abef77481ac3091892c2077c88dcdc153
     size: 152011410
     kind: assets
+    asset_marker: robosuite/models/assets/
 - family: robosuite
   repo: https://pypi.org/project/robosuite/
   revision: 1.4.1
@@ -25,3 +29,17 @@ sources:
     sha256: 62587cd5888d9d3d813f3ffcc7017f6f77efa618952527a0b9bb139ffd0a3741
     size: 193518002
     kind: assets
+    asset_marker: robosuite/models/assets/
+- family: robosuite
+  repo: https://github.com/ARISE-Initiative/robosuite-task-zoo
+  revision: 74eab7f88214c21ca1ae8617c2b2f8d19718a9ed
+  license: MIT
+  note: GitHub archive of robosuite-task-zoo (master head 2022-10-04); MimicGen Kitchen references robosuite_task_zoo/models/kitchen/burnerplate.stl.
+    sha256/size computed on download 2026-10-07.
+  files:
+  - path: robosuite-task-zoo-74eab7f88214c21ca1ae8617c2b2f8d19718a9ed.zip
+    url: https://github.com/ARISE-Initiative/robosuite-task-zoo/archive/74eab7f88214c21ca1ae8617c2b2f8d19718a9ed.zip
+    sha256: a8c5ba39488727d420413e171cbdfd2e21799c552482b2dac8e21ee94d512d73
+    size: 1717852
+    kind: assets
+    asset_marker: robosuite_task_zoo/models/

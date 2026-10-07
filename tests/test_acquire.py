@@ -8,7 +8,8 @@ import re
 import pytest
 
 from reachy_retarget.acquire import (CatalogEntry, ChecksumMismatch, InsufficientDisk, fetch,
-                                     find_entry, load_catalog, read_ledger)
+                                     find_entry, ledger_record_path, load_catalog, migrate_ledger,
+                                     read_ledger, read_ledger_record)
 fetch_mod = importlib.import_module("reachy_retarget.acquire.fetch")  # module, not the function
 
 PAYLOAD = bytes(range(256)) * 4096  # 1 MiB
@@ -54,7 +55,9 @@ def test_catalog_is_pinned_and_complete():
     for task in ["lift", "can", "square", "transport"]:
         assert {f"robomimic/{task}/ph", f"robomimic/{task}/mh"} <= datasets
     assert "robomimic/tool_hang/ph" in datasets
-    assert all(e.kind == "images_embedded" for e in cat.values() if e.family == "mimicgen")
+    for fam in ("mimicgen", "libero", "dexmimicgen"):
+        assert all(e.kind == "images_embedded" for e in cat.values() if e.family == fam and e.path.endswith(".hdf5"))
+    assert all(e.asset_marker for e in cat.values() if e.kind == "assets" and e.path.endswith((".zip", ".whl")))
     assert {e.kind for e in cat.values() if e.family == "robosuite"} == {"assets"}
 
 
@@ -107,6 +110,30 @@ def test_fetch_refuses_images_by_default(tmp_path, plenty_of_disk):
         fetch([entry(kind="images_embedded")], tmp_path, opener=opener([]))
 
 
-def test_ledger_is_json(tmp_path, plenty_of_disk):
-    fetch([entry()], tmp_path, opener=opener([]))
-    json.loads((tmp_path / "raw" / "ledger.json").read_text())
+def test_ledger_is_one_json_record_per_file(tmp_path, plenty_of_disk):
+    (rec,) = fetch([entry()], tmp_path, opener=opener([]))
+    path = tmp_path / "raw" / "ledger" / "demo" / "a" / "b.bin.json"
+    assert ledger_record_path(tmp_path, "demo/a/b.bin") == path
+    assert json.loads(path.read_text()) == rec
+    assert not (tmp_path / "raw" / "ledger.json").exists()
+
+
+def test_ledgers_of_private_roots_merge_by_copy(tmp_path, plenty_of_disk):
+    """Concurrent jobs write private roots; a no-overwrite copy merges their ledgers."""
+    import shutil
+    a, b, shared = tmp_path / "a", tmp_path / "b", tmp_path / "shared"
+    fetch([entry()], a, opener=opener([]))
+    fetch([entry(id="demo/c.bin", path="c.bin")], b, opener=opener([]))
+    for job in (a, b):
+        shutil.copytree(job, shared, dirs_exist_ok=True, copy_function=shutil.copy2)
+    assert set(read_ledger(shared)) == {"demo/a/b.bin", "demo/c.bin"}
+
+
+def test_legacy_single_file_ledger_is_read_and_migrated(tmp_path):
+    rec = {"id": "demo/x.bin", "bytes": 1}
+    (tmp_path / "raw").mkdir()
+    (tmp_path / "raw" / "ledger.json").write_text(json.dumps({rec["id"]: rec}))
+    assert read_ledger_record(tmp_path, "demo/x.bin") == rec
+    assert migrate_ledger(tmp_path) == 1 and migrate_ledger(tmp_path) == 0
+    assert json.loads(ledger_record_path(tmp_path, "demo/x.bin").read_text()) == rec
+    assert read_ledger(tmp_path) == {"demo/x.bin": rec}
