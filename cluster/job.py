@@ -36,6 +36,15 @@ def write_json(path: Path, value) -> None:
     tmp.replace(path)
 
 
+def same_ledger_record(a: Path, b: Path) -> bool:
+    """Two fetch-ledger records for the same verified file (only the fetch time differs)."""
+    if "ledger" not in a.parts or a.suffix != ".json":
+        return False
+    ra, rb = (json.loads(p.read_text()) for p in (a, b))
+    ra.pop("fetched_at", None), rb.pop("fetched_at", None)
+    return ra == rb
+
+
 def publish(out: Path, dest: Path) -> list[dict]:
     """Copy every file under ``out`` into ``dest`` atomically; never overwrite."""
     published = []
@@ -45,7 +54,7 @@ def publish(out: Path, dest: Path) -> list[dict]:
         target.parent.mkdir(parents=True, exist_ok=True)
         digest = sha256(src)
         if target.exists():
-            if sha256(target) != digest:
+            if sha256(target) != digest and not same_ledger_record(src, target):
                 raise FileExistsError(f"{target} exists with different content")
         else:
             partial = target.with_name(f".{target.name}.{os.getpid()}.partial")

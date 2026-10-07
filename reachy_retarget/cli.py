@@ -1,4 +1,4 @@
-"""Command line entry point: ``reachy-retarget {catalog,fetch,index}``."""
+"""Command line entry point: ``reachy-retarget {catalog,fetch,verify,index}``."""
 from __future__ import annotations
 
 import argparse
@@ -26,6 +26,32 @@ def _fetch(args):
         print(json.dumps(record, sort_keys=True))
 
 
+def _verify(args):
+    from .acquire import load_catalog, read_ledger, sha256_file
+
+    catalog, problems = load_catalog(), 0
+    ledger = read_ledger(args.root)
+    for entry_id, rec in sorted(ledger.items()):
+        path = Path(args.root) / rec["local_path"]
+        expected = rec["stripped"]["sha256"] if rec.get("stripped") else rec["sha256_verified"]
+        if not path.exists():
+            problem = "missing"
+        elif sha256_file(path) != expected:
+            problem = "sha256 mismatch"
+        elif entry_id in catalog and catalog[entry_id].sha256 not in (None, rec["sha256_verified"]):
+            problem = "ledger differs from catalog"
+        else:
+            continue
+        problems += 1
+        print(f"{problem}\t{entry_id}")
+    selected = [e for e in catalog.values() if e.family in args.family]
+    absent = [e.id for e in selected if e.id not in ledger]
+    for entry_id in absent:
+        print(f"not fetched\t{entry_id}")
+    print(f"{len(ledger)} ledger records, {problems} problems, {len(absent)} catalogued files not fetched")
+    raise SystemExit(1 if problems or absent else 0)
+
+
 def _index(args):
     from .schema.io import index_row, read_episode, write_index
 
@@ -47,6 +73,10 @@ def main(argv=None):
     p.add_argument("--root", required=True, help="data root; files land in <root>/raw/<family>/")
     p.add_argument("--strip-images", action="store_true", help="keep a state-only copy of image-bearing files")
     p.set_defaults(run=_fetch)
+    p = sub.add_parser("verify", help="re-hash every ledger record under a data root")
+    p.add_argument("--root", required=True)
+    p.add_argument("--family", action="append", default=[], help="also report unfetched files of a family")
+    p.set_defaults(run=_verify)
     p = sub.add_parser("index", help="write index.parquet for a directory of episodes")
     p.add_argument("dir")
     p.set_defaults(run=_index)
