@@ -747,11 +747,15 @@ recording it writes `<task>/<uuid>.npz`:
 * `qpos`, `qvel`, `time` (`mjData.time`), `step`, `success` for the reset state and every
   10th post-action state plus the last one (50 Hz);
 * `mjcf`: the scene **after the seeded reset**. BiGym's reset moves furniture and props
-  by editing compiled `body_pos`/`body_quat`, which dm_control's `to_xml_string()` does
-  not contain; the exporter writes them back into the MJCF and recompiles. Every numeric
-  model array is compared; only qpos0-derived fields (free bodies' qpos0, `*invweight0`,
-  `*poscom0`) and inertial frames of massless bodies differ, and body poses at the
-  reset state match to ≤ 1e-15 m (`meta.model_export`);
+  by editing compiled `body_pos`/`body_quat`, and disables unused props through physics
+  bindings (`Prop.disable()`: geom `contype`/`conaffinity` = 0, free-joint damping 1e7);
+  none of this is in dm_control's `to_xml_string()`. The exporter writes body poses, geom
+  collision flags and joint damping (a `<freejoint>` becomes `<joint type="free">`)
+  back into the MJCF and recompiles. Every numeric model array is compared: remaining
+  differences are only qpos0-derived fields, compiler bookkeeping (BVH, mesh graphs,
+  per-body collision summaries), inertial frames of massless bodies, and texture pixels
+  (one record); body poses at the reset state match to ≤ 1e-15 m (`meta.model_export`,
+  `ok` for all 1,933 records);
 * `meta`: zip member + SHA-256, zip SHA-256, seed, recorded and runtime versions, success
   summary (`success_any`, `success_final`, `first_success_step`), recorded termination
   flags, other stored versions, the exact failing action and traceback on error.
@@ -778,9 +782,13 @@ project's MuJoCo (assets from the sibling `assets/` folder), sets `qpos`, runs
 * **Base**: `h1/pelvis` world pose (x, y, yaw, yaw unwrapped); pelvis height is
   `torso_height`. `regime = "mobile_manipulation"`, no `base_hint`.
 * **Objects**: all free bodies outside the robot (`manipulated`, AABB geometry when assets
-  are present) plus static furniture roots (`table`/`counter` → support, `drainer`/`rack` →
-  receptacle, others fixture). The floor is skipped.
-* **World frame**: the floor plane (body `floor`, `world.xml`) is at z = 0 in every checked record, so poses are used unchanged (`provenance["floor_z_in_source_m"] = 0`, `world_offset_m = [0, 0, 0]`). The adapter measures it per record and would translate all tracks (dropping the scene) if it ever differed.
+  are present; props BiGym disabled, i.e. without collision geometry, only in
+  `provenance["inactive_free_bodies"]`) plus static furniture roots (`table`/`counter` →
+  support, `drainer`/`rack` → receptacle, others fixture). The floor is skipped.
+* **World frame**: the floor plane (body `floor`, `world.xml`) is at z = 0 in every
+  checked record, so poses are used unchanged (`provenance["floor_z_in_source_m"] = 0`,
+  `world_offset_m = [0, 0, 0]`). The adapter measures it per record and would translate
+  all tracks (dropping the scene) if it ever differed.
 * **Articulations**: hinge/slide joints outside the robot grouped by root body.
 * **Success** = `success_any` of a complete replay; `None` for an incomplete replay
   (replay error), with the error in `provenance["replay_error"]`.
@@ -1037,3 +1045,71 @@ simulator clock kept).
 * `fetch_tars` streams whole tars (videos ≈ 80 % of the transfer) because MG tars put videos
   before data; human tars could stop early but the Box SHA-1 check needs the whole stream.
 * Physics validation of RoboCasa scenes is untested here (scenes compile with full assets).
+
+### BiGym verification (2026-10-07)
+
+Full replay of the catalog (1,933 recordings, absolute version per UUID; 7 processes,
+about 2 h on the laptop; 1.1 GB of records + 25 MB assets in `data/derived/bigym/replay-v1`):
+
+| | recordings | env success | complete, no success | rejected (action out of bounds) |
+| --- | ---: | ---: | ---: | ---: |
+| all | 1,933 | **1,358 (70.3 %)** | 433 | 142 |
+| articulated (12 tasks) | 674 | 479 | 73 | 122 |
+| pick-place (22) | 970 | 640 | 311 | 19 |
+| manipulation (3) | 149 | 99 | 49 | 1 |
+| reach (3) | 140 | 140 | 0 | 0 |
+
+Success at the last step: 1,251. Per task (success / recordings): CupboardsCloseAll 52/58,
+CupboardsOpenAll 23/48, DishwasherClose 0/69 (69 rejected), DishwasherCloseTrays 42/60,
+DishwasherLoadCups 58/60, DishwasherLoadCutlery 14/41, DishwasherLoadPlates 29/35,
+DishwasherOpen 1/56 (53 rejected), DishwasherOpenTrays 56/60, DishwasherUnloadCups 0/57,
+DishwasherUnloadCupsLong 5/51, DishwasherUnloadCutlery 36/47, DishwasherUnloadCutleryLong
+29/34, DishwasherUnloadPlates 32/36, DishwasherUnloadPlatesLong 19/39, DrawerTopClose
+51/51, DrawerTopOpen 41/47, DrawersAllClose 59/60, DrawersAllOpen 46/54, FlipCup 47/60
+(1 rejected), FlipCutlery 46/50, FlipSandwich 43/62, GroceriesStoreLower 22/37,
+GroceriesStoreUpper 27/36, MovePlate 54/60 (1 rejected), MoveTwoPlates 32/51 (3 rejected),
+PickBox 35/37, PutCups 30/56 (15 rejected), ReachTarget 60/60, ReachTargetDual 50/50,
+ReachTargetSingle 30/30, RemoveSandwich 32/39, SaucepanToHob 29/39, StackBlocks 6/39,
+StoreBox 39/40, StoreKitchenware 24/36, TakeCups 29/38, ToastSandwich 22/39,
+WallCupboardClose 60/60, WallCupboardOpen 48/51.
+
+* The release is presumably curated successes, so the 575 non-successes are attributed to
+  the 4.0.0 → 4.1.0 code gap (e.g. "adjusted stiffness of floating base positional
+  actuators" in the 4.1.0 changelog), not to the operators; they are kept (with
+  `success=False`, or `None` for a rejected replay) and never relabeled.
+* Rejections: BiGym raises when an action is outside the 4.1.0 action space. DishwasherOpen
+  /Close exceed `right_shoulder_yaw` by up to 0.037 rad; the others exceed a shoulder joint
+  by ≤ 0.008 rad. The `--clip-actions` variant (`replay-v1-clipped`, labeled
+  `lineage.replay_variant = "clipped_actions"`) succeeds for 102 of these 142
+  (DishwasherClose 62/69, DishwasherOpen 27/53, PutCups 11/15, FlipCup 1/1, MovePlate 1/1,
+  MoveTwoPlates 1/3). Clipped replays are a different action sequence and are reported
+  separately; they are not counted in the 70.3 %.
+* Recorded termination flags vs replay success (complete replays): 285 terminated and
+  succeeded, 26 terminated but failed, 1,073 never terminated but succeeded, 407 neither.
+  Termination is therefore not a usable success label.
+* Prior work reproduced: the four MovePlate recordings from `legacy/docs/datasets/bigym-*`
+  give the same outcomes (0943 fails, c795 and 103d succeed, d470 rejected at action 0).
+* Determinism: replaying in another process gives bit-identical `qpos`/`qvel`.
+* Kinematics across MuJoCo versions: body poses from the record's `qpos` in MuJoCo 3.1.5
+  vs 3.15.0 agree to 4.4e-16 m (two records, all frames).
+
+Adapter verification on three tasks (all records; scenes with assets for the first three
+of each task, compiled again with MuJoCo 3.15.0 → 75 `h1/` robot bodies to remove):
+
+| task | kind | records → episodes | success | base path (median) | check |
+| --- | --- | --- | --- | --- | --- |
+| DrawerTopOpen | articulated | 47 → 47 | 41 | 0.98 m, yaw range 0.17 rad, torso 0.51 m | successful: top drawer travels its full 0.38 m; failed: ≤ 0.33 m |
+| MovePlate | pick-place | 60 → 59 (1 rejected at action 0, no states) | 54 | 0.70 m, yaw 0.32 rad | successful: plate moves ≥ 0.34 m; held plate ≈ 80 mm from the grasp center (rim grasp), 10.5 mm std while held |
+| DishwasherLoadCups | base motion + pick-place | 60 → 60 | 58 | 0.95 m, yaw range 1.16 rad, torso 0.25 m | both mugs move ≥ 0.62 m; held mug 9.9 mm std relative to the grasp frame |
+
+No adapter errors; every episode passes the `SourceEpisode` checks; gripper frames are
+orthonormal; the grasp center equals the pad midpoint at reset (unit test).
+
+### BiGym known gaps
+
+* 30 % of the recordings do not reproduce their task in the public code (above); exact
+  4.0.0 code is not available.
+* States are sampled at 50 Hz (every 10th 500 Hz step); actuator commands (`ctrl`) are
+  not stored in the records (they are recomputable from the recording's actions).
+* Some scene assets are CC BY-NC (see `3D_MODELS_ATTRIBUTION.md`); scene redistribution
+  must respect that.

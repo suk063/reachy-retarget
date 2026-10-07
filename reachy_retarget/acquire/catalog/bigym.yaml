@@ -1,0 +1,394 @@
+# BiGym (https://github.com/chernyadev/bigym, Apache-2.0): demonstrations and the code
+# revision used to replay them. Pinned 2026-10-07. The demo release (bigym_data v0.9.0, the
+# DEMO_VERSION of bigym/const.py at the pinned commit) declares no digest; sha256/size were
+# computed on download (TOFU) and are pinned here. The code archive is GitHub's zip of the
+# pinned commit (sha256 computed on download). Ids are '<family>/<path>'.
+# kind: low_dim = lightweight recordings (actions + seed + metadata; no states, no images).
+# 'tasks' (ignored by load_catalog): per task, unique recording UUIDs vs stored files.
+# Most recordings are stored twice (absolute and delta action modes converted from the
+# same recording, same UUID); they count once. Totals: 40 tasks, 1933 recordings,
+# 3402 files.
+sources:
+- family: bigym
+  repo: https://github.com/chernyadev/bigym_data
+  revision: v0.9.0
+  license: Apache-2.0
+  note: 'BiGym demonstrations release v0.9.0 (published 2024-07-17; recorded with bigym 4.0.0, mujoco 3.1.5). Lightweight
+    safetensors per recording: info_demo_action (T, 15|16) at 500 Hz, termination/truncation flags, metadata (seed,
+    env name, action mode, floating dofs). States require replay (reachy_retarget/sources/bigym_replay.py).'
+  files:
+  - path: v0.9.0/demonstrations.zip
+    url: https://github.com/chernyadev/bigym_data/releases/download/v0.9.0/demonstrations.zip
+    sha256: a7fd1e7f1bd60962ec73dc23a08e6b9b0ffa2711dbbfb8c4de914b819e1186d2
+    size: 123362114
+    kind: low_dim
+    dataset: bigym/v0.9.0
+- family: bigym
+  repo: https://github.com/chernyadev/bigym
+  revision: d98124454dfa3bc697f75536daec5989a47bfa8d
+  license: Apache-2.0
+  note: BiGym source at master head 2026-05-06 (version string 4.1.0; 4.0.0 is not in the public history). Installed
+    with --no-deps into the isolated replay interpreter; also the source of the MJCF scene assets (bigym/envs/xmls,
+    whose 3D_MODELS_ATTRIBUTION.md lists per-asset CC0 / CC BY / CC BY-NC licenses). sha256/size computed on download.
+  files:
+  - path: code/bigym-d98124454dfa3bc697f75536daec5989a47bfa8d.zip
+    url: https://github.com/chernyadev/bigym/archive/d98124454dfa3bc697f75536daec5989a47bfa8d.zip
+    sha256: 4a48cda1a7e82aae3864d4a5cb8b79fc0eaf0169b5a227b500f4be32cf7da9a5
+    size: 59310942
+    kind: assets
+    asset_marker: bigym/envs/xmls/
+tasks:
+  CupboardsCloseAll:
+    group: articulated
+    recordings: 58
+    files: 115
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Close all doors/drawers of the kitchen counter
+  CupboardsOpenAll:
+    group: articulated
+    recordings: 48
+    files: 91
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Open all doors/drawers of the kitchen counter
+  DishwasherClose:
+    group: articulated
+    recordings: 69
+    files: 138
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Push back all trays and close the door of the dishwasher
+  DishwasherCloseTrays:
+    group: articulated
+    recordings: 60
+    files: 120
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: "Push the dishwasher\u2019s trays back with the door initially open"
+  DishwasherLoadCups:
+    group: pick_place
+    recordings: 60
+    files: 119
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Load cups to dishwasher
+  DishwasherLoadCutlery:
+    group: pick_place
+    recordings: 41
+    files: 66
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Load cutlery to dishwasher
+  DishwasherLoadPlates:
+    group: pick_place
+    recordings: 35
+    files: 67
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Load plates to dishwasher
+  DishwasherOpen:
+    group: articulated
+    recordings: 56
+    files: 112
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Open the dishwasher door and pull out all trays
+  DishwasherOpenTrays:
+    group: articulated
+    recordings: 60
+    files: 120
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: "Pull out the dishwasher\u2019s trays with the door initially open"
+  DishwasherUnloadCups:
+    group: pick_place
+    recordings: 57
+    files: 112
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Unload cups from dishwasher
+  DishwasherUnloadCupsLong:
+    group: pick_place
+    recordings: 51
+    files: 100
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Unload cup from dishwasher in wall cabinet
+  DishwasherUnloadCutlery:
+    group: pick_place
+    recordings: 47
+    files: 80
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Unload cutlery from dishwasher
+  DishwasherUnloadCutleryLong:
+    group: pick_place
+    recordings: 34
+    files: 66
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Unload cutlery from dishwasher to drawer
+  DishwasherUnloadPlates:
+    group: pick_place
+    recordings: 36
+    files: 65
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Unload plates from dishwasher
+  DishwasherUnloadPlatesLong:
+    group: pick_place
+    recordings: 39
+    files: 70
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Unload plate from dishwasher in wall cabinet
+  DrawerTopClose:
+    group: articulated
+    recordings: 51
+    files: 51
+    action_modes:
+    - absolute
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Close top drawer of the cupboard
+  DrawerTopOpen:
+    group: articulated
+    recordings: 47
+    files: 47
+    action_modes:
+    - absolute
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Open top drawer of the cupboard
+  DrawersAllClose:
+    group: articulated
+    recordings: 60
+    files: 120
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Close all drawers of the cupboard
+  DrawersAllOpen:
+    group: articulated
+    recordings: 54
+    files: 108
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Open all drawers of the cupboard
+  FlipCup:
+    group: manipulation
+    recordings: 60
+    files: 60
+    action_modes:
+    - absolute
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Flip cup upside-up
+  FlipCutlery:
+    group: manipulation
+    recordings: 50
+    files: 96
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Flip cutlery item
+  FlipSandwich:
+    group: pick_place
+    recordings: 62
+    files: 105
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Flip sandwich using spatula
+  GroceriesStoreLower:
+    group: pick_place
+    recordings: 37
+    files: 69
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Put groceries to lower cabinets tasks
+  GroceriesStoreUpper:
+    group: pick_place
+    recordings: 36
+    files: 69
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Put groceries to upper cabinets tasks
+  MovePlate:
+    group: pick_place
+    recordings: 60
+    files: 120
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_rz
+    instruction: Move one plate from one rack to another
+  MoveTwoPlates:
+    group: pick_place
+    recordings: 51
+    files: 102
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_rz
+    instruction: Move two plates from one rack to another
+  PickBox:
+    group: pick_place
+    recordings: 37
+    files: 72
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Pick up box from and place it on the counter
+  PutCups:
+    group: pick_place
+    recordings: 56
+    files: 56
+    action_modes:
+    - absolute
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Put cups in the wall cabinet
+  ReachTarget:
+    group: reach
+    recordings: 60
+    files: 120
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_rz
+    instruction: Reach the target with either left or right wrist
+  ReachTargetDual:
+    group: reach
+    recordings: 50
+    files: 100
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_rz
+    instruction: Reach 2 targets, one with each arm
+  ReachTargetSingle:
+    group: reach
+    recordings: 30
+    files: 60
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_rz
+    instruction: Reach the target with specific wrist
+  RemoveSandwich:
+    group: pick_place
+    recordings: 39
+    files: 70
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Remove sandwich from the frying pan
+  SaucepanToHob:
+    group: pick_place
+    recordings: 39
+    files: 75
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Take saucepan from cabinet and place it to hob
+  StackBlocks:
+    group: manipulation
+    recordings: 39
+    files: 67
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Stack blocks in the correct area of the table
+  StoreBox:
+    group: pick_place
+    recordings: 40
+    files: 79
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Put box in the cupboard
+  StoreKitchenware:
+    group: pick_place
+    recordings: 36
+    files: 67
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Put all kitchenware to cupboard
+  TakeCups:
+    group: pick_place
+    recordings: 38
+    files: 71
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Take cups from the wall cupboard
+  ToastSandwich:
+    group: pick_place
+    recordings: 39
+    files: 66
+    action_modes:
+    - absolute
+    - delta
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Move sandwich on the frying pan
+  WallCupboardClose:
+    group: articulated
+    recordings: 60
+    files: 60
+    action_modes:
+    - absolute
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Close doors of the wall cupboard
+  WallCupboardOpen:
+    group: articulated
+    recordings: 51
+    files: 51
+    action_modes:
+    - absolute
+    floating_dofs: pelvis_x_pelvis_y_pelvis_z_pelvis_rz
+    instruction: Open doors of the wall cupboard

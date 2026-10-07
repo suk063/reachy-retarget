@@ -1,5 +1,5 @@
-"""Source adapters: local source files -> :class:`~reachy_retarget.schema.source.SourceEpisode`."""
-from . import bigym, dexmimicgen, libero, maniskill, robosuite  # noqa: F401  (registers bigym, dexmimicgen, libero, maniskill, robomimic, mimicgen)
+"""Source adapters: each registers one or more families producing SourceEpisode objects."""
+from . import behavior, bigym, dexmimicgen, libero, maniskill, molmobot, robocasa, robosuite  # noqa: F401
 from .registry import families, iter_episodes, register
 
 __all__ = ["families", "iter_episodes", "register"]
