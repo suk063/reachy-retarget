@@ -55,13 +55,28 @@ class Pool:
         self.batch, self.rt, self.rel = batch, rt, rel
         self.out = ROOT / "runs" / "pool" / batch
         self.out.mkdir(parents=True, exist_ok=True)
-        self.todo = [j for j in jobs if not (self.out / f"{j['id']}.json").exists()]
-        self.free = [(pod, s) for s in range(slots) for pod in pods]
+        self.running = self.adopt()  # id -> (pod, slot, started): launched earlier, not finished
+        busy = {(pod, slot) for pod, slot, _ in self.running.values()}
+        self.todo = [j for j in jobs if not (self.out / f"{j['id']}.json").exists() and j["id"] not in self.running]
+        self.free = [(pod, s) for s in range(slots) for pod in pods if (pod, s) not in busy]
         random.shuffle(self.free)
-        self.running = {}  # id -> (pod, slot, started)
+        self.jobs = {j["id"]: j for j in jobs}
         self.prepared = set()
+        self.retired = set()  # pods whose node is below the free-space reserve
         self.lock = threading.Lock()
         self.events = (self.out / "events.jsonl").open("a")
+
+    def adopt(self):
+        """Jobs launched by a previous run of this batch that have not finished yet."""
+        running = {}
+        path = self.out / "events.jsonl"
+        for line in path.read_text().splitlines() if path.exists() else []:
+            event = json.loads(line)
+            if event["event"] == "launched":
+                running[event["id"]] = (event["pod"], event["slot"], event["t"])
+            elif event["event"] in ("finished", "requeued"):
+                running.pop(event["id"], None)
+        return running
 
     def log(self, **event):
         with self.lock:
@@ -96,10 +111,19 @@ class Pool:
             status = json.loads(payload or "{}")
             if status.get("state") in (None, "running"):
                 continue
+            if status["state"] == "refused":  # the node lacks free space: retire the slot, rerun elsewhere
+                with self.lock:
+                    self.running.pop(job_id)
+                    self.todo.append(self.jobs[job_id])
+                    self.free = [(p, s) for p, s in self.free if p != pod]
+                    self.retired.add(pod)
+                self.log(event="requeued", id=job_id, pod=pod, error=status.get("error"))
+                continue
             (self.out / f"{job_id}.json").write_text(json.dumps(status, indent=1, sort_keys=True))
             with self.lock:
                 pod_, slot, _ = self.running.pop(job_id)
-                self.free.append((pod_, slot))
+                if pod_ not in self.retired:
+                    self.free.append((pod_, slot))
             self.log(event="finished", id=job_id, pod=pod, state=status["state"])
 
     def run(self, interval=15.0):
