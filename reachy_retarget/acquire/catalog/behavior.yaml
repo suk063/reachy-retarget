@@ -1,0 +1,2253 @@
+# Pinned BEHAVIOR-1K 2025 challenge files (family 'behavior'). Generated from the HF tree API at the pinned
+# revisions: *.parquet / *.hdf5 digests are HF LFS sha256; plain-git JSON/URDF/YAML files were downloaded at the
+# pinned revision, checked against their git blob sha1, and hashed. Subset: the first 10 episodes (by episode
+# index) of 8 of the 50 tasks. 'subset' below is ignored by load_catalog.
+sources:
+- family: behavior
+  repo: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos
+  revision: 33639692425296185f245aaa648530178c7b3d2b
+  license: MIT
+  note: 'BEHAVIOR-1K 2025 challenge demonstrations (LeRobot v2.1): per-episode low-dim parquet (observation.state 256-d R1Pro proprioception,
+    observation.task_info privileged task-object poses, action 23-d, cam_rel_poses, timestamp), per-episode metadata JSON (OmniGibson config,
+    scene_file, task_obs_keys) and skill annotations. Videos (videos/, mp4 rgb/depth/seg) and meta/episodes_stats.jsonl (367 MB of per-feature
+    statistics) are not catalogued. Dataset card license: MIT; the OmniGibson scene/object assets the episodes refer to are under the BEHAVIOR
+    Data Bundle license (not catalogued).'
+  files:
+  - path: 2025-challenge-demos/meta/info.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/info.json
+    sha256: 9e9eadd8bc138f782b609b576714b7ceb45406daa53221a16939f7f319386d9b
+    size: 7571
+    kind: metadata
+    dataset: behavior/2025-challenge-demos
+  - path: 2025-challenge-demos/meta/tasks.jsonl
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/tasks.jsonl
+    sha256: fb6717bbb4fa503ac5d2bbf220d13727e29d6d320e5cd0d4a4e9b2200483943b
+    size: 14254
+    kind: metadata
+    dataset: behavior/2025-challenge-demos
+  - path: 2025-challenge-demos/meta/episodes.jsonl
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes.jsonl
+    sha256: d0679cb99881a8d6935db2f98475e88334d37838f1afc34bb2cf1b2fa437b35c
+    size: 3731922
+    kind: metadata
+    dataset: behavior/2025-challenge-demos
+  - path: 2025-challenge-demos/data/task-0000/episode_00000010.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000010.parquet
+    sha256: 4cfcecfed5f9180fbb07a31fc420b4165e4dbeef76a8e7483564827db9756057
+    size: 2883123
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 10; 1956 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000010.json
+    sha256: 54ce5ae81565865e823cd642e1096c7221384a51f3230138cd1393e5e30dd77f
+    size: 1298919
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000010.json
+    sha256: 48f9ea43dac254b18616355499d07371c9365aeee2539c336b7cee484d92cb81
+    size: 3026
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0000/episode_00000020.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000020.parquet
+    sha256: f98047711c500f99f0e7d1ac835ee22edf0c9273bd7f79c3fb351780e6193dd9
+    size: 3405931
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 20; 2340 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000020.json
+    sha256: 653030ae108d44f53047c02b66d81819187e50b047dd2452d75a5d524c13f839
+    size: 1299318
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000020.json
+    sha256: fcbea22d35c45686190a92a0171711a36fb5f7a3ce555b14117ad4e92933ac18
+    size: 3026
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0000/episode_00000030.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000030.parquet
+    sha256: 944af259732343a61c00043603fcbe6dbee0caadd89514c49a23bac20061b1d0
+    size: 3106826
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 30; 2107 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000030.json
+    sha256: ef08597ceb64040e8ebe12f61cc2642dff69902586d0b220a77f4169546267fe
+    size: 1299186
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000030.json
+    sha256: 502221fc14831c955b3b831eb12f4be1faf6b70c188e192b2d90134d1c2dc8de
+    size: 3022
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0000/episode_00000040.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000040.parquet
+    sha256: fbd3845d7d3253d49aaf3d87510b86b146bfe07da2dc29f99fce65f0bd5070c2
+    size: 2786557
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 40; 1875 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000040.json
+    sha256: 6533e786bf0030de0daa2394ee271c41ea5c4150664aaf4cc9d466cf93487eb5
+    size: 1298876
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000040.json
+    sha256: a9142cbbc69578439f77a82fdb09f836f3be8f0ea852467eb4e6d9cdf66e3846
+    size: 3026
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0000/episode_00000050.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000050.parquet
+    sha256: c821b7bc50b49ac4328f48f4bd369f0abb19eaa68643320b975bfbb9dd093109
+    size: 2329620
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 50; 1547 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000050.json
+    sha256: 60c68b037b4080a988923593bc06220470e3bc709abf9cca89d5ef8f2c338743
+    size: 1298856
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000050.json
+    sha256: 8979d3f1cfb56d3a6b75a6e23864f256cace1915e993c5364040b46707d36f1c
+    size: 3026
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0000/episode_00000060.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000060.parquet
+    sha256: c5e7758cc151649664c3494bdb71bc58fd456d2d0a38d93de6dc29b25df0b30a
+    size: 4297075
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 60; 3227 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000060.json
+    sha256: d0f730a5ebe63339abe39c2dcace2ff8e0c8d49d97a303248d4fdf4b6f437b1f
+    size: 1299443
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000060.json
+    sha256: 11defcebdd68421fa8a1365c609c78767fcf3d609802ade565f99468a429166f
+    size: 3034
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0000/episode_00000070.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000070.parquet
+    sha256: 7c6c42a47f17acd3ea787fe0a3780abcb675de62ba017de5fd22190c9bcdd549
+    size: 3329660
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 70; 2304 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000070.json
+    sha256: 5de95142db128c26ecb9ad26774f521ecb891b1bb7a0d63338edcee89824cbc6
+    size: 1298820
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000070.json
+    sha256: 6d8460d79cfd9021c81ac8775fb93416fbc85c533aa1e372f97f1e69f8c4f474
+    size: 3026
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0000/episode_00000080.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000080.parquet
+    sha256: 9f92f18507c751064766e1755719722673d18f34e8329fc648a51623381f97ea
+    size: 3733568
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 80; 2585 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000080.json
+    sha256: f22363976d7298d6e2f2da5e9503499a2a2ac122988d62b46ee04dea57017082
+    size: 1298899
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000080.json
+    sha256: f0067fa71800c87865753dc952c03f7a863c1a8c5d6121afa5ec88fa683d3e34
+    size: 3026
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0000/episode_00000100.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000100.parquet
+    sha256: c9dfbd49160e5f40da149c6429e8ce9a6a63b7e0ece3118c7e20858f8c32cf2f
+    size: 3532955
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 100; 2427 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000100.json
+    sha256: dcf1a49c82a1df3ed8c1c19ff914dff0e2537923bc546dc03e088fd921a1f672
+    size: 1299178
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000100.json
+    sha256: 782e88d17864f26b3057a66c980d80f6a8fd4f2c6d61c8c13430c358fef61ecf
+    size: 3026
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0000/episode_00000110.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0000/episode_00000110.parquet
+    sha256: 95e069ac8ba65bb672d539b9be4020a9e2920fd74e8866bbb1f567226b8d6505
+    size: 2162671
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: task 0 turning_on_radio; episode 110; 2277 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0000/episode_00000110.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0000/episode_00000110.json
+    sha256: e25c06bde31c9f99bd5753dc9ccf9056a75b8c0589b18aeb2d90fdcdf6523b6f
+    size: 1265958
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/annotations/task-0000/episode_00000110.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0000/episode_00000110.json
+    sha256: be168991b232a0a030ae312e1a33b183b0554f1a2e9ca9641d51698fed1c7305
+    size: 3026
+    kind: metadata
+    dataset: behavior/2025-challenge/turning_on_radio
+  - path: 2025-challenge-demos/data/task-0001/episode_00010010.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010010.parquet
+    sha256: 432617d9b818b10b600603ffebbf821620a4d622d26a267efc41ca60caef9ab2
+    size: 9215728
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10010; 7667 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010010.json
+    sha256: 13b24c67d95c381b08b46eb285a7667d19b5e97418d364a11dbd0780cfbb6520
+    size: 1280162
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010010.json
+    sha256: a6ed0f9c62299e8f2475f8716dade5ef4fe670511495daf8169a1361844d42ec
+    size: 7565
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0001/episode_00010020.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010020.parquet
+    sha256: 65d6f96ac6b231698983a50642a5a2507afae4cbf8fa8c4ca21d7989c102bb2c
+    size: 3494559
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10020; 3132 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010020.json
+    sha256: e7039f80895345461ecfbe5e936531442343fb26077cf5bc958a721a218bf0f7
+    size: 1278709
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010020.json
+    sha256: d3176491d108b9549119ca549fd067ba5e53d4373f71d109c95b27326d43ef18
+    size: 7563
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0001/episode_00010030.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010030.parquet
+    sha256: 9d8eac5b9347eca5f4b3602f86968e0a95c0820f150c673e3b10db814e94fee2
+    size: 8914905
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10030; 5811 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010030.json
+    sha256: 95a389e7de2ddda75ac1758620032d9051ceedda1e441371da741e2a6f645d0c
+    size: 1313397
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010030.json
+    sha256: d03ebcf44bde6f3eea8de6ee5aca84515bdded36a8c95e7e17a87349874503b3
+    size: 7568
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0001/episode_00010040.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010040.parquet
+    sha256: 699bee59c663d4a7827daa9e91ce5cbe73d3c23a3243dc0c8aca35dd18ea5722
+    size: 8052181
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10040; 7497 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010040.json
+    sha256: 14c861aeb276f7e1f85d853740ec61935f961d0cd9afd7724aa66f67fec23560
+    size: 1280281
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010040.json
+    sha256: 3957f802ccd2205ccb1208da5e02d7ff0ea67f1f0c51da423ebc8f1c64239217
+    size: 7565
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0001/episode_00010050.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010050.parquet
+    sha256: f7f1bf9d11cbd3b8a7301b01094e40a2c26a2a061a6a2c9402caff846b13126f
+    size: 10741873
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10050; 7214 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010050.json
+    sha256: 8257ed5fff9936b617baf7d4d3e2cfdc65ee141bb4682991ed64b63711d5ed1b
+    size: 1314870
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010050.json
+    sha256: 741c13353cf24758eaed38e10b56ba03a70a931c546a674ff101b9b6fac33ad1
+    size: 7572
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0001/episode_00010080.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010080.parquet
+    sha256: 2e188f2d75a9d2e15d1f35266dff826de33e27fe96efd7e58ab03be79352aecc
+    size: 9514538
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10080; 6233 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010080.json
+    sha256: eabc16ce5e439b1ab637b7cca367ba0749b1e5ffd4f76110621d7b95d55e6cce
+    size: 1313429
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010080.json
+    sha256: 7cbec9ffd7680402f4d6924e3d0babe515737f36320f84cd363f0ff4bb3a4e64
+    size: 7571
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0001/episode_00010090.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010090.parquet
+    sha256: 7daf86c468f28bd2237de0ac90cf9d07e3799697a93b8f7b8ede93506aef9c8e
+    size: 9433413
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10090; 6346 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010090.json
+    sha256: 923956f2b7c93bfcf6e1d269b020fd118f72d86fa5abc15dae1102ae6008cc9c
+    size: 1314378
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010090.json
+    sha256: a784fdbeab375aac69e39ecd2bc5f9d8bf7cdec0f5ec66d93338037bab347dd7
+    size: 7568
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0001/episode_00010120.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010120.parquet
+    sha256: dcaa81709cb00b85b27a6107fddb9f318fd8832abd508ee861dbfe9c00b3a8a0
+    size: 8500578
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10120; 5540 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010120.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010120.json
+    sha256: 7802527382a69b6189625167023849a0f11f605d8937f45a50150e176999d7b6
+    size: 1313343
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010120.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010120.json
+    sha256: 5613348416e791f974826870777ebf77f03804bebcd3fdbe90473d1290726578
+    size: 7565
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0001/episode_00010140.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010140.parquet
+    sha256: 7602bd816e6066049662f1f834abdfc675ace73c9270253131edc1b6ad552cda
+    size: 8830344
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10140; 5827 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010140.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010140.json
+    sha256: 49604b5907ae8eebe22e9318a32575a48befe66bcf05f8650279f4b6141a0562
+    size: 1313329
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010140.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010140.json
+    sha256: 596b24a81c4ddaefd2cbeebaa1789d930ad53fd1028db62a67cd25a921224718
+    size: 7569
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0001/episode_00010150.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0001/episode_00010150.parquet
+    sha256: 8478ffb175080fd2c6bf094f136bac2fb0d53744211ebef644311f9d972f57e0
+    size: 10194967
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: task 1 picking_up_trash; episode 10150; 6983 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0001/episode_00010150.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0001/episode_00010150.json
+    sha256: 9e0ece9cd3af050b019c7133e80aad46be3d368104c3cdc17d852c55706f569e
+    size: 1314095
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/annotations/task-0001/episode_00010150.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0001/episode_00010150.json
+    sha256: 8b554541a544b69263544bed9f596b5ec663795646224f16604cbcbba43cf5c9
+    size: 7571
+    kind: metadata
+    dataset: behavior/2025-challenge/picking_up_trash
+  - path: 2025-challenge-demos/data/task-0003/episode_00030010.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030010.parquet
+    sha256: 4af1c2736c2fe19e1418255b6ab7c08743657172bc32a3cb2397166fe5010182
+    size: 11888132
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30010; 7945 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030010.json
+    sha256: 16790cea3669ef894e20c5e0523c4ca92b89ebec137c6e53ffe7052f3d1b7532
+    size: 1291955
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030010.json
+    sha256: 346ddd80d6346877cb4e5eeb23c0cbfcdca3854b196b4289e9c23d97c46d5892
+    size: 9979
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0003/episode_00030020.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030020.parquet
+    sha256: da7b1d013f2bab61143cd28b4400757d361c6573c8d7d657da6e39e8085af9e6
+    size: 14040844
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30020; 9357 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030020.json
+    sha256: 8f3df45ed9ddc060f9320d6ac886aa19c0fe4fca33fb6eab8907503ad7987678
+    size: 1292493
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030020.json
+    sha256: bc58edb6eca42d50d520004a69efbd6031936e319f13c28527aa4ece461a8f3a
+    size: 9979
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0003/episode_00030030.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030030.parquet
+    sha256: 4a5f77d20d83662429d5d920d9b31c960618ad49dcfa83743f346992269062b4
+    size: 13297533
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30030; 8686 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030030.json
+    sha256: 14838a6b2567443d0de50f6a37f008068641189473d164da7b2925ee464315a0
+    size: 1293146
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030030.json
+    sha256: ec46b829636ee9c186dd9a41a91efe00107f87b10e8ac196ae722b83e6b0d240
+    size: 9590
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0003/episode_00030040.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030040.parquet
+    sha256: 651501fda30d56eacf3a363942225143a759b6635ff5875a9cd631079cc73acb
+    size: 20840161
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30040; 14448 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030040.json
+    sha256: f0c1e3dd659516159159bb08d451e2faf07bb6bac6fcededfb620b9345bf8076
+    size: 1291753
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030040.json
+    sha256: 674ac8d1dc13bdf418488a57ff29f6bf3eca7d0fb93dc6c37f6acd3069cabdcb
+    size: 10392
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0003/episode_00030050.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030050.parquet
+    sha256: efc7f6db51f92aa8f36437e94c3f2891f686e17476c5be5836238c7244a3ddc9
+    size: 15122366
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30050; 10051 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030050.json
+    sha256: 993e2f4cf668d14c286e4344bbb723eaa7901b2e8b536cd86e94a94b2c40af19
+    size: 1292283
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030050.json
+    sha256: 133b6aa31642e7b9645c5f408b5fb47c074fa0f2bafcd18439884a1377e1ebc4
+    size: 10378
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0003/episode_00030060.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030060.parquet
+    sha256: 4fa461ba320db43bc0bc21e00445a4828b6abca16632321914762029bdaa5770
+    size: 22067045
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30060; 15279 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030060.json
+    sha256: ed1eadb63279e0d66c84b6fad807094a922acc09e1159c2f9c9f4db3ff9087b3
+    size: 1292036
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030060.json
+    sha256: 80e168be3f293cbee860e27250ab136b05ca06165a9e0d9aca37f84f8c1227f8
+    size: 10400
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0003/episode_00030070.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030070.parquet
+    sha256: 686d75254a3e81fac8c48d1a109ddd316b985bbc1738dc260dc51b4907b2794a
+    size: 16298263
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30070; 10597 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030070.json
+    sha256: dce2a0bc95ce1894bff0f0cd5ce2e3c740e60d3be8c7f16155d59ab9b3feee9c
+    size: 1292772
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030070.json
+    sha256: 102ef645f5c8c179b134284958f4c9d664d7521d1dbcf6be2e99c103269c46e2
+    size: 10386
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0003/episode_00030080.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030080.parquet
+    sha256: f46a46bf88c074ec0fcdd1504b16462134678eca0c0e5e90e3dd2cbce7de4d80
+    size: 24308554
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30080; 16848 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030080.json
+    sha256: 9e2a3126fab54fccc4b553029847172c1bb82661daa1bbd40b0a61a1f17397f9
+    size: 1292468
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030080.json
+    sha256: 44fc265d0d56fd17ba14cf5cc90e4749be1d5700d564e19f1b2b9e85bab161fe
+    size: 10400
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0003/episode_00030090.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030090.parquet
+    sha256: c77b412b1860edc046917fd2a2bd2b8d94853af034e15903581fb13d3870c7ea
+    size: 14834241
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30090; 9914 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030090.json
+    sha256: 93b205745b77f0631d4548001eb033cf382eb725218553800b4cb8d8587006ee
+    size: 1292104
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030090.json
+    sha256: 2ef415b23dc27458f7edeb5dbb26e0f45a2d328e79a5f5bd8cb5577517800b90
+    size: 9980
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0003/episode_00030100.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0003/episode_00030100.parquet
+    sha256: f2d05abef709deb06ed1b0f02f6823b3f58c11e10696aea02f15adcf2e13eb2f
+    size: 25402358
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: task 3 cleaning_up_plates_and_food; episode 30100; 17411 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0003/episode_00030100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0003/episode_00030100.json
+    sha256: 41856de0ff0da198deef40e5e0583c71b2a6b832568ac1c6f9315e10a767c019
+    size: 1292126
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/annotations/task-0003/episode_00030100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0003/episode_00030100.json
+    sha256: 6488376475e5e65d3653da5450a55fbd2fdcf49f3be33eae26a7cea8aeac6a26
+    size: 10400
+    kind: metadata
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+  - path: 2025-challenge-demos/data/task-0010/episode_00100010.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100010.parquet
+    sha256: 81a5501f6749e32fb766e72e473d38cb30e4ab34901e1157dd4c674a39fbc902
+    size: 5384001
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100010; 3598 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100010.json
+    sha256: 833cd58d313fad1835d0dcc4b5d846daee321ee29b1fe5d9f5cd1c9e47bbac81
+    size: 2689259
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100010.json
+    sha256: 0e1199af55d9cb108a02410380c9d7ec82d216ac22ce7fc5c10ad8b3b3b7a4a3
+    size: 9188
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0010/episode_00100020.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100020.parquet
+    sha256: 3c29169c8acbf1661196a4b0ffeb60e38ee3ddce0cfb82c890b3e5ab204c7cbc
+    size: 9773740
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100020; 6748 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100020.json
+    sha256: 64b7f3316be6dc768926349e05563891e4b1c1841a4e9e56a9ab1742c2b1e983
+    size: 2691284
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100020.json
+    sha256: 7c71ae2c7836b212a770b3935deec500fb7a0d2b33d21755a4d1e32870cc980a
+    size: 9814
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0010/episode_00100030.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100030.parquet
+    sha256: 8700ff497721d61ff0ba5be21785163b8f90a685619c4714cfe6fda8fad57176
+    size: 12973601
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100030; 8871 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100030.json
+    sha256: 04ea339c69a2976774f7e6025e0de33a5355c2dccbfa916bff3c8c37253dc29c
+    size: 2691809
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100030.json
+    sha256: c5dd3b7756525ffb2dddbbf371c081b4fef6c0d951d2a7aa0f24db21479d2012
+    size: 10210
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0010/episode_00100040.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100040.parquet
+    sha256: 9f3555b7e9b34174e5734074e5bee975a9448b5b2d0c55db25d0bea06c7a7523
+    size: 6741721
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100040; 4510 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100040.json
+    sha256: b5555e7f628f70ddd6dd232d9471bdc7408ccf0f0cebd3b34c6f0d1addbc439f
+    size: 2690892
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100040.json
+    sha256: 19009a848733b66996a8324fab76020074949bfedf929fb87554fbfebb380f59
+    size: 11009
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0010/episode_00100050.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100050.parquet
+    sha256: 637caa7239eb160270dec33dd82e20309fe1aec8a18dd186c6193446b6ddf96f
+    size: 11153950
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100050; 7839 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100050.json
+    sha256: 5f5e17088611b98dd990b0b6ac671202d46d03168df83f4f1d9559a06f4e3e5f
+    size: 2691776
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100050.json
+    sha256: 886a3e60ac1e58c2091a71409b87b342a817404620a64d422c587170e517f5e6
+    size: 10217
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0010/episode_00100060.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100060.parquet
+    sha256: d61ab46366ef4a82b679c6e92c06db91a30d29c1b96f667cc03588f9d2e793b9
+    size: 10102029
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100060; 7071 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100060.json
+    sha256: a46d23f2b854e9ebfca70971dc51bec63904e4f0203865fb84688149b1682a28
+    size: 2691619
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100060.json
+    sha256: a929e04d65a37a75755cc9fa0baff88a09565625d8c5b5663cf1f2e3ab978e61
+    size: 8799
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0010/episode_00100070.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100070.parquet
+    sha256: 431e0bb53175ee8d4394c1b818ae2d726a68feee276b44dfdf3dbe1d18b3af42
+    size: 10190012
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100070; 7141 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100070.json
+    sha256: 51cb4a1ff2273599c32d1724a2adb97a4f2561431a61e2b0ef20178a26ba4aad
+    size: 2691948
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100070.json
+    sha256: 79cff9959bf2991a3cdc3aaf9093e4b27baf2c3850d280dd165b5700e61f3d86
+    size: 10614
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0010/episode_00100080.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100080.parquet
+    sha256: 068f2f16baa0090ab7022311e322a60a4354e213b79c496d88bcb34f1d34db6d
+    size: 11595518
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100080; 8175 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100080.json
+    sha256: 55081fb26ef8b04bfd36fae01258086f63d26d1de64a9be343f57ffa790667e9
+    size: 2691844
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100080.json
+    sha256: b3d4719428d9e43ea36b19e73bcd14f30bb8f418f26505ba57bb463e1ffe3cb1
+    size: 10606
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0010/episode_00100090.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100090.parquet
+    sha256: f72499dc1d485442ed3e5eb81df3822b4f57d04843ea90d721226488de27740f
+    size: 9895157
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100090; 6607 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100090.json
+    sha256: 3cffeaaac8675d93a6f41468465183de65edfb288845acf517ead2c90e4c17b2
+    size: 2690082
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100090.json
+    sha256: d82ccca571780ce375c9f5974a23e63ba4f9aecb6e4ae74b9d7e77c96656a735
+    size: 11414
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0010/episode_00100100.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0010/episode_00100100.parquet
+    sha256: 0675f727744633e3c7b138555eb2714465337746cac079f8ba2952f0103e07a4
+    size: 10745876
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: task 10 set_up_a_coffee_station_in_your_kitchen; episode 100100; 7285 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0010/episode_00100100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0010/episode_00100100.json
+    sha256: d33e9b6196566cef70070a02a8e203103ccd9af0737e48f6d6ca33db0d97e912
+    size: 2690813
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/annotations/task-0010/episode_00100100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0010/episode_00100100.json
+    sha256: 5f3adc25e48db8f2cc157f6a7b0ece1b07d5781c1228890d88bcd34cc1e5d021
+    size: 11024
+    kind: metadata
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+  - path: 2025-challenge-demos/data/task-0022/episode_00220020.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220020.parquet
+    sha256: 9cd9519cb35d4d6cb3b3705b251d52015d3c130711a1ed65fa0806444bfa502d
+    size: 10261569
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220020; 7076 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220020.json
+    sha256: a34074bcb8fcdccffdccdcc7a48d6948782888fadd23579060f97cc587c28393
+    size: 1297918
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220020.json
+    sha256: 3f4dc714606745db06fe8ef9aa48dc6c38879514d62f7b48d2c75d9c00b5b003
+    size: 7248
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0022/episode_00220030.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220030.parquet
+    sha256: d9f0df45bf55603a62416a451c1741b23e057c7c064e65e49d1f8319bcfa64a4
+    size: 9974122
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220030; 6983 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220030.json
+    sha256: 7d91d8f1367c2376ab97dfb6b20ac07cf059cb7c81dd1484fdfcea05cbd23c96
+    size: 1296879
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220030.json
+    sha256: 87501e33b355b56d312410bf39194866f5d9a0d39922f4c1148814c8a8644976
+    size: 7265
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0022/episode_00220040.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220040.parquet
+    sha256: 30ef7efcd263c03f0a78d2e7b7ca82d8f03cf000dcdf8317901bc37e4d0a87c7
+    size: 8851477
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220040; 6127 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220040.json
+    sha256: 790253b37fb00ca19aec3b28b0c558164c7ce1bd07c8fa79e0e65bac1d324b19
+    size: 1297208
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220040.json
+    sha256: c48e4ac39f5335c9eda7e85fe38e885e0aa3d8a45f061d717a0a1cbbdca17633
+    size: 7263
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0022/episode_00220050.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220050.parquet
+    sha256: fb0f1aff6fa7f08c15edc33ed2b0653f4d04ca80aec5f046c534c1af9e7fa8c5
+    size: 15802591
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220050; 16564 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220050.json
+    sha256: 26833e4903d73f7fb85f11aaf5717e16f21fea8ab74181ef14724fcf9a8caa70
+    size: 1299355
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220050.json
+    sha256: 2799ac19f2948515af053b0ab73618b40a415eb3bcacd9903f8fc5b554d977ba
+    size: 7287
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0022/episode_00220060.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220060.parquet
+    sha256: e1bb8bc50f2d1e14552c9189cccdac6125b9a312d40e14f4e48990c3e7e80ea1
+    size: 9827148
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220060; 6837 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220060.json
+    sha256: bec0b6f8798ef51a04df15e5589969a6e37f3d0df3ecad7762a17dd9912a1601
+    size: 1297367
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220060.json
+    sha256: 1f0a5586e36bcca361b382f1d9bf07305cdca26c9c8d8d12b82ce2df0f6851d3
+    size: 7265
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0022/episode_00220070.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220070.parquet
+    sha256: 1f49bbc4024c63490f76cbbc4a890a907b479ec4902af9d0918cf43e40bb669f
+    size: 9393581
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220070; 6434 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220070.json
+    sha256: 1ed8e5ebbf271f1e161a99aaf9cf4d72b426884237000a18d9e17f9e487de22d
+    size: 1297577
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220070.json
+    sha256: bef7bc01a7a4b3bdc2d7193dd4254f99b6c88ef2050a4b10cf63fd82480477dc
+    size: 7263
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0022/episode_00220080.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220080.parquet
+    sha256: 301ba8de6291411589663f297ed2e5ae30cc9b9d2d0b247fa0db0daa9f1bab38
+    size: 23649146
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220080; 17266 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220080.json
+    sha256: 060e724481cd53fe3f0c63bbe44d7344fdadc9a7ed4f75e4b26f4432a3c59498
+    size: 1297269
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220080.json
+    sha256: ef33c036ed070a232f08d66908cf2d3b50b3b9eae5020c4cb3b6a8fef2629c25
+    size: 7308
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0022/episode_00220100.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220100.parquet
+    sha256: e65dddf718ae4bcfd87b7896b948e3b54915d78b8e59119a275d7b326392a7f0
+    size: 11109911
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220100; 7599 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220100.json
+    sha256: 747a857ecc48c0765558c2b1ce2388f42a780844ec4f7b48d07a3ccb08703499
+    size: 1296926
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220100.json
+    sha256: cf76cf7370eb67360a0cb63adab842948a0e8d9a8ea65f3bcfdaa47cb0d9a00b
+    size: 7248
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0022/episode_00220110.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220110.parquet
+    sha256: 3834e44aa8ce8eefd1e82f7f110873afb4bf404c6b5bef4b68a3bf9c3c193f2c
+    size: 8810918
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220110; 6051 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220110.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220110.json
+    sha256: e40934122a99589abf9fda53b2da2e605f9e316f3a5a1b2209d2c2c309e65d16
+    size: 1296905
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220110.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220110.json
+    sha256: 0543f34118a7f6f91db06676ce60f53fa5f815e3c21708dd62e1ec219fea7a34
+    size: 7246
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0022/episode_00220130.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0022/episode_00220130.parquet
+    sha256: 72f07ded397fb612235e87330054a50308037ae1f8c3aea096c1da78053cb04e
+    size: 10697883
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: task 22 putting_shoes_on_rack; episode 220130; 7410 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0022/episode_00220130.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0022/episode_00220130.json
+    sha256: da05db28fa3adada489e1a89c65b77a084bf50219ae627423f55ffb4771e9fec
+    size: 1297890
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/annotations/task-0022/episode_00220130.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0022/episode_00220130.json
+    sha256: 432f43a287a821e68f2217bb02aaa6522197a716085bd549c2a3aa5a9ee3882e
+    size: 7251
+    kind: metadata
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+  - path: 2025-challenge-demos/data/task-0034/episode_00340020.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340020.parquet
+    sha256: f1676322088fb55811cbe01f9eb9a88664a253735cd2c9815f8aa6c8e977565b
+    size: 2472283
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340020; 1544 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340020.json
+    sha256: 39bf6eaf640d36ec5953bb9c78ba87b9e61e7201f91a371fb848fd275d875084
+    size: 1282666
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340020.json
+    sha256: d4a624fec6b9e8611a0e91dfede55ba1fb0d6e27d169ca8f772801b7388a65fd
+    size: 2616
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0034/episode_00340030.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340030.parquet
+    sha256: 892aad917319556f15fa116aa907f493419916ce82b19732efdc7280cb66121e
+    size: 4201235
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340030; 2917 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340030.json
+    sha256: 15279f838360ff88190b051f774734762fcd8a92d65e640f874db4d7debc01a4
+    size: 1283401
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340030.json
+    sha256: 5472c6694c9542d648ee6e0be0adcbf33c898522f4dad76778ab72ef9a30ee7b
+    size: 3048
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0034/episode_00340040.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340040.parquet
+    sha256: 9c6aa3a6c7b23ace5e5f8a705b2c4367ae63b0df1d139fd668c8d758b6318ce2
+    size: 4087934
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340040; 2816 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340040.json
+    sha256: 574f98a88211f1a14fb0e3ae8025bb0b57b8bcbc32f19fa5d5d6093ddb79b6e9
+    size: 1283557
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340040.json
+    sha256: 6678a88fde6b38af8444d8f0fba8c2fd4a0f639ad1ca72cbb081af972c0d889c
+    size: 3045
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0034/episode_00340050.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340050.parquet
+    sha256: f1c43ffd5b271c6a968cff82143de369c87d5bd62703a900151c61afb0251b3b
+    size: 3761033
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340050; 2538 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340050.json
+    sha256: c79eab6a0ef55807a3a0ad5a7a9b255f9fd13ed9f708e7c6c7b8ba3b71f22a0f
+    size: 1282927
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340050.json
+    sha256: a552f7bc49ca5fdd4cf5353e3d600ac41fad9b623b8046f64e2994cd931be0f7
+    size: 2626
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0034/episode_00340060.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340060.parquet
+    sha256: eb317fa8736f4e2d5abe01130064cbf852f5df6d2ba99bbb3ebadb6e84f51948
+    size: 3430997
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340060; 2340 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340060.json
+    sha256: 44acf7a22d2f027bfd326bdf4be4b7468ae67614b564ba2fe3f6b6437f5417a8
+    size: 1282820
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340060.json
+    sha256: e06e08cae3b65f79e17b617b62769ec49174dc2f5e6395916805ef438aaf094f
+    size: 2625
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0034/episode_00340090.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340090.parquet
+    sha256: bf40bcbcc6a3d206c793b2aa95f3e6257c3558475c237e308554063017d15a79
+    size: 3812307
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340090; 2588 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340090.json
+    sha256: d5b247573c6f9091f312f9d3e32f689c9ca74622d1173515418243cba6597b1f
+    size: 1283256
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340090.json
+    sha256: faedaad1580c167cecec48d2a6ae3527f0dc892d2754da0c20fbf0718e449f42
+    size: 3041
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0034/episode_00340100.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340100.parquet
+    sha256: 75602286bb5e253e2e97741a78adb519e06bfca28f08dcffb546770e1acbd714
+    size: 2596330
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340100; 1655 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340100.json
+    sha256: 16a31d2a2496db825e09cfdfa3d5f1a6e775a3f257e1652a2e442e3901e71bbf
+    size: 1282017
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340100.json
+    sha256: d204c47dcbc6adbe4750aa5d0b370b5d25f15b7b976745a1a41d411df8eaa242
+    size: 2620
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0034/episode_00340110.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340110.parquet
+    sha256: 2cecd525d76ce6d247d7de7a0db41a7514076e70d7c2b14844003ccd36a98c4c
+    size: 4091062
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340110; 2797 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340110.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340110.json
+    sha256: 11196df0909ae27abba848b508cc97be025f428680877d1c57715b36e9a32fd1
+    size: 1282589
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340110.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340110.json
+    sha256: 58a78b357b205ea282f093ace736fc52e8c4056a4bcf321780eb01a2432e681f
+    size: 2629
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0034/episode_00340120.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340120.parquet
+    sha256: 4eeb961dd202c1a8e8de6418e7f397ab83c44b4abd4a80c76e659bb6472d9a19
+    size: 3732191
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340120; 2549 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340120.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340120.json
+    sha256: 82065b82d3d2a95c2da95fef865b23ddf6682493d02b5858301fb4fcb3a4a723
+    size: 1282654
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340120.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340120.json
+    sha256: 435a5ab466ed77fcc345ab9b02e3a4c9c9968edc18533f1791293246ab7d28e5
+    size: 3041
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0034/episode_00340130.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0034/episode_00340130.parquet
+    sha256: 0f2900291e648757e7ef2777e65710a58d5d87da1d955420de89b9860988fd3d
+    size: 3434037
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: task 34 hanging_pictures; episode 340130; 2361 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0034/episode_00340130.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0034/episode_00340130.json
+    sha256: 98545ec84043323e1c3d7830daf8125dd4bb9589a2062da72f9794a2d3d29d33
+    size: 1282646
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/annotations/task-0034/episode_00340130.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0034/episode_00340130.json
+    sha256: daf1d1a1469fcfb73981bb71285ac37e588e0e53ec378b84a2be3be3e0c087c8
+    size: 2625
+    kind: metadata
+    dataset: behavior/2025-challenge/hanging_pictures
+  - path: 2025-challenge-demos/data/task-0035/episode_00350010.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350010.parquet
+    sha256: e185ce9c7232cd15c3562b418e634d9df759cece03f707fa881dd6780814bf38
+    size: 4051009
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350010; 2666 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350010.json
+    sha256: d253a031650d2e216253232309ac1f56645699edf8745e4fd7215a79c4e906bb
+    size: 620568
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350010.json
+    sha256: 9f096f7c8eb40cbd39848b82ee1c56d0f8e56f9ac354d5e42794e8a58e01c57d
+    size: 3541
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0035/episode_00350020.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350020.parquet
+    sha256: 992a5db6cbd3455b3c7e3a2974149d600edc109153e2db1a47c54b7c3cc61e50
+    size: 5432776
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350020; 3780 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350020.json
+    sha256: 40b5be78f1024a3ea2d5597f2f5278a83446db811a613594fd4b4773c567d712
+    size: 620330
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350020.json
+    sha256: 9f03c250d4b3d9cef8f501ed8de3544db447e668c00e841a9a300592963427f4
+    size: 3541
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0035/episode_00350030.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350030.parquet
+    sha256: ee34dc4550ed84518b4b3b2051afd7725381e8083fbeef19bc0825c69aeae484
+    size: 4757257
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350030; 3323 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350030.json
+    sha256: 9c0b1e5e70c72f7f9c673c28951c107615676b36ce50dfba7710cd1c69d6505d
+    size: 620319
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350030.json
+    sha256: d79f89f566445e7d7d1ea12040aca317af1ff80292c7cf7fce7eace60ec76dcc
+    size: 3541
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0035/episode_00350040.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350040.parquet
+    sha256: 9d9b5e0db263bdd9b015a69bc1d8ed9397fb02498907baedd279335a1b572d02
+    size: 5093596
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350040; 3551 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350040.json
+    sha256: 70a2397051689a6bb2d7e416b5b5601de5eefcfb35af020d9534c1778cb38456
+    size: 620496
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350040.json
+    sha256: 7007f8acd1225a7af46fd903485539bf67610d7a8aee69594df7568a912fc496
+    size: 3541
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0035/episode_00350050.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350050.parquet
+    sha256: 6aaff1bedb54e3f8551435dd18e1a94acfb83ea88ccb5b54cf913091eede4314
+    size: 6105358
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350050; 4301 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350050.json
+    sha256: 47572a05d6c6bcbc874a3b4b0745b6c9ba6bcb5f148da740a57244f66d77cbf7
+    size: 620615
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350050.json
+    sha256: 44e2266d956e4f52ae379e27a14db359864af8edbf2c9827b51ab41480517289
+    size: 3541
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0035/episode_00350060.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350060.parquet
+    sha256: 9ebf52eaa509745187a8ccc0eae568b4751fc5ab0631adf9496b50589dbc4ef0
+    size: 4794294
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350060; 3425 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350060.json
+    sha256: 77ea3d7b8e2db03459fc40545f6203017bceb331dfbd055ef8700e9d9d1c6d5e
+    size: 620337
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350060.json
+    sha256: fcddd088ef10ac36c8f80ecfb9a4746b20d0d86da48fd3e518523ba92a931d39
+    size: 3541
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0035/episode_00350070.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350070.parquet
+    sha256: 04a7c814761f9e3877eebc4d034aa2386012ff09d73003c42652b8dd46c7f8f7
+    size: 4346612
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350070; 3036 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350070.json
+    sha256: eaf62d3be6c6a1ddea6952c215959a43a3f4d724bd76f2e386e8e3c0afc12329
+    size: 620398
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350070.json
+    sha256: e3033d96e6c20bd021671e34265af1e2ae0ff9bf2e084dbb35ea77f2390178be
+    size: 3541
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0035/episode_00350080.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350080.parquet
+    sha256: ef3193b474646e7688ea34e95b42fa2bab8a9072e8df44f48446913f98df1415
+    size: 6114255
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350080; 4242 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350080.json
+    sha256: ca82fb5fb2e5347f4dac5e1515ba6a66b2339e0095c04be3ff3a6082cf775e5a
+    size: 620523
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350080.json
+    sha256: 11a7e5209bb36ba10df52a2999ce1d5bc599ad7cd383db30997f7da0da0cea0e
+    size: 3544
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0035/episode_00350090.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350090.parquet
+    sha256: bf212d068fbeb380f9506979cb8208a3d16783febee746fd750a999e2008de7a
+    size: 4707422
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350090; 3320 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350090.json
+    sha256: 9109e57b997b74e0d2a1e61758d25f43264777d6ef4439d7cc9490a7eac8d766
+    size: 620290
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350090.json
+    sha256: f8dee61d23213c88d43c63f6287794204ae7220e442863ba4f30f4f2fb0f6848
+    size: 3541
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0035/episode_00350100.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0035/episode_00350100.parquet
+    sha256: 0a5a763a4daed4c65443abdd987db131623125b03f7ae92f40a942701d1e4479
+    size: 7163203
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: task 35 attach_a_camera_to_a_tripod; episode 350100; 5257 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0035/episode_00350100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0035/episode_00350100.json
+    sha256: e5bd726faa14c0a3490b79f1931a30dbaab697ce9e4bdfef4034f556a6017665
+    size: 620329
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/annotations/task-0035/episode_00350100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0035/episode_00350100.json
+    sha256: c06f966d514223548c1cb15d917370cd7459f19294a268b51395096cd0c9bef1
+    size: 3148
+    kind: metadata
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+  - path: 2025-challenge-demos/data/task-0040/episode_00400010.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400010.parquet
+    sha256: bef76c4ce0238c7779a5db6008d5cef51e76d2ebc747e1e93f0f98c5e6b46671
+    size: 5544005
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400010; 3879 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400010.json
+    sha256: 38a06acc1b241a7ec9132680b2249b38fcc9ca8f2c50da607dfee730bfacddc1
+    size: 2061352
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400010.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400010.json
+    sha256: 93ad04412a582ecda969ace966ec9cae2325f53307911f174ad7313a3c25557d
+    size: 5132
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/data/task-0040/episode_00400020.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400020.parquet
+    sha256: 4fa2c6f895326fd366410a69e8d8b8dc28cdec1ae4ac1b992cd2ef6f042ba11d
+    size: 6228791
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400020; 4398 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400020.json
+    sha256: e3b330f868a7edc4fffbed662bebdf640f89ca14f3721b4f48bd00ee05550209
+    size: 2060820
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400020.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400020.json
+    sha256: 24a06e17aca6d420889b9fbb25aea3cbaacb190ba32ab78c3ebf85d648f47ac2
+    size: 5134
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/data/task-0040/episode_00400030.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400030.parquet
+    sha256: 5102d6ebfa12f945b6706dccce05176e0082077dfe2e2b80de6c78800a3a67f1
+    size: 4979669
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400030; 3464 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400030.json
+    sha256: bf3ff0dfb091f2a4c60cee62d0e241d3e833620518d37a3829ce31d6a3e09b7e
+    size: 2060445
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400030.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400030.json
+    sha256: fb7795699883f3d861052c5ff566787d9d5227c96915c3f8ef8678577dae4750
+    size: 5134
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/data/task-0040/episode_00400040.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400040.parquet
+    sha256: 203d940a78ff61b5ddb99be4ba34030f94ecce46fe1cc3dccc38a7f2b6975e4a
+    size: 5108510
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400040; 3541 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400040.json
+    sha256: be8b0166a91e345754291fda0d54b4e213895272c0699cd6a19c43deb0ad3d17
+    size: 2062452
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400040.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400040.json
+    sha256: e50a335f4991f79d4e9bad558c52860bee03817b869193d43ec66d50d979bbec
+    size: 5132
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/data/task-0040/episode_00400050.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400050.parquet
+    sha256: e7849eadf3aa45ea56e16389f8180382f13ec6eff13497cd1d9d5d6eff640f63
+    size: 5446419
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400050; 3822 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400050.json
+    sha256: d94f99df0b727fb1d961263b4d4d4d3aab81c323f87bb54d87324e5c16d1bec5
+    size: 2059139
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400050.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400050.json
+    sha256: c235df1c5e5365010a43315b34a529601a31c0fff6de7c14fac283fdee4bd78d
+    size: 5134
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/data/task-0040/episode_00400060.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400060.parquet
+    sha256: 38c4f00b2a2280b0114a5c0e5cfb37fd222a3b7fbc87d46ea39209e994bc3862
+    size: 4933608
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400060; 3340 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400060.json
+    sha256: 9daafa823a52007c41a3892353e82421414522df309666d82ec7f0712ee12b9d
+    size: 2061057
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400060.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400060.json
+    sha256: bd1d13b227e5b5384ae4c9c9bbd44d08ee9c82a6b428c9c0743f1d2b343bdb6d
+    size: 5132
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/data/task-0040/episode_00400070.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400070.parquet
+    sha256: 27fda5160939417c606217e8ee252e489c7a95d7dceffc7d5e749f315b5d397e
+    size: 4335324
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400070; 2937 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400070.json
+    sha256: 8d73c8795603bd1d7a5445230ff02e21a40fcaba85dd1f8bfaf56f7b823ea3eb
+    size: 2058937
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400070.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400070.json
+    sha256: 49d2bd556584e870d8f57d30d6d7efb9d7217022b1d03b40ffe9755220571eb0
+    size: 5132
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/data/task-0040/episode_00400080.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400080.parquet
+    sha256: 924d1344f5d824a5e212c16f020c664aebb80c22d58f17502ab5a7f2a43f1fcd
+    size: 5516675
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400080; 3785 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400080.json
+    sha256: c1a1316ab628eb95b44f8ed8a6b2739b0f42ebc52ca37cea4925619c54166b79
+    size: 2059283
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400080.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400080.json
+    sha256: e11abea6ff8ea16b249288dd2f3cecb49b8ec01d379cfa7f9c5fdde8bcc165ac
+    size: 5133
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/data/task-0040/episode_00400090.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400090.parquet
+    sha256: 3e1e1e9a67894aebcd4560055504bf42b87289f0c87506dd78d40b1d51964a53
+    size: 4443112
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400090; 2976 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400090.json
+    sha256: 958d62d049112f1b28ddddb67bd4748ef432fd7fb684b059f2c59f750321b71a
+    size: 2061760
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400090.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400090.json
+    sha256: 588d2fc6253469097d9cd20fad2aabd2337529a9e7f2e50e870fa48dcb6c566b
+    size: 5135
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/data/task-0040/episode_00400100.parquet
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/data/task-0040/episode_00400100.parquet
+    sha256: 7f4d7e09cbf9889f28ed100866ee42ced304dc55cc8d722bafba53d06be00f1c
+    size: 6938376
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: task 40 make_microwave_popcorn; episode 400100; 4853 frames at 30 Hz
+  - path: 2025-challenge-demos/meta/episodes/task-0040/episode_00400100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/meta/episodes/task-0040/episode_00400100.json
+    sha256: e5421182780b262da6b1cfd8e7ce65bbee8e9667181bca8e18c6527a112872f4
+    size: 2059588
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+  - path: 2025-challenge-demos/annotations/task-0040/episode_00400100.json
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-demos/resolve/33639692425296185f245aaa648530178c7b3d2b/annotations/task-0040/episode_00400100.json
+    sha256: a33fec9dc1ded2a4f0448058baf965591e68900eccc3083ce0c722306a333dc0
+    size: 5132
+    kind: metadata
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+- family: behavior
+  repo: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata
+  revision: b3c9a714b8730701c480e77173d8aa4a8f19e1c0
+  license: MIT
+  note: 'Raw OmniGibson HDF5 of the same teleoperation episodes (data/demo_0: action, reward, terminated, truncated, serialized flat sim state
+    + state_size; data.attrs config and scene_file). Not images. Source of the parquet files above (same episode index), so never counted separately.
+    Used here for the success flag (terminated) only; the flat state layout is scene-dependent and not decoded.'
+  files:
+  - path: 2025-challenge-rawdata/task-0000/episode_00000010.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000010.hdf5
+    sha256: b88d9e2fa1b3492b2feecca372a48b035a483265b973d8b52a4d2731b573602f
+    size: 6040244
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0000/episode_00000020.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000020.hdf5
+    sha256: 3f242e0e231177d760ce8c383bec9b9432f0035c96cd9957bdb9e2fa6301e02f
+    size: 8770040
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0000/episode_00000030.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000030.hdf5
+    sha256: 4211fe8dccc6b811a492b2e043ae5e13b2b00768ded0909513bdadac16936d27
+    size: 6967730
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0000/episode_00000040.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000040.hdf5
+    sha256: ffc85a3225233717a17eab59ca7fd2b218563b4a066c28e240955ef7b7e0628b
+    size: 5098270
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0000/episode_00000050.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000050.hdf5
+    sha256: ff7ebcbea619eccb591064c85de9e5025bb1eaa02c05a517176305dd6646d7c1
+    size: 6054825
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0000/episode_00000060.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000060.hdf5
+    sha256: c59c93ad9a95c38cf19b4c2ff50afa18eaca4df7e112bbca71bbee34e6c2f44f
+    size: 12029298
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0000/episode_00000070.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000070.hdf5
+    sha256: fb089273779086071b225aff01c755931fb2baa4c838a167b1e0e3b7d68f1725
+    size: 10775834
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0000/episode_00000080.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000080.hdf5
+    sha256: 3cf9c898d1df971d2d192a13f684c0ab3e705ee8e5a30e993e531d147b725b93
+    size: 9489439
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0000/episode_00000100.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000100.hdf5
+    sha256: 758ec9e936259d278f7df5c01d5785bdaa8c4d1762a3392d3ae098820c40bbd9
+    size: 10116608
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0000/episode_00000110.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0000/episode_00000110.hdf5
+    sha256: e694d8f79e436db56324f10ed3fda0bb09a43b6b181c9e515a070194c4cbc82c
+    size: 8492419
+    kind: low_dim
+    dataset: behavior/2025-challenge/turning_on_radio
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010010.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010010.hdf5
+    sha256: 66c8396817198a2a165225adae56de748cc0598f16db0edf073e7a47760bf45b
+    size: 24706040
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010020.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010020.hdf5
+    sha256: 7bc2f0171ab8def3ac0e730e4575b20d9c3901ba7b3f37bf7abf05c43066ff23
+    size: 12295135
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010030.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010030.hdf5
+    sha256: c9679a30d3450a0ad468e03b39858011a997c1e412a84875b387e23d11b9b6dc
+    size: 25561121
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010040.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010040.hdf5
+    sha256: 4ebfc039a33141c45275126aea1d290d2f33a55d1552234bb7eec9f63605d3d0
+    size: 33096289
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010050.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010050.hdf5
+    sha256: f6b2ed79b194f22cf43b2426afd4f657ca85335213c034a65e886c18ae5ab99e
+    size: 27104103
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010080.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010080.hdf5
+    sha256: 880e41d390046e1599f44fb490fe5ece688117b6321a6f3bb8fc9c325d9f5cb9
+    size: 26485612
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010090.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010090.hdf5
+    sha256: 66038027bda8a28c58bb597078105847fe7a30b5bae2ccf96d628ade369ddd19
+    size: 17835568
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010120.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010120.hdf5
+    sha256: 58ea78343f7bb2fbc7cbb07e6361c244700ce9a3eec8446dd45e91e1bb3f9f90
+    size: 15599724
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010140.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010140.hdf5
+    sha256: b709a375a3b7a619c5cf65cf9ba80b55ba8a2e022c0eaec9a17b0ac530315e35
+    size: 22934968
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0001/episode_00010150.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0001/episode_00010150.hdf5
+    sha256: 868992d8edfe89dcc9fc833dd2fb2a2d3ad05550316017fab3dfa1f9304c83c9
+    size: 25227552
+    kind: low_dim
+    dataset: behavior/2025-challenge/picking_up_trash
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030010.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030010.hdf5
+    sha256: 5a8c9a061bc3cf6be3abb5338852038c7062873f3566373a5ff496d4a0efd223
+    size: 26295774
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030020.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030020.hdf5
+    sha256: 6941564bb528b77707a4d276f38fd2e0aa34dd73c932c2fa85b587ac6d152c92
+    size: 38215460
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030030.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030030.hdf5
+    sha256: 7e37a6504f72d3b5649d38bcde4afc55a1448433407e9dc6f1e5de8910626def
+    size: 33075987
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030040.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030040.hdf5
+    sha256: 7939c45de24ebb3920add6e846b4d36118eec8840a4ee69074b4367e71c7b47a
+    size: 55474015
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030050.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030050.hdf5
+    sha256: c5ff6e660ed57c3220ea6fff74f0f5c28768a759cc5bed0288e83571bf52ea70
+    size: 38259609
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030060.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030060.hdf5
+    sha256: 2c64dbf0d8cd92ce16c92933ef5d28004982b39e0dbbfe947c925d6f4865c53c
+    size: 74528744
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030070.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030070.hdf5
+    sha256: 84d43a4d1b3a0c55be6c84145f953a105fde7c85c1ff321fbd7d60c7a690d359
+    size: 36508424
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030080.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030080.hdf5
+    sha256: 035be73b6923dcfbe3bbd6509131496bf73660fe1f949d69cf643241364081c6
+    size: 79952862
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030090.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030090.hdf5
+    sha256: 41c57591dfc384c5280f0c86f0c726eb7445bf9d9343ebc64b466baf635d8bee
+    size: 65740302
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0003/episode_00030100.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0003/episode_00030100.hdf5
+    sha256: dd2b9a992e706b1dd2d9812db9883d37cc6df5912bb3d6860d2d21f1669c4787
+    size: 51881940
+    kind: low_dim
+    dataset: behavior/2025-challenge/cleaning_up_plates_and_food
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100010.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100010.hdf5
+    sha256: a9cb43790644d0a65d11fbc99f723c011df680dcb659cc7ad8820ad667dbff92
+    size: 20241170
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100020.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100020.hdf5
+    sha256: c25d2d58bc9d18acbf4cc74945c775de8827cf37764531849c513d98b7ad015d
+    size: 40321476
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100030.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100030.hdf5
+    sha256: d36799bfb71c070d11f41712eae67d687b3fb672782539533057c9b22b37a8fc
+    size: 50888479
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100040.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100040.hdf5
+    sha256: 73b4219f0a5229f19ca0c514be972e09ab48a7790e399dadbe7ca34d1ffe6511
+    size: 27261344
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100050.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100050.hdf5
+    sha256: 9ad894fc2e6b308c8157f5946e6a876819cd999528983a1d0fd46e4b336e31cf
+    size: 45997418
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100060.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100060.hdf5
+    sha256: b5485e0d7756ae4c281ad8e28c28c4ba98e7c2fa393e077d8b3f844f81327216
+    size: 41119748
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100070.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100070.hdf5
+    sha256: abf2fd266843841897a8ff607e450a247fe3dcad806f8be92f46028a21dd1b35
+    size: 33008916
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100080.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100080.hdf5
+    sha256: 4fafd1708b2e63fd5b8970d47e42e6c6429b1a7c4d41f7dfda445f7db472ca24
+    size: 42388275
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100090.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100090.hdf5
+    sha256: 3c33fa2db3af5d01482b28e8eb4b9e554deb826bfb569deaee38d834db20e505
+    size: 40435261
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0010/episode_00100100.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0010/episode_00100100.hdf5
+    sha256: 9be013465b887b26126cd58aa24dc9af66671ebe85ba4999d771639d327532c5
+    size: 47376472
+    kind: low_dim
+    dataset: behavior/2025-challenge/set_up_a_coffee_station_in_your_kitchen
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220020.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220020.hdf5
+    sha256: 06b1754329cd5d4ce0f477bc7e8911c54f96ab4494ec0116ae03304361489312
+    size: 10709050
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220030.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220030.hdf5
+    sha256: dea6c8151cd8655d56c96609dd45a1c888b87d52b8d96137ab737ffd85f2b989
+    size: 11969377
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220040.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220040.hdf5
+    sha256: 7a1c6a4c2dce80339be0a9c1b30f7266e7cbdc4e1e1be00cab847286173739a6
+    size: 9182658
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220050.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220050.hdf5
+    sha256: 206259865a5d62285659bae74dbf60730bb89dd12cdc714070243ed7fb644d18
+    size: 23569978
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220060.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220060.hdf5
+    sha256: ccb57834fbfc7c34fc16e0b4de881a6e02a047f5f7a12e480c5a6df09fcc10ad
+    size: 9428434
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220070.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220070.hdf5
+    sha256: 5be58476129556992de03530931d84039c3549b5969c6dc4c1506c5ed89848e6
+    size: 16293531
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220080.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220080.hdf5
+    sha256: 5e30279192b14eca0a6e7b81e3100d5eaa92795c480b5ad9751e3a7b30b00927
+    size: 47096915
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220100.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220100.hdf5
+    sha256: c908bc05e88332c566cf029b7bb2081e59d5e0fa9650b691dcc53faa452c4bfb
+    size: 11084051
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220110.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220110.hdf5
+    sha256: d1bb5c45c18c7592bc6402d4ed9c47788e69edd6a622ab16831561a9320f104e
+    size: 11042190
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0022/episode_00220130.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0022/episode_00220130.hdf5
+    sha256: 26ef62de44b8a982e361f9703c150d88d8cb84d55873e9125049581c502020da
+    size: 16386532
+    kind: low_dim
+    dataset: behavior/2025-challenge/putting_shoes_on_rack
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340020.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340020.hdf5
+    sha256: 7a7b278d26eb1be13a6966430675a3f846c18f223f2cd39fd847bb17b2bfe9e2
+    size: 11391963
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340030.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340030.hdf5
+    sha256: ca41277b1d5858366205007ab3ccce4e994e9087fa4ed3ae9360f41828f7af12
+    size: 7945910
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340040.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340040.hdf5
+    sha256: 8e204284e87d982aed452b979514a935587c99669cdb30a8c07cb189ccfb5033
+    size: 7798052
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340050.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340050.hdf5
+    sha256: e28a0b35740ed8d9e84c28dfa5c650d6cb338d5b3f450d4bd23d2eefd259e070
+    size: 8224523
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340060.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340060.hdf5
+    sha256: 762c9b0578f3040baacf1a34d531f26398fdcab7d9702a4fd46137161c6699d2
+    size: 9844174
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340090.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340090.hdf5
+    sha256: b7b591dd53f2fec0987e1855508f4b60ee0a6d91a30a14359737977a82c6c172
+    size: 7343556
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340100.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340100.hdf5
+    sha256: 8b57d9fc5928d5f0f3821ef1ce01c4134843a539da98b974fa353ad05449aca3
+    size: 10071349
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340110.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340110.hdf5
+    sha256: 6c1cb8070662e8e456fbda5b5ffb16c1075c371dc3e67a0f13b84fb14ba2d6e7
+    size: 11317800
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340120.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340120.hdf5
+    sha256: a6668bb3a99ec95eee66226d273bab64dbeaa6723ffe230560fdde6d96c9a1a9
+    size: 11004765
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0034/episode_00340130.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0034/episode_00340130.hdf5
+    sha256: d7ac7df0d72a50ae26b63bb824d3f47332e44ff73d7783e68bda77f094afe5b3
+    size: 6853290
+    kind: low_dim
+    dataset: behavior/2025-challenge/hanging_pictures
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350010.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350010.hdf5
+    sha256: 3da21de654254f347c667e2dd76b99c03f5042bd7a4060e9e47beadb78de70ec
+    size: 15319501
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350020.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350020.hdf5
+    sha256: 1ed8959f22bd7f5e702c38572b2db76472280cca5678978d30e13d6e17034c60
+    size: 9136498
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350030.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350030.hdf5
+    sha256: 615181a487ab3935534fa60c286de2c035fc5b4a1180e6e9f08ef639561462b4
+    size: 8879980
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350040.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350040.hdf5
+    sha256: 1b73188eac4db6035dcd6573af4870c4d70d447a29c9087e4b40ec1d80101dcb
+    size: 20682228
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350050.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350050.hdf5
+    sha256: f05d486e780400b0b192e4c4e84b500cacd2bcae8e558631813a080be78679cc
+    size: 12753942
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350060.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350060.hdf5
+    sha256: 8fe0a35f078d37d23a90013b85f810761d21361d1851f6cf532c36ff8a9f5448
+    size: 7944962
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350070.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350070.hdf5
+    sha256: c52c37d28c98b08de6afa3b0901367ed8c0dc6a4cbe27a0d171fb15165b9b7cb
+    size: 9195510
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350080.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350080.hdf5
+    sha256: a22ad3cd31fb641a6115bbb460c743c9160748df58d98e2e94fa32ae709cbe8d
+    size: 11626458
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350090.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350090.hdf5
+    sha256: 2e39d8f94871f5def4bc470036307bce663ee691974bde89834366651f9d689d
+    size: 7706612
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0035/episode_00350100.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0035/episode_00350100.hdf5
+    sha256: 046e1d0555629fe08b9242a634774a2431837dbb8db57bb1332511af87787712
+    size: 16291308
+    kind: low_dim
+    dataset: behavior/2025-challenge/attach_a_camera_to_a_tripod
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400010.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400010.hdf5
+    sha256: 2114cab65783ee0908e72622a901ae6255dfd8d34d45b8790810784628839cfc
+    size: 120116855
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400020.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400020.hdf5
+    sha256: b5a951b625b478da949e096af2a0b33d8e5c862b5bb086f8cd028c6c7e61815b
+    size: 103632662
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400030.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400030.hdf5
+    sha256: 09dc07e01903d6690e29d4e4c32175d415c8689b7067a0d6bf46825e7a1f184b
+    size: 102145314
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400040.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400040.hdf5
+    sha256: 29b871016cfe9cc740dc745291af3af227d619ac4634efb9de6499a9945a2d88
+    size: 92602487
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400050.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400050.hdf5
+    sha256: e8e1a00062526d5d1621dee247d61d40769670096262dd85c344e5459a4db675
+    size: 80923190
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400060.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400060.hdf5
+    sha256: 98bbb9d1d9b4c684ff26dc6976bb4c2e43f96c4c9fd6604a3cd1cc8533a935ef
+    size: 70626224
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400070.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400070.hdf5
+    sha256: 773055a7273fde67935c69c476c46ef1f4fc98a702ab73a8d6c32f0fcde7cc54
+    size: 61860872
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400080.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400080.hdf5
+    sha256: 2fefd14b5d2b87c02cddb1a32b571fb593eb06d3b64c543008b6e7c6d7adc3e9
+    size: 85529704
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400090.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400090.hdf5
+    sha256: 72df4e6bcd3dbefb59ad459c0d8b26f5f6f1205134e6b2e0d8fb87e271e3c430
+    size: 72790106
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+  - path: 2025-challenge-rawdata/task-0040/episode_00400100.hdf5
+    url: https://huggingface.co/datasets/behavior-1k/2025-challenge-rawdata/resolve/b3c9a714b8730701c480e77173d8aa4a8f19e1c0/task-0040/episode_00400100.hdf5
+    sha256: 2892a9b0d001f92cf0f3c63c4f14ff9aebdce2b50e49995c050c63e51825ad1b
+    size: 131178288
+    kind: low_dim
+    dataset: behavior/2025-challenge/make_microwave_popcorn
+    note: raw source of the parquet with the same episode index
+- family: behavior
+  repo: https://huggingface.co/datasets/behavior-1k/omnigibson-robot-assets
+  revision: bc61e5e3c39c6fd347fd318cfe9d23d73e9d193b
+  license: MIT
+  note: 'OmniGibson robot assets: Galaxea R1 Pro URDF (r1pro.urdf, identical git blob ff1b63ce at bc61e5e3 (2025-08-08, latest commit before the
+    recording code commit 875b5186 of 2025-08-12) and at c325bd3b) and the import config that defines {left,right}_eef_link = {side}_gripper_link
+    * (0, 0, -0.06), quat xyzw (0, 1, 0, 0). Dataset card license: MIT. The recorded assets git hash edec8837 is not public; FK agreement with
+    the recorded eef poses (< 3e-6 m) is checked in docs/sources.md.'
+  files:
+  - path: omnigibson-robot-assets/models/r1pro/urdf/r1pro.urdf
+    url: https://huggingface.co/datasets/behavior-1k/omnigibson-robot-assets/resolve/bc61e5e3c39c6fd347fd318cfe9d23d73e9d193b/models/r1pro/urdf/r1pro.urdf
+    sha256: b0d76760cbedfbcbe1ddc280380dd5f497bbca380313bc096d7239a2c50dae61
+    size: 38393
+    kind: assets
+  - path: omnigibson-robot-assets/models/r1pro/urdf/r1pro_source_cfg.yaml
+    url: https://huggingface.co/datasets/behavior-1k/omnigibson-robot-assets/resolve/bc61e5e3c39c6fd347fd318cfe9d23d73e9d193b/models/r1pro/urdf/r1pro_source_cfg.yaml
+    sha256: d3eb97811138d00edd83bc2be23f8d1d2e2b17c1bbea237a7cf2f9f89752524e
+    size: 13397
+    kind: assets
+subset:
+  tasks:
+  - task_index: 0
+    task_name: turning_on_radio
+    episodes:
+    - 10
+    - 20
+    - 30
+    - 40
+    - 50
+    - 60
+    - 70
+    - 80
+    - 100
+    - 110
+  - task_index: 1
+    task_name: picking_up_trash
+    episodes:
+    - 10010
+    - 10020
+    - 10030
+    - 10040
+    - 10050
+    - 10080
+    - 10090
+    - 10120
+    - 10140
+    - 10150
+  - task_index: 3
+    task_name: cleaning_up_plates_and_food
+    episodes:
+    - 30010
+    - 30020
+    - 30030
+    - 30040
+    - 30050
+    - 30060
+    - 30070
+    - 30080
+    - 30090
+    - 30100
+  - task_index: 10
+    task_name: set_up_a_coffee_station_in_your_kitchen
+    episodes:
+    - 100010
+    - 100020
+    - 100030
+    - 100040
+    - 100050
+    - 100060
+    - 100070
+    - 100080
+    - 100090
+    - 100100
+  - task_index: 22
+    task_name: putting_shoes_on_rack
+    episodes:
+    - 220020
+    - 220030
+    - 220040
+    - 220050
+    - 220060
+    - 220070
+    - 220080
+    - 220100
+    - 220110
+    - 220130
+  - task_index: 34
+    task_name: hanging_pictures
+    episodes:
+    - 340020
+    - 340030
+    - 340040
+    - 340050
+    - 340060
+    - 340090
+    - 340100
+    - 340110
+    - 340120
+    - 340130
+  - task_index: 35
+    task_name: attach_a_camera_to_a_tripod
+    episodes:
+    - 350010
+    - 350020
+    - 350030
+    - 350040
+    - 350050
+    - 350060
+    - 350070
+    - 350080
+    - 350090
+    - 350100
+  - task_index: 40
+    task_name: make_microwave_popcorn
+    episodes:
+    - 400010
+    - 400020
+    - 400030
+    - 400040
+    - 400050
+    - 400060
+    - 400070
+    - 400080
+    - 400090
+    - 400100
+  totals_bytes:
+    parquet: 655154200
+    meta: 118440773
+    ann: 497630
+    raw: 2503153294
+    episodes: 80
+    frames: 459624
