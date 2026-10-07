@@ -9,7 +9,7 @@ ever stepped.
 
 Mesh and texture paths in the MJCF are absolute paths on the recording machine. They
 are resolved inside the pinned robosuite wheel of the recorded ``env_version`` (see
-``reachy_retarget/acquire/catalog.yaml``), read as a zip archive. When assets are
+``reachy_retarget/acquire/catalog/robosuite.yaml``), read as a zip archive. When assets are
 missing, mesh geoms are replaced by placeholders: kinematics stay exact but the episode
 gets no physics scene (``provenance["state_route"] == "mjcf_kinematic_only"``).
 

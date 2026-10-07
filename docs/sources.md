@@ -1,6 +1,6 @@
 # Source families
 
-Every file is pinned in `reachy_retarget/acquire/catalog.yaml` (URL at an immutable
+Every file is pinned in `reachy_retarget/acquire/catalog/<family>.yaml` (URL at an immutable
 revision, publisher SHA-256, size, license, kind). `fetch()` is the only code path that
 uses the network; it writes `data/raw/<family>/<path>` and records each verified file in
 `data/raw/ledger.json`. "Catalogued", "fetched", "adapted" (a `SourceEpisode` was

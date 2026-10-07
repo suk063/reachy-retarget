@@ -53,11 +53,14 @@ class CatalogEntry:
 
 
 def load_catalog(path=None) -> dict[str, CatalogEntry]:
-    """Parse ``catalog.yaml`` (packaged by default) into entries keyed by id."""
-    text = Path(path).read_text() if path else resources.files(__package__).joinpath("catalog.yaml").read_text()
-    doc = yaml.safe_load(text)
+    """Parse a catalog file, or every packaged ``catalog/*.yaml``, into entries keyed by id."""
+    if path:
+        texts = [Path(path).read_text()]
+    else:
+        folder = resources.files(__package__).joinpath("catalog")
+        texts = [f.read_text() for f in sorted(folder.iterdir(), key=lambda f: f.name) if f.name.endswith(".yaml")]
     out = {}
-    for src in doc["sources"]:
+    for src in (s for text in texts for s in yaml.safe_load(text)["sources"]):
         shared = {k: src[k] for k in ("family", "revision", "license") if k in src}
         for f in src["files"]:
             e = CatalogEntry(id=f"{shared['family']}/{f['path']}", **{**shared, **f})
