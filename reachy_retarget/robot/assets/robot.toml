@@ -1,0 +1,308 @@
+# Single editable profile for Reachy 2 r2-0008.
+version = 1
+serial = "r2-0008"
+model_sha256 = "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448"
+
+[connection]
+host = "192.168.77.2"
+wifi_host = "192.168.10.172"
+sdk_port = 50051
+video_port = 50065
+dashboard_port = 8000
+webrtc_port = 8443
+ssh_user = "bedrock"
+
+[base]
+radius = 0.25
+path_radius = 0.36
+
+[tripod]
+sdk_setting = 1.156
+
+[postures]
+
+[postures.ready]
+right = [0, 10, -10, -90, 0, 0, 0]
+left = [0, -10, 10, -90, 0, 0, 0]
+
+[postures.rest]
+right = [0, 10, -10, 0, 0, 0, 0]
+left = [0, -10, 10, 0, 0, 0, 0]
+
+[postures.carry_xyz]
+right = [0.3, -0.25, -0.17]
+left = [0.3, 0.25, -0.17]
+
+[cameras]
+
+[cameras.head]
+about = "Measured calibration of the head eyes of r2-0008 (teleop_head stereo pair, the WebRTC images, 960 x 720). Lens: pinhole with radial distortion, OpenCV convention (K, D = [k1, k2, p1, p2, k3]). Pose: camera_from_torso = Rot(mount_rotation_deg) @ the URDF's camera_from_torso at the neck joints read with the frame; mount_rotation_deg is a rotation vector in the eye's optical frame (x right, y down, z forward), in degrees. Use the lens and mount together."
+date = "2026-09-25"
+method = "Lens (K, D): torso RGB-D at one base pose, head images at 10 neck poses (pitch 10-28 deg, yaw -25..25 deg) in two sessions; SIFT matches between the torso RGB and each eye, RANSAC on the fundamental matrix; robust least squares over f, cx, cy, k1, k2 and the mount rotation of each eye. Fitting the images to the other eye leaves 3.6-9.9 px, which confirms the eye labels (first WebRTC video track = left eye). Mount rotation: refitted later the same day (run 20260925_194429_calib-check) with the lens kept: 21 neck poses (pitch 5-25 deg, yaw -30..30 deg, roll -15..15 deg), the median torso depth rendered into each eye and tracked into the real image (about 6800 tracks per eye). The previous mount rotations left a median of 6.6 / 6.3 px (left / right); these leave 3.6 / 3.2 px, and fits on half of the views reduce the other half from 5.9-6.9 to 3.1-4.1 px. Freeing the lens, neck offsets or a torso-camera rotation as well changed the median by only 0.1-0.4 px with unstable values, so they are not identifiable from these views. Repeated visits to one neck pose differ by 0.2-0.3 deg (about 2 px), the neck's repeatability. The principal point and the mount rotation are strongly correlated; use them together."
+image_size = [960, 720]
+
+[cameras.head.left]
+K = [[360.91, 0.0, 499.33], [0.0, 360.91, 342.91], [0.0, 0.0, 1.0]]
+D = [0.0232, -0.0267, 0.0, 0.0, 0.0]
+mount_rotation_deg = [-0.268, -0.755, 0.4]
+points = 6933
+views = 21
+
+[cameras.head.left.reprojection_px]
+median = 3.55
+p90 = 9.19
+
+[cameras.head.left.sd]
+f = 0.78
+cx = 0.78
+cy = 1.01
+mount_rotation_deg = [0.006, 0.012, 0.016]
+
+[cameras.head.right]
+K = [[360.74, 0.0, 515.93], [0.0, 360.74, 347.33], [0.0, 0.0, 1.0]]
+D = [0.0716, -0.0586, 0.0, 0.0, 0.0]
+mount_rotation_deg = [0.522, -0.146, 0.207]
+points = 6680
+views = 21
+
+[cameras.head.right.reprojection_px]
+median = 3.19
+p90 = 6.29
+
+[cameras.head.right.sd]
+f = 0.6
+cx = 0.83
+cy = 1.05
+mount_rotation_deg = [0.005, 0.009, 0.013]
+
+[cameras.torso]
+version = 1
+camera = "depth_camera"
+width = 1280
+height = 720
+K = [692.5858154296875, 0.0, 642.7431640625, 0.0, 692.4882202148438, 359.644775390625, 0.0, 0.0, 1.0]
+depth_scale = 0.987
+depth_offset_m = 0.0
+reference_run = "20260926_160005_multiview-metric"
+note = "Uniform optical-depth scale supported by separate base stations and approximately known table, box and cube heights. Raw recordings remain unscaled. Validated in this nearby tabletop scene, not a global millimetre-accuracy specification. Mount and intrinsics unchanged."
+
+# Runtime state belongs in recordings, not this file. Geometry and joint limits
+# belong to the hash-bound URDF. Arm postures use URDF order in degrees; carry
+# targets use torso metres. Host/key/runs overrides belong to the environment.
+
+[notes]
+operation = """
+These are recorded operating facts through 2026-09-30, not live health status.
+Tested SDK: reachy2-sdk 1.0.15. A local/core API version warning is known.
+Wired workstation address: 192.168.77.1/30, NetworkManager profile Reachy-Wired.
+Robot static network setup: enp2s0, /etc/netplan/99-z-reachy-wired.yaml.
+Check power per part: whole-robot is_on() can be false while the base is on.
+The base must be stiff before movement. disconnect() does not stop motion;
+cancel owned goals and send zero base speed. EtherCAT faults can freeze feedback
+while the SDK reports Ok; independent health evidence is required before re-enabling arms.
+Use key-authenticated SSH and strict host verification. Never store passwords.
+"""
+frames_and_model = """
+Torso: X forward, Y left, Z up, metres. URDF joints are radians; the SDK adapter
+alone converts degrees. Use URDF FK/IK/extrinsics, not SDK FK/IK or look_at.
+World is the last deliberate odometry reset and drifts. Start a new frame after
+manual relocation, pose jumps or recovery; reset only while idle.
+The calibrated torso height is 1.166 m with about 8 mm systematic uncertainty.
+The model's calibrated 0.170 m tripod extension is baked into its origin; keep
+tripod_joint zero. Mimics preserve the physical 0.160 m linkage extension.
+Do not confuse the SDK tripod encoder setting with absolute torso height.
+Original arm/hand geometry and finger mimics are retained. arm_tip is a tool
+reference, not a calibrated contact point. Nominal CAD fingertip endpoints are
+not millimetre-accurate contact estimates. Gripper width is nonlinear and opening
+percentage alone does not establish a stable grasp.
+Joint limits are authoritative in the URDF; never widen them from SDK capability.
+Local target and feedback checks remain necessary even if the SDK accepts a goal.
+Tracking uses arm meshes for occlusion only. No environment collision planner is
+present in the retained controls; a valid endpoint does not prove a clear path.
+Raise arms away from furniture and return to rest only after a checked retreat.
+"""
+base_and_lidar = """
+Hardware LiDAR safety defaults OFF by explicit user request on 2026-10-05.
+The robot host's /pollen/docker/reachy2-core/zuuu_hal_params.yaml sets safety_on:
+false and is mounted by the core Compose service over the installed HAL params.yaml.
+The existing container's startup parameters and live SDK state were also set OFF.
+Compose validation and live reads passed; no reboot was performed for verification.
+The SDK delta runner follows the live switch: OFF permits execution and ignores LiDAR
+detection status; ON enforces LiDAR error/stop checks. It does not change the switch.
+The separate base-identification runner still requires LiDAR safety ON and clear.
+Distances remain 0.70 m slowdown and 0.55 m stop from base centre.
+Check live state after reboot; ROS parameter dumps may lag runtime service changes.
+LiDAR covers front +/-121 degrees and is blind behind;
+back out only along a just-travelled path. Thin legs and elevated obstacles can be missed.
+Never derive heading goals from wrapped SDK theta; the guarded controller tracks
+the unwrapped branch. Heading drift is about 2.5 percent over repeated turns.
+Speed commands need renewal, but callback-time expiry does not guarantee timely
+application of zero: the latest recheck found ROS-zero to HAL-logged-zero differences
+up to 1.004 s. Qualify this path before more physical threshold calibration.
+Boundaries constrain checked paths, not unseen obstacles. Movement after a ROS zero
+includes delayed application as well as possible coast; old 1.8 cm / 4 degree
+observations are not stopping bounds. Historical GoTo below about 6.5 cm / 6 degrees
+did not move. Registered controller inputs since 2026-09-30: start 0.25 m/s and
+0.75 rad/s, hold 0.15 m/s and 0.45 rad/s, combined as |v|/V + |w|/W >= 1. They are
+measured on one floor area and are not universal; a command on the combined line
+does not always move the base. Simulated position servos are not a measured
+hardware velocity model.
+"""
+base_evidence = """
+Run 20260928_122850_base-min-move used guarded GoTo from rest with 2 mm / 0.3 degree
+arrival tolerance. Translation 1-5 cm did not move; 6 cm moved once in two tries;
+6.5/7/7 cm produced 65/73/72 mm. Commands 8/9/10 cm produced 98/106/117 mm.
+Turns 2/4/6/8/10/12/15 degrees produced 0/0.3/5.5/7.5/7.1/12.7/16.1 degrees.
+Core 1.7.5.9 zuuu_hal OPEN_LOOP: 20 ms tick, no smoothing, GoTo P=5, capped at
+0.4 m/s and 1 rad/s. Wheel radius 0.105 m, wheel-to-centre 0.196 m. The duty map is
+0.0418 * wheel_rad_s + 0.0126, zero below 0.02 rad/s, capped at 0.5. Translation
+breaks away near 12 percent duty, rotation near 5 percent. Commands are scaled only
+in the configured overshoot interval to avoid suppressing break-away. A 0.4 m
+unscaled move overshot by about 5 cm. These are measurements, not a controller retune.
+Run 20260929_155458_base-breakaway-identification compared forward velocity steps:
+0.15 from rest twice and 0.20 once did not sustain motion. After measured departure
+with 0.35, input 0.15 maintained motion for 1.0-1.2 s in two distance-limited trials
+(last 0.4 s odometry means 63/94 mm/s). One additional 0.35 kick failed the sustained
+departure detector within 0.7 s. After departure, 0.05 stopped; 0.10 decayed, reaching
+about 1.5 mm/s in the longer repeat. Zero after departure also stopped. This supports
+different starting and holding inputs, not a universal 65 mm displacement quantum.
+Inputs are SDK m/s commands, not measured speed or motor voltage. Forward-only,
+short, tethered trials do not establish a reliable holding threshold or stopping model.
+Before relocation on 2026-09-30, in runs
+20260930_195639_base-wheel-diagnostic and 20260930_195815_base-start-upper-bound,
+0.35 and 0.40 forward inputs reached ROS unchanged but stopped on the measured
+reverse-path guard after 0.725 and 0.489 s. Left-wheel electrical RPM briefly
+became positive despite the expected negative sign for forward motion. Camera
+frames showed transient body motion without sustained departure. The cause may
+be wheel dynamics or feedback integrity; published RPM alone cannot distinguish
+them. The earlier 0.15/0.20/0.25 trials also did not sustain motion from rest.
+After the user relocated the robot, 0.25/0.275/0.30 produced forward motion. At a
+second relocated position, 0.20 and 0.25 did not sustain departure. A 0.35-to-0.15
+trial held forward motion for 1.210 s at ROS (HAL logged 1.222 s); final 0.3 s mean
+wheel speed was 0.0533 m/s. Its stop phase exceeded the 3 degree yaw bound. Nearby
+holding inputs remain unqualified: 0.125 was sent for only 0.091 s before a
+SDK/ROS position-consistency stop; planned 0.10 never passed the start phase.
+Angular trials ended at +7.07 degrees for +0.40 rad/s and -2.87 degrees for -0.30.
++0.30, -0.40 and -0.50 had little net rotation; +0.50 stopped on a rear-path guard
+after 0.241 s. No symmetric angular deadband or exact minimum angle is established.
+Input is not measured speed. Independent ROS receipt and HAL x-goal logs exposed
+zero-application discrepancies of 0.925/1.004/0.711 s; the first 0.20 trial had
+1.693 s of HAL-logged input versus 0.805 s at ROS. Unequal exposure confounds
+physical threshold estimation. Docker log times are not motor write timestamps.
+Depth-10 command history, serialized callbacks/wheel reads and freshness renewed
+at callback consumption support a backlog hypothesis; direct instrumentation must
+confirm it. Qualify latest-command delivery, expiry and zero application before
+further calibration. No software was deployed or numerical settings changed.
+Treat 0.35/0.15 as unqualified assumptions. Do not raise the host envelope or remove
+guards to obtain a pass. Evidence: hardware/docs/controller.md and ignored run
+20260930_200235_base-relocated-recheck/report.html. The final ten read-only samples
+had zero velocity; LiDAR was on and arms/head remained powered.
+Battery-only confirmation at 20:42-20:45 (25.5-25.8 V) found no departure at
+0.15, departure at 0.30 (69.8 mm final travel), and departure at 0.35 (106.3 mm,
+post-stop reverse-path rejection). Two 0.35-to-0.15 trials confirmed departure
+but sampled only 0.285/0.279 s of holding before SDK/ROS position disagreement.
+Neither qualifies sustained holding. A +0.40 rad/s probe stopped after 0.183 s
+on its angular/coast bound; final odometry was -0.577 degrees. Negative repeat
+was withheld. All six commanded trials ended with zero reported velocity and
+LiDAR on. No universal minimum was established; thresholds remain unchanged.
+Details: 20260930_204232_base-threshold-confirm-035/report.html.
+Finer 20:50-20:52 checks at 25.5-25.8 V: 0.275 completed a short departure/stop
+sequence once (63.6 mm forward, -1.45 deg). 0.250 and 0.2625 moved but exceeded
+the straight-line yaw bound. The latter's HAL x goal lasted 1.353 s despite
+0.801 s at ROS, so its 107.7 mm travel is not an equal-duration comparison.
+Yaw +/-0.225 and +/-0.250 rad/s all stopped early on reverse-path or angular/coast
+checks. Final angles do not establish an angular threshold. Finer holding and
+larger angular tests were withheld. Seven trials ended with zero reported speed
+and LiDAR on. 0.275 is an observed departure input, not a reliable minimum.
+Details: 20260930_204956_base-fine-threshold-preflight/report.html.
+A later repeat with straight-line drift recorded (not an abort) advanced only
+2.8 mm at 0.275, disproving repeatable departure in these trials. Input 0.30
+advanced 28.0 mm with -6.10 deg yaw. Input 0.325 ended with stop/SDK RPC timeout;
+no further motion followed. Supervisor confirmed rest; independent ROS then
+reported ten advancing zero-speed samples and LiDAR on. The final ROS frame
+position changed substantially for an unconfirmed reason; fresh frame/preflight
+is required before future movement. Evidence: base-recheck-preflight run at
+20260930_205428. No reliable start/hold/angular threshold is established.
+Run 20260930_211147_base-start-hold-verify (21:11-22:40, 2 s pulses, both directions,
+battery 25.3-25.8 V, arms hanging) supersedes the 0.8 s trials above. Translation
+0.25-0.40 departed 35/35 and 0.23 6/7; after a 0.30 start 0.16-0.20 kept moving 14/14
+and 0.14 2/4. Yaw 0.70 turned 80/83; in one pose clockwise 0.70-0.80 failed five times
+and 0.90 turned; after a 0.70 start 0.40-0.60 kept turning 12/12. On the combined
+start line 9/12 departed (11/12 at 1.2 times); at 1.2 times the combined hold line
+8/14 kept moving. Up to 9 mm / 2 degrees of odometry springs back below threshold.
+The user chose 0.25/0.15 m/s and 0.75/0.45 rad/s; see hardware/docs/controller.md.
+Navigation trials stopped 12-19 mm short under a declared 30 mm dock tolerance;
+arm compensation did not consistently improve physical TCP smoothness. Chunk preview
+reduced unnecessary arm travel in short development trials, but streaming and contacts
+were not validated. Longer tests reached 45 cm on hardware and 75 cm in simulation;
+1 m simulation failed when base undershoot exhausted arm reach reserve. Endpoint-only
+tracking missed the intermediate height arch. These controller prototypes are not
+adopted; complete measurements, failures and limitations are in hardware/docs/controller.md.
+"""
+pose_control_timing = """
+Physical 100 Hz pose control is not qualified. The strict hold test failed its
+first base-RPC deadline; moving trajectories were withheld. The guarded client
+requires preserved ROS source stamps and rejects the stock SDK server. Production
+still uses the baseline SDK/HAL. Its 50 Hz odometry failed the former 20 ms
+freshness gate, including 432/600 reads with compact candidate telemetry. That
+performance rejection has now been removed; latency is still recorded and the
+existing 100 ms outer feedback age/skew bound remains enforced.
+Robot-local saved-input replay measured 21.11 ms median / 33.72 ms P99 without
+profiling; all 1730 calls exceeded 10 ms. Moving the Python worker alone does not
+meet the timing gate. The 10 ms command deadlines, source timestamp contract and
+other motion guards remain enforced; no alternate controller is used.
+Do not independently restart SDK or HAL: the critical-node watcher can shut down
+core, systemd recreates it, and tripod-extend.service automatically commands
+160 mm. This happened during the isolated SDK restart attempt, also removing
+arm/neck power and resetting odometry. Whole-core maintenance must account for
+supported arms, the tripod hook and a fresh world frame/preflight.
+These are recorded limitations, not current live health. Detailed evidence and
+run locations are in hardware/docs/controller.md.
+"""
+cameras_and_timing = """
+Torso: Orbbec Gemini 336, registered RGB-D. Depth uses RGB optical coordinates,
+not SDK left-IR extrinsics. Preserve raw depth, stride, endianness and per-frame
+calibration; never resize mismatched RGB/depth into apparent registration.
+RGB and depth are asynchronous. The camera looks about 46.3 degrees down and
+sees table/seat surfaces only within roughly 1.2 m. Apply recorded depth correction once.
+Head: two IMX296 fisheye lenses. SDK images are empty due to a DDS discovery issue;
+WebRTC provides RGB at about 10 fps with occasional 1-3 second gaps. First track
+is the left eye. Empirical pinhole/distortion/mount calibration is stream-specific;
+DepthAI factory calibration must not be substituted. A 21-pose sweep gave about
+3.3 px median reprojection; neck repeatability is about 0.2-0.3 degrees.
+Receive timestamps do not prove synchronized exposure. Lower recording cam-hz
+can improve freshness. Service restarts are explicit operational actions.
+HeadToF uses SSH and temporarily owns the camera, stopping/restoring WebRTC.
+It measures range along a ray, not optical Z. Absolute calibration is unavailable;
+offset drifts, noise is 6-9 mm with roughly +/-20 mm patterns. It cannot set metric scale.
+Direct ToF acquisition can stall RGB. D455 registration becomes invalid if either
+camera moves. Head stereo is not an independently validated metric distance source.
+"""
+validation = """
+Run 20260926_160005_multiview-metric: 21 RGB-D views, seven stations. Nine fit views
+and twelve holdouts gave 0.97 mm median / 4.17 mm p90 floor offset with the accepted
+model versus 9.49/12.69 mm at the old encoder-based height. This is a fitted plane
+residual, not fingertip accuracy. The old 1.172 m estimate is superseded.
+Run 20260926_161521_urdf-final-validation: original CAD surface residuals 2.11-3.35 mm.
+A hand-only mount correction worsened head reprojection (3.51 to 5.75 px) and was rejected.
+Original robot URDF SHA-256: dc3e2a267fd25d670e9056a24fc61b9f106ec34f5f79fcbb315f7a099ad28c39.
+Run 20260926_163934_tip-followup: unresolved left fingertip silhouette discrepancy
+about 18-19 mm image-plane equivalent versus about 4 mm right. Finger shortening
+worsened the right fit; no left-arm offset or joint-zero correction was applied.
+Sensor audit 20260926_150348_sensor-audit and the metric follow-up retain annotations.
+At the 2026-09-27 network check all main sensors responded after a WebRTC restart;
+this does not prove service persistence across reboot. A VESC/HAL failure produced
+stale odometry and a 5.9 V reading; recovery invalidated the world frame.
+"""
+specification_limits = """
+Official specifications checked 2026-09-26: head advertised FoV 107x91 degrees,
+ToF 640x480 / 0.2-5 m, torso RGB 86x55 degrees, raw depth 90x65 degrees. Registered
+RGB-D uses RGB FoV. Nominal specs do not establish this unit's measured accuracy.
+Head EEPROM stereo baseline about 69.04 mm differs from original URDF 65 mm;
+torso baseline is 50 mm. Neither was silently overwritten from nominal specs.
+Legacy Gazebo sensor blocks mix raw/registered frames, FoV and baseline settings;
+they are unvalidated and are not used by live acquisition or the MuJoCo renderer.
+References: https://docs.pollen-robotics.com/hardware-guide/specifications/vision/
+https://www.orbbec.com/products/stereo-vision-camera/gemini-336/
+https://www.orbbec.com/gemini-330-series/
+"""

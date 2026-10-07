@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reachy-retarget"
+version = "2.0.0"
+description = "Retarget object-interaction demonstrations onto Reachy 2 as state-only training data"
+requires-python = ">=3.12"
+dependencies = ["numpy>=2", "scipy>=1.13", "h5py>=3.11", "pyyaml>=6", "pyarrow>=16"]
+
+[project.optional-dependencies]
+physics = ["mujoco>=3.2"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+reachy-retarget = "reachy_retarget.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["reachy_retarget*"]
+
+[tool.setuptools.package-data]
+"reachy_retarget.robot" = ["assets/**/*"]
+"reachy_retarget.acquire" = ["*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
