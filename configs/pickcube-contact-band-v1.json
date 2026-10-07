@@ -1,0 +1,2666 @@
+{
+ "label": "pickcube-contact-band-v1",
+ "policy": "PickCube original-model only (no contact/solver profile). Matched area-centroid controls vs opt-in inward contact band attachment with declared tipward offsets; motivated by measured tip-side contacts 16-17 mm from cube COM in retained original-model rollouts. Traj_1..4 bases = traj_0 admitted base translated by the source grasp-position difference, +/-50 mm x bank. All failures retained.",
+ "jobs": [
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-area-contact_005",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-area-contact_005",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_005",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip06-contact_005",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip06-contact_005",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_005",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.006
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip10-contact_005",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip10-contact_005",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_005",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.01
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip14-contact_005",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip14-contact_005",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_005",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip18-contact_005",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip18-contact_005",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_005",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip22-contact_005",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip22-contact_005",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_005",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.022
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_010",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip06-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip06-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_010",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.006
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip10-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip10-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_010",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.01
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_010",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_010",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip22-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "parent_workspace": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114",
+   "workspace": "workspaces/pickcube-contact-band-v1-8a7847a26e8fbb00783e4114-tip22-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/8a7847a26e8fbb00783e4114.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+   "variant": "contact_010",
+   "evaluation_split": "development",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.3,
+    -0.653,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.022
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x131-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "parent_workspace": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "workspace": "workspaces/pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x131-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/12e2ae6265014dfd0fec63c2.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.131,
+    -0.702,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x131-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "parent_workspace": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "workspace": "workspaces/pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x131-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/12e2ae6265014dfd0fec63c2.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.131,
+    -0.702,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x131-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "parent_workspace": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "workspace": "workspaces/pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x131-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/12e2ae6265014dfd0fec63c2.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.131,
+    -0.702,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x181-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "parent_workspace": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "workspace": "workspaces/pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x181-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/12e2ae6265014dfd0fec63c2.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.181,
+    -0.702,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x181-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "parent_workspace": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "workspace": "workspaces/pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x181-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/12e2ae6265014dfd0fec63c2.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.181,
+    -0.702,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x181-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "parent_workspace": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "workspace": "workspaces/pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x181-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/12e2ae6265014dfd0fec63c2.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.181,
+    -0.702,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x231-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "parent_workspace": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "workspace": "workspaces/pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x231-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/12e2ae6265014dfd0fec63c2.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.231,
+    -0.702,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x231-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "parent_workspace": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "workspace": "workspaces/pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x231-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/12e2ae6265014dfd0fec63c2.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.231,
+    -0.702,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x231-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "parent_workspace": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2",
+   "workspace": "workspaces/pickcube-contact-band-v1-12e2ae6265014dfd0fec63c2-x231-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/12e2ae6265014dfd0fec63c2.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.231,
+    -0.702,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x160-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+   "parent_workspace": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d",
+   "workspace": "workspaces/pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x160-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/26bc046d91c0174be7312e5d.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.16,
+    -0.673,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x160-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+   "parent_workspace": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d",
+   "workspace": "workspaces/pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x160-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/26bc046d91c0174be7312e5d.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.16,
+    -0.673,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x160-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+   "parent_workspace": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d",
+   "workspace": "workspaces/pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x160-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/26bc046d91c0174be7312e5d.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.16,
+    -0.673,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x210-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+   "parent_workspace": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d",
+   "workspace": "workspaces/pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x210-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/26bc046d91c0174be7312e5d.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.21,
+    -0.673,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x210-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+   "parent_workspace": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d",
+   "workspace": "workspaces/pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x210-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/26bc046d91c0174be7312e5d.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.21,
+    -0.673,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x210-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+   "parent_workspace": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d",
+   "workspace": "workspaces/pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x210-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/26bc046d91c0174be7312e5d.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.21,
+    -0.673,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x260-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+   "parent_workspace": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d",
+   "workspace": "workspaces/pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x260-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/26bc046d91c0174be7312e5d.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.26,
+    -0.673,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x260-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+   "parent_workspace": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d",
+   "workspace": "workspaces/pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x260-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/26bc046d91c0174be7312e5d.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.26,
+    -0.673,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x260-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+   "parent_workspace": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d",
+   "workspace": "workspaces/pickcube-contact-band-v1-26bc046d91c0174be7312e5d-x260-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/26bc046d91c0174be7312e5d.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.26,
+    -0.673,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x109-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "parent_workspace": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "workspace": "workspaces/pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x109-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/a630ebea03b2f07fdda1b7d3.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.109,
+    -0.54,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x109-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "parent_workspace": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "workspace": "workspaces/pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x109-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/a630ebea03b2f07fdda1b7d3.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.109,
+    -0.54,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x109-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "parent_workspace": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "workspace": "workspaces/pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x109-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/a630ebea03b2f07fdda1b7d3.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.109,
+    -0.54,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x159-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "parent_workspace": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "workspace": "workspaces/pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x159-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/a630ebea03b2f07fdda1b7d3.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.159,
+    -0.54,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x159-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "parent_workspace": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "workspace": "workspaces/pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x159-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/a630ebea03b2f07fdda1b7d3.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.159,
+    -0.54,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x159-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "parent_workspace": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "workspace": "workspaces/pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x159-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/a630ebea03b2f07fdda1b7d3.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.159,
+    -0.54,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x209-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "parent_workspace": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "workspace": "workspaces/pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x209-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/a630ebea03b2f07fdda1b7d3.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.209,
+    -0.54,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x209-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "parent_workspace": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "workspace": "workspaces/pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x209-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/a630ebea03b2f07fdda1b7d3.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.209,
+    -0.54,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x209-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "parent_workspace": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+   "workspace": "workspaces/pickcube-contact-band-v1-a630ebea03b2f07fdda1b7d3-x209-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/a630ebea03b2f07fdda1b7d3.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.209,
+    -0.54,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x187-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "parent_workspace": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "workspace": "workspaces/pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x187-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/970dc25cbc48adcabbbe06cf.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.187,
+    -0.66,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x187-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "parent_workspace": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "workspace": "workspaces/pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x187-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/970dc25cbc48adcabbbe06cf.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.187,
+    -0.66,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x187-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "parent_workspace": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "workspace": "workspaces/pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x187-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/970dc25cbc48adcabbbe06cf.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.187,
+    -0.66,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x237-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "parent_workspace": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "workspace": "workspaces/pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x237-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/970dc25cbc48adcabbbe06cf.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.237,
+    -0.66,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x237-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "parent_workspace": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "workspace": "workspaces/pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x237-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/970dc25cbc48adcabbbe06cf.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.237,
+    -0.66,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x237-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "parent_workspace": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "workspace": "workspaces/pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x237-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/970dc25cbc48adcabbbe06cf.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.237,
+    -0.66,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x287-area-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "parent_workspace": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "workspace": "workspaces/pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x287-area-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/970dc25cbc48adcabbbe06cf.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.287,
+    -0.66,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x287-tip14-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "parent_workspace": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "workspace": "workspaces/pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x287-tip14-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/970dc25cbc48adcabbbe06cf.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.287,
+    -0.66,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.014
+   }
+  },
+  {
+   "id": "pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x287-tip18-contact_010",
+   "operation": "feasible_geometry_experiment",
+   "dataset": "maniskill",
+   "parent_task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "parent_workspace": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf",
+   "workspace": "workspaces/pickcube-contact-band-v1-970dc25cbc48adcabbbe06cf-x287-tip18-contact_010",
+   "source": "data/normalized/hf__haosulab__ManiSkill_Demonstrations/970dc25cbc48adcabbbe06cf.h5",
+   "source_provenance": {
+    "provenance": [
+     {
+      "bytes": 383621,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.h5",
+      "sha256": "0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5"
+     },
+     {
+      "bytes": 2702,
+      "path": "data/raw/hf__haosulab__ManiSkill_Demonstrations/demos/PickCube-v1/teleop/trajectory.json",
+      "sha256": "ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a",
+      "source_id": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json"
+     },
+     {
+      "bytes": 12821,
+      "path": "data/raw/maniskill_panda_assets/panda_v2.urdf",
+      "sha256": "a2e41f793a4b31ec8201b77ab36c753b655f19763dc419bb183036c1e6d4fe7a",
+      "source_id": "maniskill_panda_assets",
+      "url": "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+     }
+    ],
+    "source_revision": "d674485bbffdd533914e52d272fdda34c0515608",
+    "source_urls": [
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5",
+     "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json",
+     "https://raw.githubusercontent.com/haosulab/ManiSkill/ecc579b7567c31bb3d7176539d90e86ae49296be/mani_skill/assets/robots/panda/panda_v2.urdf"
+    ]
+   },
+   "parent_attempt": "workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+   "variant": "contact_010",
+   "evaluation_split": "development_new_source",
+   "runtime_source_sha256": "72ba155c4e6e7543a7a008ccfd5495191406a342e70160bbb0287338c14be9a9",
+   "retime": true,
+   "base_xyyaw": [
+    0.287,
+    -0.66,
+    3.141592653589793
+   ],
+   "grasp_attachment": {
+    "align_box_axis": true,
+    "center_box": true,
+    "contact_reference": "inward_contact_band",
+    "contact_offset_m": 0.018
+   }
+  }
+ ]
+}

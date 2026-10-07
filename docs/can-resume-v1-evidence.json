@@ -1,0 +1,5115 @@
+{
+ "schema": "can-recovery-batch-evidence-v1",
+ "batches": [
+  "runs/local-spool-pool/can-resume-v1",
+  "runs/local-spool-pool/can-710-resume-v1"
+ ],
+ "scope": "Adaptive original-model development recoveries of three retained physical failures: 3873 base-speed caps, d755 release-XY/feedforward grid after fixture contact during lowering, 710 release-XY/palm-yaw grid after carried-object partition contact. Sources, objects, contact model, clock and every physical gate unchanged; all attempts listed.",
+ "attempts": 83,
+ "status_counts": {
+  "physical_pass": 35,
+  "launcher_failed": 6,
+  "plan_rejected": 26,
+  "physical_fail": 16
+ },
+ "passing_attempts": 35,
+ "new_unique_sources": [
+  "3873eb8d6e8cc439aa59e4bf",
+  "710ae7b398370cea3bf672b0",
+  "d755b0622b3466a973309e93"
+ ],
+ "passing_sources": {
+  "3873eb8d6e8cc439aa59e4bf": 16,
+  "d755b0622b3466a973309e93": 7,
+  "710ae7b398370cea3bf672b0": 12
+ },
+ "identity_index": "docs/can-original-success-source-identity-v5.json",
+ "total_unique_native_demonstrations": 36,
+ "attempts_detail": [
+  {
+   "job": "can-resume-v1-3873-planar35-axis30-ff1",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0015077837775872875,
+    "max_grasp_drift_deg": 1.0104880085177355,
+    "bilateral_carry_fraction": 0.998840885142255,
+    "final_stable_s": 11.659999999999796,
+    "max_hand_object_penetration_m": 0.0004417074804008748,
+    "max_object_environment_penetration_m": 0.00047755029039320263,
+    "peak_base_velocity": [
+     0.551123770854478,
+     0.27014544696196713,
+     0.7067319115491605
+    ],
+    "min_joint_margin_rad": 0.030843910089716153,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.35
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.3
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar35-axis30-ff1/artifact.tar.gz",
+    "sha256": "36e871fb51fb53d938ee13e926b6627d7ab1a02257b9655eda2391280d502cd4",
+    "bytes": 114509149,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis30-ff1",
+    "archive_sha256": "36e871fb51fb53d938ee13e926b6627d7ab1a02257b9655eda2391280d502cd4",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis30-ff1/datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis30-ff1.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis30-ff1.hdf5",
+     "sha256": "42e257e5da27cabb1d65641069724277417dfa13e67a152b95dab43383654de3",
+     "bytes": 57250455
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar35-axis25-ff1",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.001356843004942223,
+    "max_grasp_drift_deg": 0.43947484648991986,
+    "bilateral_carry_fraction": 0.9990064580228515,
+    "final_stable_s": 12.819999999999771,
+    "max_hand_object_penetration_m": 0.0004794278223959184,
+    "max_object_environment_penetration_m": 0.0004132839533013132,
+    "peak_base_velocity": [
+     0.5289224078327747,
+     0.26398977255782147,
+     0.5945870559368076
+    ],
+    "min_joint_margin_rad": 0.030702058934070353,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.35
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.25
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar35-axis25-ff1/artifact.tar.gz",
+    "sha256": "c431257943e9be36338ade1162422458fcf53e2ef8602e0c8989693db58ce192",
+    "bytes": 121072528,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis25-ff1",
+    "archive_sha256": "c431257943e9be36338ade1162422458fcf53e2ef8602e0c8989693db58ce192",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis25-ff1/datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis25-ff1.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis25-ff1.hdf5",
+     "sha256": "21e2553e8f57faf679698bb8357b38435c894bc538a1b0ffe4e1e9d38dc0fa62",
+     "bytes": 60551951
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar35-axis20-ff1",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0012020841817314523,
+    "max_grasp_drift_deg": 0.41860308468049984,
+    "bilateral_carry_fraction": 0.999089667728721,
+    "final_stable_s": 14.639999999999732,
+    "max_hand_object_penetration_m": 0.0004794278223959184,
+    "max_object_environment_penetration_m": 0.0005413328070418276,
+    "peak_base_velocity": [
+     0.5289224078327747,
+     0.26398977255782147,
+     0.5384776711519182
+    ],
+    "min_joint_margin_rad": 0.030702058934070353,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.35
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.2
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar35-axis20-ff1/artifact.tar.gz",
+    "sha256": "549b3d125a4fa8ab7b5fbf97385b3fcf3ea2b1d94744f00f62699ac5b5a17bb7",
+    "bytes": 131377579,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis20-ff1",
+    "archive_sha256": "549b3d125a4fa8ab7b5fbf97385b3fcf3ea2b1d94744f00f62699ac5b5a17bb7",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis20-ff1/datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis20-ff1.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis20-ff1.hdf5",
+     "sha256": "52955f11bf5e91f5c314159003e6e56b929558af5175f7bd8e64ead989c4b000",
+     "bytes": 65858456
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar30-axis30-ff1",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0015402962921863507,
+    "max_grasp_drift_deg": 0.47910426866475675,
+    "bilateral_carry_fraction": 0.9990731204943357,
+    "final_stable_s": 11.699999999999795,
+    "max_hand_object_penetration_m": 0.0003942864394198372,
+    "max_object_environment_penetration_m": 0.0005062832872791966,
+    "peak_base_velocity": [
+     0.5043843045682334,
+     0.24877964528193863,
+     0.6567908111593483
+    ],
+    "min_joint_margin_rad": 0.03084832711899621,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.3
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.3
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar30-axis30-ff1/artifact.tar.gz",
+    "sha256": "01d8902657bda61c613d9713d5c373b2ad2a2393d013c76dadfb35d9aa6fb81c",
+    "bytes": 116192230,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis30-ff1",
+    "archive_sha256": "01d8902657bda61c613d9713d5c373b2ad2a2393d013c76dadfb35d9aa6fb81c",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis30-ff1/datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis30-ff1.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis30-ff1.hdf5",
+     "sha256": "92070eb6f98852bcb37b84051f0b9034f4d32a01fb8b0e6ece4fa405f15ddca3",
+     "bytes": 58098113
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar30-axis25-ff1",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0013974789424571778,
+    "max_grasp_drift_deg": 0.47910426866475675,
+    "bilateral_carry_fraction": 0.9991253644314868,
+    "final_stable_s": 12.85999999999977,
+    "max_hand_object_penetration_m": 0.0003942864394198372,
+    "max_object_environment_penetration_m": 0.00044312872207807874,
+    "peak_base_velocity": [
+     0.48263717584265015,
+     0.23213227175011308,
+     0.570183607927497
+    ],
+    "min_joint_margin_rad": 0.03085582036241913,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.3
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.25
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar30-axis25-ff1/artifact.tar.gz",
+    "sha256": "12128cc4dff3922c016b4f8901c58359e71b02ceebdad1de10bf7e76a1dd17a4",
+    "bytes": 122709514,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis25-ff1",
+    "archive_sha256": "12128cc4dff3922c016b4f8901c58359e71b02ceebdad1de10bf7e76a1dd17a4",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis25-ff1/datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis25-ff1.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis25-ff1.hdf5",
+     "sha256": "65342c085a6165d77e58886e47744f585decffe4c20cdbb6c005777dfa2daf1e",
+     "bytes": 61393160
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar30-axis20-ff1",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.001288229629506653,
+    "max_grasp_drift_deg": 0.5398839063964751,
+    "bilateral_carry_fraction": 0.9993755575379125,
+    "final_stable_s": 14.679999999999731,
+    "max_hand_object_penetration_m": 0.0004454946755186296,
+    "max_object_environment_penetration_m": 0.0005513393615077521,
+    "peak_base_velocity": [
+     0.4798541808101103,
+     0.22317985567395873,
+     0.49722068235206757
+    ],
+    "min_joint_margin_rad": 0.030636931125708644,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.3
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.2
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar30-axis20-ff1/artifact.tar.gz",
+    "sha256": "a1b7c56bddb74118f558c97c5f5771686cf2241b186968aa00dfea2ee3a6f53a",
+    "bytes": 133081727,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis20-ff1",
+    "archive_sha256": "a1b7c56bddb74118f558c97c5f5771686cf2241b186968aa00dfea2ee3a6f53a",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis20-ff1/datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis20-ff1.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis20-ff1.hdf5",
+     "sha256": "04387baa8e65e71d1608cd4a126f0872a28bfa9e9d01136dfe1e09cd200c1012",
+     "bytes": 66621884
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar25-axis30-ff1",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "launcher_failed",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": null,
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.25
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.3
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar25-axis30-ff1/artifact.tar.gz",
+    "sha256": "edc41a6042675b81cfc1ee2940167089263db5229f8d243298e1bbc3ac2b568a",
+    "bytes": 2508214,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis30-ff1",
+    "archive_sha256": "edc41a6042675b81cfc1ee2940167089263db5229f8d243298e1bbc3ac2b568a",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar25-axis25-ff1",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "launcher_failed",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": null,
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.25
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.25
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar25-axis25-ff1/artifact.tar.gz",
+    "sha256": "81ba0ff5a3555e217ddd4973f09c3d1fe89a608818407ed95cb67b55a2708519",
+    "bytes": 2509015,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis25-ff1",
+    "archive_sha256": "81ba0ff5a3555e217ddd4973f09c3d1fe89a608818407ed95cb67b55a2708519",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar25-axis20-ff1",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0012603579831576095,
+    "max_grasp_drift_deg": 0.7364730106942898,
+    "bilateral_carry_fraction": 0.9994854202401373,
+    "final_stable_s": 14.76999999999973,
+    "max_hand_object_penetration_m": 0.00035996914620190423,
+    "max_object_environment_penetration_m": 0.00041562964762065213,
+    "peak_base_velocity": [
+     0.4172351141466935,
+     0.2252319246953827,
+     0.48220698821276775
+    ],
+    "min_joint_margin_rad": 0.03085928408136862,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.25
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.2
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar25-axis20-ff1/artifact.tar.gz",
+    "sha256": "3164ab54b9fbb4223f38a7cddb5254a33d61619b3c921ca3d7a055137a1387c9",
+    "bytes": 136299502,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis20-ff1",
+    "archive_sha256": "3164ab54b9fbb4223f38a7cddb5254a33d61619b3c921ca3d7a055137a1387c9",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis20-ff1/datasets/robomimic/episodes/can-resume-v1-3873-planar25-axis20-ff1.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar25-axis20-ff1.hdf5",
+     "sha256": "d324b9c48cb16f2f3213b14bb89e5e28f5ff1beed493ccaebf3e4c59104b55f1",
+     "bytes": 68238800
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar35-axis30-ff0",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0018007322250179045,
+    "max_grasp_drift_deg": 0.5560020477496674,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 11.659999999999796,
+    "max_hand_object_penetration_m": 0.00019267425934528477,
+    "max_object_environment_penetration_m": 0.0005703073969774984,
+    "peak_base_velocity": [
+     0.535351466586466,
+     0.28391829483578795,
+     0.6224809493454885
+    ],
+    "min_joint_margin_rad": 0.030850535030022608,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.35
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.3
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar35-axis30-ff0/artifact.tar.gz",
+    "sha256": "3276fbe5a1fd441b9ed10711bb81b64d90d3e44761962902630724ce276d4455",
+    "bytes": 113831269,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis30-ff0",
+    "archive_sha256": "3276fbe5a1fd441b9ed10711bb81b64d90d3e44761962902630724ce276d4455",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis30-ff0/datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis30-ff0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis30-ff0.hdf5",
+     "sha256": "9eee0cd49e259200509ff8fe39efa40b4b1ec5298a700c4e3927efe0f803dbbf",
+     "bytes": 57073608
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar35-axis25-ff0",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.00163196291371175,
+    "max_grasp_drift_deg": 0.7629545327473047,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 12.819999999999771,
+    "max_hand_object_penetration_m": 0.00020080163564691593,
+    "max_object_environment_penetration_m": 0.00041802592244721815,
+    "peak_base_velocity": [
+     0.608777199640218,
+     0.2756661410905395,
+     0.5566587919704202
+    ],
+    "min_joint_margin_rad": 0.030850136010742935,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.35
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.25
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar35-axis25-ff0/artifact.tar.gz",
+    "sha256": "a5bb5ca8198211e94dfc84f39eeb7cd5a7c3a555dd16c32954e5d503d400ad54",
+    "bytes": 120577025,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis25-ff0",
+    "archive_sha256": "a5bb5ca8198211e94dfc84f39eeb7cd5a7c3a555dd16c32954e5d503d400ad54",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis25-ff0/datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis25-ff0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis25-ff0.hdf5",
+     "sha256": "8f619b699032f744b9ca70b39e41fcc87314d98d89acb3961eba91d6d38f3a5f",
+     "bytes": 60346619
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar35-axis20-ff0",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0014707046777878152,
+    "max_grasp_drift_deg": 0.7629545327473047,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 14.639999999999732,
+    "max_hand_object_penetration_m": 0.00020080163564691593,
+    "max_object_environment_penetration_m": 0.0005478853625253687,
+    "peak_base_velocity": [
+     0.608777199640218,
+     0.2756661410905395,
+     0.5045347560209741
+    ],
+    "min_joint_margin_rad": 0.030857265049921312,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.35
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.2
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar35-axis20-ff0/artifact.tar.gz",
+    "sha256": "9d9bb59d846d70e2ea6c926500143b4cda9de221be3be8fa03660cdaf7ebafa9",
+    "bytes": 130914238,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis20-ff0",
+    "archive_sha256": "9d9bb59d846d70e2ea6c926500143b4cda9de221be3be8fa03660cdaf7ebafa9",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar35-axis20-ff0/datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis20-ff0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar35-axis20-ff0.hdf5",
+     "sha256": "df4ea3719fed1470fb79b60d24399b3a7c118451bf5cc9a8387a32ea515d89c7",
+     "bytes": 65589272
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar30-axis30-ff0",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0017435922858043992,
+    "max_grasp_drift_deg": 0.7191317965321719,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 11.699999999999795,
+    "max_hand_object_penetration_m": 0.00019165007185038916,
+    "max_object_environment_penetration_m": 0.0005466815170210858,
+    "peak_base_velocity": [
+     0.5245349465049856,
+     0.2906997622674194,
+     0.7202972090237126
+    ],
+    "min_joint_margin_rad": 0.030847624506540272,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.3
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.3
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar30-axis30-ff0/artifact.tar.gz",
+    "sha256": "29a5d3ca7f9687d9877db92b94e920a102fc0891800f9029a32c06ce8713a081",
+    "bytes": 115427808,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis30-ff0",
+    "archive_sha256": "29a5d3ca7f9687d9877db92b94e920a102fc0891800f9029a32c06ce8713a081",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis30-ff0/datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis30-ff0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis30-ff0.hdf5",
+     "sha256": "b8a51e19738893a1f9c05f3973d38b63ae80538a58a3217e16a35625a6dccacf",
+     "bytes": 57854543
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar30-axis25-ff0",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0015891537070830187,
+    "max_grasp_drift_deg": 0.8132463076527499,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 12.85999999999977,
+    "max_hand_object_penetration_m": 0.0001811494515546169,
+    "max_object_environment_penetration_m": 0.0005218344713410205,
+    "peak_base_velocity": [
+     0.4803692970589602,
+     0.2565989504636471,
+     0.5828377669748854
+    ],
+    "min_joint_margin_rad": 0.03085317119295866,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.3
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.25
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar30-axis25-ff0/artifact.tar.gz",
+    "sha256": "9fa56710091b82c6790edc6b2d6986d7b65dcb63ced584453064219312650f56",
+    "bytes": 122381006,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis25-ff0",
+    "archive_sha256": "9fa56710091b82c6790edc6b2d6986d7b65dcb63ced584453064219312650f56",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis25-ff0/datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis25-ff0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis25-ff0.hdf5",
+     "sha256": "e981bef65921db39c61ea9cebc988d22d8bfc2d27071b2f69ab36b86a3c61352",
+     "bytes": 61196929
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar30-axis20-ff0",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.001414601682575982,
+    "max_grasp_drift_deg": 0.7191317965321719,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 14.679999999999731,
+    "max_hand_object_penetration_m": 0.00019165007185038916,
+    "max_object_environment_penetration_m": 0.0004506589827258932,
+    "peak_base_velocity": [
+     0.49412071091746657,
+     0.22745856541786752,
+     0.4798383257512274
+    ],
+    "min_joint_margin_rad": 0.030855627752789883,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.3
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.2
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar30-axis20-ff0/artifact.tar.gz",
+    "sha256": "6aab722d09523fb8326d4934748b8948c2df2dd3f2218bc553383185560aed4f",
+    "bytes": 132583962,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis20-ff0",
+    "archive_sha256": "6aab722d09523fb8326d4934748b8948c2df2dd3f2218bc553383185560aed4f",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar30-axis20-ff0/datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis20-ff0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar30-axis20-ff0.hdf5",
+     "sha256": "daaec974073453a1149ac0486d4a9173dcebaddd298cad142de68338f7a13578",
+     "bytes": 66374553
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar25-axis30-ff0",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0017072161201208789,
+    "max_grasp_drift_deg": 0.3873596816778418,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 11.789999999999793,
+    "max_hand_object_penetration_m": 0.00016635448358485018,
+    "max_object_environment_penetration_m": 0.0005359122016703742,
+    "peak_base_velocity": [
+     0.5092380162765079,
+     0.2598777104747306,
+     0.6528364199258001
+    ],
+    "min_joint_margin_rad": 0.030847871502863555,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.25
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.3
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar25-axis30-ff0/artifact.tar.gz",
+    "sha256": "4bf4f44f9dc22ec8e4d613d7bc1ce7edd8a8a632939e3443ee883366a1cfd061",
+    "bytes": 118604758,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis30-ff0",
+    "archive_sha256": "4bf4f44f9dc22ec8e4d613d7bc1ce7edd8a8a632939e3443ee883366a1cfd061",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis30-ff0/datasets/robomimic/episodes/can-resume-v1-3873-planar25-axis30-ff0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar25-axis30-ff0.hdf5",
+     "sha256": "c01bff3614a5f7d086c294b4e1ebe706ad7b2145cb33b5729b9316af6baf606b",
+     "bytes": 59439210
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar25-axis25-ff0",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0015524392410092625,
+    "max_grasp_drift_deg": 0.3873596816778418,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 12.949999999999768,
+    "max_hand_object_penetration_m": 0.00016635448358485018,
+    "max_object_environment_penetration_m": 0.0005517544201272261,
+    "peak_base_velocity": [
+     0.4888814818825162,
+     0.22690281978997617,
+     0.5702839667408804
+    ],
+    "min_joint_margin_rad": 0.03085290370444921,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.25
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.25
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar25-axis25-ff0/artifact.tar.gz",
+    "sha256": "5543de298a6ff97c966dd3b6aeb1e348f3179b4e7da2cda95cc05a95212af49a",
+    "bytes": 125555172,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis25-ff0",
+    "archive_sha256": "5543de298a6ff97c966dd3b6aeb1e348f3179b4e7da2cda95cc05a95212af49a",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis25-ff0/datasets/robomimic/episodes/can-resume-v1-3873-planar25-axis25-ff0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar25-axis25-ff0.hdf5",
+     "sha256": "94e3b3a52c376719f26dd08a105aa9b2f0f6325aaebddb385d0888cab83925ab",
+     "bytes": 62757542
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-3873-planar25-axis20-ff0",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "3873eb8d6e8cc439aa59e4bf",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_33",
+   "source_hdf5_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0013766375007301373,
+    "max_grasp_drift_deg": 0.3873596816778418,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 14.76999999999973,
+    "max_hand_object_penetration_m": 0.00016635448358485018,
+    "max_object_environment_penetration_m": 0.0004589070865659294,
+    "peak_base_velocity": [
+     0.42002090324564545,
+     0.21555214941100811,
+     0.47150960118627
+    ],
+    "min_joint_margin_rad": 0.030856449325689095,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.25
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.9750000000000001,
+     -0.25916666666666666
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     -170.81285890442686
+    ],
+    "mobile_base_axis_speed_m_s": 0.2
+   },
+   "comparison_parent_job": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-3873-planar25-axis20-ff0/artifact.tar.gz",
+    "sha256": "693dc42d23fd5f8e1bdff9162a9181542f73da2f49e3610579721a875a01dfd5",
+    "bytes": 135859727,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis20-ff0",
+    "archive_sha256": "693dc42d23fd5f8e1bdff9162a9181542f73da2f49e3610579721a875a01dfd5",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-3873-planar25-axis20-ff0/datasets/robomimic/episodes/can-resume-v1-3873-planar25-axis20-ff0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-3873-planar25-axis20-ff0.hdf5",
+     "sha256": "face3b8e07cf647aedb0d6b701861ffbe51b488edbdb791918c2a9898bde0e1e",
+     "bytes": 68006287
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx0-dym6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx0-dym6-ff10/artifact/workspaces/can-resume-v1-d755-dx0-dym6-ff10/plans/can-resume-v1-d755-dx0-dym6-ff10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.92,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx0-dym6-ff10/artifact.tar.gz",
+    "sha256": "71aa0af16e2e49e293efc396c1fbc787ba2b72b0364f4890e5c62017c6fe6be8",
+    "bytes": 2828596,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx0-dym6-ff10",
+    "archive_sha256": "71aa0af16e2e49e293efc396c1fbc787ba2b72b0364f4890e5c62017c6fe6be8",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx0-dyp6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "task_stable_final_1s",
+    "carry_contact_95pct",
+    "grasp_translation_3mm",
+    "grasp_rotation_3deg",
+    "placement_opened_after_measured_support"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.02333044981589403,
+    "max_grasp_drift_deg": 6.9542372017969045,
+    "bilateral_carry_fraction": 0.6263677811550151,
+    "final_stable_s": 0.0,
+    "max_hand_object_penetration_m": 0.0005269730849198382,
+    "max_object_environment_penetration_m": 0.0013921119659257575,
+    "peak_base_velocity": [
+     0.5011598290601907,
+     0.32931022696574824,
+     0.6623314186120749
+    ],
+    "min_joint_margin_rad": 0.03097045442264129,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.92,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx0-dyp6-ff10/artifact.tar.gz",
+    "sha256": "30c1679c5f7ff1ffe034e06ea85f70ea27e112e61bfdd7f8f738baec097666e0",
+    "bytes": 80767892,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx0-dyp6-ff10",
+    "archive_sha256": "30c1679c5f7ff1ffe034e06ea85f70ea27e112e61bfdd7f8f738baec097666e0",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx0-dyp6-ff10/datasets/robomimic/episodes/can-resume-v1-d755-dx0-dyp6-ff10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx0-dyp6-ff10.hdf5",
+     "sha256": "c2f8cb5c4ca50f33b3de51c48872bf3b3fd74c5cd77c7e25dd50063b7f3741af",
+     "bytes": 41397690
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx4-dym6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx4-dym6-ff10/artifact/workspaces/can-resume-v1-d755-dx4-dym6-ff10/plans/can-resume-v1-d755-dx4-dym6-ff10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.924,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx4-dym6-ff10/artifact.tar.gz",
+    "sha256": "002a9c9126be53db757a7d43816f508cdf433b9f0efdeb6471f49a0a0744aa94",
+    "bytes": 2781151,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dym6-ff10",
+    "archive_sha256": "002a9c9126be53db757a7d43816f508cdf433b9f0efdeb6471f49a0a0744aa94",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx4-dyp0-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "task_stable_final_1s",
+    "grasp_translation_3mm",
+    "placement_opened_after_measured_support"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.005822588205980331,
+    "max_grasp_drift_deg": 0.9992950281580839,
+    "bilateral_carry_fraction": 0.9995461422087747,
+    "final_stable_s": 0.0,
+    "max_hand_object_penetration_m": 0.0005269730849198382,
+    "max_object_environment_penetration_m": 0.001330020672204312,
+    "peak_base_velocity": [
+     0.5112605268957642,
+     0.32774336793052916,
+     0.623375743809708
+    ],
+    "min_joint_margin_rad": 0.03097045442264129,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.924,
+     -0.32625
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx4-dyp0-ff10/artifact.tar.gz",
+    "sha256": "554458b63df94249f40fade41ebcb8bfd618575ae6da2e6136ca5bf0b3a0b205",
+    "bytes": 75789938,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dyp0-ff10",
+    "archive_sha256": "554458b63df94249f40fade41ebcb8bfd618575ae6da2e6136ca5bf0b3a0b205",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dyp0-ff10/datasets/robomimic/episodes/can-resume-v1-d755-dx4-dyp0-ff10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx4-dyp0-ff10.hdf5",
+     "sha256": "a90224e4b773337b9eb466fa692432aa1ad47e2961d6c5af36cabd99be28dbe0",
+     "bytes": 39892093
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx4-dyp6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "task_stable_final_1s",
+    "grasp_translation_3mm",
+    "placement_opened_after_measured_support"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.005471257097517051,
+    "max_grasp_drift_deg": 0.8823807282172922,
+    "bilateral_carry_fraction": 0.9990922844175492,
+    "final_stable_s": 0.0,
+    "max_hand_object_penetration_m": 0.0005269730849198382,
+    "max_object_environment_penetration_m": 0.0013233309281339809,
+    "peak_base_velocity": [
+     0.5300576789016347,
+     0.3432005073648984,
+     0.6691883881172128
+    ],
+    "min_joint_margin_rad": 0.03097045442264129,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.924,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx4-dyp6-ff10/artifact.tar.gz",
+    "sha256": "cf3ad2133ce3da880eda453f8521b970beea43bf74a8122fe42c72cd619d40fd",
+    "bytes": 80772225,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dyp6-ff10",
+    "archive_sha256": "cf3ad2133ce3da880eda453f8521b970beea43bf74a8122fe42c72cd619d40fd",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dyp6-ff10/datasets/robomimic/episodes/can-resume-v1-d755-dx4-dyp6-ff10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx4-dyp6-ff10.hdf5",
+     "sha256": "b02fed7de47e76bda776a3064cf254368d6108361154053e5fa0bf4aeb2c9a16",
+     "bytes": 41562464
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx8-dym6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx8-dym6-ff10/artifact/workspaces/can-resume-v1-d755-dx8-dym6-ff10/plans/can-resume-v1-d755-dx8-dym6-ff10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.928,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx8-dym6-ff10/artifact.tar.gz",
+    "sha256": "840a900268baf13601487dc335a2d8ee384404f87a9445e9520b1963ba3235fd",
+    "bytes": 2781422,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dym6-ff10",
+    "archive_sha256": "840a900268baf13601487dc335a2d8ee384404f87a9445e9520b1963ba3235fd",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx8-dyp0-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "grasp_translation_3mm"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.005930728341496037,
+    "max_grasp_drift_deg": 1.1103461198729883,
+    "bilateral_carry_fraction": 0.9966717095310136,
+    "final_stable_s": 8.63999999999986,
+    "max_hand_object_penetration_m": 0.0005269730849198382,
+    "max_object_environment_penetration_m": 0.0013497467949692122,
+    "peak_base_velocity": [
+     0.5244279712835342,
+     0.3705638256886296,
+     0.7239121359680172
+    ],
+    "min_joint_margin_rad": 0.030258455821010277,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.928,
+     -0.32625
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx8-dyp0-ff10/artifact.tar.gz",
+    "sha256": "cb022e9501b2c455257a65c6cca50c3b79a78d466b85e5c30d958eb0b2048e24",
+    "bytes": 85067233,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dyp0-ff10",
+    "archive_sha256": "cb022e9501b2c455257a65c6cca50c3b79a78d466b85e5c30d958eb0b2048e24",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dyp0-ff10/datasets/robomimic/episodes/can-resume-v1-d755-dx8-dyp0-ff10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx8-dyp0-ff10.hdf5",
+     "sha256": "2a67f226c606aa0a8ff090c6b4970cd668f71f5155332f8d476241a1574620f6",
+     "bytes": 42920089
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx8-dyp6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "grasp_translation_3mm"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.005990428782748755,
+    "max_grasp_drift_deg": 1.032192636933685,
+    "bilateral_carry_fraction": 0.9956127080181544,
+    "final_stable_s": 8.63999999999986,
+    "max_hand_object_penetration_m": 0.0005269730849198382,
+    "max_object_environment_penetration_m": 0.001221885710531328,
+    "peak_base_velocity": [
+     0.5003911124645717,
+     0.3671917728196559,
+     0.7056041048560034
+    ],
+    "min_joint_margin_rad": 0.030375709050992794,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.928,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx8-dyp6-ff10/artifact.tar.gz",
+    "sha256": "7dfa2578a0a41a8cf942aa73a88a74f2f9999eeeea01a6c67fa337dfac7d52dd",
+    "bytes": 85058830,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dyp6-ff10",
+    "archive_sha256": "7dfa2578a0a41a8cf942aa73a88a74f2f9999eeeea01a6c67fa337dfac7d52dd",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dyp6-ff10/datasets/robomimic/episodes/can-resume-v1-d755-dx8-dyp6-ff10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx8-dyp6-ff10.hdf5",
+     "sha256": "06a4c2429dbaadea2cec63e1ae8a521a39efdd4760c2c926a548fc0d840f420f",
+     "bytes": 42918983
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx12-dym6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx12-dym6-ff10/artifact/workspaces/can-resume-v1-d755-dx12-dym6-ff10/plans/can-resume-v1-d755-dx12-dym6-ff10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.932,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx12-dym6-ff10/artifact.tar.gz",
+    "sha256": "338e6e12ec1f026d4a83e4e566ef94ee7d286c7bfa14fc6cc2eadc85de05644b",
+    "bytes": 2781718,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dym6-ff10",
+    "archive_sha256": "338e6e12ec1f026d4a83e4e566ef94ee7d286c7bfa14fc6cc2eadc85de05644b",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx12-dyp0-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0017278335251026818,
+    "max_grasp_drift_deg": 0.8254837448665735,
+    "bilateral_carry_fraction": 0.9992647058823529,
+    "final_stable_s": 8.64999999999986,
+    "max_hand_object_penetration_m": 0.0005269730849198382,
+    "max_object_environment_penetration_m": 0.0013514935744802779,
+    "peak_base_velocity": [
+     0.5103036948397163,
+     0.36867326442975823,
+     0.6739751327639193
+    ],
+    "min_joint_margin_rad": 0.030821098153092363,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.932,
+     -0.32625
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx12-dyp0-ff10/artifact.tar.gz",
+    "sha256": "e3ef621798fa76561c9a8028856ec7cff3fa75957e3f25aa6d71fef5e0376c63",
+    "bytes": 86898766,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dyp0-ff10",
+    "archive_sha256": "e3ef621798fa76561c9a8028856ec7cff3fa75957e3f25aa6d71fef5e0376c63",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dyp0-ff10/datasets/robomimic/episodes/can-resume-v1-d755-dx12-dyp0-ff10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx12-dyp0-ff10.hdf5",
+     "sha256": "319741dd9ab9cd400e2848faf3a05b4bb48dc8a020b7ee2b57eb844ea8ebcf34",
+     "bytes": 43959334
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx12-dyp6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0016957179008901097,
+    "max_grasp_drift_deg": 0.8818906030281878,
+    "bilateral_carry_fraction": 0.9992641648270787,
+    "final_stable_s": 8.64999999999986,
+    "max_hand_object_penetration_m": 0.0005269730849198382,
+    "max_object_environment_penetration_m": 0.001483226102090951,
+    "peak_base_velocity": [
+     0.5023943946537822,
+     0.367646494462727,
+     0.6763023130643848
+    ],
+    "min_joint_margin_rad": 0.03079378467352606,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.932,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx12-dyp6-ff10/artifact.tar.gz",
+    "sha256": "35e2e2d83c39194c9b7a70fe14bcbea58adbdd012d76b8421cc79b57de38f636",
+    "bytes": 86909660,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dyp6-ff10",
+    "archive_sha256": "35e2e2d83c39194c9b7a70fe14bcbea58adbdd012d76b8421cc79b57de38f636",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dyp6-ff10/datasets/robomimic/episodes/can-resume-v1-d755-dx12-dyp6-ff10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx12-dyp6-ff10.hdf5",
+     "sha256": "c422c0bd386033bde3d60287140ada7108c382b7368009516e0c9fe303088fca",
+     "bytes": 43908822
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx16-dym6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx16-dym6-ff10/artifact/workspaces/can-resume-v1-d755-dx16-dym6-ff10/plans/can-resume-v1-d755-dx16-dym6-ff10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.936,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx16-dym6-ff10/artifact.tar.gz",
+    "sha256": "451752367a2e558a8377cb801c0c7732e622445c428e71a9bc288b62d4672eef",
+    "bytes": 2781449,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dym6-ff10",
+    "archive_sha256": "451752367a2e558a8377cb801c0c7732e622445c428e71a9bc288b62d4672eef",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx16-dyp0-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0019046274394069827,
+    "max_grasp_drift_deg": 0.69167048842943,
+    "bilateral_carry_fraction": 0.9994202898550725,
+    "final_stable_s": 8.65999999999986,
+    "max_hand_object_penetration_m": 0.0005486262251623378,
+    "max_object_environment_penetration_m": 0.0003764702736949176,
+    "peak_base_velocity": [
+     0.5445230399483335,
+     0.352284074021465,
+     0.6706875887545732
+    ],
+    "min_joint_margin_rad": 0.030550196194874646,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.936,
+     -0.32625
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx16-dyp0-ff10/artifact.tar.gz",
+    "sha256": "ef313f16b6209a1e97b6bb7370142657f368e3d80571b5bebfc1bb246ef04224",
+    "bytes": 88147203,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dyp0-ff10",
+    "archive_sha256": "ef313f16b6209a1e97b6bb7370142657f368e3d80571b5bebfc1bb246ef04224",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dyp0-ff10/datasets/robomimic/episodes/can-resume-v1-d755-dx16-dyp0-ff10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx16-dyp0-ff10.hdf5",
+     "sha256": "792c1aa1310be9f828c584f4c8dfedead735ec6130f5b7de0e9ef385dc984b68",
+     "bytes": 44568819
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx16-dyp6-ff10",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0018906075586009555,
+    "max_grasp_drift_deg": 0.69167048842943,
+    "bilateral_carry_fraction": 0.9994202898550725,
+    "final_stable_s": 8.65999999999986,
+    "max_hand_object_penetration_m": 0.0005486262251623378,
+    "max_object_environment_penetration_m": 0.0007128340512531085,
+    "peak_base_velocity": [
+     0.48024577474398744,
+     0.3143981355015161,
+     0.6440821574386789
+    ],
+    "min_joint_margin_rad": 0.030574757326754187,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 1.0,
+    "placement_xy_world": [
+     0.936,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx16-dyp6-ff10/artifact.tar.gz",
+    "sha256": "5ecf69ae20a6e88afe776afe09608b77c371c3353fa293eb6baba7c2e6ba4d49",
+    "bytes": 88115119,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dyp6-ff10",
+    "archive_sha256": "5ecf69ae20a6e88afe776afe09608b77c371c3353fa293eb6baba7c2e6ba4d49",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dyp6-ff10/datasets/robomimic/episodes/can-resume-v1-d755-dx16-dyp6-ff10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx16-dyp6-ff10.hdf5",
+     "sha256": "2589f2d09a85b3e3cf41cfa8e7ae01d4c0884303eb69817332cc81239561982f",
+     "bytes": 44568764
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx0-dym6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx0-dym6-ff05/artifact/workspaces/can-resume-v1-d755-dx0-dym6-ff05/plans/can-resume-v1-d755-dx0-dym6-ff05/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.92,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx0-dym6-ff05/artifact.tar.gz",
+    "sha256": "f3a673294ea574980bbe8947ebcaef499c38bd7fcce51d1d92a761fd8f87acc0",
+    "bytes": 2781713,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx0-dym6-ff05",
+    "archive_sha256": "f3a673294ea574980bbe8947ebcaef499c38bd7fcce51d1d92a761fd8f87acc0",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx0-dyp0-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "task_stable_final_1s",
+    "grasp_translation_3mm",
+    "grasp_rotation_3deg",
+    "placement_opened_after_measured_support"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.015556556787549176,
+    "max_grasp_drift_deg": 3.8697357263667804,
+    "bilateral_carry_fraction": 0.9891130567186905,
+    "final_stable_s": 0.0,
+    "max_hand_object_penetration_m": 0.0003300064078212289,
+    "max_object_environment_penetration_m": 0.0013248811407787471,
+    "peak_base_velocity": [
+     0.48442964317866727,
+     0.3146272259888535,
+     0.6870908908281858
+    ],
+    "min_joint_margin_rad": 0.03131796492354938,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.92,
+     -0.32625
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx0-dyp0-ff05/artifact.tar.gz",
+    "sha256": "16b2d20cd5864cf88d0157de8abc331ca2f4fd04f36db768a1737dbd9f334e53",
+    "bytes": 80342881,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx0-dyp0-ff05",
+    "archive_sha256": "16b2d20cd5864cf88d0157de8abc331ca2f4fd04f36db768a1737dbd9f334e53",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx0-dyp0-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx0-dyp0-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx0-dyp0-ff05.hdf5",
+     "sha256": "17a19c8c6abfae83ee42c44bb62d24469857a5cf667fb628f4e0d7ace4f4c238",
+     "bytes": 41243822
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx0-dyp6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "carry_contact_95pct",
+    "grasp_translation_3mm",
+    "grasp_rotation_3deg"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.025532550398267264,
+    "max_grasp_drift_deg": 4.214302303650276,
+    "bilateral_carry_fraction": 0.9455950540958268,
+    "final_stable_s": 8.61999999999986,
+    "max_hand_object_penetration_m": 0.0003300064078212289,
+    "max_object_environment_penetration_m": 0.0013466167576045955,
+    "peak_base_velocity": [
+     0.5243757975894957,
+     0.38699837780149177,
+     0.6665233846494935
+    ],
+    "min_joint_margin_rad": 0.03131796492354938,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.92,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx0-dyp6-ff05/artifact.tar.gz",
+    "sha256": "e663399116e7e706db77d249dbe5b7b4ed7a63c189966f039f110c622ed4c725",
+    "bytes": 83653977,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx0-dyp6-ff05",
+    "archive_sha256": "e663399116e7e706db77d249dbe5b7b4ed7a63c189966f039f110c622ed4c725",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx0-dyp6-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx0-dyp6-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx0-dyp6-ff05.hdf5",
+     "sha256": "65a33a0e1d2e82b13585495d71e9bf58a22f72aa96921672bc7e920e34413054",
+     "bytes": 42268914
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx4-dym6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx4-dym6-ff05/artifact/workspaces/can-resume-v1-d755-dx4-dym6-ff05/plans/can-resume-v1-d755-dx4-dym6-ff05/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.924,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx4-dym6-ff05/artifact.tar.gz",
+    "sha256": "b44af85673ac79cd825a7210e1dcaf3b399a259a0eef2a749796a70ac95a5fe2",
+    "bytes": 2829156,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dym6-ff05",
+    "archive_sha256": "b44af85673ac79cd825a7210e1dcaf3b399a259a0eef2a749796a70ac95a5fe2",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx4-dyp0-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "task_stable_final_1s",
+    "grasp_translation_3mm",
+    "placement_opened_after_measured_support"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.00459696533020407,
+    "max_grasp_drift_deg": 2.7178175196100947,
+    "bilateral_carry_fraction": 0.999545282303903,
+    "final_stable_s": 0.0,
+    "max_hand_object_penetration_m": 0.0003300064078212289,
+    "max_object_environment_penetration_m": 0.0012989152514560215,
+    "peak_base_velocity": [
+     0.47122401446907336,
+     0.30540329397235555,
+     0.6043638668940914
+    ],
+    "min_joint_margin_rad": 0.03100414844022964,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.924,
+     -0.32625
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx4-dyp0-ff05/artifact.tar.gz",
+    "sha256": "04a726aa986cfb00d35f48dda2e8766b4f778d5069f3dbbc7561bccde864d7a8",
+    "bytes": 80953431,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dyp0-ff05",
+    "archive_sha256": "04a726aa986cfb00d35f48dda2e8766b4f778d5069f3dbbc7561bccde864d7a8",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dyp0-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx4-dyp0-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx4-dyp0-ff05.hdf5",
+     "sha256": "b4b7d33f9ea2156e56f7ca076af2f3fe8af43557c80e88cf0556cff481eaf445",
+     "bytes": 41578556
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx4-dyp6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "task_stable_final_1s",
+    "grasp_translation_3mm",
+    "placement_opened_after_measured_support"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.00500612629781911,
+    "max_grasp_drift_deg": 2.7379318231889314,
+    "bilateral_carry_fraction": 0.9996210685865858,
+    "final_stable_s": 0.0,
+    "max_hand_object_penetration_m": 0.0003300064078212289,
+    "max_object_environment_penetration_m": 0.0012717939034634464,
+    "peak_base_velocity": [
+     0.46590397736175926,
+     0.3033498227252601,
+     0.6117469363866155
+    ],
+    "min_joint_margin_rad": 0.031064411889012433,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.924,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx4-dyp6-ff05/artifact.tar.gz",
+    "sha256": "49da4cd9470beefc4afffca565d9a94b4dc96baf4de2a0b3ba629961d4024e76",
+    "bytes": 80082955,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dyp6-ff05",
+    "archive_sha256": "49da4cd9470beefc4afffca565d9a94b4dc96baf4de2a0b3ba629961d4024e76",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx4-dyp6-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx4-dyp6-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx4-dyp6-ff05.hdf5",
+     "sha256": "bb82af3b6f377ff63e1a6cd0d949b1b3ca621f4021db361b7f766fa8457f6d87",
+     "bytes": 41339787
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx8-dym6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx8-dym6-ff05/artifact/workspaces/can-resume-v1-d755-dx8-dym6-ff05/plans/can-resume-v1-d755-dx8-dym6-ff05/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.928,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx8-dym6-ff05/artifact.tar.gz",
+    "sha256": "b982c2d2607f83f65f9ae00f4fe487f1acfb6c653402b9b766f67fed5ebc55b6",
+    "bytes": 2781599,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dym6-ff05",
+    "archive_sha256": "b982c2d2607f83f65f9ae00f4fe487f1acfb6c653402b9b766f67fed5ebc55b6",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx8-dyp0-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "grasp_translation_3mm"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0050659354452445415,
+    "max_grasp_drift_deg": 2.727201101692998,
+    "bilateral_carry_fraction": 0.9957479119210327,
+    "final_stable_s": 8.63999999999986,
+    "max_hand_object_penetration_m": 0.0003300064078212289,
+    "max_object_environment_penetration_m": 0.0013249074670365732,
+    "peak_base_velocity": [
+     0.5069880181241563,
+     0.35334943070432984,
+     0.7424021341280475
+    ],
+    "min_joint_margin_rad": 0.030255675032221874,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.928,
+     -0.32625
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx8-dyp0-ff05/artifact.tar.gz",
+    "sha256": "5e4261f63f698c75034c1ab1a80c688b2dbefa0b737a4624dce67de93fe9cd91",
+    "bytes": 85063846,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dyp0-ff05",
+    "archive_sha256": "5e4261f63f698c75034c1ab1a80c688b2dbefa0b737a4624dce67de93fe9cd91",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dyp0-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx8-dyp0-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx8-dyp0-ff05.hdf5",
+     "sha256": "8c888cc2873cf5501a0b868fc33f68d98aa54e99aa0991818c9a1cc50833ae20",
+     "bytes": 42915243
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx8-dyp6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "grasp_translation_3mm"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.00518456887158769,
+    "max_grasp_drift_deg": 2.7663993363580577,
+    "bilateral_carry_fraction": 0.9951404707668944,
+    "final_stable_s": 8.63999999999986,
+    "max_hand_object_penetration_m": 0.0003300064078212289,
+    "max_object_environment_penetration_m": 0.0012432271364786996,
+    "peak_base_velocity": [
+     0.4959848659599712,
+     0.3598470987908701,
+     0.7174254731820998
+    ],
+    "min_joint_margin_rad": 0.030454150429788274,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.928,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx8-dyp6-ff05/artifact.tar.gz",
+    "sha256": "dab657bf7bb4cfed0eac85b0b2a8a294fca6440d6129e62ff270639983caf5d4",
+    "bytes": 85107057,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dyp6-ff05",
+    "archive_sha256": "dab657bf7bb4cfed0eac85b0b2a8a294fca6440d6129e62ff270639983caf5d4",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx8-dyp6-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx8-dyp6-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx8-dyp6-ff05.hdf5",
+     "sha256": "04f124c73f6029311d7afe1bdc0a21ca99fcbf41c0e9bc773a39afddddfca60e",
+     "bytes": 42912654
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx12-dym6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx12-dym6-ff05/artifact/workspaces/can-resume-v1-d755-dx12-dym6-ff05/plans/can-resume-v1-d755-dx12-dym6-ff05/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.932,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx12-dym6-ff05/artifact.tar.gz",
+    "sha256": "e368139f80f198f76373286b4d568a6d5f34487cfb4515e555861ff166fc2fc4",
+    "bytes": 2781113,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dym6-ff05",
+    "archive_sha256": "e368139f80f198f76373286b4d568a6d5f34487cfb4515e555861ff166fc2fc4",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx12-dyp0-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "grasp_rotation_3deg"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0017559858808354582,
+    "max_grasp_drift_deg": 3.0953692746553823,
+    "bilateral_carry_fraction": 0.9997045790251107,
+    "final_stable_s": 8.64999999999986,
+    "max_hand_object_penetration_m": 0.0003329526570428203,
+    "max_object_environment_penetration_m": 0.0014560071072641234,
+    "peak_base_velocity": [
+     0.518513310021494,
+     0.3678907696957411,
+     0.6999732946325434
+    ],
+    "min_joint_margin_rad": 0.03091005995969781,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.932,
+     -0.32625
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx12-dyp0-ff05/artifact.tar.gz",
+    "sha256": "cfe4c5eaf393b830088f709a3e5e5cd0d49a780bd4fd414eb46eb96d0447b787",
+    "bytes": 86928302,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dyp0-ff05",
+    "archive_sha256": "cfe4c5eaf393b830088f709a3e5e5cd0d49a780bd4fd414eb46eb96d0447b787",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dyp0-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx12-dyp0-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx12-dyp0-ff05.hdf5",
+     "sha256": "fb8a0e59db1eedff9aa59de12600dbd26ed3621188bb8b82518af7151c4840db",
+     "bytes": 43930767
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx12-dyp6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0017580904252525425,
+    "max_grasp_drift_deg": 2.565511288192198,
+    "bilateral_carry_fraction": 0.9997045790251107,
+    "final_stable_s": 8.64999999999986,
+    "max_hand_object_penetration_m": 0.0003300064078212289,
+    "max_object_environment_penetration_m": 0.0014151567907384477,
+    "peak_base_velocity": [
+     0.5352278340172231,
+     0.38980372494651033,
+     0.690809552402554
+    ],
+    "min_joint_margin_rad": 0.030176164899562985,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.932,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx12-dyp6-ff05/artifact.tar.gz",
+    "sha256": "2a8c2138bf31214fee81f66f7ebccc9561e185a6484b623efc3621fac517fb6d",
+    "bytes": 86952178,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dyp6-ff05",
+    "archive_sha256": "2a8c2138bf31214fee81f66f7ebccc9561e185a6484b623efc3621fac517fb6d",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx12-dyp6-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx12-dyp6-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx12-dyp6-ff05.hdf5",
+     "sha256": "9ecc4ae64a1fd911fe75a2a0507890256bb5bd384aedbbc0fed1dc0ea8950d14",
+     "bytes": 43926396
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx16-dym6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-resume-v1/can-resume-v1-d755-dx16-dym6-ff05/artifact/workspaces/can-resume-v1-d755-dx16-dym6-ff05/plans/can-resume-v1-d755-dx16-dym6-ff05/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.936,
+     -0.33225
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx16-dym6-ff05/artifact.tar.gz",
+    "sha256": "c1c5e4448e4216181c28701f6b6d5eaecfb22153c8efcc6efd48c12a54e406fd",
+    "bytes": 2810969,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dym6-ff05",
+    "archive_sha256": "c1c5e4448e4216181c28701f6b6d5eaecfb22153c8efcc6efd48c12a54e406fd",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx16-dyp0-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0019395828643301984,
+    "max_grasp_drift_deg": 2.618727046686994,
+    "bilateral_carry_fraction": 0.9998545454545454,
+    "final_stable_s": 8.65999999999986,
+    "max_hand_object_penetration_m": 0.0003300064078212289,
+    "max_object_environment_penetration_m": 0.0004017211238752648,
+    "peak_base_velocity": [
+     0.5429086023137379,
+     0.34416295980932504,
+     0.6929516787517889
+    ],
+    "min_joint_margin_rad": 0.030711347394712374,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.936,
+     -0.32625
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx16-dyp0-ff05/artifact.tar.gz",
+    "sha256": "9d715c82f4c43ee21324ca155cae94ad9bdd0b0653c8ba571de993c77058788d",
+    "bytes": 88092199,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dyp0-ff05",
+    "archive_sha256": "9d715c82f4c43ee21324ca155cae94ad9bdd0b0653c8ba571de993c77058788d",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dyp0-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx16-dyp0-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx16-dyp0-ff05.hdf5",
+     "sha256": "1842aa298e41373532db5d486b4719bab23137df1d082db38a619a530a591b6c",
+     "bytes": 44557567
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-resume-v1-d755-dx16-dyp6-ff05",
+   "batch": "runs/local-spool-pool/can-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "d755b0622b3466a973309e93",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_30",
+   "source_hdf5_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+   "evaluation_split": "development_after_frozen_heldout_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0019427761257455468,
+    "max_grasp_drift_deg": 2.6183438411596427,
+    "bilateral_carry_fraction": 0.9998545454545454,
+    "final_stable_s": 8.65999999999986,
+    "max_hand_object_penetration_m": 0.0003300064078212289,
+    "max_object_environment_penetration_m": 0.0003996227531719575,
+    "peak_base_velocity": [
+     0.49779240778627465,
+     0.35847975558758466,
+     0.7226933902046442
+    ],
+    "min_joint_margin_rad": 0.030559720999694784,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.5,
+    "placement_xy_world": [
+     0.936,
+     -0.32025
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.01740134501671
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-resume-v1/can-resume-v1-d755-dx16-dyp6-ff05/artifact.tar.gz",
+    "sha256": "41b75b127b98ed98ec823eb7db8f6f0f65cb2d928037e9a66584c6dbb56d7d29",
+    "bytes": 88128749,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dyp6-ff05",
+    "archive_sha256": "41b75b127b98ed98ec823eb7db8f6f0f65cb2d928037e9a66584c6dbb56d7d29",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-resume-v1/can-resume-v1-d755-dx16-dyp6-ff05/datasets/robomimic/episodes/can-resume-v1-d755-dx16-dyp6-ff05.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-resume-v1-d755-dx16-dyp6-ff05.hdf5",
+     "sha256": "2b3013dfc819dc2da9b2e7c0c9dd1cb9b831162077b9de7da17ca2a43dacb836",
+     "bytes": 44555319
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dym6-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.001207827602859981,
+    "max_grasp_drift_deg": 1.988771379178572,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 7.799999999999878,
+    "max_hand_object_penetration_m": 0.00016951740636129997,
+    "max_object_environment_penetration_m": 0.0011709803326652572,
+    "peak_base_velocity": [
+     0.47729066610973936,
+     0.30924166079357246,
+     0.5868656694930354
+    ],
+    "min_joint_margin_rad": 0.029703524232327916,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.3035
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dym6-yawm10/artifact.tar.gz",
+    "sha256": "2fedaf0fb9d445b196c0d448c18a3c2d97b2246f6efea827b9dd81aef1c0c030",
+    "bytes": 83489532,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym6-yawm10",
+    "archive_sha256": "2fedaf0fb9d445b196c0d448c18a3c2d97b2246f6efea827b9dd81aef1c0c030",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym6-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx6-dym6-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx6-dym6-yawm10.hdf5",
+     "sha256": "48dc27e9f8294d5d957608744b04fc4da9b8353beb96006493712a146c5b2f1e",
+     "bytes": 42025938
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dym6-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "grasp_translation_3mm"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0037848854937958015,
+    "max_grasp_drift_deg": 0.6730327018772736,
+    "bilateral_carry_fraction": 0.9991130820399112,
+    "final_stable_s": 8.229999999999869,
+    "max_hand_object_penetration_m": 0.00022574417332621384,
+    "max_object_environment_penetration_m": 0.0012879942286369032,
+    "peak_base_velocity": [
+     0.5065983190667765,
+     0.33899829785733376,
+     0.6611723124593434
+    ],
+    "min_joint_margin_rad": 0.029858172887581746,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.3035
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dym6-yaw0/artifact.tar.gz",
+    "sha256": "6fe21577df7b64b95ecb42237f1366ab4e9bad4efd8893216dc0a3d2b973db9e",
+    "bytes": 88012954,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym6-yaw0",
+    "archive_sha256": "6fe21577df7b64b95ecb42237f1366ab4e9bad4efd8893216dc0a3d2b973db9e",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym6-yaw0/datasets/robomimic/episodes/can-710-resume-v1-dx6-dym6-yaw0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx6-dym6-yaw0.hdf5",
+     "sha256": "36008a7b6f7f10e770c19b146f99a94b3a77ede782ffdd7de78d07dc8c74a7b4",
+     "bytes": 44281863
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dym6-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "launcher_failed",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": null,
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.3035
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dym6-yaw10/artifact.tar.gz",
+    "sha256": "0eae6a24a88975f14685a4f129b31d0dd65a9f0b1e80c1fac2f04d7bb625b641",
+    "bytes": 4072257,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym6-yaw10",
+    "archive_sha256": "0eae6a24a88975f14685a4f129b31d0dd65a9f0b1e80c1fac2f04d7bb625b641",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dym3-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0012228316516517729,
+    "max_grasp_drift_deg": 2.8082698403950777,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 7.799999999999878,
+    "max_hand_object_penetration_m": 0.00020780235686697059,
+    "max_object_environment_penetration_m": 0.0012953014748465328,
+    "peak_base_velocity": [
+     0.5064826052933629,
+     0.31300591783857973,
+     0.618661709403845
+    ],
+    "min_joint_margin_rad": 0.02959282251087858,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.3005
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dym3-yawm10/artifact.tar.gz",
+    "sha256": "e72855576bc4a1eb9e427076edac661ade68e74430b016885539f1a145236fa6",
+    "bytes": 83497449,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym3-yawm10",
+    "archive_sha256": "e72855576bc4a1eb9e427076edac661ade68e74430b016885539f1a145236fa6",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym3-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx6-dym3-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx6-dym3-yawm10.hdf5",
+     "sha256": "948590c50506deddc96226be63aaf40b3a8b34d128da9f40c28b592a949e77a4",
+     "bytes": 42005133
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dym3-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "grasp_translation_3mm"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.004502431989102498,
+    "max_grasp_drift_deg": 0.5521745654303952,
+    "bilateral_carry_fraction": 0.9992609016999261,
+    "final_stable_s": 8.229999999999869,
+    "max_hand_object_penetration_m": 0.00022214787796176577,
+    "max_object_environment_penetration_m": 0.001343171899295874,
+    "peak_base_velocity": [
+     0.5047582870733862,
+     0.30753890005339046,
+     0.6739229963159215
+    ],
+    "min_joint_margin_rad": 0.028646532538226188,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.3005
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dym3-yaw0/artifact.tar.gz",
+    "sha256": "fea68a94fd2ca023d2a821471ad93142c668837c408318716f37f1fd79321c13",
+    "bytes": 88031705,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym3-yaw0",
+    "archive_sha256": "fea68a94fd2ca023d2a821471ad93142c668837c408318716f37f1fd79321c13",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym3-yaw0/datasets/robomimic/episodes/can-710-resume-v1-dx6-dym3-yaw0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx6-dym3-yaw0.hdf5",
+     "sha256": "4597011b3c5d8b0949acffecce2206be41646c10e2a9aaf96404c5aebc51350f",
+     "bytes": 44323654
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dym3-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "launcher_failed",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": null,
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.3005
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dym3-yaw10/artifact.tar.gz",
+    "sha256": "890db20785651bea07a43d6e983393848062bd782be6e948ff232724594ef4ad",
+    "bytes": 4125755,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dym3-yaw10",
+    "archive_sha256": "890db20785651bea07a43d6e983393848062bd782be6e948ff232724594ef4ad",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dy0-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0012175749906660816,
+    "max_grasp_drift_deg": 1.6348948723240786,
+    "bilateral_carry_fraction": 0.9995283018867925,
+    "final_stable_s": 7.799999999999878,
+    "max_hand_object_penetration_m": 0.0001723079379570399,
+    "max_object_environment_penetration_m": 0.0010695488571136609,
+    "peak_base_velocity": [
+     0.5004998984603739,
+     0.305946243149186,
+     0.6600194039570451
+    ],
+    "min_joint_margin_rad": 0.029448213454915384,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.2975
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dy0-yawm10/artifact.tar.gz",
+    "sha256": "fc4018d3c5cdd244d4b6a07c90d4f03d1f7a2d621583ac4c734e7e66ef5a1299",
+    "bytes": 83433191,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy0-yawm10",
+    "archive_sha256": "fc4018d3c5cdd244d4b6a07c90d4f03d1f7a2d621583ac4c734e7e66ef5a1299",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy0-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx6-dy0-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx6-dy0-yawm10.hdf5",
+     "sha256": "6c40f6b42f68e933ed73dde5a50deaa9aecf39050f31d1b5d972c45b8e801849",
+     "bytes": 42038681
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dy0-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "grasp_translation_3mm"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.004965846381817844,
+    "max_grasp_drift_deg": 0.7488837709002232,
+    "bilateral_carry_fraction": 0.9986676535899334,
+    "final_stable_s": 8.229999999999869,
+    "max_hand_object_penetration_m": 0.0001973493233297453,
+    "max_object_environment_penetration_m": 0.0012965186900870027,
+    "peak_base_velocity": [
+     0.6066781839784987,
+     0.3711353682765839,
+     0.7727895586292978
+    ],
+    "min_joint_margin_rad": 0.030750935317540307,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.2975
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dy0-yaw0/artifact.tar.gz",
+    "sha256": "db2de94b1031399325557673547bf9d4f5600abf7434cbb341f4cbeb510f32e9",
+    "bytes": 88018194,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy0-yaw0",
+    "archive_sha256": "db2de94b1031399325557673547bf9d4f5600abf7434cbb341f4cbeb510f32e9",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy0-yaw0/datasets/robomimic/episodes/can-710-resume-v1-dx6-dy0-yaw0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx6-dy0-yaw0.hdf5",
+     "sha256": "6e07805f7adca2ca56c5468f41d7da62125c7ba70bddf5c786d6718b601e44fd",
+     "bytes": 44288270
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dy0-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "launcher_failed",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": null,
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.2975
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dy0-yaw10/artifact.tar.gz",
+    "sha256": "73d1e3ec5722c59cfad0ed92b40378624328362415d0120570b2194089b36346",
+    "bytes": 4070869,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy0-yaw10",
+    "archive_sha256": "73d1e3ec5722c59cfad0ed92b40378624328362415d0120570b2194089b36346",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dy3-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0012342281552900878,
+    "max_grasp_drift_deg": 1.5244868597098395,
+    "bilateral_carry_fraction": 0.9998427672955974,
+    "final_stable_s": 7.799999999999878,
+    "max_hand_object_penetration_m": 0.00015988357310130235,
+    "max_object_environment_penetration_m": 0.0011903499027222553,
+    "peak_base_velocity": [
+     0.4542423872427297,
+     0.31265323941983936,
+     0.5903385609213856
+    ],
+    "min_joint_margin_rad": 0.029528714048628002,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.2945
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dy3-yawm10/artifact.tar.gz",
+    "sha256": "e9865d6751c473a160558ab88bd9cff316be63160246183edd987df1e8c5fc7b",
+    "bytes": 83479728,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy3-yawm10",
+    "archive_sha256": "e9865d6751c473a160558ab88bd9cff316be63160246183edd987df1e8c5fc7b",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy3-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx6-dy3-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx6-dy3-yawm10.hdf5",
+     "sha256": "ca2bc244768a1de57d06a88f3d1092cd3f937a065a053a6a88169e9e52ff84e7",
+     "bytes": 42015827
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dy3-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_fail",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": [
+    "grasp_translation_3mm"
+   ],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.004426946117785016,
+    "max_grasp_drift_deg": 0.5407773661356833,
+    "bilateral_carry_fraction": 0.9989652623798965,
+    "final_stable_s": 8.229999999999869,
+    "max_hand_object_penetration_m": 0.0002083289685235918,
+    "max_object_environment_penetration_m": 0.0012856669668302348,
+    "peak_base_velocity": [
+     0.49288730315054774,
+     0.3276279988493608,
+     0.6197302567874252
+    ],
+    "min_joint_margin_rad": 0.029740818973000238,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.2945
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dy3-yaw0/artifact.tar.gz",
+    "sha256": "c43b2e4a6e1322e6a03919602f670bf75e23c4eb82a8b4e1fe8add1551a85d86",
+    "bytes": 88022446,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy3-yaw0",
+    "archive_sha256": "c43b2e4a6e1322e6a03919602f670bf75e23c4eb82a8b4e1fe8add1551a85d86",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy3-yaw0/datasets/robomimic/episodes/can-710-resume-v1-dx6-dy3-yaw0.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx6-dy3-yaw0.hdf5",
+     "sha256": "34aa03b2d407ad7dca858dac38d4b4b77ac8778671211af2b382102f30baae93",
+     "bytes": 44307699
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx6-dy3-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "launcher_failed",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": null,
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.926,
+     -0.2945
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx6-dy3-yaw10/artifact.tar.gz",
+    "sha256": "1f1f6db49f7c830709026100cf301f73f4bffcba5cb2abdc6a60f577c844c836",
+    "bytes": 4072797,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx6-dy3-yaw10",
+    "archive_sha256": "1f1f6db49f7c830709026100cf301f73f4bffcba5cb2abdc6a60f577c844c836",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dym6-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0013658275709134,
+    "max_grasp_drift_deg": 0.5296017648906097,
+    "bilateral_carry_fraction": 0.9995308835027366,
+    "final_stable_s": 7.799999999999878,
+    "max_hand_object_penetration_m": 0.0001789109171772673,
+    "max_object_environment_penetration_m": 0.0006359259330077637,
+    "peak_base_velocity": [
+     0.46446083713877,
+     0.3033190360655685,
+     0.5976792597489536
+    ],
+    "min_joint_margin_rad": 0.030078989962576352,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.3035
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym6-yawm10/artifact.tar.gz",
+    "sha256": "9e972c8d970537890c951420e216a09726786e249267148e3bc34fc3862897db",
+    "bytes": 83783034,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dym6-yawm10",
+    "archive_sha256": "9e972c8d970537890c951420e216a09726786e249267148e3bc34fc3862897db",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dym6-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx9-dym6-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx9-dym6-yawm10.hdf5",
+     "sha256": "c1bd4abacd9592dc9c4b1a05f10ff23b438bf0d5146ec6eb87c01b8e728328e6",
+     "bytes": 42224158
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dym6-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym6-yaw0/artifact/workspaces/can-710-resume-v1-dx9-dym6-yaw0/plans/can-710-resume-v1-dx9-dym6-yaw0/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.3035
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym6-yaw0/artifact.tar.gz",
+    "sha256": "d8cef6915c0725382f4a075e43cfc2d30d47193a5e4343e2900bd301f4ead2a1",
+    "bytes": 2832627,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dym6-yaw0",
+    "archive_sha256": "d8cef6915c0725382f4a075e43cfc2d30d47193a5e4343e2900bd301f4ead2a1",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dym6-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym6-yaw10/artifact/workspaces/can-710-resume-v1-dx9-dym6-yaw10/plans/can-710-resume-v1-dx9-dym6-yaw10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.3035
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym6-yaw10/artifact.tar.gz",
+    "sha256": "eb478589e232c916bb71a012929a7a3d49b0eb6d61097fe231a1bb6119e3b06c",
+    "bytes": 2869222,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dym6-yaw10",
+    "archive_sha256": "eb478589e232c916bb71a012929a7a3d49b0eb6d61097fe231a1bb6119e3b06c",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dym3-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.001336372485891138,
+    "max_grasp_drift_deg": 0.6860788472681878,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 7.799999999999878,
+    "max_hand_object_penetration_m": 0.00015361040301377664,
+    "max_object_environment_penetration_m": 0.0007196131562213769,
+    "peak_base_velocity": [
+     0.4963580500101578,
+     0.3003239860878128,
+     0.586725862889442
+    ],
+    "min_joint_margin_rad": 0.030271062683268624,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.3005
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym3-yawm10/artifact.tar.gz",
+    "sha256": "57d2f417c696c506eaa3f156fd5bb4d98a9f943e92118ee8acd6bec8bff523c0",
+    "bytes": 83806836,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dym3-yawm10",
+    "archive_sha256": "57d2f417c696c506eaa3f156fd5bb4d98a9f943e92118ee8acd6bec8bff523c0",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dym3-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx9-dym3-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx9-dym3-yawm10.hdf5",
+     "sha256": "15f9c2a5e9ea26656fed75b4e8adab173f30f3a97aa98267dc2226f1ad9bb869",
+     "bytes": 42234005
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dym3-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym3-yaw0/artifact/workspaces/can-710-resume-v1-dx9-dym3-yaw0/plans/can-710-resume-v1-dx9-dym3-yaw0/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.3005
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym3-yaw0/artifact.tar.gz",
+    "sha256": "91a12ca4420d92cd5724832275267890e51d006cdb29ede4ccbe2ba970239f99",
+    "bytes": 2832621,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dym3-yaw0",
+    "archive_sha256": "91a12ca4420d92cd5724832275267890e51d006cdb29ede4ccbe2ba970239f99",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dym3-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym3-yaw10/artifact/workspaces/can-710-resume-v1-dx9-dym3-yaw10/plans/can-710-resume-v1-dx9-dym3-yaw10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.3005
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dym3-yaw10/artifact.tar.gz",
+    "sha256": "155e0a749fea9e8f3c170cb5fa40233319dc1a711df8c44dd5cb7ade2d44eb5e",
+    "bytes": 2834526,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dym3-yaw10",
+    "archive_sha256": "155e0a749fea9e8f3c170cb5fa40233319dc1a711df8c44dd5cb7ade2d44eb5e",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dy0-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.00135415259531462,
+    "max_grasp_drift_deg": 0.4526953895597738,
+    "bilateral_carry_fraction": 0.9998436278342455,
+    "final_stable_s": 7.799999999999878,
+    "max_hand_object_penetration_m": 0.0001509721862944847,
+    "max_object_environment_penetration_m": 0.00067827965963263,
+    "peak_base_velocity": [
+     0.49867688787204606,
+     0.30569252161200056,
+     0.599233052450924
+    ],
+    "min_joint_margin_rad": 0.03032276572125736,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.2975
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy0-yawm10/artifact.tar.gz",
+    "sha256": "93f333c86539a34d7e4d9f6329883d4e5cb252e3e3ce6492b9aef4808cb46562",
+    "bytes": 83768916,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dy0-yawm10",
+    "archive_sha256": "93f333c86539a34d7e4d9f6329883d4e5cb252e3e3ce6492b9aef4808cb46562",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dy0-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx9-dy0-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx9-dy0-yawm10.hdf5",
+     "sha256": "a75ce62fb53967ee37c1a533bfcd4fcea69a79ebe1fc006edb1a15b24695509f",
+     "bytes": 42207419
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dy0-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy0-yaw0/artifact/workspaces/can-710-resume-v1-dx9-dy0-yaw0/plans/can-710-resume-v1-dx9-dy0-yaw0/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.2975
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy0-yaw0/artifact.tar.gz",
+    "sha256": "49289d7e67fac555fecf84cea3afcc2c0a1fc53b11b868fcddd046675c05270f",
+    "bytes": 2832648,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dy0-yaw0",
+    "archive_sha256": "49289d7e67fac555fecf84cea3afcc2c0a1fc53b11b868fcddd046675c05270f",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dy0-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy0-yaw10/artifact/workspaces/can-710-resume-v1-dx9-dy0-yaw10/plans/can-710-resume-v1-dx9-dy0-yaw10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.2975
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy0-yaw10/artifact.tar.gz",
+    "sha256": "4012956720c671c382f91c50e19ec24f69255bf2cf748b7053195949f5022d2f",
+    "bytes": 2834723,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dy0-yaw10",
+    "archive_sha256": "4012956720c671c382f91c50e19ec24f69255bf2cf748b7053195949f5022d2f",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dy3-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0012922783091381207,
+    "max_grasp_drift_deg": 0.3997851606561892,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 7.799999999999878,
+    "max_hand_object_penetration_m": 0.0001469460711038908,
+    "max_object_environment_penetration_m": 0.0006317022955601991,
+    "peak_base_velocity": [
+     0.4736445549030673,
+     0.31102075344135166,
+     0.6295583087676553
+    ],
+    "min_joint_margin_rad": 0.030991608828562556,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.2945
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy3-yawm10/artifact.tar.gz",
+    "sha256": "253eade40ebef429b7df0add0eb5dc60ba5a1a193125dd280e46f367f1be7abc",
+    "bytes": 83829352,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dy3-yawm10",
+    "archive_sha256": "253eade40ebef429b7df0add0eb5dc60ba5a1a193125dd280e46f367f1be7abc",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dy3-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx9-dy3-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx9-dy3-yawm10.hdf5",
+     "sha256": "2df9a49534c960c58a59267da0d577a261b109c143c9a7587e92fd19b07557a8",
+     "bytes": 42227248
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dy3-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy3-yaw0/artifact/workspaces/can-710-resume-v1-dx9-dy3-yaw0/plans/can-710-resume-v1-dx9-dy3-yaw0/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.2945
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy3-yaw0/artifact.tar.gz",
+    "sha256": "b63c4a603da2cbf0accb5038e46dd88bd01058b5a0a82dae4b2f539bd63a78da",
+    "bytes": 2832805,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dy3-yaw0",
+    "archive_sha256": "b63c4a603da2cbf0accb5038e46dd88bd01058b5a0a82dae4b2f539bd63a78da",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx9-dy3-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy3-yaw10/artifact/workspaces/can-710-resume-v1-dx9-dy3-yaw10/plans/can-710-resume-v1-dx9-dy3-yaw10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.929,
+     -0.2945
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx9-dy3-yaw10/artifact.tar.gz",
+    "sha256": "b3a3fb9a8c98131c7215fc3410a5f912797a31bee4b74b0f3f0fde8b233a140e",
+    "bytes": 2834281,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx9-dy3-yaw10",
+    "archive_sha256": "b3a3fb9a8c98131c7215fc3410a5f912797a31bee4b74b0f3f0fde8b233a140e",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dym6-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0013347497410479512,
+    "max_grasp_drift_deg": 0.5196266020047353,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 7.809999999999878,
+    "max_hand_object_penetration_m": 0.00015361040301377664,
+    "max_object_environment_penetration_m": 0.0006283011784598002,
+    "peak_base_velocity": [
+     0.48449126413120536,
+     0.3292310609003134,
+     0.5996924421770878
+    ],
+    "min_joint_margin_rad": 0.030433057296322563,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.3035
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym6-yawm10/artifact.tar.gz",
+    "sha256": "46cfe17aa61ba7f00bc948aa9fdead69a767f6140c1e864dc8151b35ac471a4d",
+    "bytes": 84597458,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dym6-yawm10",
+    "archive_sha256": "46cfe17aa61ba7f00bc948aa9fdead69a767f6140c1e864dc8151b35ac471a4d",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dym6-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx12-dym6-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx12-dym6-yawm10.hdf5",
+     "sha256": "b43ec57e2c22a6604a75ea9f75aef7b8242ad1f3bcd9ca55480e243c4ea54e85",
+     "bytes": 42645215
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dym6-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym6-yaw0/artifact/workspaces/can-710-resume-v1-dx12-dym6-yaw0/plans/can-710-resume-v1-dx12-dym6-yaw0/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.3035
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym6-yaw0/artifact.tar.gz",
+    "sha256": "f2036c12e028fdfab301f7bdf449ecd4717a17e4ccc8fb70025f915e4977c17a",
+    "bytes": 2830788,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dym6-yaw0",
+    "archive_sha256": "f2036c12e028fdfab301f7bdf449ecd4717a17e4ccc8fb70025f915e4977c17a",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dym6-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym6-yaw10/artifact/workspaces/can-710-resume-v1-dx12-dym6-yaw10/plans/can-710-resume-v1-dx12-dym6-yaw10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.3035
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym6-yaw10/artifact.tar.gz",
+    "sha256": "81b1116804f2904fbcd8dbe0a68453571989fdb1e72fa141c43761f9adce8072",
+    "bytes": 2834088,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dym6-yaw10",
+    "archive_sha256": "81b1116804f2904fbcd8dbe0a68453571989fdb1e72fa141c43761f9adce8072",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dym3-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0013312394403457494,
+    "max_grasp_drift_deg": 0.4482773003017511,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 7.809999999999878,
+    "max_hand_object_penetration_m": 0.0001526869829178339,
+    "max_object_environment_penetration_m": 0.0005587751795773642,
+    "peak_base_velocity": [
+     0.49310248650125604,
+     0.33178445535657436,
+     0.6414142411487439
+    ],
+    "min_joint_margin_rad": 0.030421301277869517,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.3005
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym3-yawm10/artifact.tar.gz",
+    "sha256": "08427fbc1b3b8529dfe5e079d5080d28456a6e7c2e25c7206c04c7433feb2328",
+    "bytes": 84511524,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dym3-yawm10",
+    "archive_sha256": "08427fbc1b3b8529dfe5e079d5080d28456a6e7c2e25c7206c04c7433feb2328",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dym3-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx12-dym3-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx12-dym3-yawm10.hdf5",
+     "sha256": "a059eb93f46c7425a087eef1e0fff322709dca303d991c0ded0ec8205d14329b",
+     "bytes": 42627433
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dym3-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym3-yaw0/artifact/workspaces/can-710-resume-v1-dx12-dym3-yaw0/plans/can-710-resume-v1-dx12-dym3-yaw0/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.3005
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym3-yaw0/artifact.tar.gz",
+    "sha256": "b807de8e3d91763c22822d40bdaeeca44c39550de41c3c6223d880559ce40e6f",
+    "bytes": 2830758,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dym3-yaw0",
+    "archive_sha256": "b807de8e3d91763c22822d40bdaeeca44c39550de41c3c6223d880559ce40e6f",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dym3-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym3-yaw10/artifact/workspaces/can-710-resume-v1-dx12-dym3-yaw10/plans/can-710-resume-v1-dx12-dym3-yaw10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.3005
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dym3-yaw10/artifact.tar.gz",
+    "sha256": "b0fe4250927009645d2a1f61fec7c66b44c8006482f3f76c30126fc77b005bb0",
+    "bytes": 2834094,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dym3-yaw10",
+    "archive_sha256": "b0fe4250927009645d2a1f61fec7c66b44c8006482f3f76c30126fc77b005bb0",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dy0-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0013270189195797825,
+    "max_grasp_drift_deg": 0.5963057183709054,
+    "bilateral_carry_fraction": 0.9996911196911196,
+    "final_stable_s": 7.809999999999878,
+    "max_hand_object_penetration_m": 0.00015765859746543018,
+    "max_object_environment_penetration_m": 0.0007487829131501698,
+    "peak_base_velocity": [
+     0.5098276827398897,
+     0.35000397738155675,
+     0.6387846257399923
+    ],
+    "min_joint_margin_rad": 0.030433255653405822,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.2975
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy0-yawm10/artifact.tar.gz",
+    "sha256": "8027c283f80893282cb808ee7bbc9f7423456cf6fc48e5c23e56dc2d9dcd635f",
+    "bytes": 84551384,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dy0-yawm10",
+    "archive_sha256": "8027c283f80893282cb808ee7bbc9f7423456cf6fc48e5c23e56dc2d9dcd635f",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dy0-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx12-dy0-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx12-dy0-yawm10.hdf5",
+     "sha256": "35ab51b3744ffbcdddfb7eec15adecc3ea8aea5081cd61d9ddb002515da2483e",
+     "bytes": 42639747
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dy0-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy0-yaw0/artifact/workspaces/can-710-resume-v1-dx12-dy0-yaw0/plans/can-710-resume-v1-dx12-dy0-yaw0/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.2975
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy0-yaw0/artifact.tar.gz",
+    "sha256": "877e96e89688f19abbfdfd589c6fc57da06f74fb46e4192c5afe8b6e40fc710c",
+    "bytes": 2830828,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dy0-yaw0",
+    "archive_sha256": "877e96e89688f19abbfdfd589c6fc57da06f74fb46e4192c5afe8b6e40fc710c",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dy0-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy0-yaw10/artifact/workspaces/can-710-resume-v1-dx12-dy0-yaw10/plans/can-710-resume-v1-dx12-dy0-yaw10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.2975
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy0-yaw10/artifact.tar.gz",
+    "sha256": "aa351c24fc7f2a43c97fb9ab4d8bfab3d9d9882eb105e1f1dcbf8731a0c5325e",
+    "bytes": 2834085,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dy0-yaw10",
+    "archive_sha256": "aa351c24fc7f2a43c97fb9ab4d8bfab3d9d9882eb105e1f1dcbf8731a0c5325e",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dy3-yawm10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "physical_pass",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": "hf__robomimic__robomimic_datasets",
+   "source_sequence": "v1.5/can/ph/demo_5",
+   "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": true,
+   "all_physics_gates": true,
+   "failure_reasons": [],
+   "reason": null,
+   "metrics": {
+    "max_grasp_drift_m": 0.0013322294732751952,
+    "max_grasp_drift_deg": 0.46072692603305576,
+    "bilateral_carry_fraction": 1.0,
+    "final_stable_s": 7.809999999999878,
+    "max_hand_object_penetration_m": 0.00013942916243645746,
+    "max_object_environment_penetration_m": 0.0006981483629504569,
+    "peak_base_velocity": [
+     0.46338359125456174,
+     0.3126634034190117,
+     0.6421354075466384
+    ],
+    "min_joint_margin_rad": 0.03047796362239763,
+    "supported_release_time_s": null
+   },
+   "actuator_replay_pass": true,
+   "independent_validation_pass": true,
+   "object_welds_actuators": false,
+   "object_state_assignments": "initial reset only",
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.2945
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     90.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy3-yawm10/artifact.tar.gz",
+    "sha256": "e25b624c84bf907c89b41929e61ccf4fb2150f1df36af9cc6028d761d27c8dc5",
+    "bytes": 84498466,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dy3-yawm10",
+    "archive_sha256": "e25b624c84bf907c89b41929e61ccf4fb2150f1df36af9cc6028d761d27c8dc5",
+    "episode": {
+     "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dy3-yawm10/datasets/robomimic/episodes/can-710-resume-v1-dx12-dy3-yawm10.hdf5",
+     "relative_path": "datasets/robomimic/episodes/can-710-resume-v1-dx12-dy3-yawm10.hdf5",
+     "sha256": "84de7eee92c00aa728ec57109cc7ff42a9bec5712e451b0194eec9be2f6f708f",
+     "bytes": 42611704
+    },
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dy3-yaw0",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy3-yaw0/artifact/workspaces/can-710-resume-v1-dx12-dy3-yaw0/plans/can-710-resume-v1-dx12-dy3-yaw0/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.2945
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     100.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy3-yaw0/artifact.tar.gz",
+    "sha256": "652e33396e187dcd86feb3863d3a8a604340a45336a971e35ee9dd3b2c7a7bcb",
+    "bytes": 2874452,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dy3-yaw0",
+    "archive_sha256": "652e33396e187dcd86feb3863d3a8a604340a45336a971e35ee9dd3b2c7a7bcb",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  },
+  {
+   "job": "can-710-resume-v1-dx12-dy3-yaw10",
+   "batch": "runs/local-spool-pool/can-710-resume-v1",
+   "status": "plan_rejected",
+   "source_episode": "710ae7b398370cea3bf672b0",
+   "source_id": null,
+   "source_sequence": null,
+   "source_hdf5_sha256": null,
+   "evaluation_split": "additional22_development_after_frozen_evaluation",
+   "physics_validated": false,
+   "all_physics_gates": false,
+   "failure_reasons": null,
+   "reason": "Supported placement IK rejected; inspect /tmp/reachy-retarget-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy3-yaw10/artifact/workspaces/can-710-resume-v1-dx12-dy3-yaw10/plans/can-710-resume-v1-dx12-dy3-yaw10/supported-placement/result.json",
+   "metrics": {},
+   "actuator_replay_pass": null,
+   "independent_validation_pass": null,
+   "object_welds_actuators": null,
+   "object_state_assignments": null,
+   "varied": {
+    "retiming_settings": {
+     "arm_speed_rad_s": 0.8,
+     "planar_speed_m_s": 0.4
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "placement_xy_world": [
+     0.932,
+     -0.2945
+    ],
+    "rotation_xyz_deg": [
+     0.0,
+     50.0,
+     110.66673649362735
+    ],
+    "mobile_base_axis_speed_m_s": null
+   },
+   "comparison_parent_job": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+   "operator_archive": {
+    "path": "/mnt/reachy-retarget/operator-backups/local-spool-pool/can-710-resume-v1/can-710-resume-v1-dx12-dy3-yaw10/artifact.tar.gz",
+    "sha256": "dcff67bbffa8d6c3bc03356e5da7e30961100c92e377052c832c0fd0b137919a",
+    "bytes": 2847292,
+    "storage": "shared_pvc"
+   },
+   "published": {
+    "path": "/mnt/reachy-retarget/node-local-exports/can-710-resume-v1/can-710-resume-v1-dx12-dy3-yaw10",
+    "archive_sha256": "dcff67bbffa8d6c3bc03356e5da7e30961100c92e377052c832c0fd0b137919a",
+    "episode": null,
+    "cross_pod_readback_verified": true
+   }
+  }
+ ]
+}

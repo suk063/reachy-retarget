@@ -7,8 +7,10 @@ interrupted control connection does not terminate or silently duplicate work.
 """
 import argparse
 import base64
+import fcntl
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
+import inspect
 import json
 from pathlib import Path, PurePosixPath
 import queue
@@ -33,8 +35,10 @@ if status.exists():
  old=json.loads(status.read_text())
  if old['job']!=job or old['launcher_sha256']!=v['launcher_sha256']:raise ValueError('Immutable local launch conflict')
  print(json.dumps(old));raise SystemExit(0)
-lock=Path('/tmp/reachy-retarget-pod-execution.lock').open('a+')
-fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+slot=int(v.get('slot',0))
+lock=Path('/tmp/reachy-retarget-pod-execution.lock'+('' if slot==0 else '.'+str(slot))).open('a+')
+try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+except BlockingIOError:print(json.dumps(dict(pod_busy=True)));raise SystemExit(0)
 runtime_root=None
 if v.get('runtime_bundle'):
  bundle=v['runtime_bundle'];content=base64.b64decode(bundle['base64']);pin=job['runtime_source_sha256']
@@ -78,6 +82,43 @@ if done.exists():result['manifest']=json.loads(done.read_text())
 if (spool/'progress.json').exists():result['progress']=json.loads((spool/'progress.json').read_text())
 if not alive and not done.exists():result['log_tail']=(outer/'stdout.log').read_text(errors='replace')[-6000:]
 print(json.dumps(result))
+'''
+
+
+PVC_BACKUP = r'''
+import hashlib,json,os,shutil,subprocess,sys,tarfile,time
+from pathlib import Path,PurePosixPath
+v=json.load(sys.stdin);target=Path(v['path']);spool=Path(v['spool'])
+if shutil.disk_usage('/mnt/reachy-retarget').free-v['reserve_bytes']<50_000_000_000:raise OSError('50 decimal GB shared-storage reserve')
+target.parent.mkdir(parents=True,exist_ok=True)
+reused=target.exists()
+part=target if reused else target.with_name('.'+target.name+'.partial-'+str(time.time_ns()))
+try:
+ if not reused:
+  with part.open('xb') as handle:
+   subprocess.run(['tar','-czf','-','-C',str(spool),'.'],stdout=handle,check=True,stderr=subprocess.PIPE,timeout=600,env=dict(os.environ,COPYFILE_DISABLE='1'))
+   handle.flush();os.fsync(handle.fileno())
+ # An archive left by an interrupted orchestrator is reused only after every
+ # regular file again matches the immutable artifact manifest.
+ result=verify_archive(part,v['manifest'])
+ sha=hashlib.sha256();size=0
+ with part.open('rb') as handle:
+  for block in iter(lambda:handle.read(8*1024*1024),b''):sha.update(block);size+=len(block)
+ if not reused:os.link(part,target)
+finally:
+ if not reused:part.unlink(missing_ok=True)
+fd=os.open(target.parent,os.O_RDONLY);os.fsync(fd);os.close(fd)
+log=Path(v['outer'])/'stdout.log'
+print(json.dumps(dict(path=str(target),sha256=sha.hexdigest(),bytes=size,result=result,reused_verified_archive=reused,
+ stdout_log=log.read_text(errors='replace')[-2_000_000:] if log.exists() else None)))
+'''
+
+PVC_READBACK = r'''
+import hashlib,json,sys
+v=json.load(sys.stdin);sha=hashlib.sha256();size=0
+with open(v['path'],'rb') as handle:
+ for block in iter(lambda:handle.read(8*1024*1024),b''):sha.update(block);size+=len(block)
+print(json.dumps(dict(sha256=sha.hexdigest(),bytes=size)))
 '''
 
 
@@ -126,15 +167,29 @@ def verify_archive(path, manifest):
     return result
 
 
+# Captured at import so a later edit of this file cannot change the remote
+# verifier sent by an already running batch process.
+VERIFY_ARCHIVE_SOURCE = inspect.getsource(verify_archive)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('manifest', type=Path)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--namespace', default='erl-ucsd')
     parser.add_argument('--exclude-pod', action='append', default=[])
-    parser.add_argument('--pods', type=int, default=50)
+    parser.add_argument('--pods', type=int, default=None, help='Use at most this many ready pods (default: all)')
     parser.add_argument('--poll-seconds', type=float, default=8)
     parser.add_argument('--runtime-bundle', type=Path)
+    parser.add_argument('--lease-dir', type=Path,
+                        default=Path(__file__).resolve().parents[1]/'runs/local-spool-pool/.pod-leases',
+                        help='Operator-side per-pod leases shared by concurrent batch processes')
+    parser.add_argument('--slots-per-pod', type=int, default=2,
+                        help='Concurrent single-threaded jobs per pod (pods have a 2-CPU limit)')
+    parser.add_argument('--resume-only', action='store_true',
+                        help='Only finish and back up jobs that already have a retained launch; launch nothing new')
+    parser.add_argument('--archive-storage', choices=('pvc', 'local'), default='pvc',
+                        help='Keep verified operator archives on the shared PVC (default) or on this disk')
     args = parser.parse_args()
     manifest = json.loads(args.manifest.read_text())
     safe_name(manifest['label'])
@@ -172,7 +227,7 @@ def main():
     pods = [item['metadata']['name'] for item in inventory
             if item['status']['phase'] == 'Running'
             and any(c.get('ready') for c in item['status'].get('containerStatuses', []))
-            and item['metadata']['name'] not in args.exclude_pod][:args.pods]
+            and item['metadata']['name'] not in args.exclude_pod][:args.pods or None]
     if not pods:
         raise ValueError('No ready unreserved persistent pods')
     write_json(args.output/'pod-inventory.json', inventory)
@@ -192,11 +247,11 @@ def main():
                     reason='Retained scratch launch needs its original pod; no duplicate execution'))
             else:
                 assigned[pod].put(job)
-        else:
+        elif not args.resume_only:
             work.put(job)
     reporting_lock = threading.Lock()
     transfer_lock = threading.Lock()
-    backup_slots = threading.Semaphore(4)
+    backup_slots = threading.Semaphore(8)
     reserved_bytes = 0
     states = previous.get('states', {})
     started = previous.get('started_unix_s', time.time())
@@ -214,8 +269,37 @@ def main():
             input=json.dumps(value), text=True, capture_output=True, timeout=timeout, check=True)
         return json.loads(process.stdout)
 
+    def pvc_backup(pod, job, launch, binding, destination):
+        # The archive is written and verified by the executing pod directly
+        # on shared storage, then re-read on a different pod; only receipts
+        # and the log are kept on the operator disk.
+        path = str(PurePosixPath('/mnt/reachy-retarget/operator-backups/local-spool-pool')
+                   / manifest['label'] / job['id'] / 'artifact.tar.gz')
+        code = ('import hashlib,json,tarfile\nfrom pathlib import PurePosixPath\n'
+                + VERIFY_ARCHIVE_SOURCE + PVC_BACKUP)
+        with backup_slots:
+            written = remote(pod, code, dict(path=path, spool=launch['spool'], outer=launch['outer'],
+                manifest=binding, reserve_bytes=2*binding['artifact_bytes']+10_000_000), timeout=900)
+        verifier = next(p for p in pods if p != pod) if len(pods) > 1 else None
+        if verifier is None:
+            raise ValueError('Cross-pod PVC readback requires a second pod')
+        readback = remote(verifier, PVC_READBACK, dict(path=path), timeout=600)
+        if readback != dict(sha256=written['sha256'], bytes=written['bytes']):
+            raise ValueError('Cross-pod PVC archive readback mismatch')
+        if written['stdout_log'] is not None:
+            (destination/'stdout.log').write_text(written['stdout_log'])
+        receipt = dict(archive=path, archive_storage='shared_pvc', bytes=written['bytes'],
+            sha256=written['sha256'], all_file_hashes_verified=True, original_spool=launch['spool'],
+            pod=pod, cross_pod_readback_pod=verifier, result=written['result'], manifest=binding,
+            reused_verified_pvc_archive=written['reused_verified_archive'],
+            durable_pvc_export=False, completed_unix_s=time.time())
+        write_json(destination/'backup.json', receipt)
+        return receipt
+
     def backup(pod, job, launch, binding, destination):
         nonlocal reserved_bytes
+        if args.archive_storage == 'pvc':
+            return pvc_backup(pod, job, launch, binding, destination)
         required = binding['artifact_bytes'] + 10_000_000
         with backup_slots:
             with transfer_lock:
@@ -247,15 +331,43 @@ def main():
                 with transfer_lock:
                     reserved_bytes -= required
 
-    def worker(pod):
+    args.lease_dir.mkdir(parents=True, exist_ok=True)
+    held_leases = []
+
+    def acquire(pod, slot):
+        # Concurrent batch processes share the persistent pods. A pod is
+        # leased for one launched job at a time, so a new batch can start on
+        # whichever pods free up instead of fixing its pod set at start.
+        handle = (args.lease_dir/(pod+('.lock' if slot == 0 else f'.slot{slot}.lock'))).open('a+')
+        try:
+            fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            handle.close()
+            return None
+        handle.seek(0)
+        handle.truncate()
+        handle.write(json.dumps(dict(label=manifest['label'], pid=__import__('os').getpid(),
+                                     leased_unix_s=time.time()))+'\n')
+        handle.flush()
+        return handle
+
+    def worker(pod, slot):
         while True:
+            own_queue = assigned[pod] if not assigned[pod].empty() else work
+            if own_queue.empty():
+                return
+            lease = acquire(pod, slot)
+            if lease is None:
+                time.sleep(args.poll_seconds)
+                continue
             try:
-                own_queue = assigned[pod] if not assigned[pod].empty() else work
                 job = own_queue.get_nowait()
             except queue.Empty:
+                lease.close()
                 return
             destination = args.output/job['id']
             destination.mkdir(exist_ok=True)
+            keep_lease = False
             try:
                 report(job, stage='launching', pod=pod)
                 if (destination/'launch.json').exists():
@@ -265,13 +377,19 @@ def main():
                 else:
                     base = ('/mnt/reachy-retarget/shared-spool/' if job.get('spool_storage') == 'shared_pvc'
                             else '/tmp/reachy-retarget-pool/')
-                    launch = remote(pod, BOOTSTRAP, dict(base=base+manifest['label'],
+                    launch = remote(pod, BOOTSTRAP, dict(base=base+manifest['label'], slot=slot,
                         job=job, launcher=launcher, launcher_sha256=launcher_hash,
                         runtime_bundle=(runtime_bundle if runtime_bundle and
                             job['runtime_source_sha256']==runtime_bundle['source_sha256'] else None)))
+                    if launch.get('pod_busy'):
+                        # Another operator or unleased process owns this pod.
+                        report(job, stage='queued', pod=None, deferred_from_busy_pod=pod)
+                        own_queue.put(job)
+                        time.sleep(max(args.poll_seconds, 60))
+                        continue
                 launch['pod'] = pod
                 write_json(destination/'launch.json', launch)
-                report(job, stage='running', pod=pod, spool=launch['spool'])
+                report(job, stage='running', pod=pod, slot=slot, spool=launch['spool'])
                 while True:
                     polled = remote(pod, POLL, launch)
                     if polled['complete']:
@@ -292,14 +410,23 @@ def main():
                 report(job, stage='orchestration_error', pod=pod, error=repr(error))
                 # A lost connection may leave an active process. Reserve this
                 # pod rather than running another experiment on top of it.
+                keep_lease = True
                 return
             finally:
                 own_queue.task_done()
+                if keep_lease:
+                    held_leases.append(lease)
+                else:
+                    lease.close()
 
-    with ThreadPoolExecutor(max_workers=len(pods)) as pool:
-        for future in as_completed([pool.submit(worker, pod) for pod in pods]):
+    if not 1 <= args.slots_per_pod <= 4:
+        raise ValueError('Between one and four slots per pod')
+    with ThreadPoolExecutor(max_workers=len(pods)*args.slots_per_pod) as pool:
+        for future in as_completed([pool.submit(worker, pod, slot) for slot in range(args.slots_per_pod)
+                                    for pod in pods]):
             future.result()
-    remaining = []
+    remaining = [] if not args.resume_only else [job['id'] for job in jobs
+        if not (args.output/job['id']/'launch.json').exists()]
     while not work.empty():
         remaining.append(work.get_nowait()['id'])
     for pod, assigned_queue in assigned.items():

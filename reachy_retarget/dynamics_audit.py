@@ -293,7 +293,7 @@ def _load_acquisition(attempt, report, frames):
     execution = report.get('acquisition_execution')
     if execution is None:
         return None
-    from .acquisition_clock import AcquisitionClock, complete_reference_coverage
+    from .acquisition_clock import AcquisitionClock, complete_reference_coverage, dilation_kwargs
     from .acquisition_policy import from_details
     _, metadata = from_details(report['plan'])
     if not np.isclose(metadata['timestep_s'], .01, atol=1e-12, rtol=0):
@@ -337,7 +337,8 @@ def _load_acquisition(attempt, report, frames):
     clock = AcquisitionClock(source_rows=len(times), first_close_index=int(metadata['first_close_index']),
         acquisition_index=int(metadata['acquisition_index']), entry_rows=len(plan_arrays['entry_reference']),
         exit_source_indices=plan_arrays['exit_source_indices'].tolist(), timestep=metadata['timestep_s'],
-        wait_limit_s=metadata['timeout_s'], stable_s=metadata['stable_s'])
+        wait_limit_s=metadata['timeout_s'], stable_s=metadata['stable_s'],
+        **dilation_kwargs(metadata))
     iterator = clock.frames()
     for i in range(frames):
         try:

@@ -172,7 +172,7 @@ if target.exists():
  verified_result=verify_archive(target/'artifact.tar.gz',v['manifest'])
  if verified_result!=json.loads((target/'result.json').read_text()):raise ValueError('Retained result differs from bound archive')
  # Consume the stream so a retry is well-defined for the sending process.
- if v.get('input_mode') not in ('pod_local','shared_pvc','repair_existing'):
+ if v.get('input_mode') not in ('pod_local','shared_pvc','repair_existing','pvc_backup'):
   sha=hashlib.sha256()
   for block in iter(lambda:sys.stdin.buffer.read(8*1024*1024),b''):sha.update(block)
   if sha.hexdigest()!=v['sha256']:raise ValueError('Retry stream checksum mismatch')
@@ -195,8 +195,9 @@ try:
    os.fsync(f.fileno())
    for block in iter(lambda:f.read(8*1024*1024),b''):sha.update(block);size+=len(block)
  else:
+  stream=open(v['archive_path'],'rb') if v.get('input_mode')=='pvc_backup' else sys.stdin.buffer
   with archive.open('xb') as f:
-   for block in iter(lambda:sys.stdin.buffer.read(8*1024*1024),b''):
+   for block in iter(lambda:stream.read(8*1024*1024),b''):
     f.write(block);sha.update(block);size+=len(block)
    f.flush();os.fsync(f.fileno())
   if size!=v['bytes'] or sha.hexdigest()!=v['sha256']:raise ValueError('Archive transport checksum mismatch')
@@ -298,15 +299,19 @@ def main():
             raise ValueError('Local immutable publication conflicts with backup')
         shared_spool=(backup['manifest']['spool']==
             str(PurePosixPath('/mnt/reachy-retarget/shared-spool')/batch/job/'artifact'))
-        source_pod = args.pod if retained or args.upload or shared_spool else backup['pod']
+        pvc_backup = backup.get('archive_storage') == 'shared_pvc'
+        source_pod = args.pod if retained or args.upload or shared_spool or pvc_backup else backup['pod']
         readback_pod = args.readback_pod if args.readback_pod != source_pod else args.pod
         if source_pod == readback_pod:
             raise ValueError('A distinct readback pod is required')
         k = ['kubectl', '-n', 'erl-ucsd', 'exec', '-i', source_pod, '--', 'python3', '-c', REMOTE]
-        mode = ('repair_existing' if retained else 'operator_upload' if args.upload
+        mode = ('repair_existing' if retained else 'pvc_backup' if pvc_backup
+                else 'operator_upload' if args.upload
                 else 'shared_pvc' if shared_spool else 'pod_local')
         meta = dict(batch=batch, job=job, sha256=backup['sha256'], bytes=backup['bytes'],
                     manifest=backup['manifest'], input_mode=mode)
+        if pvc_backup:
+            meta['archive_path'] = backup['archive']
         if mode == 'operator_upload':
             with Path(backup['archive']).open('rb') as stream:
                 process = subprocess.run(k+[json.dumps(meta)], stdin=stream, text=True,

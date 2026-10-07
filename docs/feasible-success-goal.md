@@ -566,3 +566,24 @@ A2 passed all original gates with FF0 after a native-partition and measured-atta
 The 261 axial cache had a missing aperture-variant label. Nine launcher failures were retained. A separately derived v2 cache restores the canonical variant metadata while proving every numeric Candidate and source/reference array unchanged, and passes full placement-parent validation on another pod before retry. A malformed derivative binding during root materialization was also retained and corrected before any placement execution.
 
 The root common-state audit now covers 1,524 independently published attempts and 245/245 complete measured-state/actual-control archives without RGB. Separate manual A60, 6a and A2 exports remain explicitly outside that root index. Four previously static-screen-only source failures and three older admitted-source placement failures are now assigned useful updated-logic jobs rather than being treated as globally infeasible.
+
+## Resumed execution: 36 native Can sources and shared-storage archives
+
+The cluster had been idle after the last batches finished. Three retained physical failures were resumed with single-cause corrections. The source, object, contact model, clock and every physical gate stayed unchanged, and every attempt is listed in [the recovery evidence](can-resume-v1-evidence.json).
+
+* 3873 had failed only `actual_base_speed_limits` (peak base vx 0.658 m/s against the 0.611 m/s limit). Lowering the source planar cap and the inserted base axis cap produced 16 passing variants of this one source. One combination, a 0.25 m/s source cap, was rejected by the unchanged retimed-source repair and is retained.
+* d755 kept its grasp through carry, but the Can met a fixture about 20 mm above the bin floor during lowering. This was measured as a jump in the hand-frame translation at t ≈ 15 s. A bounded release-XY grid recovered it: seven variants at +12 or +16 mm X pass with feedforward 1.0 or 0.5. Of the four +12/+16 mm X combinations with Y offset 0 or +6 mm, all four pass at feedforward 1.0 and three pass at 0.5. Smaller shifts still drift, and −6 mm Y shifts fail placement IK.
+* 710 passed with the attachment-derived +12 mm X shift together with a −10° placement palm yaw. All 12 variants with −10° yaw passed, and every 0° or +10° variant failed IK. This matches the earlier diagnosis that the wrist was near its range limit.
+
+All 35 passing attempts replay exactly from issued actuator controls, use no object welds, and assign the object state only at the initial reset. The adaptive original-model union is now 36 unique native Can demonstrations ([identity v5](can-original-success-source-identity-v5.json)). These are 16/22 additional sources, two earlier development sources, three held-out sources under their separate policies, and 15 post-frozen development recoveries. Both frozen 24-source policies remain at 1/24.
+
+For the ten remaining sources with an admitted source path, a [lower-knot census](can-placement-lower-knot-census-v1.json) of 285 retained placement failures found the following. 263 failures occur during `lower` at smooth weights 0.35–0.97, with IK errors at the unchanged 2 mm / 20 mrad tolerances. They are reach/orientation limits partway down, not failures at the release pose. The derived `can-placement-grid-v2` retries the two deepest-progress postures per source with ±8 mm release XY and ±12/±24° palm yaw, using the current runtime pin. `can-placement-grid-v1` reused stale per-parent runtime pins, so 54 launches failed before planning. Those failures are retained, and v1 was superseded without launching its remaining jobs. 106b's 88 correctly pinned v1 grid points produced no admission.
+
+Throughput and storage changes:
+
+* Operator archives are now written by the executing pod directly to `/mnt/reachy-retarget/operator-backups/local-spool-pool` and verified against the artifact manifest. They are then re-read on a second pod. Only receipts and logs stay on the operator disk.
+* The export step publishes from that PVC archive (`pvc_backup` mode) without re-uploading.
+* Per-pod operator leases let concurrent batches share all 50 pods. A busy pod defers a job instead of failing it.
+* An interrupted orchestrator can resume a PVC archive only after re-verifying every file hash.
+* The remote verifier source is captured when the module is imported. Previously, editing the file under a running batch sent a mis-sliced verifier and caused 50 retained orchestration errors; their simulations were then backed up on resume.
+* `cluster/offload_local_archives.py` can remove the 19.6 GB of legacy local archives after a byte-identical cross-pod check. It has not been run.

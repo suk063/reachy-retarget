@@ -1,0 +1,1010 @@
+{
+  "label": "can-v3policy-smoke-source-B",
+  "jobs": [
+    {
+      "id": "can-v3policy-smoke-source-d755b0622b3466a973309e93-nofp90-s0",
+      "workspace": "workspaces/can-v3policy-smoke-source-d755b0622b3466a973309e93-nofp90-s0",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_mechanics_smoke_test_before_v3_freeze",
+      "runtime_source_sha256": "1e3f2f2a679e7a089e46f88da47aed62b1f24ab7f3bee0d5fbe4eea2135b6169",
+      "variant": "contact_0035",
+      "frozen_policy_sha256": "4afc108049e3fcc4608f7ed5b3b9aca5ae62d945f2bacc336e1d0ab99fd897cd",
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 297,
+        "anchor_reference": [
+          0.007329463176232093,
+          -0.6378316567404292,
+          1.6490031797426328,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -1.3878316567404292,
+            1.1176219941877514
+          ],
+          [
+            -1.559756350188001,
+            3.2197995065375293
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "admission_only": true,
+      "diagnostic_seed": {
+        "pivot_world_xy": [
+          0.20627279864523693,
+          -0.1580381193186581
+        ],
+        "planar_yaw_transport_rad": 1.5707963267948966,
+        "requested_grasp_rotation_deg": 90,
+        "seed_base_x_perturbation_m": 0.0,
+        "original_anchor_reference": [
+          -0.27352073877653416,
+          0.04090521615034671,
+          0.07820685294773629,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "source": "d755b0622b3466a973309e93",
+        "anchor_rule": {
+          "name": "first_closed_lifted",
+          "lift_threshold_m": 0.01,
+          "definition": "anchor_index = first frame at or after the first closed gripper intent where the source object is >=10 mm above its initial height (else the first closed frame); anchor_reference = parent reference row at the anchor; grasp azimuth offset theta transports the planar base seed by a rotation theta about the source object anchor XY (arm angles unchanged); base bounds = union of the parent reference base extent and the transported seed, widened by base_bound_margins_xyyaw",
+          "base_bound_margins_xyyaw": [
+            0.75,
+            0.75,
+            1.5707963267948966
+          ]
+        },
+        "first_closed_frame": 255,
+        "frames": 831,
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.20627279864523693,
+          -0.1580381193186581,
+          0.8701114675050794,
+          0.2493238220483176,
+          0.0017266197930211422,
+          0.013818902445008134,
+          0.9683200341201894
+        ],
+        "support_floor_geom": "source_scene_geom_21",
+        "parent_files": {
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        }
+      },
+      "source_tier": "B",
+      "source_candidate_rank": 3,
+      "source_grasp_name": "nofp90",
+      "source_episode_id_v3": "d755b0622b3466a973309e93",
+      "scope": "Frozen v3 policy source-path kinematic admission; no physics"
+    },
+    {
+      "id": "can-v3policy-smoke-source-d755b0622b3466a973309e93-nofp90-s1",
+      "workspace": "workspaces/can-v3policy-smoke-source-d755b0622b3466a973309e93-nofp90-s1",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_mechanics_smoke_test_before_v3_freeze",
+      "runtime_source_sha256": "1e3f2f2a679e7a089e46f88da47aed62b1f24ab7f3bee0d5fbe4eea2135b6169",
+      "variant": "contact_0035",
+      "frozen_policy_sha256": "4afc108049e3fcc4608f7ed5b3b9aca5ae62d945f2bacc336e1d0ab99fd897cd",
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 297,
+        "anchor_reference": [
+          -0.052670536823767905,
+          -0.6378316567404292,
+          1.6490031797426328,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -1.3878316567404292,
+            1.1176219941877514
+          ],
+          [
+            -1.559756350188001,
+            3.2197995065375293
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "admission_only": true,
+      "diagnostic_seed": {
+        "pivot_world_xy": [
+          0.20627279864523693,
+          -0.1580381193186581
+        ],
+        "planar_yaw_transport_rad": 1.5707963267948966,
+        "requested_grasp_rotation_deg": 90,
+        "seed_base_x_perturbation_m": -0.06,
+        "original_anchor_reference": [
+          -0.27352073877653416,
+          0.04090521615034671,
+          0.07820685294773629,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "source": "d755b0622b3466a973309e93",
+        "anchor_rule": {
+          "name": "first_closed_lifted",
+          "lift_threshold_m": 0.01,
+          "definition": "anchor_index = first frame at or after the first closed gripper intent where the source object is >=10 mm above its initial height (else the first closed frame); anchor_reference = parent reference row at the anchor; grasp azimuth offset theta transports the planar base seed by a rotation theta about the source object anchor XY (arm angles unchanged); base bounds = union of the parent reference base extent and the transported seed, widened by base_bound_margins_xyyaw",
+          "base_bound_margins_xyyaw": [
+            0.75,
+            0.75,
+            1.5707963267948966
+          ]
+        },
+        "first_closed_frame": 255,
+        "frames": 831,
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.20627279864523693,
+          -0.1580381193186581,
+          0.8701114675050794,
+          0.2493238220483176,
+          0.0017266197930211422,
+          0.013818902445008134,
+          0.9683200341201894
+        ],
+        "support_floor_geom": "source_scene_geom_21",
+        "parent_files": {
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        }
+      },
+      "source_tier": "B",
+      "source_candidate_rank": 4,
+      "source_grasp_name": "nofp90",
+      "source_episode_id_v3": "d755b0622b3466a973309e93",
+      "scope": "Frozen v3 policy source-path kinematic admission; no physics"
+    },
+    {
+      "id": "can-v3policy-smoke-source-d755b0622b3466a973309e93-nofp90-s2",
+      "workspace": "workspaces/can-v3policy-smoke-source-d755b0622b3466a973309e93-nofp90-s2",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_mechanics_smoke_test_before_v3_freeze",
+      "runtime_source_sha256": "1e3f2f2a679e7a089e46f88da47aed62b1f24ab7f3bee0d5fbe4eea2135b6169",
+      "variant": "contact_0035",
+      "frozen_policy_sha256": "4afc108049e3fcc4608f7ed5b3b9aca5ae62d945f2bacc336e1d0ab99fd897cd",
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 2,
+      "mobile_fixture_ik": {
+        "anchor_index": 297,
+        "anchor_reference": [
+          0.06732946317623209,
+          -0.6378316567404292,
+          1.6490031797426328,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -1.3878316567404292,
+            1.1176219941877514
+          ],
+          [
+            -1.559756350188001,
+            3.2197995065375293
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "admission_only": true,
+      "diagnostic_seed": {
+        "pivot_world_xy": [
+          0.20627279864523693,
+          -0.1580381193186581
+        ],
+        "planar_yaw_transport_rad": 1.5707963267948966,
+        "requested_grasp_rotation_deg": 90,
+        "seed_base_x_perturbation_m": 0.06,
+        "original_anchor_reference": [
+          -0.27352073877653416,
+          0.04090521615034671,
+          0.07820685294773629,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "source": "d755b0622b3466a973309e93",
+        "anchor_rule": {
+          "name": "first_closed_lifted",
+          "lift_threshold_m": 0.01,
+          "definition": "anchor_index = first frame at or after the first closed gripper intent where the source object is >=10 mm above its initial height (else the first closed frame); anchor_reference = parent reference row at the anchor; grasp azimuth offset theta transports the planar base seed by a rotation theta about the source object anchor XY (arm angles unchanged); base bounds = union of the parent reference base extent and the transported seed, widened by base_bound_margins_xyyaw",
+          "base_bound_margins_xyyaw": [
+            0.75,
+            0.75,
+            1.5707963267948966
+          ]
+        },
+        "first_closed_frame": 255,
+        "frames": 831,
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.20627279864523693,
+          -0.1580381193186581,
+          0.8701114675050794,
+          0.2493238220483176,
+          0.0017266197930211422,
+          0.013818902445008134,
+          0.9683200341201894
+        ],
+        "support_floor_geom": "source_scene_geom_21",
+        "parent_files": {
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        }
+      },
+      "source_tier": "B",
+      "source_candidate_rank": 5,
+      "source_grasp_name": "nofp90",
+      "source_episode_id_v3": "d755b0622b3466a973309e93",
+      "scope": "Frozen v3 policy source-path kinematic admission; no physics"
+    },
+    {
+      "id": "can-v3policy-smoke-source-d755b0622b3466a973309e93-nofm90-s0",
+      "workspace": "workspaces/can-v3policy-smoke-source-d755b0622b3466a973309e93-nofm90-s0",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_mechanics_smoke_test_before_v3_freeze",
+      "runtime_source_sha256": "1e3f2f2a679e7a089e46f88da47aed62b1f24ab7f3bee0d5fbe4eea2135b6169",
+      "variant": "contact_0035",
+      "frozen_policy_sha256": "4afc108049e3fcc4608f7ed5b3b9aca5ae62d945f2bacc336e1d0ab99fd897cd",
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 297,
+        "anchor_reference": [
+          0.40521613411424173,
+          0.32175541810311303,
+          -1.4925894738471603,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -0.7098813176039843,
+            1.1176219941877514
+          ],
+          [
+            -3.063385800642057,
+            1.6816863132765554
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "admission_only": true,
+      "diagnostic_seed": {
+        "pivot_world_xy": [
+          0.20627279864523693,
+          -0.1580381193186581
+        ],
+        "planar_yaw_transport_rad": -1.5707963267948966,
+        "requested_grasp_rotation_deg": -90,
+        "seed_base_x_perturbation_m": 0.0,
+        "original_anchor_reference": [
+          -0.27352073877653416,
+          0.04090521615034671,
+          0.07820685294773629,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "source": "d755b0622b3466a973309e93",
+        "anchor_rule": {
+          "name": "first_closed_lifted",
+          "lift_threshold_m": 0.01,
+          "definition": "anchor_index = first frame at or after the first closed gripper intent where the source object is >=10 mm above its initial height (else the first closed frame); anchor_reference = parent reference row at the anchor; grasp azimuth offset theta transports the planar base seed by a rotation theta about the source object anchor XY (arm angles unchanged); base bounds = union of the parent reference base extent and the transported seed, widened by base_bound_margins_xyyaw",
+          "base_bound_margins_xyyaw": [
+            0.75,
+            0.75,
+            1.5707963267948966
+          ]
+        },
+        "first_closed_frame": 255,
+        "frames": 831,
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.20627279864523693,
+          -0.1580381193186581,
+          0.8701114675050794,
+          0.2493238220483176,
+          0.0017266197930211422,
+          0.013818902445008134,
+          0.9683200341201894
+        ],
+        "support_floor_geom": "source_scene_geom_21",
+        "parent_files": {
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        }
+      },
+      "source_tier": "B",
+      "source_candidate_rank": 6,
+      "source_grasp_name": "nofm90",
+      "source_episode_id_v3": "d755b0622b3466a973309e93",
+      "scope": "Frozen v3 policy source-path kinematic admission; no physics"
+    },
+    {
+      "id": "can-v3policy-smoke-source-d755b0622b3466a973309e93-nofm90-s1",
+      "workspace": "workspaces/can-v3policy-smoke-source-d755b0622b3466a973309e93-nofm90-s1",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_mechanics_smoke_test_before_v3_freeze",
+      "runtime_source_sha256": "1e3f2f2a679e7a089e46f88da47aed62b1f24ab7f3bee0d5fbe4eea2135b6169",
+      "variant": "contact_0035",
+      "frozen_policy_sha256": "4afc108049e3fcc4608f7ed5b3b9aca5ae62d945f2bacc336e1d0ab99fd897cd",
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 297,
+        "anchor_reference": [
+          0.34521613411424174,
+          0.32175541810311303,
+          -1.4925894738471603,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -0.7098813176039843,
+            1.1176219941877514
+          ],
+          [
+            -3.063385800642057,
+            1.6816863132765554
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "admission_only": true,
+      "diagnostic_seed": {
+        "pivot_world_xy": [
+          0.20627279864523693,
+          -0.1580381193186581
+        ],
+        "planar_yaw_transport_rad": -1.5707963267948966,
+        "requested_grasp_rotation_deg": -90,
+        "seed_base_x_perturbation_m": -0.06,
+        "original_anchor_reference": [
+          -0.27352073877653416,
+          0.04090521615034671,
+          0.07820685294773629,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "source": "d755b0622b3466a973309e93",
+        "anchor_rule": {
+          "name": "first_closed_lifted",
+          "lift_threshold_m": 0.01,
+          "definition": "anchor_index = first frame at or after the first closed gripper intent where the source object is >=10 mm above its initial height (else the first closed frame); anchor_reference = parent reference row at the anchor; grasp azimuth offset theta transports the planar base seed by a rotation theta about the source object anchor XY (arm angles unchanged); base bounds = union of the parent reference base extent and the transported seed, widened by base_bound_margins_xyyaw",
+          "base_bound_margins_xyyaw": [
+            0.75,
+            0.75,
+            1.5707963267948966
+          ]
+        },
+        "first_closed_frame": 255,
+        "frames": 831,
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.20627279864523693,
+          -0.1580381193186581,
+          0.8701114675050794,
+          0.2493238220483176,
+          0.0017266197930211422,
+          0.013818902445008134,
+          0.9683200341201894
+        ],
+        "support_floor_geom": "source_scene_geom_21",
+        "parent_files": {
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        }
+      },
+      "source_tier": "B",
+      "source_candidate_rank": 7,
+      "source_grasp_name": "nofm90",
+      "source_episode_id_v3": "d755b0622b3466a973309e93",
+      "scope": "Frozen v3 policy source-path kinematic admission; no physics"
+    },
+    {
+      "id": "can-v3policy-smoke-source-d755b0622b3466a973309e93-nofm90-s2",
+      "workspace": "workspaces/can-v3policy-smoke-source-d755b0622b3466a973309e93-nofm90-s2",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_mechanics_smoke_test_before_v3_freeze",
+      "runtime_source_sha256": "1e3f2f2a679e7a089e46f88da47aed62b1f24ab7f3bee0d5fbe4eea2135b6169",
+      "variant": "contact_0035",
+      "frozen_policy_sha256": "4afc108049e3fcc4608f7ed5b3b9aca5ae62d945f2bacc336e1d0ab99fd897cd",
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 2,
+      "mobile_fixture_ik": {
+        "anchor_index": 297,
+        "anchor_reference": [
+          0.46521613411424173,
+          0.32175541810311303,
+          -1.4925894738471603,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -0.7098813176039843,
+            1.1176219941877514
+          ],
+          [
+            -3.063385800642057,
+            1.6816863132765554
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "admission_only": true,
+      "diagnostic_seed": {
+        "pivot_world_xy": [
+          0.20627279864523693,
+          -0.1580381193186581
+        ],
+        "planar_yaw_transport_rad": -1.5707963267948966,
+        "requested_grasp_rotation_deg": -90,
+        "seed_base_x_perturbation_m": 0.06,
+        "original_anchor_reference": [
+          -0.27352073877653416,
+          0.04090521615034671,
+          0.07820685294773629,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2085518093286814,
+          -0.35080107436815566,
+          0.09318224099661564,
+          -1.175071339550175,
+          0.43629616668280014,
+          -0.4323837587106295,
+          -0.48457548801786204
+        ],
+        "source": "d755b0622b3466a973309e93",
+        "anchor_rule": {
+          "name": "first_closed_lifted",
+          "lift_threshold_m": 0.01,
+          "definition": "anchor_index = first frame at or after the first closed gripper intent where the source object is >=10 mm above its initial height (else the first closed frame); anchor_reference = parent reference row at the anchor; grasp azimuth offset theta transports the planar base seed by a rotation theta about the source object anchor XY (arm angles unchanged); base bounds = union of the parent reference base extent and the transported seed, widened by base_bound_margins_xyyaw",
+          "base_bound_margins_xyyaw": [
+            0.75,
+            0.75,
+            1.5707963267948966
+          ]
+        },
+        "first_closed_frame": 255,
+        "frames": 831,
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.20627279864523693,
+          -0.1580381193186581,
+          0.8701114675050794,
+          0.2493238220483176,
+          0.0017266197930211422,
+          0.013818902445008134,
+          0.9683200341201894
+        ],
+        "support_floor_geom": "source_scene_geom_21",
+        "parent_files": {
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        }
+      },
+      "source_tier": "B",
+      "source_candidate_rank": 8,
+      "source_grasp_name": "nofm90",
+      "source_episode_id_v3": "d755b0622b3466a973309e93",
+      "scope": "Frozen v3 policy source-path kinematic admission; no physics"
+    }
+  ],
+  "frozen_policy_sha256": "4afc108049e3fcc4608f7ed5b3b9aca5ae62d945f2bacc336e1d0ab99fd897cd",
+  "skipped_sources": [],
+  "scope": "Frozen v3 source-path admission tier B; selection by declared rank only"
+}

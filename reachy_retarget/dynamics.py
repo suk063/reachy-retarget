@@ -328,7 +328,10 @@ def rollout(store, row, label, candidate, *, control_path=None, prepared_plan=No
             acquisition_index=int(policy['acquisition_index']),
             entry_rows=len(acquisition_plan['arrays']['entry_reference']),
             exit_source_indices=[int(i) for i in acquisition_plan['arrays']['exit_source_indices']],
-            timestep=policy['timestep_s'], wait_limit_s=policy['timeout_s'], stable_s=policy['stable_s'])
+            timestep=policy['timestep_s'], wait_limit_s=policy['timeout_s'], stable_s=policy['stable_s'],
+            **clock_policy.dilation_kwargs(policy))
+        if 'post_acquisition_dilation' in policy and candidate.post_acquisition_base_velocity_feedforward:
+            raise ValueError('Post-acquisition dilation is not combined with post-acquisition base feedforward')
     report.update(plan=details, physics=manifest)
     report["physics"]["scene_asset_hashes"] = bind_scene_assets(xml, out)
     json_write(out/"attempt.json", report)

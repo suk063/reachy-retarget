@@ -72,3 +72,27 @@ def test_adaptive_chord_repair_preserves_bank_identity_and_records_selected_poli
     for value in (True, -1, 4, 1.5):
         with pytest.raises(ValueError, match='integer'):
             refinement_bank(original, value)
+
+
+def test_declared_timing_overrides_and_palm_yaw_offsets_preserve_bank_identity():
+    from reachy_retarget.feasible_placement_search import override_bank, offset_palm_yaw
+    original = [dict(id=3, rank=[.1, .02, 3], parameters={'rotation_xyz_deg': [0., 50., 175.]})]
+    assert override_bank(original, None) is original
+    bound = override_bank(original, {'mobile_base_axis_speed_m_s': .25, 'support_wait_s': .55})
+    assert bound[0]['id'] == 3 and bound[0]['rank'] == original[0]['rank']
+    assert bound[0]['parameters']['mobile_base_axis_speed_m_s'] == .25
+    assert bound[0]['parameters']['support_wait_s'] == .55
+    assert 'support_wait_s' not in original[0]['parameters']
+    for value in ({}, {'extra_descent_m': .01}, {'support_wait_s': True},
+                  {'support_wait_s': float('nan')}, {'support_wait_s': '0.55'}, [('support_wait_s', .55)]):
+        with pytest.raises(ValueError):
+            override_bank(original, value)
+    assert offset_palm_yaw(original, 0) is original
+    turned = offset_palm_yaw(original, 10)
+    assert turned[0]['parameters']['rotation_xyz_deg'] == [0., 50., -175.]
+    assert turned[0]['rank'] == original[0]['rank'] and turned[0]['palm_yaw_offset_deg'] == 10.
+    assert original[0]['parameters']['rotation_xyz_deg'] == [0., 50., 175.]
+    assert offset_palm_yaw(original, -10)[0]['parameters']['rotation_xyz_deg'] == [0., 50., 165.]
+    for value in (31, -45, float('inf'), True, '10'):
+        with pytest.raises(ValueError):
+            offset_palm_yaw(original, value)

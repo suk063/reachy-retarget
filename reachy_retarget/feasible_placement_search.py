@@ -62,6 +62,42 @@ def refinement_bank(bank, rounds, *, midpoint_minimum_motion=False, interval_kno
             for item in bank]
 
 
+PARAMETER_OVERRIDE_KEYS = ('mobile_base_axis_speed_m_s', 'support_wait_s')
+
+
+def override_bank(bank, overrides):
+    """Bind declared inserted-timing overrides to every candidate without reranking.
+
+    Only the inserted mobile base axis cap and the pre-opening support wait may be
+    declared; supported_placement still validates their ranges during admission.
+    """
+    if overrides is None:
+        return bank
+    if (not isinstance(overrides, dict) or not overrides
+            or set(overrides) - set(PARAMETER_OVERRIDE_KEYS)):
+        raise ValueError('Placement overrides may only declare '+', '.join(PARAMETER_OVERRIDE_KEYS))
+    for name, value in overrides.items():
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+            raise ValueError(name+' override must be a finite number')
+    return [dict(item, parameters=dict(item['parameters'], **overrides)) for item in bank]
+
+
+def offset_palm_yaw(proposals, offset_deg):
+    """Rotate every declared placement palm yaw by one fixed offset before screening."""
+    if (isinstance(offset_deg, bool) or not isinstance(offset_deg, (int, float))
+            or not math.isfinite(offset_deg) or abs(offset_deg) > 30):
+        raise ValueError('Palm yaw offset must be a finite angle within +/-30 degrees')
+    if not offset_deg:
+        return proposals
+    result = []
+    for item in proposals:
+        angles = list(item['parameters']['rotation_xyz_deg'])
+        angles[2] = float((angles[2]+offset_deg+180.) % 360.-180.)
+        result.append(dict(item, palm_yaw_offset_deg=float(offset_deg),
+                           parameters=dict(item['parameters'], rotation_xyz_deg=angles)))
+    return result
+
+
 def run(root, job):
     from .cluster_pipeline import under
     from .robot import Robot
@@ -86,6 +122,9 @@ def run(root, job):
         proposals, bank_metadata = placement_wall_candidates.bank(
             prepared, robot, **config.get('wall_settings', {}))
         (output/'placement_wall_candidates.py').write_text(Path(placement_wall_candidates.__file__).read_text())
+        if 'palm_yaw_offset_deg' in config:
+            proposals = offset_palm_yaw(proposals, config['palm_yaw_offset_deg'])
+            bank_metadata = dict(wall_directions=bank_metadata, palm_yaw_offset_deg=config['palm_yaw_offset_deg'])
         if bank_name == 'hand_mobile':
             from . import placement_hand_targets
             proposals, hand_report = placement_hand_targets.propose(
@@ -96,8 +135,10 @@ def run(root, job):
                                  selected_proposals=hand_report['selected_ids'])
     else:
         raise ValueError('Unknown declared Can placement bank')
-    bank = chunk_placements(refinement_bank(proposals, config.get('adaptive_midpoints', 0),
-        **config.get('refinement_options', {})), index, count)
+    if 'palm_yaw_offset_deg' in config and bank_name == 'original':
+        raise ValueError('Palm yaw offsets apply only to wall-derived mobile banks')
+    bank = chunk_placements(override_bank(refinement_bank(proposals, config.get('adaptive_midpoints', 0),
+        **config.get('refinement_options', {})), config.get('parameter_overrides')), index, count)
     report = dict(policy='admitted-source-can-placement-bank-v1', bank=bank_name,
         bank_metadata=bank_metadata, source_episode=source.stem,
         source_sha256=sha256(source), chunk_index=index, chunk_count=count,

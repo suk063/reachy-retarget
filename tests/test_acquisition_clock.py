@@ -113,3 +113,67 @@ def test_source_indexed_controller_pauses_updates_but_consumes_every_original_ro
     assert controller.calls[5][1] > 5
     with pytest.raises(ValueError, match='consecutive'):
         updates.update(10, 0.)
+
+
+def _run(execution):
+    frames = []
+    for frame in execution.frames():
+        frames.append(frame)
+        if frame.phase in ('settle', 'close'):
+            execution.observe(alignment=True, bilateral_force=frame.phase == 'close')
+    return frames
+
+
+def test_post_exit_dilation_subdivides_whole_rows_and_keeps_coverage():
+    from reachy_retarget.acquisition_clock import dilation_kwargs
+    assert dilation_kwargs({}) == {}
+    plain = _run(clock())
+    assert _run(clock(**dilation_kwargs({'post_acquisition_dilation': None}))) == plain
+    execution = clock(dilation=dict(start_index=7, frames_per_row=[3]))
+    frames = _run(execution)
+    indices = [f.reference_index for f in frames]
+    assert complete_reference_coverage(indices, 9)
+    assert indices == [0, 1, 2, 3]+[4]*23+[5, 6, 7, 7, 7, 8]
+    assert [(f.phase, f.correction_index, f.subdivisions) for f in frames if f.reference_index == 7] == [
+        ('dilated', 0, 3), ('dilated', 1, 3), ('dilated', 2, 3)]
+    assert execution.report()['post_acquisition_added_frames'] == 2
+    for invalid in (dict(start_index=6, frames_per_row=[2]), dict(start_index=7, frames_per_row=[2, 2]),
+                    dict(start_index=7, frames_per_row=[0]), dict(start_index=7, frames_per_row=[2.])):
+        with pytest.raises(ValueError, match='Dilation'):
+            clock(dilation=invalid)
+
+
+def test_dilated_command_interpolates_original_rows_and_scales_feedforward():
+    import numpy as np
+    from reachy_retarget.acquisition_clock import Frame, command
+    rows = np.arange(9*2, dtype=float).reshape(9, 2)
+    hands = np.repeat(np.eye(4)[None], 9, axis=0); hands[:, 0, 3] = np.arange(9)
+    hands[8, :3, :3] = [[0, -1, 0], [1, 0, 0], [0, 0, 1]]
+    plan = {'arrays': {'original_reference': rows, 'original_hand_goals': hands}}
+    reference, goal, intent, ff = command(Frame(7, 'dilated', 1, 2), rows[7], hands[7], -1., np.ones(2), plan)
+    assert np.allclose(reference, (rows[7]+rows[8])/2) and np.allclose(ff, .5) and intent == -1.
+    assert goal[0, 3] == pytest.approx(7.5)
+    from scipy.spatial.transform import Rotation
+    assert Rotation.from_matrix(goal[:3, :3]).magnitude() == pytest.approx(np.pi/4)
+    with pytest.raises(ValueError, match='bound original row'):
+        command(Frame(7, 'dilated', 1, 2), rows[6], hands[7], -1., np.ones(2), plan)
+    assert np.array_equal(rows, np.arange(18, dtype=float).reshape(9, 2))
+
+
+def test_tcp_speed_dilation_caps_post_exit_hand_speed_without_changing_arrays():
+    import numpy as np
+    from reachy_retarget.acquisition_clock import tcp_speed_dilation, dilation_kwargs
+    times = np.arange(9)*.01
+    hands = np.repeat(np.eye(4)[None], 9, axis=0); hands[:, 0, 3] = np.r_[0, 0, 0, 0, 0, 0, 0, .004, .008]
+    original = hands.copy()
+    plan = {'arrays': {'original_time_s': times, 'original_hand_goals': hands,
+                       'exit_source_indices': np.array([5, 6])}, 'metadata': {}}
+    result = tcp_speed_dilation(plan, linear_speed_m_s=.1, angular_speed_rad_s=1., smoothing_s=.01)
+    assert result['start_index'] == 7 and result['frames_per_row'] == [4]
+    assert result['peak_dilated_linear_m_s'] <= .1+1e-12
+    assert np.array_equal(hands, original)
+    assert dilation_kwargs(plan['metadata']) == {'dilation': dict(start_index=7, frames_per_row=[4])}
+    execution = clock(**dilation_kwargs(plan['metadata']))
+    assert [f.reference_index for f in _run(execution)][-5:] == [7, 7, 7, 7, 8]
+    with pytest.raises(ValueError, match='post-exit'):
+        tcp_speed_dilation(plan, linear_speed_m_s=.1, angular_speed_rad_s=1., start_index=6)

@@ -1,36 +1,36 @@
 {
   "schema": "feasible-retarget-goal-status-v2",
-  "verified_utc": "2026-10-07T16:45:02.710359+00:00",
+  "verified_utc": "2026-10-07T19:16:44.084209+00:00",
   "goal_status": "active",
   "branch": "main",
   "scope": "Explicit unique-source cohorts and separately counted retained attempts. No single global success rate is inferred from adaptive trials.",
   "cluster": {
-    "persistent_workers": 50,
-    "ready_workers": 50,
-    "distinct_hosts": 50,
-    "root_experiment_workers": 43,
-    "reserved_diagnostic_workers": 7,
-    "temporary_bigym_extra_workers": [
-      "reachy-retarget-worker-7d46748688-74vxp",
-      "reachy-retarget-worker-7d46748688-7btrt",
-      "reachy-retarget-worker-7d46748688-7ppnz"
-    ]
+    "persistent_workers": 100,
+    "ready_workers": 100,
+    "distinct_hosts": 100,
+    "root_experiment_workers": 100,
+    "reserved_diagnostic_workers": 0,
+    "scheduling": "Operator-side per-pod leases let concurrent batches share all 50 persistent pods; a busy pod defers a job instead of failing it.",
+    "archive_storage": "Operator archives are written by the executing pod to /mnt/reachy-retarget/operator-backups/local-spool-pool and re-read on a second pod; only receipts and logs remain on the operator disk.",
+    "slots_per_pod": 2,
+    "concurrent_job_slots": 200,
+    "scaling_note": "Deployment scaled 50->100 replicas on 2026-10-07 (namespace pod quota 200; required one-pod-per-host anti-affinity). Pods keep a 2-CPU / 4Gi limit; single-threaded jobs run two per pod."
   },
   "original_model": {
     "additional_can": {
       "unique_sources": 22,
-      "passed_sources": 15,
-      "fully_admitted_sources": 16,
-      "not_yet_fully_admitted": 6
+      "passed_sources": 16,
+      "fully_admitted_sources": 17,
+      "not_yet_fully_admitted": 5
     },
     "can_all_cohorts": {
-      "passed_unique_sources": 33,
-      "additional": 15,
+      "passed_unique_sources": 36,
+      "additional": 16,
       "earlier_development": 2,
       "held_out": 3,
       "held_out_scope": "One earlier held-out policy pass plus two new-cohort source successes under different predeclared policies; not one-policy union rate",
-      "post_frozen_development": 13,
-      "native_source_identity_evidence": "docs/can-original-success-source-identity-v4.json"
+      "post_frozen_development": 15,
+      "native_source_identity_evidence": "docs/can-original-success-source-identity-v5.json"
     },
     "additional_boxes": {
       "unique_sources": 28,
@@ -44,7 +44,7 @@
       "feedforward_ablation_passed": 1,
       "policy_denominator": 24,
       "physics_denominator_per_policy": 2,
-      "post_frozen_development_recovered_sources": 13
+      "post_frozen_development_recovered_sources": 15
     }
   },
   "alternative_models": {
@@ -80,10 +80,10 @@
   "pending": {
     "bigym": "Originalmodelrim12 reachesnativetask and97.188%carrycontact butfailscommon drift/stability/environmentdepth. Three furtherforce-cone-qualifiedgrasps fullIKattempts exposewrist/base limits. Widerbaseyaw and explicitlyinactive-right-hand planning arebeing checked. Originalmaterials/object/activelefttargets remainunchanged; no commonphysics success.",
     "nonbox": "Original-hand Threading .005closure passes depth but fails4.029mm/3.584degree drift/task. Constant attachment and post-acquisition baseFF comparisons worsened outcomes, retained as rejected development; defaults remainunchanged. Actual native contact witnesses/COMwrench are being diagnosed.",
-    "heldout_can_v2": "Frozen policy rates remain1/24 each. Thirteen separate post-frozen development recoveries now include7029 after insertion-only base-axis cap0.30to0.25m/s, and a2 after native-partition-derived7mm placementX correction. Four previously static-screen-only failed native sources now have12fresh mobile/approach/facet proposals. Three older source-admitted failures have9quarter-point/source-clearance repair chunks.",
+    "heldout_can_v2": "Frozen policy rates remain 1/24 each. Fifteen separate post-frozen development recoveries now include 3873 (base-speed caps only) and d755 (release XY +12 mm and feedforward). 106b had no admission in an 88-point XY/yaw grid; bfbe, 261e and f418 still lack an admitted source path.",
     "stack": "9295 passed alternative contact4ms after20mm robot-only post-release return lift; original10mm comparison stillfails. Source4 free-carry slip remains before target contact.",
     "can_acquisition": "fe117 recovered with measured fixedpatch alignment/contact wait and bounded calibrated0.20radclosureoffset; source/facet versions passall originalphysics/replay/sourcecoverage gates. The three prior successful policies remain unchanged and rerun3/3.",
-    "additional_can": "15/22 adaptive original-model successes;16havefullkinematicadmission including710. ItsFF0 source/traverse areclean, but nativepartition contact duringlower causestranslationdrift andjointmarginfailure; a minimal measuredattachment-derived correction is underdiagnosis.261v2derivedcache preservesall numericCandidate/source/reference arrays while restoring missingcontact0035label; fullplacementvariantcheck passescrosspod. Ninev1metadata-failed attempts retained; ninev2placementretrychunks running.",
+    "additional_can": "16/22 adaptive original-model successes after 710 passed with a +12 mm X release shift and -10 deg palm yaw (12 passing variants of one source). Remaining additional sources lack a full placement admission; the lower-knot census shows mid-lowering 2 mm / 20 mrad IK limits. A 792-job release-XY/palm-yaw grid is running.",
     "momagen": "Native pipeline and common-format IK archive completed for909 original rows with task-declared left hand active. Source target/time/object arrays are exact; max active-hand error .991mm/9.809mrad. Includes only breakfast_table_6 andcoffee_cup_7. No measured physics fields or RGB are fabricated. Physics remains unvalidated pending original assets/contact calibration/fixture reconstruction. Evidence: docs/datasets/momagen-task-hand-pipeline-v4.json."
   },
   "limitations": [
@@ -124,9 +124,11 @@
       "unique_remaining_sources": 12,
       "admitted_source_paths": 9,
       "scope": "Sixprevious+threeadditional source-path admissions; only3ofthese9havefullplacementadmission at thissnapshot. Physicscounts separate."
-    }
+    },
+    "lower_knot_census": "docs/can-placement-lower-knot-census-v1.json"
   },
   "recent_physical_success_evidence": [
+    "docs/can-resume-v1-evidence.json",
     "docs/can-a3-support-wait-v1-evidence.json",
     "docs/can-a3-support-wait-counterfactual-v1.json",
     "docs/can-mobile-midpoint-physics-v2-evidence.json",
@@ -144,6 +146,27 @@
   ],
   "completed_root_batches": [
     {
+      "label": "can-resume-v1",
+      "jobs": 47,
+      "physical_passes": 23,
+      "new_unique_sources": 2,
+      "all_artifacts_published": true
+    },
+    {
+      "label": "can-710-resume-v1",
+      "jobs": 36,
+      "physical_passes": 12,
+      "new_unique_sources": 1,
+      "all_artifacts_published": true
+    },
+    {
+      "label": "can-placement-grid-v1",
+      "jobs_launched": 142,
+      "jobs_superseded_unlaunched": 738,
+      "physical_passes": 0,
+      "note": "54 launches inherited stale runtime pins and failed before planning; retained. Superseded by can-placement-grid-v2 with the current runtime pin."
+    },
+    {
       "label": "can-steeper-wall-placement-v1",
       "jobs": 42,
       "admitted_sources": 0,
@@ -158,16 +181,8 @@
   ],
   "active_root_batches": [
     {
-      "label": "can-261-axial-placement-v2",
-      "jobs": 9
-    },
-    {
-      "label": "can-old-lower-quarter-repair-v1",
-      "jobs": 9
-    },
-    {
-      "label": "can-untried-mobile-source-v1",
-      "jobs": 12
+      "label": "can-placement-grid-v2",
+      "jobs": 792
     }
   ]
 }

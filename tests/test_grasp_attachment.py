@@ -88,3 +88,42 @@ def test_box_eligibility_rejects_articulation_and_explicit_pair_extra_collision(
     sphere.geom_type[sphere.geom("collision").id] = mujoco.mjtGeom.mjGEOM_SPHERE
     with pytest.raises(ValueError, match="one verified source box"):
         single_box_geometry(sphere, object_body="task_box", object_joint="task_free")
+
+
+def _tilted_pad_model():
+    # Two wedge pads converge toward their tips (z = -0.06): only the tip
+    # vertices are inward-most, as measured for PickCube contacts.
+    def wedge(side):
+        inner_tip, inner_root = .020*side, .024*side
+        outer = .030*side
+        vertices = [(-.01, inner_tip, -.06), (.01, inner_tip, -.06),
+                    (-.01, inner_root, -.03), (.01, inner_root, -.03),
+                    (-.01, outer, -.06), (.01, outer, -.06),
+                    (-.01, outer, -.03), (.01, outer, -.03)]
+        return " ".join(f"{x} {y-.025*side} {z}" for x, y, z in vertices)
+    xml = f"""<mujoco><asset>
+      <mesh name="left" vertex="{wedge(-1)}"/><mesh name="right" vertex="{wedge(1)}"/></asset>
+      <worldbody><site name="r_arm_tip_tcp" pos="0 0 0"/>
+        <body name="r_hand_distal_link" pos="0 -.025 0"><geom type="mesh" mesh="left"/></body>
+        <body name="r_hand_distal_mimic_link" pos="0 .025 0"><geom type="mesh" mesh="right"/></body>
+      </worldbody></mujoco>"""
+    model = mujoco.MjModel.from_xml_string(xml)
+    data = mujoco.MjData(model)
+    mujoco.mj_forward(model, data)
+    return model, data
+
+
+def test_inward_contact_band_finds_converging_tips_without_state_change():
+    from reachy_retarget.grasp_attachment import inward_contact_band
+    model, data = _tilted_pad_model()
+    before = data.qpos.copy(), data.xpos.copy()
+    band = inward_contact_band(model, data, band_m=.0005)
+    np.testing.assert_allclose(band["midpoint_tcp"], [0., 0., -.06], atol=1e-9)
+    assert band["vertex_counts"] == [2, 2]
+    np.testing.assert_allclose(band["points_tcp"][:, 1], [-.02, .02], atol=1e-9)
+    np.testing.assert_array_equal(before[0], data.qpos)
+    np.testing.assert_array_equal(before[1], data.xpos)
+    wide = inward_contact_band(model, data, band_m=.005)
+    assert wide["vertex_counts"] == [4, 4]
+    with pytest.raises(ValueError):
+        inward_contact_band(model, data, band_m=0.)

@@ -12,7 +12,7 @@ import mujoco
 import numpy as np
 from scipy.optimize import brentq
 
-from .pad_alignment import pad_surfaces
+from .pad_alignment import FINGERS, pad_surfaces
 from .physics import initialize
 from .store import json_write, sha256
 
@@ -105,13 +105,77 @@ def derive_attachment(hand, object_pose, jaw_tcp, midpoint_tcp, box_axes_object,
                             desired_pad_midpoint_object_m=center.tolist())
 
 
-def apply(prepared, robot, output, *, align_box_axis=True, center_box=True):
+CONTACT_REFERENCES = ("pad_area_centroid", "inward_contact_band")
+
+
+def inward_contact_band(model, data, *, band_m=.0005):
+    """Inward-most distal collision vertices of each pad, in the TCP frame.
+
+    ``pad_surfaces`` averages the flat inward-facing faces. When the opposing
+    distal meshes are not parallel at the contact aperture, MuJoCo's convex
+    mesh/box contacts occur only where the pads protrude furthest inward. This
+    returns the centroid of every compiled collision vertex within ``band_m`` of
+    each pad's maximum inward extent, along the same body-to-body inward axis
+    used by ``pad_surfaces``. Read-only; geometry and state are unchanged.
+    """
+    if not np.isfinite(band_m) or not 0 < band_m <= .005:
+        raise ValueError("Contact band must be a finite positive width up to 5 mm")
+    tcp = model.site("r_arm_tip_tcp").id
+    rotation, origin = data.site_xmat[tcp].reshape(3, 3), data.site_xpos[tcp]
+    bodies = [model.body(name).id for name in FINGERS]
+    points, counts, extents = [], [], []
+    for index, body in enumerate(bodies):
+        inward = data.xpos[bodies[1-index]]-data.xpos[body]
+        inward /= np.linalg.norm(inward)
+        vertices = []
+        for geom in np.flatnonzero(model.geom_bodyid == body):
+            if not (model.geom_contype[geom] or model.geom_conaffinity[geom]):
+                continue
+            if int(model.geom_type[geom]) != int(mujoco.mjtGeom.mjGEOM_MESH):
+                raise ValueError("Contact band extraction requires the original distal collision mesh")
+            mesh = int(model.geom_dataid[geom])
+            start, count = int(model.mesh_vertadr[mesh]), int(model.mesh_vertnum[mesh])
+            vertices.append(model.mesh_vert[start:start+count] @ data.geom_xmat[geom].reshape(3, 3).T
+                            + data.geom_xpos[geom])
+        if not vertices:
+            raise ValueError("No distal collision mesh")
+        vertices = np.vstack(vertices)
+        depth = vertices @ inward
+        band = vertices[depth >= depth.max()-band_m]
+        points.append(rotation.T @ (band.mean(0)-origin))
+        counts.append(int(len(band)))
+        extents.append(np.ptp((band-origin) @ rotation, axis=0).tolist())
+    points = np.asarray(points)
+    return {"points_tcp": points, "midpoint_tcp": points.mean(0), "band_m": float(band_m),
+            "vertex_counts": counts, "band_extent_tcp_m": extents}
+
+
+def apply(prepared, robot, output, *, align_box_axis=True, center_box=True,
+          contact_reference="pad_area_centroid", contact_band_m=.0005, contact_offset_m=None,
+          vertical_offset_m=0.):
     """Calibrate targets, then pass the result to feasible_maniskill.prepare.
 
     A single original box collision geom is required. The gap-matching gripper
     angle is recalculated from actual opposing pad surfaces; source gripper
     intent remains byte-identical. No per-object constants or physics tuning.
+
+    ``contact_reference="inward_contact_band"`` (opt-in) moves the centered
+    reference from the flat-pad area centroid toward the inward-most distal
+    vertex band (the pads' measured taper direction), because measured
+    original-model PickCube contacts occur only on that tip side. Without
+    ``contact_offset_m`` the band centroid itself is centered; otherwise the
+    reference lies the declared distance along that unit direction.
+
+    ``vertical_offset_m`` (default zero) raises the centered target along world
+    up at the anchor. For a horizontal closing axis this changes no gravity
+    torque about that axis; it is an explicit robot-only fixture clearance.
     """
+    if contact_reference not in CONTACT_REFERENCES:
+        raise ValueError("Unknown pad contact reference")
+    if contact_offset_m is not None and (not np.isfinite(contact_offset_m) or not 0 <= contact_offset_m <= .03):
+        raise ValueError("Contact offset must lie in [0, 30] mm")
+    if not np.isfinite(vertical_offset_m) or not -.015 <= vertical_offset_m <= .015:
+        raise ValueError("Vertical offset must lie in [-15, 15] mm")
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     (output / Path(__file__).name).write_text(Path(__file__).read_text())
@@ -150,7 +214,22 @@ def apply(prepared, robot, output, *, align_box_axis=True, center_box=True):
     jaw = pad["points_tcp"][1] - pad["points_tcp"][0]
     jaw /= np.linalg.norm(jaw)
     center = box_center if center_box else np.asarray(details["pad_alignment"]["section"]["center_object"])
-    attachment, selection = derive_attachment(hands[anchor], objects[anchor], jaw, pad["midpoint_tcp"],
+    if vertical_offset_m:
+        up = -np.asarray(model.opt.gravity, float)
+        up /= np.linalg.norm(up)
+        center = np.asarray(center, float)+objects[anchor, :3, :3].T @ up*float(vertical_offset_m)
+    area_midpoint = np.asarray(pad["midpoint_tcp"], float)
+    contact = None
+    reference_midpoint = area_midpoint
+    if contact_reference == "inward_contact_band":
+        contact = inward_contact_band(model, data, band_m=contact_band_m)
+        direction = contact["midpoint_tcp"]-area_midpoint
+        distance = float(np.linalg.norm(direction))
+        if distance < 1e-6:
+            raise ValueError("Pad contact band coincides with the area centroid; no taper direction")
+        offset = distance if contact_offset_m is None else float(contact_offset_m)
+        reference_midpoint = area_midpoint+direction/distance*offset
+    attachment, selection = derive_attachment(hands[anchor], objects[anchor], jaw, reference_midpoint,
                                                box_axes, center, align_box_axis=align_box_axis)
     if selection["box_face_axis"] != face:
         raise ValueError("Gripper aperture changed the selected box face; explicit recalibration required")
@@ -169,12 +248,20 @@ def apply(prepared, robot, output, *, align_box_axis=True, center_box=True):
                   box_center_object_m=box_center.tolist(), box_axes_object=box_axes.tolist(),
                   contact_width_m=width, inferred_contact_angle_rad=angle,
                   pad_midpoint_tcp_m=pad["midpoint_tcp"].tolist(), attachment=attachment.tolist(),
+                  contact_reference=contact_reference, vertical_offset_m=float(vertical_offset_m),
+                  contact_reference_midpoint_tcp_m=reference_midpoint.tolist(),
+                  **({} if contact is None else dict(
+                      contact_band={k: v.tolist() if isinstance(v, np.ndarray) else v for k, v in contact.items()},
+                      contact_offset_m=float(np.linalg.norm(reference_midpoint-area_midpoint)))),
                   original_inferred_angle_rad=details["pad_alignment"]["inferred_contact_angle_rad"],
                   artifact_sha256=sha256(artifact), physics_validated=False,
                   joint_reference_valid=False, requires_full_ik_and_collision_admission=True,
                   policy="One constant right-multiplied robot TCP attachment on the complete original hand trajectory; object references, clock, geometry, gripper intent unchanged")
     json_write(output / "result.json", report)
     details["previous_pad_alignment"] = deepcopy(details["pad_alignment"])
+    if contact is not None:
+        # Downstream centering checks use the declared contact reference.
+        pad = dict(pad, area_midpoint_tcp=area_midpoint, midpoint_tcp=reference_midpoint)
     details["pad_alignment"].update(inferred_contact_angle_rad=angle,
                                    pad={key: value.tolist() if isinstance(value, np.ndarray) else value for key, value in pad.items()},
                                    section={"width_m": width, "center_object": np.asarray(center).tolist(),
