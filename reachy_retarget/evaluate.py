@@ -42,17 +42,32 @@ def _short(metrics: dict, keys) -> dict:
 def evaluate_episode(family: str, path: str, demo: str, *, physics: bool = True, write: str | None = None,
                      cfg=None, physics_cfg=None) -> dict:
     """Retarget one demo (+ tier P); returns a JSON-compatible record."""
-    from .retarget import retarget
-    from .retarget.pipeline import _jsonable
     from .sources import iter_episodes
 
     t0 = time.perf_counter()
     src = next(iter_episodes(family, path, demos=[demo]))
-    t_read = time.perf_counter() - t0
-    rec = {"family": family, "path": str(path), "demo": demo, "task": src.task, "dataset": src.dataset,
+    rec = process_source(src, physics=physics, write=write, cfg=cfg, physics_cfg=physics_cfg,
+                         read_seconds=time.perf_counter() - t0)
+    rec.update(path=str(path), demo=demo)
+    return rec
+
+
+def process_source(src, *, physics: bool = True, write: str | None = None, cfg=None, physics_cfg=None,
+                   read_seconds: float = 0.0, layout: str = "task") -> dict:
+    """Retarget one SourceEpisode, run tier K (and P when it has a scene); optionally write it.
+
+    ``layout="task"`` writes ``<write>/<task>/<episode>.h5`` (evaluation runs);
+    ``layout="dataset"`` writes ``<write>/<dataset>/<episode>.h5`` (unique across files).
+    """
+    from .retarget import retarget
+    from .retarget.pipeline import _jsonable
+
+    t0 = time.perf_counter()
+    t_read = read_seconds
+    rec = {"family": src.family, "task": src.task, "dataset": src.dataset, "episode_id": src.episode_id,
            "source_frames": src.length, "source_success": src.success}
     res = retarget(src, cfg)
-    t_ret = time.perf_counter() - t0 - t_read
+    t_ret = time.perf_counter() - t0
     rec["status"] = res.status
     if res.episode is None:
         rec.update(K={"passed": False, "reasons": res.reasons}, P=None,
@@ -86,7 +101,7 @@ def evaluate_episode(family: str, path: str, demo: str, *, physics: bool = True,
     rec["seconds"] = {"read": t_read, "retarget": t_ret, "physics": t_phys}
     if write:
         from .schema.io import index_row, write_episode
-        out = Path(write) / src.task / f"{src.episode_id}.h5"
+        out = Path(write) / (src.task if layout == "task" else src.dataset) / f"{src.episode_id}.h5"
         out.parent.mkdir(parents=True, exist_ok=True)
         write_episode(out, ep)
         rec["file"] = str(out)
