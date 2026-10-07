@@ -1,0 +1,35 @@
+{
+  "schema": "reachy-retarget-config-v1",
+  "storage_reserve_bytes": 50000000000,
+  "fetch": {
+    "workers": 4,
+    "attempts": 3,
+    "transport": "auto",
+    "xet_batch_size": 2048
+  },
+  "normalize": {
+    "sequences_per_source": 5,
+    "robomimic_can_sequences": 10
+  },
+  "retarget": {
+    "sequences_per_source": 5,
+    "dt_s": 0.01,
+    "window_s": 6,
+    "family": 6
+  },
+  "contact": {
+    "label": "can_fixed10_final",
+    "sequences": 10,
+    "time_scale": 10.0,
+    "heading_rad": 0.0,
+    "grasp_depth_m": 0.035,
+    "render": true
+  },
+  "units": {
+    "distance": "m",
+    "angle": "rad",
+    "time": "s",
+    "quaternion": "wxyz"
+  },
+  "policy": "Retain missing data masks, reject unreachable trajectories, never move dynamic objects by target assignment."
+}

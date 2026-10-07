@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reachy-retarget"
+version = "0.1.0"
+description = "Provenance-preserving state dataset collection and Reachy 2 retargeting"
+requires-python = ">=3.11"
+dependencies = ["numpy", "scipy", "h5py", "pyarrow", "requests", "huggingface-hub", "hf-xet>=1.6.1a0", "fsspec", "aiohttp", "trimesh"]
+
+[project.optional-dependencies]
+rlds = ["tensorflow>=2.16", "google-crc32c"]
+test = ["pytest"]
+
+[project.scripts]
+reachy-retarget = "reachy_retarget.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["reachy_retarget*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
