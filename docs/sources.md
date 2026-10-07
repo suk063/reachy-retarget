@@ -1113,3 +1113,131 @@ orthonormal; the grasp center equals the pad midpoint at reset (unit test).
   not stored in the records (they are recomputable from the recording's actions).
 * Some scene assets are CC BY-NC (see `3D_MODELS_ATTRIBUTION.md`); scene redistribution
   must respect that.
+
+## MobileManiBench (family `mobilemanibench`)
+
+* Paper: MobileManiBench (arXiv 2602.05233, Microsoft Research Asia, Feb 2026); project page
+  dexhand.github.io/MobileManiBench. Data:
+  [`arnoldland/MobileManiBench`](https://huggingface.co/datasets/arnoldland/MobileManiBench)
+  at `88bc86eed0162c3b9a27bc962ce2d4815cbf2e59` (public, not gated; a smaller copy
+  `WenbWa/MobileManiBench` exists without a license tag and is not used). Code:
+  [`DexHand/MobileManiBench`](https://github.com/DexHand/MobileManiBench) at
+  `135466638d379c642f0c3f1742e6c20091b203c7` (Isaac Lab 4.5 fork + `unimanip`).
+* **License**: dataset card front matter is exactly `license: mit` (the README has no other
+  text); the code repository LICENSE is BSD-3-Clause (Isaac Lab); the project page is
+  CC BY-SA 4.0. `Assets/Assets.zip` redistributes PartNet-Mobility, UniDoor and YCB object
+  assets whose upstream terms (PartNet-Mobility: non-commercial research) are not changed by
+  the card; only the robot URDF is taken from it.
+* **Release** (39 G1 + 39 XHand tars, 1011.7 GB in total; `object_manifest.jsonl` gives
+  per-tar `nfiles`, bytes and the sha256 = HF LFS oid): `MobileManiDataset/<robot>/<Open|Close>/
+  <partnet|unidoor|ycb>/<group>.tar`, uncompressed, each holding the original tree
+  `<robot>/<task>/<category>/<group>/<NNNN>/<object>/train_0/` with the policy run
+  (`model_3999.pt`, `exported/policy.{pt,onnx}`, tensorboard events, `params/{env,agent}.yaml`,
+  `git/MobileManipVLA.diff`, `log.txt`) and `trajectories/traj_<k>/` (k = room batch,
+  `scene_infos.json`, `log.txt`) with `episode_<j>/` = 6 MP4 videos (rgb/depth/segmentation ×
+  head/wrist, 520²) + `state_infos.pkl`. The `segment_label_*.npz`/`distance_image_*.npz` files
+  the recorder writes are not in the release. Episodes exist only for train objects: up to
+  16 rooms × 10 episodes = 160 per object.
+* **Counts (G1 only; XHand dexterous hand excluded)**: 39 tars, 497.1 GB, 1,002,381 files.
+  Episode count estimated from file counts ((nfiles − 8 × objects) × 10/72 per tar):
+  ~137,900 G1 episodes (Close ~68,600, Open ~69,300; upper bound train objects × 160 =
+  152,320); the paper reports ~300K for both robots. Groups: partnet box, cart (pull/push),
+  dishwasher, faucet, laptop, microwave, oven, refrigerator, table (drawers, prismatic),
+  toilet, trashcan, washingmachine; unidoor cabinet, car, fridge, lever_door, round_door,
+  safe, window; ycb (pick, Open only).
+* **Overlap / lineage**: every episode is a rollout of one PPO policy per robot × skill ×
+  object, with randomized room pose, robot spawn and object height/yaw. Episodes are not
+  variants of a seed demonstration, but all come from one policy per object (lineage `seed` =
+  that policy's object folder). G1 and XHand rollouts are different robots and different
+  policies. The recorder deletes every episode without success (`env_model.py`
+  `_reset_idx`), so the release is success-only and gives no failure rate.
+
+### Catalog (`catalog/mobilemanibench.yaml`)
+
+`sources` (whole files, `acquire.fetch`): `object_manifest.jsonl`, the card and `unpack.py`
+at the HF revision; from GitHub at the pinned commit the prompt tables
+`unimanip/configs/data/analysis_{partnet,unidoor,ycb,scene}.yaml`, `env_model.py`,
+`g1_robot_env.py` and the LICENSE (stored under `raw/mobilemanibench/code/`).
+`mobilemanibench_members` (single tar / zip members by HTTP Range,
+`sources.mobilemanibench_fetch.fetch_members`; videos are never requested): the first object
+with trajectories in five G1 tars — Close/partnet/microwave (7119, revolute door, close),
+Open/partnet/table (19179, prismatic drawer, open), Open/unidoor/lever_door (99650019960001,
+revolute door, open), Close/partnet/cart (100491, push), Open/ycb/ycb (021_bleach_cleanser,
+pick; objects 0000–0017 of that tar are test objects without trajectories) — `traj_000`
+episodes 000–004 and `traj_001` episodes 000–002: 40 episodes, plus each run's
+`params/{env,agent}.yaml`, `git/MobileManipVLA.diff`, the two trajectory folders'
+`scene_infos.json`/`log.txt`, and `Assets/g1_robot_rotate/G1_120s.urdf` (deflate member of
+`Assets/Assets.zip`, CRC-32 checked). Member sha256 values were computed at catalog time
+(`generate_members` walks tar headers with 512-byte range reads); the archive digests are the
+publisher's. All 76 members + 10 files fetched: 24.8 MB (`data/raw/mobilemanibench`).
+
+### Adapter: `reachy_retarget/sources/mobilemanibench.py`
+
+Input: one `state_infos.pkl` or a folder. `params/env.yaml` and `scene_infos.json` come from
+the tar layout; the URDF and prompt tables from `raw/mobilemanibench/` under the data root
+(or `urdf=`). The pickle is loaded with an allow-list unpickler (numpy arrays only). Only
+`G1_Robot` episodes with `robot_name: g1_robot` are accepted (XHand is refused).
+
+* `state_infos.pkl` (`env_model.py` L1334–1390): per env step (30 Hz) `time` (step from 1),
+  `success`, `action` (7), `object` (grasp point xyz + roll-pitch-yaw + goal xyz),
+  `robot_base`/`robot_hand` (xyz, rpy, lin/ang vel of `base_link`/`gripper_r_center_link`),
+  `robot_body` (48 × 12), `robot_joint` (36 × pos/vel/acc), `robot_joint_target`, camera poses,
+  `init` (robot/object root states, object joint positions, room pose). Body and joint orders
+  are those listed in `g1_robot_env.py`; `robot_base`/`robot_hand` equal bodies 2/31 exactly.
+* **Effector** `right` (policies only move the right arm; the left arm stays at its initial
+  pose): orientation of `gripper_r_center_link` (+z approach, +y from the outer to the inner
+  pad); position = recorded midpoint of the pad links `gripper_r_{inner,outer}_link5`
+  (`*_Pad_Link.STL`) projected on the center link's z axis. The pads sit 0.085–0.107 m ahead
+  of the center link (four-bar fingers), so the publisher's "center" link is not the grasp
+  center. `width` = pad-link origin distance (0.033–0.122 m in the subset), `opening` =
+  `clip(idx81_gripper_r_outer_joint1, 0, 1)` (URDF: 0 closed, 1 open = 0.106 m; the joint
+  reaches 1.34 in some lever-door frames).
+* **Base**: `base_link` x, y, yaw. The release USD adds `slider_basex` (yaw about the fixed
+  spawn `Root`) and `slider_basey` (translation along that heading), a polar rig: lateral
+  motion only by turning. `torso_height` = world z of `arm_base_link` (0.9735 m; lift and
+  pitch joints stay at 0). World = Isaac Lab env frame, ground at z = 0, `base_link` at
+  z = 0.02 (robot floats 1 cm, gravity off); no offset applied.
+* **Objects**: only the publisher's grasp point is recorded per frame — the handle pose on the
+  grasp link for articulated objects (`<group>_<id>_<handle>`, kind point, manipulated), the
+  COM pose for YCB (`<name>`, manipulated). Articulated objects also get a root track
+  (`<group>_<id>`, fixture) valid at t0 only. Goal position, initial joint positions and room
+  are in provenance. Cart (joint type `None`): the whole cart is pushed/pulled; handle track
+  only, no articulation.
+* **Articulations** (derived, labelled): qpos = q0 ± θ(t) with θ the handle's rotation about
+  (revolute) or translation along (prismatic) its dominant axis since t0, + for open, − for
+  close, q0 = largest recorded initial joint value; the hinge line is fitted from the handle
+  circle.
+* **Instruction** = the publisher's VLA prompt (`load_object_prompt`): `close microwave`, `open
+  table at bottom`, `open door`, `push cart`, `pick bleach cleanser`. `task` =
+  `<skill>_<group or YCB name>`. `success` = any per-frame success flag (all True by
+  construction). `scene = None` (Isaac Sim USD rooms/objects), `regime = mobile_manipulation`.
+
+### MobileManiBench verification (2026-10-07)
+
+All 40 catalogued episodes (5 task types × 8; 147–242 frames) adapted.
+
+* FK: `G1_120s.urdf` FK of the recorded lift/pitch + right-arm joints reproduces the recorded
+  `gripper_r_center_link` pose relative to `base_link` on every frame: max 3.4e-6 m,
+  2.4e-6 rad (float32), `arm_base_link` ≤ 2.9e-6 m. The polar base rule reproduces the
+  recorded `base_link` pose to ≤ 1.0e-6 m / rad; `Root` never moves; base tilt ≤ 6e-8 rad.
+* Base path 0.25–1.05 m with 0.08–0.45 rad of yaw per episode; success first reached 117–212
+  frames in, followed by exactly 30 success frames (1 s hold) in every episode.
+* Derived articulations: microwave close 0.75–1.30 rad → ≤ 0.007 rad, matching the recorded
+  initial joint value to < 1e-3 rad; lever-door open 1.02–1.06 rad; drawer open 0.49–0.52 m;
+  off-axis residual 0 (< 1e-4) and hinge-circle radius spread < 1e-6 m, i.e. the handle
+  tracks are exact single-joint motions.
+* Contact style: microwave closing and lever-door opening are done with the gripper nearly
+  open (median opening 0.95–1.0 while the object moves, grasp center 3–5 cm from the handle,
+  i.e. pushing/hooking), drawer opening at opening ≈ 0.55, cart pushing open; the YCB pick
+  closes to 0.51–0.80 with the COM 6–15 mm from the grasp center while lifting (~0.24 m).
+  YCB objects and the cart also move before contact (settling / rolling at spawn).
+
+### Known gaps (MobileManiBench)
+
+* No per-frame object joint positions or root poses; articulations are derived and the root
+  is valid at t0 only. No object, stage (table) or room geometry (Isaac USD assets).
+* Success-only release (failed rollouts deleted by the recorder); 300K/≈138K are file-count
+  estimates, not a walk of every tar.
+* The XHand (dexterous hand) half of the release is not used. Prismatic close tasks
+  (e.g. Close/partnet/table) are not in the subset; their q0 units (scaled PartNet joints) are
+  unverified.
