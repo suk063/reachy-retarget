@@ -1,0 +1,379 @@
+{
+  "independent_demonstrations": 1,
+  "source_group": "c795f62efb4f4d20ab899af96d766a2f",
+  "physical_successes": 0,
+  "status": "diagnostic_failed",
+  "error": "ValueError: Acquisition settle_timeout",
+  "physical_steps": 5212,
+  "expected_source_reference_steps": 8753,
+  "all_common_gates": {
+    "task_stable_final_1s": false,
+    "bilateral_lifted_grasp": false,
+    "carry_contact_95pct": false,
+    "grasp_translation_3mm": false,
+    "grasp_rotation_3deg": false,
+    "hand_object_penetration_1mm": true,
+    "robot_environment_penetration_2mm": true,
+    "object_environment_penetration_2mm": false,
+    "robot_self_penetration_2mm": true,
+    "no_nonhand_object_robot_contact": true,
+    "actual_arm_speed_1rad_s": true,
+    "actual_base_speed_limits": true,
+    "joint_margin_25mrad": true,
+    "self_clearance_9mm": true,
+    "rollout_complete": false,
+    "finite_integration": true,
+    "actuator_replay": true
+  },
+  "replay_errors": {
+    "qpos": 0.0,
+    "qvel": 0.0,
+    "object_pose": 1.2212453270876722e-15,
+    "clock": 0.0
+  },
+  "geometry": {
+    "source_row": 550,
+    "geometry_mode": "finite_patch_translation",
+    "original_finite_face_margins_m": [
+      -0.0034976506957889904,
+      -0.003327561958484073
+    ],
+    "desired_face_margin_m": 0.004,
+    "measured_plate_pose": [
+      0.7400805851544465,
+      0.4701889030743524,
+      1.0658304458339227,
+      0.7536400363721806,
+      0.6570978881247557,
+      0.004784338017081134,
+      -0.01503898629108203
+    ],
+    "chord_collider": "plate/collider_012",
+    "chord_interval_m": [
+      -0.001960575429420513,
+      0.005798506831435791
+    ],
+    "closing_axis_world": [
+      0.3032684336335748,
+      -0.9435542611365149,
+      -0.1331676141280746
+    ],
+    "correction_world_m": [
+      -0.006870441211565626,
+      -0.0016929753982446746,
+      0.0025844049479846675
+    ],
+    "correction_m": 0.007533145231296732,
+    "finite_face_margins_m": [
+      0.004000000000000066,
+      0.004000000000000039
+    ],
+    "max_centering_m": 0.01,
+    "minimum_face_margin_m": 0.003,
+    "robot_only": true,
+    "actual_integrator_state_writes": 0
+  },
+  "rendezvous": {
+    "phase": "failed",
+    "failure": "settle_timeout",
+    "inserted_steps": 1000,
+    "inserted_duration_s": 2.0,
+    "wait_limit_per_phase_s": 2.0,
+    "stable_guard_s": 0.1,
+    "events": [
+      {
+        "event": "settle_started",
+        "hold_step": 0
+      },
+      {
+        "event": "settle_timeout",
+        "hold_step": 1000
+      }
+    ],
+    "phase_codes": {
+      "approach": 0,
+      "settle": 1,
+      "close": 2,
+      "carry": 3,
+      "failed": 4
+    },
+    "source_clock_semantics": "Pause command progression during settle/close; never alter the integration clock or source samples",
+    "policy": {
+      "method": "measured_plate_rendezvous",
+      "source_row": 550,
+      "max_centering_m": 0.01,
+      "evidence": {
+        "bigym-acquisition-phase-geometry-20261007-01": {
+          "path": "/mnt/reachy-retarget/workspaces/bigym-acquisition-phase-geometry-20261007-01/result.json",
+          "sha256": "e84823342249acbc9a51ab0ebf5135dc8699f237fbfc5656fb8f7cfdc6d5617b"
+        },
+        "bigym-pause-footprint-audit-20261007-01": {
+          "path": "/mnt/reachy-retarget/workspaces/bigym-pause-footprint-audit-20261007-01/result.json",
+          "sha256": "0f2eeb45741541f3676c77827961efa41024c71ba8b03fe487fc8b3d6f345ebc"
+        },
+        "actual_prefix_audit": {
+          "path": "/mnt/reachy-retarget/workspaces/bigym-rendezvous-prefix-audit-20261007-02/result.json",
+          "sha256": "a03a35bbdb5a74dbc0e38017a1a455278ab6c076549eaa3be22c7700eb61b152"
+        }
+      },
+      "geometry_mode": "finite_patch_translation"
+    },
+    "admission": {
+      "admitted": true,
+      "source_frames": 2256,
+      "fixture_min_m": 0.003001,
+      "self_min_m": 0.028042991795262887,
+      "self_depth_max_m": 0.0,
+      "position_max_m": 0.0007024770858931286,
+      "rotation_max_rad": 0.0007895808441947559,
+      "scene_sha256": "f93e74f25ec12df84daa066b0e30480a79651ff3641c34ecf51c2447100ef7db",
+      "aperture_samples_rad": [
+        0.19568650182914799,
+        0.24568650182914797,
+        0.646764876371861,
+        1.097843250914574,
+        1.548921625457287,
+        2.0
+      ],
+      "checker": {
+        "minimum_m": 0.003,
+        "collision_pair_count": 1273,
+        "support_pairs": [
+          [
+            "drivewhl1_link_collision_0",
+            "floor"
+          ],
+          [
+            "drivewhl2_link_collision_0",
+            "floor"
+          ],
+          [
+            "drivewhl3_link_collision_0",
+            "floor"
+          ]
+        ],
+        "active_object_body_ids": [
+          8,
+          9
+        ],
+        "robot_body_ids": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109
+        ],
+        "scope": "All compiled physical robot/fixture collision pairs; selected active-object subtrees and only explicit support pairs excluded"
+      },
+      "physics_validated": false,
+      "scope": "All source-frame corrected two-hand references and sampled aperture envelope; active plate contacts assessed during integration; actual state collision gates remain required"
+    },
+    "geometry_guard": "Nominal closed-pad CAD proxy transformed by measured TCP; actual bilateral forces independently required",
+    "source_row": 550,
+    "correction_world_m": [
+      -0.006870441211565626,
+      -0.0016929753982446746,
+      0.0025844049479846675
+    ],
+    "original_source_intent_preserved": true,
+    "arm_feedforward_enabled": false,
+    "object_state_writes_after_reset": 0
+  },
+  "first_guard": {
+    "timestamp": 8.427999999999484,
+    "phase": "settle",
+    "tcp_position_error_m": 0.032734780791759885,
+    "tcp_rotation_error_rad": 0.0774292040498191,
+    "tcp_speed_m_s": null,
+    "nominal_closed_pad_chord_center_error_m": 0.01643350516505706,
+    "finite_pad_anchor_margins_m": [
+      -0.027293418607183727,
+      -0.027358371790296716
+    ],
+    "actual_pad_normal_forces_n": [
+      0.0,
+      0.0
+    ],
+    "actual_gripper_rad": 1.9999935721110358,
+    "alignment": false,
+    "bilateral_force": false
+  },
+  "last_guard": {
+    "timestamp": 10.426000000000151,
+    "phase": "settle",
+    "tcp_position_error_m": 0.02469217403894899,
+    "tcp_rotation_error_rad": 0.05652342882900739,
+    "tcp_speed_m_s": 0.0005799545188881653,
+    "nominal_closed_pad_chord_center_error_m": 0.010916359897443498,
+    "finite_pad_anchor_margins_m": [
+      -0.02006216886788973,
+      -0.020133112322886233
+    ],
+    "actual_pad_normal_forces_n": [
+      0.0,
+      0.0
+    ],
+    "actual_gripper_rad": 1.9999999988142025,
+    "alignment": false,
+    "bilateral_force": false
+  },
+  "last_actual_contacts": [
+    {
+      "geoms": [
+        "plate/collider_011",
+        "l_hand_palm_link_collision_0"
+      ],
+      "force_n": 12.000436059812607,
+      "depth_m": 3.3098150719858103e-05,
+      "distal_pad_body": false
+    }
+  ],
+  "commanded_nonpad_plate_depth_m": 0.013552968124468679,
+  "memory_peak_bytes": 4273115136,
+  "oom_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+  "durable_export": {
+    "pod": "reachy-retarget-worker-7d46748688-frs8d",
+    "original_workspace": "/tmp/reachy-bigym-side-baseplan-v23-1791371162340095423",
+    "exported_workspace": "/mnt/reachy-retarget/workspaces/bigym-acquisition550-patch-frs8d-20261007-01",
+    "original_manifest_sha256": "05afb526caccd1736507639dddbe59feaa12a5e6fb30ccd71f0927d317289db3",
+    "verified_files": 261,
+    "verified_bytes": 683692648,
+    "canonical_archives": [
+      {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-acquisition550-margin-050-source.hdf5",
+        "sha256": "cd61a3d17377318625177d3e9ed3e63059fba6e1f2ee42916d2ffd323acf2818",
+        "bytes": 38613456,
+        "sidecar_sha256": "8aeb4f1a751e00865b4b0d51cd17c234f5c3a0818c95ac8f457c06d01b0866b1"
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-acquisition550-patch-margin-050-source.hdf5",
+        "sha256": "773a6c1a3e3650d95ec40ee9f304537c244cee00096acf3900533ca4d26e072b",
+        "bytes": 46374990,
+        "sidecar_sha256": "89c328bb31ca2fff57508f0372efd091c796837d56863db3809adb61390863b0"
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-side-baseplan-ff1-margin-020-source.hdf5",
+        "sha256": "257ae9b37c250991d411db9ceafd56307341a8df3a61a8327e84e7ee023b5e91",
+        "bytes": 78307344,
+        "sidecar_sha256": "d5d8a90a231f9157db2d155a477a543f78461cbc0c7ad13ed2b3e1aa1605b7aa"
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-side-baseplan-margin-020-source.hdf5",
+        "sha256": "be8b874e50a72e552109a22435e3554569dc84acaebfc080517726cb9d797b79",
+        "bytes": 76852591,
+        "sidecar_sha256": "076201278b70f68c1746cae7208aa305f52eccf973d0c4f456cdc3693a4b55ca"
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/feasible-bigym-upper-rim-side-baseplan-v1-ik-node-local-ik.hdf5",
+        "sha256": "8828f6175b6b9c31d21038e15bc0dbb9c3d8c110807447f564c06c58366f2818",
+        "bytes": 2454179,
+        "sidecar_sha256": "1b584ebf44e4aa7c479281717b9e0dc944d93ed943a86ad56b391728fb92c2a5"
+      }
+    ],
+    "path_map": {
+      "/tmp/reachy-bigym-side-baseplan-v23-1791371162340095423": "/mnt/reachy-retarget/workspaces/bigym-acquisition550-patch-frs8d-20261007-01"
+    },
+    "export_utc": "2026-10-07T12:54:07Z",
+    "source_complete": true,
+    "physics_validated": false
+  },
+  "cross_pod_verification": "/mnt/reachy-retarget/workspaces/bigym-acquisition550-patch-frs8d-20261007-01/cross-pod-and-sidecars-verification.json",
+  "producer_overlay_sha256": "4aa1c245be6188489aba972d9968a9b71a87c2e7e4c168134980fdc542437233",
+  "held_out_103d_used": false,
+  "object_state_writes_after_reset": 0
+}

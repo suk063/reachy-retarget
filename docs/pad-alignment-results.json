@@ -1,0 +1,964 @@
+{
+  "created": "2026-10-07T06:18:03.856361+00:00",
+  "protocol": "frozen-retarget-pad-translation-v1",
+  "episodes": [
+    {
+      "episode": "6ad5cc23ec6d1c207da3e4b2",
+      "source_sequence": "v1.5/can/ph/demo_0",
+      "variants": {
+        "before": {
+          "path": "runs/dynamics/pad_alignment/translation_final/before/6ad5cc23ec6d1c207da3e4b2",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": false,
+          "grasp_drift_available": false,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "bilateral_lifted_grasp",
+            "carry_contact_95pct",
+            "object_environment_penetration_2mm"
+          ],
+          "max_lift_m": 0.006311815507108798,
+          "max_hand_object_penetration_m": 0.0005406552077005678,
+          "bilateral_carry_fraction": 0.0,
+          "max_grasp_drift_m": null,
+          "max_grasp_drift_deg": null,
+          "final_stable_s": 0.0,
+          "result_sha256": "d67fab2ed886cbffc394837507cd66efe9eb290b53dc4092ad7130ee4bb9ebc4",
+          "replay_sha256": "5410f59bef68653315e9723e9bd0d30040264e0f3399aadb65126a35cdbf13ea",
+          "actuator_audit_sha256": "87b4e947fe19b6a302b0233b0d5994953863c9a56fc5762ff404b30fbbaec9d6",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": false,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": true,
+            "hand_object_penetration_1mm": true,
+            "robot_environment_penetration_2mm": true,
+            "object_environment_penetration_2mm": false,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": true,
+            "actual_base_speed_limits": true,
+            "joint_margin_25mrad": true,
+            "self_clearance_9mm": true,
+            "rollout_complete": true
+          }
+        },
+        "after": {
+          "path": "runs/dynamics/pad_alignment/translation_final/after/6ad5cc23ec6d1c207da3e4b2",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": true,
+          "grasp_drift_available": true,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "carry_contact_95pct",
+            "grasp_translation_3mm",
+            "grasp_rotation_3deg",
+            "hand_object_penetration_1mm",
+            "robot_environment_penetration_2mm",
+            "object_environment_penetration_2mm",
+            "actual_arm_speed_1rad_s"
+          ],
+          "max_lift_m": 0.03149580870537072,
+          "max_hand_object_penetration_m": 0.001345681065809282,
+          "bilateral_carry_fraction": 0.025,
+          "max_grasp_drift_m": 0.019121843719615787,
+          "max_grasp_drift_deg": 12.002604961603817,
+          "final_stable_s": 0.0,
+          "result_sha256": "d50d577ef2ca5f48c8df50226e524f3897b9250c4604af12777258322aea3220",
+          "replay_sha256": "82dd1e10983d3c1f17fe92b4d7c1de93fcecec0a9f31a929d500db4a0f19d14d",
+          "actuator_audit_sha256": "160ce7569c335e194fde04ae0aac89fce1f19d7727a557021ccd45d5f1c5625d",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": true,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": false,
+            "grasp_rotation_3deg": false,
+            "hand_object_penetration_1mm": false,
+            "robot_environment_penetration_2mm": false,
+            "object_environment_penetration_2mm": false,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": false,
+            "actual_base_speed_limits": true,
+            "joint_margin_25mrad": true,
+            "self_clearance_9mm": true,
+            "rollout_complete": true
+          }
+        }
+      },
+      "frozen_factor_checks": {
+        "identical_scene": true,
+        "time_s": true,
+        "gripper": true,
+        "object_goals": true,
+        "initial/qpos": true,
+        "initial/qvel": true,
+        "initial/ctrl": true,
+        "base_and_inactive_arm_reference": true,
+        "target_orientation": true,
+        "base_inactive_arm_gripper_actuator_commands": true,
+        "uncorrected_free_interval_targets": true,
+        "uncorrected_free_interval_joint_reference": true
+      },
+      "alignment": {
+        "source_anchor_frame": 64,
+        "retarget_anchor_frame": 320,
+        "source_grasp_point_object_m": [
+          -0.005314924370771634,
+          -0.006622218491811743,
+          0.007005819215950115
+        ],
+        "section": {
+          "width_m": 0.04932955198400082,
+          "center_object": [
+            0.0014704431817431016,
+            -0.002388002607566212,
+            0.006800999782041165
+          ],
+          "collision_regions": [
+            "Can_g0"
+          ],
+          "line_bounds_m": [
+            -0.03266551020690992,
+            0.016664041777090896
+          ]
+        },
+        "inferred_contact_angle_rad": 1.1377928961653683,
+        "pad": {
+          "points_tcp": [
+            [
+              -0.010191952520149924,
+              -0.02466477565960796,
+              -0.04822202145862528
+            ],
+            [
+              -0.010200047479850084,
+              0.024664775659607962,
+              -0.04822202145862517
+            ]
+          ],
+          "midpoint_tcp": [
+            -0.010196000000000004,
+            1.734723475976807e-18,
+            -0.048222021458625225
+          ],
+          "gap_m": 0.04932955198340574,
+          "area_m2": [
+            0.0007191648182220734,
+            0.0007191648182220728
+          ],
+          "distal_reach_m": 0.07689629533785286
+        },
+        "translation_object_m": [
+          0.032514840520688766,
+          -0.03648039701314715,
+          0.009881899370098575
+        ],
+        "translation_norm_m": 0.049856656080040244,
+        "alignment_ready_time_s": 1.1500000000000001,
+        "precontact_envelope_m": 0.11039013985584128,
+        "max_ik_position_error_m": 0.0009971391579328022,
+        "max_ik_rotation_error_rad": 0.0036697535320185594,
+        "pad_definition": "area-weighted inward distal collision faces, proxy checked against source visual insert",
+        "gripper_policy": "source commands unchanged; inferred aperture is calibration only"
+      }
+    },
+    {
+      "episode": "58e7f4f3c4178bc2c5f3f2c7",
+      "source_sequence": "v1.5/lift/ph/demo_0",
+      "variants": {
+        "before": {
+          "path": "runs/dynamics/pad_alignment/translation_final/before/58e7f4f3c4178bc2c5f3f2c7",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": false,
+          "grasp_drift_available": false,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "bilateral_lifted_grasp",
+            "carry_contact_95pct",
+            "hand_object_penetration_1mm",
+            "object_environment_penetration_2mm"
+          ],
+          "max_lift_m": 0.0,
+          "max_hand_object_penetration_m": 0.0010632651264961491,
+          "bilateral_carry_fraction": 0.0,
+          "max_grasp_drift_m": null,
+          "max_grasp_drift_deg": null,
+          "final_stable_s": 0.0,
+          "result_sha256": "381cfabd18eb23f6407033e3b4bc2cb56db6cbb37d8c764151967d1a8f3095ee",
+          "replay_sha256": "5a1075627edae300df7cb2617c167d411f3fa7aaf03ca7dcf789c34bf9a7aa91",
+          "actuator_audit_sha256": "ed0b49a82881c737618cab961eae3cf0841c0b018702ec12f3aaa2246e288766",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": false,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": true,
+            "hand_object_penetration_1mm": false,
+            "robot_environment_penetration_2mm": true,
+            "object_environment_penetration_2mm": false,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": true,
+            "actual_base_speed_limits": true,
+            "joint_margin_25mrad": true,
+            "self_clearance_9mm": true,
+            "rollout_complete": true
+          }
+        },
+        "after": {
+          "path": "runs/dynamics/pad_alignment/translation_final/after/58e7f4f3c4178bc2c5f3f2c7",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": true,
+          "grasp_drift_available": true,
+          "failure_reasons": [
+            "grasp_rotation_3deg",
+            "hand_object_penetration_1mm",
+            "object_environment_penetration_2mm",
+            "actual_arm_speed_1rad_s"
+          ],
+          "max_lift_m": 0.029435536637036464,
+          "max_hand_object_penetration_m": 0.003609209848517831,
+          "bilateral_carry_fraction": 1.0,
+          "max_grasp_drift_m": 0.0012158685714701103,
+          "max_grasp_drift_deg": 5.183117886088844,
+          "final_stable_s": 1.7000000000000013,
+          "result_sha256": "aa5420e63f5676c66dd06ea60064d07f5664250d33c535bd8753834e48cfe8ec",
+          "replay_sha256": "44d695c334049cb88ec5fb422dd201c07a26ced323e0a6ac57c7e74cddd57f54",
+          "actuator_audit_sha256": "61f970cd3c5810fd798102a1dc82156ef3f51431ac0124c764140491afa83b4e",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": true,
+            "bilateral_lifted_grasp": true,
+            "carry_contact_95pct": true,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": false,
+            "hand_object_penetration_1mm": false,
+            "robot_environment_penetration_2mm": true,
+            "object_environment_penetration_2mm": false,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": false,
+            "actual_base_speed_limits": true,
+            "joint_margin_25mrad": true,
+            "self_clearance_9mm": true,
+            "rollout_complete": true
+          }
+        }
+      },
+      "frozen_factor_checks": {
+        "identical_scene": true,
+        "time_s": true,
+        "gripper": true,
+        "object_goals": true,
+        "initial/qpos": true,
+        "initial/qvel": true,
+        "initial/ctrl": true,
+        "base_and_inactive_arm_reference": true,
+        "target_orientation": true,
+        "base_inactive_arm_gripper_actuator_commands": true,
+        "uncorrected_free_interval_targets": true,
+        "uncorrected_free_interval_joint_reference": true
+      },
+      "alignment": {
+        "source_anchor_frame": 57,
+        "retarget_anchor_frame": 285,
+        "source_grasp_point_object_m": [
+          -0.007629010251288648,
+          0.0013382122099501632,
+          0.004001107803742743
+        ],
+        "section": {
+          "width_m": 0.04340047344093794,
+          "center_object": [
+            2.6020852139652106e-18,
+            0.002925632782702898,
+            0.004110526027926809
+          ],
+          "collision_regions": [
+            "cube_g0"
+          ],
+          "line_bounds_m": [
+            -0.013907055480638246,
+            0.029493417960299695
+          ]
+        },
+        "inferred_contact_angle_rad": 1.011160797825923,
+        "pad": {
+          "points_tcp": [
+            [
+              -0.010191952520149662,
+              -0.02170023634300552,
+              -0.04807314240779034
+            ],
+            [
+              -0.010200047479850155,
+              0.021700236343005518,
+              -0.04807314240779026
+            ]
+          ],
+          "midpoint_tcp": [
+            -0.010195999999999908,
+            -1.734723475976807e-18,
+            -0.0480731424077903
+          ],
+          "gap_m": 0.043400473440937976,
+          "area_m2": [
+            0.0007191648182220706,
+            0.000719164818222071
+          ],
+          "distal_reach_m": 0.07535049266887511
+        },
+        "translation_object_m": [
+          -0.0022185717117908198,
+          0.04820333645564666,
+          0.011415366909776008
+        ],
+        "translation_norm_m": 0.04958623102819413,
+        "alignment_ready_time_s": 1.01,
+        "precontact_envelope_m": 0.10742560058430976,
+        "max_ik_position_error_m": 0.0009830405028688767,
+        "max_ik_rotation_error_rad": 0.005932993254789933,
+        "pad_definition": "area-weighted inward distal collision faces, proxy checked against source visual insert",
+        "gripper_policy": "source commands unchanged; inferred aperture is calibration only"
+      }
+    },
+    {
+      "episode": "d1c98eab070e1de3803eb075",
+      "source_sequence": "v1.5/square/ph/demo_0",
+      "variants": {
+        "before": {
+          "path": "runs/dynamics/pad_alignment/translation_final/before/d1c98eab070e1de3803eb075",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": false,
+          "grasp_drift_available": false,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "bilateral_lifted_grasp",
+            "carry_contact_95pct",
+            "hand_object_penetration_1mm",
+            "object_environment_penetration_2mm"
+          ],
+          "max_lift_m": 0.0,
+          "max_hand_object_penetration_m": 0.001352893376246726,
+          "bilateral_carry_fraction": 0.0,
+          "max_grasp_drift_m": null,
+          "max_grasp_drift_deg": null,
+          "final_stable_s": 0.0,
+          "result_sha256": "1861d8e2e4c2a838080ca46c696c6bbfc04047414b3c6c88389f9ee7e0efacc7",
+          "replay_sha256": "708afb438027fb7c11ccd35bfa857b61d50bc24d747cef45237dfa6daee170c3",
+          "actuator_audit_sha256": "86c536b99f685aa782b808f5d4635f2720679bd0cfb6f6266dad03f17687700f",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": false,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": true,
+            "hand_object_penetration_1mm": false,
+            "robot_environment_penetration_2mm": true,
+            "object_environment_penetration_2mm": false,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": true,
+            "actual_base_speed_limits": true,
+            "joint_margin_25mrad": true,
+            "self_clearance_9mm": true,
+            "rollout_complete": true
+          }
+        },
+        "after": {
+          "status": "alignment_rejected",
+          "physics_validated": false,
+          "reason": "Translated target is unreachable with the frozen base and orientation"
+        }
+      },
+      "alignment": {
+        "source_anchor_frame": 67,
+        "retarget_anchor_frame": 335,
+        "source_grasp_point_object_m": [
+          0.0746803097972284,
+          -0.0009976945429327443,
+          0.003653592353352497
+        ],
+        "section": {
+          "width_m": 0.05694004984334868,
+          "center_object": [
+            0.051,
+            0.0019378479682130448,
+            0.003264348371980842
+          ],
+          "collision_regions": [
+            "SquareNut_g3",
+            "SquareNut_g4"
+          ],
+          "line_bounds_m": [
+            -0.052334768641322554,
+            0.004605281202026125
+          ]
+        },
+        "inferred_contact_angle_rad": 1.300172295360905,
+        "pad": {
+          "points_tcp": [
+            [
+              -0.010191952520149638,
+              -0.02847002463381537,
+              -0.04815511471441541
+            ],
+            [
+              -0.010200047479850094,
+              0.028470024633815372,
+              -0.04815511471441545
+            ]
+          ],
+          "midpoint_tcp": [
+            -0.010195999999999865,
+            1.734723475976807e-18,
+            -0.04815511471441543
+          ],
+          "gap_m": 0.05694004984304623,
+          "area_m2": [
+            0.0007191648182220739,
+            0.0007191648182220725
+          ],
+          "distal_reach_m": 0.07878597307957125
+        },
+        "translation_object_m": [
+          -0.01790495293775662,
+          0.05103209971920083,
+          0.006746129601492495
+        ],
+        "translation_norm_m": 0.05450112664939937,
+        "alignment_ready_time_s": 1.24,
+        "precontact_envelope_m": 0.1141953887855152,
+        "max_ik_position_error_m": 0.003007035590314387,
+        "max_ik_rotation_error_rad": 0.03094289449403055,
+        "pad_definition": "area-weighted inward distal collision faces, proxy checked against source visual insert",
+        "gripper_policy": "source commands unchanged; inferred aperture is calibration only"
+      }
+    },
+    {
+      "episode": "8a7847a26e8fbb00783e4114",
+      "source_sequence": "demos/PickCube-v1/teleop/traj_0",
+      "variants": {
+        "before": {
+          "path": "runs/dynamics/pad_alignment/translation_final/before/8a7847a26e8fbb00783e4114",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": false,
+          "grasp_drift_available": false,
+          "failure_reasons": [
+            "RuntimeError: Early stop: severe robot collision",
+            "task_stable_final_1s",
+            "bilateral_lifted_grasp",
+            "carry_contact_95pct",
+            "robot_environment_penetration_2mm",
+            "actual_arm_speed_1rad_s",
+            "rollout_complete"
+          ],
+          "max_lift_m": 0.0,
+          "max_hand_object_penetration_m": 0.0,
+          "bilateral_carry_fraction": 0.0,
+          "max_grasp_drift_m": null,
+          "max_grasp_drift_deg": null,
+          "final_stable_s": 0.0,
+          "result_sha256": "dc33aad3a715678086178b2803572e0051f37dd0556ad66e1cb37b5fa8a2d9b0",
+          "replay_sha256": "ccfdea58dcad82cf899f6a3e278eb9fe2778ceb03ce1f1639773f6b4f3fefa0b",
+          "actuator_audit_sha256": "be9333f367fae136dfda3617395e7ada5bfc0fc0f7fb1a9d4023067dd17d44d6",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": false,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": true,
+            "hand_object_penetration_1mm": true,
+            "robot_environment_penetration_2mm": false,
+            "object_environment_penetration_2mm": true,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": false,
+            "actual_base_speed_limits": true,
+            "joint_margin_25mrad": true,
+            "self_clearance_9mm": true,
+            "rollout_complete": false
+          }
+        },
+        "after": {
+          "path": "runs/dynamics/pad_alignment/translation_final/after/8a7847a26e8fbb00783e4114",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": false,
+          "grasp_drift_available": false,
+          "failure_reasons": [
+            "RuntimeError: Early stop: severe robot collision",
+            "task_stable_final_1s",
+            "bilateral_lifted_grasp",
+            "carry_contact_95pct",
+            "robot_environment_penetration_2mm",
+            "actual_arm_speed_1rad_s",
+            "rollout_complete"
+          ],
+          "max_lift_m": 0.0,
+          "max_hand_object_penetration_m": 0.0,
+          "bilateral_carry_fraction": 0.0,
+          "max_grasp_drift_m": null,
+          "max_grasp_drift_deg": null,
+          "final_stable_s": 0.0,
+          "result_sha256": "405267620bc9087ed325f736ace0ad6b09317d1362ad426f36118212f3f74d71",
+          "replay_sha256": "38bbcc6f329812b56613810bc6c7697ef7b0f5e5117d9de459e0b823279d18d5",
+          "actuator_audit_sha256": "c64d46a6bd2a96307e2c6c21ee15a692656332379de69b2caaffaa1e4b131875",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": false,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": true,
+            "hand_object_penetration_1mm": true,
+            "robot_environment_penetration_2mm": false,
+            "object_environment_penetration_2mm": true,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": false,
+            "actual_base_speed_limits": true,
+            "joint_margin_25mrad": true,
+            "self_clearance_9mm": true,
+            "rollout_complete": false
+          }
+        }
+      },
+      "frozen_factor_checks": {
+        "identical_scene": true,
+        "time_s": true,
+        "gripper": true,
+        "object_goals": true,
+        "initial/qpos": true,
+        "initial/qvel": true,
+        "initial/ctrl": true,
+        "base_and_inactive_arm_reference": true,
+        "target_orientation": true,
+        "base_inactive_arm_gripper_actuator_commands": true,
+        "uncorrected_free_interval_targets": true,
+        "uncorrected_free_interval_joint_reference": true
+      },
+      "alignment": {
+        "source_anchor_frame": 59,
+        "retarget_anchor_frame": 295,
+        "source_grasp_point_object_m": [
+          -0.00045073383461025074,
+          -0.014754596490334882,
+          0.010554782204052642
+        ],
+        "section": {
+          "width_m": 0.04093121184218518,
+          "center_object": [
+            0.002749926796720887,
+            -1.734723475976807e-18,
+            0.010654336729610619
+          ],
+          "collision_regions": [
+            "cube_collision"
+          ],
+          "line_bounds_m": [
+            -0.005367518056296126,
+            0.035563693785889056
+          ]
+        },
+        "inferred_contact_angle_rad": 0.9582705861641172,
+        "pad": {
+          "points_tcp": [
+            [
+              -0.010191952520149634,
+              -0.02046560552085782,
+              -0.047958902592885856
+            ],
+            [
+              -0.010200047479850226,
+              0.020465605520857882,
+              -0.04795890259288568
+            ]
+          ],
+          "midpoint_tcp": [
+            -0.01019599999999993,
+            3.122502256758253e-17,
+            -0.047958902592885766
+          ],
+          "gap_m": 0.040931211842185206,
+          "area_m2": [
+            0.0007191648182220738,
+            0.0007191648182220725
+          ],
+          "distal_reach_m": 0.07468658297675163
+        },
+        "translation_object_m": [
+          -0.04349192883038226,
+          0.024796377768688718,
+          0.010968369706415576
+        ],
+        "translation_norm_m": 0.05125147176278132,
+        "alignment_ready_time_s": 0.71,
+        "precontact_envelope_m": 0.10619096978493349,
+        "max_ik_position_error_m": 0.000998332389471364,
+        "max_ik_rotation_error_rad": 0.009711280850947919,
+        "pad_definition": "area-weighted inward distal collision faces, proxy checked against source visual insert",
+        "gripper_policy": "source commands unchanged; inferred aperture is calibration only"
+      }
+    },
+    {
+      "episode": "b6c2b8facf7aa4c978b6bd6d",
+      "source_sequence": "source/stack/demo_0",
+      "variants": {
+        "before": {
+          "path": "runs/dynamics/pad_alignment/translation_final/before/b6c2b8facf7aa4c978b6bd6d",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": false,
+          "grasp_drift_available": false,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "bilateral_lifted_grasp",
+            "carry_contact_95pct",
+            "object_environment_penetration_2mm",
+            "joint_margin_25mrad"
+          ],
+          "max_lift_m": 0.0,
+          "max_hand_object_penetration_m": 0.0,
+          "bilateral_carry_fraction": 0.0,
+          "max_grasp_drift_m": null,
+          "max_grasp_drift_deg": null,
+          "final_stable_s": 0.0,
+          "result_sha256": "552ad935090e3db0aff4bc9b4917bc24c20a0dc3906bc603a0dce94289ff5f97",
+          "replay_sha256": "4fbe0f0b81b9e25059a7e8394bc710825463361438b87f716d7c35553d9567c9",
+          "actuator_audit_sha256": "8e726ec8332d41e83e9464a6676696108525c8e213308baaf1876bb9fbf3254b",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": false,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": true,
+            "hand_object_penetration_1mm": true,
+            "robot_environment_penetration_2mm": true,
+            "object_environment_penetration_2mm": false,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": true,
+            "actual_base_speed_limits": true,
+            "joint_margin_25mrad": false,
+            "self_clearance_9mm": true,
+            "rollout_complete": true
+          }
+        },
+        "after": {
+          "path": "runs/dynamics/pad_alignment/translation_final/after/b6c2b8facf7aa4c978b6bd6d",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": false,
+          "grasp_drift_available": false,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "bilateral_lifted_grasp",
+            "carry_contact_95pct",
+            "hand_object_penetration_1mm",
+            "object_environment_penetration_2mm",
+            "joint_margin_25mrad"
+          ],
+          "max_lift_m": 0.0,
+          "max_hand_object_penetration_m": 0.0013095078518244635,
+          "bilateral_carry_fraction": 0.0,
+          "max_grasp_drift_m": null,
+          "max_grasp_drift_deg": null,
+          "final_stable_s": 0.0,
+          "result_sha256": "8f52545fc7d204b6759eb1ed7e64830af4d06a9bdd8dde7c2c7eb14bed61a1f4",
+          "replay_sha256": "06e8a972716263a0556b4799cfea8e774ea9cd86bb9646658c9f07f14c4a69d4",
+          "actuator_audit_sha256": "20c12a1eded3273f0fa3290d135ab1bb48430237c9b7a5f98b269a754ac39f42",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": false,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": true,
+            "hand_object_penetration_1mm": false,
+            "robot_environment_penetration_2mm": true,
+            "object_environment_penetration_2mm": false,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": true,
+            "actual_base_speed_limits": true,
+            "joint_margin_25mrad": false,
+            "self_clearance_9mm": true,
+            "rollout_complete": true
+          }
+        }
+      },
+      "frozen_factor_checks": {
+        "identical_scene": true,
+        "time_s": true,
+        "gripper": true,
+        "object_goals": true,
+        "initial/qpos": true,
+        "initial/qvel": true,
+        "initial/ctrl": true,
+        "base_and_inactive_arm_reference": true,
+        "target_orientation": true,
+        "base_inactive_arm_gripper_actuator_commands": true,
+        "uncorrected_free_interval_targets": true,
+        "uncorrected_free_interval_joint_reference": true
+      },
+      "alignment": {
+        "source_anchor_frame": 56,
+        "retarget_anchor_frame": 280,
+        "source_grasp_point_object_m": [
+          -0.0007385729022502466,
+          -0.012128240975501088,
+          -0.007106619187951968
+        ],
+        "section": {
+          "width_m": 0.04000534611629402,
+          "center_object": [
+            -0.0009339504813004638,
+            0.0,
+            -0.007140521576162526
+          ],
+          "collision_regions": [
+            "cubeA_g0"
+          ],
+          "line_bounds_m": [
+            -0.032132535008315505,
+            0.007872811107978514
+          ]
+        },
+        "inferred_contact_angle_rad": 0.9384052507792314,
+        "pad": {
+          "points_tcp": [
+            [
+              -0.010191952520149454,
+              -0.020002672648649487,
+              -0.047908090162480196
+            ],
+            [
+              -0.01020004747985019,
+              0.020002672648649487,
+              -0.047908090162480356
+            ]
+          ],
+          "midpoint_tcp": [
+            -0.010195999999999822,
+            0.0,
+            -0.04790809016248028
+          ],
+          "gap_m": 0.04000534611629418,
+          "area_m2": [
+            0.0007191648182220727,
+            0.0007191648182220713
+          ],
+          "distal_reach_m": 0.07443447957288787
+        },
+        "translation_object_m": [
+          0.04778245368171841,
+          0.012991738325327365,
+          0.00896496035479424
+        ],
+        "translation_norm_m": 0.050322148788802507,
+        "alignment_ready_time_s": 0.67,
+        "precontact_envelope_m": 0.10572803692198782,
+        "max_ik_position_error_m": 0.000998862138732102,
+        "max_ik_rotation_error_rad": 0.0099751053601545,
+        "pad_definition": "area-weighted inward distal collision faces, proxy checked against source visual insert",
+        "gripper_policy": "source commands unchanged; inferred aperture is calibration only"
+      }
+    },
+    {
+      "episode": "c1f6fdd7b4fa919be783b8a6",
+      "source_sequence": "source/threading/demo_0",
+      "variants": {
+        "before": {
+          "path": "runs/dynamics/pad_alignment/translation_final/before/c1f6fdd7b4fa919be783b8a6",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": false,
+          "grasp_drift_available": false,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "bilateral_lifted_grasp",
+            "carry_contact_95pct",
+            "robot_environment_penetration_2mm",
+            "actual_base_speed_limits"
+          ],
+          "max_lift_m": 0.0,
+          "max_hand_object_penetration_m": 0.0,
+          "bilateral_carry_fraction": 0.0,
+          "max_grasp_drift_m": null,
+          "max_grasp_drift_deg": null,
+          "final_stable_s": 0.0,
+          "result_sha256": "3f01a5c1cde1b4ef3dc8b68cdd648b890c30486ed45a90c3afdbadb1e6b766f8",
+          "replay_sha256": "85b67ddaeb57c2cadea10e12b486727d0a5423c85b65d2889c9e91820198af14",
+          "actuator_audit_sha256": "e46b269e5137bb7889c1105135ba0cb929a5c5b6cbd5153b6d6a1b52651f5ec8",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": false,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": true,
+            "hand_object_penetration_1mm": true,
+            "robot_environment_penetration_2mm": false,
+            "object_environment_penetration_2mm": true,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": true,
+            "actual_base_speed_limits": false,
+            "joint_margin_25mrad": true,
+            "self_clearance_9mm": true,
+            "rollout_complete": true
+          }
+        },
+        "after": {
+          "path": "runs/dynamics/pad_alignment/translation_final/after/c1f6fdd7b4fa919be783b8a6",
+          "status": "physical_fail",
+          "actuator_replay_pass": true,
+          "bilateral_grasp_acquired": false,
+          "grasp_drift_available": false,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "bilateral_lifted_grasp",
+            "carry_contact_95pct",
+            "robot_environment_penetration_2mm",
+            "actual_arm_speed_1rad_s",
+            "actual_base_speed_limits"
+          ],
+          "max_lift_m": 0.0,
+          "max_hand_object_penetration_m": 0.0,
+          "bilateral_carry_fraction": 0.0,
+          "max_grasp_drift_m": null,
+          "max_grasp_drift_deg": null,
+          "final_stable_s": 0.0,
+          "result_sha256": "b4d216d8f94b4c8cd1491c97eca72367b506db7e5a18b134218ac5e2ac9895f5",
+          "replay_sha256": "b788af1f79aa15e2df44d1f02c3c1dc708ba4086a26e87e7540081a4d44cb827",
+          "actuator_audit_sha256": "40d3c18fe272ce077020dd9df7963f6aab6485ac567eb5a08a0c832e352d2a2d",
+          "max_replay_error": 0.0,
+          "gate_results": {
+            "task_stable_final_1s": false,
+            "bilateral_lifted_grasp": false,
+            "carry_contact_95pct": false,
+            "grasp_translation_3mm": true,
+            "grasp_rotation_3deg": true,
+            "hand_object_penetration_1mm": true,
+            "robot_environment_penetration_2mm": false,
+            "object_environment_penetration_2mm": true,
+            "no_nonhand_object_robot_contact": true,
+            "robot_self_penetration_2mm": true,
+            "actual_arm_speed_1rad_s": false,
+            "actual_base_speed_limits": false,
+            "joint_margin_25mrad": true,
+            "self_clearance_9mm": true,
+            "rollout_complete": true
+          }
+        }
+      },
+      "frozen_factor_checks": {
+        "identical_scene": true,
+        "time_s": true,
+        "gripper": true,
+        "object_goals": true,
+        "initial/qpos": true,
+        "initial/qvel": true,
+        "initial/ctrl": true,
+        "base_and_inactive_arm_reference": true,
+        "target_orientation": true,
+        "base_inactive_arm_gripper_actuator_commands": true,
+        "uncorrected_free_interval_targets": true,
+        "uncorrected_free_interval_joint_reference": true
+      },
+      "alignment": {
+        "source_anchor_frame": 64,
+        "retarget_anchor_frame": 335,
+        "source_grasp_point_object_m": [
+          0.0002484588205004523,
+          0.058948636433876336,
+          -0.0074373020269309364
+        ],
+        "section": {
+          "width_m": 0.08124861139955514,
+          "center_object": [
+            0.0017667897989975805,
+            0.040310042518582036,
+            -0.0036632498961852817
+          ],
+          "collision_regions": [
+            "needle_obj_handle",
+            "needle_obj_needle"
+          ],
+          "line_bounds_m": [
+            -0.0215469373910958,
+            0.05970167400845934
+          ]
+        },
+        "inferred_contact_angle_rad": 1.8284357273767387,
+        "pad": {
+          "points_tcp": [
+            [
+              -0.010191952520150028,
+              -0.04062430549814809,
+              -0.045949656747490415
+            ],
+            [
+              -0.010200047479850394,
+              0.04062430549814811,
+              -0.045949656747490485
+            ]
+          ],
+          "midpoint_tcp": [
+            -0.010196000000000212,
+            1.0408340855860843e-17,
+            -0.04594965674749045
+          ],
+          "gap_m": 0.08124861139955462,
+          "area_m2": [
+            0.0007191648182220721,
+            0.0007191648182220736
+          ],
+          "distal_reach_m": 0.08418983901295693
+        },
+        "translation_object_m": [
+          0.046246047827265505,
+          -0.012431293769741652,
+          0.016404529166959423
+        ],
+        "translation_norm_m": 0.05061958693649098,
+        "alignment_ready_time_s": 1.43,
+        "precontact_envelope_m": 0.12634966956361843,
+        "max_ik_position_error_m": 0.0009990933196243545,
+        "max_ik_rotation_error_rad": 0.009999833102596,
+        "pad_definition": "area-weighted inward distal collision faces, proxy checked against source visual insert",
+        "gripper_policy": "source commands unchanged; inferred aperture is calibration only"
+      }
+    }
+  ],
+  "source_interval": "complete",
+  "search": false,
+  "finished": "2026-10-07T06:18:22.030335+00:00",
+  "verification": {
+    "offline_tests_passed": 288,
+    "raw_files_unchanged": 54,
+    "raw_bytes_unchanged": 673639339,
+    "physical_rollouts": 11,
+    "actuator_replays_pass": 11,
+    "physics_passes": 0,
+    "after_ik_rejections": 1,
+    "unique_source_episodes": 6,
+    "branch": "main",
+    "not_unseen_object_evaluation": true
+  }
+}

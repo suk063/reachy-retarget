@@ -1,0 +1,1967 @@
+{
+  "manifest": {
+    "jobs": [
+      {
+        "dataset": "bigym",
+        "id": "feasible-bigym-pad-physics-v1-source",
+        "ik_attempt": "queue/tasks/feasible-speed-and-pad-v1-bigym-pad-calibrated/attempts/1791366722612140241-reachy-retarget-worker-7d46748688-pskjs",
+        "native_assets": "workspaces/bigym-native-assets-c795-20261007-01",
+        "operation": "bigym_physics_diagnostic",
+        "parent_task": "bigym-original-c795f62efb4f4d20ab899af96d766a2f",
+        "runtime_source_sha256": "f78c8d9dc1e39fe41cad80579232ab0016de4bcbc4767974f420b3496be8ed74",
+        "source_replay": "queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay",
+        "timing": {
+          "arm_speed_rad_s": 0.8,
+          "base_axis_speed_m_s": 0.6,
+          "base_yaw_speed_rad_s": 1.2,
+          "interval_grid_s": 0.002
+        }
+      },
+      {
+        "dataset": "bigym",
+        "id": "feasible-bigym-pad-physics-v1-contact4ms",
+        "ik_attempt": "queue/tasks/feasible-speed-and-pad-v1-bigym-pad-calibrated/attempts/1791366722612140241-reachy-retarget-worker-7d46748688-pskjs",
+        "native_assets": "workspaces/bigym-native-assets-c795-20261007-01",
+        "operation": "bigym_physics_diagnostic",
+        "parent_task": "bigym-original-c795f62efb4f4d20ab899af96d766a2f",
+        "runtime_source_sha256": "f78c8d9dc1e39fe41cad80579232ab0016de4bcbc4767974f420b3496be8ed74",
+        "simulation_profile": "global-contact-4ms",
+        "source_replay": "queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay",
+        "timing": {
+          "arm_speed_rad_s": 0.8,
+          "base_axis_speed_m_s": 0.6,
+          "base_yaw_speed_rad_s": 1.2,
+          "interval_grid_s": 0.002
+        }
+      }
+    ],
+    "label": "feasible-bigym-pad-physics-v1",
+    "policy": "Paired full-available-source-pose-interval Reachy simulations using the same native-geometry-calibrated leftpad IK and fixed2ms derived timing grid. Original sourcecontact vs explicit global4ms alternative. Object geometry/inertia/friction and task predicate unchanged; common physical gates+independent actuator replay. Post-action source reset at.002s is explicitly retained."
+  },
+  "jobs": [
+    {
+      "job": {
+        "dataset": "bigym",
+        "id": "feasible-bigym-pad-physics-v1-source",
+        "ik_attempt": "queue/tasks/feasible-speed-and-pad-v1-bigym-pad-calibrated/attempts/1791366722612140241-reachy-retarget-worker-7d46748688-pskjs",
+        "native_assets": "workspaces/bigym-native-assets-c795-20261007-01",
+        "operation": "bigym_physics_diagnostic",
+        "parent_task": "bigym-original-c795f62efb4f4d20ab899af96d766a2f",
+        "runtime_source_sha256": "f78c8d9dc1e39fe41cad80579232ab0016de4bcbc4767974f420b3496be8ed74",
+        "source_replay": "queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay",
+        "timing": {
+          "arm_speed_rad_s": 0.8,
+          "base_axis_speed_m_s": 0.6,
+          "base_yaw_speed_rad_s": 1.2,
+          "interval_grid_s": 0.002
+        }
+      },
+      "result": {
+        "actuator_scope": "Reachy base, arms, neck and grippers only",
+        "admission": {
+          "accepted": true,
+          "max_robot_penetration_m": 0.0,
+          "penetration_limit_m": 0.002,
+          "physics_validated": false,
+          "plate_floor_contact": false,
+          "plate_pad_contact": false,
+          "plate_table_contact": false,
+          "plate_target_contact": false,
+          "reset_semantics": "First archived post-action source plate pose and velocity, then fully free dynamics; robot initialized from derived first IK row",
+          "robot_contacts": [
+            {
+              "body1": "floor",
+              "body2": "drivewhl1_link",
+              "geom1": "floor",
+              "geom2": "drivewhl1_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl1_link",
+              "geom1": "floor",
+              "geom2": "drivewhl1_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl2_link",
+              "geom1": "floor",
+              "geom2": "drivewhl2_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl2_link",
+              "geom1": "floor",
+              "geom2": "drivewhl2_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl3_link",
+              "geom1": "floor",
+              "geom2": "drivewhl3_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl3_link",
+              "geom1": "floor",
+              "geom2": "drivewhl3_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            }
+          ],
+          "scene_sha256": "bfc31f6976d5d7600c79ef22b01d4c4a6f00226e5207a61bb7b6060c4d554854",
+          "source_ik_attempt": "/mnt/reachy-retarget/queue/tasks/feasible-speed-and-pad-v1-bigym-pad-calibrated/attempts/1791366722612140241-reachy-retarget-worker-7d46748688-pskjs",
+          "source_ik_sha256": "19c8264e75c20f1366d05081c9acae5f85b9f4ca0c3acfc8674c0ab1c795179c",
+          "source_task_success": true
+        },
+        "archive": "/mnt/reachy-retarget/datasets/bigym/episodes/feasible-bigym-pad-physics-v1-source.hdf5",
+        "attempt": "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-source/attempts/1791366862325293856-reachy-retarget-worker-7d46748688-pskjs",
+        "common_validation": {
+          "acceleration_has_acceptance_threshold": false,
+          "actuator_replay": {
+            "actuator_replay_pass": true,
+            "compared_terminal": true,
+            "control_rows": 9012,
+            "initial_time_s": 0.002,
+            "max_absolute_errors": {
+              "clock": 0.0,
+              "object_pose": 1.2212453270876722e-15,
+              "qpos": 0.0,
+              "qvel": 0.0
+            },
+            "meaning": "Exact actuator replay, separate from task and common physical gate success",
+            "object_assistance": false,
+            "object_state_assignments": "one recorded integration-state reset only",
+            "physical_steps": 9012,
+            "runtime_mujoco_version": "3.15.0",
+            "scene_asset_hashes": {
+              "hfields": {},
+              "meshes": {
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-source/attempts/1791366862325293856-reachy-retarget-worker-7d46748688-pskjs/reachy-assets/data/assets/reachy_mujoco_state/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-source/attempts/1791366862325293856-reachy-retarget-worker-7d46748688-pskjs/reachy-assets/data/assets/reachy_mujoco_state/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-source/attempts/1791366862325293856-reachy-retarget-worker-7d46748688-pskjs/reachy-assets/data/assets/reachy_mujoco_state/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-source/attempts/1791366862325293856-reachy-retarget-worker-7d46748688-pskjs/reachy-assets/data/assets/reachy_mujoco_state/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-source/attempts/1791366862325293856-reachy-retarget-worker-7d46748688-pskjs/reachy-assets/data/assets/reachy_mujoco_state/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-source/attempts/1791366862325293856-reachy-retarget-worker-7d46748688-pskjs/reachy-assets/data/assets/reachy_mujoco_state/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-source/attempts/1791366862325293856-reachy-retarget-worker-7d46748688-pskjs/reachy-assets/data/assets/reachy_mujoco_state/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/base-e5dacbcc3971bfdb549ff8c7d38ea873ca7f2933.stl": "1c7b9f2bd92d705fc4e897c94e905973a3c05f406845e942229433deb7041453",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/base_mount-22e57178defe77afb6bdd333bfae16607f1eb3dd.stl": "87971dfdd6e5311b5a723e7b73c4701ebf5c2364df671500f30dfc1c53c8e61a",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/coupler-0a4240dc94992944cca6ec9e270ff1658fa86c55.stl": "d5ee95e62f8415bf5b6e503c831a958f5fc1990bf9b2865329ec38a28932727c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/driver-97efa43184c575b31ff1f3980641896f51492762.stl": "bbd6e868b1778bead60d2516c7ede581d7ad4e431744b1828757d6ea5129c112",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/follower-39e4b8048f1395ee38cb45b37b5fec0e6f2aaec9.stl": "633793332c081641ce200df27a40643cc293b29956e3cb5cb29cb811c33ef1c7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_ankle_link-7b3e177ce59314da1a0d1e43be29ce2ce95fafb7.stl": "f623223b59d0f8cd86a799f409f4e8680da3e48d9b60e9f4bf9dad5c5dc8ac25",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_elbow_link-4ec4ac14ef4c3fe15d7bfb6f56b0de39c33b7138.stl": "5ccf9bc83a751c1965b692e75534e57ee3c8a0916cbcff2ccccd8fe2b9d818d7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_hip_pitch_link-a117f6124d5faaca23025e0adf62feffe9ba4004.stl": "aa790c31ffc100cd182f2bf4480e7bfda675edc58ed8f361b6553a4975c9de3b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_hip_roll_link-357d6dfd2955a19b686f1739678fabeab41a331e.stl": "8ed880cf1171e048cfe50489fe2546c32790ac0c24a2b3b4c560495401013552",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_hip_yaw_link-494e2431c66e182a535ce4cf2d4dc4b2028b6ff4.stl": "103a854e684b84e1baba7d073822079069c64d0fa7b1592f29d38bd29f545bfb",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_knee_link-b3f1dc3282a07758c360cc832370f7d31e6f183f.stl": "efda8a6c54406c788102c0d6e59ea95e24114607bc2da9a2bf7f287ef7e48109",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_shoulder_pitch_link-db61428f6606af254eae566cf43abcc9a5646dfa.stl": "42e1db49464ca0f44f933114ee426e7f6d6310d20cf104bfa38b5ed4794cfab7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_shoulder_roll_link-0a25e37b165e6b3a70bb9004166e898c6c48f597.stl": "8d3bcf767d72a9a5d7dae539eae79dc4132f0159b8803a6f6f2f9ad4b7e94d19",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_shoulder_yaw_link-e59c21b2ab06f40100090a2d941bf30c101c0916.stl": "e22a5b53f8f307e6c5d6c17f9ceae4852c6468547a951cb39dfdec9ee414b515",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/logo_link-10057dae98625f181444678810ff8cea114d3937.stl": "ef9635c847ca7cd61aeaed86ad599935b648fb6f8688867c0448917b1811511b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/pad-e6a633b2c81740b1f783ec4c6e695c8cc570f09d.stl": "4af1fa8d9bb285abecbf5dfc88e74cb30f059a7a074c2030dc35e9ee4316019d",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/pelvis-df22b3c8ffb402f0a99f99a1ff69c6d06df6824b.stl": "dc2cbbeb07d3b63bce9fedeb8cf5252609dca1e89380734d22d5b3c8ded2f15c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01-aa92739e05447df3440ecea0d54e94bbe05dead8.obj": "59d10edd771eafbc2d27f1a8a7c6b7e68c02ccbfed4cfd50caae180d3100477e",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_001-7ee0ac09ed2a9cb006c37df80c8d70b7d616714f.obj": "2650a2f636d87dc5232ccd65d833495cc1791d3ad124f08701e05cc18dd33704",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_002-16c44556f076e00ba23c11eb2714a4e0db221238.obj": "bf010a2f8d058e4973c9b7917f5799348aa6062fa85f6ac532516a6b98893a99",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_003-e4e326a87153a3dbc5884574042fbd6451aebbac.obj": "6bb5f917aa3d03f68d33629e75c4fa8226788ef2d1062a3f5cbfb24e219599fd",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_004-9b53bb5bbb6b2f12d545d7aed4e797d2d9276938.obj": "92c34e6b70157cda6c1e22065ceb0dc6287268f5af251f9d36dd3414e90b1654",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_005-d0492ed204282093ee447dee7e6a785aa539ca24.obj": "721ea44348a59fd0565a4ca019a1c352b399dbc9b0a8aecefd7a5a5c616f096e",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_006-6ecb94c9efd09455d04e63c528b3349613a147df.obj": "7cfca2b36fa38192332a37af8ce78351ed715c7f15f3e3bb1745a06c0380b54d",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_007-4ec74df3bf67bd120b19412a73ae87ccae5a36a1.obj": "537565dcdc74cc3b46c57762ef57e0acab3b7d40dc4caf3d425ac77795a4c4f7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_008-5c542fa48ca0cb523856fb8cf6f5ef2d747c8807.obj": "8cb5b69529d28e6bc43384f5b5bc21f6e646934a437355291c31aca4e61f164b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_009-2fa81743e2eea60c263c9134a74d29d7ad47115d.obj": "959571dbb91fe78b33dbca32ed3013f073fc3315d66fcb2517ae128bc1591db1",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_010-54bed5ac98c71dd393fe373eee4b5a87b5009a2b.obj": "f7de420f741dbc34629720dcde87677da478a9514757a34d9cea1883ca7222c7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_011-391e1f4a1b817edf0feb4249a8b798299d68b345.obj": "80272338d1f9fa55de83d5edd091be55f10ed1c811afb76dad8ecc5c1da31655",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_012-5d7fd83bcec103ae328bfa921fc568f1b67bac3b.obj": "d5490b2f0451b064b19602e09a84476da694065afb1f03b614a89a0447561740",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack-3d583e70e29f5f4db515f52c9a2532d9c962348d.obj": "1ef6878f8ea0956a2f0198bdd1b9ac99dd1462c950f82b739a5ddd50ebd2546d",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_001-277909de3994653857daec5e2da4bb002d4a12c1.obj": "835f881b08cea348174ea8bc933cc4e7432301692227094ac2c2012a1d842ffc",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_002-52cba1f95ad6418f07465e13cab68e2f51f7463e.obj": "05d4c45c5d5b03c13e625fa9b8841a3813bc47ee9c1837a7168056f00cd5f489",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_003-0ac717979ad9cf4926c4f3c6084424621fc181ce.obj": "d7e440819b3356658e8b55a71e7c4523b36b3fb216444762c85ecf9ed4adafc5",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_004-59998472513592aeb9d69ab0cf5905c1f4022748.obj": "b437010ba9d1a383bab3b50b5c811422b30108fa68e687963ffb950b685e1698",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_005-fdfa5a6ae4216af21d70748d8b7b0e6573332838.obj": "8038e53072be14f6d281b035a73d840cde20b3411d091f596f007280ae81a91c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_006-2da0df260c92af6255e16da00a4624bf2a5b6828.obj": "9d1a65fd018c1fc591ad3ed182ef2328ae4a7a0a52c1eb30e13e74d79e962884",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_007-178d3b1391288d8ab7b9ec12af54eef3ec3d9a88.obj": "7bebd223c12894313287276c1f3b5401f70b7e6a4ecfdaa1f8a38d78ae62d5ea",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_008-c794f476715a43d29d6d86e93b8df78e7673ea84.obj": "4f4bb8386bbc836d26aa9fc87f8561442f01a56ea306080507d0fdd64fc2dd13",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_009-0a7697ad832d2905eee06a06dfcd8f03503ed40e.obj": "923ab53a3a7a6fa90a8d9b9c198be0996c69cfbfed964eede3546ac7b367eb0c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_010-388a13b8ad8f97d31abe0f75c9c9e1fde548be00.obj": "b0f45946ec85a0e21a63f51ea7a761b1e32cbda46b698cae5bd245889b058e4d",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_011-8ce859b8c6aa16c9de0442be9ea57236b6803ac3.obj": "9dcfd7ef64d0922a018f958b5ee089089b6491049d3a51cdb3fc08a6cea79c56",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_012-1f2dfae6302975c6c426b46bb8c329934ebc9f06.obj": "c9780c61dfe8f27e067e4f0a96e3ef138b610d5c1d28aa9de626a3738216997b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_013-64ea1f8c359733c8e82892bddc0d7cdf2ad0d371.obj": "679e87f3d17e5d6f1619f5f38b48c55eaceee3217c03036d2582cb5d19248993",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_014-2df273503de613618d517f6486230a8da46a977c.obj": "d6c1cd3cbd25582b7562f439eab8354b6e23d8379171459cd25e93f1d91eb989",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_015-e131785ab9a51dd20ca5c892c5126042ffe6af8b.obj": "f18d59a2f668cf1fc4b130e5b1f0ebf0c2d7bf0fa88c9e6a2e3f1f7d6eba27d0",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_016-34e1e4f9abe3ef75bb4ff72ef934f829efd34ca2.obj": "6de5ea6af0880d2541735d7c270662c3f60740ff722ea74771f49036eed1556a",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_017-3f87c0b44aed67fdfb63703eff773ad7cb47fe52.obj": "91972c4378d9333af5e86902c0e995c768149f8cb11c7bb6ddc7b8977344af24",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_018-339d03a2ef88e508407cf75b3e00d04cf3b87330.obj": "695cefb8a1ef350bc87deaaab451277137b03697a97cdf04c56e645b8f0d5ea3",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_ankle_link-e221f4e4a4b92d59298e64ad0e229ec59aeaa811.stl": "a72e7b10d3961b5c5bb7b0ca09f20cbc203619f5ded33ca030517c06298d2fd9",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_elbow_link-c162ccfa1d51f1c81ef688664ca0f758f2aee107.stl": "bc1b2aa33cffda279b3e6a40b5b932b86de9cce6c41f0c0d860b442e81edcdc2",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_hip_pitch_link-8ea70aa41408ab69b27cf3f21bc3f18a34771403.stl": "3c0300dd96432f218857886007e9d4e8be038cd8b85e04e84a59df4de7f90476",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_hip_roll_link-13b6f0700f7b642bb41920412bbc8f21ad593f09.stl": "3e95b01b0a215e1d134545d4073cf7a72ab38ca33e35c606c03f1706d63588c6",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_hip_yaw_link-b5f7dfaf54b8c7e72c98388bf40626e27391db5d.stl": "10badbb0ac78e22fc220f421b1c919cfcf59406b412d78313e4b8b06cbc51e47",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_knee_link-34c63d03ee95c13e0705e2b6f22dcb6279a5fb93.stl": "6183abbaef2afc775c220853e403b8479022a99954dbeef829b39d71916ddeda",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_shoulder_pitch_link-51e52ba571074d048a8488abff55e99cf118a3a3.stl": "850ffa7321993bfadcdb8bab1d422239f6a20abe27daa5ef99622f55d4da3217",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_shoulder_roll_link-9686d47c6102e6fc601611fcbbe432a57bc75ea1.stl": "b9e793e351e09027d27427c06df2c1cb6b37c0205d0f68686b0d73916c6821de",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_shoulder_yaw_link-c9db09eeb683b883476f391b270db668c77fa0ab.stl": "0c9e4bec895f24c07fb2c4d132fc5e3cc7146155547267e9c270789af6567781",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/silicone_pad-c284384f3ca6dcdc24d6188a5d1a2d4c42c412ac.stl": "ca20c0fa61e6d3ce7b04bed25360e048e31dfd88ace04187aa6d9e8f4ca3fd0f",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/spring_link-8f50234325193b84e9f86b7a63a24560a389c9bf.stl": "4fb74a8a0d76c0e471cf19fd48bc676fd5b19123798e7a39eb6aa56869354283",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table-5e01ff7eba34315e402b748480ee0e9ffc0b9f46.obj": "0881eb3045a2fc398deb5d4090586a10da1c06a2febd873d75c88aa108259571",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_001-8d36f2a965e680e7c326435d5652b061f0930015.obj": "77d807a4909d0718b9bd81cba86d687a29c03d9d44491738117ff465e076e16c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_002-938bf1f6da2b9158ea27ba951eafbe4a50155f41.obj": "3f12e22da1b9edd57921e2f109b6a764db07ee7e8ed7e613c2b8e79ec75253d9",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_003-f6b265ab2616a1f5d37cfb6937af35e0cf97aa06.obj": "60366f1bc415c5101a3acb60e0b87477ed1f65a4feaa04cee61387a0c4402028",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_004-019b01237fad73fd080b5e834fab0343b4a5fd7f.obj": "b86bfa1b79663dc2e6df9cf68b597b6f31805025906ed41cf3d36afe959d1d8f",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_005-c164c36446594960020d53a1d6ffb1a23a6b9884.obj": "9d8ea9f9e98db11faca483fc36bbad404865a5a00649e2e3990142b61597017f",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_006-bcc7610a6f3fd5b588d7aeef4e9cb0ea1e9593ed.obj": "5f0bd63a25ce907b8aac617abbd2022f12df13fcc9129492f2ccf7f6b5dcd89b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_007-10500f34f5ccdbe230e81475e76676f372e421c0.obj": "aa44eee94796f444dbc75d1e9e5e8ba006814b58fc5a4eca9146cac4e40e5ca0",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_legs-9e0e06bf9ae21ff87d47388f766cd1557e923748.obj": "fc5dc3307a0ae259f36683ee19b944c21121a326aa62a0fb6e0bee9173c958d7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/torso_link-da0b2a088d5683280651d46d5379a9b4d02ed0e7.stl": "3ab785cbfbd851b0e9c59a46871aabc4718f3f8e726e21a2d14360d217ec7ba8"
+              },
+              "textures": {
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/drying_rack-1ee063bad31089158b6668e7f88fcca6dbd7d958.png": "89dbb8ad225caa37862a9088b38b14cd8a7381e09d84ef94dd22e1c1b5d9f736",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table-ee834850109e7b68c6d7297b546e3e436c6c06b6.png": "cad7d29f82484185662c511c2cb68c24c8fac6eb20d8e76f1e68ea3798dcf715"
+              }
+            },
+            "scene_sha256": "bfc31f6976d5d7600c79ef22b01d4c4a6f00226e5207a61bb7b6060c4d554854",
+            "terminal_time_s": 18.026000000000888
+          },
+          "arm_joint_names": [
+            "l_shoulder_pitch",
+            "l_shoulder_roll",
+            "l_elbow_yaw",
+            "l_elbow_pitch",
+            "l_wrist_roll",
+            "l_wrist_pitch",
+            "l_wrist_yaw",
+            "r_shoulder_pitch",
+            "r_shoulder_roll",
+            "r_elbow_yaw",
+            "r_elbow_pitch",
+            "r_wrist_roll",
+            "r_wrist_pitch",
+            "r_wrist_yaw"
+          ],
+          "best_stable_s": 0.005999999999996675,
+          "expected_steps": 9012,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "grasp_translation_3mm",
+            "grasp_rotation_3deg",
+            "object_environment_penetration_2mm",
+            "joint_margin_25mrad"
+          ],
+          "final_stable_s": 0.0,
+          "final_time_s": 18.026000000000888,
+          "forbidden_nonhand_object_contact_samples": 0,
+          "gates": {
+            "actual_arm_speed_1rad_s": true,
+            "actual_base_speed_limits": true,
+            "actuator_replay": true,
+            "bilateral_lifted_grasp": true,
+            "carry_contact_95pct": true,
+            "finite_integration": true,
+            "grasp_rotation_3deg": false,
+            "grasp_translation_3mm": false,
+            "hand_object_penetration_1mm": true,
+            "joint_margin_25mrad": false,
+            "no_nonhand_object_robot_contact": true,
+            "object_environment_penetration_2mm": false,
+            "robot_environment_penetration_2mm": true,
+            "robot_self_penetration_2mm": true,
+            "rollout_complete": true,
+            "self_clearance_9mm": true,
+            "task_stable_final_1s": false
+          },
+          "grasp_hands": {
+            "left": {
+              "acquired": true,
+              "bilateral_carry_fraction": 0.9980716253443522,
+              "grasp_rotation_rad": 0.5413716142796643,
+              "grasp_translation_m": 0.04085229248922752,
+              "measured_carry_duration_s": 7.260000000001131,
+              "phases": 1
+            }
+          },
+          "max_contact_depths_m": {
+            "hand_object": 0.0003082036715474878,
+            "object_environment": 0.004143205756627262,
+            "robot_environment": 1.3877787807814457e-17,
+            "robot_self": 0.0
+          },
+          "max_lift_m": 0.2276100782757895,
+          "min_joint_margin_rad": 0.024682808552445756,
+          "min_self_clearance_m": 0.06949589921316518,
+          "missing_fields": [],
+          "native_task_final": true,
+          "peak_arm_acceleration_rad_s2": [
+            45.19056917874972,
+            106.75670917865402,
+            29.228661171798812,
+            89.57689731973466,
+            60.52337452999293,
+            36.59684192793356,
+            27.21800652297124,
+            35.975726107647574,
+            85.0136014524086,
+            13.264275320248956,
+            65.27960424861087,
+            4.583917535971797,
+            10.585188693429355,
+            7.169212201888471
+          ],
+          "peak_arm_velocity_rad_s": [
+            0.44851639977727314,
+            0.7214829247125967,
+            0.7054312800028122,
+            0.7812558773759536,
+            0.3061116605575928,
+            0.4825499700534674,
+            0.6702392348899542,
+            0.43179685173095506,
+            0.39375342572825495,
+            0.5874892577229348,
+            0.7816738889182233,
+            0.3593702169838605,
+            0.4756338514786687,
+            0.7133493891747943
+          ],
+          "peak_base_velocity_local_vx_vy_wz": [
+            0.2509237636899118,
+            0.28817898517464485,
+            0.39992684675424617
+          ],
+          "physical_steps": 9012,
+          "physics_validated": false,
+          "protocol": "reachy-common-physical-gates-v1",
+          "scope": "Measured robot/task-object manipulation gates; producer must separately bind native source/model identity and task predicate. No object state, geometry, physics parameter or threshold changes.",
+          "thresholds": {
+            "acquisition_lift_m": 0.015,
+            "arm_speed_rad_s": 1.001,
+            "base_vx_m_s": 0.611,
+            "base_vy_m_s": 0.611,
+            "base_wz_rad_s": 1.9906753472735357,
+            "carry_bilateral_fraction": 0.95,
+            "final_stable_s": 1.0,
+            "grasp_rotation_rad": 0.05235987755982989,
+            "grasp_translation_m": 0.003,
+            "hand_object_depth_m": 0.001,
+            "joint_margin_rad": 0.025,
+            "object_environment_depth_m": 0.002,
+            "positive_contact_force_n": 1e-06,
+            "replay_absolute_tolerance": 1e-07,
+            "robot_environment_depth_m": 0.002,
+            "robot_self_depth_m": 0.002,
+            "self_clearance_m": 0.009,
+            "stable_angular_speed_rad_s": 0.2,
+            "stable_linear_speed_m_s": 0.02
+          },
+          "validation_complete": true,
+          "worst_contact_events": {
+            "hand_object": {
+              "depth_m": 0.0003082036715474878,
+              "geoms": [
+                "plate/collider_010",
+                "l_hand_distal_mimic_link_collision_0"
+              ],
+              "initial": false,
+              "time_s": 8.937999999999654
+            },
+            "object_environment": {
+              "depth_m": 0.004143205756627262,
+              "geoms": [
+                "dish_drainer//unnamed_geom_18",
+                "plate/collider_009"
+              ],
+              "initial": false,
+              "time_s": 0.09800000000000007
+            },
+            "robot_environment": {
+              "depth_m": 1.3877787807814457e-17,
+              "geoms": [
+                "floor",
+                "drivewhl1_link_collision_0"
+              ],
+              "initial": false,
+              "time_s": 0.016
+            },
+            "robot_self": null
+          }
+        },
+        "diagnostic_gate_passed": true,
+        "diagnostic_only": true,
+        "error": null,
+        "finished_unix": 1791366947.6464522,
+        "max_robot_penetration_m": 0.0003082036715474878,
+        "missing_common_validation_gates": [],
+        "native_scene_task_pass": true,
+        "native_task_predicate_final": {
+          "plate_floor_contact": false,
+          "plate_pad_contact": false,
+          "plate_table_contact": false,
+          "plate_target_contact": true,
+          "success": true,
+          "target_slot_distance_m": 0.03974557566361366,
+          "upright_error_rad": 0.21062428810945505
+        },
+        "object_state_writes_after_reset": 0,
+        "original_source_clock_preserved": true,
+        "penetration_limit_m": 0.002,
+        "physical_clock_matches_source": false,
+        "physical_steps": 9012,
+        "physics_validated": false,
+        "plate_floor_contact_any": false,
+        "robot_timing": {
+          "arm_target_speed_limit_rad_s": 0.8,
+          "base_axis_target_speed_limit_m_s": 0.6,
+          "base_yaw_target_speed_limit_rad_s": 1.2,
+          "derived_duration_s": 18.024,
+          "enabled": true,
+          "hardware_limit_claim": false,
+          "interval_duration_grid_s": 0.002,
+          "max_interval_time_factor": 32.99999999999997,
+          "measured_speed_validation": false,
+          "physical_steps": 9012,
+          "semantics": "Minimal interval-local speed-budget slowdown; unchanged source trajectory and explicit monotone time map",
+          "source_duration_s": 4.509999999999725
+        },
+        "scene_path": "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-source/attempts/1791366862325293856-reachy-retarget-worker-7d46748688-pskjs/scene.xml",
+        "scene_sha256": "bfc31f6976d5d7600c79ef22b01d4c4a6f00226e5207a61bb7b6060c4d554854",
+        "simulation_assumptions": [
+          "Original BiGym source version gap retained (recorded 4.0, public replay 4.1).",
+          "Reachy uses gravity-compensated ideal planar/arm/neck position servos; mobile wheel traction is not modeled.",
+          "Native task XML/mesh assets, masses, inertia, friction and contact parameters retained and checked.",
+          "Simulator version differs from native 3.1.5; this is a derived Reachy simulation."
+        ],
+        "simulation_profile": null,
+        "source_contact_parameters_preserved": true,
+        "source_frames": 2256,
+        "source_task_success": true,
+        "status": "diagnostic_task_pass",
+        "task_id": "feasible-bigym-pad-physics-v1-source",
+        "validation_scope": "Native scene task/contact diagnostic; common dynamics gates and source reproduction remain unresolved"
+      },
+      "claims": [
+        {
+          "time": 1791366863.1491556,
+          "worker": "reachy-retarget-worker-7d46748688-pskjs",
+          "finished_unix": 1791366947.6464522
+        }
+      ]
+    },
+    {
+      "job": {
+        "dataset": "bigym",
+        "id": "feasible-bigym-pad-physics-v1-contact4ms",
+        "ik_attempt": "queue/tasks/feasible-speed-and-pad-v1-bigym-pad-calibrated/attempts/1791366722612140241-reachy-retarget-worker-7d46748688-pskjs",
+        "native_assets": "workspaces/bigym-native-assets-c795-20261007-01",
+        "operation": "bigym_physics_diagnostic",
+        "parent_task": "bigym-original-c795f62efb4f4d20ab899af96d766a2f",
+        "runtime_source_sha256": "f78c8d9dc1e39fe41cad80579232ab0016de4bcbc4767974f420b3496be8ed74",
+        "simulation_profile": "global-contact-4ms",
+        "source_replay": "queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay",
+        "timing": {
+          "arm_speed_rad_s": 0.8,
+          "base_axis_speed_m_s": 0.6,
+          "base_yaw_speed_rad_s": 1.2,
+          "interval_grid_s": 0.002
+        }
+      },
+      "result": {
+        "actuator_scope": "Reachy base, arms, neck and grippers only",
+        "admission": {
+          "accepted": true,
+          "max_robot_penetration_m": 0.0,
+          "penetration_limit_m": 0.002,
+          "physics_validated": false,
+          "plate_floor_contact": false,
+          "plate_pad_contact": false,
+          "plate_table_contact": false,
+          "plate_target_contact": false,
+          "reset_semantics": "First archived post-action source plate pose and velocity, then fully free dynamics; robot initialized from derived first IK row",
+          "robot_contacts": [
+            {
+              "body1": "floor",
+              "body2": "drivewhl1_link",
+              "geom1": "floor",
+              "geom2": "drivewhl1_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl1_link",
+              "geom1": "floor",
+              "geom2": "drivewhl1_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl2_link",
+              "geom1": "floor",
+              "geom2": "drivewhl2_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl2_link",
+              "geom1": "floor",
+              "geom2": "drivewhl2_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl3_link",
+              "geom1": "floor",
+              "geom2": "drivewhl3_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl3_link",
+              "geom1": "floor",
+              "geom2": "drivewhl3_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            }
+          ],
+          "scene_sha256": "27d0f53fcb679ad410c63bfd042afd9cf3591440ad39b458cee49d7a091d07f1",
+          "source_ik_attempt": "/mnt/reachy-retarget/queue/tasks/feasible-speed-and-pad-v1-bigym-pad-calibrated/attempts/1791366722612140241-reachy-retarget-worker-7d46748688-pskjs",
+          "source_ik_sha256": "19c8264e75c20f1366d05081c9acae5f85b9f4ca0c3acfc8674c0ab1c795179c",
+          "source_task_success": true
+        },
+        "archive": "/mnt/reachy-retarget/datasets/bigym/episodes/feasible-bigym-pad-physics-v1-contact4ms.hdf5",
+        "attempt": "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-contact4ms/attempts/1791366862533612195-reachy-retarget-worker-7d46748688-ccchs",
+        "common_validation": {
+          "acceleration_has_acceptance_threshold": false,
+          "actuator_replay": {
+            "actuator_replay_pass": true,
+            "compared_terminal": true,
+            "control_rows": 18024,
+            "initial_time_s": 0.002,
+            "max_absolute_errors": {
+              "clock": 0.0,
+              "object_pose": 1.2212453270876722e-15,
+              "qpos": 0.0,
+              "qvel": 0.0
+            },
+            "meaning": "Exact actuator replay, separate from task and common physical gate success",
+            "object_assistance": false,
+            "object_state_assignments": "one recorded integration-state reset only",
+            "physical_steps": 18024,
+            "runtime_mujoco_version": "3.15.0",
+            "scene_asset_hashes": {
+              "hfields": {},
+              "meshes": {
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-contact4ms/attempts/1791366862533612195-reachy-retarget-worker-7d46748688-ccchs/reachy-assets/data/assets/reachy_mujoco_state/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-contact4ms/attempts/1791366862533612195-reachy-retarget-worker-7d46748688-ccchs/reachy-assets/data/assets/reachy_mujoco_state/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-contact4ms/attempts/1791366862533612195-reachy-retarget-worker-7d46748688-ccchs/reachy-assets/data/assets/reachy_mujoco_state/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-contact4ms/attempts/1791366862533612195-reachy-retarget-worker-7d46748688-ccchs/reachy-assets/data/assets/reachy_mujoco_state/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-contact4ms/attempts/1791366862533612195-reachy-retarget-worker-7d46748688-ccchs/reachy-assets/data/assets/reachy_mujoco_state/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-contact4ms/attempts/1791366862533612195-reachy-retarget-worker-7d46748688-ccchs/reachy-assets/data/assets/reachy_mujoco_state/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+                "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-contact4ms/attempts/1791366862533612195-reachy-retarget-worker-7d46748688-ccchs/reachy-assets/data/assets/reachy_mujoco_state/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/base-e5dacbcc3971bfdb549ff8c7d38ea873ca7f2933.stl": "1c7b9f2bd92d705fc4e897c94e905973a3c05f406845e942229433deb7041453",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/base_mount-22e57178defe77afb6bdd333bfae16607f1eb3dd.stl": "87971dfdd6e5311b5a723e7b73c4701ebf5c2364df671500f30dfc1c53c8e61a",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/coupler-0a4240dc94992944cca6ec9e270ff1658fa86c55.stl": "d5ee95e62f8415bf5b6e503c831a958f5fc1990bf9b2865329ec38a28932727c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/driver-97efa43184c575b31ff1f3980641896f51492762.stl": "bbd6e868b1778bead60d2516c7ede581d7ad4e431744b1828757d6ea5129c112",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/follower-39e4b8048f1395ee38cb45b37b5fec0e6f2aaec9.stl": "633793332c081641ce200df27a40643cc293b29956e3cb5cb29cb811c33ef1c7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_ankle_link-7b3e177ce59314da1a0d1e43be29ce2ce95fafb7.stl": "f623223b59d0f8cd86a799f409f4e8680da3e48d9b60e9f4bf9dad5c5dc8ac25",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_elbow_link-4ec4ac14ef4c3fe15d7bfb6f56b0de39c33b7138.stl": "5ccf9bc83a751c1965b692e75534e57ee3c8a0916cbcff2ccccd8fe2b9d818d7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_hip_pitch_link-a117f6124d5faaca23025e0adf62feffe9ba4004.stl": "aa790c31ffc100cd182f2bf4480e7bfda675edc58ed8f361b6553a4975c9de3b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_hip_roll_link-357d6dfd2955a19b686f1739678fabeab41a331e.stl": "8ed880cf1171e048cfe50489fe2546c32790ac0c24a2b3b4c560495401013552",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_hip_yaw_link-494e2431c66e182a535ce4cf2d4dc4b2028b6ff4.stl": "103a854e684b84e1baba7d073822079069c64d0fa7b1592f29d38bd29f545bfb",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_knee_link-b3f1dc3282a07758c360cc832370f7d31e6f183f.stl": "efda8a6c54406c788102c0d6e59ea95e24114607bc2da9a2bf7f287ef7e48109",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_shoulder_pitch_link-db61428f6606af254eae566cf43abcc9a5646dfa.stl": "42e1db49464ca0f44f933114ee426e7f6d6310d20cf104bfa38b5ed4794cfab7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_shoulder_roll_link-0a25e37b165e6b3a70bb9004166e898c6c48f597.stl": "8d3bcf767d72a9a5d7dae539eae79dc4132f0159b8803a6f6f2f9ad4b7e94d19",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/left_shoulder_yaw_link-e59c21b2ab06f40100090a2d941bf30c101c0916.stl": "e22a5b53f8f307e6c5d6c17f9ceae4852c6468547a951cb39dfdec9ee414b515",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/logo_link-10057dae98625f181444678810ff8cea114d3937.stl": "ef9635c847ca7cd61aeaed86ad599935b648fb6f8688867c0448917b1811511b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/pad-e6a633b2c81740b1f783ec4c6e695c8cc570f09d.stl": "4af1fa8d9bb285abecbf5dfc88e74cb30f059a7a074c2030dc35e9ee4316019d",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/pelvis-df22b3c8ffb402f0a99f99a1ff69c6d06df6824b.stl": "dc2cbbeb07d3b63bce9fedeb8cf5252609dca1e89380734d22d5b3c8ded2f15c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01-aa92739e05447df3440ecea0d54e94bbe05dead8.obj": "59d10edd771eafbc2d27f1a8a7c6b7e68c02ccbfed4cfd50caae180d3100477e",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_001-7ee0ac09ed2a9cb006c37df80c8d70b7d616714f.obj": "2650a2f636d87dc5232ccd65d833495cc1791d3ad124f08701e05cc18dd33704",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_002-16c44556f076e00ba23c11eb2714a4e0db221238.obj": "bf010a2f8d058e4973c9b7917f5799348aa6062fa85f6ac532516a6b98893a99",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_003-e4e326a87153a3dbc5884574042fbd6451aebbac.obj": "6bb5f917aa3d03f68d33629e75c4fa8226788ef2d1062a3f5cbfb24e219599fd",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_004-9b53bb5bbb6b2f12d545d7aed4e797d2d9276938.obj": "92c34e6b70157cda6c1e22065ceb0dc6287268f5af251f9d36dd3414e90b1654",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_005-d0492ed204282093ee447dee7e6a785aa539ca24.obj": "721ea44348a59fd0565a4ca019a1c352b399dbc9b0a8aecefd7a5a5c616f096e",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_006-6ecb94c9efd09455d04e63c528b3349613a147df.obj": "7cfca2b36fa38192332a37af8ce78351ed715c7f15f3e3bb1745a06c0380b54d",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_007-4ec74df3bf67bd120b19412a73ae87ccae5a36a1.obj": "537565dcdc74cc3b46c57762ef57e0acab3b7d40dc4caf3d425ac77795a4c4f7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_008-5c542fa48ca0cb523856fb8cf6f5ef2d747c8807.obj": "8cb5b69529d28e6bc43384f5b5bc21f6e646934a437355291c31aca4e61f164b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_009-2fa81743e2eea60c263c9134a74d29d7ad47115d.obj": "959571dbb91fe78b33dbca32ed3013f073fc3315d66fcb2517ae128bc1591db1",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_010-54bed5ac98c71dd393fe373eee4b5a87b5009a2b.obj": "f7de420f741dbc34629720dcde87677da478a9514757a34d9cea1883ca7222c7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_011-391e1f4a1b817edf0feb4249a8b798299d68b345.obj": "80272338d1f9fa55de83d5edd091be55f10ed1c811afb76dad8ecc5c1da31655",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/plate_01_collision_012-5d7fd83bcec103ae328bfa921fc568f1b67bac3b.obj": "d5490b2f0451b064b19602e09a84476da694065afb1f03b614a89a0447561740",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack-3d583e70e29f5f4db515f52c9a2532d9c962348d.obj": "1ef6878f8ea0956a2f0198bdd1b9ac99dd1462c950f82b739a5ddd50ebd2546d",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_001-277909de3994653857daec5e2da4bb002d4a12c1.obj": "835f881b08cea348174ea8bc933cc4e7432301692227094ac2c2012a1d842ffc",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_002-52cba1f95ad6418f07465e13cab68e2f51f7463e.obj": "05d4c45c5d5b03c13e625fa9b8841a3813bc47ee9c1837a7168056f00cd5f489",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_003-0ac717979ad9cf4926c4f3c6084424621fc181ce.obj": "d7e440819b3356658e8b55a71e7c4523b36b3fb216444762c85ecf9ed4adafc5",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_004-59998472513592aeb9d69ab0cf5905c1f4022748.obj": "b437010ba9d1a383bab3b50b5c811422b30108fa68e687963ffb950b685e1698",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_005-fdfa5a6ae4216af21d70748d8b7b0e6573332838.obj": "8038e53072be14f6d281b035a73d840cde20b3411d091f596f007280ae81a91c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_006-2da0df260c92af6255e16da00a4624bf2a5b6828.obj": "9d1a65fd018c1fc591ad3ed182ef2328ae4a7a0a52c1eb30e13e74d79e962884",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_007-178d3b1391288d8ab7b9ec12af54eef3ec3d9a88.obj": "7bebd223c12894313287276c1f3b5401f70b7e6a4ecfdaa1f8a38d78ae62d5ea",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_008-c794f476715a43d29d6d86e93b8df78e7673ea84.obj": "4f4bb8386bbc836d26aa9fc87f8561442f01a56ea306080507d0fdd64fc2dd13",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_009-0a7697ad832d2905eee06a06dfcd8f03503ed40e.obj": "923ab53a3a7a6fa90a8d9b9c198be0996c69cfbfed964eede3546ac7b367eb0c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_010-388a13b8ad8f97d31abe0f75c9c9e1fde548be00.obj": "b0f45946ec85a0e21a63f51ea7a761b1e32cbda46b698cae5bd245889b058e4d",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_011-8ce859b8c6aa16c9de0442be9ea57236b6803ac3.obj": "9dcfd7ef64d0922a018f958b5ee089089b6491049d3a51cdb3fc08a6cea79c56",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_012-1f2dfae6302975c6c426b46bb8c329934ebc9f06.obj": "c9780c61dfe8f27e067e4f0a96e3ef138b610d5c1d28aa9de626a3738216997b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_013-64ea1f8c359733c8e82892bddc0d7cdf2ad0d371.obj": "679e87f3d17e5d6f1619f5f38b48c55eaceee3217c03036d2582cb5d19248993",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_014-2df273503de613618d517f6486230a8da46a977c.obj": "d6c1cd3cbd25582b7562f439eab8354b6e23d8379171459cd25e93f1d91eb989",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_015-e131785ab9a51dd20ca5c892c5126042ffe6af8b.obj": "f18d59a2f668cf1fc4b130e5b1f0ebf0c2d7bf0fa88c9e6a2e3f1f7d6eba27d0",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_016-34e1e4f9abe3ef75bb4ff72ef934f829efd34ca2.obj": "6de5ea6af0880d2541735d7c270662c3f60740ff722ea74771f49036eed1556a",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_017-3f87c0b44aed67fdfb63703eff773ad7cb47fe52.obj": "91972c4378d9333af5e86902c0e995c768149f8cb11c7bb6ddc7b8977344af24",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/rack_collision_018-339d03a2ef88e508407cf75b3e00d04cf3b87330.obj": "695cefb8a1ef350bc87deaaab451277137b03697a97cdf04c56e645b8f0d5ea3",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_ankle_link-e221f4e4a4b92d59298e64ad0e229ec59aeaa811.stl": "a72e7b10d3961b5c5bb7b0ca09f20cbc203619f5ded33ca030517c06298d2fd9",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_elbow_link-c162ccfa1d51f1c81ef688664ca0f758f2aee107.stl": "bc1b2aa33cffda279b3e6a40b5b932b86de9cce6c41f0c0d860b442e81edcdc2",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_hip_pitch_link-8ea70aa41408ab69b27cf3f21bc3f18a34771403.stl": "3c0300dd96432f218857886007e9d4e8be038cd8b85e04e84a59df4de7f90476",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_hip_roll_link-13b6f0700f7b642bb41920412bbc8f21ad593f09.stl": "3e95b01b0a215e1d134545d4073cf7a72ab38ca33e35c606c03f1706d63588c6",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_hip_yaw_link-b5f7dfaf54b8c7e72c98388bf40626e27391db5d.stl": "10badbb0ac78e22fc220f421b1c919cfcf59406b412d78313e4b8b06cbc51e47",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_knee_link-34c63d03ee95c13e0705e2b6f22dcb6279a5fb93.stl": "6183abbaef2afc775c220853e403b8479022a99954dbeef829b39d71916ddeda",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_shoulder_pitch_link-51e52ba571074d048a8488abff55e99cf118a3a3.stl": "850ffa7321993bfadcdb8bab1d422239f6a20abe27daa5ef99622f55d4da3217",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_shoulder_roll_link-9686d47c6102e6fc601611fcbbe432a57bc75ea1.stl": "b9e793e351e09027d27427c06df2c1cb6b37c0205d0f68686b0d73916c6821de",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/right_shoulder_yaw_link-c9db09eeb683b883476f391b270db668c77fa0ab.stl": "0c9e4bec895f24c07fb2c4d132fc5e3cc7146155547267e9c270789af6567781",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/silicone_pad-c284384f3ca6dcdc24d6188a5d1a2d4c42c412ac.stl": "ca20c0fa61e6d3ce7b04bed25360e048e31dfd88ace04187aa6d9e8f4ca3fd0f",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/spring_link-8f50234325193b84e9f86b7a63a24560a389c9bf.stl": "4fb74a8a0d76c0e471cf19fd48bc676fd5b19123798e7a39eb6aa56869354283",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table-5e01ff7eba34315e402b748480ee0e9ffc0b9f46.obj": "0881eb3045a2fc398deb5d4090586a10da1c06a2febd873d75c88aa108259571",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_001-8d36f2a965e680e7c326435d5652b061f0930015.obj": "77d807a4909d0718b9bd81cba86d687a29c03d9d44491738117ff465e076e16c",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_002-938bf1f6da2b9158ea27ba951eafbe4a50155f41.obj": "3f12e22da1b9edd57921e2f109b6a764db07ee7e8ed7e613c2b8e79ec75253d9",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_003-f6b265ab2616a1f5d37cfb6937af35e0cf97aa06.obj": "60366f1bc415c5101a3acb60e0b87477ed1f65a4feaa04cee61387a0c4402028",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_004-019b01237fad73fd080b5e834fab0343b4a5fd7f.obj": "b86bfa1b79663dc2e6df9cf68b597b6f31805025906ed41cf3d36afe959d1d8f",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_005-c164c36446594960020d53a1d6ffb1a23a6b9884.obj": "9d8ea9f9e98db11faca483fc36bbad404865a5a00649e2e3990142b61597017f",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_006-bcc7610a6f3fd5b588d7aeef4e9cb0ea1e9593ed.obj": "5f0bd63a25ce907b8aac617abbd2022f12df13fcc9129492f2ccf7f6b5dcd89b",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_collision_007-10500f34f5ccdbe230e81475e76676f372e421c0.obj": "aa44eee94796f444dbc75d1e9e5e8ba006814b58fc5a4eca9146cac4e40e5ca0",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table_legs-9e0e06bf9ae21ff87d47388f766cd1557e923748.obj": "fc5dc3307a0ae259f36683ee19b944c21121a326aa62a0fb6e0bee9173c958d7",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/torso_link-da0b2a088d5683280651d46d5379a9b4d02ed0e7.stl": "3ab785cbfbd851b0e9c59a46871aabc4718f3f8e726e21a2d14360d217ec7ba8"
+              },
+              "textures": {
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/drying_rack-1ee063bad31089158b6668e7f88fcca6dbd7d958.png": "89dbb8ad225caa37862a9088b38b14cd8a7381e09d84ef94dd22e1c1b5d9f736",
+                "/mnt/reachy-retarget/workspaces/bigym-native-assets-c795-20261007-01/table-ee834850109e7b68c6d7297b546e3e436c6c06b6.png": "cad7d29f82484185662c511c2cb68c24c8fac6eb20d8e76f1e68ea3798dcf715"
+              }
+            },
+            "scene_sha256": "27d0f53fcb679ad410c63bfd042afd9cf3591440ad39b458cee49d7a091d07f1",
+            "terminal_time_s": 18.025999999999048
+          },
+          "arm_joint_names": [
+            "l_shoulder_pitch",
+            "l_shoulder_roll",
+            "l_elbow_yaw",
+            "l_elbow_pitch",
+            "l_wrist_roll",
+            "l_wrist_pitch",
+            "l_wrist_yaw",
+            "r_shoulder_pitch",
+            "r_shoulder_roll",
+            "r_elbow_yaw",
+            "r_elbow_pitch",
+            "r_wrist_roll",
+            "r_wrist_pitch",
+            "r_wrist_yaw"
+          ],
+          "best_stable_s": 0.020000000000024443,
+          "expected_steps": 18024,
+          "failure_reasons": [
+            "task_stable_final_1s",
+            "grasp_translation_3mm",
+            "grasp_rotation_3deg"
+          ],
+          "final_stable_s": 0.0,
+          "final_time_s": 18.025999999999048,
+          "forbidden_nonhand_object_contact_samples": 0,
+          "gates": {
+            "actual_arm_speed_1rad_s": true,
+            "actual_base_speed_limits": true,
+            "actuator_replay": true,
+            "bilateral_lifted_grasp": true,
+            "carry_contact_95pct": true,
+            "finite_integration": true,
+            "grasp_rotation_3deg": false,
+            "grasp_translation_3mm": false,
+            "hand_object_penetration_1mm": true,
+            "joint_margin_25mrad": true,
+            "no_nonhand_object_robot_contact": true,
+            "object_environment_penetration_2mm": true,
+            "robot_environment_penetration_2mm": true,
+            "robot_self_penetration_2mm": true,
+            "rollout_complete": true,
+            "self_clearance_9mm": true,
+            "task_stable_final_1s": false
+          },
+          "grasp_hands": {
+            "left": {
+              "acquired": true,
+              "bilateral_carry_fraction": 0.997510029049662,
+              "grasp_rotation_rad": 0.6320419851819837,
+              "grasp_translation_m": 0.04751146241114053,
+              "measured_carry_duration_s": 7.228999999998576,
+              "phases": 1
+            }
+          },
+          "max_contact_depths_m": {
+            "hand_object": 0.00036498899050196984,
+            "object_environment": 0.0017905449846892458,
+            "robot_environment": 1.3877787807814457e-17,
+            "robot_self": 0.0
+          },
+          "max_lift_m": 0.21953810628346515,
+          "min_joint_margin_rad": 0.025232361863469166,
+          "min_self_clearance_m": 0.06945038373858561,
+          "missing_fields": [],
+          "native_task_final": true,
+          "peak_arm_acceleration_rad_s2": [
+            161.05660638201275,
+            361.67862341184525,
+            68.61008295710647,
+            505.5601726662946,
+            44.804558273128,
+            146.58201777539446,
+            34.311248681662775,
+            169.99543992464845,
+            244.11290180216383,
+            82.9275914896442,
+            400.4999293577035,
+            31.008111486211845,
+            48.89347031192888,
+            8.052206427652719
+          ],
+          "peak_arm_velocity_rad_s": [
+            0.4476257886629807,
+            0.7764588484552392,
+            0.7057237376666624,
+            0.8326944877000186,
+            0.3091224643980618,
+            0.4811112757267955,
+            0.6677673755826831,
+            0.43313272081920223,
+            0.5194018943978546,
+            0.5874622902190644,
+            0.8730125917191598,
+            0.3609391641696231,
+            0.4758523553922114,
+            0.7124247397262882
+          ],
+          "peak_base_velocity_local_vx_vy_wz": [
+            0.364080592959086,
+            0.2769306960247064,
+            0.5710612592172067
+          ],
+          "physical_steps": 18024,
+          "physics_validated": false,
+          "protocol": "reachy-common-physical-gates-v1",
+          "scope": "Measured robot/task-object manipulation gates; producer must separately bind native source/model identity and task predicate. No object state, geometry, physics parameter or threshold changes.",
+          "thresholds": {
+            "acquisition_lift_m": 0.015,
+            "arm_speed_rad_s": 1.001,
+            "base_vx_m_s": 0.611,
+            "base_vy_m_s": 0.611,
+            "base_wz_rad_s": 1.9906753472735357,
+            "carry_bilateral_fraction": 0.95,
+            "final_stable_s": 1.0,
+            "grasp_rotation_rad": 0.05235987755982989,
+            "grasp_translation_m": 0.003,
+            "hand_object_depth_m": 0.001,
+            "joint_margin_rad": 0.025,
+            "object_environment_depth_m": 0.002,
+            "positive_contact_force_n": 1e-06,
+            "replay_absolute_tolerance": 1e-07,
+            "robot_environment_depth_m": 0.002,
+            "robot_self_depth_m": 0.002,
+            "self_clearance_m": 0.009,
+            "stable_angular_speed_rad_s": 0.2,
+            "stable_linear_speed_m_s": 0.02
+          },
+          "validation_complete": true,
+          "worst_contact_events": {
+            "hand_object": {
+              "depth_m": 0.00036498899050196984,
+              "geoms": [
+                "plate/collider_011",
+                "l_hand_distal_mimic_link_collision_0"
+              ],
+              "initial": false,
+              "time_s": 8.921000000000495
+            },
+            "object_environment": {
+              "depth_m": 0.0017905449846892458,
+              "geoms": [
+                "dish_drainer//unnamed_geom_13",
+                "plate/collider_007"
+              ],
+              "initial": true,
+              "time_s": 0.002
+            },
+            "robot_environment": {
+              "depth_m": 1.3877787807814457e-17,
+              "geoms": [
+                "floor",
+                "drivewhl1_link_collision_0"
+              ],
+              "initial": false,
+              "time_s": 0.006
+            },
+            "robot_self": null
+          }
+        },
+        "diagnostic_gate_passed": true,
+        "diagnostic_only": true,
+        "error": null,
+        "finished_unix": 1791366979.3945248,
+        "max_robot_penetration_m": 0.00036498899050196984,
+        "missing_common_validation_gates": [],
+        "native_scene_task_pass": true,
+        "native_task_predicate_final": {
+          "plate_floor_contact": false,
+          "plate_pad_contact": false,
+          "plate_table_contact": false,
+          "plate_target_contact": true,
+          "success": true,
+          "target_slot_distance_m": 0.03235332473706075,
+          "upright_error_rad": 0.22192355260242655
+        },
+        "object_state_writes_after_reset": 0,
+        "original_source_clock_preserved": true,
+        "penetration_limit_m": 0.002,
+        "physical_clock_matches_source": false,
+        "physical_steps": 18024,
+        "physics_validated": false,
+        "plate_floor_contact_any": false,
+        "robot_timing": {
+          "arm_target_speed_limit_rad_s": 0.8,
+          "base_axis_target_speed_limit_m_s": 0.6,
+          "base_yaw_target_speed_limit_rad_s": 1.2,
+          "derived_duration_s": 18.024,
+          "enabled": true,
+          "hardware_limit_claim": false,
+          "interval_duration_grid_s": 0.002,
+          "max_interval_time_factor": 32.99999999999997,
+          "measured_speed_validation": false,
+          "physical_steps": 18024,
+          "semantics": "Minimal interval-local speed-budget slowdown; unchanged source trajectory and explicit monotone time map",
+          "source_duration_s": 4.509999999999725
+        },
+        "scene_path": "/mnt/reachy-retarget/queue/tasks/feasible-bigym-pad-physics-v1-contact4ms/attempts/1791366862533612195-reachy-retarget-worker-7d46748688-ccchs/scene.xml",
+        "scene_sha256": "27d0f53fcb679ad410c63bfd042afd9cf3591440ad39b458cee49d7a091d07f1",
+        "simulation_assumptions": [
+          "Original BiGym source version gap retained (recorded 4.0, public replay 4.1).",
+          "Reachy uses gravity-compensated ideal planar/arm/neck position servos; mobile wheel traction is not modeled.",
+          "Native task XML/mesh assets, masses, inertia, friction and contact parameters retained and checked.",
+          "Simulator version differs from native 3.1.5; this is a derived Reachy simulation.",
+          "Global positive contact time constants capped at4ms; original damping, impedance, friction and all object state/geometry/inertia preserved. Distinct from source-fidelity validation."
+        ],
+        "simulation_profile": {
+          "changed_contacts": [
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "floor"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "table/mesh"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "table/mesh_legs"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "table/collider_001"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "table/collider_002"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "table/collider_003"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "table/collider_004"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "table/collider_005"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "table/collider_006"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "table/collider_007"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_0"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_1"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_2"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_3"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_4"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_5"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_6"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_7"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_8"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_9"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_10"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_11"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_12"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_13"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_14"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_15"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_16"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_17"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer//unnamed_geom_18"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_0"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_1"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_2"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_3"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_4"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_5"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_6"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_7"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_8"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_9"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_10"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_11"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_12"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_13"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_14"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_15"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_16"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_17"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "dish_drainer_1//unnamed_geom_18"
+            },
+            {
+              "after": [
+                0.004,
+                1.0
+              ],
+              "before": [
+                0.02,
+                1.0
+              ],
+              "kind": "geom",
+              "name": "plate/mesh"
+            }
+          ],
+          "contact_time_constant_cap_s": 0.004,
+          "meaning": "Alternative global virtual contact stiffness assumption; never promoted as a pass under original source contact parameters",
+          "physics_validated": false,
+          "profile": "global-contact-4ms",
+          "reference": "https://mujoco.readthedocs.io/en/stable/modeling.html#solver-parameters",
+          "source_fidelity": false,
+          "timestep_s": 0.001,
+          "unchanged_model_arrays": [
+            "B_colind",
+            "B_rowadr",
+            "B_rownnz",
+            "D_colind",
+            "D_diag",
+            "D_rowadr",
+            "D_rownnz",
+            "M_colind",
+            "M_rowadr",
+            "M_rownnz",
+            "_sizes",
+            "actuator_acc0",
+            "actuator_actadr",
+            "actuator_actearly",
+            "actuator_actlimited",
+            "actuator_actnum",
+            "actuator_actrange",
+            "actuator_armature",
+            "actuator_biasprm",
+            "actuator_biastype",
+            "actuator_cranklength",
+            "actuator_ctrladr",
+            "actuator_ctrllimited",
+            "actuator_ctrlnum",
+            "actuator_ctrlrange",
+            "actuator_ctrlspec",
+            "actuator_damping",
+            "actuator_dampingpoly",
+            "actuator_delay",
+            "actuator_dynprm",
+            "actuator_dyntype",
+            "actuator_forcelimited",
+            "actuator_forcerange",
+            "actuator_gainprm",
+            "actuator_gaintype",
+            "actuator_gear",
+            "actuator_group",
+            "actuator_history",
+            "actuator_historyadr",
+            "actuator_length0",
+            "actuator_lengthrange",
+            "actuator_outadr",
+            "actuator_outnum",
+            "actuator_plugin",
+            "actuator_trnid",
+            "actuator_trntype",
+            "actuator_user",
+            "body_bvhadr",
+            "body_bvhnum",
+            "body_conaffinity",
+            "body_contype",
+            "body_dofadr",
+            "body_dofnum",
+            "body_geomadr",
+            "body_geomnum",
+            "body_gravcomp",
+            "body_inertia",
+            "body_invweight0",
+            "body_ipos",
+            "body_iquat",
+            "body_jntadr",
+            "body_jntnum",
+            "body_margin",
+            "body_mass",
+            "body_mocapid",
+            "body_parentid",
+            "body_plugin",
+            "body_pos",
+            "body_quat",
+            "body_rootid",
+            "body_sameframe",
+            "body_simple",
+            "body_subtreemass",
+            "body_treeid",
+            "body_user",
+            "body_weldid",
+            "bvh_aabb",
+            "bvh_child",
+            "bvh_depth",
+            "bvh_nodeid",
+            "cam_bodyid",
+            "cam_fovy",
+            "cam_intrinsic",
+            "cam_ipd",
+            "cam_mat0",
+            "cam_mode",
+            "cam_output",
+            "cam_pos",
+            "cam_pos0",
+            "cam_poscom0",
+            "cam_projection",
+            "cam_quat",
+            "cam_resolution",
+            "cam_sensorsize",
+            "cam_targetbodyid",
+            "cam_user",
+            "dof_M0",
+            "dof_Madr",
+            "dof_armature",
+            "dof_bodyid",
+            "dof_damping",
+            "dof_dampingpoly",
+            "dof_frictionloss",
+            "dof_invweight0",
+            "dof_jntid",
+            "dof_length",
+            "dof_parentid",
+            "dof_simplenum",
+            "dof_solimp",
+            "dof_solref",
+            "dof_treeid",
+            "efm0_L",
+            "efm0_L_colind",
+            "efm0_L_rowadr",
+            "efm0_L_rownnz",
+            "efm0_dofid",
+            "eq_active0",
+            "eq_data",
+            "eq_obj1id",
+            "eq_obj2id",
+            "eq_objtype",
+            "eq_solimp",
+            "eq_solref",
+            "eq_type",
+            "exclude_signature",
+            "flex_activelayers",
+            "flex_bending",
+            "flex_bendingadr",
+            "flex_bvhadr",
+            "flex_bvhnum",
+            "flex_cellnum",
+            "flex_centered",
+            "flex_conaffinity",
+            "flex_condim",
+            "flex_contype",
+            "flex_damping",
+            "flex_dim",
+            "flex_edge",
+            "flex_edgeadr",
+            "flex_edgedamping",
+            "flex_edgeequality",
+            "flex_edgeflap",
+            "flex_edgenum",
+            "flex_edgestiffness",
+            "flex_elem",
+            "flex_elemadr",
+            "flex_elemdataadr",
+            "flex_elemedge",
+            "flex_elemedgeadr",
+            "flex_elemlayer",
+            "flex_elemnum",
+            "flex_elemtexcoord",
+            "flex_flatskin",
+            "flex_friction",
+            "flex_gap",
+            "flex_group",
+            "flex_interp",
+            "flex_margin",
+            "flex_matid",
+            "flex_node",
+            "flex_node0",
+            "flex_nodeadr",
+            "flex_nodebodyid",
+            "flex_nodenum",
+            "flex_passive",
+            "flex_priority",
+            "flex_radius",
+            "flex_rgba",
+            "flex_rigid",
+            "flex_selfcollide",
+            "flex_shell",
+            "flex_shelldataadr",
+            "flex_shellnum",
+            "flex_size",
+            "flex_solimp",
+            "flex_solmix",
+            "flex_solref",
+            "flex_stiffness",
+            "flex_stiffnessadr",
+            "flex_texcoord",
+            "flex_texcoordadr",
+            "flex_vert",
+            "flex_vert0",
+            "flex_vertadr",
+            "flex_vertbodyid",
+            "flex_vertedge",
+            "flex_vertedgeadr",
+            "flex_vertedgenum",
+            "flex_vertmetric",
+            "flex_vertnum",
+            "flexedge_J_colind",
+            "flexedge_J_rowadr",
+            "flexedge_J_rownnz",
+            "flexedge_invweight0",
+            "flexedge_length0",
+            "flexedge_rigid",
+            "flexvert_J_colind",
+            "flexvert_J_rowadr",
+            "flexvert_J_rownnz",
+            "geom_aabb",
+            "geom_adhesion",
+            "geom_bodyid",
+            "geom_conaffinity",
+            "geom_condim",
+            "geom_contype",
+            "geom_dataid",
+            "geom_fluid",
+            "geom_friction",
+            "geom_gap",
+            "geom_group",
+            "geom_margin",
+            "geom_matid",
+            "geom_plugin",
+            "geom_pos",
+            "geom_priority",
+            "geom_quat",
+            "geom_rbound",
+            "geom_rgba",
+            "geom_sameframe",
+            "geom_size",
+            "geom_solimp",
+            "geom_solmix",
+            "geom_surfacevel",
+            "geom_type",
+            "geom_user",
+            "hfield_adr",
+            "hfield_data",
+            "hfield_ncol",
+            "hfield_nrow",
+            "hfield_pathadr",
+            "hfield_size",
+            "jnt_actfrclimited",
+            "jnt_actfrcrange",
+            "jnt_actgravcomp",
+            "jnt_actuatorid",
+            "jnt_axis",
+            "jnt_bodyid",
+            "jnt_dofadr",
+            "jnt_group",
+            "jnt_limited",
+            "jnt_margin",
+            "jnt_pos",
+            "jnt_qposadr",
+            "jnt_range",
+            "jnt_solimp",
+            "jnt_solref",
+            "jnt_stiffness",
+            "jnt_stiffnesspoly",
+            "jnt_type",
+            "jnt_user",
+            "key_act",
+            "key_ctrl",
+            "key_mpos",
+            "key_mquat",
+            "key_qpos",
+            "key_qvel",
+            "key_time",
+            "light_active",
+            "light_ambient",
+            "light_attenuation",
+            "light_bodyid",
+            "light_bulbradius",
+            "light_castshadow",
+            "light_cutoff",
+            "light_diffuse",
+            "light_dir",
+            "light_dir0",
+            "light_exponent",
+            "light_intensity",
+            "light_mode",
+            "light_pos",
+            "light_pos0",
+            "light_poscom0",
+            "light_range",
+            "light_softness",
+            "light_specular",
+            "light_targetbodyid",
+            "light_texid",
+            "light_type",
+            "mapD2M",
+            "mapM2D",
+            "mapM2M",
+            "mat_emission",
+            "mat_metallic",
+            "mat_reflectance",
+            "mat_rgba",
+            "mat_roughness",
+            "mat_shininess",
+            "mat_specular",
+            "mat_texid",
+            "mat_texrepeat",
+            "mat_texuniform",
+            "mesh_bvhadr",
+            "mesh_bvhnum",
+            "mesh_extrema",
+            "mesh_face",
+            "mesh_faceadr",
+            "mesh_facenormal",
+            "mesh_facenum",
+            "mesh_facetexcoord",
+            "mesh_graph",
+            "mesh_graphadr",
+            "mesh_normal",
+            "mesh_normaladr",
+            "mesh_normalnum",
+            "mesh_octadr",
+            "mesh_octnum",
+            "mesh_pathadr",
+            "mesh_polyadr",
+            "mesh_polymap",
+            "mesh_polymapadr",
+            "mesh_polymapnum",
+            "mesh_polynormal",
+            "mesh_polynum",
+            "mesh_polyvert",
+            "mesh_polyvertadr",
+            "mesh_polyvertnum",
+            "mesh_pos",
+            "mesh_quat",
+            "mesh_scale",
+            "mesh_texcoord",
+            "mesh_texcoordadr",
+            "mesh_texcoordnum",
+            "mesh_vert",
+            "mesh_vertadr",
+            "mesh_vertnum",
+            "name_actuatoradr",
+            "name_bodyadr",
+            "name_camadr",
+            "name_eqadr",
+            "name_excludeadr",
+            "name_flexadr",
+            "name_geomadr",
+            "name_hfieldadr",
+            "name_jntadr",
+            "name_keyadr",
+            "name_lightadr",
+            "name_matadr",
+            "name_meshadr",
+            "name_numericadr",
+            "name_pairadr",
+            "name_pluginadr",
+            "name_sensoradr",
+            "name_siteadr",
+            "name_skinadr",
+            "name_tendonadr",
+            "name_texadr",
+            "name_textadr",
+            "name_tupleadr",
+            "names_map",
+            "numeric_adr",
+            "numeric_data",
+            "numeric_size",
+            "oct_aabb",
+            "oct_child",
+            "oct_coeff",
+            "oct_depth",
+            "pair_adhesion",
+            "pair_dim",
+            "pair_friction",
+            "pair_gap",
+            "pair_geom1",
+            "pair_geom2",
+            "pair_margin",
+            "pair_signature",
+            "pair_solimp",
+            "pair_solreffriction",
+            "plugin",
+            "plugin_attr",
+            "plugin_attradr",
+            "plugin_stateadr",
+            "plugin_statenum",
+            "qpos0",
+            "qpos_spring",
+            "sensor_adr",
+            "sensor_cutoff",
+            "sensor_datatype",
+            "sensor_delay",
+            "sensor_dim",
+            "sensor_history",
+            "sensor_historyadr",
+            "sensor_interval",
+            "sensor_intprm",
+            "sensor_needstage",
+            "sensor_noise",
+            "sensor_objid",
+            "sensor_objtype",
+            "sensor_plugin",
+            "sensor_refid",
+            "sensor_reftype",
+            "sensor_type",
+            "sensor_user",
+            "site_bodyid",
+            "site_dataid",
+            "site_group",
+            "site_matid",
+            "site_pos",
+            "site_quat",
+            "site_rgba",
+            "site_sameframe",
+            "site_size",
+            "site_type",
+            "site_user",
+            "skin_boneadr",
+            "skin_bonebindpos",
+            "skin_bonebindquat",
+            "skin_bonebodyid",
+            "skin_bonenum",
+            "skin_bonevertadr",
+            "skin_bonevertid",
+            "skin_bonevertnum",
+            "skin_bonevertweight",
+            "skin_face",
+            "skin_faceadr",
+            "skin_facenum",
+            "skin_group",
+            "skin_inflate",
+            "skin_matid",
+            "skin_pathadr",
+            "skin_rgba",
+            "skin_texcoord",
+            "skin_texcoordadr",
+            "skin_vert",
+            "skin_vertadr",
+            "skin_vertnum",
+            "ten_J_colind",
+            "ten_J_rowadr",
+            "ten_J_rownnz",
+            "tendon_actfrclimited",
+            "tendon_actfrcrange",
+            "tendon_actuatorid",
+            "tendon_adr",
+            "tendon_armature",
+            "tendon_damping",
+            "tendon_dampingpoly",
+            "tendon_frictionloss",
+            "tendon_group",
+            "tendon_invweight0",
+            "tendon_length0",
+            "tendon_lengthspring",
+            "tendon_limited",
+            "tendon_margin",
+            "tendon_matid",
+            "tendon_num",
+            "tendon_range",
+            "tendon_rgba",
+            "tendon_solimp_fri",
+            "tendon_solimp_lim",
+            "tendon_solref_fri",
+            "tendon_solref_lim",
+            "tendon_stiffness",
+            "tendon_stiffnesspoly",
+            "tendon_treeid",
+            "tendon_treenum",
+            "tendon_user",
+            "tendon_width",
+            "tex_adr",
+            "tex_colorspace",
+            "tex_data",
+            "tex_height",
+            "tex_nchannel",
+            "tex_pathadr",
+            "tex_type",
+            "tex_width",
+            "text_adr",
+            "text_size",
+            "tree_bodyadr",
+            "tree_bodynum",
+            "tree_dofadr",
+            "tree_dofnum",
+            "tree_sleep_policy",
+            "tuple_adr",
+            "tuple_objid",
+            "tuple_objprm",
+            "tuple_objtype",
+            "tuple_size",
+            "wrap_objid",
+            "wrap_prm",
+            "wrap_type"
+          ]
+        },
+        "source_contact_parameters_preserved": false,
+        "source_frames": 2256,
+        "source_task_success": true,
+        "status": "diagnostic_task_pass",
+        "task_id": "feasible-bigym-pad-physics-v1-contact4ms",
+        "validation_scope": "Native scene task/contact diagnostic; common dynamics gates and source reproduction remain unresolved"
+      },
+      "claims": [
+        {
+          "time": 1791366863.2049143,
+          "worker": "reachy-retarget-worker-7d46748688-ccchs",
+          "finished_unix": 1791366979.3945248
+        }
+      ]
+    }
+  ],
+  "collected_unix": 1791367517.556476,
+  "summary": {
+    "jobs": 2,
+    "claimed": 2,
+    "workers_used": 2,
+    "peak_overlapping_claims": 2,
+    "statuses": {
+      "diagnostic_task_pass": 2
+    },
+    "physical_passes": 0,
+    "alternate_model_passes": 0,
+    "unique_sources": 1
+  }
+}

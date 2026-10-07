@@ -1,0 +1,82 @@
+{
+  "profiles": {
+    "bigym-recording-performance-v3-full": {
+      "attempt": "/mnt/reachy-retarget/queue/tasks/feasible-placement-v1-bigym-c795-timed/attempts/1791365261013471172-reachy-retarget-worker-7d46748688-wz5f5",
+      "profile_window": {
+        "first_row": 0,
+        "rows": 10233
+      },
+      "timings_s": {
+        "sync_pre": 0.926020601647906,
+        "capture": 21.04151029861532,
+        "contact_metrics_pre": 4.1527273101964965,
+        "native_task_pre": 0.9455401697196066,
+        "mj_step": 1.7599376267753541,
+        "sample_contacts": 1.9313246991951019,
+        "sync_post": 0.8646454610861838,
+        "native_task_post": 4.506407550419681,
+        "measured": 0.6266680390108377,
+        "geometry": 7.369408683036454,
+        "gate_update": 2.608890147996135,
+        "stack_observations": 1.2025440050056204
+      },
+      "ncon_min": 0,
+      "ncon_max": 19,
+      "fields": 63,
+      "scope": "Bounded isolated replay profiling only; not a new demonstration or full physical validation",
+      "source": "/mnt/reachy-retarget/releases/06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "profile_path": "/mnt/reachy-retarget/workspaces/bigym-recording-performance-v3-full/profile.txt",
+      "profile_sha256": "3f248da4cad367cdb8a0511e5656296dd4075411cc816a8ec3727242314713db",
+      "script_path": "/mnt/reachy-retarget/workspaces/bigym-recording-performance-v3-full/profile-script.py",
+      "script_sha256": "2e7fc9ca66cef31ca69d733adff6f92a9153bd288bd6ce6efa2f2c0123b3d6a7"
+    },
+    "bigym-recording-export-profile-v1": {
+      "attempt": "/mnt/reachy-retarget/queue/tasks/feasible-placement-v1-bigym-c795-timed/attempts/1791365261013471172-reachy-retarget-worker-7d46748688-wz5f5",
+      "timings_s": {
+        "load_npz_s": 0.5591149280080572,
+        "npz_compressed_s": 4.587366823921911,
+        "canonical_hdf5_s": 3.3034972709137946
+      },
+      "array_bytes": 227692072,
+      "array_fields": 142,
+      "rows": 10233,
+      "npz_bytes": 85376595,
+      "hdf5_bytes": 89586555,
+      "scope": "Identical saved-state export benchmark only; not an independent demonstration or new physical validation",
+      "profile_path": "/mnt/reachy-retarget/workspaces/bigym-recording-export-profile-v1/profile.txt",
+      "profile_sha256": "587dd8caa2f6f603e4be67b63de364dee44bbd4cc86bf952dc8c2c090f91f1a5",
+      "script_path": "/mnt/reachy-retarget/workspaces/bigym-recording-export-profile-v1/profile-script.py",
+      "script_sha256": "c294da641ef7dbda4917077559b2ebf80a989c7ed984bdd651dbb9fbc3624e13"
+    },
+    "bigym-physical-setup-profile-v1": {
+      "timings_s": {
+        "normalize_s": 0.7282013399526477,
+        "prepare_s": 0.0012468630447983742,
+        "build_scene_s": 4.2705795370275155,
+        "robot_s": 0.21058873599395156,
+        "timing_s": 0.032303904998116195,
+        "initialize_s": 0.01364700892008841
+      },
+      "scope": "Exact original setup profile, no stepping or new physical trial",
+      "source": "/mnt/reachy-retarget/releases/06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "model_dimensions": {
+        "nq": 37,
+        "nv": 36,
+        "nu": 22
+      },
+      "profile_path": "/mnt/reachy-retarget/workspaces/bigym-physical-setup-profile-v1/profile.txt",
+      "profile_sha256": "d70aba47d40b6b5e52a86ecde539acee7e88abc4a1de1b5752f466f2309d3cd9",
+      "script_path": "/mnt/reachy-retarget/workspaces/bigym-physical-setup-profile-v1/profile-script.py",
+      "script_sha256": "058ec56e5c315a0bbc385e65213dbd306225880a86229715f88094267dc22e84"
+    }
+  },
+  "notes": [
+    "Warm access-pod measurements; cProfile overhead and node/I/O conditions differ from actual worker run.",
+    "The 122.8-second original worker wall time is not attributed entirely to any stage by these separate profiles.",
+    "All 63 observed fields and every actual physics/control row retained.",
+    "Common validation thresholds and source/object properties unchanged."
+  ],
+  "recording_sha256": "e9cbba15cf7572d10e33106c71ef47bf0058bade440ee3990ed60ed3da142f19",
+  "scene_sha256": "e232fa1da3c9b0f50046acce4cb8901e158f1a7c0c82ba548047dd2c78a2cc88",
+  "pod": "reachy-retarget-worker-7d46748688-4tn7w"
+}

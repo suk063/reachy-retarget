@@ -1,0 +1,1731 @@
+{
+  "source": "261e660d9f92515639b01aae",
+  "archive": {
+    "path": "runs/can-261e-native-height-v1/artifact.tar.gz",
+    "sha256": "57fa7eeec988a0b9715e7f0525875f58587ad56fe9937c0ce9b97cdfbf231065",
+    "bytes": 2685820
+  },
+  "original_job": {
+    "admission_only": true,
+    "approach_before_base_admission": true,
+    "cylindrical_grasp": {
+      "azimuth_offset_deg": 120,
+      "azimuth_policy": "nearest_opposed_facets",
+      "end_margin_m": 0.001,
+      "orientation_policy": "jaw_level"
+    },
+    "dataset": "robomimic",
+    "diagnostic_seed": {
+      "anchor_index": 335,
+      "anchor_reference": [
+        -0.24333461118565136,
+        0.04873432775941121,
+        0.08618506002228542,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        -0.300748535891513,
+        -0.3907077323008944,
+        0.12801115234174248,
+        -1.1560222752013425,
+        0.41090129247868334,
+        -0.3742566704884491,
+        -0.5324321366688493
+      ],
+      "axis_world": [
+        0.07498865434315939,
+        0.11824090973244833,
+        0.990149377107033
+      ],
+      "inspected": true,
+      "original_rows": 831,
+      "original_seconds": 8.3,
+      "parent_attempt": "workspaces/additional-independent-v1-261e660d9f92515639b01aae/runs/dynamics/additional-independent-v1-261e660d9f92515639b01aae-aligned/261e660d9f92515639b01aae",
+      "parent_files_sha256": {
+        "plan.h5": "b006bf82239b08f68b29432ede286201520cd29f87e4f56aab95fb5bdfc80fa1",
+        "result.json": "6d8c5fc425aa68790878db4ba88332f0f08536f18d556ccc1422783f4bb35db0",
+        "scene.xml": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46"
+      },
+      "pivot_world": [
+        0.262611332638988,
+        -0.14668937180432395,
+        0.8935308108841934
+      ],
+      "planar_yaw_transport_rad": 2.084705081509089,
+      "requested_grasp_rotation_deg": 120,
+      "scene_sha256": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46",
+      "source": "261e660d9f92515639b01aae",
+      "source_normalized_sha256": "90f6adacf9e640f806c9918983fc4db27d919a4c08dc7e327ab85859b8adf7c1"
+    },
+    "evaluation_split": "additional22_development_after_frozen_evaluation",
+    "geometry_clearance": {
+      "minimum_m": 0.003
+    },
+    "geometry_seed_rank": 1,
+    "grasp_approach": {
+      "lift_m": 0.12,
+      "traverse_fraction": 0.5
+    },
+    "id": "can-mobile-continuation-v4-axial-261e660d9f92515639b01aae-p120",
+    "mobile_fixture_ik": {
+      "anchor_index": 335,
+      "anchor_reference": [
+        0.3411459373054503,
+        -0.6833494469856857,
+        2.170890141531374,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        -0.300748535891513,
+        -0.3907077323008944,
+        0.12801115234174248,
+        -1.1560222752013425,
+        0.41090129247868334,
+        -0.3742566704884491,
+        -0.5324321366688493
+      ],
+      "base_bounds_xyyaw": [
+        [
+          -0.6460405242102782,
+          0.745420237036585
+        ],
+        [
+          -1.0947266358247765,
+          0.7179579439095942
+        ],
+        [
+          -0.48801905142816154,
+          2.707673596035539
+        ]
+      ],
+      "minimum_fixture_gap_m": 0.003,
+      "pose_tolerance_constraints": true,
+      "stop_on_first_invalid": true
+    },
+    "operation": "feasible_geometry_experiment",
+    "parent_attempt": "workspaces/additional-independent-v1-261e660d9f92515639b01aae/runs/dynamics/additional-independent-v1-261e660d9f92515639b01aae-aligned/261e660d9f92515639b01aae",
+    "parent_attempt_files_sha256": {
+      "plan.h5": "b006bf82239b08f68b29432ede286201520cd29f87e4f56aab95fb5bdfc80fa1",
+      "result.json": "6d8c5fc425aa68790878db4ba88332f0f08536f18d556ccc1422783f4bb35db0",
+      "scene.xml": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46"
+    },
+    "parent_task": "additional-independent-v1-261e660d9f92515639b01aae",
+    "parent_workspace": "workspaces/additional-independent-v1-261e660d9f92515639b01aae",
+    "runtime_source_sha256": "3d1c2406168559ff372f71f7d619b44d1450f1fb0778028ab5394c52def2fae7",
+    "source": "data/normalized/hf__robomimic__robomimic_datasets/261e660d9f92515639b01aae.h5",
+    "source_normalized_sha256": "90f6adacf9e640f806c9918983fc4db27d919a4c08dc7e327ab85859b8adf7c1",
+    "source_provenance": {
+      "provenance": [
+        {
+          "bytes": 46889752,
+          "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+          "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+          "source_id": "hf__robomimic__robomimic_datasets",
+          "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        }
+      ],
+      "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+      "source_urls": [
+        "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+      ]
+    },
+    "variant": "contact_0035",
+    "workspace": "workspaces/can-mobile-continuation-v4-axial-261e660d9f92515639b01aae-p120"
+  },
+  "native_bound": {
+    "source": "261e660d9f92515639b01aae",
+    "scene_sha256": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46",
+    "pair": [
+      "r_hand_palm_link_collision_0",
+      "source_scene_geom_7"
+    ],
+    "box_position_world_m": [
+      0.35,
+      -0.2,
+      0.8
+    ],
+    "box_rotation_world": [
+      [
+        0.0,
+        0.9999999999999998,
+        0.0
+      ],
+      [
+        -0.9999999999999998,
+        0.0,
+        -0.0
+      ],
+      [
+        -0.0,
+        0.0,
+        0.9999999999999998
+      ]
+    ],
+    "box_half_sizes_m": [
+      0.2,
+      0.25,
+      0.02
+    ],
+    "position_tolerance_m": 0.002,
+    "rotation_tolerance_rad": 0.02,
+    "frame281": {
+      "frame": 281,
+      "source_time_s": 2.81,
+      "closed": true,
+      "native_vertex_index": 42,
+      "vertex_tcp_m": [
+        -0.026923976554799216,
+        -0.044266103852587176,
+        0.07096254443328356
+      ],
+      "nominal_vertex_box_m": [
+        -0.057140726370993884,
+        -0.03870964173975169,
+        0.019369146983190658
+      ],
+      "guaranteed_xy_inside_margin_m": 0.13910202420516415,
+      "minimum_box_z_m": 0.01585265504840227,
+      "maximum_box_z_m": 0.022903090321076895,
+      "maximum_possible_vertex_gap_m": 0.0029030903210768948,
+      "deficit_to_3mm_m": 9.690967892310443e-05
+    },
+    "failed_source_rows": [
+      {
+        "frame": 257,
+        "source_time_s": 2.57,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.019447524697247538
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.015934911135215675,
+        "maximum_box_z_m": 0.022977722267816032,
+        "maximum_possible_vertex_gap_m": 0.002977722267816032,
+        "deficit_to_3mm_m": 2.2277732183967336e-05
+      },
+      {
+        "frame": 258,
+        "source_time_s": 2.58,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.01900959837216621
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.015496984810134345,
+        "maximum_box_z_m": 0.022539795942734704,
+        "maximum_possible_vertex_gap_m": 0.0025397959427347037,
+        "deficit_to_3mm_m": 0.00046020405726529545
+      },
+      {
+        "frame": 259,
+        "source_time_s": 2.59,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.018613765156658142
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.015101151594626277,
+        "maximum_box_z_m": 0.022143962727226636,
+        "maximum_possible_vertex_gap_m": 0.002143962727226636,
+        "deficit_to_3mm_m": 0.0008560372727733634
+      },
+      {
+        "frame": 260,
+        "source_time_s": 2.6,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.018258649123069078
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.014746035561037213,
+        "maximum_box_z_m": 0.02178884669363757,
+        "maximum_possible_vertex_gap_m": 0.0017888466936375712,
+        "deficit_to_3mm_m": 0.001211153306362428
+      },
+      {
+        "frame": 261,
+        "source_time_s": 2.61,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.017942748641099578
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.014430135079067713,
+        "maximum_box_z_m": 0.02147294621166807,
+        "maximum_possible_vertex_gap_m": 0.0014729462116680712,
+        "deficit_to_3mm_m": 0.001527053788331928
+      },
+      {
+        "frame": 262,
+        "source_time_s": 2.62,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.017664433994816327
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.014151820432784462,
+        "maximum_box_z_m": 0.02119463156538482,
+        "maximum_possible_vertex_gap_m": 0.0011946315653848204,
+        "deficit_to_3mm_m": 0.0018053684346151788
+      },
+      {
+        "frame": 263,
+        "source_time_s": 2.63,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.01742194499966366
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.013909331437631794,
+        "maximum_box_z_m": 0.020952142570232153,
+        "maximum_possible_vertex_gap_m": 0.0009521425702321527,
+        "deficit_to_3mm_m": 0.0020478574297678465
+      },
+      {
+        "frame": 264,
+        "source_time_s": 2.64,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.017213388619473642
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.013700775057441777,
+        "maximum_box_z_m": 0.020743586190042136,
+        "maximum_possible_vertex_gap_m": 0.0007435861900421357,
+        "deficit_to_3mm_m": 0.0022564138099578634
+      },
+      {
+        "frame": 265,
+        "source_time_s": 2.65,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.017036736583479713
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.013524123021447848,
+        "maximum_box_z_m": 0.020566934154048207,
+        "maximum_possible_vertex_gap_m": 0.0005669341540482063,
+        "deficit_to_3mm_m": 0.002433065845951793
+      },
+      {
+        "frame": 266,
+        "source_time_s": 2.66,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.016889823003327094
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.013377209441295229,
+        "maximum_box_z_m": 0.020420020573895588,
+        "maximum_possible_vertex_gap_m": 0.0004200205738955874,
+        "deficit_to_3mm_m": 0.0025799794261044118
+      },
+      {
+        "frame": 267,
+        "source_time_s": 2.67,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.016770341990083988
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.013257728428052123,
+        "maximum_box_z_m": 0.020300539560652482,
+        "maximum_possible_vertex_gap_m": 0.00030053956065248175,
+        "deficit_to_3mm_m": 0.0026994604393475174
+      },
+      {
+        "frame": 268,
+        "source_time_s": 2.68,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.016675845271253105
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.01316323170922124,
+        "maximum_box_z_m": 0.0202060428418216,
+        "maximum_possible_vertex_gap_m": 0.00020604284182159857,
+        "deficit_to_3mm_m": 0.0027939571581784006
+      },
+      {
+        "frame": 269,
+        "source_time_s": 2.69,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.01660373980778363
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.013091126245751766,
+        "maximum_box_z_m": 0.020133937378352125,
+        "maximum_possible_vertex_gap_m": 0.00013393737835212458,
+        "deficit_to_3mm_m": 0.0028660626216478746
+      },
+      {
+        "frame": 270,
+        "source_time_s": 2.7,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.01655128541108298
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.013038671849051114,
+        "maximum_box_z_m": 0.020081482981651473,
+        "maximum_possible_vertex_gap_m": 8.148298165147269e-05,
+        "deficit_to_3mm_m": 0.0029185170183485265
+      },
+      {
+        "frame": 271,
+        "source_time_s": 2.71,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.016515592360026095
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.01300297879799423,
+        "maximum_box_z_m": 0.02004578993059459,
+        "maximum_possible_vertex_gap_m": 4.578993059458844e-05,
+        "deficit_to_3mm_m": 0.0029542100694054108
+      },
+      {
+        "frame": 272,
+        "source_time_s": 2.72,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.01649361901796998
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.012981005455938116,
+        "maximum_box_z_m": 0.020023816588538475,
+        "maximum_possible_vertex_gap_m": 2.381658853847432e-05,
+        "deficit_to_3mm_m": 0.002976183411461525
+      },
+      {
+        "frame": 273,
+        "source_time_s": 2.73,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.016482169449763225
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.01296955588773136,
+        "maximum_box_z_m": 0.02001236702033172,
+        "maximum_possible_vertex_gap_m": 1.2367020331718187e-05,
+        "deficit_to_3mm_m": 0.002987632979668281
+      },
+      {
+        "frame": 274,
+        "source_time_s": 2.74,
+        "closed": false,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05645178664273076,
+          -0.03970954357743159,
+          0.01647789103875786
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.012965277476725994,
+        "maximum_box_z_m": 0.020008088609326354,
+        "maximum_possible_vertex_gap_m": 8.088609326353108e-06,
+        "deficit_to_3mm_m": 0.002991911390673646
+      },
+      {
+        "frame": 275,
+        "source_time_s": 2.75,
+        "closed": true,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.056451786642730775,
+          -0.03970954357743159,
+          0.01647727210382032
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13979096393342727,
+        "minimum_box_z_m": 0.012964658541788457,
+        "maximum_box_z_m": 0.020007469674388816,
+        "maximum_possible_vertex_gap_m": 7.469674388815156e-06,
+        "deficit_to_3mm_m": 0.002992530325611184
+      },
+      {
+        "frame": 276,
+        "source_time_s": 2.7600000000000002,
+        "closed": true,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05655035161302302,
+          -0.03955353188186696,
+          0.016974269486642664
+        ],
+        "guaranteed_xy_inside_margin_m": 0.139692398963135,
+        "minimum_box_z_m": 0.013460966285650109,
+        "maximum_box_z_m": 0.02050513321246315,
+        "maximum_possible_vertex_gap_m": 0.0005051332124631491,
+        "deficit_to_3mm_m": 0.00249486678753685
+      },
+      {
+        "frame": 277,
+        "source_time_s": 2.77,
+        "closed": true,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.056648964677547334,
+          -0.03939785827373274,
+          0.017471315818480826
+        ],
+        "guaranteed_xy_inside_margin_m": 0.1395937858986107,
+        "minimum_box_z_m": 0.013957323963403384,
+        "maximum_box_z_m": 0.021002844707089498,
+        "maximum_possible_vertex_gap_m": 0.0010028447070894973,
+        "deficit_to_3mm_m": 0.001997155292910502
+      },
+      {
+        "frame": 278,
+        "source_time_s": 2.7800000000000002,
+        "closed": true,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.05674762570275926,
+          -0.039242522764563026,
+          0.017968410701832076
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13949512487339877,
+        "minimum_box_z_m": 0.014453731177728586,
+        "maximum_box_z_m": 0.021500603760603386,
+        "maximum_possible_vertex_gap_m": 0.0015006037606033855,
+        "deficit_to_3mm_m": 0.0014993962393966137
+      },
+      {
+        "frame": 279,
+        "source_time_s": 2.79,
+        "closed": true,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.056846334555137615,
+          -0.03908752536561341,
+          0.018465553739243495
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13939641602102043,
+        "minimum_box_z_m": 0.014950187531354561,
+        "maximum_box_z_m": 0.02199840997539146,
+        "maximum_possible_vertex_gap_m": 0.001998409975391458,
+        "deficit_to_3mm_m": 0.001001590024608541
+      },
+      {
+        "frame": 280,
+        "source_time_s": 2.8000000000000003,
+        "closed": true,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.056945091101184016,
+          -0.03893286608786002,
+          0.018962744533313043
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13929765947497402,
+        "minimum_box_z_m": 0.015446692627059751,
+        "maximum_box_z_m": 0.02249626295389255,
+        "maximum_possible_vertex_gap_m": 0.002496262953892551,
+        "deficit_to_3mm_m": 0.0005037370461074483
+      },
+      {
+        "frame": 281,
+        "source_time_s": 2.81,
+        "closed": true,
+        "native_vertex_index": 42,
+        "vertex_tcp_m": [
+          -0.026923976554799216,
+          -0.044266103852587176,
+          0.07096254443328356
+        ],
+        "nominal_vertex_box_m": [
+          -0.057140726370993884,
+          -0.03870964173975169,
+          0.019369146983190658
+        ],
+        "guaranteed_xy_inside_margin_m": 0.13910202420516415,
+        "minimum_box_z_m": 0.01585265504840227,
+        "maximum_box_z_m": 0.022903090321076895,
+        "maximum_possible_vertex_gap_m": 0.0029030903210768948,
+        "deficit_to_3mm_m": 9.690967892310443e-05
+      }
+    ],
+    "checked_frames": 831,
+    "source_reference_unchanged": true,
+    "scope": "Necessary single-native-palm-vertex upper bound under every rigid pose within the original translation/rotation norm tolerances. Vertex remains inside fixture XY and cannot escape below; upper gap<3mm certifies no arm/base solution can satisfy these unchanged target tolerances and this fixture gate. No simulation/source/model edit.",
+    "script_sha256": "af02299ecb387d220f05fdbd934d6da4a9db6ff56791e2b16acdb74eae7f3068"
+  },
+  "height_proposal": {
+    "source": "261e660d9f92515639b01aae",
+    "scene_sha256": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46",
+    "source_anchor": 335,
+    "first_closed_frame": 275,
+    "last_closed_frame": 564,
+    "minimum_native_table_clearing_axial_shift_m": 0.006634336642069025,
+    "selected_axial_shift_m": 0.006734336642069025,
+    "explicit_fixture_reserve_m": 0.0001,
+    "full_closed_supported_shift_interval_m": [
+      -0.015352999527265106,
+      0.009385883141527804
+    ],
+    "original_anchor_height_m": 0.012840947033709397,
+    "new_anchor_height_m": 0.01957528367577842,
+    "pad_axial_bounds_before_m": [
+      -0.02199419773836987,
+      0.026743896629572394
+    ],
+    "pad_axial_bounds_after_m": [
+      -0.015372676402248944,
+      0.03347767286439732
+    ],
+    "native_straight_wall_interval_m": [
+      -0.038089999945253125,
+      0.03712899871170498
+    ],
+    "minimum_closed_table_gap_m": 0.003098317710542697,
+    "required_rows": [
+      {
+        "frame": 275,
+        "original_gap_m": -0.0035227278961796897,
+        "minimum_upward_shift_m": 0.006634336642069025
+      },
+      {
+        "frame": 276,
+        "original_gap_m": -0.0030257305133574164,
+        "minimum_upward_shift_m": 0.006128403682807586
+      },
+      {
+        "frame": 277,
+        "original_gap_m": -0.002528684181519192,
+        "minimum_upward_shift_m": 0.00562249632941597
+      },
+      {
+        "frame": 278,
+        "original_gap_m": -0.002031589298167935,
+        "minimum_upward_shift_m": 0.005116613864627503
+      },
+      {
+        "frame": 279,
+        "original_gap_m": -0.0015344462607564946,
+        "minimum_upward_shift_m": 0.004610755571232824
+      },
+      {
+        "frame": 280,
+        "original_gap_m": -0.0010372554666869815,
+        "minimum_upward_shift_m": 0.004104920732075938
+      },
+      {
+        "frame": 281,
+        "original_gap_m": -0.0006308530168093185,
+        "minimum_upward_shift_m": 0.003691344828009988
+      },
+      {
+        "frame": 282,
+        "original_gap_m": -0.00022442208830786295,
+        "minimum_upward_shift_m": 0.0032778222123952105
+      },
+      {
+        "frame": 283,
+        "original_gap_m": 0.00018203662705307266,
+        "minimum_upward_shift_m": 0.0028643531471215142
+      },
+      {
+        "frame": 284,
+        "original_gap_m": 0.0005885224376808161,
+        "minimum_upward_shift_m": 0.0024509378940318935
+      },
+      {
+        "frame": 285,
+        "original_gap_m": 0.0009950346521609976,
+        "minimum_upward_shift_m": 0.0020375767149168854
+      },
+      {
+        "frame": 286,
+        "original_gap_m": 0.0016354435201636486,
+        "minimum_upward_shift_m": 0.0013865200906724253
+      },
+      {
+        "frame": 287,
+        "original_gap_m": 0.002275757760947905,
+        "minimum_upward_shift_m": 0.000735777416334125
+      },
+      {
+        "frame": 288,
+        "original_gap_m": 0.002915967768574612,
+        "minimum_upward_shift_m": 8.535654983599901e-05
+      }
+    ],
+    "source_object_clock_intent_unchanged": true,
+    "original_first_hand_exact": true,
+    "full_ik_required": true,
+    "physics_validated": false,
+    "artifact_sha256": "a292fed0f2d1c3960323743c8e2692f100a38a4665cd6ca48ecbf33453547333",
+    "scope": "One minimum axial attachment derived from unchanged palm/table and finite CAD/cylinder wall geometry, plus100micrometer explicit reserve. Complete closed source interval audited. No azimuth grid or model/gate change. New open approach derived with original first pose; full IK/all fixtures and physical playback remain required."
+  },
+  "full_admission": {
+    "source": "261e660d9f92515639b01aae",
+    "runtime_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+    "script_sha256": "238d39969dd6d06ce3d39f750fb2a44462730c45a29f19a201363138cf763fe2",
+    "source_artifact_sha256": "a9e027cdfe1a4fa9b877f0add7f46013c1a1121c7c9133d0c87fa9b398fddf73",
+    "height_artifact_sha256": "a292fed0f2d1c3960323743c8e2692f100a38a4665cd6ca48ecbf33453547333",
+    "source_clock_objects_intent_preserved": true,
+    "physics_validated": false,
+    "stages": [
+      {
+        "stage": "approach_proposal",
+        "status": "saved"
+      },
+      {
+        "stage": "mobile_ik",
+        "admitted": true
+      },
+      {
+        "stage": "approach",
+        "admitted": true
+      },
+      {
+        "stage": "full_fixture_clearance",
+        "admitted": true
+      }
+    ],
+    "admitted": true,
+    "wall_s": 98.92735999599972,
+    "module_hashes": {
+      "reachy_retarget.mobile_fixture_ik": "4f37c745e3b5cf34b5bda6ad01dca305ade203215c055783ae4c9fc8c0696290",
+      "reachy_retarget.grasp_approach": "0d7aaad33a815b7b07998c47d9a1083ecda4a4c9683a715d522eb74596bb2fec",
+      "reachy_retarget.geometry_clearance": "8d25bb582061ad246518600f9445fac09b25159b438cfb0c70fc0242e79bc936"
+    }
+  },
+  "mobile_admission": {
+    "admitted": true,
+    "admission_checks": {
+      "completed": true,
+      "ik": true,
+      "environment": true,
+      "self_collision": true,
+      "positive_fixture_clearance": true,
+      "joint_margin": true,
+      "self_clearance": true,
+      "inactive_left_reference": true,
+      "source_arrays_unchanged": true
+    },
+    "completed_frames": 831,
+    "total_frames": 831,
+    "exception": null,
+    "events": [],
+    "method": "Anchored backward/forward mobile/right-arm SLSQP with an active set of compiled fixture-distance constraints",
+    "anchor_index": 335,
+    "anchor_reference": [
+      0.3411459373054503,
+      -0.6833494469856857,
+      2.170890141531374,
+      0.0,
+      0.15,
+      0.0,
+      -0.2,
+      0.0,
+      0.0,
+      0.0,
+      -0.300748535891513,
+      -0.3907077323008944,
+      0.12801115234174248,
+      -1.1560222752013425,
+      0.41090129247868334,
+      -0.3742566704884491,
+      -0.5324321366688493
+    ],
+    "base_bounds_xyyaw": [
+      [
+        -0.6460405242102782,
+        0.745420237036585
+      ],
+      [
+        -1.0947266358247765,
+        0.7179579439095942
+      ],
+      [
+        -0.48801905142816154,
+        2.707673596035539
+      ]
+    ],
+    "source_array_sha256": {
+      "time_s": "e491e65c1024b2b5e9d0cfed78f5eeac43195d4830243b2dd1d3cb4d9454ab76",
+      "reference": "1267c297390aabc804c6a4a46b06446ea9a9bcc9a860e3a10f2591a543db7923",
+      "gripper_intent": "1de0f4cd81dc24a7df0612a36a0131ea7ce5683d9bb579eafcbb687bdc930ee3",
+      "hand_goals": "5a001d4c89af72c119f7fb3e8168af5481ea310f3e802df6d5baead492ece19f",
+      "object_goals": "5c39157059c904ade8f6e19eff32c3dbce0e6a1d5f69a65f909e62e4c29a1a5a"
+    },
+    "scene_sha256": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46",
+    "source_metadata": {
+      "source_format": "robomimic-hdf5",
+      "robot_type": "Panda",
+      "env_args": {
+        "env_name": "PickPlaceCan",
+        "env_version": "1.5.1",
+        "type": 1,
+        "env_kwargs": {
+          "has_renderer": false,
+          "has_offscreen_renderer": false,
+          "ignore_done": true,
+          "use_object_obs": true,
+          "use_camera_obs": false,
+          "control_freq": 20,
+          "controller_configs": {
+            "type": "BASIC",
+            "body_parts": {
+              "right": {
+                "type": "OSC_POSE",
+                "input_max": 1,
+                "input_min": -1,
+                "output_max": [
+                  0.05,
+                  0.05,
+                  0.05,
+                  0.5,
+                  0.5,
+                  0.5
+                ],
+                "output_min": [
+                  -0.05,
+                  -0.05,
+                  -0.05,
+                  -0.5,
+                  -0.5,
+                  -0.5
+                ],
+                "kp": 150,
+                "damping": 1,
+                "impedance_mode": "fixed",
+                "kp_limits": [
+                  0,
+                  300
+                ],
+                "damping_limits": [
+                  0,
+                  10
+                ],
+                "position_limits": null,
+                "orientation_limits": null,
+                "uncouple_pos_ori": true,
+                "control_delta": true,
+                "interpolation": null,
+                "ramp_ratio": 0.2,
+                "input_ref_frame": "world",
+                "gripper": {
+                  "type": "GRIP"
+                }
+              }
+            }
+          },
+          "robots": [
+            "Panda"
+          ],
+          "camera_depths": false,
+          "camera_heights": 84,
+          "camera_widths": 84,
+          "lite_physics": false,
+          "reward_shaping": false
+        }
+      },
+      "objects": {
+        "Can": {
+          "qpos_address": 30,
+          "body": "Can_main",
+          "joint": "Can_joint0",
+          "pose_frame": "world",
+          "pose_source": "recorded simulator free-joint qpos",
+          "geometry_source": "embedded model_xml; asset files may require separate acquisition",
+          "mass_friction": "source model values retained; not independently calibrated",
+          "asset": "robosuite/models/assets/objects/can.xml"
+        }
+      },
+      "object_state_decoding": {
+        "nq": 37,
+        "nv": 33,
+        "layout": "time, qpos, qvel",
+        "quaternion": "wxyz",
+        "inactive_free_bodies_omitted": [
+          "Bread",
+          "Cereal",
+          "Milk"
+        ],
+        "references": [
+          "https://github.com/ARISE-Initiative/robosuite/blob/v1.4.1/robosuite/utils/binding_utils.py",
+          "https://github.com/ARISE-Initiative/robosuite/blob/v1.5.1/robosuite/utils/binding_utils.py",
+          "https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-joint"
+        ],
+        "independent_can_sensor_check": true
+      },
+      "model_xml": "<?xml version='1.0' encoding='utf8'?>\n<mujoco model=\"base\">\n  <compiler angle=\"radian\" meshdir=\"meshes/\" autolimits=\"true\" />\n  <option impratio=\"20\" density=\"1.2\" viscosity=\"2e-05\" cone=\"elliptic\" />\n  <size njmax=\"5000\" nconmax=\"5000\" />\n  <visual>\n    <map znear=\"0.001\" />\n  </visual>\n  <default />\n  <asset>\n    <texture type=\"skybox\" builtin=\"gradient\" rgb1=\"0.9 0.9 1\" rgb2=\"0.2 0.3 0.4\" width=\"256\" height=\"1536\" />\n    <texture type=\"2d\" name=\"texplane\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/light-gray-floor-tile.png\" />\n    <texture type=\"cube\" name=\"tex-steel-brushed\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/steel-brushed.png\" />\n    <texture type=\"2d\" name=\"tex-light-gray-plaster\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/light-gray-plaster.png\" />\n    <texture type=\"2d\" name=\"tex-light-wood\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/light-wood.png\" />\n    <texture type=\"2d\" name=\"tex-dark-wood\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/dark-wood.png\" />\n    <texture type=\"2d\" name=\"Milk_tex-ceramic\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/../textures/ceramic.png\" />\n    <texture type=\"2d\" name=\"Bread_tex-bread\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/../textures/bread.png\" />\n    <texture type=\"2d\" name=\"Cereal_tex-cereal\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/../textures/cereal.png\" />\n    <texture type=\"2d\" name=\"Can_tex-can\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/../textures/soda.png\" />\n    <material name=\"floorplane\" texture=\"texplane\" texuniform=\"true\" texrepeat=\"2 2\" specular=\"0\" shininess=\"0\" reflectance=\"0.01\" />\n    <material name=\"table_legs_metal\" texture=\"tex-steel-brushed\" shininess=\"0.8\" reflectance=\"0.8\" />\n    <material name=\"walls_mat\" texture=\"tex-light-gray-plaster\" texuniform=\"true\" texrepeat=\"3 3\" specular=\"0.1\" shininess=\"0.1\" />\n    <material name=\"light-wood\" texture=\"tex-light-wood\" texuniform=\"true\" texrepeat=\"15 15\" />\n    <material name=\"dark-wood\" texture=\"tex-dark-wood\" texuniform=\"true\" texrepeat=\"5 5\" />\n    <material name=\"robot0_Face636_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Part__Feature017_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature018_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature019_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature022_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Part__Feature023_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Shell001_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Shell002_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Shell003_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Shell009_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Shell010_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Shell_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature024\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature001_010_001_002\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature002_007_001_002\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature003_004_001_002\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature_001_001_001_002\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature001_001_003_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature002_001_003_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature003_001_003_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature_002_003_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature_002_004_003\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell001_001_001_003\" shininess=\"0.45\" rgba=\"0.25 0.25 0.25 1\" />\n    <material name=\"robot0_Shell_001_001_003\" shininess=\"0.45\" />\n    <material name=\"robot0_Face064_002_001_002_001\" shininess=\"0.45\" rgba=\"1 0 0 1\" />\n    <material name=\"robot0_Face065_002_001_002_001\" shininess=\"0.45\" rgba=\"0 1 0 1\" />\n    <material name=\"robot0_Face374_002_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Face539_002_001_002_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature001_009_001_002_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature002_006_001_002_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Shell002_002_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell003_002_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell004_001_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell005_001_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell006_003_002_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Shell007_002_002_001\" shininess=\"0.45\" rgba=\"0.25 0.25 0.25 1\" />\n    <material name=\"robot0_Shell011_002_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell012_002_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell_003_001_002_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Union001_001_001_002_001\" shininess=\"0.45\" rgba=\"0.039216 0.541176 0.780392 1\" />\n    <material name=\"robot0_Union_001_001_002_001\" shininess=\"0.45\" rgba=\"0.039216 0.541176 0.780392 1\" />\n    <material name=\"robot0_Part__Mirroring001_004_002\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring002_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring003_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring004_004_002\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Mirroring005_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring006_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring007_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring_004_001\" shininess=\"0.45\" rgba=\"0.898039 0.917647 0.929412 1\" />\n    <material name=\"Milk_ceramic\" texture=\"Milk_tex-ceramic\" texuniform=\"true\" reflectance=\"0.5\" />\n    <material name=\"Bread_bread\" texture=\"Bread_tex-bread\" texuniform=\"true\" texrepeat=\"15 15\" reflectance=\"0.7\" />\n    <material name=\"Cereal_cereal\" texture=\"Cereal_tex-cereal\" reflectance=\"0.5\" />\n    <material name=\"Can_coke\" texture=\"Can_tex-can\" texuniform=\"true\" texrepeat=\"5 5\" reflectance=\"0.7\" />\n    <mesh name=\"robot0_link0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link0.stl\" />\n    <mesh name=\"robot0_link1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link1.stl\" />\n    <mesh name=\"robot0_link2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link2.stl\" />\n    <mesh name=\"robot0_link3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link3.stl\" />\n    <mesh name=\"robot0_link4\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link4.stl\" />\n    <mesh name=\"robot0_link5\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link5.stl\" />\n    <mesh name=\"robot0_link6\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link6.stl\" />\n    <mesh name=\"robot0_link7\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link7.stl\" />\n    <mesh name=\"robot0_link0_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_0.obj\" />\n    <mesh name=\"robot0_link0_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_1.obj\" />\n    <mesh name=\"robot0_link0_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_2.obj\" />\n    <mesh name=\"robot0_link0_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_3.obj\" />\n    <mesh name=\"robot0_link0_vis_4\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_4.obj\" />\n    <mesh name=\"robot0_link0_vis_5\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_5.obj\" />\n    <mesh name=\"robot0_link0_vis_6\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_6.obj\" />\n    <mesh name=\"robot0_link0_vis_7\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_7.obj\" />\n    <mesh name=\"robot0_link0_vis_8\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_8.obj\" />\n    <mesh name=\"robot0_link0_vis_9\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_9.obj\" />\n    <mesh name=\"robot0_link0_vis_10\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_10.obj\" />\n    <mesh name=\"robot0_link0_vis_11\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_11.obj\" />\n    <mesh name=\"robot0_link1_vis\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link1_vis/link1_vis.obj\" />\n    <mesh name=\"robot0_link2_vis\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link2_vis/link2_vis.obj\" />\n    <mesh name=\"robot0_link3_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link3_vis/link3_vis_0.obj\" />\n    <mesh name=\"robot0_link3_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link3_vis/link3_vis_1.obj\" />\n    <mesh name=\"robot0_link3_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link3_vis/link3_vis_2.obj\" />\n    <mesh name=\"robot0_link3_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link3_vis/link3_vis_3.obj\" />\n    <mesh name=\"robot0_link4_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link4_vis/link4_vis_0.obj\" />\n    <mesh name=\"robot0_link4_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link4_vis/link4_vis_1.obj\" />\n    <mesh name=\"robot0_link4_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link4_vis/link4_vis_2.obj\" />\n    <mesh name=\"robot0_link4_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link4_vis/link4_vis_3.obj\" />\n    <mesh name=\"robot0_link5_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link5_vis/link5_vis_0.obj\" />\n    <mesh name=\"robot0_link5_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link5_vis/link5_vis_1.obj\" />\n    <mesh name=\"robot0_link5_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link5_vis/link5_vis_2.obj\" />\n    <mesh name=\"robot0_link6_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_0.obj\" />\n    <mesh name=\"robot0_link6_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_1.obj\" />\n    <mesh name=\"robot0_link6_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_2.obj\" />\n    <mesh name=\"robot0_link6_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_3.obj\" />\n    <mesh name=\"robot0_link6_vis_4\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_4.obj\" />\n    <mesh name=\"robot0_link6_vis_5\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_5.obj\" />\n    <mesh name=\"robot0_link6_vis_6\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_6.obj\" />\n    <mesh name=\"robot0_link6_vis_7\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_7.obj\" />\n    <mesh name=\"robot0_link6_vis_8\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_8.obj\" />\n    <mesh name=\"robot0_link6_vis_9\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_9.obj\" />\n    <mesh name=\"robot0_link6_vis_10\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_10.obj\" />\n    <mesh name=\"robot0_link6_vis_11\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_11.obj\" />\n    <mesh name=\"robot0_link6_vis_12\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_12.obj\" />\n    <mesh name=\"robot0_link6_vis_13\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_13.obj\" />\n    <mesh name=\"robot0_link6_vis_14\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_14.obj\" />\n    <mesh name=\"robot0_link6_vis_15\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_15.obj\" />\n    <mesh name=\"robot0_link6_vis_16\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_16.obj\" />\n    <mesh name=\"robot0_link7_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_0.obj\" />\n    <mesh name=\"robot0_link7_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_1.obj\" />\n    <mesh name=\"robot0_link7_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_2.obj\" />\n    <mesh name=\"robot0_link7_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_3.obj\" />\n    <mesh name=\"robot0_link7_vis_4\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_4.obj\" />\n    <mesh name=\"robot0_link7_vis_5\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_5.obj\" />\n    <mesh name=\"robot0_link7_vis_6\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_6.obj\" />\n    <mesh name=\"robot0_link7_vis_7\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_7.obj\" />\n    <mesh name=\"fixed_mount0_pedestal\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/bases/meshes/rethink_mount/pedestal.stl\" />\n    <mesh name=\"gripper0_right_hand\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/hand.stl\" />\n    <mesh name=\"gripper0_right_hand_vis\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/hand_vis.stl\" />\n    <mesh name=\"gripper0_right_finger\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/finger.stl\" />\n    <mesh name=\"gripper0_right_finger_vis\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/finger_vis.stl\" />\n    <mesh name=\"gripper0_right_finger_vis2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/finger_longer.stl\" />\n    <mesh name=\"VisualMilk_milk_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/milk.stl\" scale=\"0.9 0.9 0.9\" />\n    <mesh name=\"VisualBread_bread_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/bread.stl\" scale=\"0.8 0.8 0.8\" />\n    <mesh name=\"VisualCereal_cereal_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/cereal.stl\" />\n    <mesh name=\"VisualCan_can_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/can.stl\" />\n    <mesh name=\"Milk_milk_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/milk.msh\" scale=\"0.9 0.9 0.9\" />\n    <mesh name=\"Bread_bread_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/bread.stl\" scale=\"0.8 0.8 0.8\" />\n    <mesh name=\"Cereal_cereal_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/cereal.msh\" />\n    <mesh name=\"Can_can_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/can.msh\" />\n  </asset>\n  <worldbody>\n    <geom name=\"floor\" size=\"3 3 0.125\" type=\"plane\" group=\"1\" material=\"floorplane\" />\n    <geom name=\"wall_leftcorner_visual\" size=\"1.06 1.5 0.01\" pos=\"-1.25 2.25 1.5\" quat=\"0.653281 0.653281 0.270598 0.270598\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_rightcorner_visual\" size=\"1.06 1.5 0.01\" pos=\"-1.25 -2.25 1.5\" quat=\"0.653281 0.653281 -0.270598 -0.270598\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_left_visual\" size=\"1.75 1.5 0.01\" pos=\"1.25 3 1.5\" quat=\"0.707107 0.707107 0 0\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_right_visual\" size=\"1.75 1.5 0.01\" pos=\"1.25 -3 1.5\" quat=\"0.707107 -0.707107 0 0\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_rear_visual\" size=\"1.5 1.5 0.01\" pos=\"-2 0 1.5\" quat=\"0.5 0.5 0.5 0.5\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_front_visual\" size=\"3 1.5 0.01\" pos=\"3 0 1.5\" quat=\"0.5 0.5 -0.5 -0.5\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <camera name=\"frontview\" pos=\"1.6 0 1.45\" quat=\"0.560842 0.430646 0.430646 0.560842\" />\n    <camera name=\"birdview\" pos=\"-0.2 0 3\" quat=\"0.707107 0 0 0.707107\" />\n    <camera name=\"agentview\" pos=\"1 0 1.75\" quat=\"0.653098 0.271041 0.271041 0.653098\" />\n    <light pos=\"1 1 1.5\" dir=\"-0.19245 -0.19245 -0.96225\" directional=\"true\" castshadow=\"false\" />\n    <body name=\"bin1\" pos=\"0.1 -0.25 0.8\" gravcomp=\"0\">\n      <geom size=\"0.2 0.25 0.02\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.2 0.25 0.02\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 0.25 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 0.25 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 -0.25 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 -0.25 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0.2 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0.2 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"-0.2 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"-0.2 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom name=\"bin1_leg1_visual\" size=\"0.01 0.4\" pos=\"0.15 0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin1_leg2_visual\" size=\"0.01 0.4\" pos=\"-0.15 0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin1_leg3_visual\" size=\"0.01 0.4\" pos=\"-0.15 -0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin1_leg4_visual\" size=\"0.01 0.4\" pos=\"0.15 -0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n    </body>\n    <body name=\"bin2\" pos=\"0.1 0.28 0.8\" gravcomp=\"0\">\n      <geom size=\"0.2 0.25 0.02\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.2 0.25 0.02\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 0.25 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 0.25 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.2 0.01 0.05\" pos=\"0 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.2 0.01 0.05\" pos=\"0 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 -0.25 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 -0.25 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0.2 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0.2 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"-0.2 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"-0.2 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom name=\"bin2_leg1_visual\" size=\"0.01 0.4\" pos=\"0.15 0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin2_leg2_visual\" size=\"0.01 0.4\" pos=\"-0.15 0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin2_leg3_visual\" size=\"0.01 0.4\" pos=\"-0.15 -0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin2_leg4_visual\" size=\"0.01 0.4\" pos=\"0.15 -0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n    </body>\n    <body name=\"robot0_base\" pos=\"-0.5 -0.1 0.912\" gravcomp=\"0\">\n      <inertial pos=\"0 0 0\" mass=\"0\" diaginertia=\"0 0 0\" />\n      <camera name=\"robot0_robotview\" pos=\"1 0 0.4\" quat=\"0.653098 0.271041 0.271041 0.653098\" />\n      <body name=\"robot0_link0\" pos=\"0 0 0\" gravcomp=\"0\">\n        <inertial pos=\"0 0 0.05\" mass=\"4\" diaginertia=\"0.4 0.4 0.4\" />\n        <geom name=\"robot0_g0_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell010_001\" mesh=\"robot0_link0_vis_0\" />\n        <geom name=\"robot0_g1_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell009_001\" mesh=\"robot0_link0_vis_1\" />\n        <geom name=\"robot0_g2_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell003_001\" mesh=\"robot0_link0_vis_2\" />\n        <geom name=\"robot0_g3_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell_001\" mesh=\"robot0_link0_vis_3\" />\n        <geom name=\"robot0_g4_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell002_001\" mesh=\"robot0_link0_vis_4\" />\n        <geom name=\"robot0_g5_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell001_001\" mesh=\"robot0_link0_vis_5\" />\n        <geom name=\"robot0_g6_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face636_001\" mesh=\"robot0_link0_vis_6\" />\n        <geom name=\"robot0_g7_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature018_001\" mesh=\"robot0_link0_vis_7\" />\n        <geom name=\"robot0_g8_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature019_001\" mesh=\"robot0_link0_vis_8\" />\n        <geom name=\"robot0_g9_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature023_001\" mesh=\"robot0_link0_vis_9\" />\n        <geom name=\"robot0_g10_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature022_001\" mesh=\"robot0_link0_vis_10\" />\n        <geom name=\"robot0_g11_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature017_001\" mesh=\"robot0_link0_vis_11\" />\n        <geom name=\"robot0_link0_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link0\" />\n        <body name=\"robot0_link1\" pos=\"0 0 0.333\" gravcomp=\"0\">\n          <inertial pos=\"0 0 -0.07\" mass=\"3\" diaginertia=\"0.3 0.3 0.3\" />\n          <joint name=\"robot0_joint1\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-2.8973 2.8973\" armature=\"5\" damping=\"0.1\" frictionloss=\"0.1\" />\n          <geom name=\"robot0_g12_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature_001\" mesh=\"robot0_link1_vis\" />\n          <geom name=\"robot0_link1_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link1\" />\n          <body name=\"robot0_link2\" pos=\"0 0 0\" quat=\"0.707107 -0.707107 0 0\" gravcomp=\"0\">\n            <inertial pos=\"0 -0.1 0\" mass=\"3\" diaginertia=\"0.3 0.3 0.3\" />\n            <joint name=\"robot0_joint2\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-1.7628 1.7628\" armature=\"2.5\" damping=\"0.1\" frictionloss=\"0.1\" />\n            <geom name=\"robot0_g13_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature024\" mesh=\"robot0_link2_vis\" />\n            <geom name=\"robot0_link2_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link2\" />\n            <body name=\"robot0_link3\" pos=\"0 -0.316 0\" quat=\"0.707107 0.707107 0 0\" gravcomp=\"0\">\n              <inertial pos=\"0.04 0 -0.05\" mass=\"2\" diaginertia=\"0.2 0.2 0.2\" />\n              <joint name=\"robot0_joint3\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-2.8973 2.8973\" armature=\"1.66667\" damping=\"0.1\" frictionloss=\"0.1\" />\n              <geom name=\"robot0_g14_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature003_004_001_002\" mesh=\"robot0_link3_vis_0\" />\n              <geom name=\"robot0_g15_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature002_007_001_002\" mesh=\"robot0_link3_vis_1\" />\n              <geom name=\"robot0_g16_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature001_010_001_002\" mesh=\"robot0_link3_vis_2\" />\n              <geom name=\"robot0_g17_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature_001_001_001_002\" mesh=\"robot0_link3_vis_3\" />\n              <geom name=\"robot0_link3_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link3\" />\n              <body name=\"robot0_link4\" pos=\"0.0825 0 0\" quat=\"0.707107 0.707107 0 0\" gravcomp=\"0\">\n                <inertial pos=\"-0.04 0.05 0\" mass=\"2\" diaginertia=\"0.2 0.2 0.2\" />\n                <joint name=\"robot0_joint4\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-3.0718 -0.0698\" armature=\"1.25\" damping=\"0.1\" frictionloss=\"0.1\" />\n                <geom name=\"robot0_g18_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature001_001_003_001\" mesh=\"robot0_link4_vis_0\" />\n                <geom name=\"robot0_g19_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature003_001_003_001\" mesh=\"robot0_link4_vis_1\" />\n                <geom name=\"robot0_g20_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature002_001_003_001\" mesh=\"robot0_link4_vis_2\" />\n                <geom name=\"robot0_g21_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature_002_003_001\" mesh=\"robot0_link4_vis_3\" />\n                <geom name=\"robot0_link4_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link4\" />\n                <body name=\"robot0_link5\" pos=\"-0.0825 0.384 0\" quat=\"0.707107 -0.707107 0 0\" gravcomp=\"0\">\n                  <inertial pos=\"0 0 -0.15\" mass=\"2\" diaginertia=\"0.2 0.2 0.2\" />\n                  <joint name=\"robot0_joint5\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-2.8973 2.8973\" armature=\"1\" damping=\"0.1\" frictionloss=\"0.1\" />\n                  <geom name=\"robot0_g22_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell001_001_001_003\" mesh=\"robot0_link5_vis_0\" />\n                  <geom name=\"robot0_g23_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell_001_001_003\" mesh=\"robot0_link5_vis_1\" />\n                  <geom name=\"robot0_g24_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature_002_004_003\" mesh=\"robot0_link5_vis_2\" />\n                  <geom name=\"robot0_link5_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link5\" />\n                  <body name=\"robot0_link6\" pos=\"0 0 0\" quat=\"0.707107 0.707107 0 0\" gravcomp=\"0\">\n                    <inertial pos=\"0.06 0 0\" mass=\"1.5\" diaginertia=\"0.1 0.1 0.1\" />\n                    <joint name=\"robot0_joint6\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-0.0175 3.7525\" armature=\"0.833333\" damping=\"0.01\" frictionloss=\"0.1\" />\n                    <geom name=\"robot0_g25_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell006_003_002_001\" mesh=\"robot0_link6_vis_0\" />\n                    <geom name=\"robot0_g26_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell011_002_002_001\" mesh=\"robot0_link6_vis_1\" />\n                    <geom name=\"robot0_g27_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell007_002_002_001\" mesh=\"robot0_link6_vis_2\" />\n                    <geom name=\"robot0_g28_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell005_001_001_002_001\" mesh=\"robot0_link6_vis_3\" />\n                    <geom name=\"robot0_g29_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell004_001_001_002_001\" mesh=\"robot0_link6_vis_4\" />\n                    <geom name=\"robot0_g30_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell003_002_001_002_001\" mesh=\"robot0_link6_vis_5\" />\n                    <geom name=\"robot0_g31_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell002_002_001_002_001\" mesh=\"robot0_link6_vis_6\" />\n                    <geom name=\"robot0_g32_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Union001_001_001_002_001\" mesh=\"robot0_link6_vis_7\" />\n                    <geom name=\"robot0_g33_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Union_001_001_002_001\" mesh=\"robot0_link6_vis_8\" />\n                    <geom name=\"robot0_g34_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face539_002_001_002_001\" mesh=\"robot0_link6_vis_9\" />\n                    <geom name=\"robot0_g35_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell_003_001_002_001\" mesh=\"robot0_link6_vis_10\" />\n                    <geom name=\"robot0_g36_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face374_002_001_002_001\" mesh=\"robot0_link6_vis_11\" />\n                    <geom name=\"robot0_g37_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face065_002_001_002_001\" mesh=\"robot0_link6_vis_12\" />\n                    <geom name=\"robot0_g38_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face064_002_001_002_001\" mesh=\"robot0_link6_vis_13\" />\n                    <geom name=\"robot0_g39_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature002_006_001_002_001\" mesh=\"robot0_link6_vis_14\" />\n                    <geom name=\"robot0_g40_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature001_009_001_002_001\" mesh=\"robot0_link6_vis_15\" />\n                    <geom name=\"robot0_g41_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell012_002_002_001\" mesh=\"robot0_link6_vis_16\" />\n                    <geom name=\"robot0_link6_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link6\" />\n                    <body name=\"robot0_link7\" pos=\"0.088 0 0\" quat=\"0.707107 0.707107 0 0\" gravcomp=\"0\">\n                      <inertial pos=\"0 0 0.08\" mass=\"0.5\" diaginertia=\"0.05 0.05 0.05\" />\n                      <joint name=\"robot0_joint7\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-2.8973 2.8973\" armature=\"0.714286\" damping=\"0.01\" frictionloss=\"0.1\" />\n                      <geom name=\"robot0_g42_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring004_004_002\" mesh=\"robot0_link7_vis_0\" />\n                      <geom name=\"robot0_g43_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring001_004_002\" mesh=\"robot0_link7_vis_1\" />\n                      <geom name=\"robot0_g44_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring007_004_001\" mesh=\"robot0_link7_vis_2\" />\n                      <geom name=\"robot0_g45_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring006_004_001\" mesh=\"robot0_link7_vis_3\" />\n                      <geom name=\"robot0_g46_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring005_004_001\" mesh=\"robot0_link7_vis_4\" />\n                      <geom name=\"robot0_g47_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring003_004_001\" mesh=\"robot0_link7_vis_5\" />\n                      <geom name=\"robot0_g48_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring002_004_001\" mesh=\"robot0_link7_vis_6\" />\n                      <geom name=\"robot0_g49_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring_004_001\" mesh=\"robot0_link7_vis_7\" />\n                      <geom name=\"robot0_link7_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link7\" />\n                      <body name=\"robot0_right_hand\" pos=\"0 0 0.1065\" quat=\"0.923785 0 0 -0.382911\" gravcomp=\"0\">\n                        <inertial pos=\"0 0 0\" mass=\"0.5\" diaginertia=\"0.05 0.05 0.05\" />\n                        <camera name=\"robot0_eye_in_hand\" pos=\"0.05 0 0\" quat=\"0 0.707107 0.707107 0\" fovy=\"75\" />\n                        <body name=\"gripper0_right_right_gripper\" pos=\"0 0 0\" quat=\"0.707107 0 0 -0.707107\" gravcomp=\"0\">\n                          <inertial pos=\"0 0 0.17\" quat=\"0.707107 0.707107 0 0\" mass=\"0.3\" diaginertia=\"0.09 0.07 0.05\" />\n                          <geom name=\"gripper0_right_hand_visual\" quat=\"0.707107 0 0 0.707107\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"1 1 1 1\" mesh=\"gripper0_right_hand_vis\" />\n                          <geom name=\"gripper0_right_hand_collision\" quat=\"0.707107 0 0 0.707107\" type=\"mesh\" rgba=\"0 0 0.5 1\" mesh=\"gripper0_right_hand\" />\n                          <site name=\"gripper0_right_ft_frame\" pos=\"0 0 0\" size=\"0.01\" group=\"1\" rgba=\"1 0 0 -1\" />\n                          <body name=\"gripper0_right_eef\" pos=\"0 0 0.097\" gravcomp=\"0\">\n                            <site name=\"gripper0_right_grip_site\" pos=\"0 0 0\" size=\"0.01\" group=\"1\" rgba=\"1 0 0 -0.5\" />\n                            <site name=\"gripper0_right_ee_x\" pos=\"0.1 0 0\" quat=\"0.707105 0 0.707108 0\" size=\"0.005 0.1\" group=\"1\" type=\"cylinder\" rgba=\"1 0 0 0\" />\n                            <site name=\"gripper0_right_ee_y\" pos=\"0 0.1 0\" quat=\"0.707105 0.707108 0 0\" size=\"0.005 0.1\" group=\"1\" type=\"cylinder\" rgba=\"0 1 0 0\" />\n                            <site name=\"gripper0_right_ee_z\" pos=\"0 0 0.1\" size=\"0.005 0.1\" group=\"1\" type=\"cylinder\" rgba=\"0 0 1 0\" />\n                            <site name=\"gripper0_right_grip_site_cylinder\" pos=\"0 0 0\" size=\"0.005 10\" group=\"1\" type=\"cylinder\" rgba=\"0 1 0 -0.3\" />\n                          </body>\n                          <body name=\"gripper0_right_leftfinger\" pos=\"0 0 0.0524\" quat=\"0.707107 0 0 0.707107\" gravcomp=\"0\">\n                            <inertial pos=\"0 0 0.05\" mass=\"0.1\" diaginertia=\"0.01 0.01 0.005\" />\n                            <joint name=\"gripper0_right_finger_joint1\" pos=\"0 0 0\" axis=\"0 1 0\" type=\"slide\" range=\"0 0.04\" armature=\"1\" damping=\"100\" frictionloss=\"1\" />\n                            <geom name=\"gripper0_right_finger1_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"0.499 0.499 0.499 1\" mesh=\"gripper0_right_finger_vis\" />\n                            <geom name=\"gripper0_right_finger1_collision\" type=\"mesh\" contype=\"0\" condim=\"4\" rgba=\"0 0 0.5 1\" mesh=\"gripper0_right_finger\" />\n                            <body name=\"gripper0_right_finger_joint1_tip\" pos=\"0 0.0085 0.056\" gravcomp=\"0\">\n                              <inertial pos=\"0 0 0\" quat=\"0 0 0 1\" mass=\"0.01\" diaginertia=\"0.01 0.01 0.01\" />\n                              <geom name=\"gripper0_right_finger1_pad_collision\" size=\"0.008 0.004 0.008\" pos=\"0 -0.005 -0.015\" quat=\"0 0 0 1\" type=\"box\" friction=\"2 0.05 0.0001\" solref=\"0.01 0.5\" rgba=\"0 0 0.5 1\" />\n                            </body>\n                          </body>\n                          <body name=\"gripper0_right_rightfinger\" pos=\"0 0 0.0524\" quat=\"0.707107 0 0 0.707107\" gravcomp=\"0\">\n                            <inertial pos=\"0 0 0.05\" mass=\"0.1\" diaginertia=\"0.01 0.01 0.005\" />\n                            <joint name=\"gripper0_right_finger_joint2\" pos=\"0 0 0\" axis=\"0 1 0\" type=\"slide\" range=\"-0.04 0\" armature=\"1\" damping=\"100\" frictionloss=\"1\" />\n                            <geom name=\"gripper0_right_finger2_visual\" quat=\"0 0 0 1\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"0.499 0.499 0.499 1\" mesh=\"gripper0_right_finger_vis\" />\n                            <geom name=\"gripper0_right_finger2_collision\" quat=\"0 0 0 1\" type=\"mesh\" contype=\"0\" condim=\"4\" rgba=\"0 0 0.5 1\" mesh=\"gripper0_right_finger\" />\n                            <body name=\"gripper0_right_finger_joint2_tip\" pos=\"0 -0.0085 0.056\" gravcomp=\"0\">\n                              <inertial pos=\"0 0 0\" quat=\"0 0 0 1\" mass=\"0.01\" diaginertia=\"0.01 0.01 0.01\" />\n                              <geom name=\"gripper0_right_finger2_pad_collision\" size=\"0.008 0.004 0.008\" pos=\"0 0.005 -0.015\" quat=\"0 0 0 1\" type=\"box\" friction=\"2 0.05 0.0001\" solref=\"0.01 0.5\" rgba=\"0 0 0.5 1\" />\n                            </body>\n                          </body>\n                        </body>\n                      </body>\n                    </body>\n                  </body>\n                </body>\n              </body>\n            </body>\n          </body>\n        </body>\n      <site name=\"robot0_right_center\" pos=\"0 0 0\" size=\"0.01\" rgba=\"1 0.3 0.3 1\" group=\"2\" /></body>\n      <body name=\"fixed_mount0_base\" pos=\"0 0 0.01\" gravcomp=\"0\">\n        <body name=\"fixed_mount0_controller_box\" pos=\"0 0 0\" gravcomp=\"0\">\n          <inertial pos=\"-0.325 0 -0.38\" mass=\"46.64\" diaginertia=\"1.71363 1.27988 0.809981\" />\n          <geom name=\"fixed_mount0_controller_box_col\" size=\"0.11 0.2 0.265\" pos=\"-0.325 0 -0.38\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n        </body>\n        <body name=\"fixed_mount0_pedestal_feet\" pos=\"0 0 0\" gravcomp=\"0\">\n          <inertial pos=\"-0.1225 0 -0.758\" mass=\"167.09\" diaginertia=\"8.16095 9.59375 15.0785\" />\n          <geom name=\"fixed_mount0_pedestal_feet_col\" size=\"0.385 0.35 0.155\" pos=\"-0.1225 0 -0.758\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n        </body>\n        <body name=\"fixed_mount0_torso\" pos=\"0 0 0\" gravcomp=\"0\">\n          <inertial pos=\"0 0 0\" mass=\"0.0001\" diaginertia=\"1e-08 1e-08 1e-08\" />\n          <geom name=\"fixed_mount0_torso_vis\" size=\"0.05 0.05 0.05\" pos=\"0 0 -0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"0.2 0.2 0.2 1\" />\n        </body>\n        <body name=\"fixed_mount0_pedestal\" pos=\"0 0 0\" gravcomp=\"0\">\n          <inertial pos=\"0 0 0\" quat=\"0.659267 -0.259505 -0.260945 0.655692\" mass=\"60.864\" diaginertia=\"6.0869 5.81635 4.20915\" />\n          <geom name=\"fixed_mount0_pedestal_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"0.2 0.2 0.2 1\" mesh=\"fixed_mount0_pedestal\" />\n          <geom name=\"fixed_mount0_pedestal_col\" size=\"0.18 0.31\" pos=\"-0.02 0 -0.29\" type=\"cylinder\" rgba=\"0.5 0.5 0 1\" />\n        </body>\n      </body>\n    </body>\n    <body name=\"VisualMilk_main\" pos=\"0.0025 0.1575 0.885\" gravcomp=\"0\">\n      <geom name=\"VisualMilk_g0\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" mass=\"0\" rgba=\"0.8 0.8 0.8 0.3\" mesh=\"VisualMilk_milk_mesh\" />\n      <site name=\"VisualMilk_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"VisualBread_main\" pos=\"0.1975 0.1575 0.845\" gravcomp=\"0\">\n      <geom name=\"VisualBread_g0\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" mass=\"0\" rgba=\"0.8 0.8 0.8 0.3\" mesh=\"VisualBread_bread_mesh\" />\n      <site name=\"VisualBread_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"VisualCereal_main\" pos=\"0.0025 0.4025 0.9\" gravcomp=\"0\">\n      <geom name=\"VisualCereal_g0\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" mass=\"0\" rgba=\"0.8 0.8 0.8 0.3\" mesh=\"VisualCereal_cereal_mesh\" />\n      <site name=\"VisualCereal_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"VisualCan_main\" pos=\"0.1975 0.4025 0.86\" gravcomp=\"0\">\n      <geom name=\"VisualCan_g0\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" mass=\"0\" rgba=\"0.8 0.8 0.8 0.3\" mesh=\"VisualCan_can_mesh\" />\n      <site name=\"VisualCan_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"Milk_main\" pos=\"0 0 0\" gravcomp=\"0\">\n      <joint name=\"Milk_joint0\" type=\"free\" damping=\"0.0005\" />\n      <geom name=\"Milk_g0\" type=\"mesh\" condim=\"4\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" density=\"100\" rgba=\"0.5 0 0 1\" mesh=\"Milk_milk_mesh\" />\n      <geom name=\"Milk_g0_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" condim=\"4\" group=\"1\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" mass=\"0\" material=\"Milk_ceramic\" mesh=\"Milk_milk_mesh\" />\n      <site name=\"Milk_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"Bread_main\" pos=\"0 0 0\" gravcomp=\"0\">\n      <joint name=\"Bread_joint0\" type=\"free\" damping=\"0.0005\" />\n      <geom name=\"Bread_g0\" type=\"mesh\" condim=\"4\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" density=\"50\" rgba=\"0.5 0 0 1\" mesh=\"Bread_bread_mesh\" />\n      <geom name=\"Bread_g0_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" condim=\"4\" group=\"1\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" mass=\"0\" material=\"Bread_bread\" mesh=\"Bread_bread_mesh\" />\n      <site name=\"Bread_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"Cereal_main\" pos=\"0 0 0\" gravcomp=\"0\">\n      <joint name=\"Cereal_joint0\" type=\"free\" damping=\"0.0005\" />\n      <geom name=\"Cereal_g0\" type=\"mesh\" condim=\"4\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" density=\"150\" rgba=\"0.5 0 0 1\" mesh=\"Cereal_cereal_mesh\" />\n      <geom name=\"Cereal_g0_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" condim=\"4\" group=\"1\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" mass=\"0\" material=\"Cereal_cereal\" mesh=\"Cereal_cereal_mesh\" />\n      <site name=\"Cereal_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"Can_main\" pos=\"0 0 0\" gravcomp=\"0\">\n      <joint name=\"Can_joint0\" type=\"free\" damping=\"0.0005\" />\n      <geom name=\"Can_g0\" type=\"mesh\" condim=\"4\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" density=\"100\" rgba=\"0.5 0 0 1\" mesh=\"Can_can_mesh\" />\n      <geom name=\"Can_g0_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" condim=\"4\" group=\"1\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" mass=\"0\" material=\"Can_coke\" mesh=\"Can_can_mesh\" />\n      <site name=\"Can_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n  </worldbody>\n  <actuator>\n    <general name=\"robot0_torq_j1\" joint=\"robot0_joint1\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j2\" joint=\"robot0_joint2\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j3\" joint=\"robot0_joint3\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j4\" joint=\"robot0_joint4\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j5\" joint=\"robot0_joint5\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j6\" joint=\"robot0_joint6\" ctrlrange=\"-12 12\" actdim=\"0\" />\n    <general name=\"robot0_torq_j7\" joint=\"robot0_joint7\" ctrlrange=\"-12 12\" actdim=\"0\" />\n    <general name=\"gripper0_right_gripper_finger_joint1\" joint=\"gripper0_right_finger_joint1\" ctrlrange=\"0 0.04\" forcerange=\"-20 20\" actdim=\"0\" biastype=\"affine\" gainprm=\"1000 0 0 0 0 0 0 0 0 0\" biasprm=\"0 -1000 0 0 0 0 0 0 0 0\" />\n    <general name=\"gripper0_right_gripper_finger_joint2\" joint=\"gripper0_right_finger_joint2\" ctrlrange=\"-0.04 0\" forcerange=\"-20 20\" actdim=\"0\" biastype=\"affine\" gainprm=\"1000 0 0 0 0 0 0 0 0 0\" biasprm=\"0 -1000 0 0 0 0 0 0 0 0\" />\n  </actuator>\n  <sensor>\n    <force site=\"gripper0_right_ft_frame\" name=\"gripper0_right_force_ee\" />\n    <torque site=\"gripper0_right_ft_frame\" name=\"gripper0_right_torque_ee\" />\n  </sensor>\n</mujoco>",
+      "fps": 20,
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/can/ph/demo_8",
+      "provenance": [
+        {
+          "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+          "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962"
+        }
+      ],
+      "hand_assignment": "robot0 to Reachy right; robot1 to Reachy left when present; shared world frame",
+      "quaternion_evidence": "robosuite observables use xyzw; converted to wxyz",
+      "action_semantics": "source OSC command, not a Reachy joint command",
+      "schema": "reachy-retarget-episode-v1",
+      "source_id": "hf__robomimic__robomimic_datasets",
+      "source_sequence": "v1.5/can/ph/demo_8",
+      "episode_id": "261e660d9f92515639b01aae",
+      "split": "train",
+      "content_fingerprint": "30422bc390f40a7212bb239d4d9dc6e16be0a21dfd66fc6503bea23521d52e9b",
+      "canonical_units": {
+        "length": "m",
+        "angle": "rad",
+        "time": "s",
+        "quaternion": "wxyz"
+      },
+      "physics_validated": false,
+      "hdf5_sha256": "90f6adacf9e640f806c9918983fc4db27d919a4c08dc7e327ab85859b8adf7c1"
+    },
+    "frozen_parent_binding": null,
+    "scene_asset_hashes": {
+      "meshes": {
+        "/mnt/reachy-retarget/workspaces/additional-independent-v1-261e660d9f92515639b01aae/data/assets/reachy_mujoco_state/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+        "/mnt/reachy-retarget/workspaces/additional-independent-v1-261e660d9f92515639b01aae/data/assets/reachy_mujoco_state/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+        "/mnt/reachy-retarget/workspaces/additional-independent-v1-261e660d9f92515639b01aae/data/assets/reachy_mujoco_state/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+        "/mnt/reachy-retarget/workspaces/additional-independent-v1-261e660d9f92515639b01aae/data/assets/reachy_mujoco_state/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82",
+        "/mnt/reachy-retarget/workspaces/additional-independent-v1-261e660d9f92515639b01aae/data/assets/reachy_mujoco_state/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+        "/mnt/reachy-retarget/workspaces/additional-independent-v1-261e660d9f92515639b01aae/data/assets/reachy_mujoco_state/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+        "/mnt/reachy-retarget/workspaces/additional-independent-v1-261e660d9f92515639b01aae/data/assets/reachy_mujoco_state/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+        "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/meshes/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8"
+      },
+      "textures": {
+        "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+        "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5",
+        "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+        "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+        "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+        "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d"
+      },
+      "hfields": {}
+    },
+    "artifact_sha256": "9d2594bef4d0dc8d4c25b0c116381757622293c6b89565f36d25fe56d9af6f24",
+    "artifact": "/tmp/can-261e-native-height-full-admission-v1/mobile/robot-mobile-path.npz",
+    "physics_validated": false,
+    "object_state_assignment": "none; isolated robot-only FK queries",
+    "fixture_assumption": "Original compiled reset; task fixtures are not predicted or rewritten",
+    "source_clock_scope": "Every complete original control row retained; this module does not retime",
+    "controller_identity": {
+      "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/reachy.py": "28bb18ac71bbf38e2ce45db1b0b523005ffc2141dfef97215d144390bc41cac8",
+      "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/collision.py": "155a338b662028192011ccf611e433b6b5fede677b336dc551e4d28427ee208b",
+      "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/reachy.urdf": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448",
+      "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/collision_spheres.json": "8d581c1954e16769601234585c2b15897223b381171bc46f36449e76230a2bd0"
+    },
+    "minimum_fixture_gap_m": 0.003,
+    "support_pairs": [
+      [
+        "drivewhl1_link_collision_0",
+        "floor"
+      ],
+      [
+        "drivewhl2_link_collision_0",
+        "floor"
+      ],
+      [
+        "drivewhl3_link_collision_0",
+        "floor"
+      ]
+    ],
+    "gripper_closed_target_rad": 1.1079683354778884,
+    "inferred_contact_angle_rad": 1.1429683354778883,
+    "aperture_scope": "Five samples across declared contact/command interval and intent transitions; inactive left2rad; continuous sweep not asserted",
+    "max_iterations": 160,
+    "max_active_set_updates": 4,
+    "stop_on_first_invalid": true,
+    "pose_tolerance_constraints": true,
+    "pose_constraint_tolerances": [
+      0.0019999,
+      0.0199999
+    ],
+    "incomplete_path_scope": "Unvisited rows retain original references; no full-path feasibility claim",
+    "displacement_regularizer": 1e-08,
+    "wall_s": 94.33064790799108,
+    "constrained_pairs": [
+      [
+        "r_elbow_forearm_link_collision_0",
+        "source_scene_geom_13"
+      ]
+    ],
+    "max_ik_errors": [
+      1.1506388194176359e-06,
+      4.000615389422555e-06
+    ],
+    "max_collision_depths_m": [
+      2.7755575615628914e-17,
+      0.0
+    ],
+    "min_fixture_clearance_m": 0.003001,
+    "min_self_clearance_m": 0.12456412372827763,
+    "min_joint_margin_rad": 0.031000000000000028,
+    "peak_original_clock_reference_speed": [
+      0.2102516186171122,
+      0.18812081587083318,
+      0.3478752137184401,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.3393672247818424,
+      0.4491758142501563,
+      0.2641241869035188,
+      0.19552138084416565,
+      0.6183966159055736,
+      0.358647580078772,
+      0.20927919193182962
+    ]
+  },
+  "fixture_admission": {
+    "minimum_m": 0.003,
+    "collision_pair_count": 374,
+    "support_pairs": [
+      [
+        "drivewhl1_link_collision_0",
+        "floor"
+      ],
+      [
+        "drivewhl2_link_collision_0",
+        "floor"
+      ],
+      [
+        "drivewhl3_link_collision_0",
+        "floor"
+      ]
+    ],
+    "active_object_body_ids": [
+      103
+    ],
+    "robot_body_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100
+    ],
+    "scope": "All compiled physical robot/fixture collision pairs; selected active-object subtrees and only explicit support pairs excluded",
+    "admitted": true,
+    "admission_checks": {
+      "complete": true,
+      "positive_fixture_gap": true
+    },
+    "completed_frames": 831,
+    "total_frames": 831,
+    "exception": null,
+    "closed_aperture_rad": [
+      1.1079683354778884,
+      1.1429683354778883
+    ],
+    "inactive_left_gripper_rad": 2.0,
+    "worst": {
+      "admitted": true,
+      "minimum_required_m": 0.003,
+      "minimum_signed_distance_or_lower_bound_m": 0.003001,
+      "distance_is_lower_bound": true,
+      "closest_geom_pair": null,
+      "closest_segment_world": null,
+      "inspected_pairs": 374,
+      "exact_distance_queries": 62,
+      "certified_far_pairs": 312,
+      "gripper_angle_rad": 2.0,
+      "frame": 0,
+      "time_s": 0.0
+    },
+    "artifact_sha256": "e18c56d7672a4c3aade9bbd35a1ba033d69cced415c26a53f420508ae8809cb8",
+    "physics_validated": false,
+    "fixture_pose_scope": "Original compiled reset with source passive fixture initialization; no object trajectory or physics stepping",
+    "aperture_scope": "Five-point closed aperture envelopes and opening/closing transitions; continuous swept-volume clearance is not asserted"
+  },
+  "api_reproduction": {
+    "settings": {
+      "azimuth_offset_deg": 120,
+      "azimuth_policy": "nearest_opposed_facets",
+      "end_margin_m": 0.001,
+      "orientation_policy": "jaw_level",
+      "axial_offset_m": 0.006734336642069025,
+      "preserve_pre_offset_initial_target": true
+    },
+    "helper_sha256": "def9fa676e264282058f9ddef6dfb709bab59042243e96558ee01e94f80ed4dc",
+    "parent_plan_sha256": "b006bf82239b08f68b29432ede286201520cd29f87e4f56aab95fb5bdfc80fa1",
+    "scene_sha256": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46",
+    "target_exact": true,
+    "max_hand_matrix_difference": 0.0,
+    "source_clock_exact": true,
+    "original_objects_exact": true,
+    "source_intents_exact": true,
+    "source_reference_exact": true,
+    "finite_support": {
+      "requested_offset_m": 0.006734336642069025,
+      "supported_offset_interval_m": [
+        -0.01535299952726491,
+        0.009385883141528006
+      ],
+      "closed_source_rows": [
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        492,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564
+      ],
+      "completed_frames": 290,
+      "total_frames": 290,
+      "constant_translation_tcp_m": [
+        0.006707087254479592,
+        1.095243626728227e-06,
+        -0.0006052019249410598
+      ],
+      "finite_pad_axial_bounds_before_m": [
+        -0.02199419773837006,
+        0.026743896629572193
+      ],
+      "finite_pad_axial_bounds_after_m": [
+        -0.015372676402249135,
+        0.03347767286439711
+      ],
+      "allowed_wall_interval_with_guard_m": [
+        -0.037089999945253124,
+        0.03612899871170498
+      ],
+      "every_closed_source_row_axially_supported": true,
+      "scope": "Explicit robot attachment only; every closed source row checked against unchanged native wall and finite CAD faces; fresh complete IK/fixture and physical validation required"
+    },
+    "physics_validated": false
+  },
+  "materialization": {
+    "source": "data/normalized/hf__robomimic__robomimic_datasets/261e660d9f92515639b01aae.h5",
+    "parent_workspace": "workspaces/additional-independent-v1-261e660d9f92515639b01aae",
+    "cache": "/tmp/can-261e-axial-materialization-v1/cache",
+    "binding": {
+      "files": {
+        "plan.h5": "961a44e499591e71a1aa3f08081f01076b2f4ec3c002d6d3b5002be04106b537",
+        "result.json": "cf6f87b0fe70ec44e968742e2a1f5e273d13eb4cff4ec1d1ada066744f243dae",
+        "scene.xml": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46"
+      },
+      "parent_attempt": "/tmp/can-261e-axial-materialization-v1/cache"
+    },
+    "roundtrip_bit_exact": {
+      "6": true,
+      "7": true,
+      "8": true,
+      "9": true,
+      "10": false,
+      "11": false
+    },
+    "maximum_pose_serialization_roundoff": 7.771561172376096e-16,
+    "admitted_source_rows": 831,
+    "source_seconds": 8.3,
+    "physics_validated": false,
+    "exact_reconstruction_settings": {
+      "azimuth_offset_deg": 120,
+      "azimuth_policy": "nearest_opposed_facets",
+      "end_margin_m": 0.001,
+      "orientation_policy": "jaw_level",
+      "axial_offset_m": 0.006734336642069025,
+      "preserve_pre_offset_initial_target": true
+    },
+    "scene_sha256": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46",
+    "source_sha256": "90f6adacf9e640f806c9918983fc4db27d919a4c08dc7e327ab85859b8adf7c1"
+  },
+  "frozen_api_sha256": "67993a23344e09a48ed01a421de95034f1d0ccf7f6cb247fc76be3670bff9a99",
+  "focused_tests": "35 passed",
+  "physics_validated": false,
+  "materialization_v2": {
+    "proof": {
+      "reason": "v1 lacked experiment_variant; derive missing identity via canonical variant helper and verify every numeric Candidate field unchanged",
+      "variant": "contact_0035",
+      "parent_cache": "/tmp/can-261e-axial-materialization-v1/cache",
+      "parent_files_sha256": {
+        "scene.xml": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46",
+        "plan.h5": "961a44e499591e71a1aa3f08081f01076b2f4ec3c002d6d3b5002be04106b537",
+        "result.json": "cf6f87b0fe70ec44e968742e2a1f5e273d13eb4cff4ec1d1ada066744f243dae",
+        "binding.json": "08a526198a954a84a1bc3e4c7f719e520d038e065dc6d1f04febf6622e1caf04"
+      },
+      "canonical_variant_numeric_candidate_unchanged": true,
+      "reference_source_arrays_exact": true,
+      "independently_admitted_aperture_exact": true,
+      "source_sha256": "90f6adacf9e640f806c9918983fc4db27d919a4c08dc7e327ab85859b8adf7c1",
+      "runtime_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "script_sha256": "2af980671c0ab3b45cdaf050a85d4fa71cd8befe75b17a15a0b677ad8daeee25",
+      "source_objects_and_physics_unchanged": true
+    },
+    "cache": "/tmp/can-261e-axial-materialization-v2/cache",
+    "binding": {
+      "files": {
+        "plan.h5": "79a0661daa8b659c1b718d87c40491046e3e54432a3f1b854dfd325dc8efbb8c",
+        "result.json": "1d61c96b884a700e53d7729477298405fe0fecc345b3ee4a9be6eda248fe853a",
+        "scene.xml": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46"
+      },
+      "parent_attempt": "/tmp/can-261e-axial-materialization-v2/cache"
+    },
+    "validate_parent_pass": true,
+    "source_rows": 831,
+    "physics_validated": false,
+    "v1_bytes_unchanged": true
+  },
+  "materialization_v2_archive": {
+    "path": "runs/can-261e-native-height-v1/materialization-v2.tar.gz",
+    "bytes": 154952,
+    "sha256": "e7ca1b86e3c1c72c2e5da90b9b19abf76389d4cbd6ddb70d745f82698fa55725"
+  }
+}

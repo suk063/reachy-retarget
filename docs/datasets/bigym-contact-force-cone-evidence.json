@@ -1,0 +1,88 @@
+{
+  "status": "static_contact_candidates_only",
+  "source_group": "bigym/MovePlate/c795f62efb4f4d20ab899af96d766a2f",
+  "source_urls": [
+    "https://github.com/NeuracoreAI/bigym_data/releases/download/v0.9.0/demonstrations.zip#member=MovePlate/JointPositionActionMode_floating_pelvis_x_pelvis_y_pelvis_rz_absolute/lightweight/c795f62efb4f4d20ab899af96d766a2f.safetensors",
+    "https://github.com/NeuracoreAI/bigym/tree/52070fa73e8dd88a3d76eed4be575a6d01497931"
+  ],
+  "source_revision": "52070fa73e8dd88a3d76eed4be575a6d01497931",
+  "source_states_sha256": "3a0250b9bf4cf22f0def1ff13e5ea5275852052d578a3f205803a9bdfb1e4612",
+  "compiled_native_model_sha256": "02d31ee9af6bac55c0254d07b66551fc8bdc0e8bbf1a7537779b792e3f2ac986",
+  "scope": "Archived-state native geometry and compiled contact model inspection plus detached Reachy hand CAD screening. No new physical replay or success claim.",
+  "original_observations_available": false,
+  "native_runtime_mujoco": "3.1.5",
+  "reachy_runtime_mujoco": "3.15.0",
+  "source_code_version": "4.1.0",
+  "recorded_demo_code_version": "4.0.0",
+  "source_carry_geometry": {
+    "lift_threshold_m": 0.015,
+    "source_closed_rows_inclusive": [
+      515,
+      1988
+    ],
+    "unsupported_lifted_rows": 1166,
+    "main_contiguous_rows_inclusive": [
+      768,
+      1914
+    ],
+    "definition": "Compiled fixture contact distances at archived source states; mj_forward on independent clones. This is geometry, not recorded force ground truth.",
+    "gravity_second_moment_eigenvalues": [
+      0.0113339353584,
+      0.0280640481433,
+      0.960602016498
+    ]
+  },
+  "native_contact_model": {
+    "sampled_carry_rows": [
+      764,
+      801,
+      900,
+      1500
+    ],
+    "plate_pad_contact_counts": [
+      7,
+      6,
+      6,
+      5
+    ],
+    "contact_dimension": 3,
+    "active_spin_friction": false,
+    "sliding_friction_coefficients": [
+      0.95,
+      1.0
+    ],
+    "meaning": "Several source contact points can carry moments through separated force locations; a configured spin coefficient is inactive at condim=3."
+  },
+  "static_search": {
+    "balanced_rim_candidates": 56,
+    "static_geometry_and_balanced_internal_force_admitted": 37,
+    "force_cone_mu": 1.0,
+    "internal_force_cosine_threshold": 0.7071067811865476,
+    "nominal_positive_gap_m": 5e-05,
+    "finite_patch_margin_m": 0.003,
+    "nonpad_and_fixture_clearance_m": 0.003,
+    "face_plane_tolerance_m": 0.0005,
+    "face_normal_cosine_threshold": 0.95,
+    "closure_margin_rad": 0.05,
+    "physical_success": false,
+    "limitation": "The two-point balanced internal-squeeze condition is necessary for that simplified model, not sufficient for a full grasp wrench or dynamic stability. Gravity moment ranking uses unchanged native reference poses, never failed Reachy object trajectories."
+  },
+  "artifact": {
+    "workspace": "/mnt/reachy-retarget/workspaces/bigym-native-gravity-contact-force-cone-search-20261007-01",
+    "manifest_sha256": "a361c255e933887cd11144aaa1f5917350430cb761b4eccd6d1549ca94d7f766",
+    "files": 34,
+    "bytes": 4699980,
+    "cross_pod_verified": true
+  },
+  "missing_fields": [
+    "Original BiGym 4.0 observed state trajectories for comparison",
+    "Physical validation of detached-hand candidates",
+    "Whole-path robot IK/fixture admission for detached-hand candidates"
+  ],
+  "simulation_assumptions": [
+    "Mass/shape/materials/source poses remain unchanged",
+    "Native-state clones are set only for read-only geometry inspection, not physical validation",
+    "Positive closest-distance witnesses are used; zero-distance witness points are not treated as reliable normals",
+    "Failed runtime/input attempts are retained with retrospective notes; missing original stderr was not fabricated"
+  ]
+}

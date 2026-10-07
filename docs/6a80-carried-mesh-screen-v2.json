@@ -1,0 +1,264 @@
+{
+  "schema": "6a80-carry-mesh-screen-v1",
+  "query": {
+    "active_body": "Can_main",
+    "source_release_frame": 535,
+    "hand_to_object": [
+      [
+        0.04765723410616946,
+        0.05339074685981493,
+        0.9974358205855157,
+        -0.02013417160707462
+      ],
+      [
+        -0.6099700080720247,
+        0.7923134372431364,
+        -0.01326674099319979,
+        0.0001785215469836121
+      ],
+      [
+        -0.7909901246475608,
+        -0.6077736793525345,
+        0.07032622125721251,
+        -0.045745699899875314
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "minimum_m": 0.003,
+    "intended_support_geoms": [
+      "source_scene_geom_21"
+    ],
+    "excluded_support_pairs": [
+      [
+        "Can_g0",
+        "source_scene_geom_21"
+      ]
+    ],
+    "support_policy": "Only explicitly named horizontal support surfaces may contact during lower; all other fixtures remain constrained",
+    "scene_xml_sha256": "5bab807341cab33c6304d03223fe6a46d7bb924e59b4ba3e90902527035ed184",
+    "source_body_frame": "Compiled object root frame, including mesh/geom rotations and rigid child bodies",
+    "assumption": "Perfect rigid source grasp relative to desired TCP; actual grip and support require independent physics",
+    "state_mutation": "Private derived object geom_xpos/geom_xmat only; no qpos/qvel/time/model writes"
+  },
+  "module_sha256": "440a0e00a35f5276038a6115fe25b534d3666eba51e453ddc7c67aecadbaa5c3",
+  "source_sha256": "ba2abb2e6f92a575811067198af7e26e4f316f41c6558b9386641402820174fd",
+  "results": [
+    {
+      "shift_x_m": 0.0,
+      "parameters": {
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.6395718250129875,
+              1.875
+            ],
+            [
+              -1.3196024302966984,
+              0.55
+            ],
+            [
+              -1.4872932378250436,
+              5.4008292720648345
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "placement_xy_world": [
+          0.92,
+          -0.32625
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          135.63395716701234
+        ]
+      },
+      "carried_admitted": false,
+      "worst": {
+        "phase": "lower",
+        "fraction": 0.9400000000000001,
+        "admitted": false,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": -0.0019644395761628797,
+        "distance_is_lower_bound": false,
+        "closest_geom_pair": [
+          "Can_g0",
+          "source_scene_geom_25"
+        ],
+        "closest_segment_world": [
+          0.8880355604238371,
+          -0.3270208068546034,
+          0.8994657956261026,
+          0.89,
+          -0.3270208068546034,
+          0.8994657956261027
+        ],
+        "inspected_pairs": 12,
+        "exact_distance_queries": 5,
+        "certified_far_pairs": 7,
+        "allow_intended_support": true,
+        "object_pose": [
+          [
+            -0.7997801455377372,
+            -0.563939413942679,
+            -0.2057281123367042,
+            0.9200000000000002
+          ],
+          [
+            0.5901241717660872,
+            -0.8014314314104399,
+            -0.09726830236414727,
+            -0.32625000000000004
+          ],
+          [
+            -0.11002354612093587,
+            -0.19919838892270433,
+            0.9737632264311348,
+            0.8681665649627734
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "hand_screen": {
+        "rigid_hand_screen_passed": true,
+        "full_robot_admitted": false,
+        "physics_validated": false,
+        "requires_full_mobile_ik_and_fixture_admission": true,
+        "segment_samples": 101,
+        "sampled_poses": 203,
+        "worst": {
+          "phase": "bottom",
+          "fraction": 1.0,
+          "rigid_hand_screen_passed": true,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "worst_aperture_rad": null,
+          "exact_distance_queries": 152
+        }
+      }
+    },
+    {
+      "shift_x_m": 0.005,
+      "parameters": {
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.6395718250129875,
+              1.875
+            ],
+            [
+              -1.3196024302966984,
+              0.55
+            ],
+            [
+              -1.4872932378250436,
+              5.4008292720648345
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "placement_xy_world": [
+          0.925,
+          -0.32625
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          135.63395716701234
+        ]
+      },
+      "carried_admitted": true,
+      "worst": {
+        "phase": "traverse",
+        "fraction": 0.0,
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 13,
+        "exact_distance_queries": 5,
+        "certified_far_pairs": 8,
+        "allow_intended_support": false,
+        "object_pose": [
+          [
+            0.717037198290111,
+            0.051523117432053143,
+            -0.6951280634806443,
+            0.8667308632386153
+          ],
+          [
+            0.13736586073421067,
+            0.9672619567589342,
+            0.21338914525258057,
+            -0.3089317172213431
+          ],
+          [
+            0.683365404869911,
+            -0.24849481961795572,
+            0.6864852861132732,
+            1.01902807598845
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "hand_screen": {
+        "rigid_hand_screen_passed": true,
+        "full_robot_admitted": false,
+        "physics_validated": false,
+        "requires_full_mobile_ik_and_fixture_admission": true,
+        "segment_samples": 101,
+        "sampled_poses": 203,
+        "worst": {
+          "phase": "bottom",
+          "fraction": 1.0,
+          "rigid_hand_screen_passed": true,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "worst_aperture_rad": null,
+          "exact_distance_queries": 152
+        }
+      }
+    }
+  ],
+  "physics_validated": false,
+  "full_robot_admitted": false
+}

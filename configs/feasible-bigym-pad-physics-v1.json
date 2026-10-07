@@ -1,0 +1,39 @@
+{
+  "label": "feasible-bigym-pad-physics-v1",
+  "jobs": [
+    {
+      "id": "feasible-bigym-pad-physics-v1-source",
+      "operation": "bigym_physics_diagnostic",
+      "dataset": "bigym",
+      "parent_task": "bigym-original-c795f62efb4f4d20ab899af96d766a2f",
+      "source_replay": "queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay",
+      "native_assets": "workspaces/bigym-native-assets-c795-20261007-01",
+      "ik_attempt": "queue/tasks/feasible-speed-and-pad-v1-bigym-pad-calibrated/attempts/1791366722612140241-reachy-retarget-worker-7d46748688-pskjs",
+      "timing": {
+        "arm_speed_rad_s": 0.8,
+        "base_axis_speed_m_s": 0.6,
+        "base_yaw_speed_rad_s": 1.2,
+        "interval_grid_s": 0.002
+      },
+      "runtime_source_sha256": "f78c8d9dc1e39fe41cad80579232ab0016de4bcbc4767974f420b3496be8ed74"
+    },
+    {
+      "id": "feasible-bigym-pad-physics-v1-contact4ms",
+      "operation": "bigym_physics_diagnostic",
+      "dataset": "bigym",
+      "parent_task": "bigym-original-c795f62efb4f4d20ab899af96d766a2f",
+      "source_replay": "queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay",
+      "native_assets": "workspaces/bigym-native-assets-c795-20261007-01",
+      "ik_attempt": "queue/tasks/feasible-speed-and-pad-v1-bigym-pad-calibrated/attempts/1791366722612140241-reachy-retarget-worker-7d46748688-pskjs",
+      "timing": {
+        "arm_speed_rad_s": 0.8,
+        "base_axis_speed_m_s": 0.6,
+        "base_yaw_speed_rad_s": 1.2,
+        "interval_grid_s": 0.002
+      },
+      "simulation_profile": "global-contact-4ms",
+      "runtime_source_sha256": "f78c8d9dc1e39fe41cad80579232ab0016de4bcbc4767974f420b3496be8ed74"
+    }
+  ],
+  "policy": "Paired full-available-source-pose-interval Reachy simulations using the same native-geometry-calibrated leftpad IK and fixed2ms derived timing grid. Original sourcecontact vs explicit global4ms alternative. Object geometry/inertia/friction and task predicate unchanged; common physical gates+independent actuator replay. Post-action source reset at.002s is explicitly retained."
+}

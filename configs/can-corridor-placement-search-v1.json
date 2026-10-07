@@ -1,0 +1,118 @@
+{
+  "label": "can-corridor-placement-search-v1",
+  "scope": "Replan complete original-source base/arm and supported placement after the minimal -6.97 mm robot TCP height change required to retain the finite CAD pads within the original cylinder wall over the closed post-anchor prefix. No physics outcome selection; geometry cost chooses candidate before full rollout.",
+  "evidence": "docs/cylindrical-grasp-closed-corridor-v1.json",
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8ee64ec58eb602a29bbc0827",
+      "parent_workspace": "workspaces/additional-independent-v1-8ee64ec58eb602a29bbc0827",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8ee64ec58eb602a29bbc0827.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-8ee64ec58eb602a29bbc0827/runs/dynamics/additional-independent-v1-8ee64ec58eb602a29bbc0827-aligned/8ee64ec58eb602a29bbc0827",
+      "evaluation_split": "adaptive_geometry_only_after_corridor_attachment_invalidated_prior_placement",
+      "id": "can-corridor-placement-search-v1-8ee64ec58eb602a29bbc0827-chunk0",
+      "operation": "feasible_geometry_search",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "height_policy": "post_anchor_closed_corridor"
+      },
+      "runtime_source_sha256": "7f499a1060823f140b91ef30fc0e09952af4b859f0ace062305dd021fe4f5677",
+      "workspace": "workspaces/can-corridor-placement-search-v1-8ee64ec58eb602a29bbc0827-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8ee64ec58eb602a29bbc0827",
+      "parent_workspace": "workspaces/additional-independent-v1-8ee64ec58eb602a29bbc0827",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8ee64ec58eb602a29bbc0827.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-8ee64ec58eb602a29bbc0827/runs/dynamics/additional-independent-v1-8ee64ec58eb602a29bbc0827-aligned/8ee64ec58eb602a29bbc0827",
+      "evaluation_split": "adaptive_geometry_only_after_corridor_attachment_invalidated_prior_placement",
+      "id": "can-corridor-placement-search-v1-8ee64ec58eb602a29bbc0827-chunk1",
+      "operation": "feasible_geometry_search",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "height_policy": "post_anchor_closed_corridor"
+      },
+      "runtime_source_sha256": "7f499a1060823f140b91ef30fc0e09952af4b859f0ace062305dd021fe4f5677",
+      "workspace": "workspaces/can-corridor-placement-search-v1-8ee64ec58eb602a29bbc0827-chunk1"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8ee64ec58eb602a29bbc0827",
+      "parent_workspace": "workspaces/additional-independent-v1-8ee64ec58eb602a29bbc0827",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8ee64ec58eb602a29bbc0827.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-8ee64ec58eb602a29bbc0827/runs/dynamics/additional-independent-v1-8ee64ec58eb602a29bbc0827-aligned/8ee64ec58eb602a29bbc0827",
+      "evaluation_split": "adaptive_geometry_only_after_corridor_attachment_invalidated_prior_placement",
+      "id": "can-corridor-placement-search-v1-8ee64ec58eb602a29bbc0827-chunk2",
+      "operation": "feasible_geometry_search",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "height_policy": "post_anchor_closed_corridor"
+      },
+      "runtime_source_sha256": "7f499a1060823f140b91ef30fc0e09952af4b859f0ace062305dd021fe4f5677",
+      "workspace": "workspaces/can-corridor-placement-search-v1-8ee64ec58eb602a29bbc0827-chunk2"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "label": "feasible-bigym-upper-rim-side-baseplan-v1",
+  "jobs": [
+    {
+      "id": "feasible-bigym-upper-rim-side-baseplan-v1-ik",
+      "dataset": "bigym",
+      "operation": "source_pose_feasible",
+      "evaluation_split": "development",
+      "parent_task": "bigym-original-c795f62efb4f4d20ab899af96d766a2f",
+      "source_replay": "queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay",
+      "solver_settings": {
+        "jaw_sign": {
+          "left": 1,
+          "right": -1
+        },
+        "pad_calibration_gap_m": {
+          "left": 0.008895600596189504
+        },
+        "pad_calibration_evidence": {
+          "artifact": "workspaces/bigym-c795-upper-rim-side-approach-diagnosis-20261007-01/geometry.json",
+          "artifact_sha256": "74944b1e4134d54b57a341704e9f101a8132df7b8eeb8cec40a8d103ab629628",
+          "source_mjb_sha256": "02d31ee9af6bac55c0254d07b66551fc8bdc0e8bbf1a7537779b792e3f2ac986",
+          "anchor_frame": 764,
+          "method": "Native unchanged convex collider intersection along original source closing axis at derived above-COM contact point; retain source hand orientation to avoid overhead wrist limits"
+        },
+        "grasp_relocation": {
+          "hand": "left",
+          "object_key": "objects/plate/pose",
+          "anchor_frame": 764,
+          "center_of_mass_local_m": [
+            9.337855360113342e-09,
+            -1.3582060230392212e-08,
+            0.01058004976121132
+          ],
+          "plane_normal_local": [
+            0.0005734709654451335,
+            0.0002637575610108153,
+            0.9999998007814807
+          ],
+          "gravity_world_m_s2": [
+            0.0,
+            0.0,
+            -9.81
+          ],
+          "geometry_evidence": {
+            "source_mjb": "/mnt/reachy-retarget/queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay/source-model.mjb",
+            "source_mjb_sha256": "02d31ee9af6bac55c0254d07b66551fc8bdc0e8bbf1a7537779b792e3f2ac986",
+            "method": "Native3.1.5 actual subtree center-of-mass and planar normal from unique unchanged collision vertices",
+            "plane_thickness_to_radius_singular_ratio": 0.11892110431008945,
+            "artifact": "workspaces/bigym-physical-performance-20261007-01/c795-upper-rim-geometry.json",
+            "artifact_sha256": "8f3296bc6a51feb3bf2c8ff0c0dc433f3e4eb0e44dc4b811055515e4fcaa2b7d"
+          },
+          "free_phase_blend": {
+            "clock_key": "timestamp",
+            "gripper_command": {
+              "array": "source/action",
+              "column": 13,
+              "closed_value": 1
+            },
+            "clear_distance_m": 0.2,
+            "return_distance_m": 0.3
+          },
+          "orientation_policy": "preserve_source",
+          "orientation_evidence": {
+            "artifact": "workspaces/bigym-c795-upper-rim-side-approach-diagnosis-20261007-01/geometry.json",
+            "artifact_sha256": "74944b1e4134d54b57a341704e9f101a8132df7b8eeb8cec40a8d103ab629628",
+            "source_mjb_sha256": "02d31ee9af6bac55c0254d07b66551fc8bdc0e8bbf1a7537779b792e3f2ac986",
+            "anchor_frame": 764,
+            "method": "Native unchanged convex collider intersection along original source closing axis at derived above-COM contact point; retain source hand orientation to avoid overhead wrist limits"
+          }
+        },
+        "base_axis_speed_m_s": 1.2,
+        "base_yaw_speed_rad_s": 2.4
+      },
+      "proposal": "Derived above-COM contact position with original source hand orientation, original distant open approach restored by declared source-clock blend. Both source hands constrained; task objects, original clocks, and source arrays unchanged.",
+      "planning_vs_execution": "1.2m/s XY and2.4rad/s yaw are planning bounds on unchanged original source timestamps. Subsequent physical execution must use existing interval-local retiming caps0.6m/s axis,1.2rad/s yaw and0.8rad/s arm; raw planned source-interval velocities are not physical observations.",
+      "runtime_source_sha256": "af843d7673fec92230740ee90f28393a86120f2e694922ae4567afea61b1aad5"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+runtime_bundle=/mnt/reachy-retarget/runtime/py312-bundle.tar.gz
+runtime_local=/tmp/reachy-retarget-runtime
+mkdir -p "$runtime_local"
+exec 9>"$runtime_local/unpack.lock"
+flock 9
+if [ ! -f "$runtime_local/ready" ]; then
+    cd /mnt/reachy-retarget/runtime
+    sha256sum -c /mnt/reachy-retarget/provenance/runtime-bundle.sha256 >&2
+    tar -xzf "$runtime_bundle" -C "$runtime_local"
+    touch "$runtime_local/ready"
+fi
+flock -u 9
+exec 9>&-
+exec "$runtime_local/reachy-retarget-venv/bin/python" "$@"

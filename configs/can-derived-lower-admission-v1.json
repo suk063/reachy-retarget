@@ -1,0 +1,212 @@
+{
+  "label": "can-derived-lower-admission-v1",
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-derived-lower-admission-v1-68e",
+      "operation": "feasible_geometry_experiment",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-derived-lower-admission-v1-68e",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+        "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+        "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "admission_only": true,
+      "retime": true,
+      "retimed_source_clearance": {
+        "minimum_m": 0.003,
+        "enforce_planar_neighbor_speed": true
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.962030960466873,
+          -0.27250000745311936
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          70.0,
+          88.70216595570616
+        ],
+        "release_aperture_rad": 1.2,
+        "extra_descent_m": 0.0018029743346129508,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.3979202856853134,
+              1.875
+            ],
+            [
+              -1.6981951727325464,
+              0.55
+            ],
+            [
+              -1.2222779941346982,
+              5.7962320123777715
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true,
+        "midpoint_position_reserve_m": 0.0001,
+        "midpoint_fixture_reserve_m": 0.0001,
+        "midpoint_quarter_probes": true
+      },
+      "carried_object_clearance": {
+        "support_geoms": [
+          "source_scene_geom_21"
+        ],
+        "minimum_m": 0.003
+      },
+      "derived_geometry_evidence": {
+        "path": "docs/can-68e-derived-placement-screen-v1.json",
+        "sha256": "a20a04c84c857efaa6cba9a08b93d46d14e870f6b296270e658ec2443aebd6a6"
+      },
+      "comparison_scope": "Reuse exact independently admitted sourcecache; no reapplication of grasp alignment. Change only insertedgeometry from nativehand screen, then require fullIK/fixture/source/timing and ideal-carried-mesh clearance before physics. Native targetbin floor21 explicitly exempt only inlower/hold/open per carriedqueryprotocol; allwallsremainchecked."
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-261e660d9f92515639b01aae",
+      "parent_workspace": "workspaces/additional-independent-v1-261e660d9f92515639b01aae",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/261e660d9f92515639b01aae.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-261e-axial-api-v2",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-derived-lower-admission-v1-261",
+      "operation": "feasible_geometry_experiment",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-derived-lower-admission-v1-261",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "source_normalized_sha256": "90f6adacf9e640f806c9918983fc4db27d919a4c08dc7e327ab85859b8adf7c1",
+      "parent_attempt_files_sha256": {
+        "plan.h5": "79a0661daa8b659c1b718d87c40491046e3e54432a3f1b854dfd325dc8efbb8c",
+        "result.json": "1d61c96b884a700e53d7729477298405fe0fecc345b3ee4a9be6eda248fe853a",
+        "scene.xml": "dd08b5139b0c8b9425cabb1c2314d834fac5341d19eead62c76acdfeef0ead46"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-261e660d9f92515639b01aae-p120",
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "retimed_source_clearance": {
+        "minimum_m": 0.003,
+        "enforce_planar_neighbor_speed": true
+      },
+      "admission_only": true,
+      "retime": true,
+      "supported_placement": {
+        "placement_xy_world": [
+          0.9774999925490218,
+          -0.26208760737118897
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          30.0,
+          59.663978688246175
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.39801793283489784,
+              1.875
+            ],
+            [
+              -1.6478668127217957,
+              0.55
+            ],
+            [
+              -1.4277707099936696,
+              5.47892469211765
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true,
+        "midpoint_quarter_probes": true,
+        "midpoint_position_reserve_m": 0.0001,
+        "midpoint_fixture_reserve_m": 0.0001
+      },
+      "carried_object_clearance": {
+        "support_geoms": [
+          "source_scene_geom_21"
+        ],
+        "minimum_m": 0.003
+      },
+      "derived_geometry_evidence": {
+        "path": "docs/can-additional-lower-hand-v1.json",
+        "sha256": "f88a9585f8487996f4c09d55d58ceac87c5e7dd7bf1fcb156bccb475fc32a9db"
+      },
+      "comparison_scope": "Reuse exact independently admitted sourcecache; no reapplication of grasp alignment. Change only insertedgeometry from nativehand screen, then require fullIK/fixture/source/timing and ideal-carried-mesh clearance before physics. Native targetbin floor21 explicitly exempt only inlower/hold/open per carriedqueryprotocol; allwallsremainchecked."
+    }
+  ],
+  "scope": "Two geometry-derived robot-only placement corrections; fulladmission only, no physics or success claims."
+}

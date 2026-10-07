@@ -127,21 +127,29 @@ def lerobot(store, source, limit):
                 unit_evidence="https://github.com/huggingface/lerobot/blob/main/src/lerobot/robots/reachy2/robot_reachy2.py",
                 gripper_mapping="SDK motor radians preserved; not equated with finger joint angle",
             )
+        from .scope import require_objects
+        require_objects(arrays)
         results.append(write_episode(store, source, f"episode_{i:06d}", arrays, meta))
     return results
 
 
 def robomimic(store, source, limit):
     root = store.root / "data/raw" / source
-    paths = sorted(root.rglob("*low_dim_v15.hdf5"))
+    paths = sorted(root.rglob("*.hdf5"))
     # Proficient-human can is the fixed contact benchmark, before other tasks.
     paths.sort(key=lambda p: ("can/ph" not in p.as_posix(), str(p)))
     results = []
     for path in paths:
         raw_hash = sha256(path)
+        relative = path.relative_to(root)
+        sequence_base = relative.parent if path.name == "low_dim_v15.hdf5" else relative.with_suffix("")
         with h5py.File(path, "r") as f:
             env = json.loads(f["data"].attrs.get("env_args", "{}"))
-            fps = env.get("env_kwargs", {}).get("control_freq", 20)
+            if env.get("env_version") not in ("1.5.1", "1.4.1"):
+                raise ValueError("Unverified robosuite state version")
+            fps = env.get("env_kwargs", {}).get("control_freq")
+            if not fps or fps <= 0:
+                raise ValueError("Missing documented control frequency")
             demos = sorted(f["data"], key=lambda k: int(k.rsplit("_", 1)[-1]))
             for name in demos[: limit or None]:
                 g = f["data"][name]
@@ -160,7 +168,12 @@ def robomimic(store, source, limit):
                         obs["robot0_eef_pos"][()],
                         obs["robot0_eef_quat"][()][:, [3, 0, 1, 2]],
                     ]
-                objects = {}
+                if {"robot1_eef_pos", "robot1_eef_quat"} <= set(obs):
+                    arrays["hand/left_pose"] = np.c_[obs["robot1_eef_pos"][()], obs["robot1_eef_quat"][()][:, [3, 0, 1, 2]]]
+                model = g.attrs.get("model_file", "")
+                from .simstate import free_object_poses
+                object_arrays, objects, object_evidence = free_object_poses(model, arrays["source/simulator_state"], env["env_name"])
+                arrays.update(object_arrays)
                 # robosuite 1.5.1 _create_obj_sensors puts relative EEF sensors
                 # first, followed by world object xyz and xyzw (last seven).
                 if "can" in path.parts and "object" in obs:
@@ -169,50 +182,43 @@ def robomimic(store, source, limit):
                         raise ValueError(
                             "Unverified PickPlaceCan object observation ordering"
                         )
-                    arrays["objects/Can/pose"] = np.c_[
+                    sensor_pose = np.c_[
                         obj[:, 7:10], obj[:, 10:14][:, [3, 0, 1, 2]]
                     ]
-                    objects["Can"] = {
-                        "pose_frame": "world",
-                        "source": "robosuite PickPlaceCan object-state sensor",
-                        "asset": "robosuite/models/assets/objects/can.xml",
-                    }
+                    np.testing.assert_allclose(arrays["objects/Can/pose"], sensor_pose, atol=1e-6)
+                    objects["Can"]["asset"] = "robosuite/models/assets/objects/can.xml"
+                    object_evidence["independent_can_sensor_check"] = True
                 if "robot0_gripper_qpos" in obs:
                     arrays["source/gripper_qpos"] = obs["robot0_gripper_qpos"][()]
-                model = g.attrs.get("model_file", "")
                 meta = {
                     "source_format": "robomimic-hdf5",
                     "robot_type": "Panda",
                     "env_args": env,
                     "objects": objects,
+                    "object_state_decoding": object_evidence,
                     "model_xml": model,
                     "fps": fps,
                     "source_group": source
                     + "/"
-                    + str(path.relative_to(root).parent)
+                    + str(sequence_base)
                     + "/"
                     + name,
                     "provenance": [
                         {"path": str(path.relative_to(store.root)), "sha256": raw_hash}
                     ],
-                    "hand_assignment": "source robot0 assigned to Reachy right arm during retargeting",
+                    "hand_assignment": "robot0 to Reachy right; robot1 to Reachy left when present; shared world frame",
                     "quaternion_evidence": "robosuite observables use xyzw; converted to wxyz",
                     "action_semantics": "source OSC command, not a Reachy joint command",
                 }
-                seq = str(path.relative_to(root).parent) + "/" + name
+                seq = str(sequence_base) + "/" + name
                 results.append(write_episode(store, source, seq, arrays, meta))
-        # Representative conversion: one task family. All other source files remain available.
-        if results:
-            break
     if not results:
-        raise ValueError("No downloaded low_dim_v15 HDF5")
+        raise ValueError("No supported downloaded robosuite HDF5")
     return results
 
 
 def run(store, sources=None, limit=5):
     sources = sources or [
-        "hf__pollen-robotics__pick_and_place_bottle",
-        "hf__glannuzel__reachy2_pick_place",
         "hf__robomimic__robomimic_datasets",
         "parahome",
         "humoto",
@@ -220,6 +226,9 @@ def run(store, sources=None, limit=5):
     report = []
     for source in sources:
         try:
+            from .scope import EXCLUDED_SOURCES
+            if source in EXCLUDED_SOURCES:
+                raise ValueError("Excluded objectless selection: " + EXCLUDED_SOURCES[source])
             if source == "humoto":
                 from .human import humoto
 
@@ -228,8 +237,11 @@ def run(store, sources=None, limit=5):
                 from .human import parahome
 
                 paths = parahome(store, source, limit)
-            elif "robomimic" in source:
+            elif "robomimic" in source or "mimicgen" in source:
                 paths = robomimic(store, source, limit)
+            elif source == "hf__haosulab__ManiSkill_Demonstrations":
+                from .maniskill import maniskill
+                paths = maniskill(store, source, limit)
             else:
                 paths = lerobot(store, source, limit)
             row = {"source": source, "status": "normalized", "episodes": len(paths)}

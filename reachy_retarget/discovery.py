@@ -141,6 +141,10 @@ def hf_discover(store, repo, mode="lerobot", category="robot", parent=None):
 
     sid = hf_id(repo)
     url = f"https://huggingface.co/datasets/{repo}"
+    from .scope import EXCLUDED_SOURCES
+    if sid in EXCLUDED_SOURCES:
+        store.source(sid, category, url, "excluded_objectless", reason=EXCLUDED_SOURCES[sid])
+        return
     checkpoint = store.root / "catalog/discovery_checkpoints" / sid
     checkpoint.mkdir(parents=True, exist_ok=True)
     state_path = checkpoint / "cursor.json"
@@ -500,7 +504,8 @@ def discover_oxe(store):
 
 def discover(store, group="core"):
     if group in ("all", "core"):
-        discover_reachy(store)
+        # Native Reachy numeric mirrors lack object-state adapters; keep their
+        # historical inventory as evidence, outside the active collection scope.
         for repo, mode, category, parent in [
             ("robomimic/robomimic_datasets", "robomimic", "simulation", "robomimic"),
             ("kelvin34501/OakInk-v2", "oakink", "human_object", "oakink2"),

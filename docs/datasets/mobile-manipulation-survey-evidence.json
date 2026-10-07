@@ -1,0 +1,3153 @@
+{
+  "schema_version": 1,
+  "accessed_on": "2026-10-06",
+  "scope": "Mobile manipulation data/benchmarks/assets; online primary-source research only; no demonstration or mesh payloads downloaded.",
+  "profile_count": 37,
+  "catalog_snapshot": {
+    "entries": 333,
+    "sha256": "ee6d4055a281ce66c7a73a39acc9dac276f38454e36ffec60fb0c722f42c4526",
+    "catalog_path": "catalog/datasets.json"
+  },
+  "status_definitions": {
+    "A": "Best near-term MuJoCo state/asset candidates; no success implied",
+    "B": "Useful simulation/source but adapter, generation, physics or licensing gap",
+    "C": "Motion/perception/system/research source; missing object-state/physics or not released"
+  },
+  "profiles": [
+    {
+      "id": "robocasa365",
+      "name": "RoboCasa365 and earlier RoboCasa",
+      "resource_kind": "simulation demonstrations + tasks + assets",
+      "reachy_priority": "A1",
+      "embodiment": "Panda arm, Omron mobile base, parallel gripper",
+      "base_state": "Named base position/rotation in modality metadata; exact world/base frame must follow episode configuration. Native state enables authoritative reconstruction.",
+      "hand_state": "Gripper qpos, closure action, arm end-effector pose/action; base motion and control-mode actions.",
+      "object_state": "Native extras contain raw MuJoCo states plus episode MJCF. Map joints/bodies from compiled model, never fixed tail offsets.",
+      "scene_assets": "model.xml.gz and ep_meta.json identify fixtures, objects, layouts/styles; resolve referenced mesh/texture assets from pinned RoboCasa.",
+      "scenario_coverage": "365 tasks; paper separates 220 requiring mobility and 145 stationary. Cabinets, appliances, dishes, food, containers; 30k human pretraining demonstrations plus generated data.",
+      "access": "Public official downloader supports task/split/source selection. Download a native task package retaining extras. Exact package bytes were not verified here.",
+      "license": "Code MIT; data/assets CC-BY-4.0 with upstream asset notices.",
+      "limitations": "Version 1.0.1 raises evaluation horizons 1.5x. A LeRobot mirror lacking extras cannot support object replay. Check arm/controller timing and mobile-base constraints when replacing Panda with Reachy.",
+      "sources": [
+        {
+          "title": "Native dataset layout",
+          "url": "https://robocasa.ai/docs/build/html/datasets/using_datasets.html"
+        },
+        {
+          "title": "RoboCasa365 paper",
+          "url": "https://robocasa.ai/assets/robocasa365_iclr26.pdf"
+        },
+        {
+          "title": "Dataset registry",
+          "url": "https://github.com/robocasa/robocasa/blob/main/robocasa/utils/dataset_registry.py"
+        },
+        {
+          "title": "Repository and license",
+          "url": "https://github.com/robocasa/robocasa"
+        }
+      ],
+      "lineage": "RoboCasa versions, alternate cameras, LeRobot conversions and MimicGen expansions are related releases; record human seed lineage.",
+      "recommended_next_step": "First choice: one counter-to-cabinet or counter-to-counter mobile episode, its extras, and only referenced assets; verify base/object poses against simulator FK before Reachy physics.",
+      "github_repo": "robocasa/robocasa",
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "robocasa"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "native_or_reconstructable_simulator_state",
+      "source_revision": "456174f62b89b8fca99eaaf33949c29fec9cfc2a",
+      "dataset_revision": null,
+      "catalog_matches": [
+        "robocasa",
+        "hf__lerobot__robocasa_target_human_unified"
+      ],
+      "catalog_relation": "family_or_related_entry_present",
+      "unknowns": [
+        "Version 1.0.1 raises evaluation horizons 1.5x. A LeRobot mirror lacking extras cannot support object replay. Check arm/controller timing and mobile-base constraints when replacing Panda with Reachy."
+      ]
+    },
+    {
+      "id": "bigym",
+      "name": "BiGym",
+      "resource_kind": "simulation demonstrations + benchmark",
+      "reachy_priority": "A2",
+      "embodiment": "Bimanual floating-base humanoid with parallel grippers",
+      "base_state": "Floating-base control is explicit; it is not a wheeled nonholonomic base. Recover full pose from pinned MuJoCo model/state during replay.",
+      "hand_state": "Bimanual joint-position demonstrations; gripper actions, arm proprioception and optional RGB/depth observations.",
+      "object_state": "Lightweight demonstrations carry actions and reset seed, not a verified per-frame all-object state table. Replay and log MuJoCo bodies/joints.",
+      "scene_assets": "MJCF robot, household props, kitchen assets and collisions in source tree.",
+      "scenario_coverage": "40 tasks including dishwashing, cupboards, plates and kitchen cleanup; exclude target-reaching-only tasks for this repository.",
+      "access": "Public v0.9.0 demonstrations.zip: 123, 362, 114 bytes. DemoStore.get_demos can auto-download the entire ZIP; use explicit fetch and pin release.",
+      "license": "Code Apache-2.0; asset notices include CC0, CC-BY-4.0 and CC-BY-NC-4.0. Demo-specific grant should be checked alongside release.",
+      "limitations": "Upstream warns that some demonstrations do not succeed on replay. Preserve failed playback. Floating base may prescribe motion unrealistic for Reachy wheels.",
+      "sources": [
+        {
+          "title": "Official repository",
+          "url": "https://github.com/NeuracoreAI/bigym"
+        },
+        {
+          "title": "Demo loader",
+          "url": "https://github.com/NeuracoreAI/bigym/blob/master/demonstrations/demo_store.py"
+        },
+        {
+          "title": "Demo schema",
+          "url": "https://github.com/NeuracoreAI/bigym/blob/master/demonstrations/demo.py"
+        },
+        {
+          "title": "Release v0.9.0",
+          "url": "https://github.com/NeuracoreAI/bigym_data/releases/tag/v0.9.0"
+        }
+      ],
+      "lineage": "Former chernyadev repository redirects to NeuracoreAI; cached observation/frequency variants are the same underlying demos.",
+      "recommended_next_step": "Choose MovePlate or a cupboard manipulation demo, replay its native actions, export complete object state, then attempt Reachy contact without copying object states during validation.",
+      "github_repo": "NeuracoreAI/bigym",
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "bigym"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "14beb30318ad14c5d6723175c2ee2281129792af",
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Upstream warns that some demonstrations do not succeed on replay. Preserve failed playback. Floating base may prescribe motion unrealistic for Reachy wheels."
+      ]
+    },
+    {
+      "id": "behavior1k",
+      "name": "BEHAVIOR-1K / OmniGibson 2025 and 2026 releases",
+      "resource_kind": "simulation demonstrations + tasks + assets",
+      "reachy_priority": "B1",
+      "embodiment": "2026 R1Pro bimanual holonomic mobile manipulator",
+      "base_state": "2026 LeRobot observation.state[0:3] is robot-local base velocity, not global SE(2); raw simulator state supports world pose recovery.",
+      "hand_state": "2026 state width 61, action width 23, arm/gripper/trunk positions and velocities; three RGB/depth cameras.",
+      "object_state": "Raw HDF5 state/state_size plus initial scene information and add/remove transitions. Variable-length serialized state cannot be read using MuJoCo qpos offsets.",
+      "scene_assets": "USD geometry/material/physics and scene JSON; particle/material/semantic states exceed rigid-body MJCF. Many assets are encrypted under third-party licenses.",
+      "scenario_coverage": "2026: 20k demos, 100 full-length tasks, seven challenge scenes; benchmark overall has 1, 000 activities. 2025 raw release is distinct version lineage, not automatically independent.",
+      "access": "2026 raw listing: 1, 440, 087, 423, 774 bytes, 20, 000 HDF5s. Smallest listed HDF5 667, 124 bytes. LeRobot documentation: 3.27 TB. Public metadata and raw listing accessible.",
+      "license": "2026 LeRobot card says MIT; raw repository has no card license in API. Code MIT does not license encrypted ShapeNet/TurboSquid assets for arbitrary redistribution.",
+      "limitations": "Maintainer confirms assisted grasping in collection and evaluation. July 2026 corrected base velocity frame; August corrected joint velocities. Evaluation docs require v 3.9.3 while baseline page still names v 3.9.2. Pin code and data independently.",
+      "sources": [
+        {
+          "title": "Dataset release",
+          "url": "https://github.com/StanfordVL/BEHAVIOR-1K/blob/main/docs/challenge/dataset.md"
+        },
+        {
+          "title": "HDF5 writer",
+          "url": "https://github.com/StanfordVL/BEHAVIOR-1K/blob/main/OmniGibson/omnigibson/envs/hdf5_data_wrapper.py"
+        },
+        {
+          "title": "Assisted grasp maintainer confirmation",
+          "url": "https://github.com/StanfordVL/BEHAVIOR-1K/issues/2245#issuecomment-4597125008"
+        },
+        {
+          "title": "Corrections",
+          "url": "https://behavior.stanford.edu/challenge/updates.html"
+        },
+        {
+          "title": "Evaluation version",
+          "url": "https://github.com/StanfordVL/BEHAVIOR-1K/blob/main/docs/challenge/evaluation.md"
+        },
+        {
+          "title": "Asset licensing and format",
+          "url": "https://behavior.stanford.edu/getting_started/important_concepts.html"
+        },
+        {
+          "title": "Raw release",
+          "url": "https://huggingface.co/datasets/behavior-1k/2026-challenge-rawdata"
+        },
+        {
+          "title": "LeRobot metadata",
+          "url": "https://huggingface.co/datasets/behavior-1k/2026-challenge-demos/blob/main/meta/info.json"
+        }
+      ],
+      "lineage": "Deduplicate 2025/2026, raw/LeRobot, rerenders and language annotations by original trajectory identifiers. Do not add 10k and 20k without overlap audit.",
+      "recommended_next_step": "Use bounded raw state inspection first. Start with rigid pick/carry/place and export legally usable geometry. Replan grasp under physical contacts; assisted source success is not validation.",
+      "github_repo": "StanfordVL/BEHAVIOR-1K",
+      "hf_repo": "behavior-1k/2026-challenge-rawdata",
+      "catalog_match_tokens": [
+        "behavior"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "native_or_reconstructable_simulator_state",
+      "source_revision": "a8247a8cc1633fe1ca0cc66aa07243d46c64f155",
+      "dataset_revision": "f9d2901112993d75684223820eec70722806c2c4",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Maintainer confirms assisted grasping in collection and evaluation. July 2026 corrected base velocity frame; August corrected joint velocities. Evaluation docs require v 3.9.3 while baseline page still names v 3.9.2. Pin code and data independently."
+      ]
+    },
+    {
+      "id": "behavior100",
+      "name": "Legacy BEHAVIOR-100 VR demonstrations",
+      "resource_kind": "human teleoperation in simulation",
+      "reachy_priority": "B3",
+      "embodiment": "Legacy iGibson VR human/avatar embodiment",
+      "base_state": "VR body/head/hand trajectories; mobile robot base is not directly measured.",
+      "hand_state": "Tracked human hands/controllers; map to Reachy arm/gripper intent.",
+      "object_state": "Processed simulator records and raw VR logs differ; inspect actual HDF5 schema before assuming object trajectories.",
+      "scene_assets": "Legacy iGibson scenes/object assets, not current OmniGibson serialization.",
+      "scenario_coverage": "500 demonstrations covering 100 activities, five per activity.",
+      "access": "Official docs list processed ~250 GB, raw ~1.7 GB; raw example ~10 MB and processed example ~1 GB.",
+      "license": "Dataset and inherited iGibson asset terms require separate verification.",
+      "limitations": "Legacy embodiment and simulation dependency; VR trajectories may rely on grasp abstractions. Source states are references, not target-robot dynamics.",
+      "sources": [
+        {
+          "title": "Official legacy dataset documentation",
+          "url": "https://github.com/StanfordVL/BEHAVIOR-1K/blob/main/docs/behavior_100/dataset.md"
+        }
+      ],
+      "lineage": "Separate from BEHAVIOR-1K robot challenge; raw/processed/video views of each recording count once.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "behavior"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Legacy embodiment and simulation dependency; VR trajectories may rely on grasp abstractions. Source states are references, not target-robot dynamics."
+      ]
+    },
+    {
+      "id": "momart",
+      "name": "MoMaRT / Mobile Manipulation RoboTurk",
+      "resource_kind": "simulation demonstrations",
+      "reachy_priority": "B2",
+      "embodiment": "Mobile robot in iGibson/PyBullet kitchen",
+      "base_state": "Wrapper exposes base x/y and sin/cos yaw in observations, base linear/angular velocity; native WorldSaver captures world state.",
+      "hand_state": "Arm/gripper proprioception and actions, task object observations.",
+      "object_state": "WorldSaver.serialize(), with excluded body IDs; task observation object-state is source-task-specific. It is not robosuite flattened MuJoCo state.",
+      "scene_assets": "Requires historical iGibson momart branch and exact kitchen/object assets.",
+      "scenario_coverage": "Five long-horizon table setup/cleanup and dishwasher tasks; expert, suboptimal, generalization, sample splits.",
+      "access": "Registry estimates sample files 0.6\u20131.1 GB; full task/split files 14\u201336 GB. Direct official HDF5 links. No payload fetched.",
+      "license": "Data grant not verified separately from robomimic code and iGibson asset terms.",
+      "limitations": "Current robomimic constructor explicitly raises no-longer-supported; use historical compatible implementation in isolation. Body IDs and serialized state must match source model.",
+      "sources": [
+        {
+          "title": "Official dataset guide",
+          "url": "https://robomimic.github.io/docs/datasets/momart.html"
+        },
+        {
+          "title": "Native state/observation wrapper",
+          "url": "https://github.com/ARISE-Initiative/robomimic/blob/master/robomimic/envs/env_ig_momart.py"
+        },
+        {
+          "title": "Download registry",
+          "url": "https://github.com/ARISE-Initiative/robomimic/blob/master/robomimic/__init__.py"
+        },
+        {
+          "title": "Paper",
+          "url": "https://proceedings.mlr.press/v164/wong22a/wong22a.pdf"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Inspect table_setup_from_dishwasher_sample.hdf 5 schema and recover body mapping from pinned iGibson before writing any decoder.",
+      "github_repo": "ARISE-Initiative/robomimic",
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "momart",
+        "rt_mm"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "native_or_reconstructable_simulator_state",
+      "source_revision": "d309eaecc18acf4152a830a895a6984b8ac71b05",
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Current robomimic constructor explicitly raises no-longer-supported; use historical compatible implementation in isolation. Body IDs and serialized state must match source model."
+      ]
+    },
+    {
+      "id": "m3bench",
+      "name": "M3Bench",
+      "resource_kind": "generated whole-body trajectories + scene assets",
+      "reachy_priority": "B2",
+      "embodiment": "Mecanum/Kinova mobile manipulator",
+      "base_state": "Base-arm joint trajectories and initial robot configuration; global transforms can be derived from supplied URDF.",
+      "hand_state": "Joint trajectory, language and target configuration; verify gripper joint/action timing in archive.",
+      "object_state": "config.json contains target link and initial object pose. Published schema does not promise a measured per-frame object trajectory.",
+      "scene_assets": "Robot URDF/USD and complete scene URDF packages; nonuniform mesh scale handling is documented.",
+      "scenario_coverage": "30k pick/place trajectories across 119 scenes; planner-generated, not 30k human teleoperations.",
+      "access": "Public HF listing: 20, 115, 025, 023 bytes; robot URDF ZIP 56.7 MB, pick ZIP 2.81 GB, place ZIP 1.98 GB, scene ZIP 15.24 GB. No single-episode listing.",
+      "license": "HF card Apache-2.0; inspect asset-specific notices before redistribution.",
+      "limitations": "PyBullet evaluation checks collisions/limits/smoothness; Isaac Sim separately checks task completion. A kinematically feasible trajectory is not automatically a friction-valid grasp.",
+      "sources": [
+        {
+          "title": "Official dataset structure",
+          "url": "https://github.com/TooSchoolForCool/M3Bench"
+        },
+        {
+          "title": "Publisher dataset",
+          "url": "https://huggingface.co/datasets/M3Bench/M3Bench"
+        },
+        {
+          "title": "Project and paper",
+          "url": "https://zeyuzhang.com/papers/m3bench/"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Request/select one scene and trajectory from archive ranges if supported; decode base/arm and object initial pose, then run an independent Reachy physics attempt.",
+      "github_repo": "TooSchoolForCool/M3Bench",
+      "hf_repo": "M3Bench/M3Bench",
+      "catalog_match_tokens": [
+        "m3bench"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "97cec07e7c37cc36aec35ff79ee5d6b5db123a45",
+      "dataset_revision": "5b543a8c93c82b16442b2c1c4a139b96bb313b59",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "PyBullet evaluation checks collisions/limits/smoothness; Isaac Sim separately checks task completion. A kinematically feasible trajectory is not automatically a friction-valid grasp."
+      ]
+    },
+    {
+      "id": "momagen",
+      "name": "MoMaGen",
+      "resource_kind": "released simulation data-generation code; downloadable demo corpus unverified",
+      "reachy_priority": "B1-generator",
+      "embodiment": "Bimanual mobile manipulator",
+      "base_state": "Planner jointly chooses base/torso/camera poses under reachability/visibility constraints.",
+      "hand_state": "Object-centric end-effector subtask trajectories transformed from seed demos.",
+      "object_state": "Generation uses object-centric frames and simulator state. A public recording package with a complete per-frame object-state schema was not verified.",
+      "scene_assets": "OmniGibson/BEHAVIOR dependencies, task configurations and scene-instance files are in the released generator. Exact assets and source demonstrations remain separate dependencies.",
+      "scenario_coverage": "Four tasks: pick cup, tidy table, clean pan, put dishes away.",
+      "access": "Public ChengshuLi/MoMaGen source and installation documentation are available. Repository revision 5da621667669b15b97d7a220d086283b3c8ad0e5 was checked. No downloadable source-demonstration package was verified.",
+      "license": "Website CC-BY-SA is not a dataset license. Code, source demonstration and inherited BEHAVIOR asset grants need separate inspection.",
+      "limitations": "The older momagen-rss.github.io page still says code coming soon; current momagen.github.io links the public repository. Do not infer source-data availability or physical-grasp fidelity from code availability.",
+      "sources": [
+        {
+          "title": "Current official project",
+          "url": "https://momagen.github.io/"
+        },
+        {
+          "title": "Released code at inspected revision",
+          "url": "https://github.com/ChengshuLi/MoMaGen/tree/5da621667669b15b97d7a220d086283b3c8ad0e5"
+        },
+        {
+          "title": "Installation documentation",
+          "url": "https://chengshuli.github.io/MoMaGen/installation/"
+        },
+        {
+          "title": "Paper v4",
+          "url": "https://arxiv.org/abs/2510.18316v4"
+        },
+        {
+          "title": "Stale earlier landing page",
+          "url": "https://momagen-rss.github.io/"
+        }
+      ],
+      "lineage": "Synthetic augmentation derives from seed demonstrations; descendants are not independent human demos.",
+      "recommended_next_step": "Inspect the generator recorder and grasp settings, then plan one source task with explicit base reachability and visibility constraints. Verify seed data access and asset license before installation.",
+      "github_repo": "ChengshuLi/MoMaGen",
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "momagen"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "5da621667669b15b97d7a220d086283b3c8ad0e5",
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "The older momagen-rss.github.io page still says code coming soon; current momagen.github.io links the public repository. Do not infer source-data availability or physical-grasp fidelity from code availability."
+      ]
+    },
+    {
+      "id": "maniskill_mobile",
+      "name": "ManiSkill mobile tasks and scene-manipulation environments",
+      "resource_kind": "simulation task suite + selected demonstrations",
+      "reachy_priority": "B2",
+      "embodiment": "Fetch and other configurable mobile robots",
+      "base_state": "Source simulator can export base articulation/root pose; requested trajectory modality must include state.",
+      "hand_state": "Robot/controller-specific joint, end-effector and gripper actions.",
+      "object_state": "Native env_states may contain actor/articulation pose and velocity; verify HDF5 modality and asset IDs for each download.",
+      "scene_assets": "SAPIEN/PhysX assets; PartNet-Mobility cabinets and RoboCasa/ReplicaCAD/AI2THOR scenes.",
+      "scenario_coverage": "Mobile OpenCabinetDrawer plus exploratory scene environments. Documentation says large scene environments do not all have rewards/success definitions.",
+      "access": "Explicit asset/demonstration downloader; per-environment availability differs. A scene package is not a demonstration collection.",
+      "license": "Code and each source asset dataset have separate terms; PartNet/ReplicaCAD/AI2THOR terms persist.",
+      "limitations": "MuJoCo conversion requires geometry, joint-axis, friction, mass and timestep reconciliation; reused RoboCasa scenes are not new independent scenes.",
+      "sources": [
+        {
+          "title": "Mobile task specifications",
+          "url": "https://maniskill.readthedocs.io/en/v3.0.0b20/tasks/mobile_manipulation/"
+        },
+        {
+          "title": "Scene dataset status",
+          "url": "https://maniskill.readthedocs.io/en/v3.0.0b21/user_guide/datasets/scenes.html"
+        },
+        {
+          "title": "Official repository",
+          "url": "https://github.com/haosulab/ManiSkill"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Prefer one native cabinet trajectory with env_states over a random scene rollout; verify target handle and articulation before Reachy conversion.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "maniskill"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [
+        "maniskill",
+        "hf__haosulab__ManiSkill_Demonstrations",
+        "oxe__maniskill_dataset_converted_externally_to_rlds"
+      ],
+      "catalog_relation": "family_or_related_entry_present",
+      "unknowns": [
+        "MuJoCo conversion requires geometry, joint-axis, friction, mass and timestep reconciliation; reused RoboCasa scenes are not new independent scenes."
+      ]
+    },
+    {
+      "id": "humanoidbench",
+      "name": "HumanoidBench manipulation subset",
+      "resource_kind": "MuJoCo benchmark / rollout generator",
+      "reachy_priority": "B2",
+      "embodiment": "H1/G1 humanoids, dexterous or simplified hands",
+      "base_state": "Free-root locomotion state is in model qpos/qvel; Reachy would need a wheeled-base adaptation.",
+      "hand_state": "Joint/torque controls; privileged robot+environment observations and optional tactile/visual sensors.",
+      "object_state": "MuJoCo task object state can be logged directly during generated rollouts. No released large demonstration corpus verified.",
+      "scene_assets": "MJCF assets and source task code available; robot models inherit upstream sources.",
+      "scenario_coverage": "Whole-body push, cabinet, door, package, bookshelf, kitchen and other manipulation. Exclude walk/stand/reach-only tasks.",
+      "access": "Public code, low-level policy weights and learning curves. Weights/curves are not demonstrations.",
+      "license": "Repository license plus upstream model/texture licenses; audit exact assets selected.",
+      "limitations": "Some examples strengthen humanoid hands for specific tasks. Keep the selected task physics explicit and do not treat source policies as Reachy success.",
+      "sources": [
+        {
+          "title": "Official benchmark",
+          "url": "https://github.com/carlosferrazza/humanoid-bench"
+        },
+        {
+          "title": "Release history",
+          "url": "https://github.com/carlosferrazza/humanoid-bench/releases"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Useful MuJoCo task generator: adapt a rigid push/package task with source mesh unchanged and save all outcomes.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "humanoidbench"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Some examples strengthen humanoid hands for specific tasks. Keep the selected task physics explicit and do not treat source policies as Reachy success."
+      ]
+    },
+    {
+      "id": "home_robot_ovmm",
+      "name": "HomeRobot / OVMM",
+      "resource_kind": "task episodes + scene/object assets + baselines",
+      "reachy_priority": "B3",
+      "embodiment": "Hello Robot Stretch in Habitat and real-world systems",
+      "base_state": "Simulation exposes root pose; episode start pose and goals are available. Benchmark package is not dense base-motion demonstrations.",
+      "hand_state": "Arm/gripper control comes from simulator and baseline skills.",
+      "object_state": "Episode object placements/targets and runtime object transforms; no universal released per-frame demo tracks.",
+      "scene_assets": "Pinned HSSD ovmm branch, OVMM object collection, robot model and episode files.",
+      "scenario_coverage": "Explore, locate an open-vocabulary object, find destination receptacle, pick and place.",
+      "access": "Official download script pins HSSD 4e0292b..., objects e9b714c..., episodes 9ad25fb.... Current object listing is ~1.34 GB; scenes separate.",
+      "license": "HomeRobot code MIT; HSSD CC-BY-NC-4.0; object collection inherits asset-specific licenses.",
+      "limitations": "Habitat magic/suction grasp actions use holding abstractions. Need physical gripper replacement before Reachy validation; preserve split/category boundaries.",
+      "sources": [
+        {
+          "title": "Official repository",
+          "url": "https://github.com/facebookresearch/home-robot"
+        },
+        {
+          "title": "Exact asset pins",
+          "url": "https://github.com/facebookresearch/home-robot/blob/main/download_data.sh"
+        },
+        {
+          "title": "OVMM paper",
+          "url": "https://ovmm.github.io/OVMM_ArXiv.pdf"
+        },
+        {
+          "title": "Grasp/action semantics",
+          "url": "https://github.com/facebookresearch/habitat-lab/blob/main/habitat-lab/habitat/config/CONFIG_KEYS.md"
+        }
+      ],
+      "lineage": "HSSD, OVMM objects and OVMM episodes are complementary components, not three demonstration datasets.",
+      "recommended_next_step": "Select a mini episode and explicit assets; generate and log base/object state, then replace assisted hold with Reachy contacts.",
+      "github_repo": "facebookresearch/home-robot",
+      "hf_repo": "ai-habitat/OVMM_objects",
+      "catalog_match_tokens": [
+        "ovmm",
+        "home-robot"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "ede6a67a2d0c0c8e12ad3b9726f330cea6cf90f5",
+      "dataset_revision": "e69d754e7256f6f906a5d553f79ad38edc37e462",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Habitat magic/suction grasp actions use holding abstractions. Need physical gripper replacement before Reachy validation; preserve split/category boundaries."
+      ]
+    },
+    {
+      "id": "habitat_rearrange",
+      "name": "Habitat 2/3 rearrangement",
+      "resource_kind": "task episodes + simulator",
+      "reachy_priority": "B3",
+      "embodiment": "Fetch/Stretch/Spot and human avatars, depending on task",
+      "base_state": "Start configuration and runtime mobile base pose; standard base action is forward velocity plus yaw velocity.",
+      "hand_state": "Joint/EE arm action with magic or suction gripper controller.",
+      "object_state": "Object initial/goal transforms, articulated furniture state, runtime transforms; task episodes are not dense demonstrations.",
+      "scene_assets": "ReplicaCAD/YCB for 2022 rearrangement; Habitat 3/PARTNR add other scenes and agents.",
+      "scenario_coverage": "2022 train: 50k problem definitions over 63 scenes; minival 20; val 1k over 21 scenes. Navigation and pick/place/open/close compose tasks.",
+      "access": "Public training/validation episode and asset downloads; held-out challenge test episodes are not public.",
+      "license": "Habitat code MIT, ReplicaCAD CC-BY-4.0; task and other asset terms separate.",
+      "limitations": "MagicGraspAction and SuctionGraspAction are not Reachy finger friction. Current repository announces no official Meta maintenance beyond v 0.3.4.",
+      "sources": [
+        {
+          "title": "Challenge episode definitions",
+          "url": "https://aihabitat.org/challenge/rearrange_2022/"
+        },
+        {
+          "title": "Action and sensor schema",
+          "url": "https://github.com/facebookresearch/habitat-lab/blob/main/habitat-lab/habitat/config/CONFIG_KEYS.md"
+        },
+        {
+          "title": "Maintenance status",
+          "url": "https://github.com/facebookresearch/habitat-lab"
+        }
+      ],
+      "lineage": "CortexBench MobilePick and Galactic/Habitat evaluations reuse this ecosystem; do not count them as independent demonstrations.",
+      "recommended_next_step": "Use to sample scene/goal distributions; independently generate dense state trajectories and validate contact.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "habitat_rearrange"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "MagicGraspAction and SuctionGraspAction are not Reachy finger friction. Current repository announces no official Meta maintenance beyond v 0.3.4."
+      ]
+    },
+    {
+      "id": "partnr",
+      "name": "PARTNR episodes and HitL traces",
+      "resource_kind": "task generator + problem instances + human-in-loop traces",
+      "reachy_priority": "B3",
+      "embodiment": "Human/robot collaborative agents in Habitat 3",
+      "base_state": "Simulator/HitL trace can describe agents; audit recorded trace fields and actions rather than assuming robotic joint demonstrations.",
+      "hand_state": "Motor skills pick/place/nav/open/close; humanoid interaction abstraction differs from Reachy gripper.",
+      "object_state": "Episode world graph/placements and HitL traces; dense state/velocity coverage must be checked in trace reader.",
+      "scene_assets": "HSSD scenes and object collections; models/policies and concept graphs are additional artifacts.",
+      "scenario_coverage": "131, 991 unverified generated problems; 111, 652 verified training subset; 2k/403 subsets; val 1k; CI 2. Released HitL traces are separate.",
+      "access": "HF listing 1, 045, 010, 217 bytes. CI problem file 2, 185 bytes; two largest HitL archives ~266/284 MB.",
+      "license": "Data CC-BY-NC-4.0; scene/asset source terms also apply.",
+      "limitations": "Verified problem feasibility does not mean 111k dense demonstrations. Same Habitat grasp limitations; distinguish user avatar motion from robot motor state.",
+      "sources": [
+        {
+          "title": "Publisher dataset card",
+          "url": "https://huggingface.co/datasets/ai-habitat/partnr_episodes"
+        },
+        {
+          "title": "Generator and baselines",
+          "url": "https://github.com/facebookresearch/partnr-planner"
+        },
+        {
+          "title": "Trace analysis",
+          "url": "https://github.com/facebookresearch/partnr-planner/tree/main/scripts/hitl_analysis"
+        }
+      ],
+      "lineage": "train_mini/train_2k are subsets of train, itself subset of unverified generation. Count each episode once.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": "facebookresearch/partnr-planner",
+      "hf_repo": "ai-habitat/partnr_episodes",
+      "catalog_match_tokens": [
+        "partnr"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "ddfff19f4b6c098a31edea4d19e7b75db72433c2",
+      "dataset_revision": "c6cffbdd82691c2f4240b75aa5289cd9efd0a32b",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Verified problem feasibility does not mean 111k dense demonstrations. Same Habitat grasp limitations; distinguish user avatar motion from robot motor state."
+      ]
+    },
+    {
+      "id": "habitat_web",
+      "name": "Habitat-Web Pick-and-Place-HD",
+      "resource_kind": "human demonstrations in simulator",
+      "reachy_priority": "B3",
+      "embodiment": "Browser-controlled Habitat agent",
+      "base_state": "Navigation trajectory/action history from human demonstrations; embodiment is not necessarily an articulated mobile manipulator.",
+      "hand_state": "Pick/place task abstraction; inspect action schema before mapping to a gripper.",
+      "object_state": "Scene/object assets and replayable demonstration actions; dense physical object-state schema not verified.",
+      "scene_assets": "Matterport 3D scenes plus released pick/place object assets.",
+      "scenario_coverage": "12k Pick-and-Place human demonstrations; separate 70k ObjectNav set is navigation-only and excluded.",
+      "access": "Official repository links axel81/habitat-web and object assets. Total/sample bytes not established here.",
+      "license": "Demonstrations CC-BY-NC-4.0; MP3D requires its own access/terms.",
+      "limitations": "Best for navigation-to-interaction sequencing. Discrete object interaction does not establish antipodal grasp or physical forces.",
+      "sources": [
+        {
+          "title": "Official download instructions",
+          "url": "https://github.com/Ram81/habitat-imitation-baselines"
+        },
+        {
+          "title": "Paper",
+          "url": "https://openaccess.thecvf.com/content/CVPR2022/papers/Ramrakhya_Habitat-Web_Learning_Embodied_Object-Search_Strategies_From_Human_Demonstrations_at_Scale_CVPR_2022_paper.pdf"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Audit one Pick-and-Place trace, excluding ObjectNav-only demonstrations.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "habitat_web"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Best for navigation-to-interaction sequencing. Discrete object interaction does not establish antipodal grasp or physical forces."
+      ]
+    },
+    {
+      "id": "galactic",
+      "name": "Galactic",
+      "resource_kind": "kinematic simulator + tasks + assets",
+      "reachy_priority": "C3",
+      "embodiment": "Fetch-style mobile robot; extendable URDF articulation",
+      "base_state": "Robot articulation and start poses plus runtime kinematic state.",
+      "hand_state": "Abstract grasping and dropping behavior.",
+      "object_state": "Episode placements and runtime kinematic movable-object poses.",
+      "scene_assets": "Runtime datasets bundled under data: collection JSON, URDF, collision grids, mesh/texture packs and episode JSON.",
+      "scenario_coverage": "Mobile pick and tidy-house rearrangement at high simulation throughput.",
+      "access": "Public repository includes runtime data; archived August2024. Source asset reconstruction is separate.",
+      "license": "Majority CC-BY-NC; Habitat submodules/bps 3D MIT; source asset terms retained.",
+      "limitations": "Explicitly kinematic collision/sliding/grasping approximations. Unsuitable for proving slip-free Reachy grasp dynamics.",
+      "sources": [
+        {
+          "title": "Simulation and license statement",
+          "url": "https://github.com/facebookresearch/galactic"
+        },
+        {
+          "title": "Data format",
+          "url": "https://github.com/facebookresearch/galactic/blob/main/DATA.md"
+        }
+      ],
+      "lineage": "Reuses ReplicaCAD/YCB and Habitat components; count tasks/assets separately from recordings.",
+      "recommended_next_step": "Use scene placements for planning stress tests only; regenerate physical contacts independently.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "galactic"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Explicitly kinematic collision/sliding/grasping approximations. Unsuitable for proving slip-free Reachy grasp dynamics."
+      ]
+    },
+    {
+      "id": "replicacad",
+      "name": "ReplicaCAD Interactive",
+      "resource_kind": "scene/object asset dataset",
+      "reachy_priority": "A3-assets",
+      "embodiment": "Robot-independent; Fetch-oriented navigation meshes",
+      "base_state": "No measured base trajectory. Scene transforms and navmeshes only.",
+      "hand_state": "No gripper demonstrations.",
+      "object_state": "Static/initial object transforms and articulated asset definitions; no time-series interactions.",
+      "scene_assets": "90+ object assets with convex collision meshes, mass/friction/restitution, six+ articulated URDFs, receptacle metadata.",
+      "scenario_coverage": "Apartment rearrangements; interactive package has 84 of 105 published variations, 21 held out.",
+      "access": "Public, ungated HF listing: 157,450,746 bytes across 602 files at revision 3e8c7fe5759f64bfcbc3882f9cdf6de97f82a06d. The card describes a 132 MB original interactive package; the 525 MB baked-lighting package is a different rendering variant.",
+      "license": "CC-BY-4.0.",
+      "limitations": "Strong compact asset source, but scenes are related apartment variants, not independent household demonstrations. Baked-lighting version makes most furniture static.",
+      "sources": [
+        {
+          "title": "Publisher interactive asset card",
+          "url": "https://huggingface.co/datasets/ai-habitat/ReplicaCAD_dataset"
+        },
+        {
+          "title": "Project",
+          "url": "https://aihabitat.org/datasets/replica_cad/"
+        }
+      ],
+      "lineage": "Interactive/baked versions and microvariations share asset and scene lineage.",
+      "recommended_next_step": "Import one object or articulated cabinet with source physical properties; create a new Reachy task and label it generated, not retargeted.",
+      "github_repo": null,
+      "hf_repo": "ai-habitat/ReplicaCAD_dataset",
+      "catalog_match_tokens": [
+        "replicacad"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": "3e8c7fe5759f64bfcbc3882f9cdf6de97f82a06d",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Strong compact asset source, but scenes are related apartment variants, not independent household demonstrations. Baked-lighting version makes most furniture static."
+      ]
+    },
+    {
+      "id": "hssd",
+      "name": "HSSD / HSSD-Hab / HSSD-mini",
+      "resource_kind": "scene/object asset dataset",
+      "reachy_priority": "B3-assets",
+      "embodiment": "Robot-independent",
+      "base_state": "No base trajectories.",
+      "hand_state": "No gripper demonstrations.",
+      "object_state": "Object instances and scene placements, not temporal manipulation tracks.",
+      "scene_assets": "211 authored scenes, 18, 656 object models; Habitat/OVMM adaptations provide metadata needed for interaction.",
+      "scenario_coverage": "Home navigation and rearrangement contexts; wide visual/object diversity.",
+      "access": "Official HF hssd/hssd-hab; HomeRobot pins ovmm branch. Mini subset useful for bounded setup. Incorrect ai-habitat/HSSD path is not the official release.",
+      "license": "CC-BY-NC-4.0; asset/source notices remain relevant.",
+      "limitations": "Navigation-ready geometry need not have verified mass/inertia/contact meshes. Do not equate individual object models with demonstrations.",
+      "sources": [
+        {
+          "title": "Official project",
+          "url": "https://3dlg-hcvc.github.io/hssd/"
+        },
+        {
+          "title": "Habitat package",
+          "url": "https://huggingface.co/datasets/hssd/hssd-hab"
+        },
+        {
+          "title": "OVMM branch pin",
+          "url": "https://github.com/facebookresearch/home-robot/blob/main/download_data.sh"
+        }
+      ],
+      "lineage": "HSSD-mini, OVMM and PARTNR reuse scenes/assets; they are not separate home scans.",
+      "recommended_next_step": "Use mini scene plus a selected dynamic object only after collision/inertia audit.",
+      "github_repo": null,
+      "hf_repo": "hssd/hssd-hab",
+      "catalog_match_tokens": [
+        "hssd"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Navigation-ready geometry need not have verified mass/inertia/contact meshes. Do not equate individual object models with demonstrations.",
+        "Full API listing exceeded the 8 MB metadata read cap; official card and HomeRobot pinned revision were checked instead."
+      ]
+    },
+    {
+      "id": "hm3d",
+      "name": "HM3D / HM3DSem",
+      "resource_kind": "real-world scene scans / navigation assets",
+      "reachy_priority": "C3-assets",
+      "embodiment": "Robot-independent",
+      "base_state": "No robot base trajectories in scene release.",
+      "hand_state": "No manipulation demonstrations.",
+      "object_state": "Semantic instance geometry in scanned scenes; no freely moving object tracks or calibrated object dynamics.",
+      "scene_assets": "1, 000 building-scale scans; downloadable training/validation versus held-out test.",
+      "scenario_coverage": "Residential/commercial/civic navigation contexts.",
+      "access": "Access via Matterport research agreement; no acceptance performed. Byte totals depend on release/resolution.",
+      "license": "Academic noncommercial research terms, separate from Habitat MIT code.",
+      "limitations": "A scanned mug merged into static scene geometry cannot become a physical free object without segmentation, completion and assumed dynamics.",
+      "sources": [
+        {
+          "title": "Official HM3D source",
+          "url": "https://aihabitat.org/datasets/hm3d/"
+        }
+      ],
+      "lineage": "HM3DSem adds annotations to HM3D; navigation derivatives are not new manipulation demonstrations.",
+      "recommended_next_step": "Use as background/navigation context, not priority object-contact ground truth.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "hm3d"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "A scanned mug merged into static scene geometry cannot become a physical free object without segmentation, completion and assumed dynamics."
+      ]
+    },
+    {
+      "id": "mobile_aloha",
+      "name": "Mobile ALOHA",
+      "resource_kind": "real-robot demonstrations / collection code",
+      "reachy_priority": "C1-motion",
+      "embodiment": "Dual ViperX arms on differential mobile base",
+      "base_state": "Recorder saves measured linear/angular base velocity in /base_action[2]; optional T265 field is commented out. No measured global SE(2) field verified.",
+      "hand_state": "14-D arm/gripper qpos/qvel/effort and action, multiview video.",
+      "object_state": "No object 6D trajectory or matched scene/object mesh in inspected writer.",
+      "scene_assets": "Robot hardware models available separately; real object geometry/dynamics require reconstruction.",
+      "scenario_coverage": "Cooking, storage, cleaning and multi-step bimanual mobile tasks.",
+      "access": "Official project/code and linked data resources; individual HDF5 episodes. No complete official payload byte inventory established.",
+      "license": "Code MIT; verify exact data-host license before mirroring.",
+      "limitations": "Velocity integration gives derived drifting odometry, not measured world pose. Co-training stationary ALOHA data does not make it mobile.",
+      "sources": [
+        {
+          "title": "Official project",
+          "url": "https://mobile-aloha.github.io/"
+        },
+        {
+          "title": "Recorder schema",
+          "url": "https://github.com/MarkFzp/mobile-aloha/blob/main/aloha_scripts/record_episodes.py"
+        },
+        {
+          "title": "Paper",
+          "url": "https://mobile-aloha.github.io/resources/mobile-aloha.pdf"
+        }
+      ],
+      "lineage": "ACT/ALOHA stationary demos and converted mirrors overlap. Keep source episode IDs and distinguish mobile subset.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": "MarkFzp/mobile-aloha",
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "aloha"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "0e403249c76054a68e757e590d4da4dba401c9e3",
+      "dataset_revision": null,
+      "catalog_matches": [
+        "aloha",
+        "mobile_aloha",
+        "hf__lerobot__aloha_sim_transfer_cube_human",
+        "hf__lerobot__aloha_sim_insertion_scripted",
+        "hf__lerobot__aloha_sim_transfer_cube_scripted",
+        "hf__lerobot__aloha_sim_insertion_human",
+        "hf__lerobot__aloha_static_candy",
+        "hf__lerobot__aloha_static_tape",
+        "hf__lerobot__aloha_static_screw_driver",
+        "hf__lerobot__aloha_mobile_wipe_wine",
+        "hf__lerobot__aloha_static_towel",
+        "hf__lerobot__aloha_static_coffee",
+        "hf__lerobot__aloha_static_battery",
+        "hf__lerobot__aloha_static_thread_velcro",
+        "hf__lerobot__aloha_static_vinh_cup_left",
+        "hf__lerobot__aloha_static_vinh_cup",
+        "hf__lerobot__aloha_static_coffee_new",
+        "hf__lerobot__aloha_static_ziploc_slide",
+        "hf__lerobot__aloha_static_pingpong_test",
+        "hf__lerobot__aloha_static_cups_open",
+        "hf__lerobot__aloha_static_fork_pick_up",
+        "hf__lerobot__aloha_static_pro_pencil",
+        "hf__lerobot__aloha_mobile_shrimp",
+        "hf__lerobot__aloha_mobile_wash_pan",
+        "hf__lerobot__aloha_mobile_cabinet",
+        "hf__lerobot__aloha_mobile_chair",
+        "hf__lerobot__aloha_sim_insertion_scripted_image",
+        "hf__lerobot__aloha_mobile_elevator",
+        "hf__lerobot__aloha_sim_transfer_cube_human_image",
+        "hf__lerobot__aloha_sim_transfer_cube_scripted_image",
+        "hf__lerobot__aloha_sim_insertion_human_image",
+        "hf__lerobot__aloha_mobile_shrimp_image",
+        "oxe__aloha_mobile"
+      ],
+      "catalog_relation": "family_or_related_entry_present",
+      "unknowns": [
+        "Velocity integration gives derived drifting odometry, not measured world pose. Co-training stationary ALOHA data does not make it mobile."
+      ]
+    },
+    {
+      "id": "airoa_moma",
+      "name": "AIRoA MoMa preliminary release",
+      "resource_kind": "real-robot demonstrations",
+      "reachy_priority": "C1-motion",
+      "embodiment": "Toyota HSR",
+      "base_state": "Public card describes robot state; base-state names and frame not verified behind gate.",
+      "hand_state": "Arm/gripper/head state and actions; RGB cameras and calibration.",
+      "object_state": "No per-frame object 6D or matching meshes documented.",
+      "scene_assets": "One household laboratory; physical HSR model does not define the manipulated objects.",
+      "scenario_coverage": "23, 762 filtered PA episodes, 87 h, seven household task groups. Earlier paper/preliminary counts differ.",
+      "access": "HF auto-gated; anonymous card/API visible, payload requires accepting contact-sharing terms. Listing89, 898, 503, 338 bytes.",
+      "license": "CC-BY-NC-SA-4.0.",
+      "limitations": "v 1.1 filters duration, state jumps and synchronization delay. Primitive episodes grouped by UUID may belong to one longer execution.",
+      "sources": [
+        {
+          "title": "Publisher card and version notes",
+          "url": "https://huggingface.co/datasets/airoa-org/airoa-moma"
+        },
+        {
+          "title": "Paper",
+          "url": "https://arxiv.org/abs/2509.25032"
+        }
+      ],
+      "lineage": "MoMa 5k expands preliminary collection; audit UUID overlap before summing.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": "airoa-org/airoa-moma",
+      "catalog_match_tokens": [
+        "airoa"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": "586f25e39d7b8d4d13b2b94dd7703a47a02cdd0b",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "v 1.1 filters duration, state jumps and synchronization delay. Primitive episodes grouped by UUID may belong to one longer execution."
+      ]
+    },
+    {
+      "id": "airoa_moma5k",
+      "name": "AIRoA MoMa 5k",
+      "resource_kind": "real-robot demonstrations with wrench telemetry",
+      "reachy_priority": "C1-motion",
+      "embodiment": "Toyota HSR across 44 robots/five sites",
+      "base_state": "action.base[3] is x/y/theta delta. This is an action, not measured global base pose; 11-D servo fields include wheels.",
+      "hand_state": "8-D arm/wrist/gripper/head state; wrist wrench history600 values, freshness flags, 6-D EE poses.",
+      "object_state": "No all-object 6D or mesh correspondence in documented feature schema.",
+      "scene_assets": "Real-world scenes; no matched simulator object assets verified.",
+      "scenario_coverage": "1, 184, 259 successful primitive episodes, 425, 518 grouped short-horizon executions, 93 templates, 5, 025 h at 10 Hz.",
+      "access": "Aug2026 release; gated v3 packed repository~4 TiB, v2.1 bucket has same records in per-episode form.",
+      "license": "Custom airoa-public-dataset-terms; own R&D use and restrictions on redistribution of data/derivatives/models. Do not substitute preliminary CC license.",
+      "limitations": "One site has 6-value wrench samples padded to 600 in v 3; freshness/validity matters. Success-only train split; PA count is not independent full-task count. Absolute EE frame needs schema clarification.",
+      "sources": [
+        {
+          "title": "Publisher detailed schema and terms",
+          "url": "https://huggingface.co/datasets/airoa-org/airoa-moma-5k"
+        },
+        {
+          "title": "Official release announcement",
+          "url": "https://airoa.org/updates/20260803/487/"
+        },
+        {
+          "title": "License",
+          "url": "https://huggingface.co/datasets/airoa-org/airoa-moma-5k/blob/main/LICENSE.ja.md"
+        }
+      ],
+      "lineage": "v 2.1 and v 3 payloads represent the same episodes. Group by UUID; deduplicate against preliminary release.",
+      "recommended_next_step": "After authorized access, inspect one complete grouped navigation/pick/carry/place sequence and wrench validity; object reconstruction remains separate.",
+      "github_repo": null,
+      "hf_repo": "airoa-org/airoa-moma-5k",
+      "catalog_match_tokens": [
+        "airoa"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": "2681f223af815be0465189103f198ae97cd694c3",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "One site has 6-value wrench samples padded to 600 in v 3; freshness/validity matters. Success-only train split; PA count is not independent full-task count. Absolute EE frame needs schema clarification."
+      ]
+    },
+    {
+      "id": "galaxea",
+      "name": "Galaxea Open-World Dataset",
+      "resource_kind": "real-robot demonstrations",
+      "reachy_priority": "C1-motion",
+      "embodiment": "Galaxea R1-Lite mobile dual-arm robot",
+      "base_state": "The published schema records observation.state.chassis[3] positions, chassis.velocities[3], and chassis.imu[10]. The reference frame, pose convention and odometry calibration are not established by the card. action.chassis.velocities[6] is a commanded twist.",
+      "hand_state": "Left/right arm position and velocity vectors have six values each; torso vectors have four. Each gripper observation ranges from 0 closed to 100 open. Each end-effector pose has position plus quaternion (seven values).",
+      "object_state": "No per-frame all-object 6D or dynamics assets in published schema.",
+      "scene_assets": "11 real collection sites; real objects only in visual observations/annotations.",
+      "scenario_coverage": "500+ hours; 227 task-level archives across homes, kitchens, retail and offices; bed making/table bussing/microwave.",
+      "access": "HF auto-gated contact-sharing; listing2, 867, 672, 629, 620 bytes. Smallest task archive501, 166, 913 bytes.",
+      "license": "CC-BY-NC-SA-4.0 for this repository.",
+      "limitations": "Observed chassis position is stronger evidence than command-only mobility. Global reference frame and quaternion ordering still need calibration/schema verification. Object poses and physical assets are absent from the inspected schema.",
+      "sources": [
+        {
+          "title": "Publisher schema and archives",
+          "url": "https://huggingface.co/datasets/OpenGalaxea/Galaxea-Open-World-Dataset"
+        },
+        {
+          "title": "Official project",
+          "url": "https://opengalaxea.github.io/GalaxeaVLA/"
+        },
+        {
+          "title": "Paper",
+          "url": "https://arxiv.org/abs/2509.00576"
+        }
+      ],
+      "lineage": "G0/G05 model training and RoboCOIN R1-Lite subsets are not automatically independent recordings; compare episode source IDs.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": "OpenGalaxea/Galaxea-Open-World-Dataset",
+      "catalog_match_tokens": [
+        "galaxea"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": "df670d8dc3f2b369f55d28a3428b8639f0dab37d",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Observed chassis position is stronger evidence than command-only mobility. Global reference frame and quaternion ordering still need calibration/schema verification. Object poses and physical assets are absent from the inspected schema."
+      ]
+    },
+    {
+      "id": "robomind_mobile",
+      "name": "RoboMIND 2.0 mobile subset and digital twins",
+      "resource_kind": "real/sim dataset releases with availability caveat",
+      "reachy_priority": "C2-pending",
+      "embodiment": "Six embodiments including mobile bimanual platforms",
+      "base_state": "Paper claims20k mobile trajectories; exact measured base-state fields not independently verified in released2.0 payload.",
+      "hand_state": "Robot proprioception, multiview observations; 12k tactile-enhanced episodes reported.",
+      "object_state": "20k simulation trajectories/digital twins reported; per-frame object-state schema and matched assets not verified.",
+      "scene_assets": "Real scenes and Isaac Sim digital twins; actual per-task asset distribution needs inspection.",
+      "scenario_coverage": "2.0 reports 310k+ trajectories 739 tasks, including mobile and tactile subsets.1.0 primarily stationary multi-embodiment manipulation.",
+      "access": "Official site points to ModelScope collection. HF2.0 indexed tree has only README/.gitattributes; API401 here. HF1.0 is gated12.28 TB, not evidence2.0 mobile data downloaded.",
+      "license": "1.0 HF card Apache-2.0; 2.0 exact ModelScope data terms not verified.",
+      "limitations": "Do not equate paper scale with accessible payload. Need compare 2.0 with 1.0 and identify overlapping demos; mobile robot name alone does not prove base motion.",
+      "sources": [
+        {
+          "title": "Official site release link",
+          "url": "https://x-humanoid-robomind.github.io/"
+        },
+        {
+          "title": "2.0 paper",
+          "url": "https://arxiv.org/abs/2512.24653"
+        },
+        {
+          "title": "2.0 HF listing",
+          "url": "https://huggingface.co/datasets/x-humanoid-robomind/RoboMIND2.0/tree/main"
+        },
+        {
+          "title": "Official ModelScope collection",
+          "url": "https://modelscope.cn/collections/X-Humanoid/RoboMIND20"
+        },
+        {
+          "title": "1.0 publisher card",
+          "url": "https://huggingface.co/datasets/x-humanoid-robomind/RoboMIND"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": "x-humanoid-robomind/RoboMIND",
+      "catalog_match_tokens": [
+        "robomind"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": "e7ffe31d1fe983a42c3d7b79d192f554fc05b86e",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Do not equate paper scale with accessible payload. Need compare 2.0 with 1.0 and identify overlapping demos; mobile robot name alone does not prove base motion."
+      ]
+    },
+    {
+      "id": "agibot_beta",
+      "name": "AgiBot World Alpha/Beta",
+      "resource_kind": "real-robot demonstrations",
+      "reachy_priority": "C1-motion",
+      "embodiment": "Mobile dual-arm AgiBot robots",
+      "base_state": "Robot state/action telemetry; base coordinate fields must be checked by embodiment.",
+      "hand_state": "Joint/end-effector/gripper or dexterous-hand channels depending on robot.",
+      "object_state": "Visual/object annotations are not verified world-object 6D tracks.",
+      "scene_assets": "Real scenes; robot metadata does not provide calibrated object meshes.",
+      "scenario_coverage": "Broad manipulation collection; select verified navigation-plus-manipulation episodes.",
+      "access": "Beta public card/listing but auto-gated; listing48, 050, 136, 152, 505 bytes. Task-state and observation archives separated.",
+      "license": "Custom publisher terms/card did not expose a standard license via API; verify before transfer.",
+      "limitations": "Large scale alone does not solve missing object state. Avoid downloading multi-tens-of-GB video archives for schema inspection.",
+      "sources": [
+        {
+          "title": "Official publisher organization and lineage",
+          "url": "https://huggingface.co/agibot-world"
+        },
+        {
+          "title": "Beta release",
+          "url": "https://huggingface.co/datasets/agibot-world/AgiBotWorld-Beta"
+        },
+        {
+          "title": "Primary paper",
+          "url": "https://agibot-world.com/blog/agibot_go1.pdf"
+        }
+      ],
+      "lineage": "Publisher says Alpha is a subset of Beta; never add their episode counts.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": "agibot-world/AgiBotWorld-Beta",
+      "catalog_match_tokens": [
+        "agibot"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": "2252b3fdc88dc67fa5d5e4b771e1b86f5e71c278",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Large scale alone does not solve missing object state. Avoid downloading multi-tens-of-GB video archives for schema inspection."
+      ]
+    },
+    {
+      "id": "agibot2026",
+      "name": "AgiBot World2026",
+      "resource_kind": "real demonstrations + separately identified simulation/RL sections",
+      "reachy_priority": "C1-motion",
+      "embodiment": "AgiBotG2 mobile bimanual platform",
+      "base_state": "Per-task meta/info.json field_descriptions defines indices; documented action/robot/velocity is not a universal SE(2) pose.",
+      "hand_state": "Joint position/velocity telemetry and end-effector actions; exact dimensions vary by subrelease.",
+      "object_state": "Real collection includes2D boxes/object attributes, not guaranteed6D poses. Simulation section must be audited independently.",
+      "scene_assets": "Real service/commercial scenes; simulation assets via GenieSim separate.",
+      "scenario_coverage": "Long-horizon restocking, atomic-skill annotations and retained error/recovery trajectories.",
+      "access": "Ungated listing13, 564, 582, 299, 458 bytes; current directories include simulation and ReinforcementLearning as well as imitation data.",
+      "license": "CC-BY-NC-SA-4.0 in current publisher card.",
+      "limitations": "Old card sample path task 3777/380098_380609.tar.gz may no longer match current tree; use recorded listing instead of blindly following sample text.",
+      "sources": [
+        {
+          "title": "Publisher current card",
+          "url": "https://huggingface.co/datasets/agibot-world/AgiBotWorld2026"
+        },
+        {
+          "title": "Official announcement",
+          "url": "https://www.agibot.com/article/231/detail/54.html"
+        }
+      ],
+      "lineage": "Separate real, synthetic and policy-rollout provenance. Overlap with 2025 collection not resolved.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": "agibot-world/AgiBotWorld2026",
+      "catalog_match_tokens": [
+        "agibot"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": "cf9841dffaa4bb6a7b226a30b145e4fa5127a064",
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Old card sample path task 3777/380098_380609.tar.gz may no longer match current tree; use recorded listing instead of blindly following sample text."
+      ]
+    },
+    {
+      "id": "geniesim",
+      "name": "AgiBot Digital World / GenieSim",
+      "resource_kind": "synthetic data + scene/task generator",
+      "reachy_priority": "B3",
+      "embodiment": "AgiBotG1/G2; task config can use fixed or mobile base",
+      "base_state": "Task template defines robot initial SE(3); runtime mobile state availability depends on recorder/selected task.",
+      "hand_state": "Whole-body/gripper task controls and recordings; no uniform action width assumed.",
+      "object_state": "Engine exposes object world/local poses and filters over motion; whether public LeRobot archives retain these is unverified.",
+      "scene_assets": "USD scenes/assets, JSON task recipes, object IDs, physical simulation; 3D Gaussian reconstruction is not itself collision geometry.",
+      "scenario_coverage": "Current project advertises 10k+ synthetic hours and 200+ loco-manipulation tasks; precise public subset requires listing audit.",
+      "access": "Public code/assets/data links; 2026 HF listing includes simulation metadata bundles as small as1.18 MB. Full stack heavy.",
+      "license": "Code/data/asset releases can differ; 2026 bundled data CC-BY-NC-SA; verify selected generator and asset license.",
+      "limitations": "Some templates explicitly attach objects. Do not import attachment-based behavior as physical grasp evidence. Source success filters need independent contact audit.",
+      "sources": [
+        {
+          "title": "Official platform",
+          "url": "https://github.com/AgibotTech/genie_sim"
+        },
+        {
+          "title": "Task configuration",
+          "url": "https://github.com/AgibotTech/genie_sim/blob/main/source/data_collection/TASK_CONFIG_GUIDE.md"
+        },
+        {
+          "title": "Object-state filters",
+          "url": "https://github.com/AgibotTech/genie_sim/blob/main/source/data_collection/common/data_filter/README.md"
+        }
+      ],
+      "lineage": "Digital World, GenieSim versions and 2026 simulation packages can overlap; track generation seeds and source recipes.",
+      "recommended_next_step": "Read a metadata-only task bundle and recorder schema before a simulator install; prioritize free rigid objects without attachment constraints.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "geniesim"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Some templates explicitly attach objects. Do not import attachment-based behavior as physical grasp evidence. Source success filters need independent contact audit."
+      ]
+    },
+    {
+      "id": "brmdata",
+      "name": "BRMData",
+      "resource_kind": "real-robot bimanual/mobile demonstrations",
+      "reachy_priority": "C1-motion",
+      "embodiment": "Bimanual mobile household robot",
+      "base_state": "Mobile capability is described; exact base pose/action schema remains unverified.",
+      "hand_state": "Arm/gripper demonstrations and multiview/depth sensing; inspect HDF5 fields.",
+      "object_state": "No verified per-frame object 6D or matched scene dynamics in public overview.",
+      "scene_assets": "Real rigid/flexible objects; CAD correspondence not established.",
+      "scenario_coverage": "Ten original tasks incl bottle handoff, cup/plate placement, fruit, cleaning, human interaction; five added tasks announcedAug 2024.",
+      "access": "Official JDBox dataset link uses password given in paper; no gate acceptance or payload download performed.",
+      "license": "Dataset license link on project did not resolve in this check; grant unverified.",
+      "limitations": "Mobile/tabletop and human-interaction subsets must be distinguished. Do not extrapolate ten-task paper to every later announced task.",
+      "sources": [
+        {
+          "title": "Official project and download",
+          "url": "https://embodiedrobot.github.io/BRMData.html"
+        },
+        {
+          "title": "Official code",
+          "url": "https://github.com/Louis-ZhangLe/BRMData"
+        },
+        {
+          "title": "Paper",
+          "url": "https://arxiv.org/abs/2405.18860"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "brmdata"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Mobile/tabletop and human-interaction subsets must be distinguished. Do not extrapolate ten-task paper to every later announced task."
+      ]
+    },
+    {
+      "id": "robocoin",
+      "name": "RoboCOIN mobile-capable subsets",
+      "resource_kind": "real-robot multi-embodiment data collection",
+      "reachy_priority": "C1-motion",
+      "embodiment": "15 platforms including R1-Lite and other mobile-capable bimanual robots",
+      "base_state": "Per-task base channels not guaranteed by common schema; verify actual chassis motion.",
+      "hand_state": "Standard arm/hand radians, normalized gripper, EE fields; actions may be derived from next observation if original actions absent.",
+      "object_state": "eef_sim_pose_state is robot forward-kinematic EE pose, not simulated object ground truth.",
+      "scene_assets": "Unified robot-coordinate models; real scene/object geometry not generally supplied.",
+      "scenario_coverage": "Paper 180k+ demonstrations 421 tasks 16 scenarios; choose actual mobile tasks, not all bimanual data.",
+      "access": "Task-level HF/ModelScope download manager; access application required. Example two-task selection10.8 GB.",
+      "license": "Toolkit Apache-2.0; each data repository terms require verification.",
+      "limitations": "Unified x-forward/y-left/z-up frame is at robot base/feet center. Derived FK and derived actions must be labelled; neither is measured contact.",
+      "sources": [
+        {
+          "title": "Official schema",
+          "url": "https://github.com/FlagOpen/RoboCOIN"
+        },
+        {
+          "title": "Access manager",
+          "url": "https://github.com/FlagOpen/RoboCOIN-DataManager"
+        },
+        {
+          "title": "Paper",
+          "url": "https://arxiv.org/abs/2511.17441"
+        }
+      ],
+      "lineage": "Check manufacturer collections for reused episodes and mirrors; embodiment count is not independent dataset count.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "robocoin"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Unified x-forward/y-left/z-up frame is at robot base/feet center. Derived FK and derived actions must be labelled; neither is measured contact."
+      ]
+    },
+    {
+      "id": "rt1_fractal",
+      "name": "RT-1 / Fractal / OXE mobile-capable records",
+      "resource_kind": "real-robot demonstrations / standardized mixture component",
+      "reachy_priority": "C1-motion",
+      "embodiment": "Everyday Robots mobile manipulator",
+      "base_state": "Schema contains commanded base displacement[2] and vertical rotation[1]; base_pose_tool_reached means EE pose relative to base, not robot global pose.",
+      "hand_state": "Continuous gripper state/command, base-relative EE displacement/RPY action, RGB/language.",
+      "object_state": "No object 6D tracks or matched meshes in documented TFDS schema.",
+      "scene_assets": "Real environments; visual object context only.",
+      "scenario_coverage": "TFDS v 0.1.0 lists 87, 212 train episodes and 111.38 GiB; catalog description is tabletop manipulation with 17 objects. Must measure whether selected episodes actually move base.",
+      "access": "Public TFDS/OXE dataset distribution; shard-based partial inspection.",
+      "license": "Per-source OXE/RT-1 terms, not a blanket mixture license; inspect linked source release.",
+      "limitations": "Do not turn command deltas into measured global trajectory. Many conversions select 7-D arm action and discard base channels.",
+      "sources": [
+        {
+          "title": "Official TFDS schema",
+          "url": "https://www.tensorflow.org/datasets/catalog/fractal20220817_data"
+        },
+        {
+          "title": "RT-1 project",
+          "url": "https://robotics-transformer1.github.io/"
+        },
+        {
+          "title": "OXE collection",
+          "url": "https://robotics-transformer-x.github.io/"
+        }
+      ],
+      "lineage": "Fractal/RT-1 in OXE and transformed mirrors are the same source recordings, not additional datasets.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "fractal",
+        "open_x",
+        "oxe"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [
+        "hf__Voxel51__tavis-head-reachy2-800ep",
+        "oxe",
+        "oxe__columbia_cairlab_pusht_real",
+        "oxe__stanford_kuka_multimodal_dataset_converted_externally_to_rlds",
+        "oxe__nyu_rot_dataset_converted_externally_to_rlds",
+        "oxe__cmu_franka_exploration_dataset_converted_externally_to_rlds",
+        "oxe__ucsd_pick_and_place_dataset_converted_externally_to_rlds",
+        "oxe__usc_cloth_sim_converted_externally_to_rlds",
+        "oxe__utokyo_pr2_opening_fridge_converted_externally_to_rlds",
+        "oxe__utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds",
+        "oxe__utokyo_saytap_converted_externally_to_rlds",
+        "oxe__utokyo_xarm_pick_and_place_converted_externally_to_rlds",
+        "oxe__utokyo_xarm_bimanual_converted_externally_to_rlds",
+        "oxe__kaist_nonprehensile_converted_externally_to_rlds",
+        "oxe__tokyo_u_lsmo_converted_externally_to_rlds",
+        "oxe__dlr_sara_pour_converted_externally_to_rlds",
+        "oxe__dlr_sara_grid_clamp_converted_externally_to_rlds",
+        "oxe__asu_table_top_converted_externally_to_rlds",
+        "oxe__stanford_robocook_converted_externally_to_rlds",
+        "oxe__imperialcollege_sawyer_wrist_cam",
+        "oxe__uiuc_d3field",
+        "oxe__berkeley_gnm_recon",
+        "oxe__berkeley_gnm_cory_hall",
+        "oxe__berkeley_gnm_sac_son",
+        "oxe__conq_hose_manipulation",
+        "oxe__fmb",
+        "hf__IPEC-COMMUNITY__fractal20220817_data_lerobot",
+        "oxe__aloha_mobile",
+        "oxe__bridge",
+        "oxe__cmu_playing_with_food",
+        "oxe__eth_agent_affordances",
+        "oxe__fractal20220817_data",
+        "oxe__io_ai_tech",
+        "oxe__maniskill_dataset_converted_externally_to_rlds",
+        "oxe__mimic_play",
+        "oxe__plex_robosuite",
+        "oxe__robo_net",
+        "oxe__robo_set",
+        "oxe__robot_vqa",
+        "oxe__spoc",
+        "oxe__stanford_mask_vit_converted_externally_to_rlds",
+        "oxe__tidybot",
+        "oxe__vima_converted_externally_to_rlds",
+        "oxe__kuka",
+        "oxe__taco_play",
+        "oxe__jaco_play",
+        "oxe__berkeley_cable_routing",
+        "oxe__roboturk",
+        "oxe__nyu_door_opening_surprising_effectiveness",
+        "oxe__viola",
+        "oxe__berkeley_autolab_ur5",
+        "oxe__toto",
+        "oxe__stanford_hydra_dataset_converted_externally_to_rlds",
+        "oxe__austin_buds_dataset_converted_externally_to_rlds",
+        "oxe__nyu_franka_play_dataset_converted_externally_to_rlds",
+        "oxe__furniture_bench_dataset_converted_externally_to_rlds",
+        "oxe__ucsd_kitchen_dataset_converted_externally_to_rlds",
+        "oxe__austin_sailor_dataset_converted_externally_to_rlds",
+        "oxe__austin_sirius_dataset_converted_externally_to_rlds",
+        "oxe__bc_z",
+        "oxe__berkeley_mvp_converted_externally_to_rlds",
+        "oxe__berkeley_rpt_converted_externally_to_rlds",
+        "oxe__dlr_edan_shared_control_converted_externally_to_rlds",
+        "oxe__iamlab_cmu_pickup_insert_converted_externally_to_rlds",
+        "oxe__utaustin_mutex",
+        "oxe__berkeley_fanuc_manipulation",
+        "oxe__cmu_play_fusion",
+        "oxe__cmu_stretch",
+        "oxe__droid",
+        "oxe__dobbe",
+        "oxe__qut_dexterous_manipulation",
+        "oxe__language_table"
+      ],
+      "catalog_relation": "family_or_related_entry_present",
+      "unknowns": [
+        "Do not turn command deltas into measured global trajectory. Many conversions select 7-D arm action and discard base channels."
+      ]
+    },
+    {
+      "id": "umi",
+      "name": "Universal Manipulation Interface",
+      "resource_kind": "handheld human demonstration data",
+      "reachy_priority": "C1-motion",
+      "embodiment": "Human-held parallel gripper; no robot during recording",
+      "base_state": "SLAM end-effector/world camera motion; no independently measured robot base.",
+      "hand_state": "6-DoF gripper trajectory, width and wrist video; relative/absolute frame conventions follow preprocessing.",
+      "object_state": "No general all-object 6D/mass/friction/CAD ground truth.",
+      "scene_assets": "Real-world scenes and tools; reconstruction optional/derived.",
+      "scenario_coverage": "Portable diverse object manipulation and bimanual collection.",
+      "access": "Official community lists task-specific MP4/Zarr files and licenses. Bounded task downloads available.",
+      "license": "Original code MIT; community datasets have per-row terms.",
+      "limitations": "SLAM drift/failure and calibration determine pose quality; hand trajectory is insufficient to infer feasible mobile base or physical Reachy grasp.",
+      "sources": [
+        {
+          "title": "Official implementation",
+          "url": "https://github.com/real-stanford/universal_manipulation_interface"
+        },
+        {
+          "title": "Dataset registry",
+          "url": "https://umi-data.github.io/"
+        },
+        {
+          "title": "Paper",
+          "url": "https://umi-gripper.github.io/umi.pdf"
+        }
+      ],
+      "lineage": "Raw MP4, processed Zarr and robot retargets share demonstration lineage.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "umi"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [
+        "umi",
+        "hf__lerobot__umi_cup_in_the_wild",
+        "hf__IPEC-COMMUNITY__FastUMI-Data",
+        "hf__IPEC-COMMUNITY__FastUMI_100k_lerobot",
+        "fastumi"
+      ],
+      "catalog_relation": "family_or_related_entry_present",
+      "unknowns": [
+        "SLAM drift/failure and calibration determine pose quality; hand trajectory is insufficient to infer feasible mobile base or physical Reachy grasp."
+      ]
+    },
+    {
+      "id": "umi_legs",
+      "name": "UMI on Legs",
+      "resource_kind": "handheld demonstrations + whole-body controller framework",
+      "reachy_priority": "C1-motion",
+      "embodiment": "Quadruped with arm, trained from human-held UMI",
+      "base_state": "The deployed controller uses robot state and odometry to track a task-frame end-effector path; handheld training recordings do not directly measure the downstream robot base.",
+      "hand_state": "Human-held parallel-gripper width and 6-DoF end-effector paths; a separate controller transfers the motion to the legged embodiment.",
+      "object_state": "No universal moving-object pose and dynamics sequence was verified in the released UMI task records.",
+      "scene_assets": "The Isaac Gym controller environment and terrain are separate from the real demonstration object scenes.",
+      "scenario_coverage": "Prehensile, nonprehensile and dynamic tasks. The UMI registry includes 14 kettlebell-push and 500 basket-toss demonstrations.",
+      "access": "Official code/data/checkpoint links and task-level UMI registry; no robot deployment invoked.",
+      "license": "Code MIT; registry marks these listed demos MIT.",
+      "limitations": "Successful robot deployment does not add object ground truth to handheld inputs. Controller-training rollouts and human task demos are different data types.",
+      "sources": [
+        {
+          "title": "Official code",
+          "url": "https://github.com/real-stanford/umi-on-legs"
+        },
+        {
+          "title": "Primary paper",
+          "url": "https://arxiv.org/abs/2407.10353"
+        },
+        {
+          "title": "Task download registry",
+          "url": "https://umi-data.github.io/"
+        }
+      ],
+      "lineage": "UMI collection and robot controller rollouts have different provenance. Replaying one recording on another robot does not create an independent human demonstration.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": "real-stanford/umi-on-legs",
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "umi"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "d75c9c182d8044dadf53043612da2ffbf1936a97",
+      "dataset_revision": null,
+      "catalog_matches": [
+        "umi",
+        "hf__lerobot__umi_cup_in_the_wild",
+        "hf__IPEC-COMMUNITY__FastUMI-Data",
+        "hf__IPEC-COMMUNITY__FastUMI_100k_lerobot",
+        "fastumi"
+      ],
+      "catalog_relation": "family_or_related_entry_present",
+      "unknowns": [
+        "Successful robot deployment does not add object ground truth to handheld inputs. Controller-training rollouts and human task demos are different data types."
+      ]
+    },
+    {
+      "id": "mobile_umi",
+      "name": "Mobile UMI (2026)",
+      "resource_kind": "research method / handheld data framework",
+      "reachy_priority": "C4",
+      "embodiment": "Human chest+wrist cameras; downstream mobile manipulator",
+      "base_state": "A ChArUco anchor aligns visual-inertial frames. The method derives base SE(2) and chest-relative hand SE(3) from human motion; these are derived labels rather than measured robot-base trajectories.",
+      "hand_state": "Portable wrist manipulation interface; downstream robot action must be reconstructed.",
+      "object_state": "No released object-pose and matched-mesh corpus was verified.",
+      "scene_assets": "Real household environments; simulator assets and calibrated object dynamics were not verified.",
+      "scenario_coverage": "Four long-horizon tasks in the paper; asynchronous execution accounts for latency.",
+      "access": "The May 2026 paper is accessible. This audit did not establish an authoritative downloadable dataset or schema.",
+      "license": "Dataset license unknown; paper access does not establish data use rights.",
+      "limitations": "Do not infer a released corpus or measured robot odometry from the method description.",
+      "sources": [
+        {
+          "title": "Primary paper and submission",
+          "url": "https://arxiv.org/abs/2605.20894"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Track source release; useful frame-factorization idea for mobility retargeting.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "mobile_umi"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Do not infer a released corpus or measured robot odometry from the method description."
+      ]
+    },
+    {
+      "id": "dobbe",
+      "name": "Dobb-E / Homes of New York",
+      "resource_kind": "handheld human demonstration dataset",
+      "reachy_priority": "C1-motion",
+      "embodiment": "The Stick/iPhone human collection; downstream Stretch deployment",
+      "base_state": "Camera and handheld motion are recorded, rather than a measured mobile robot-base trajectory.",
+      "hand_state": "Human demonstration motion with RGB-D; the downstream robot actions are learned mappings.",
+      "object_state": "No measured all-object poses or matched dynamics meshes were verified.",
+      "scene_assets": "Real observations from 22 homes and 216 environments; calibrated physical scene assets are not established.",
+      "scenario_coverage": "Homes of New York contains approximately 13 hours and 1.5 million RGB-D frames of household manipulation.",
+      "access": "Official code and dataset documentation are public. This audit made no bulk transfer.",
+      "license": "Code MIT; dataset-specific terms and a complete payload byte inventory need confirmation.",
+      "limitations": "Deployment on a mobile Stretch does not establish simultaneous base-navigation labels in human training data. Reconstruction and contact labels would be derived.",
+      "sources": [
+        {
+          "title": "Official repository",
+          "url": "https://github.com/notmahi/dobb-e"
+        },
+        {
+          "title": "Official documentation",
+          "url": "https://docs.dobb-e.com/"
+        },
+        {
+          "title": "Paper",
+          "url": "https://arxiv.org/abs/2311.16098"
+        }
+      ],
+      "lineage": "Raw and processed HoNY versions, and task fine-tuning subsets, can overlap. Retain original recording identifiers.",
+      "recommended_next_step": "Inspect a bounded source episode and its schema before adding an adapter.",
+      "github_repo": "notmahi/dobb-e",
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "dobbe"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "cf06a27e180625754c3508411117c157c615a2a7",
+      "dataset_revision": null,
+      "catalog_matches": [
+        "hf__IPEC-COMMUNITY__dobbe_lerobot",
+        "oxe__dobbe"
+      ],
+      "catalog_relation": "family_or_related_entry_present",
+      "unknowns": [
+        "Deployment on a mobile Stretch does not establish simultaneous base-navigation labels in human training data. Reconstruction and contact labels would be derived."
+      ]
+    },
+    {
+      "id": "tidybot",
+      "name": "TidyBot (2023)",
+      "resource_kind": "preference benchmark + mobile manipulation system",
+      "reachy_priority": "C3-system",
+      "embodiment": "Mobile arm robot",
+      "base_state": "The system navigates, but the released preference benchmark is not a base and arm trajectory dataset.",
+      "hand_state": "Manipulation primitives and rule-based execution.",
+      "object_state": "Objects, receptacles and language preferences; a dense contact-trajectory schema was not verified.",
+      "scene_assets": "Real experimental setups; no matched, calibrated MuJoCo episode package was verified.",
+      "scenario_coverage": "Personalized put-away choices and real object cleanup.",
+      "access": "Public code includes a benchmark directory. No dense motion corpus was verified.",
+      "license": "Inspect the repository license and exact benchmark files separately before reuse.",
+      "limitations": "Preference accuracy and source-robot success do not establish Reachy contact or manipulation success.",
+      "sources": [
+        {
+          "title": "Official repository",
+          "url": "https://github.com/jimmyyhwu/tidybot"
+        },
+        {
+          "title": "Official project",
+          "url": "https://tidybot.cs.princeton.edu/"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Use the task semantics and preference evaluation; collect separate motion and object-state evidence for retargeting.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "tidybot"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [
+        "oxe__tidybot"
+      ],
+      "catalog_relation": "family_or_related_entry_present",
+      "unknowns": [
+        "Preference accuracy and source-robot success do not establish Reachy contact or manipulation success."
+      ]
+    },
+    {
+      "id": "tidybot2",
+      "name": "TidyBot++ / tidybot2",
+      "resource_kind": "mobile robot demonstrations + MuJoCo collection environment",
+      "reachy_priority": "B3",
+      "embodiment": "Holonomic mobile base, single arm and parallel gripper",
+      "base_state": "base_pose[3] is episode-relative SE(2); the recorder checks that the initial base pose is approximately zero.",
+      "hand_state": "Observations include arm_pos, arm_quat and gripper_pos. The simulator changes MuJoCo wxyz quaternions to xyzw; the dataset converter encodes action orientation as axis-angle.",
+      "object_state": "The inspected recorder and HDF5 converter retain observations and actions, but no general MuJoCo full-state or object-qpos time series.",
+      "scene_assets": "The MuJoCo model and a cube pickup environment are provided.",
+      "scenario_coverage": "Ground-level cube pickup sample demonstrations, with separate real household examples.",
+      "access": "The official README links sim-v1.tar.gz on Dropbox and converted HDF5 data. Payload size was not verified.",
+      "license": "Code MIT, verified from the repository license; the sample dataset grant was not separately established.",
+      "limitations": "The upstream example randomizes the cube at reset, so open-loop action playback is not expected to succeed every time. Its recorder keeps successful recordings; this repository must also preserve failed attempts.",
+      "sources": [
+        {
+          "title": "Official code and samplelinks",
+          "url": "https://github.com/jimmyyhwu/tidybot2"
+        },
+        {
+          "title": "Writer",
+          "url": "https://github.com/jimmyyhwu/tidybot2/blob/main/episode_storage.py"
+        },
+        {
+          "title": "Converter",
+          "url": "https://github.com/jimmyyhwu/tidybot2/blob/main/convert_to_robomimic_hdf5.py"
+        },
+        {
+          "title": "Simulation",
+          "url": "https://github.com/jimmyyhwu/tidybot2/blob/main/mujoco_env.py"
+        },
+        {
+          "title": "Inspected code license",
+          "url": "https://raw.githubusercontent.com/jimmyyhwu/tidybot2/main/LICENSE"
+        }
+      ],
+      "lineage": "The raw sim-v 1 collection and its robomimic HDF5 conversion are the same recordings.",
+      "recommended_next_step": "Use the offline MuJoCo environment as a generator and add complete initial state, object trajectories and asset provenance. Do not label missing original cube poses as measured.",
+      "github_repo": "jimmyyhwu/tidybot2",
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "tidybot2"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "c8dd23819f9cced476124a4b88538e6863ef53f7",
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "The upstream example randomizes the cube at reset, so open-loop action playback is not expected to succeed every time. Its recorder keeps successful recordings; this repository must also preserve failed attempts."
+      ]
+    },
+    {
+      "id": "ok_robot",
+      "name": "OK-Robot",
+      "resource_kind": "open-vocabulary mobile system / evaluation",
+      "reachy_priority": "C3-system",
+      "embodiment": "Stretch",
+      "base_state": "The system uses iPhone scene scans and robot localization for navigation. No dense released base-action demonstration corpus was verified.",
+      "hand_state": "Open-vocabulary grasp and drop modules.",
+      "object_state": "Scene scans, semantic memory and localization estimates; no ground-truth object-pose time series was verified.",
+      "scene_assets": "Real home scans; no calibrated per-object mass, friction and matched simulation package was verified.",
+      "scenario_coverage": "Zero-shot pick and drop in unfamiliar homes.",
+      "access": "Public modular code, paper and videos. A system release is not itself a trajectory dataset.",
+      "license": "Code MIT, verified from the repository license. Dataset and scene-scan terms require separate verification.",
+      "limitations": "AnyGrasp and projected scene estimates are derived predictions. Videos and aggregate source success are not dense object-contact ground truth.",
+      "sources": [
+        {
+          "title": "Official code",
+          "url": "https://github.com/ok-robot/ok-robot"
+        },
+        {
+          "title": "Primary paper",
+          "url": "https://ok-robot.github.io/mfiles/paper/ok_robot.pdf"
+        },
+        {
+          "title": "Inspected code license",
+          "url": "https://raw.githubusercontent.com/ok-robot/ok-robot/main/LICENSE"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Use the perception and navigation design as a reference; create separate state and contact validation data.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "ok_robot"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "AnyGrasp and projected scene estimates are derived predictions. Videos and aggregate source success are not dense object-contact ground truth."
+      ]
+    },
+    {
+      "id": "dynamem",
+      "name": "DynaMem",
+      "resource_kind": "dynamic scene-memory system / evaluation",
+      "reachy_priority": "C3-system",
+      "embodiment": "Stretch SE3",
+      "base_state": "The system maintains a 3D memory from robot observations. A released global-pose/action demonstration collection was not verified.",
+      "hand_state": "Robot search, pick and drop pipeline.",
+      "object_state": "Dynamic point-cloud memory and estimated object localization; no motion-capture-style object-pose ground truth was verified.",
+      "scene_assets": "The evaluation uses three real and nine offline scenes; scene memory is not a calibrated physical object library.",
+      "scenario_coverage": "Objects move, appear or disappear; the robot searches, navigates and manipulates under layout changes.",
+      "access": "Official project, linked code and documentation are public. No complete all-trial motion/state corpus was verified.",
+      "license": "Inspect linked code and any scene-data terms; the publication website is not a dataset grant.",
+      "limitations": "Estimated object tracks and reported source-robot pick/drop results do not establish Reachy physical success.",
+      "sources": [
+        {
+          "title": "Official project",
+          "url": "https://dynamem.github.io/"
+        },
+        {
+          "title": "Primary paper",
+          "url": "https://arxiv.org/abs/2411.04999"
+        },
+        {
+          "title": "Linked StretchAI stack",
+          "url": "https://github.com/hello-robot/stretch_ai"
+        }
+      ],
+      "lineage": "No independence claim; deduplicate by original episode identifiers.",
+      "recommended_next_step": "Use dynamic scene changes as a planning test; create explicit ground-truth free objects for contact validation.",
+      "github_repo": null,
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "dynamem"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": null,
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Estimated object tracks and reported source-robot pick/drop results do not establish Reachy physical success."
+      ]
+    },
+    {
+      "id": "stretch_sim",
+      "name": "StretchAI / official Stretch MuJoCo",
+      "resource_kind": "offline simulation/collection tools",
+      "reachy_priority": "B2-generator",
+      "embodiment": "Stretch 3/4 mobile arm platforms",
+      "base_state": "MuJoCo root and joint states are available to an offline recorder. Base controls and wheel constraints need comparison with the Reachy model.",
+      "hand_state": "Joint-position and base-velocity interfaces, with modeled grippers.",
+      "object_state": "Full MuJoCo object states can be logged for newly created episodes. No existing demonstration corpus is assumed.",
+      "scene_assets": "Official Stretch MJCF and RoboCasa kitchen integration.",
+      "scenario_coverage": "Mobile teleoperation, grasping, placement and kitchen experimentation.",
+      "access": "Public simulation repositories. Only offline simulation code is relevant; no hardware SDK or robot server was invoked.",
+      "license": "stretch_mujoco uses the Clear BSD license. Upstream MuJoCo Menagerie and RoboCasa asset notices still apply.",
+      "limitations": "Useful as an offline task generator and model-conversion reference. Real robot drivers and deployment are outside this project scope.",
+      "sources": [
+        {
+          "title": "Official MuJoCo stack",
+          "url": "https://github.com/hello-robot/stretch_mujoco"
+        },
+        {
+          "title": "Official collection/planning stack",
+          "url": "https://github.com/hello-robot/stretch_ai"
+        },
+        {
+          "title": "Current robot organization",
+          "url": "https://github.com/hello-robot"
+        },
+        {
+          "title": "Inspected code license",
+          "url": "https://raw.githubusercontent.com/hello-robot/stretch_mujoco/main/LICENSE"
+        }
+      ],
+      "lineage": "Reusing a RoboCasa kitchen does not establish new asset or demonstration provenance.",
+      "recommended_next_step": "Compare mobile model construction and generate new state/contact logs under the Reachy model.",
+      "github_repo": "hello-robot/stretch_mujoco",
+      "hf_repo": null,
+      "catalog_match_tokens": [
+        "stretch_sim"
+      ],
+      "accessed_on": "2026-10-06",
+      "local_validation_status": "research_only_not_downloaded_retargeted_or_physics_validated_by_this_survey",
+      "object_pose_is_measured_or_simulated_ground_truth": "not_verified_in_released_payload",
+      "source_revision": "d107e094cc295d92f7461bd233daef96e9e22fab",
+      "dataset_revision": null,
+      "catalog_matches": [],
+      "catalog_relation": "no_matching_non_exclusion_entry_in_catalog_snapshot",
+      "unknowns": [
+        "Useful as an offline task generator and model-conversion reference. Real robot drivers and deployment are outside this project scope."
+      ]
+    }
+  ],
+  "github_head_checks": {
+    "StanfordVL/BEHAVIOR-1K": {
+      "url": "https://github.com/StanfordVL/BEHAVIOR-1K",
+      "revision": "a8247a8cc1633fe1ca0cc66aa07243d46c64f155",
+      "error": null
+    },
+    "robocasa/robocasa": {
+      "url": "https://github.com/robocasa/robocasa",
+      "revision": "456174f62b89b8fca99eaaf33949c29fec9cfc2a",
+      "error": null
+    },
+    "NeuracoreAI/bigym": {
+      "url": "https://github.com/NeuracoreAI/bigym",
+      "revision": "14beb30318ad14c5d6723175c2ee2281129792af",
+      "error": null
+    },
+    "NeuracoreAI/bigym_data": {
+      "url": "https://github.com/NeuracoreAI/bigym_data",
+      "revision": "9c226ea7946a82ee3e475c6c569b4420fda32622",
+      "error": null
+    },
+    "TooSchoolForCool/M3Bench": {
+      "url": "https://github.com/TooSchoolForCool/M3Bench",
+      "revision": "97cec07e7c37cc36aec35ff79ee5d6b5db123a45",
+      "error": null
+    },
+    "ARISE-Initiative/robomimic": {
+      "url": "https://github.com/ARISE-Initiative/robomimic",
+      "revision": "d309eaecc18acf4152a830a895a6984b8ac71b05",
+      "error": null
+    },
+    "MarkFzp/mobile-aloha": {
+      "url": "https://github.com/MarkFzp/mobile-aloha",
+      "revision": "0e403249c76054a68e757e590d4da4dba401c9e3",
+      "error": null
+    },
+    "jimmyyhwu/tidybot2": {
+      "url": "https://github.com/jimmyyhwu/tidybot2",
+      "revision": "c8dd23819f9cced476124a4b88538e6863ef53f7",
+      "error": null
+    },
+    "facebookresearch/partnr-planner": {
+      "url": "https://github.com/facebookresearch/partnr-planner",
+      "revision": "ddfff19f4b6c098a31edea4d19e7b75db72433c2",
+      "error": null
+    },
+    "facebookresearch/home-robot": {
+      "url": "https://github.com/facebookresearch/home-robot",
+      "revision": "ede6a67a2d0c0c8e12ad3b9726f330cea6cf90f5",
+      "error": null
+    },
+    "notmahi/dobb-e": {
+      "url": "https://github.com/notmahi/dobb-e",
+      "revision": "cf06a27e180625754c3508411117c157c615a2a7",
+      "error": null
+    },
+    "real-stanford/umi-on-legs": {
+      "url": "https://github.com/real-stanford/umi-on-legs",
+      "revision": "d75c9c182d8044dadf53043612da2ffbf1936a97",
+      "error": null
+    },
+    "hello-robot/stretch_ai": {
+      "url": "https://github.com/hello-robot/stretch_ai",
+      "revision": "6272b28e3ff7be482af3b427a4551d1772ebf7d7",
+      "error": null
+    },
+    "hello-robot/stretch_mujoco": {
+      "url": "https://github.com/hello-robot/stretch_mujoco",
+      "revision": "d107e094cc295d92f7461bd233daef96e9e22fab",
+      "error": null
+    },
+    "ChengshuLi/MoMaGen": {
+      "url": "https://github.com/ChengshuLi/MoMaGen",
+      "revision": "5da621667669b15b97d7a220d086283b3c8ad0e5",
+      "error": null,
+      "checked_on": "2026-10-06"
+    }
+  },
+  "huggingface_listing_checks": {
+    "behavior-1k/2026-challenge-rawdata": {
+      "url": "https://huggingface.co/api/datasets/behavior-1k/2026-challenge-rawdata?blobs=true",
+      "revision": "f9d2901112993d75684223820eec70722806c2c4",
+      "gated": false,
+      "license": null,
+      "last_modified": "2026-06-22T06:05:43.000Z",
+      "files": 20001,
+      "total_reported_file_bytes": 1440087423774,
+      "largest_files": [
+        {
+          "rfilename": "task-0039/episode_00390680.hdf5",
+          "blobId": "2907c22ff387dd0fa66df536d154748d86bba61a",
+          "size": 1304633841,
+          "lfs": {
+            "sha256": "51b2516bbe975503cb4f92db894cbc8b36e036bf78d3c891d361b1311709c333",
+            "size": 1304633841,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "task-0039/episode_00390410.hdf5",
+          "blobId": "69807c1aec98343de187f39bbeffeab23eff0bdb",
+          "size": 1820757403,
+          "lfs": {
+            "sha256": "babe988ea64990bd24e1afab9b8f0682d9b1a45fd37ba5a728d5c58969575ff5",
+            "size": 1820757403,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "metadata_files": [],
+      "smallest_listing_entries": [
+        {
+          "rfilename": "task-0002/episode_00021890.hdf5",
+          "blobId": "a7395a7fbd2640afde94de2f401019efab8932c6",
+          "size": 667124,
+          "lfs": {
+            "sha256": "b01e7b8183e2c738edf1f5e65bba53163fee30713970845631401e20e6cd1a75",
+            "size": 667124,
+            "pointerSize": 131
+          }
+        },
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "d6a8d7de6b5fa1c2b4067e16c36ad7b15adfe92d",
+          "size": 1362504
+        },
+        {
+          "rfilename": "task-0000/episode_00001550.hdf5",
+          "blobId": "adca592d23152d60c1ea2f766738e63e9ab57590",
+          "size": 2747080,
+          "lfs": {
+            "sha256": "af8c60c2eedf64ccf58015ea7b7271422b7f61d1b50c26196f83f210b0f4529b",
+            "size": 2747080,
+            "pointerSize": 132
+          }
+        },
+        {
+          "rfilename": "task-0000/episode_00001900.hdf5",
+          "blobId": "d615a46362e9569aad3878db6015dc8a7f2cf528",
+          "size": 2884774,
+          "lfs": {
+            "sha256": "4ca4342b8de63ee45f15531d2cb83fd198d28f40865307541c99fd47a1a7a4ed",
+            "size": 2884774,
+            "pointerSize": 132
+          }
+        },
+        {
+          "rfilename": "task-0000/episode_00002670.hdf5",
+          "blobId": "7578f9a508e6d3d57d1115f57bdc96426923aa1d",
+          "size": 3017272,
+          "lfs": {
+            "sha256": "d871f2ca573a4e6354724dd44f8314ba88a731321504fab8658aec1e126f36dd",
+            "size": 3017272,
+            "pointerSize": 132
+          }
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "behavior-1k/2026-challenge-demos": {
+      "revision": "4f50b44796641a4d526a19d9aeadc8aa51e2f2c2",
+      "gated": false,
+      "license": "mit",
+      "metadata_summary_verified": true,
+      "listing_limit": "Full blob listing exceeded the 6 MB research cap; minimal API metadata used."
+    },
+    "behavior-1k/2025-challenge-rawdata": {
+      "url": "https://huggingface.co/api/datasets/behavior-1k/2025-challenge-rawdata?blobs=true",
+      "revision": "b3c9a714b8730701c480e77173d8aa4a8f19e1c0",
+      "gated": false,
+      "license": "mit",
+      "last_modified": "2025-09-03T21:09:22.000Z",
+      "files": 10002,
+      "total_reported_file_bytes": 792618234069,
+      "largest_files": [
+        {
+          "rfilename": "task-0039/episode_00390680.hdf5",
+          "blobId": "2907c22ff387dd0fa66df536d154748d86bba61a",
+          "size": 1304633841,
+          "lfs": {
+            "sha256": "51b2516bbe975503cb4f92db894cbc8b36e036bf78d3c891d361b1311709c333",
+            "size": 1304633841,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "task-0039/episode_00390410.hdf5",
+          "blobId": "69807c1aec98343de187f39bbeffeab23eff0bdb",
+          "size": 1820757403,
+          "lfs": {
+            "sha256": "babe988ea64990bd24e1afab9b8f0682d9b1a45fd37ba5a728d5c58969575ff5",
+            "size": 1820757403,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "metadata_files": [
+        {
+          "rfilename": "README.md",
+          "blobId": "acb132c8f50ba394d4f63c298904c290319877a2",
+          "size": 20
+        }
+      ],
+      "smallest_listing_entries": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "4b5a5693e3fbc287b97e7b2d2c736ea675ce5cc9",
+          "size": 682461
+        },
+        {
+          "rfilename": "task-0000/episode_00001550.hdf5",
+          "blobId": "adca592d23152d60c1ea2f766738e63e9ab57590",
+          "size": 2747080,
+          "lfs": {
+            "sha256": "af8c60c2eedf64ccf58015ea7b7271422b7f61d1b50c26196f83f210b0f4529b",
+            "size": 2747080,
+            "pointerSize": 132
+          }
+        },
+        {
+          "rfilename": "task-0000/episode_00001900.hdf5",
+          "blobId": "d615a46362e9569aad3878db6015dc8a7f2cf528",
+          "size": 2884774,
+          "lfs": {
+            "sha256": "4ca4342b8de63ee45f15531d2cb83fd198d28f40865307541c99fd47a1a7a4ed",
+            "size": 2884774,
+            "pointerSize": 132
+          }
+        },
+        {
+          "rfilename": "task-0000/episode_00002670.hdf5",
+          "blobId": "7578f9a508e6d3d57d1115f57bdc96426923aa1d",
+          "size": 3017272,
+          "lfs": {
+            "sha256": "d871f2ca573a4e6354724dd44f8314ba88a731321504fab8658aec1e126f36dd",
+            "size": 3017272,
+            "pointerSize": 132
+          }
+        },
+        {
+          "rfilename": "task-0000/episode_00001470.hdf5",
+          "blobId": "929a490158d8f02287c61a77551d06de763e8076",
+          "size": 3144574,
+          "lfs": {
+            "sha256": "94032e6f7526a7c8728266a39e8f07f50ba93883fe9f83d936a5c56882d6f428",
+            "size": 3144574,
+            "pointerSize": 132
+          }
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "M3Bench/M3Bench": {
+      "url": "https://huggingface.co/api/datasets/M3Bench/M3Bench?blobs=true",
+      "revision": "5b543a8c93c82b16442b2c1c4a139b96bb313b59",
+      "gated": false,
+      "license": "apache-2.0",
+      "last_modified": "2025-07-17T10:05:31.000Z",
+      "files": 7,
+      "total_reported_file_bytes": 20115025023,
+      "largest_files": [
+        {
+          "rfilename": "pick_traj.zip",
+          "blobId": "cd2ec062097106790b4bd24aaa76701bbf77cfad",
+          "size": 2811609913,
+          "lfs": {
+            "sha256": "d3b8f2f40f27ee622057cc762d376bc9643680ca63c2c1aee7134d9ac24874d2",
+            "size": 2811609913,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "scene_urdf.zip",
+          "blobId": "9ed9c9b21d8c7e7e7200f3b51e5736cd0035fb63",
+          "size": 15239447414,
+          "lfs": {
+            "sha256": "d06e4b6cbee40a37f48ca2ea6d84954de6829e7ca99c7a9ed7ccabb5e00e43df",
+            "size": 15239447414,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "metadata_files": [
+        {
+          "rfilename": "README.md",
+          "blobId": "96536261dedb479d1d368a1d8ab9b4c3af90e8f5",
+          "size": 1641
+        }
+      ],
+      "smallest_listing_entries": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "1ef325f1b111266a6b26e0196871bd78baa8c2f3",
+          "size": 2461
+        },
+        {
+          "rfilename": "robot_usd.zip",
+          "blobId": "a78cf4e83e064d1523fcc57f924386efd7ae0c9b",
+          "size": 23926404,
+          "lfs": {
+            "sha256": "de17be11b0f6ca6afc67d9ec1954a59c2580a3e6cb52cd6f3c2b20baa786c237",
+            "size": 23926404,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "robot_urdf.zip",
+          "blobId": "2fd5c69284090db9c1fe7bcd659e73c650cdf45e",
+          "size": 56672394,
+          "lfs": {
+            "sha256": "46103e1a3f84b0f9fdd8f1c72c9c34dfaedff8f6bd5031a5b1770f47e4196220",
+            "size": 56672394,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "place_traj.zip",
+          "blobId": "0fcac986f68315b7a2330fb2ee6ae86253d6fe23",
+          "size": 1983364796,
+          "lfs": {
+            "sha256": "dbc0ca4d348f0839e77215ce54b66d4c96834a42a188af051ec5d373b0ec4eb0",
+            "size": 1983364796,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "pick_traj.zip",
+          "blobId": "cd2ec062097106790b4bd24aaa76701bbf77cfad",
+          "size": 2811609913,
+          "lfs": {
+            "sha256": "d3b8f2f40f27ee622057cc762d376bc9643680ca63c2c1aee7134d9ac24874d2",
+            "size": 2811609913,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "ai-habitat/partnr_episodes": {
+      "url": "https://huggingface.co/api/datasets/ai-habitat/partnr_episodes?blobs=true",
+      "revision": "c6cffbdd82691c2f4240b75aa5289cd9efd0a32b",
+      "gated": false,
+      "license": "cc-by-nc-4.0",
+      "last_modified": "2025-07-16T17:17:44.000Z",
+      "files": 718,
+      "total_reported_file_bytes": 1045010217,
+      "largest_files": [
+        {
+          "rfilename": "hitl_data/p5_learn_val_finetune.tar.gz",
+          "blobId": "e2a3c2aac6ed9f4d5ef56ddc599600a8027b2908",
+          "size": 266446639,
+          "lfs": {
+            "sha256": "a576bdd0a45d5bd60800d990ad7f77c50e4ad00005df979f989bf0e10cc087b5",
+            "size": 266446639,
+            "pointerSize": 134
+          }
+        },
+        {
+          "rfilename": "hitl_data/p5_learn_val_v2.tar.gz",
+          "blobId": "615852c78d4d439265ff908cc67b161f04d7885f",
+          "size": 284149510,
+          "lfs": {
+            "sha256": "10e7ba5b1e684c4c5a59da8b9a47878a60868886ba19795f79365f3e402210d6",
+            "size": 284149510,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "metadata_files": [
+        {
+          "rfilename": "README.md",
+          "blobId": "c41a1716f096543edb8cd5f1d2907beaaaa07200",
+          "size": 2154
+        }
+      ],
+      "smallest_listing_entries": [
+        {
+          "rfilename": "test_rag/react_based_rag_dataset/2024_08_01_train_mini.json.gz/traces/0/trace-episode_245_0-0.txt",
+          "blobId": "3d520191e0e9aa5c284798ac9a54dda54367c5d2",
+          "size": 2058
+        },
+        {
+          "rfilename": "README.md",
+          "blobId": "c41a1716f096543edb8cd5f1d2907beaaaa07200",
+          "size": 2154
+        },
+        {
+          "rfilename": "v0_0/ci.json.gz",
+          "blobId": "5f9e362b8255b3dab2f73c341bdd6e6cf6901dd3",
+          "size": 2185,
+          "lfs": {
+            "sha256": "0d48baf278fd5bd5f8b0466e2ea6c77dec8d1ac023350671de3a258d35f328e1",
+            "size": 2185,
+            "pointerSize": 129
+          }
+        },
+        {
+          "rfilename": "test_rag/react_based_rag_dataset/2024_08_01_train_mini.json.gz/traces/0/trace-episode_147_0-0.txt",
+          "blobId": "ee43a241654426f6ee8153a358e04945bd3266ce",
+          "size": 2254
+        },
+        {
+          "rfilename": "test_rag/state_based_rag_dataset/2024_08_01_train_mini.json.gz/traces/0/trace-episode_7_0-0.txt",
+          "blobId": "1e4357f628be450d84f81aaa5056eacc57611f91",
+          "size": 2338
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "ai-habitat/HSSD": {
+      "url": "https://huggingface.co/api/datasets/ai-habitat/HSSD?blobs=true",
+      "error": "HTTP Error 401: Unauthorized"
+    },
+    "ai-habitat/OVMM_objects": {
+      "url": "https://huggingface.co/api/datasets/ai-habitat/OVMM_objects?blobs=true",
+      "revision": "e69d754e7256f6f906a5d553f79ad38edc37e462",
+      "gated": false,
+      "license": null,
+      "last_modified": "2024-07-16T18:11:34.000Z",
+      "files": 11049,
+      "total_reported_file_bytes": 1338665479,
+      "largest_files": [
+        {
+          "rfilename": "train_val/google_scanned/assets/objects/Ortho_Forward_Facing_QCaor9ImJ2G/meshes/model.obj",
+          "blobId": "67f03da366773916898da2c2bf4304e74429ac9b",
+          "size": 9940191
+        },
+        {
+          "rfilename": "train_val/google_scanned/assets/objects/Ortho_Forward_Facing_QCaor9ImJ2G/model.obj",
+          "blobId": "67f03da366773916898da2c2bf4304e74429ac9b",
+          "size": 9940191
+        }
+      ],
+      "metadata_files": [],
+      "smallest_listing_entries": [
+        {
+          "rfilename": "train_val/google_scanned/assets/objects/Cascadia_8_Color_AquariusHibscsBearingSeaBlk_Size_50/model.config",
+          "blobId": "fb080c5ccb9a11869505ce1e3f070e08b2356388",
+          "size": 2053
+        },
+        {
+          "rfilename": "train_val/google_scanned/assets/objects/Nestle_Nesquik_Chocolate_Powder_Flavored_Milk_Additive_109_Oz_Canister/model.config",
+          "blobId": "e45dfae745a5608ceb14b4888471e3151c919618",
+          "size": 2109
+        },
+        {
+          "rfilename": "train_val/google_scanned/assets/objects/Cascadia_8_Color_AquariusHibscsBearingSeaBlk_Size_50/metadata.pbtxt",
+          "blobId": "b952eb65f7015e8fcf8da67fc5409ea0b0182ef6",
+          "size": 2125
+        },
+        {
+          "rfilename": "train_val/google_scanned/assets/objects/Nestle_Nesquik_Chocolate_Powder_Flavored_Milk_Additive_109_Oz_Canister/metadata.pbtxt",
+          "blobId": "135484031b390077896b1e339935003b52b01b00",
+          "size": 2173
+        },
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "ac1f4217507fec04c14561aac2a4e88aa2a18f7b",
+          "size": 2404
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "airoa-org/airoa-moma": {
+      "url": "https://huggingface.co/api/datasets/airoa-org/airoa-moma?blobs=true",
+      "revision": "586f25e39d7b8d4d13b2b94dd7703a47a02cdd0b",
+      "gated": "auto",
+      "license": "cc-by-nc-sa-4.0",
+      "last_modified": "2025-12-22T21:11:56.000Z",
+      "files": 196,
+      "total_reported_file_bytes": 89898503338,
+      "largest_files": [
+        {
+          "rfilename": "videos/observation.image.hand/chunk-000/file-009.mp4",
+          "blobId": "a953cddbd85de47cf708dac675b027760803eb8d",
+          "size": 523985998,
+          "lfs": {
+            "sha256": "2536c99921c41e1509d3b9d4fbbb3e352dfb2e9774862da0710fa6d46fc14d65",
+            "size": 523985998,
+            "pointerSize": 134
+          }
+        },
+        {
+          "rfilename": "videos/observation.image.head/chunk-000/file-012.mp4",
+          "blobId": "b37569381d50282809dc14c881b9bce7365c2d08",
+          "size": 523988826,
+          "lfs": {
+            "sha256": "22c4d7423026b3f55bd246544212edcb4e703b02327f2ec54b888112421cd7df",
+            "size": 523988826,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "metadata_files": [
+        {
+          "rfilename": "README.md",
+          "blobId": "6b2babef67fcc9568a5ed6dcb327a7cd8207d1d8",
+          "size": 11890
+        },
+        {
+          "rfilename": "meta/info.json",
+          "blobId": "1de7b2542e0b783e8af0235307479bfb0f8d853a",
+          "size": 9290
+        }
+      ],
+      "smallest_listing_entries": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "90968e5bcafa7b89c89d2ea71607410633c3f082",
+          "size": 2579
+        },
+        {
+          "rfilename": "meta/tasks.parquet",
+          "blobId": "7a48b29405b9b9dd6d0d88befab00da5d30a418a",
+          "size": 3334,
+          "lfs": {
+            "sha256": "d311479c90eca3475dd6a61c3e62a7128464719394542702cd5a77cd5c069083",
+            "size": 3334,
+            "pointerSize": 129
+          }
+        },
+        {
+          "rfilename": "meta/info.json",
+          "blobId": "1de7b2542e0b783e8af0235307479bfb0f8d853a",
+          "size": 9290
+        },
+        {
+          "rfilename": "README.md",
+          "blobId": "6b2babef67fcc9568a5ed6dcb327a7cd8207d1d8",
+          "size": 11890
+        },
+        {
+          "rfilename": "meta/stats.json",
+          "blobId": "e2cc2b020a8e273221d6926132e4ddc5599237f4",
+          "size": 45673
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "OpenGalaxea/Galaxea-Open-World-Dataset": {
+      "url": "https://huggingface.co/api/datasets/OpenGalaxea/Galaxea-Open-World-Dataset?blobs=true",
+      "revision": "df670d8dc3f2b369f55d28a3428b8639f0dab37d",
+      "gated": "auto",
+      "license": "cc-by-nc-sa-4.0",
+      "last_modified": "2026-04-17T06:26:22.000Z",
+      "files": 231,
+      "total_reported_file_bytes": 2867672629620,
+      "largest_files": [
+        {
+          "rfilename": "lerobot/Pick_And_Place_Items_On_The_Bread_Shelf_20250701_003.tar.gz",
+          "blobId": "e7851d02c9b14c5e42341dd845da4e8e126f281a",
+          "size": 77087855510,
+          "lfs": {
+            "sha256": "b8d9a49181d6058d227f5911c84de8bad94b7416ebdaddb13525f21d2b4dfd9c",
+            "size": 77087855510,
+            "pointerSize": 136
+          }
+        },
+        {
+          "rfilename": "lerobot/Fold_Clothes_20250807_011.tar.gz",
+          "blobId": "8f06285ffb2a20c17e481df37ae7df5c68b8992c",
+          "size": 77593548985,
+          "lfs": {
+            "sha256": "395eeb2213f2d4ea604f6cc5845691138db49d13ebe916917146fd1baab4386d",
+            "size": 77593548985,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "metadata_files": [
+        {
+          "rfilename": "README.md",
+          "blobId": "d6031cbcf3fadf5c36d17cce241e550f83143091",
+          "size": 8589
+        },
+        {
+          "rfilename": "lerobot_info.json",
+          "blobId": "78fa25368fce3dcb1b58ee31c7df7bf67669ad4e",
+          "size": 11945
+        }
+      ],
+      "smallest_listing_entries": [
+        {
+          "rfilename": "README.md",
+          "blobId": "d6031cbcf3fadf5c36d17cce241e550f83143091",
+          "size": 8589
+        },
+        {
+          "rfilename": "lerobot_info.json",
+          "blobId": "78fa25368fce3dcb1b58ee31c7df7bf67669ad4e",
+          "size": 11945
+        },
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "c06fae5732e80953c23bfeb018503f5c81c01f6c",
+          "size": 1355165
+        },
+        {
+          "rfilename": "demo.mp4",
+          "blobId": "c0624264ae62b4cd73552ab0484a811420a931bd",
+          "size": 85098224,
+          "lfs": {
+            "sha256": "d31363c3866227c54378e2a45bf705404b3e409df74c0a701804d312bc6a6f0b",
+            "size": 85098224,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "lerobot/Put_The_Items_Into_The_Storage_Box_20250929_002_007.tar.gz",
+          "blobId": "41524e998476203b815421bc5685f93bc47bfc26",
+          "size": 501166913,
+          "lfs": {
+            "sha256": "85a1b600c2912338091c0245672cd948d847dfb6971bbe0cb709c3c50a463c75",
+            "size": 501166913,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "agibot-world/AgiBotWorld2026": {
+      "url": "https://huggingface.co/api/datasets/agibot-world/AgiBotWorld2026?blobs=true",
+      "revision": "cf9841dffaa4bb6a7b226a30b145e4fa5127a064",
+      "gated": false,
+      "license": "cc-by-nc-sa-4.0",
+      "last_modified": "2026-09-01T05:54:04.000Z",
+      "files": 420,
+      "total_reported_file_bytes": 13564582299458,
+      "largest_files": [
+        {
+          "rfilename": "ReinforcementLearning/Industry/task_6687/1497403_1566656.tar.gz",
+          "blobId": "ef6c34ec4b9a53c68674bd80c11a19464af58a50",
+          "size": 61775459108,
+          "lfs": {
+            "sha256": "67c9f03d6a4cb46f90db3dafceff68b447d38f3673eedbcc36f772f7d08a6965",
+            "size": 61775459108,
+            "pointerSize": 136
+          }
+        },
+        {
+          "rfilename": "ReinforcementLearning/Industry/task_6687/PolicyRollout/20709332_20845245.tar.gz",
+          "blobId": "d82532e5a827520d3989641d1940154be7b32a56",
+          "size": 64091782970,
+          "lfs": {
+            "sha256": "54bbbc3b7194630383bd8de53bed4d671c95382a113946e5dd82b7a47bf09f87",
+            "size": 64091782970,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "metadata_files": [
+        {
+          "rfilename": "README.md",
+          "blobId": "b51dc5ad99c0932255b41cf940e0f2b6d173823b",
+          "size": 16711
+        }
+      ],
+      "smallest_listing_entries": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "bed0738c7eeb449bca98b5d2f33c89a1ee56349a",
+          "size": 2504
+        },
+        {
+          "rfilename": "ReinforcementLearning/README_THEME_3.md",
+          "blobId": "e7c009d58583bcd2f3a47a75e8be0b69acf48a09",
+          "size": 5093
+        },
+        {
+          "rfilename": "split_episodes_tool.zip",
+          "blobId": "3135ed0c3133b14664872d6a125157677c4ee0bb",
+          "size": 7181,
+          "lfs": {
+            "sha256": "97b907efb9a90e59fbbafbfca016efe3cb6466aa2ef045ad7a1584c6cc801c4a",
+            "size": 7181,
+            "pointerSize": 129
+          }
+        },
+        {
+          "rfilename": "README.md",
+          "blobId": "b51dc5ad99c0932255b41cf940e0f2b6d173823b",
+          "size": 16711
+        },
+        {
+          "rfilename": "simulation/tidy_up_food_in_freezer/g2_swift_picker/lite/meta.tar.gz.000",
+          "blobId": "cc74dcaa0f275c0ff317814983147f9cd7d99656",
+          "size": 1180944,
+          "lfs": {
+            "sha256": "c35019b5f9f7db1cf34eef82a7f81b51b011c742ffae9c715ccc5f7641493c9b",
+            "size": 1180944,
+            "pointerSize": 132
+          }
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "agibot-world/AgiBotWorld-Beta": {
+      "url": "https://huggingface.co/api/datasets/agibot-world/AgiBotWorld-Beta?blobs=true",
+      "revision": "2252b3fdc88dc67fa5d5e4b771e1b86f5e71c278",
+      "gated": "auto",
+      "license": null,
+      "last_modified": "2025-10-13T10:01:35.000Z",
+      "files": 1400,
+      "total_reported_file_bytes": 48050136152505,
+      "largest_files": [
+        {
+          "rfilename": "observations/498/793225-861344.tar",
+          "blobId": "42de0b4f62983149d0ac1630289342a1a2cdf29d",
+          "size": 49280020480,
+          "lfs": {
+            "sha256": "eaa777a888778d74ff8de633093134f55b3072fcdd3857551d7fdecef65f1434",
+            "size": 49280020480,
+            "pointerSize": 136
+          }
+        },
+        {
+          "rfilename": "observations/444/713949-716079.tar",
+          "blobId": "8b010ec1881905b6ea338607911887195ab0f595",
+          "size": 49286789120,
+          "lfs": {
+            "sha256": "ac4b30708cd6ef84995f3084b400cc4b75bd41002a1df39f4f325ef31326e047",
+            "size": 49286789120,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "metadata_files": [
+        {
+          "rfilename": "README.md",
+          "blobId": "584243b733efa878ecb9ed14ec0858775d67cbb7",
+          "size": 14952
+        }
+      ],
+      "smallest_listing_entries": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "1ef325f1b111266a6b26e0196871bd78baa8c2f3",
+          "size": 2461
+        },
+        {
+          "rfilename": "README.md",
+          "blobId": "584243b733efa878ecb9ed14ec0858775d67cbb7",
+          "size": 14952
+        },
+        {
+          "rfilename": "task_info/task_604.json",
+          "blobId": "7d59c2be674bae157236e2f416d80d4abbcd1077",
+          "size": 15593
+        },
+        {
+          "rfilename": "task_info/task_719.json",
+          "blobId": "559bbd32240b75bbb92e7e36132e6a37f0352679",
+          "size": 35278
+        },
+        {
+          "rfilename": "task_info/task_727.json",
+          "blobId": "d42e434dfc24b9f2d8a3ea3741ce73d0915015e9",
+          "size": 35441
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "x-humanoid-robomind/RoboMIND": {
+      "url": "https://huggingface.co/api/datasets/x-humanoid-robomind/RoboMIND?blobs=true",
+      "revision": "e7ffe31d1fe983a42c3d7b79d192f554fc05b86e",
+      "gated": "auto",
+      "license": "apache-2.0",
+      "last_modified": "2026-04-14T08:07:26.000Z",
+      "files": 3081,
+      "total_reported_file_bytes": 12278969661415,
+      "largest_files": [
+        {
+          "rfilename": "example_data/h5_ur_1rgb/close_top_white_drawer.tar.gz.part-aa",
+          "blobId": "8858b8b7718dae9b033a74a3c544f25688a0d26b",
+          "size": 10737418240,
+          "lfs": {
+            "sha256": "817ddfd4174de052eabbf7905bc7e45be1b0b6c852c4846f76cc77ca964f6da0",
+            "size": 10737418240,
+            "pointerSize": 136
+          }
+        },
+        {
+          "rfilename": "example_data/h5_ur_1rgb/close_top_white_drawer.tar.gz.part-ab",
+          "blobId": "3f49a47220f2c1de817352a56e0e007a2b5b7a85",
+          "size": 10737418240,
+          "lfs": {
+            "sha256": "f0461036fcd496a1cc21f460ac82556333bac339f289a0a594d0ec0c4bc57f48",
+            "size": 10737418240,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "metadata_files": [
+        {
+          "rfilename": "README.md",
+          "blobId": "5373544bade7f0d579bfe80603bae1eb34ac04d9",
+          "size": 9799
+        }
+      ],
+      "smallest_listing_entries": [
+        {
+          "rfilename": "static/images/.DS_Store",
+          "blobId": "5008ddfcf53c02e82d7eee2e57c38e5672ef89f6",
+          "size": 6148
+        },
+        {
+          "rfilename": "README.md",
+          "blobId": "5373544bade7f0d579bfe80603bae1eb34ac04d9",
+          "size": 9799
+        },
+        {
+          "rfilename": "static/all_robot_h5_info.md",
+          "blobId": "bb0b74b9ac5e9ffa4fe2d9573938d35e679abe21",
+          "size": 9914
+        },
+        {
+          "rfilename": "static/all_robot_h5_info_v1.2.md",
+          "blobId": "d04cab89f1f673054d84bba84af2b406eae15414",
+          "size": 13694
+        },
+        {
+          "rfilename": "quick_start.ipynb",
+          "blobId": "ff5f45b78b3db706f308ccda702c907d79f037ae",
+          "size": 22300
+        }
+      ],
+      "listing_note": "Returned smallest listing entries may include metadata. Selected actual payloads are listed separately; metadata access is not payload access."
+    },
+    "airoa-org/airoa-moma-5k": {
+      "revision": "2681f223af815be0465189103f198ae97cd694c3",
+      "gated": "auto",
+      "license": "other",
+      "metadata_summary_verified": true
+    },
+    "ai-habitat/ReplicaCAD_dataset": {
+      "url": "https://huggingface.co/api/datasets/ai-habitat/ReplicaCAD_dataset?blobs=true",
+      "revision": "3e8c7fe5759f64bfcbc3882f9cdf6de97f82a06d",
+      "gated": false,
+      "license": "cc-by-4.0",
+      "files": 602,
+      "total_reported_file_bytes": 157450746,
+      "last_modified": "2023-07-12T01:04:41.000Z"
+    }
+  },
+  "github_release_checks": {
+    "bigym_v0.9.0": {
+      "tag": "v0.9.0",
+      "url": "https://github.com/NeuracoreAI/bigym_data/releases/tag/v0.9.0",
+      "assets": [
+        {
+          "name": "demonstrations.zip",
+          "size": 123362114,
+          "digest": null,
+          "browser_download_url": "https://github.com/NeuracoreAI/bigym_data/releases/download/v0.9.0/demonstrations.zip"
+        }
+      ]
+    }
+  },
+  "metadata_source_checks": [
+    {
+      "url": "https://raw.githubusercontent.com/StanfordVL/BEHAVIOR-1K/main/docs/challenge/dataset.md",
+      "bytes": 4465,
+      "sha256": "f09734ede33f7578abb8e17c0fad60e168176215df14a34fe155119183b7b0af",
+      "label": "behavior_dataset",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "f09734ede33f7578abb8e17c0fad60e168176215df14a34fe155119183b7b0af"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/StanfordVL/BEHAVIOR-1K/main/OmniGibson/omnigibson/utils/data_utils.py",
+      "bytes": 8735,
+      "sha256": "6f443ad6569c1881d7cc4c63717ca2238f0a8e062b4f506d49354d1d31ae541c",
+      "label": "behavior_replay",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "6f443ad6569c1881d7cc4c63717ca2238f0a8e062b4f506d49354d1d31ae541c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ARISE-Initiative/robomimic/master/robomimic/__init__.py",
+      "bytes": 6611,
+      "sha256": "2e9b3b5a4a289f04ff0cfc7ccb31905a0b52493e5f7b207470892dfa4ba767b0",
+      "label": "momart_registry",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "2e9b3b5a4a289f04ff0cfc7ccb31905a0b52493e5f7b207470892dfa4ba767b0"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ARISE-Initiative/robomimic/master/robomimic/envs/env_ig_momart.py",
+      "bytes": 15320,
+      "sha256": "c3998af94f74f9d9f21fe37eace4c33dc250a8c551ec65ccfb15b8dc8d0462d6",
+      "label": "momart_env",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "c3998af94f74f9d9f21fe37eace4c33dc250a8c551ec65ccfb15b8dc8d0462d6"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MarkFzp/mobile-aloha/main/aloha_scripts/record_episodes.py",
+      "bytes": 12804,
+      "sha256": "ec99c01d02390147623711b29e586e869562e4badae87e997f2d2e35b25ef6b5",
+      "label": "mobile_aloha_record",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "ec99c01d02390147623711b29e586e869562e4badae87e997f2d2e35b25ef6b5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TooSchoolForCool/M3Bench/main/README.md",
+      "error": "HTTP Error 404: Not Found",
+      "label": "m3_readme",
+      "checked_on": "2026-10-06"
+    },
+    {
+      "url": "https://huggingface.co/datasets/OpenGalaxea/Galaxea-Open-World-Dataset/raw/main/README.md",
+      "error": "HTTP Error 401: Unauthorized",
+      "label": "galaxea_card",
+      "checked_on": "2026-10-06"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/x-humanoid-robomind/x-humanoid-robomind/main/README.md",
+      "error": "HTTP Error 404: Not Found",
+      "label": "robomind_readme",
+      "checked_on": "2026-10-06"
+    },
+    {
+      "url": "https://huggingface.co/datasets/ai-habitat/partnr_episodes/raw/main/README.md",
+      "bytes": 2154,
+      "sha256": "e616cbcfb615f62c01ff3ca984e1f94890223c2f4dc226a1d7fad9f5df917584",
+      "label": "partnr_card",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "e616cbcfb615f62c01ff3ca984e1f94890223c2f4dc226a1d7fad9f5df917584"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/facebookresearch/home-robot/main/download_data.sh",
+      "bytes": 1831,
+      "sha256": "2eccaca36d84d77bcc6fc5bcd079c67df42d4fe522db0040d4f1876c15111ae7",
+      "label": "home_robot_download",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "2eccaca36d84d77bcc6fc5bcd079c67df42d4fe522db0040d4f1876c15111ae7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/facebookresearch/home-robot/main/README.md",
+      "bytes": 11400,
+      "sha256": "45dd1f535ffbe1b825999deb73c10dc66d28dcc26feb5e78b7cb8afe7442cb11",
+      "label": "home_robot_readme",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "45dd1f535ffbe1b825999deb73c10dc66d28dcc26feb5e78b7cb8afe7442cb11"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/jimmyyhwu/tidybot2/main/README.md",
+      "bytes": 32761,
+      "sha256": "976249a605477a782187028827a454007219a33a92219c919492702cde3c8c5a",
+      "label": "tidybot_readme",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "976249a605477a782187028827a454007219a33a92219c919492702cde3c8c5a"
+    },
+    {
+      "url": "https://huggingface.co/datasets/agibot-world/AgiBotWorld2026/raw/main/README.md",
+      "bytes": 16711,
+      "sha256": "31d00119dc85a58b43bd44ffccfab87d2c9cecd7b483aed737b81995d1e0219b",
+      "label": "agibot2026_card",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "31d00119dc85a58b43bd44ffccfab87d2c9cecd7b483aed737b81995d1e0219b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chernyadev/bigym/main/README.md",
+      "error": "HTTP Error 404: Not Found",
+      "label": "bigym_readme",
+      "checked_on": "2026-10-06"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/StanfordVL/BEHAVIOR-1K/main/joylo/gello/robots/sim_robot/og_teleop_utils.py",
+      "error": "HTTP Error 404: Not Found",
+      "label": "behavior_grasp",
+      "checked_on": "2026-10-06"
+    },
+    {
+      "url": "https://api.github.com/repos/StanfordVL/BEHAVIOR-1K/issues/2245/comments",
+      "bytes": 3566,
+      "label": "behavior_comments",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "e24daa6baf05fab1084ed7e601c2f03b5464c9ca8a1a300cddecbef347f726b6"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/StanfordVL/BEHAVIOR-1K/main/LICENSE",
+      "bytes": 1091,
+      "label": "behavior_license",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "bd06773d35549a0dfb4d6526190c80cea09d54a9e3033e98654999e51efcc0ca"
+    },
+    {
+      "url": "https://huggingface.co/datasets/behavior-1k/2026-challenge-demos/resolve/main/meta/info.json",
+      "bytes": 8978,
+      "label": "behavior_demo_meta",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "24c77f7a984bcee775e666203881a946b11a899f524fbc2405922b2109757874"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/robocasa/robocasa/main/robocasa/utils/dataset_registry.py",
+      "bytes": 94640,
+      "label": "rc_registry",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "23e8e31bb56bae80de86c34eafadfe32dd1e1eba6608376152ba9fdda5532a4b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NeuracoreAI/bigym/master/bigym/const.py",
+      "bytes": 756,
+      "label": "bigym_const",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "f8726612b382672fb568ba08a70f9834bd47dec4b27613429ec8a7223955bfd6"
+    },
+    {
+      "url": "https://api.github.com/repos/NeuracoreAI/bigym_data/releases/latest",
+      "error": "HTTP Error 404: Not Found",
+      "label": "bigym_releases",
+      "checked_on": "2026-10-06"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TooSchoolForCool/M3Bench/master/README.md",
+      "bytes": 5491,
+      "label": "m3_readme",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "a576882c9169ffa63aebcbd208de172b5802893c1e62109ac4af557e92921b07"
+    },
+    {
+      "url": "https://huggingface.co/api/datasets/airoa-org/airoa-moma-5k?blobs=true",
+      "error": "metadata cap exceeded",
+      "label": "moma5k_api",
+      "checked_on": "2026-10-06"
+    },
+    {
+      "url": "https://huggingface.co/api/datasets/x-humanoid-robomind/RoboMIND2.0?blobs=true",
+      "error": "HTTP Error 401: Unauthorized",
+      "label": "robomind2_api",
+      "checked_on": "2026-10-06"
+    },
+    {
+      "url": "https://api.github.com/repos/robocasa/robocasa/git/trees/main?recursive=1",
+      "bytes": 268177,
+      "label": "rc_tree",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "104663e9426da95b00ba3911f9fda1d341a53e50dfa382caff3d7707239fbee6"
+    },
+    {
+      "url": "https://api.github.com/repos/StanfordVL/BEHAVIOR-1K/git/trees/main?recursive=1",
+      "bytes": 1440907,
+      "label": "behavior_tree",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "c2ec10df70b20b054a5f1075ca91be277ae707dd5c794e4259942880f6fd7e79"
+    },
+    {
+      "url": "https://api.github.com/repos/TooSchoolForCool/M3Bench/git/trees/master?recursive=1",
+      "bytes": 423726,
+      "label": "m3_tree",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "bebd04d84fd31c70d7933cdf81782445872107dfbdaea273257353332c513f05"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/StanfordVL/BEHAVIOR-1K/main/OmniGibson/omnigibson/envs/hdf5_data_wrapper.py",
+      "bytes": 36212,
+      "label": "behavior_hdf",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "96d81a0d58a3d4c3ea30d2e5bede13767ef40b0a07fca5f91da96791be39d202"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/StanfordVL/BEHAVIOR-1K/main/OmniGibson/omnigibson/envs/data_wrapper.py",
+      "bytes": 43863,
+      "label": "behavior_data",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "0233614fe19ff19f12052e76337504152a0ce243adeda33be107292e0b2ea5d5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/StanfordVL/BEHAVIOR-1K/main/joylo/gello/utils/og_teleop_utils.py",
+      "bytes": 57944,
+      "label": "behavior_grasp",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "b9bed3065c13ed9ac9c4e49439c9a25aff40c273fa47af79aee035cd6f877694"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/robocasa/robocasa/main/robocasa/utils/dataset_registry_utils.py",
+      "bytes": 7796,
+      "label": "rc_meta_utils",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "9ea74602711ab9c499314bc3d94c4b61db6fe85bebf616cce573b9d39ba02e3b"
+    },
+    {
+      "url": "https://api.github.com/repos/NeuracoreAI/bigym_data/releases/tags/v0.9.0",
+      "bytes": 3238,
+      "label": "bigym_releases",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "cd76d1f46e4081a9bbc225bd0b07fc71141b531a63aa6781a7e5b35663a9f3f2"
+    },
+    {
+      "url": "https://huggingface.co/api/datasets/behavior-1k/2026-challenge-demos?expand[]=sha&expand[]=gated&expand[]=cardData",
+      "bytes": 335,
+      "label": "behavior_demo_api",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "50942a961e9d2ac29333fcae1e991d6f7967efb263ab983d5faca27a61b4af22"
+    },
+    {
+      "url": "https://huggingface.co/api/datasets/airoa-org/airoa-moma-5k?expand[]=sha&expand[]=gated&expand[]=cardData",
+      "bytes": 8685,
+      "label": "moma5k_summary_api",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "82256dcf3c35eea91f70f7e388a914e46da94752c2ed9d898c1c4a2a5be02546"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/jimmyyhwu/tidybot2/main/convert_to_robomimic_hdf5.py",
+      "bytes": 2377,
+      "label": "tidybot_convert",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "89142275bf6ddc2507efc0e9922b9deb372ef38243ba16fab2f5fbe59c25ca4c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/jimmyyhwu/tidybot2/main/episode_storage.py",
+      "bytes": 4366,
+      "label": "tidybot_episode",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "11542d695a09d44e2b0b1f9f47248974f8c4dcf98e40070fd5c098d948e08fe3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/jimmyyhwu/tidybot2/main/mujoco_env.py",
+      "bytes": 17676,
+      "label": "tidybot_sim",
+      "checked_on": "2026-10-06",
+      "sha256_of_read_metadata": "cfe00924ffb0b7578987326b2ab892e63ec3f2d20f5fb312a9e0ba20a63d14d6"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/tensorflow/datasets/master/tensorflow_datasets/robotics/fractal20220817_data/fractal20220817_data_dataset_builder.py",
+      "error": "HTTP Error 404: Not Found",
+      "label": "rt1_schema",
+      "checked_on": "2026-10-06"
+    },
+    {
+      "label": "momagen_tree",
+      "url": "https://api.github.com/repos/ChengshuLi/MoMaGen/git/trees/5da621667669b15b97d7a220d086283b3c8ad0e5?recursive=1",
+      "checked_on": "2026-10-06",
+      "error": "HTTP Error 403: rate limit exceeded"
+    },
+    {
+      "label": "momagen_readme",
+      "url": "https://raw.githubusercontent.com/ChengshuLi/MoMaGen/5da621667669b15b97d7a220d086283b3c8ad0e5/README.md",
+      "checked_on": "2026-10-06",
+      "bytes": 1998,
+      "sha256_of_read_metadata": "f9e332b72e5eecd40c1339c42dd1c5490412e87c87470c23e78919cebd7a0fb9"
+    },
+    {
+      "label": "galaxea_schema",
+      "url": "https://huggingface.co/datasets/OpenGalaxea/Galaxea-Open-World-Dataset/raw/main/lerobot_info.json",
+      "checked_on": "2026-10-06",
+      "error": "HTTP Error 401: Unauthorized"
+    },
+    {
+      "label": "ok_robot_license",
+      "url": "https://raw.githubusercontent.com/ok-robot/ok-robot/main/LICENSE",
+      "checked_on": "2026-10-06",
+      "bytes": 1102,
+      "sha256_of_read_metadata": "e87473b95b49659e5956493173694355e649e1194fab7fd6480b076cd6fbdf1e"
+    },
+    {
+      "label": "tidybot2_license",
+      "url": "https://raw.githubusercontent.com/jimmyyhwu/tidybot2/main/LICENSE",
+      "checked_on": "2026-10-06",
+      "bytes": 1065,
+      "sha256_of_read_metadata": "b08b874f76ea7d22d6c751703adc213d2b46834e23895ff27af54b66a87722f0"
+    },
+    {
+      "label": "stretch_mujoco_license",
+      "url": "https://raw.githubusercontent.com/hello-robot/stretch_mujoco/main/LICENSE",
+      "checked_on": "2026-10-06",
+      "bytes": 1688,
+      "sha256_of_read_metadata": "bcc1dc8fcec14cbef3dc8f10b6f6d2fd2d81c0fb5c0e3657e43e34d3d38f9072"
+    },
+    {
+      "label": "hssd/hssd-hab",
+      "url": "https://huggingface.co/api/datasets/hssd/hssd-hab?blobs=true",
+      "checked_on": "2026-10-06",
+      "error": "metadata exceeded read cap"
+    },
+    {
+      "label": "ai-habitat/ReplicaCAD_dataset",
+      "url": "https://huggingface.co/api/datasets/ai-habitat/ReplicaCAD_dataset?blobs=true",
+      "checked_on": "2026-10-06",
+      "bytes": 100534,
+      "sha256_of_read_metadata": "bef22e682a803a6b2a0cb4eae167cd1714af9404d92660e6bd54de8225c6c12a"
+    }
+  ],
+  "integrity_note": "LFS hashes and byte totals are publisher/API metadata, not verified payload checksums. Git refs can move; exact revisions recorded. Null means unverified, not absent.",
+  "deduplication_rules": [
+    "Never add raw/processed/LeRobot/video variants.",
+    "Record original episode ID and human seed lineage for synthetic expansions.",
+    "Count scenes, task definitions, primitive segments, grouped executions and demonstrations separately.",
+    "No source assisted-grasp success transfers to Reachy physical validation."
+  ],
+  "corrections": [
+    {
+      "subject": "MoMaGen code availability",
+      "finding": "Public code and installation docs supersede the older RSS landing page coming-soon text. Downloadable source demonstrations still unverified.",
+      "sources": [
+        "https://momagen-rss.github.io/",
+        "https://momagen.github.io/",
+        "https://github.com/ChengshuLi/MoMaGen/tree/5da621667669b15b97d7a220d086283b3c8ad0e5"
+      ]
+    },
+    {
+      "subject": "Galaxea base telemetry",
+      "finding": "Publisher schema explicitly contains observed chassis positions and velocities plus IMU, as well as commanded chassis twist. Absolute reference frame remains unverified.",
+      "sources": [
+        "https://huggingface.co/datasets/OpenGalaxea/Galaxea-Open-World-Dataset"
+      ]
+    },
+    {
+      "subject": "OK-Robot code license",
+      "finding": "MIT, checked directly; not Apache-2.0. Data and scan grants not inferred.",
+      "sources": [
+        "https://raw.githubusercontent.com/ok-robot/ok-robot/main/LICENSE"
+      ]
+    }
+  ],
+  "selected_payload_metadata": [
+    {
+      "repository": "behavior-1k/2026-challenge-rawdata",
+      "revision": "f9d2901112993d75684223820eec70722806c2c4",
+      "path": "task-0002/episode_00021890.hdf5",
+      "bytes": 667124,
+      "publisher_lfs_sha256": "b01e7b8183e2c738edf1f5e65bba53163fee30713970845631401e20e6cd1a75",
+      "payload_downloaded_by_survey": false,
+      "checksum_verified_against_payload": false,
+      "source_url": "https://huggingface.co/datasets/behavior-1k/2026-challenge-rawdata/blob/f9d2901112993d75684223820eec70722806c2c4/task-0002/episode_00021890.hdf5"
+    },
+    {
+      "repository": "M3Bench/M3Bench",
+      "revision": "5b543a8c93c82b16442b2c1c4a139b96bb313b59",
+      "path": "robot_usd.zip",
+      "bytes": 23926404,
+      "publisher_lfs_sha256": "de17be11b0f6ca6afc67d9ec1954a59c2580a3e6cb52cd6f3c2b20baa786c237",
+      "payload_downloaded_by_survey": false,
+      "checksum_verified_against_payload": false,
+      "source_url": "https://huggingface.co/datasets/M3Bench/M3Bench/blob/5b543a8c93c82b16442b2c1c4a139b96bb313b59/robot_usd.zip"
+    },
+    {
+      "repository": "M3Bench/M3Bench",
+      "revision": "5b543a8c93c82b16442b2c1c4a139b96bb313b59",
+      "path": "robot_urdf.zip",
+      "bytes": 56672394,
+      "publisher_lfs_sha256": "46103e1a3f84b0f9fdd8f1c72c9c34dfaedff8f6bd5031a5b1770f47e4196220",
+      "payload_downloaded_by_survey": false,
+      "checksum_verified_against_payload": false,
+      "source_url": "https://huggingface.co/datasets/M3Bench/M3Bench/blob/5b543a8c93c82b16442b2c1c4a139b96bb313b59/robot_urdf.zip"
+    },
+    {
+      "repository": "M3Bench/M3Bench",
+      "revision": "5b543a8c93c82b16442b2c1c4a139b96bb313b59",
+      "path": "place_traj.zip",
+      "bytes": 1983364796,
+      "publisher_lfs_sha256": "dbc0ca4d348f0839e77215ce54b66d4c96834a42a188af051ec5d373b0ec4eb0",
+      "payload_downloaded_by_survey": false,
+      "checksum_verified_against_payload": false,
+      "source_url": "https://huggingface.co/datasets/M3Bench/M3Bench/blob/5b543a8c93c82b16442b2c1c4a139b96bb313b59/place_traj.zip"
+    },
+    {
+      "repository": "M3Bench/M3Bench",
+      "revision": "5b543a8c93c82b16442b2c1c4a139b96bb313b59",
+      "path": "pick_traj.zip",
+      "bytes": 2811609913,
+      "publisher_lfs_sha256": "d3b8f2f40f27ee622057cc762d376bc9643680ca63c2c1aee7134d9ac24874d2",
+      "payload_downloaded_by_survey": false,
+      "checksum_verified_against_payload": false,
+      "source_url": "https://huggingface.co/datasets/M3Bench/M3Bench/blob/5b543a8c93c82b16442b2c1c4a139b96bb313b59/pick_traj.zip"
+    },
+    {
+      "repository": "OpenGalaxea/Galaxea-Open-World-Dataset",
+      "revision": "df670d8dc3f2b369f55d28a3428b8639f0dab37d",
+      "path": "lerobot/Put_The_Items_Into_The_Storage_Box_20250929_002_007.tar.gz",
+      "bytes": 501166913,
+      "publisher_lfs_sha256": "85a1b600c2912338091c0245672cd948d847dfb6971bbe0cb709c3c50a463c75",
+      "payload_downloaded_by_survey": false,
+      "checksum_verified_against_payload": false,
+      "source_url": "https://huggingface.co/datasets/OpenGalaxea/Galaxea-Open-World-Dataset/blob/df670d8dc3f2b369f55d28a3428b8639f0dab37d/lerobot/Put_The_Items_Into_The_Storage_Box_20250929_002_007.tar.gz"
+    },
+    {
+      "repository": "ai-habitat/partnr_episodes",
+      "revision": "c6cffbdd82691c2f4240b75aa5289cd9efd0a32b",
+      "path": "v0_0/ci.json.gz",
+      "bytes": 2185,
+      "publisher_lfs_sha256": "0d48baf278fd5bd5f8b0466e2ea6c77dec8d1ac023350671de3a258d35f328e1",
+      "payload_downloaded_by_survey": false,
+      "checksum_verified_against_payload": false,
+      "source_url": "https://huggingface.co/datasets/ai-habitat/partnr_episodes/blob/c6cffbdd82691c2f4240b75aa5289cd9efd0a32b/v0_0/ci.json.gz"
+    }
+  ],
+  "metadata_only_scope": "Read public documentation, source text, license text and repository listings. No simulator/data dependency installation, no dataset payloads, no gate acceptance, no hardware."
+}

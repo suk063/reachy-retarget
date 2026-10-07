@@ -1,0 +1,1637 @@
+{
+  "label": "can-wall-grasp-azimuth-development-v1",
+  "jobs": [
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am120-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am120-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am120-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am120-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am120-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am120-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am090-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am090-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am090-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am090-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am090-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am090-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am060-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am060-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -60
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am060-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am060-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -60
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am060-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am060-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -60
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am030-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am030-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am030-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am030-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am030-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am030-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am015-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am015-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -15
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am015-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am015-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -15
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-am015-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-am015-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -15
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap015-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap015-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 15
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap015-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap015-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 15
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap015-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap015-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 15
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap030-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap030-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap030-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap030-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap030-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap030-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap060-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap060-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 60
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap060-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap060-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 60
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap060-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap060-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 60
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap090-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap090-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap090-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap090-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap090-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap090-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap120-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap120-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap120-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap120-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap120-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap120-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap180-chunk0",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap180-chunk0",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 180
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap180-chunk1",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap180-chunk1",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 180
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    },
+    {
+      "id": "can-wall-grasp-azimuth-development-v1-ap180-chunk2",
+      "workspace": "workspaces/can-wall-grasp-azimuth-development-v1-ap180-chunk2",
+      "operation": "feasible_geometry_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-aligned/f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_cohort_geometry_diagnosis",
+      "runtime_source_sha256": "0fc591d2e65d825fdfa2fc1db4e57f88560a80afbba8305719b6b819be3e8f4d",
+      "variant": "contact_002",
+      "geometry_search": {
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "placement": true
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 180
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df-v1/materialization.json",
+        "sha256": "080e5b3c3f2c60d6fc5ce7254877aba421abfc171d0c755c4debf75b9e18fa8f",
+        "original_archive_sha256": "1cbf82bb1bfccbe2befb2826f6ac80506f181e73f01b12aeeed4d8639472aff4"
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "closure_scope": "Existing frozen geometry bank screens/admit contact002; both predeclared contact0035 physical policies require a fresh full-path closure admission before physics.",
+      "nomination_rank": "Actual angular robot attachment correction, then existing base/placement rank, stable requested angle. No physical outcome selection.",
+      "causal_evidence": "Fixed exact original TCP yields40.7295mm palm penetration of near binwall, unchanged after13.7nmIKrefinement. Robot-only cylinder-axis grasp azimuth changes are necessary for this fixed-target obstruction."
+    }
+  ],
+  "source_episode": "f418d7840c743cd217dec0df",
+  "angles_deg": [
+    -120,
+    -90,
+    -60,
+    -30,
+    -15,
+    15,
+    30,
+    60,
+    90,
+    120,
+    180
+  ],
+  "scope": "One formerheldoutsource nowexplicitdevelopment: originalfrozenpolicyrejection remains unchanged. Rotate robot grasp around exact original Can geometry; allsourceobject/clock arrays unchanged, fresh completeIK/finitepad/fixture thenindependentphysics stillrequired.33chunksare one source, not33demonstrations."
+}

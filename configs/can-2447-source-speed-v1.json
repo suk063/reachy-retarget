@@ -1,0 +1,421 @@
+{
+  "label": "can-2447-source-speed-v1",
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-2447e639d8694ab40028362b",
+      "parent_workspace": "workspaces/additional-independent-v1-2447e639d8694ab40028362b",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/2447e639d8694ab40028362b.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-2447e639d8694ab40028362b/runs/dynamics/additional-independent-v1-2447e639d8694ab40028362b-aligned/2447e639d8694ab40028362b",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-2447-source-speed-v1-2447e639d8694ab40028362b-ff1",
+      "operation": "feasible_geometry_experiment",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-2447-source-speed-v1-2447e639d8694ab40028362b-ff1",
+      "runtime_source_sha256": "42423340d9429494cab1aa2f493e61782cce15c9d1524ebb41e63442f9282dae",
+      "source_normalized_sha256": "22220aeaae770a67f52a91abb3b1fbe8645ba40fb9e5f69f8c7acb32272b46a1",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "69d5fb62df731d55534b47b25cbbabffe4e5ff522611a276322d96cf091b1bb3",
+        "plan.h5": "10e2d5d17113ec45017ac2738751b4b18be198610827d9be4632732594870a30",
+        "result.json": "4542babbe8b44ef7508faf39bf1ed1b2738b0389f062343929aaa778d73f8eeb"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source",
+        "azimuth_offset_deg": 0
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 290,
+        "anchor_reference": [
+          -0.09555978381275265,
+          0.18371147816470532,
+          0.042151915956021975,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2290099607768251,
+          -0.3390051694808653,
+          -0.3074079303195997,
+          -1.037894138495242,
+          0.3959673200125376,
+          -0.2992264463787219,
+          -0.44932684184588095
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.48026542429011165,
+            0.7917499476450438
+          ],
+          [
+            -0.18339213942669078,
+            0.7153124359754427
+          ],
+          [
+            -0.4781624466212115,
+            0.5979821533081944
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "2447e639d8694ab40028362b",
+        "parent_attempt": "workspaces/additional-independent-v1-2447e639d8694ab40028362b/runs/dynamics/additional-independent-v1-2447e639d8694ab40028362b-aligned/2447e639d8694ab40028362b",
+        "source_normalized_sha256": "22220aeaae770a67f52a91abb3b1fbe8645ba40fb9e5f69f8c7acb32272b46a1",
+        "parent_files_sha256": {
+          "scene.xml": "69d5fb62df731d55534b47b25cbbabffe4e5ff522611a276322d96cf091b1bb3",
+          "plan.h5": "10e2d5d17113ec45017ac2738751b4b18be198610827d9be4632732594870a30",
+          "result.json": "4542babbe8b44ef7508faf39bf1ed1b2738b0389f062343929aaa778d73f8eeb"
+        },
+        "anchor_index": 290,
+        "anchor_reference": [
+          -0.09555978381275271,
+          0.18371147816470534,
+          0.042151915956021975,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2290099607768251,
+          -0.3390051694808653,
+          -0.3074079303195997,
+          -1.037894138495242,
+          0.3959673200125376,
+          -0.2992264463787219,
+          -0.44932684184588095
+        ],
+        "axis_world": [
+          -0.03169540847850739,
+          -0.028185990003558575,
+          0.9991000705879767
+        ],
+        "pivot_world": [
+          0.40912194778499544,
+          -0.19175148306425419,
+          0.9012976535832478
+        ],
+        "original_rows": 736,
+        "original_seconds": 7.3500000000000005,
+        "scene_sha256": "69d5fb62df731d55534b47b25cbbabffe4e5ff522611a276322d96cf091b1bb3",
+        "inspected": true,
+        "planar_yaw_transport_rad": 0.0,
+        "requested_grasp_rotation_deg": 0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.3
+      },
+      "retimed_source_clearance": {
+        "minimum_m": 0.003,
+        "enforce_planar_neighbor_speed": true
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          -129.48767209826244
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -1.1626986027255135,
+              1.875
+            ],
+            [
+              -1.145,
+              1.1747334473179276
+            ],
+            [
+              -3.2483809945840445,
+              3.7395748068979877
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true,
+        "midpoint_position_reserve_m": 0.0001,
+        "midpoint_fixture_reserve_m": 0.0001
+      },
+      "source_prefix_velocity_feedforward": 1.0,
+      "geometry_selection_rank": [
+        2.3475116677333516,
+        0.06269968101992227,
+        168
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-retimed-source-repair-v1/can-retimed-source-repair-v1-2447e639d8694ab40028362b-chunk0/backup.json",
+          "sha256": "04263010915e78096428b9aa49b33a96b189e74a36e1b79e7f46f1250e26d87d"
+        },
+        {
+          "path": "runs/local-spool-pool/can-retimed-source-repair-v1/can-retimed-source-repair-v1-2447e639d8694ab40028362b-chunk1/backup.json",
+          "sha256": "a7684816413f7aceba75eb6d1ce73586d04010e60034f0b81cbc246ed67be977"
+        },
+        {
+          "path": "runs/local-spool-pool/can-retimed-source-repair-v1/can-retimed-source-repair-v1-2447e639d8694ab40028362b-chunk2/backup.json",
+          "sha256": "2a12890ed7a3e909cbd29963829afae9f0e23a81c57b953c8d12747f407a8273"
+        }
+      ],
+      "comparison_scope": "Prior FF0 passes every contact, grasp, final task and arm speed gate; only actual base peak .721676m/s fails. Both branches retain all geometry/object/source knots and insertion parameters. Change only local source XY norm cap .4 to .3m/s; preserve .8rad/s arm cap and independently recheck all physical gates. Derived source repair enforces the same norm bound",
+      "comparison_parent_job": "can-retimed-source-physics-v1-2447e639d8694ab40028362b-ff1"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-2447e639d8694ab40028362b",
+      "parent_workspace": "workspaces/additional-independent-v1-2447e639d8694ab40028362b",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/2447e639d8694ab40028362b.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-2447e639d8694ab40028362b/runs/dynamics/additional-independent-v1-2447e639d8694ab40028362b-aligned/2447e639d8694ab40028362b",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-2447-source-speed-v1-2447e639d8694ab40028362b-ff0",
+      "operation": "feasible_geometry_experiment",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-2447-source-speed-v1-2447e639d8694ab40028362b-ff0",
+      "runtime_source_sha256": "42423340d9429494cab1aa2f493e61782cce15c9d1524ebb41e63442f9282dae",
+      "source_normalized_sha256": "22220aeaae770a67f52a91abb3b1fbe8645ba40fb9e5f69f8c7acb32272b46a1",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "69d5fb62df731d55534b47b25cbbabffe4e5ff522611a276322d96cf091b1bb3",
+        "plan.h5": "10e2d5d17113ec45017ac2738751b4b18be198610827d9be4632732594870a30",
+        "result.json": "4542babbe8b44ef7508faf39bf1ed1b2738b0389f062343929aaa778d73f8eeb"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source",
+        "azimuth_offset_deg": 0
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 290,
+        "anchor_reference": [
+          -0.09555978381275265,
+          0.18371147816470532,
+          0.042151915956021975,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2290099607768251,
+          -0.3390051694808653,
+          -0.3074079303195997,
+          -1.037894138495242,
+          0.3959673200125376,
+          -0.2992264463787219,
+          -0.44932684184588095
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.48026542429011165,
+            0.7917499476450438
+          ],
+          [
+            -0.18339213942669078,
+            0.7153124359754427
+          ],
+          [
+            -0.4781624466212115,
+            0.5979821533081944
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "2447e639d8694ab40028362b",
+        "parent_attempt": "workspaces/additional-independent-v1-2447e639d8694ab40028362b/runs/dynamics/additional-independent-v1-2447e639d8694ab40028362b-aligned/2447e639d8694ab40028362b",
+        "source_normalized_sha256": "22220aeaae770a67f52a91abb3b1fbe8645ba40fb9e5f69f8c7acb32272b46a1",
+        "parent_files_sha256": {
+          "scene.xml": "69d5fb62df731d55534b47b25cbbabffe4e5ff522611a276322d96cf091b1bb3",
+          "plan.h5": "10e2d5d17113ec45017ac2738751b4b18be198610827d9be4632732594870a30",
+          "result.json": "4542babbe8b44ef7508faf39bf1ed1b2738b0389f062343929aaa778d73f8eeb"
+        },
+        "anchor_index": 290,
+        "anchor_reference": [
+          -0.09555978381275271,
+          0.18371147816470534,
+          0.042151915956021975,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2290099607768251,
+          -0.3390051694808653,
+          -0.3074079303195997,
+          -1.037894138495242,
+          0.3959673200125376,
+          -0.2992264463787219,
+          -0.44932684184588095
+        ],
+        "axis_world": [
+          -0.03169540847850739,
+          -0.028185990003558575,
+          0.9991000705879767
+        ],
+        "pivot_world": [
+          0.40912194778499544,
+          -0.19175148306425419,
+          0.9012976535832478
+        ],
+        "original_rows": 736,
+        "original_seconds": 7.3500000000000005,
+        "scene_sha256": "69d5fb62df731d55534b47b25cbbabffe4e5ff522611a276322d96cf091b1bb3",
+        "inspected": true,
+        "planar_yaw_transport_rad": 0.0,
+        "requested_grasp_rotation_deg": 0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.3
+      },
+      "retimed_source_clearance": {
+        "minimum_m": 0.003,
+        "enforce_planar_neighbor_speed": true
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          -129.48767209826244
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -1.1626986027255135,
+              1.875
+            ],
+            [
+              -1.145,
+              1.1747334473179276
+            ],
+            [
+              -3.2483809945840445,
+              3.7395748068979877
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true,
+        "midpoint_position_reserve_m": 0.0001,
+        "midpoint_fixture_reserve_m": 0.0001
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        2.3475116677333516,
+        0.06269968101992227,
+        168
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-retimed-source-repair-v1/can-retimed-source-repair-v1-2447e639d8694ab40028362b-chunk0/backup.json",
+          "sha256": "04263010915e78096428b9aa49b33a96b189e74a36e1b79e7f46f1250e26d87d"
+        },
+        {
+          "path": "runs/local-spool-pool/can-retimed-source-repair-v1/can-retimed-source-repair-v1-2447e639d8694ab40028362b-chunk1/backup.json",
+          "sha256": "a7684816413f7aceba75eb6d1ce73586d04010e60034f0b81cbc246ed67be977"
+        },
+        {
+          "path": "runs/local-spool-pool/can-retimed-source-repair-v1/can-retimed-source-repair-v1-2447e639d8694ab40028362b-chunk2/backup.json",
+          "sha256": "2a12890ed7a3e909cbd29963829afae9f0e23a81c57b953c8d12747f407a8273"
+        }
+      ],
+      "comparison_scope": "Prior FF0 passes every contact, grasp, final task and arm speed gate; only actual base peak .721676m/s fails. Both branches retain all geometry/object/source knots and insertion parameters. Change only local source XY norm cap .4 to .3m/s; preserve .8rad/s arm cap and independently recheck all physical gates. Derived source repair enforces the same norm bound",
+      "comparison_parent_job": "can-retimed-source-physics-v1-2447e639d8694ab40028362b-ff0"
+    }
+  ]
+}

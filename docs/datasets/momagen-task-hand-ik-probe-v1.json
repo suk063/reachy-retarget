@@ -1,0 +1,412 @@
+{
+  "label": "momagen-pick-cup-task-hand-probe-v1",
+  "task_config_sha256": "f88d8efbc4b2de8d16266eb5311b3419a11c2d6b0fe860ceee8b54082f71f982",
+  "task_config_url": "https://github.com/ChengshuLi/MoMaGen/blob/5da621667669b15b97d7a220d086283b3c8ad0e5/momagen/datasets/base_configs/r1_pick_cup.json",
+  "runtime": {
+    "python": "/mnt/reachy-retarget/runtime/run-python",
+    "source": "/mnt/reachy-retarget/releases/d4c94b0f527dc697b39df96b1bb1f24acf822a7b1fedef7ca9f2386096659f2b",
+    "control": "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+    "source_sha256": "d4c94b0f527dc697b39df96b1bb1f24acf822a7b1fedef7ca9f2386096659f2b",
+    "control_sha256": "8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+    "reachy_agent_revision": "eb39c2e0f133e8955acfb949513512eaae193db1",
+    "reachy_agent_source": "/mnt/reachy-retarget/references/reachy-agent/eb39c2e0f133e8955acfb949513512eaae193db1"
+  },
+  "rows": [
+    {
+      "pod": "reachy-retarget-worker-7d46748688-47rp8",
+      "job": "momagen-pick-cup-task-hand-probe-v1-seed0",
+      "returncode": 0,
+      "stderr": "",
+      "result": {
+        "schema": "momagen-task-hand-ik-probe-v1",
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed0",
+        "seed_yaw_deg": 0,
+        "frames_requested": 909,
+        "frames_completed": 909,
+        "failure": null,
+        "complete": true,
+        "source_ik_artifact": "/mnt/reachy-retarget/queue/tasks/momagen-r1_pick_cup-v3/attempts/1791357416700532213-reachy-retarget-worker-7d46748688-ccxjh/raw-ik.npz",
+        "source_ik_sha256": "38440d396266343ba29c8e6004506bc8991acab92eab7a0bdfb3b46dc5c023e6",
+        "source_target_numeric_sha256": "caa1b36a2b390e4355cb5f322148d601bb859b0e03e7d4afc5bd190c782c8c86",
+        "source_clock_numeric_sha256": "328fd73b2b45dee2554178b359b897a58e1441a104f0d2b14f95211bae3b7c4d",
+        "all_position_within_2mm": true,
+        "all_rotation_within_20mrad": true,
+        "max_error": [
+          0.000990871434191672,
+          0.009808826356318905
+        ],
+        "self_clearance_min_m": 0.12460047171877858,
+        "joint_margin_min_rad": 0.031000000000000028,
+        "base_xy_bounds": [
+          [
+            -0.1085698990446371,
+            4.158081076148819
+          ],
+          [
+            -0.7848646306184784,
+            0.9989299768504072
+          ]
+        ],
+        "inactive_right_arm_stays_neutral": true,
+        "wall_s": 1.1628527959110215,
+        "physics_validated": false,
+        "fixture_clearance_checked": false,
+        "source_tool_frame_calibration_verified": false,
+        "scope": "Declared task-only left hand target and mobile base IK diagnostic. All909source rows retained exactly. Idle right hand at Reachy neutral is derived, not source motion. Original world gauge/tool rotation from prior source archive; no pad calibration or fixture/dynamics/task success claim.",
+        "artifact_sha256": "2160aef66303ab1ab48f4eb569d2a25d881fc82b3873650be21d8d8c349df6b6",
+        "artifact": "/tmp/momagen-pick-cup-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed0/attempt.npz"
+      }
+    },
+    {
+      "pod": "reachy-retarget-worker-7d46748688-6gwhb",
+      "job": "momagen-pick-cup-task-hand-probe-v1-seed1",
+      "returncode": 0,
+      "stderr": "",
+      "result": {
+        "schema": "momagen-task-hand-ik-probe-v1",
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed1",
+        "seed_yaw_deg": 60,
+        "frames_requested": 909,
+        "frames_completed": 909,
+        "failure": null,
+        "complete": true,
+        "source_ik_artifact": "/mnt/reachy-retarget/queue/tasks/momagen-r1_pick_cup-v3/attempts/1791357416700532213-reachy-retarget-worker-7d46748688-ccxjh/raw-ik.npz",
+        "source_ik_sha256": "38440d396266343ba29c8e6004506bc8991acab92eab7a0bdfb3b46dc5c023e6",
+        "source_target_numeric_sha256": "caa1b36a2b390e4355cb5f322148d601bb859b0e03e7d4afc5bd190c782c8c86",
+        "source_clock_numeric_sha256": "328fd73b2b45dee2554178b359b897a58e1441a104f0d2b14f95211bae3b7c4d",
+        "all_position_within_2mm": true,
+        "all_rotation_within_20mrad": true,
+        "max_error": [
+          0.0009993247154345194,
+          0.009905343002277776
+        ],
+        "self_clearance_min_m": 0.12460047171877925,
+        "joint_margin_min_rad": 0.031000000000000028,
+        "base_xy_bounds": [
+          [
+            -0.1085698990446371,
+            4.158081076148819
+          ],
+          [
+            -0.7848646306184784,
+            0.9989299768504072
+          ]
+        ],
+        "inactive_right_arm_stays_neutral": true,
+        "wall_s": 0.731877209036611,
+        "physics_validated": false,
+        "fixture_clearance_checked": false,
+        "source_tool_frame_calibration_verified": false,
+        "scope": "Declared task-only left hand target and mobile base IK diagnostic. All909source rows retained exactly. Idle right hand at Reachy neutral is derived, not source motion. Original world gauge/tool rotation from prior source archive; no pad calibration or fixture/dynamics/task success claim.",
+        "artifact_sha256": "8aa230fc9a9d510ec3c90e6523f46d3ed8d0b879eec5cd6c440393b345fc2d71",
+        "artifact": "/tmp/momagen-pick-cup-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed1/attempt.npz"
+      }
+    },
+    {
+      "pod": "reachy-retarget-worker-7d46748688-6sn62",
+      "job": "momagen-pick-cup-task-hand-probe-v1-seed2",
+      "returncode": 0,
+      "stderr": "",
+      "result": {
+        "schema": "momagen-task-hand-ik-probe-v1",
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed2",
+        "seed_yaw_deg": -60,
+        "frames_requested": 909,
+        "frames_completed": 909,
+        "failure": null,
+        "complete": true,
+        "source_ik_artifact": "/mnt/reachy-retarget/queue/tasks/momagen-r1_pick_cup-v3/attempts/1791357416700532213-reachy-retarget-worker-7d46748688-ccxjh/raw-ik.npz",
+        "source_ik_sha256": "38440d396266343ba29c8e6004506bc8991acab92eab7a0bdfb3b46dc5c023e6",
+        "source_target_numeric_sha256": "caa1b36a2b390e4355cb5f322148d601bb859b0e03e7d4afc5bd190c782c8c86",
+        "source_clock_numeric_sha256": "328fd73b2b45dee2554178b359b897a58e1441a104f0d2b14f95211bae3b7c4d",
+        "all_position_within_2mm": true,
+        "all_rotation_within_20mrad": true,
+        "max_error": [
+          0.0009985035352333732,
+          0.009973379063674442
+        ],
+        "self_clearance_min_m": 0.12460047171877836,
+        "joint_margin_min_rad": 0.031,
+        "base_xy_bounds": [
+          [
+            -0.1085698990446371,
+            4.158081076148819
+          ],
+          [
+            -0.7848646306184784,
+            0.9989299768504072
+          ]
+        ],
+        "inactive_right_arm_stays_neutral": true,
+        "wall_s": 0.5705781870055944,
+        "physics_validated": false,
+        "fixture_clearance_checked": false,
+        "source_tool_frame_calibration_verified": false,
+        "scope": "Declared task-only left hand target and mobile base IK diagnostic. All909source rows retained exactly. Idle right hand at Reachy neutral is derived, not source motion. Original world gauge/tool rotation from prior source archive; no pad calibration or fixture/dynamics/task success claim.",
+        "artifact_sha256": "21bfeafdbe71db8f33ea1180d115c177cb5cf5636798091c8a83bb434cbdb794",
+        "artifact": "/tmp/momagen-pick-cup-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed2/attempt.npz"
+      }
+    },
+    {
+      "pod": "reachy-retarget-worker-7d46748688-7ppnz",
+      "job": "momagen-pick-cup-task-hand-probe-v1-seed3",
+      "returncode": 0,
+      "stderr": "",
+      "result": {
+        "schema": "momagen-task-hand-ik-probe-v1",
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed3",
+        "seed_yaw_deg": 120,
+        "frames_requested": 909,
+        "frames_completed": 909,
+        "failure": null,
+        "complete": true,
+        "source_ik_artifact": "/mnt/reachy-retarget/queue/tasks/momagen-r1_pick_cup-v3/attempts/1791357416700532213-reachy-retarget-worker-7d46748688-ccxjh/raw-ik.npz",
+        "source_ik_sha256": "38440d396266343ba29c8e6004506bc8991acab92eab7a0bdfb3b46dc5c023e6",
+        "source_target_numeric_sha256": "caa1b36a2b390e4355cb5f322148d601bb859b0e03e7d4afc5bd190c782c8c86",
+        "source_clock_numeric_sha256": "328fd73b2b45dee2554178b359b897a58e1441a104f0d2b14f95211bae3b7c4d",
+        "all_position_within_2mm": true,
+        "all_rotation_within_20mrad": true,
+        "max_error": [
+          0.00099951912577394,
+          0.00991951832279493
+        ],
+        "self_clearance_min_m": 0.07165390229928967,
+        "joint_margin_min_rad": 0.031000000000000028,
+        "base_xy_bounds": [
+          [
+            -0.1085698990446371,
+            4.158081076148819
+          ],
+          [
+            -0.7848646306184784,
+            0.9989299768504072
+          ]
+        ],
+        "inactive_right_arm_stays_neutral": true,
+        "wall_s": 1.7768654110259376,
+        "physics_validated": false,
+        "fixture_clearance_checked": false,
+        "source_tool_frame_calibration_verified": false,
+        "scope": "Declared task-only left hand target and mobile base IK diagnostic. All909source rows retained exactly. Idle right hand at Reachy neutral is derived, not source motion. Original world gauge/tool rotation from prior source archive; no pad calibration or fixture/dynamics/task success claim.",
+        "artifact_sha256": "eb85819149bc99e6427396c092d5f1b9ef78488f50bfd78316340c04881cca11",
+        "artifact": "/tmp/momagen-pick-cup-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed3/attempt.npz"
+      }
+    },
+    {
+      "pod": "reachy-retarget-worker-7d46748688-8nffd",
+      "job": "momagen-pick-cup-task-hand-probe-v1-seed4",
+      "returncode": 0,
+      "stderr": "",
+      "result": {
+        "schema": "momagen-task-hand-ik-probe-v1",
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed4",
+        "seed_yaw_deg": -120,
+        "frames_requested": 909,
+        "frames_completed": 909,
+        "failure": null,
+        "complete": true,
+        "source_ik_artifact": "/mnt/reachy-retarget/queue/tasks/momagen-r1_pick_cup-v3/attempts/1791357416700532213-reachy-retarget-worker-7d46748688-ccxjh/raw-ik.npz",
+        "source_ik_sha256": "38440d396266343ba29c8e6004506bc8991acab92eab7a0bdfb3b46dc5c023e6",
+        "source_target_numeric_sha256": "caa1b36a2b390e4355cb5f322148d601bb859b0e03e7d4afc5bd190c782c8c86",
+        "source_clock_numeric_sha256": "328fd73b2b45dee2554178b359b897a58e1441a104f0d2b14f95211bae3b7c4d",
+        "all_position_within_2mm": true,
+        "all_rotation_within_20mrad": true,
+        "max_error": [
+          0.000999147675889848,
+          0.009729283523732682
+        ],
+        "self_clearance_min_m": 0.12460047171877886,
+        "joint_margin_min_rad": 0.031,
+        "base_xy_bounds": [
+          [
+            -0.1085698990446371,
+            4.158081076148819
+          ],
+          [
+            -0.7848646306184784,
+            0.9989299768504072
+          ]
+        ],
+        "inactive_right_arm_stays_neutral": true,
+        "wall_s": 1.1590430550277233,
+        "physics_validated": false,
+        "fixture_clearance_checked": false,
+        "source_tool_frame_calibration_verified": false,
+        "scope": "Declared task-only left hand target and mobile base IK diagnostic. All909source rows retained exactly. Idle right hand at Reachy neutral is derived, not source motion. Original world gauge/tool rotation from prior source archive; no pad calibration or fixture/dynamics/task success claim.",
+        "artifact_sha256": "3d249a73c337639cfce16c54d74d5af03212d30f39cd7528df2624a591e432c7",
+        "artifact": "/tmp/momagen-pick-cup-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed4/attempt.npz"
+      }
+    },
+    {
+      "pod": "reachy-retarget-worker-7d46748688-8t4vr",
+      "job": "momagen-pick-cup-task-hand-probe-v1-seed5",
+      "returncode": 0,
+      "stderr": "",
+      "result": {
+        "schema": "momagen-task-hand-ik-probe-v1",
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed5",
+        "seed_yaw_deg": 180,
+        "frames_requested": 909,
+        "frames_completed": 909,
+        "failure": null,
+        "complete": true,
+        "source_ik_artifact": "/mnt/reachy-retarget/queue/tasks/momagen-r1_pick_cup-v3/attempts/1791357416700532213-reachy-retarget-worker-7d46748688-ccxjh/raw-ik.npz",
+        "source_ik_sha256": "38440d396266343ba29c8e6004506bc8991acab92eab7a0bdfb3b46dc5c023e6",
+        "source_target_numeric_sha256": "caa1b36a2b390e4355cb5f322148d601bb859b0e03e7d4afc5bd190c782c8c86",
+        "source_clock_numeric_sha256": "328fd73b2b45dee2554178b359b897a58e1441a104f0d2b14f95211bae3b7c4d",
+        "all_position_within_2mm": false,
+        "all_rotation_within_20mrad": false,
+        "max_error": [
+          0.006866557605937142,
+          0.18535379587723327
+        ],
+        "self_clearance_min_m": 0.1246004717187787,
+        "joint_margin_min_rad": 0.030999999999999917,
+        "base_xy_bounds": [
+          [
+            -0.1085698990446371,
+            4.158081076148819
+          ],
+          [
+            -0.7848646306184784,
+            0.9989299768504072
+          ]
+        ],
+        "inactive_right_arm_stays_neutral": true,
+        "wall_s": 1.6471050580730662,
+        "physics_validated": false,
+        "fixture_clearance_checked": false,
+        "source_tool_frame_calibration_verified": false,
+        "scope": "Declared task-only left hand target and mobile base IK diagnostic. All909source rows retained exactly. Idle right hand at Reachy neutral is derived, not source motion. Original world gauge/tool rotation from prior source archive; no pad calibration or fixture/dynamics/task success claim.",
+        "artifact_sha256": "d48ddf9b32c3e9fca2be5720f4a69fdd311d162ee95ab9d223c8cd11709d083b",
+        "artifact": "/tmp/momagen-pick-cup-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed5/attempt.npz"
+      }
+    }
+  ],
+  "publication": {
+    "cross_pod_verified": true,
+    "files": 18,
+    "rows": [
+      {
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed0",
+        "files": [
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed0/attempt.npz",
+            "sha256": "2160aef66303ab1ab48f4eb569d2a25d881fc82b3873650be21d8d8c349df6b6",
+            "bytes": 398079
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed0/job.json",
+            "sha256": "4775072731ba8f8b7454abe3ceece46ee0d6b071250376d7a42e4093887904c0",
+            "bytes": 3326
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed0/result.json",
+            "sha256": "c03c7c7af4fc1e550b94358c7dd66e12475766f255542dbcb7be9e8ae7c0ad39",
+            "bytes": 1766
+          }
+        ]
+      },
+      {
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed1",
+        "files": [
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed1/attempt.npz",
+            "sha256": "8aa230fc9a9d510ec3c90e6523f46d3ed8d0b879eec5cd6c440393b345fc2d71",
+            "bytes": 396806
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed1/job.json",
+            "sha256": "a9f9109eaac21dee5c8a1d5c11f89df9de7d1409f5d99903b6d248edf0e6efe8",
+            "bytes": 3327
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed1/result.json",
+            "sha256": "518b33462df2aa29405c8d2108691768aa967cf0e0becd9dfc9def93c27224f6",
+            "bytes": 1767
+          }
+        ]
+      },
+      {
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed2",
+        "files": [
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed2/attempt.npz",
+            "sha256": "21bfeafdbe71db8f33ea1180d115c177cb5cf5636798091c8a83bb434cbdb794",
+            "bytes": 399161
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed2/job.json",
+            "sha256": "a741065f23f7c60fadea21f08b9c5ad37e4cc086aba36990c932d4caabe0085d",
+            "bytes": 3328
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed2/result.json",
+            "sha256": "98fb11492b9bb190001aa7dd9601c9c22a9edef1452f11dfbebb2d6e9d116d28",
+            "bytes": 1754
+          }
+        ]
+      },
+      {
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed3",
+        "files": [
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed3/attempt.npz",
+            "sha256": "eb85819149bc99e6427396c092d5f1b9ef78488f50bfd78316340c04881cca11",
+            "bytes": 397431
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed3/job.json",
+            "sha256": "0006c1b2b3b72a70ca3bd17f620e76e8f155f47147f248acf39d30ce472cbc2c",
+            "bytes": 3328
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed3/result.json",
+            "sha256": "3e443375acdd2c7e9129c656feaa7f263407c61025c94a2a40468fa307166fba",
+            "bytes": 1766
+          }
+        ]
+      },
+      {
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed4",
+        "files": [
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed4/attempt.npz",
+            "sha256": "3d249a73c337639cfce16c54d74d5af03212d30f39cd7528df2624a591e432c7",
+            "bytes": 398430
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed4/job.json",
+            "sha256": "6867c15d54b4fa1ebf6f51d73baa1c009dd45553b2528351037019718c024b55",
+            "bytes": 3329
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed4/result.json",
+            "sha256": "35fcbc594eef4320b6827dacbefec1d7339b17bde9dcc776027026453d78fe57",
+            "bytes": 1754
+          }
+        ]
+      },
+      {
+        "job": "momagen-pick-cup-task-hand-probe-v1-seed5",
+        "files": [
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed5/attempt.npz",
+            "sha256": "d48ddf9b32c3e9fca2be5720f4a69fdd311d162ee95ab9d223c8cd11709d083b",
+            "bytes": 394191
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed5/job.json",
+            "sha256": "76ab7a8f31c10496e81fd4c5e219b7c6d5d5dc1e18aba1a2c7d9133c1d88c0a9",
+            "bytes": 3328
+          },
+          {
+            "path": "/mnt/reachy-retarget/diagnostics/momagen-task-hand-probe-v1/momagen-pick-cup-task-hand-probe-v1-seed5/result.json",
+            "sha256": "cce5021533dc4ddf2d797fcf6b01fc7c61fdd5400ad5e860b8f798914cb08708",
+            "bytes": 1768
+          }
+        ]
+      }
+    ]
+  }
+}

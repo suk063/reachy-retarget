@@ -1,0 +1,542 @@
+{
+  "label": "additional-lift-center-clearance-v1",
+  "scope": "Eightdeclaredgeometrycandidates overfour previouslycarryingrotation-failureLift sources. Alignactualboxface andcentergrasp; boundedbasebackwardcomparison chosenfromcollisionderivatives, noforce/model/gatechange.",
+  "jobs": [
+    {
+      "id": "additional-lift-center-clearance-v1-f7a0da6cfd445c85197fc0fd-base000",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "parent_workspace": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "workspace": "workspaces/additional-lift-center-clearance-v1-f7a0da6cfd445c85197fc0fd-base000",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f7a0da6cfd445c85197fc0fd.h5",
+      "source_episode_id": "f7a0da6cfd445c85197fc0fd",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd/runs/dynamics/additional-independent-v1-f7a0da6cfd445c85197fc0fd-aligned/f7a0da6cfd445c85197fc0fd",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_causal_box_face_alignment_with_passing_regression",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-f7a0da6cfd445c85197fc0fd",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      }
+    },
+    {
+      "id": "additional-lift-center-clearance-v1-f7a0da6cfd445c85197fc0fd-basem100",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "parent_workspace": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "workspace": "workspaces/additional-lift-center-clearance-v1-f7a0da6cfd445c85197fc0fd-basem100",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f7a0da6cfd445c85197fc0fd.h5",
+      "source_episode_id": "f7a0da6cfd445c85197fc0fd",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd/runs/dynamics/additional-independent-v1-f7a0da6cfd445c85197fc0fd-aligned/f7a0da6cfd445c85197fc0fd",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_causal_box_face_alignment_with_passing_regression",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-f7a0da6cfd445c85197fc0fd",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      }
+    },
+    {
+      "id": "additional-lift-center-clearance-v1-700a59388f33b29472d59243-base000",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-700a59388f33b29472d59243",
+      "parent_workspace": "workspaces/additional-independent-v1-700a59388f33b29472d59243",
+      "workspace": "workspaces/additional-lift-center-clearance-v1-700a59388f33b29472d59243-base000",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/700a59388f33b29472d59243.h5",
+      "source_episode_id": "700a59388f33b29472d59243",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_15",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-700a59388f33b29472d59243/runs/dynamics/additional-independent-v1-700a59388f33b29472d59243-aligned/700a59388f33b29472d59243",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_causal_box_face_alignment_with_passing_regression",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-700a59388f33b29472d59243",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      }
+    },
+    {
+      "id": "additional-lift-center-clearance-v1-700a59388f33b29472d59243-basem100",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-700a59388f33b29472d59243",
+      "parent_workspace": "workspaces/additional-independent-v1-700a59388f33b29472d59243",
+      "workspace": "workspaces/additional-lift-center-clearance-v1-700a59388f33b29472d59243-basem100",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/700a59388f33b29472d59243.h5",
+      "source_episode_id": "700a59388f33b29472d59243",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_15",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-700a59388f33b29472d59243/runs/dynamics/additional-independent-v1-700a59388f33b29472d59243-aligned/700a59388f33b29472d59243",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_causal_box_face_alignment_with_passing_regression",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-700a59388f33b29472d59243",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      }
+    },
+    {
+      "id": "additional-lift-center-clearance-v1-8d2d7f3d29228ccaf19c5ae9-base000",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8d2d7f3d29228ccaf19c5ae9",
+      "parent_workspace": "workspaces/additional-independent-v1-8d2d7f3d29228ccaf19c5ae9",
+      "workspace": "workspaces/additional-lift-center-clearance-v1-8d2d7f3d29228ccaf19c5ae9-base000",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8d2d7f3d29228ccaf19c5ae9.h5",
+      "source_episode_id": "8d2d7f3d29228ccaf19c5ae9",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_16",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-8d2d7f3d29228ccaf19c5ae9/runs/dynamics/additional-independent-v1-8d2d7f3d29228ccaf19c5ae9-aligned/8d2d7f3d29228ccaf19c5ae9",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_causal_box_face_alignment_with_passing_regression",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-8d2d7f3d29228ccaf19c5ae9",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      }
+    },
+    {
+      "id": "additional-lift-center-clearance-v1-8d2d7f3d29228ccaf19c5ae9-basem100",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8d2d7f3d29228ccaf19c5ae9",
+      "parent_workspace": "workspaces/additional-independent-v1-8d2d7f3d29228ccaf19c5ae9",
+      "workspace": "workspaces/additional-lift-center-clearance-v1-8d2d7f3d29228ccaf19c5ae9-basem100",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8d2d7f3d29228ccaf19c5ae9.h5",
+      "source_episode_id": "8d2d7f3d29228ccaf19c5ae9",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_16",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-8d2d7f3d29228ccaf19c5ae9/runs/dynamics/additional-independent-v1-8d2d7f3d29228ccaf19c5ae9-aligned/8d2d7f3d29228ccaf19c5ae9",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_causal_box_face_alignment_with_passing_regression",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-8d2d7f3d29228ccaf19c5ae9",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      }
+    },
+    {
+      "id": "additional-lift-center-clearance-v1-247ce7204e1b7227dfa0ec2d-base000",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-247ce7204e1b7227dfa0ec2d",
+      "parent_workspace": "workspaces/additional-independent-v1-247ce7204e1b7227dfa0ec2d",
+      "workspace": "workspaces/additional-lift-center-clearance-v1-247ce7204e1b7227dfa0ec2d-base000",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/247ce7204e1b7227dfa0ec2d.h5",
+      "source_episode_id": "247ce7204e1b7227dfa0ec2d",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_23",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-247ce7204e1b7227dfa0ec2d/runs/dynamics/additional-independent-v1-247ce7204e1b7227dfa0ec2d-aligned/247ce7204e1b7227dfa0ec2d",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_causal_box_face_alignment_with_passing_regression",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-247ce7204e1b7227dfa0ec2d",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      }
+    },
+    {
+      "id": "additional-lift-center-clearance-v1-247ce7204e1b7227dfa0ec2d-basem100",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-247ce7204e1b7227dfa0ec2d",
+      "parent_workspace": "workspaces/additional-independent-v1-247ce7204e1b7227dfa0ec2d",
+      "workspace": "workspaces/additional-lift-center-clearance-v1-247ce7204e1b7227dfa0ec2d-basem100",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/247ce7204e1b7227dfa0ec2d.h5",
+      "source_episode_id": "247ce7204e1b7227dfa0ec2d",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_23",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-247ce7204e1b7227dfa0ec2d/runs/dynamics/additional-independent-v1-247ce7204e1b7227dfa0ec2d-aligned/247ce7204e1b7227dfa0ec2d",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_causal_box_face_alignment_with_passing_regression",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-247ce7204e1b7227dfa0ec2d",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "schema": "feasible-retarget-goal-status-v2",
+  "verified_utc": "2026-10-07T16:45:02.710359+00:00",
+  "goal_status": "active",
+  "branch": "main",
+  "scope": "Explicit unique-source cohorts and separately counted retained attempts. No single global success rate is inferred from adaptive trials.",
+  "cluster": {
+    "persistent_workers": 50,
+    "ready_workers": 50,
+    "distinct_hosts": 50,
+    "root_experiment_workers": 43,
+    "reserved_diagnostic_workers": 7,
+    "temporary_bigym_extra_workers": [
+      "reachy-retarget-worker-7d46748688-74vxp",
+      "reachy-retarget-worker-7d46748688-7btrt",
+      "reachy-retarget-worker-7d46748688-7ppnz"
+    ]
+  },
+  "original_model": {
+    "additional_can": {
+      "unique_sources": 22,
+      "passed_sources": 15,
+      "fully_admitted_sources": 16,
+      "not_yet_fully_admitted": 6
+    },
+    "can_all_cohorts": {
+      "passed_unique_sources": 33,
+      "additional": 15,
+      "earlier_development": 2,
+      "held_out": 3,
+      "held_out_scope": "One earlier held-out policy pass plus two new-cohort source successes under different predeclared policies; not one-policy union rate",
+      "post_frozen_development": 13,
+      "native_source_identity_evidence": "docs/can-original-success-source-identity-v4.json"
+    },
+    "additional_boxes": {
+      "unique_sources": 28,
+      "passed_sources": 0
+    },
+    "heldout_can_v2": {
+      "unique_sources": 24,
+      "baseline_passed": 0,
+      "fully_admitted_sources": 2,
+      "primary_passed": 1,
+      "feedforward_ablation_passed": 1,
+      "policy_denominator": 24,
+      "physics_denominator_per_policy": 2,
+      "post_frozen_development_recovered_sources": 13
+    }
+  },
+  "alternative_models": {
+    "global_contact_4ms_additional_boxes": {
+      "unique_sources": 28,
+      "adaptive_passed": 22,
+      "lift_passed": 19,
+      "lift_total": 21,
+      "stack_passed": 3,
+      "stack_total": 7,
+      "frozen_policy_passed": 9
+    },
+    "can_solver_diagnosis": {
+      "trials": 7,
+      "passing_trials": 5,
+      "failing_trials": 2,
+      "newly_passing_unique_source": "8ee64ec58eb602a29bbc0827",
+      "original_model_success_count_unchanged": true
+    }
+  },
+  "publication": {
+    "attempts_published": 1524,
+    "canonical_physics_archives": 245,
+    "all_canonical_state_control_checks_passed": true,
+    "includes_failed_and_alternative_model_attempts": true,
+    "evidence": "docs/canonical-common-state-inspection-v19.json",
+    "additional_bigym_prefix_failure_evidence": "docs/datasets/bigym-acquisition-rendezvous-v1-evidence.json",
+    "attempt_count_scope": "Independently verified individual receipts, including incomplete batches; variants are not unique source demonstrations.",
+    "additional_a60_evidence": "docs/can-a60-source-speed-recovery-v1.json",
+    "additional_6a_evidence": "docs/6a80-carried-placement-recovery-v1.json",
+    "additional_a2_evidence": "docs/a2-carried-placement-recovery-v1.json"
+  },
+  "pending": {
+    "bigym": "Originalmodelrim12 reachesnativetask and97.188%carrycontact butfailscommon drift/stability/environmentdepth. Three furtherforce-cone-qualifiedgrasps fullIKattempts exposewrist/base limits. Widerbaseyaw and explicitlyinactive-right-hand planning arebeing checked. Originalmaterials/object/activelefttargets remainunchanged; no commonphysics success.",
+    "nonbox": "Original-hand Threading .005closure passes depth but fails4.029mm/3.584degree drift/task. Constant attachment and post-acquisition baseFF comparisons worsened outcomes, retained as rejected development; defaults remainunchanged. Actual native contact witnesses/COMwrench are being diagnosed.",
+    "heldout_can_v2": "Frozen policy rates remain1/24 each. Thirteen separate post-frozen development recoveries now include7029 after insertion-only base-axis cap0.30to0.25m/s, and a2 after native-partition-derived7mm placementX correction. Four previously static-screen-only failed native sources now have12fresh mobile/approach/facet proposals. Three older source-admitted failures have9quarter-point/source-clearance repair chunks.",
+    "stack": "9295 passed alternative contact4ms after20mm robot-only post-release return lift; original10mm comparison stillfails. Source4 free-carry slip remains before target contact.",
+    "can_acquisition": "fe117 recovered with measured fixedpatch alignment/contact wait and bounded calibrated0.20radclosureoffset; source/facet versions passall originalphysics/replay/sourcecoverage gates. The three prior successful policies remain unchanged and rerun3/3.",
+    "additional_can": "15/22 adaptive original-model successes;16havefullkinematicadmission including710. ItsFF0 source/traverse areclean, but nativepartition contact duringlower causestranslationdrift andjointmarginfailure; a minimal measuredattachment-derived correction is underdiagnosis.261v2derivedcache preservesall numericCandidate/source/reference arrays while restoring missingcontact0035label; fullplacementvariantcheck passescrosspod. Ninev1metadata-failed attempts retained; ninev2placementretrychunks running.",
+    "momagen": "Native pipeline and common-format IK archive completed for909 original rows with task-declared left hand active. Source target/time/object arrays are exact; max active-hand error .991mm/9.809mrad. Includes only breakfast_table_6 andcoffee_cup_7. No measured physics fields or RGB are fabricated. Physics remains unvalidated pending original assets/contact calibration/fixture reconstruction. Evidence: docs/datasets/momagen-task-hand-pipeline-v4.json."
+  },
+  "limitations": [
+    "Adaptive success unions are not held-out success-rate estimates.",
+    "One held-out Can pass does not establish broad generalization.",
+    "Some original-model box failures occur before hand contact due to unchanged source-model passive object/table penetration.",
+    "Geometric rejection in a bounded search is not proof of global infeasibility.",
+    "Physics success remains absent for BiGym and other nonbox tasks under current validated attempts."
+  ],
+  "historical_initial_source_snapshot": {
+    "path": "docs/status-snapshots/initial-43-source-status-20261007T075339.json",
+    "sha256": "909f043d18bc150b39f383a2f5839a5a29b876f76c0df33ac850571f1e606cce",
+    "scope": "Selected source-input trajectories, excluding earlier retries. Dataset variants may overlap; counts are not independent-demonstration counts."
+  },
+  "completed_root_batch": {
+    "label": "can-mobile-interior-reserve-v1",
+    "jobs": 44,
+    "all_artifacts_published": true,
+    "placement_search_jobs": 42,
+    "placement_search_admissions": 0,
+    "physical_passes": 1,
+    "physical_failures": 1
+  },
+  "geometric_development": {
+    "source_paths_admitted_original_azimuth": 6,
+    "source_paths_admitted_axial_alternatives": 7,
+    "independent_a60_source_path": 1,
+    "placement_or_physics_success_implied": false,
+    "evidence": [
+      "docs/can-mobile-source-and-placement-development-v1-evidence.json",
+      "docs/can-mobile-axial-grasp-development-v1-evidence.json",
+      "docs/can-mobile-extra-parent-materialization-v1.json",
+      "docs/can-axial-7f6-physics-v1-evidence.json",
+      "docs/can-mobile-wall-364-physics-v1-evidence.json",
+      "docs/can-mobile-wall-364-support-gap-v2.json"
+    ],
+    "additional22_remaining_source_admission": {
+      "unique_remaining_sources": 12,
+      "admitted_source_paths": 9,
+      "scope": "Sixprevious+threeadditional source-path admissions; only3ofthese9havefullplacementadmission at thissnapshot. Physicscounts separate."
+    }
+  },
+  "recent_physical_success_evidence": [
+    "docs/can-a3-support-wait-v1-evidence.json",
+    "docs/can-a3-support-wait-counterfactual-v1.json",
+    "docs/can-mobile-midpoint-physics-v2-evidence.json",
+    "docs/can-50bd-speed-support-v1-evidence.json",
+    "docs/can-mobile-source-speed-v1-evidence.json",
+    "docs/can-native-facet-carry-recovery-v1-evidence.json",
+    "docs/can-a60-source-speed-recovery-v1.json",
+    "docs/can-364-interior-touchdown-v1-evidence.json",
+    "docs/can-retimed-source-physics-v1-evidence.json",
+    "docs/can-source-speed-recovery-v2-evidence.json",
+    "docs/6a80-carried-placement-recovery-v1.json",
+    "docs/can-f15-planar-repair-v1-evidence.json",
+    "docs/can-7029-insertion-speed-recovery-v1-evidence.json",
+    "docs/a2-carried-placement-recovery-v1.json"
+  ],
+  "completed_root_batches": [
+    {
+      "label": "can-steeper-wall-placement-v1",
+      "jobs": 42,
+      "admitted_sources": 0,
+      "all_artifacts_published": true
+    },
+    {
+      "label": "can-retimed-source-repair-v1",
+      "jobs": 12,
+      "fully_admitted_sources": 4,
+      "all_artifacts_published": true
+    }
+  ],
+  "active_root_batches": [
+    {
+      "label": "can-261-axial-placement-v2",
+      "jobs": 9
+    },
+    {
+      "label": "can-old-lower-quarter-repair-v1",
+      "jobs": 9
+    },
+    {
+      "label": "can-untried-mobile-source-v1",
+      "jobs": 12
+    }
+  ]
+}

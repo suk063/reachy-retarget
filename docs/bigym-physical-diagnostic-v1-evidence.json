@@ -1,0 +1,162 @@
+{
+  "manifest": {
+    "jobs": [
+      {
+        "dataset": "bigym",
+        "id": "bigym-physical-diagnostic-v1",
+        "ik_attempt": "queue/tasks/bigym-feasible-pose-v1-l1-r-1/attempts/1791361535083003902-reachy-retarget-worker-7d46748688-b4chm",
+        "native_assets": "workspaces/bigym-native-assets-20261007-01",
+        "operation": "bigym_physics_diagnostic",
+        "parent_task": "bigym-feasible-pose-v1-l1-r-1",
+        "runtime_source_sha256": "68297d91eb79bffecbcf03ae8381b9d6e3014e5c35a91495cb854a37110320df",
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      }
+    ],
+    "label": "bigym-physical-diagnostic-v1",
+    "policy": "One full-clock native-scene diagnostic; original source task success is not reproduced and common dynamics validation is incomplete. No primary physical pass may be claimed."
+  },
+  "jobs": [
+    {
+      "job": {
+        "dataset": "bigym",
+        "id": "bigym-physical-diagnostic-v1",
+        "ik_attempt": "queue/tasks/bigym-feasible-pose-v1-l1-r-1/attempts/1791361535083003902-reachy-retarget-worker-7d46748688-b4chm",
+        "native_assets": "workspaces/bigym-native-assets-20261007-01",
+        "operation": "bigym_physics_diagnostic",
+        "parent_task": "bigym-feasible-pose-v1-l1-r-1",
+        "runtime_source_sha256": "68297d91eb79bffecbcf03ae8381b9d6e3014e5c35a91495cb854a37110320df",
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      },
+      "result": {
+        "actuator_scope": "Reachy base, arms, neck and grippers only",
+        "admission": {
+          "accepted": true,
+          "max_robot_penetration_m": 0.0,
+          "penetration_limit_m": 0.002,
+          "physics_validated": false,
+          "plate_floor_contact": false,
+          "plate_pad_contact": false,
+          "plate_table_contact": false,
+          "plate_target_contact": false,
+          "reset_semantics": "First archived post-action source plate pose and velocity, then fully free dynamics; robot initialized from derived first IK row",
+          "robot_contacts": [
+            {
+              "body1": "floor",
+              "body2": "drivewhl1_link",
+              "geom1": "floor",
+              "geom2": "drivewhl1_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl1_link",
+              "geom1": "floor",
+              "geom2": "drivewhl1_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl2_link",
+              "geom1": "floor",
+              "geom2": "drivewhl2_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl2_link",
+              "geom1": "floor",
+              "geom2": "drivewhl2_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl3_link",
+              "geom1": "floor",
+              "geom2": "drivewhl3_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            },
+            {
+              "body1": "floor",
+              "body2": "drivewhl3_link",
+              "geom1": "floor",
+              "geom2": "drivewhl3_link_collision_0",
+              "penetration_m": 0.0,
+              "self_collision": false
+            }
+          ],
+          "scene_sha256": "295e3850cd25dd6e61255fdfdaeb38c88a7a6ca6bca0c75d0a846499626dbc37",
+          "source_ik_attempt": "/mnt/reachy-retarget/queue/tasks/bigym-feasible-pose-v1-l1-r-1/attempts/1791361535083003902-reachy-retarget-worker-7d46748688-b4chm",
+          "source_ik_sha256": "7f07a1dd9fac282e6b3b60e3da42e5942feb4fb0e64fb17be082f601d5caff8c",
+          "source_task_success": false
+        },
+        "archive": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-physical-diagnostic-v1.hdf5",
+        "attempt": "/mnt/reachy-retarget/queue/tasks/bigym-physical-diagnostic-v1/attempts/1791362782891061801-reachy-retarget-worker-7d46748688-74vxp",
+        "diagnostic_gate_passed": false,
+        "diagnostic_only": true,
+        "error": null,
+        "finished_unix": 1791362973.6511374,
+        "max_robot_penetration_m": 0.0002444875733154117,
+        "missing_common_validation_gates": [
+          "measured robot speed/acceleration limits",
+          "joint-limit margins",
+          "positive self-collision clearance margins",
+          "contact grasp drift and stable bilateral contact"
+        ],
+        "native_scene_task_pass": false,
+        "native_task_predicate_final": {
+          "plate_floor_contact": false,
+          "plate_pad_contact": false,
+          "plate_table_contact": false,
+          "plate_target_contact": false,
+          "success": false,
+          "target_slot_distance_m": 0.4401263406103402,
+          "upright_error_rad": 0.21270441881701635
+        },
+        "object_state_writes_after_reset": 0,
+        "original_clock_preserved": true,
+        "penetration_limit_m": 0.002,
+        "physical_steps": 2252,
+        "physics_validated": false,
+        "plate_floor_contact_any": false,
+        "scene_path": "/mnt/reachy-retarget/queue/tasks/bigym-physical-diagnostic-v1/attempts/1791362782891061801-reachy-retarget-worker-7d46748688-74vxp/scene.xml",
+        "scene_sha256": "295e3850cd25dd6e61255fdfdaeb38c88a7a6ca6bca0c75d0a846499626dbc37",
+        "simulation_assumptions": [
+          "Original BiGym source version gap retained (recorded 4.0, public replay 4.1).",
+          "Reachy uses gravity-compensated ideal planar/arm/neck position servos; mobile wheel traction is not modeled.",
+          "Native task XML/mesh assets, masses, inertia, friction and contact parameters retained and checked.",
+          "Simulator version differs from native 3.1.5; this is a derived Reachy simulation."
+        ],
+        "source_frames": 2253,
+        "source_task_success": false,
+        "status": "diagnostic_failed",
+        "task_id": "bigym-physical-diagnostic-v1",
+        "validation_scope": "Native scene task/contact diagnostic; common dynamics gates and source reproduction remain unresolved"
+      },
+      "claims": [
+        {
+          "time": 1791362783.8797004,
+          "worker": "reachy-retarget-worker-7d46748688-74vxp",
+          "finished_unix": 1791362973.6511374
+        }
+      ]
+    }
+  ],
+  "collected_unix": 1791363113.185404,
+  "summary": {
+    "jobs": 1,
+    "claimed": 1,
+    "workers_used": 1,
+    "peak_overlapping_claims": 1,
+    "statuses": {
+      "diagnostic_failed": 1
+    },
+    "physical_passes": 0,
+    "alternate_model_passes": 0,
+    "unique_sources": 1
+  }
+}

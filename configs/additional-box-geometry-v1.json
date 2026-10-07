@@ -1,0 +1,332 @@
+{
+  "label": "additional-box-geometry-v1",
+  "status": "proposal_pending_v20_runtime_binding_and_root_enqueue",
+  "original_independent_source_count": 28,
+  "selected_failed_source_count": 6,
+  "attempt_count": 6,
+  "prior_adaptive_union_passes": 12,
+  "preflight_evidence": [
+    "docs/additional-box-grasp-roll-preflight-v1.json",
+    "docs/additional-box-grasp-roll-preflight-v2.json"
+  ],
+  "policy": "Minimum sampled-eligible positive pad-line roll: +15degrees for five original-base sources, +30degrees and base offset[-.05,+.05,0] for Stack demo6. Complete IK/path/fixture admission and unchanged control policy required.",
+  "scope": "Adaptive geometric follow-up, not an independent source bank or a new fixed-policy generalization rate. Sampled preflight is not full-path or physics validation. No source object, scene, gate or original trajectory clock edits.",
+  "jobs": [
+    {
+      "contact_profile": "global-contact-4ms",
+      "dataset": "robomimic",
+      "evaluation_split": "adaptive_causal_geometry_after_control_recovery_failure",
+      "id": "additional-box-geometry-v1-ab4336bad6ed07404a4ea8a1-roll15",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1/runs/dynamics/additional-independent-v1-ab4336bad6ed07404a4ea8a1-aligned/ab4336bad6ed07404a4ea8a1",
+      "parent_task": "additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "parent_workspace": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "physics_timestep_s": 0.001,
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/ab4336bad6ed07404a4ea8a1.h5",
+      "source_episode_id": "ab4336bad6ed07404a4ea8a1",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_7",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "task": "Lift",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-box-geometry-v1-ab4336bad6ed07404a4ea8a1-roll15",
+      "adaptive_parent_task": "additional-box-policy-v1-ab4336bad6ed07404a4ea8a1",
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd"
+    },
+    {
+      "contact_profile": "global-contact-4ms",
+      "dataset": "robomimic",
+      "evaluation_split": "adaptive_causal_geometry_after_control_recovery_failure",
+      "id": "additional-box-geometry-v1-4fe075e87220671b4ccf06b3-roll15",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-4fe075e87220671b4ccf06b3/runs/dynamics/additional-independent-v1-4fe075e87220671b4ccf06b3-aligned/4fe075e87220671b4ccf06b3",
+      "parent_task": "additional-independent-v1-4fe075e87220671b4ccf06b3",
+      "parent_workspace": "workspaces/additional-independent-v1-4fe075e87220671b4ccf06b3",
+      "physics_timestep_s": 0.001,
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/4fe075e87220671b4ccf06b3.h5",
+      "source_episode_id": "4fe075e87220671b4ccf06b3",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "task": "Lift",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-box-geometry-v1-4fe075e87220671b4ccf06b3-roll15",
+      "adaptive_parent_task": "additional-box-policy-v1-4fe075e87220671b4ccf06b3",
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd"
+    },
+    {
+      "contact_profile": "global-contact-4ms",
+      "dataset": "robomimic",
+      "evaluation_split": "adaptive_causal_geometry_after_control_recovery_failure",
+      "id": "additional-box-geometry-v1-c4ae3baf6a03958bc67de6ec-roll15",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-c4ae3baf6a03958bc67de6ec/runs/dynamics/additional-independent-v1-c4ae3baf6a03958bc67de6ec-aligned/c4ae3baf6a03958bc67de6ec",
+      "parent_task": "additional-independent-v1-c4ae3baf6a03958bc67de6ec",
+      "parent_workspace": "workspaces/additional-independent-v1-c4ae3baf6a03958bc67de6ec",
+      "physics_timestep_s": 0.001,
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/c4ae3baf6a03958bc67de6ec.h5",
+      "source_episode_id": "c4ae3baf6a03958bc67de6ec",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_21",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "task": "Lift",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-box-geometry-v1-c4ae3baf6a03958bc67de6ec-roll15",
+      "adaptive_parent_task": "additional-box-policy-v1-c4ae3baf6a03958bc67de6ec",
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd"
+    },
+    {
+      "contact_profile": "global-contact-4ms",
+      "dataset": "robomimic",
+      "evaluation_split": "adaptive_causal_geometry_after_control_recovery_failure",
+      "id": "additional-box-geometry-v1-a6e0ef052d6560e88d1f9827-roll15",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-a6e0ef052d6560e88d1f9827/runs/dynamics/additional-independent-v1-a6e0ef052d6560e88d1f9827-aligned/a6e0ef052d6560e88d1f9827",
+      "parent_task": "additional-independent-v1-a6e0ef052d6560e88d1f9827",
+      "parent_workspace": "workspaces/additional-independent-v1-a6e0ef052d6560e88d1f9827",
+      "physics_timestep_s": 0.001,
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/a6e0ef052d6560e88d1f9827.h5",
+      "source_episode_id": "a6e0ef052d6560e88d1f9827",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_22",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "task": "Lift",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-box-geometry-v1-a6e0ef052d6560e88d1f9827-roll15",
+      "adaptive_parent_task": "additional-box-policy-v1-a6e0ef052d6560e88d1f9827",
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd"
+    },
+    {
+      "contact_profile": "global-contact-4ms",
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_geometry_after_control_recovery_failure",
+      "id": "additional-box-geometry-v1-9295ddc7f5668cb10cae9f98-roll15",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "physics_timestep_s": 0.001,
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-box-geometry-v1-9295ddc7f5668cb10cae9f98-roll15",
+      "adaptive_parent_task": "additional-box-policy-v1-9295ddc7f5668cb10cae9f98",
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd"
+    },
+    {
+      "contact_profile": "global-contact-4ms",
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_geometry_after_control_recovery_failure",
+      "id": "additional-box-geometry-v1-b1d985821e4c4a4563c2e318-roll30",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "physics_timestep_s": 0.001,
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-box-geometry-v1-b1d985821e4c4a4563c2e318-roll30",
+      "adaptive_parent_task": "additional-box-policy-v1-b1d985821e4c4a4563c2e318",
+      "grasp_roll": {
+        "angle_rad": 0.5235987755982988
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.05,
+        0.0
+      ],
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd"
+    }
+  ]
+}

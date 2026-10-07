@@ -30,6 +30,19 @@ def inventory(store):
 
 
 def fetch_xet(store, items, batch_size=256):
+    from .scope import exclusion_reason
+    allowed = []
+    excluded_count = 0
+    for item in items:
+        reason = exclusion_reason(store, item["source_id"])
+        if reason:
+            store.update_file(item["source_id"], item["path"], status="excluded_objectless", error=reason)
+            excluded_count += 1
+        else:
+            allowed.append(item)
+    items = allowed
+    if not items:
+        return {"excluded_objectless": excluded_count}
     os.environ.setdefault("HF_XET_CACHE", str(store.root / "data/cache/xet"))
     os.environ.setdefault("HF_XET_CHUNK_CACHE_SIZE_BYTES", "0")
     os.environ.setdefault("HF_XET_HIGH_PERFORMANCE", "1")
@@ -46,7 +59,7 @@ def fetch_xet(store, items, batch_size=256):
         key = item["source_id"], item["path"]
         if key in hashes and "#" not in item["url"] and item.get("expected_sha256"):
             groups[item["source_id"]].append(item)
-    outcomes = collections.Counter()
+    outcomes = collections.Counter(excluded_objectless=excluded_count)
     for sid, rows in groups.items():
         if host_paused(store, rows[0]["url"]):
             outcomes["rate_wait"] += len(rows)

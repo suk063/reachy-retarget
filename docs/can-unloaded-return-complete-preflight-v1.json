@@ -1,0 +1,6094 @@
+{
+  "source": "2447e639d8694ab40028362b",
+  "runtime_source_sha256": "8b2ce5b8b3fe65653e9f0a9446c355b86804d659c700fd829ddf4a61ac9cb5be",
+  "unloaded_return_sha256": "eb6edaa1d4ce62279fad1ee4a5cfd53d0bbea0c8087bf538a180835e6cc5246b",
+  "scratch": "/tmp/can-return-complete-1791372852528588916",
+  "stages": [
+    {
+      "stage": "base",
+      "status": "passed",
+      "report": {
+        "base_xyyaw": null,
+        "right_arm_seed": [
+          -0.07174286951069012,
+          -0.902745775685186,
+          0.18542113837357807,
+          -1.361150358195674,
+          -0.20982220218473058,
+          0.03744438167939799,
+          -1.1980294239033369
+        ],
+        "gripper_admission": "open_envelope",
+        "gripper_closed_target_rad": null,
+        "inactive_left_gripper_rad": 2.0,
+        "gripper_admission_scope": "Static sampled robot aperture envelopes; actual gripper tracking and all contacts remain independently physics-gated",
+        "initial_base_xyyaw": [
+          -0.029801163279170817,
+          0.36483059168079435,
+          0.30899700503681604
+        ],
+        "final_base_xyyaw": [
+          0.4157678573601098,
+          0.2541154965543502,
+          0.3454510966474098
+        ],
+        "base_policy": "explicit original-clock base trajectory",
+        "completed_frames": 736,
+        "total_frames": 736,
+        "exception": null,
+        "physics_validated": false,
+        "max_ik_position_error_m": 0.000999404607187675,
+        "max_ik_rotation_error_rad": 0.009999723541465015,
+        "max_environment_penetration_m": 1.3877787807814457e-17,
+        "max_self_penetration_m": 0.0,
+        "min_self_clearance_m": 0.1245641237282776,
+        "min_joint_margin_rad": 0.031000000000000028,
+        "worst_collision_pairs": {
+          "environment": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "self": null
+        },
+        "artifact_sha256": "1e62bd07018f2800d6c829a787c3afd412169715a1b49d1565fde27eef406754",
+        "frozen_scene_sha256": "69d5fb62df731d55534b47b25cbbabffe4e5ff522611a276322d96cf091b1bb3",
+        "controller_identity": {
+          "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/reachy.py": "28bb18ac71bbf38e2ce45db1b0b523005ffc2141dfef97215d144390bc41cac8",
+          "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/collision.py": "155a338b662028192011ccf611e433b6b5fede677b336dc551e4d28427ee208b",
+          "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/reachy.urdf": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448",
+          "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/collision_spheres.json": "8d581c1954e16769601234585c2b15897223b381171bc46f36449e76230a2bd0"
+        },
+        "native_source_clock_sha256": "ed17f2188e731e78ed5687eea339e6536f40a5fe0fddbd13841f45b16bfca2ff",
+        "scope": "Robot base and right-arm joint configuration only; no source or scene changes",
+        "object_collision_scope": "Source reset object stays unchanged; static admission checks environment and robot self only",
+        "admission_checks": {
+          "completed": true,
+          "right_hand_ik": true,
+          "environment": true,
+          "self_collision": true,
+          "self_clearance": true,
+          "joint_margin": true
+        },
+        "admitted": true,
+        "peak_reference_base_speed_xyyaw": [
+          0.29782672707018365,
+          0.22338962052353953,
+          0.04612034085160443
+        ],
+        "peak_reference_arm_speed_rad_s": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3342421300047875,
+          1.127630783183699,
+          0.728222921366541,
+          1.1187550707523997,
+          0.44339910673778604,
+          2.0147477036544905,
+          1.5756845966238389
+        ]
+      }
+    },
+    {
+      "stage": "approach",
+      "status": "passed",
+      "report": {
+        "close_frame": 230,
+        "close_time_s": 2.3000000000000003,
+        "traverse_end_time_s": 1.1500000000000001,
+        "above_pose": [
+          [
+            0.06275235225911524,
+            -0.2570358199547016,
+            -0.9643623434924046,
+            0.327821550886635
+          ],
+          [
+            -0.028724296544190897,
+            0.9654013023998173,
+            -0.2591818668672216,
+            -0.21341591551752676
+          ],
+          [
+            0.9976156860605138,
+            0.04396490173935373,
+            0.05319802948474395,
+            1.009709434780315
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "requested_lift_m": 0.12,
+        "traverse_fraction": 0.5,
+        "exception": null,
+        "admission_checks": {
+          "complete": true,
+          "hand_ik": true,
+          "environment": true,
+          "self_collision": true,
+          "open_robot_object_no_overlap": true,
+          "self_clearance": true,
+          "joint_margin": true
+        },
+        "admitted": true,
+        "completed_frames": 736,
+        "total_frames": 736,
+        "physics_validated": false,
+        "proposal_sha256": "50454c1f06fa85e9bd277d48b65ba90cc8dd66015c85e22016345e01fb64c960",
+        "artifact_sha256": "683e12338467687c7d888b2bd592de143e0c0f42f18b5aa7ad9d93c512aed91f",
+        "scope": "Robot pregrasp TCP path and right-arm prefix only; original closure pose and closed suffix retained",
+        "object_check_scope": "Original object reset is unchanged; all pregrasp samples checked for robot/object overlap",
+        "max_ik_errors": [
+          0.000999404607187675,
+          0.009999723541465137
+        ],
+        "max_collision_depths_m": [
+          1.3877787807814457e-17,
+          0.0,
+          0.0
+        ],
+        "min_self_clearance_m": 0.1245641237282776,
+        "min_joint_margin_rad": 0.031000000000000028
+      }
+    },
+    {
+      "stage": "retime",
+      "status": "passed",
+      "report": {
+        "method": "local segment dilation with bounded reference speed and smoothed dilation envelope; linear joints, pose SLERP, zero-order held gripper intent",
+        "original_duration_s": 7.3500000000000005,
+        "duration_s": 8.82,
+        "duration_ratio": 1.2,
+        "speed_limits": [
+          0.55,
+          0.55,
+          1.5,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8,
+          0.8
+        ],
+        "peak_reference_acceleration": [
+          10.57644543094316,
+          7.097526709830548,
+          3.694248415532231,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          78.22763492425673,
+          34.04017153040728,
+          63.15927811068711,
+          58.21770185269859,
+          40.36994076473565,
+          55.70631881596968,
+          51.9141920228594
+        ],
+        "original_interval_complete": true,
+        "source_clock_artifact": "/tmp/can-return-complete-1791372852528588916/retime/time-map.npz",
+        "artifact_sha256": "d48f5b65f03be838d45127d3b098bd67db9630ce544bf288dce233f297c3be6b",
+        "physics_validated": false,
+        "note": "Reference limits are planning constraints; actual physical speed remains independently gated"
+      }
+    }
+  ],
+  "placement_candidates": [
+    {
+      "candidate": {
+        "id": 10,
+        "rank": [
+          0.1569349131154234,
+          10
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-10",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 6.809657794968337e-05,
+            "rotation_error_rad": 0.00014064166731166756,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.07438890198662457,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 6.083956401307903e-05,
+            "rotation_error_rad": 0.00011321567344524069,
+            "depths_m": {
+              "environment": 0.003803008723299158,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.12464215945384499,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 28,
+        "rank": [
+          0.16077386762885057,
+          28
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-28",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 8.427491239011875e-05,
+            "rotation_error_rad": 0.0003562948710143064,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.05173336695671776,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0001202877021228388,
+            "rotation_error_rad": 0.0003573895322801197,
+            "depths_m": {
+              "environment": 0.011129863604103854,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.07243246181855911,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 9,
+        "rank": [
+          0.16728073668225213,
+          9
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-9",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.000855733408655496,
+            "rotation_error_rad": 0.008727329819066739,
+            "depths_m": {
+              "environment": 0.003785768423882012,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 11,
+        "rank": [
+          0.16728073668225213,
+          11
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-11",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 7.36405268956731e-05,
+            "rotation_error_rad": 0.00041862613990218967,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.16464763564646845,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00017960820495157456,
+            "rotation_error_rad": 0.0009111784035423988,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.2406392775182994,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.000297661384033902,
+            "rotation_error_rad": 0.001281406817700402,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.17714358334937635,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0004067568509588876,
+            "rotation_error_rad": 0.0015830024210917496,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.14469094975519636,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 6.869492189560145e-05,
+            "rotation_error_rad": 0.0001371202511373419,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.27602090620310404,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 0.0001082405666352205,
+            "rotation_error_rad": 0.00015518748601776994,
+            "depths_m": {
+              "environment": 0.004979746570713538,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 27,
+        "rank": [
+          0.17111969119567932,
+          27
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-27",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009472563368907154,
+            "rotation_error_rad": 0.009647500806245511,
+            "depths_m": {
+              "environment": 0.009476300126608574,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 29,
+        "rank": [
+          0.17111969119567932,
+          29
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-29",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 4.82716418994445e-05,
+            "rotation_error_rad": 0.0002825885785371332,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.14641354901471065,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 5.7509209624055725e-05,
+            "rotation_error_rad": 0.00041929731267926525,
+            "depths_m": {
+              "environment": 0.0009897938739613327,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.20250234317282934,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.00012113769827112024,
+            "rotation_error_rad": 0.000567373284943332,
+            "depths_m": {
+              "environment": 0.0056358103609245825,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.10060014015805036,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 13,
+        "rank": [
+          0.1743882056353667,
+          13
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-13",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0003007543517247436,
+            "rotation_error_rad": 0.00070818498750852,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.08795850147795187,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0002805612809781811,
+            "rotation_error_rad": 0.0006310007530515129,
+            "depths_m": {
+              "environment": 0.0024597665465907535,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.11159625744126811,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 31,
+        "rank": [
+          0.17822716014879386,
+          31
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-31",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0002736149554344411,
+            "rotation_error_rad": 0.0014467758420287774,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.06172440550470243,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0003854048306553608,
+            "rotation_error_rad": 0.0013797596567164856,
+            "depths_m": {
+              "environment": 0.008913544250017193,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.08114487506873003,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 1,
+        "rank": [
+          0.18083326908390718,
+          1
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-1",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 5.081510490717467e-05,
+            "rotation_error_rad": 0.00014364725528245132,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.05767325664656325,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 5.3522121728207626e-05,
+            "rotation_error_rad": 0.00015264552915602098,
+            "depths_m": {
+              "environment": 0.004411395288350549,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.08789831229403378,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 12,
+        "rank": [
+          0.18230761790125222,
+          12
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-12",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009035430438071923,
+            "rotation_error_rad": 0.009312614345120013,
+            "depths_m": {
+              "environment": 0.0019445145210111206,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0008970465685675482,
+            "rotation_error_rad": 0.009492402712782913,
+            "depths_m": {
+              "environment": 0.010000605775669079,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_27",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 14,
+        "rank": [
+          0.18230761790125222,
+          14
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-14",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0002245441026961633,
+            "rotation_error_rad": 0.001027683465054456,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.17647573277092388,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0003000776561891904,
+            "rotation_error_rad": 0.001480028163685567,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.17754753204633844,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0004701473097206087,
+            "rotation_error_rad": 0.0017057445791316178,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.08302240161783608,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.000575418572004036,
+            "rotation_error_rad": 0.005805103693513904,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 3.521840242130774e-05,
+            "rotation_error_rad": 7.503657367727641e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.14367228200914356,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 7.150024507389219e-05,
+            "rotation_error_rad": 0.00014283537422741868,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.2749829163625488,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 0.00012685143563919508,
+            "rotation_error_rad": 0.0002073519831683606,
+            "depths_m": {
+              "environment": 0.007418598812668263,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 30,
+        "rank": [
+          0.1861465724146794,
+          30
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-30",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009321694410648197,
+            "rotation_error_rad": 0.009586104009005086,
+            "depths_m": {
+              "environment": 0.008167542718083835,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 32,
+        "rank": [
+          0.1861465724146794,
+          32
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-32",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0001359573178006338,
+            "rotation_error_rad": 0.000833359634638514,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.15727179668951613,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0001926534156029864,
+            "rotation_error_rad": 0.0013554904929422855,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.13687707882492495,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.002736613935524418,
+            "rotation_error_rad": 0.02748408585414271,
+            "depths_m": {
+              "environment": 0.009697851006025158,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 0,
+        "rank": [
+          0.19117909265073593,
+          0
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-0",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009413245032028355,
+            "rotation_error_rad": 0.009569488122693556,
+            "depths_m": {
+              "environment": 0.005684389713843726,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 2,
+        "rank": [
+          0.19117909265073593,
+          2
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-2",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 2.5321381826136088e-05,
+            "rotation_error_rad": 0.00014411422978783238,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1505507805206973,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 7.723538049683639e-05,
+            "rotation_error_rad": 0.0003971336519380847,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.23612034168953755,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.00015163805740831806,
+            "rotation_error_rad": 0.0006501614969536561,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.15476462325453577,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.00024570207081297656,
+            "rotation_error_rad": 0.0009053561616717534,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.09360508068714701,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 8.583810158516431e-05,
+            "rotation_error_rad": 0.00014369495751515292,
+            "depths_m": {
+              "environment": 0.0001572283483181058,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.2301208552436959,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 0.00012842354575884725,
+            "rotation_error_rad": 0.00017151066525628126,
+            "depths_m": {
+              "environment": 0.008621506526111709,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 16,
+        "rank": [
+          0.19184149815531,
+          16
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-16",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0007002718440469584,
+            "rotation_error_rad": 0.004468893792569433,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.09752583412256655,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00085464301155797,
+            "rotation_error_rad": 0.006711611834991284,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.041885238094311994,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.00382029160136204,
+            "rotation_error_rad": 0.038361607007139024,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 34,
+        "rank": [
+          0.19568045266873718,
+          34
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-34",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 2.3567229579830166e-05,
+            "rotation_error_rad": 9.143298735955516e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.0694730036332506,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0009531407252133471,
+            "rotation_error_rad": 0.009573040923639045,
+            "depths_m": {
+              "environment": 0.011148721810332954,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 15,
+        "rank": [
+          0.19814547772900593,
+          15
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-15",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009546156566297801,
+            "rotation_error_rad": 0.00997067654004452,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0008590641738435952,
+            "rotation_error_rad": 0.009350069463131657,
+            "depths_m": {
+              "environment": 0.007624116932821388,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_27",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 17,
+        "rank": [
+          0.19814547772900593,
+          17
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-17",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0005002072384859991,
+            "rotation_error_rad": 0.0018474329469220186,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.18703893209411387,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0005618086384762482,
+            "rotation_error_rad": 0.0029439666935434745,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.11363463061399776,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.00365630605083706,
+            "rotation_error_rad": 0.036712827588716065,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 4,
+        "rank": [
+          0.1982865616038505,
+          4
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-4",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.00025480769873384836,
+            "rotation_error_rad": 0.0008183639938837095,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.0699360358169796,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00027144529532124184,
+            "rotation_error_rad": 0.0007862043671419969,
+            "depths_m": {
+              "environment": 0.00259119269828989,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.10913061210243113,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 33,
+        "rank": [
+          0.2019844322424331,
+          33
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-33",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0008796229392610556,
+            "rotation_error_rad": 0.009154580903079461,
+            "depths_m": {
+              "environment": 0.006697555902331012,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 35,
+        "rank": [
+          0.2019844322424331,
+          35
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-35",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            0.9775,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0003122782657967638,
+            "rotation_error_rad": 0.0016009219662778103,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.16759183481434647,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00044817261209823944,
+            "rotation_error_rad": 0.002619672936990547,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.07076909807184584,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.01308887031776101,
+            "rotation_error_rad": 0.13145358906185667,
+            "depths_m": {
+              "environment": 0.0005094887403588237,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 3,
+        "rank": [
+          0.206205973869736,
+          3
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-3",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009136787913012189,
+            "rotation_error_rad": 0.009374947897292181,
+            "depths_m": {
+              "environment": 0.004263630753515821,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 5,
+        "rank": [
+          0.206205973869736,
+          5
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-5",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0001260479461460194,
+            "rotation_error_rad": 0.0005045831658901565,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1609294188605611,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0001816417013481622,
+            "rotation_error_rad": 0.00105686443136304,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.17133962904049704,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.000278498484559474,
+            "rotation_error_rad": 0.0011218908338844538,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.05730056512845727,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0034480494846244117,
+            "rotation_error_rad": 0.03462252348061283,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 19,
+        "rank": [
+          0.20649368766232512,
+          19
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-19",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 9.873861283156772e-06,
+            "rotation_error_rad": 2.431855949680697e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.06350111103874861,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 1.076417291382081e-05,
+            "rotation_error_rad": 2.5213577142166622e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.10224329398171605,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 9.269902862462538e-06,
+            "rotation_error_rad": 2.2090556196161797e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.11187470509989722,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0009656799433856485,
+            "rotation_error_rad": 0.009695059870457564,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 7.062650009249407e-05,
+            "rotation_error_rad": 5.930443845023402e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.15866840154354722,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 0.00013582766302778145,
+            "rotation_error_rad": 0.0002573607149528951,
+            "depths_m": {
+              "environment": 0.0008865856777172102,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_27",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1422274126467249,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 0.00036223342417226697,
+            "rotation_error_rad": 0.0006174062222438366,
+            "depths_m": {
+              "environment": 0.008509152675575058,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_25",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.11314657917584936,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 37,
+        "rank": [
+          0.20912366992893572,
+          37
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-37",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 3.79401418770997e-05,
+            "rotation_error_rad": 0.00013418535539134357,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.04107776745158048,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 4.410867860053938e-05,
+            "rotation_error_rad": 0.00016229286376050203,
+            "depths_m": {
+              "environment": 0.0029629918356270926,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.052014357892093466,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 7,
+        "rank": [
+          0.2157398541237938,
+          7
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-7",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0006000667098456855,
+            "rotation_error_rad": 0.003500120790954398,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.07872117515384852,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.000833376236308322,
+            "rotation_error_rad": 0.006880403649373879,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.041885238094311994,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0009938115192105483,
+            "rotation_error_rad": 0.00997897622319722,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0009948879558192268,
+            "rotation_error_rad": 0.009990030299499233,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 6.724791124876364e-05,
+            "rotation_error_rad": 0.0001742027287167672,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.08643930451921417,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 4.288041977648094e-05,
+            "rotation_error_rad": 2.2592604700613645e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.17124529345934414,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 4.423537702085014e-05,
+            "rotation_error_rad": 0.00011816116258443635,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.2733199905267594,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 1.0,
+            "position_error_m": 0.0004165634233485206,
+            "rotation_error_rad": 0.0002869435133058531,
+            "depths_m": {
+              "environment": 0.03872484028028058,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_31",
+                "r_hand_palm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.2984178510314004,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 18,
+        "rank": [
+          0.21683951122915388,
+          18
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-18",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009228961695601622,
+            "rotation_error_rad": 0.009364564387081274,
+            "depths_m": {
+              "environment": 0.0013634704310774672,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0008718684884281523,
+            "rotation_error_rad": 0.008879153872569412,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0008623171265702946,
+            "rotation_error_rad": 0.00873555415050485,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0009190878816695576,
+            "rotation_error_rad": 0.009232679570474156,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 4.994145348673405e-05,
+            "rotation_error_rad": 6.060047389900452e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.06343034571643946,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 7.928145905327001e-05,
+            "rotation_error_rad": 0.0001342307297933127,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.09156252654233482,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 0.000582772933925478,
+            "rotation_error_rad": 0.0007188654131670806,
+            "depths_m": {
+              "environment": 0.0030477352564896023,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_25",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.10608427204529353,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 20,
+        "rank": [
+          0.21683951122915388,
+          20
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-20",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 3.7713346295536845e-05,
+            "rotation_error_rad": 0.00021843539312943014,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1552583392458079,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00011150330830836668,
+            "rotation_error_rad": 0.0005108435441807454,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.27382822960368347,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0001790853656065355,
+            "rotation_error_rad": 0.0006953463570867204,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.21616234557743402,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.00024092156144680225,
+            "rotation_error_rad": 0.000823000364259407,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.18014515562374672,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 7.167360355068151e-05,
+            "rotation_error_rad": 9.182388981662149e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 0.00012060516464465285,
+            "rotation_error_rad": 0.00011221588511961964,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 0.0003771157187000526,
+            "rotation_error_rad": 0.0002247887153620941,
+            "depths_m": {
+              "environment": 0.006715502260247528,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_25",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 36,
+        "rank": [
+          0.21946949349576447,
+          36
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-36",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009643451660905695,
+            "rotation_error_rad": 0.009773729098147705,
+            "depths_m": {
+              "environment": 0.006944786500885408,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 38,
+        "rank": [
+          0.21946949349576447,
+          38
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-38",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            30.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 8.550607783785703e-06,
+            "rotation_error_rad": 1.7188554349975194e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.13655200047693267,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 2.226000704838985e-05,
+            "rotation_error_rad": 0.00011668608308751472,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.23496786178412332,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 5.5860543197902495e-05,
+            "rotation_error_rad": 0.00023972426562796342,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.14075125800350247,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.00011432471495411449,
+            "rotation_error_rad": 0.0003912067288628176,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.05779473235927851,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 9.91379789916226e-05,
+            "rotation_error_rad": 0.00013637271090691393,
+            "depths_m": {
+              "environment": 0.0025744633572999383,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_27",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.19761697113094379,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 6,
+        "rank": [
+          0.2220438336974897,
+          6
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-6",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0008576063326223629,
+            "rotation_error_rad": 0.008902786205187101,
+            "depths_m": {
+              "environment": 0.002675069773017268,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 8,
+        "rank": [
+          0.2220438336974897,
+          8
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-8",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0025,
+            -0.2975
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.00033560960129338987,
+            "rotation_error_rad": 0.0010144742117254239,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.17032498472682084,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0004106080780943125,
+            "rotation_error_rad": 0.0022885908030572917,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.10599946921717368,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0070428502124897565,
+            "rotation_error_rad": 0.07071494862706815,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 22,
+        "rank": [
+          0.22394698018226844,
+          22
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-22",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.00014850378750529917,
+            "rotation_error_rad": 0.00040620065764074964,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.0771648263652081,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0001503409574354915,
+            "rotation_error_rad": 0.00041712095462468317,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1260846997347687,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0009559428418333237,
+            "rotation_error_rad": 0.00959755785355916,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0009853219877745448,
+            "rotation_error_rad": 0.009891273186232277,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 5.302604333305542e-05,
+            "rotation_error_rad": 7.976474875585443e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.15155165788515423,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 0.00012077340744910074,
+            "rotation_error_rad": 0.00011934806066148534,
+            "depths_m": {
+              "environment": 0.004182295286827298,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_33",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.2951537173701438,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 40,
+        "rank": [
+          0.22657696244887904,
+          40
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-40",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.00021206161816963442,
+            "rotation_error_rad": 0.000943635734569357,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.0512408605649699,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00023311415195284763,
+            "rotation_error_rad": 0.0009903888180630431,
+            "depths_m": {
+              "environment": 0.0004681228534963998,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.06829891704653784,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0009787669936237838,
+            "rotation_error_rad": 0.00982943727104975,
+            "depths_m": {
+              "environment": 0.00012179053977596596,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_27",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0009862388648676048,
+            "rotation_error_rad": 0.009904042640153947,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 4.401212491266811e-05,
+            "rotation_error_rad": 9.529230028745626e-05,
+            "depths_m": {
+              "environment": 0.007170963864309581,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_33",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1471290947079289,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 21,
+        "rank": [
+          0.23186639244815394,
+          21
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-21",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0008778586366710232,
+            "rotation_error_rad": 0.008986416095400952,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0009337182800772407,
+            "rotation_error_rad": 0.009675704828632125,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0009066863034478702,
+            "rotation_error_rad": 0.009302143925032343,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0009290513533064791,
+            "rotation_error_rad": 0.00935230284128917,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 4.5026174014792795e-05,
+            "rotation_error_rad": 5.998572772637723e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.07906075666434459,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 5.847686937706182e-05,
+            "rotation_error_rad": 7.592885346094956e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.12537640054977978,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 0.00034496202984386694,
+            "rotation_error_rad": 0.00036954724360738607,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1592246804989354,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 1.0,
+            "position_error_m": 0.0002624295685646051,
+            "rotation_error_rad": 7.713393108139675e-05,
+            "depths_m": {
+              "environment": 0.036277779714060314,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_31",
+                "r_hand_palm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.11031867115062088,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 23,
+        "rank": [
+          0.23186639244815394,
+          23
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-23",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 8.690569435674668e-05,
+            "rotation_error_rad": 0.0004931658694550089,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.16551699584051893,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00017975338993806965,
+            "rotation_error_rad": 0.0007853101558108452,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.2095130137181213,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.00030621991282822234,
+            "rotation_error_rad": 0.0010066786354410151,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1209398620753277,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.00042420354097057785,
+            "rotation_error_rad": 0.0010608264781082363,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.05620193301495835,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 5.018551854947557e-05,
+            "rotation_error_rad": 7.521669168136055e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.17618961482721918,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 8.288654358475115e-05,
+            "rotation_error_rad": 0.00011032519814390718,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 0.00020349445574808752,
+            "rotation_error_rad": 0.0002067237674431703,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 1.0,
+            "position_error_m": 1.710630663868804e-05,
+            "rotation_error_rad": 1.1107261314955811e-05,
+            "depths_m": {
+              "environment": 0.036244680908072424,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_25",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 39,
+        "rank": [
+          0.23449637471476453,
+          39
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-39",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009764412196868299,
+            "rotation_error_rad": 0.00997784836748103,
+            "depths_m": {
+              "environment": 0.005863365435026687,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 41,
+        "rank": [
+          0.23449637471476453,
+          41
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-41",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 9.117506147384928e-05,
+            "rotation_error_rad": 0.00012055186779594474,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.14683794735308847,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00011438566027945012,
+            "rotation_error_rad": 0.000622302078151937,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.16908133151780447,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.00016560614551928648,
+            "rotation_error_rad": 0.000944476345342652,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.040347425311356155,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.00929146907035074,
+            "rotation_error_rad": 0.09329306431955998,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 25,
+        "rank": [
+          0.24140027270221173,
+          25
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-25",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.00041569080221594035,
+            "rotation_error_rad": 0.0015168338440936034,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.08695685843593792,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0004280724094898026,
+            "rotation_error_rad": 0.001332774391132414,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.07370386608830531,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.000992747651353503,
+            "rotation_error_rad": 0.009966240800516446,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0009685452844971249,
+            "rotation_error_rad": 0.009723041405843088,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 3.611796237678889e-05,
+            "rotation_error_rad": 6.952877066556987e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1174252430853932,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 4.4782163086045623e-05,
+            "rotation_error_rad": 9.763184212660613e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.2297536779573579,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 0.00010490814994105457,
+            "rotation_error_rad": 0.0001774255252642488,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 1.0,
+            "position_error_m": 0.0006922250070490276,
+            "rotation_error_rad": 0.0003519433185453627,
+            "depths_m": {
+              "environment": 0.020936154446626352,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_31",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 43,
+        "rank": [
+          0.24403025496882233,
+          43
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-43",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0005222350743982368,
+            "rotation_error_rad": 0.002680360472627326,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.060046149918031144,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0006549944986406918,
+            "rotation_error_rad": 0.004861396637599201,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.041885238094311994,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.000995291356677976,
+            "rotation_error_rad": 0.009994516943740948,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0009601340457263443,
+            "rotation_error_rad": 0.00964210680080162,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 3.223925824964384e-05,
+            "rotation_error_rad": 4.796004822943858e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1164813280629588,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 3.9369852025215635e-05,
+            "rotation_error_rad": 9.920938959424634e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.22812065033405243,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 7.180140131531571e-05,
+            "rotation_error_rad": 0.00015477701095097302,
+            "depths_m": {
+              "environment": 0.0011055083868566629,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_31",
+                "r_hand_proximal_mimic_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 1.0,
+            "position_error_m": 0.00041630058173979624,
+            "rotation_error_rad": 0.0003552232841441238,
+            "depths_m": {
+              "environment": 0.042121958564770016,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_31",
+                "r_hand_proximal_mimic_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 24,
+        "rank": [
+          0.24770425227590764,
+          24
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-24",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0009406145992277482,
+            "rotation_error_rad": 0.009741484208434863,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.0008861833566828691,
+            "rotation_error_rad": 0.009379688579129677,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0008926656604040867,
+            "rotation_error_rad": 0.00922959682070357,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0009301585905574779,
+            "rotation_error_rad": 0.009340743329726326,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 4.187717347763756e-05,
+            "rotation_error_rad": 5.245858531746937e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.09075989944056134,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 5.331794664661108e-05,
+            "rotation_error_rad": 7.31074553268752e-05,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.15042649260635,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 0.00021890309898279852,
+            "rotation_error_rad": 0.0001851588990894889,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.20041661331500943,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 1.0,
+            "position_error_m": 7.282661694339876e-05,
+            "rotation_error_rad": 3.652769945785746e-05,
+            "depths_m": {
+              "environment": 0.031245271716875734,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_31",
+                "r_hand_palm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.16331233741850182,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 26,
+        "rank": [
+          0.24770425227590764,
+          26
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-26",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.00023859789461164473,
+            "rotation_error_rad": 0.0011050474621404048,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.17525877424245329,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00034528436264233403,
+            "rotation_error_rad": 0.0018441115171067928,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.14536667397903302,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.0005183617281554583,
+            "rotation_error_rad": 0.004755518160524584,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 1.0,
+            "position_error_m": 0.0010805763642737908,
+            "rotation_error_rad": 0.010845912989634332,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.25,
+            "position_error_m": 5.828407578832803e-05,
+            "rotation_error_rad": 0.0002207599334446855,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.08631307687512035,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.5,
+            "position_error_m": 5.705008545284054e-05,
+            "rotation_error_rad": 0.00011375180884349392,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.1684721939935826,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 0.75,
+            "position_error_m": 0.00010242269287457296,
+            "rotation_error_rad": 0.00011587358442718134,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.26992559749665485,
+            "passed": true
+          },
+          {
+            "phase": "lower",
+            "weight": 1.0,
+            "position_error_m": 0.0007891455386740881,
+            "rotation_error_rad": 0.0003968225400658425,
+            "depths_m": {
+              "environment": 0.018066606660092854,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_25",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.30000000000000004,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 42,
+        "rank": [
+          0.25033423454251824,
+          42
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-42",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            -20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.0008562708278446606,
+            "rotation_error_rad": 0.008840000901119402,
+            "depths_m": {
+              "environment": 0.004638713654035021,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_9",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    },
+    {
+      "candidate": {
+        "id": 44,
+        "rank": [
+          0.25033423454251824,
+          44
+        ],
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        }
+      },
+      "artifact": "/tmp/can-return-complete-1791372852528588916/placement-44",
+      "screen": {
+        "screening_only": true,
+        "physics_validated": false,
+        "exception": null,
+        "passed": false,
+        "parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.27249999999999996
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "samples": [
+          {
+            "phase": "traverse",
+            "weight": 0.0,
+            "position_error_m": 0.0008470437731168543,
+            "rotation_error_rad": 0.008524776939173959,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.25,
+            "position_error_m": 0.00028598010099162004,
+            "rotation_error_rad": 0.00042493730962025843,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.15613980766574942,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.5,
+            "position_error_m": 0.00033168194493929414,
+            "rotation_error_rad": 0.001445716340913034,
+            "depths_m": {
+              "environment": 0.0,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {},
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.10280997651034601,
+            "passed": true
+          },
+          {
+            "phase": "traverse",
+            "weight": 0.75,
+            "position_error_m": 0.008572562863500922,
+            "rotation_error_rad": 0.08607082046596014,
+            "depths_m": {
+              "environment": 0.001500234594786431,
+              "self": 0.0
+            },
+            "worst_collision_pairs": {
+              "environment": [
+                "source_scene_geom_27",
+                "r_elbow_forearm_link_collision_0"
+              ]
+            },
+            "clearance_m": 0.1245641237282778,
+            "joint_margin_rad": 0.031000000000000028,
+            "passed": false
+          }
+        ],
+        "limitation": "Sparse sequential IK may reject a different feasible branch; no full-path or physical claim"
+      },
+      "status": "screen_rejected"
+    }
+  ],
+  "selected": null,
+  "physics_validated": false
+}

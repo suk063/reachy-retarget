@@ -1,0 +1,337 @@
+{
+  "label": "can-3873-quarter-physics-v1",
+  "jobs": [
+    {
+      "id": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+      "workspace": "workspaces/can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff1",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf-aligned/3873eb8d6e8cc439aa59e4bf",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/3873eb8d6e8cc439aa59e4bf.h5",
+      "source_normalized_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf-v1/materialization.json",
+        "sha256": "d40c8f1cdfa03153cb4c9c2c33bfc7ad0c661e9cf51ae7793c3e6b2b39b9580c",
+        "original_archive_sha256": "b1f9cc8a408fc734340776962f2dfa527b1df3e6cf8a95fe1ec829d9094f9b15"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 504,
+        "anchor_reference": [
+          0.4192633918159041,
+          0.29465280708726316,
+          0.33762150942004326,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.14249350578220266,
+          -0.413070928041437,
+          -0.8631035896655934,
+          -1.2746354734872924,
+          -0.4925999999999999,
+          0.11750331103551742,
+          -0.4280230985799234
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.43067498909681357,
+            0.8117609305493194
+          ],
+          [
+            -0.10324355083074402,
+            0.7179488683805212
+          ],
+          [
+            -0.4931158768323234,
+            0.57744912714291
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "diagnostic_seed": {
+        "archived_screen_sha256": "6cfc0b0e567edbde898937a41c82361596e4b32ccf2333fd2b93dde492d3e04e",
+        "sample_time_s": 5.04,
+        "body": "r_elbow_forearm_link",
+        "depth_m": 0.0025476848840472184,
+        "seed_base_x_perturbation_m": 0.0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "retimed_source_clearance": {
+        "minimum_m": 0.003,
+        "enforce_planar_neighbor_speed": true
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.9750000000000001,
+          -0.25916666666666666
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          -170.81285890442686
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.9527476565149353,
+              1.875
+            ],
+            [
+              -1.145,
+              1.0657401399952158
+            ],
+            [
+              -2.8549243485305116,
+              3.719041780732703
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true,
+        "midpoint_quarter_probes": true,
+        "midpoint_position_reserve_m": 0.0001,
+        "midpoint_fixture_reserve_m": 0.0001
+      },
+      "source_prefix_velocity_feedforward": 1.0,
+      "geometry_selection_rank": [
+        2.9962978141406476,
+        0.013565683830083055,
+        311
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-old-lower-quarter-repair-v1/can-old-lower-quarter-repair-v1-3873eb8d6e8cc439aa59e4bf-chunk0/backup.json",
+          "sha256": "e5dd76ab8575a7f5db0adbe860f67e48ebf405345e042256e5ae7a665245d519"
+        },
+        {
+          "path": "runs/local-spool-pool/can-old-lower-quarter-repair-v1/can-old-lower-quarter-repair-v1-3873eb8d6e8cc439aa59e4bf-chunk1/backup.json",
+          "sha256": "949724179ef9973e0f3387d45cc9b8c6754baa5632738667c5884f744ff904a2"
+        },
+        {
+          "path": "runs/local-spool-pool/can-old-lower-quarter-repair-v1/can-old-lower-quarter-repair-v1-3873eb8d6e8cc439aa59e4bf-chunk2/backup.json",
+          "sha256": "64eaf2a36e8c3aaef96a8eb9e9fac8ef479454ba85962f4f7e2c88398e2924e9"
+        }
+      ],
+      "comparison_scope": "Minimum original geometry rank selected onlyafterall3quarter-repair chunkscompleted. Fresh complete-source reconstruction retains exact source-retiming/repair and selectedplacementparameters. Originalsource/model/physicalgates unchanged; adaptive development."
+    },
+    {
+      "id": "can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+      "workspace": "workspaces/can-3873-quarter-physics-v1-3873eb8d6e8cc439aa59e4bf-ff0",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf-aligned/3873eb8d6e8cc439aa59e4bf",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/3873eb8d6e8cc439aa59e4bf.h5",
+      "source_normalized_sha256": "a763c69e76c3f57d0fdf21845d43f23e47947905fd93bbb8858499be2b0a2a07",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-3873eb8d6e8cc439aa59e4bf-v1/materialization.json",
+        "sha256": "d40c8f1cdfa03153cb4c9c2c33bfc7ad0c661e9cf51ae7793c3e6b2b39b9580c",
+        "original_archive_sha256": "b1f9cc8a408fc734340776962f2dfa527b1df3e6cf8a95fe1ec829d9094f9b15"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 504,
+        "anchor_reference": [
+          0.4192633918159041,
+          0.29465280708726316,
+          0.33762150942004326,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.14249350578220266,
+          -0.413070928041437,
+          -0.8631035896655934,
+          -1.2746354734872924,
+          -0.4925999999999999,
+          0.11750331103551742,
+          -0.4280230985799234
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.43067498909681357,
+            0.8117609305493194
+          ],
+          [
+            -0.10324355083074402,
+            0.7179488683805212
+          ],
+          [
+            -0.4931158768323234,
+            0.57744912714291
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "diagnostic_seed": {
+        "archived_screen_sha256": "6cfc0b0e567edbde898937a41c82361596e4b32ccf2333fd2b93dde492d3e04e",
+        "sample_time_s": 5.04,
+        "body": "r_elbow_forearm_link",
+        "depth_m": 0.0025476848840472184,
+        "seed_base_x_perturbation_m": 0.0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "retimed_source_clearance": {
+        "minimum_m": 0.003,
+        "enforce_planar_neighbor_speed": true
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.9750000000000001,
+          -0.25916666666666666
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          -170.81285890442686
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.9527476565149353,
+              1.875
+            ],
+            [
+              -1.145,
+              1.0657401399952158
+            ],
+            [
+              -2.8549243485305116,
+              3.719041780732703
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true,
+        "midpoint_quarter_probes": true,
+        "midpoint_position_reserve_m": 0.0001,
+        "midpoint_fixture_reserve_m": 0.0001
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        2.9962978141406476,
+        0.013565683830083055,
+        311
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-old-lower-quarter-repair-v1/can-old-lower-quarter-repair-v1-3873eb8d6e8cc439aa59e4bf-chunk0/backup.json",
+          "sha256": "e5dd76ab8575a7f5db0adbe860f67e48ebf405345e042256e5ae7a665245d519"
+        },
+        {
+          "path": "runs/local-spool-pool/can-old-lower-quarter-repair-v1/can-old-lower-quarter-repair-v1-3873eb8d6e8cc439aa59e4bf-chunk1/backup.json",
+          "sha256": "949724179ef9973e0f3387d45cc9b8c6754baa5632738667c5884f744ff904a2"
+        },
+        {
+          "path": "runs/local-spool-pool/can-old-lower-quarter-repair-v1/can-old-lower-quarter-repair-v1-3873eb8d6e8cc439aa59e4bf-chunk2/backup.json",
+          "sha256": "64eaf2a36e8c3aaef96a8eb9e9fac8ef479454ba85962f4f7e2c88398e2924e9"
+        }
+      ],
+      "comparison_scope": "Minimum original geometry rank selected onlyafterall3quarter-repair chunkscompleted. Fresh complete-source reconstruction retains exact source-retiming/repair and selectedplacementparameters. Originalsource/model/physicalgates unchanged; adaptive development."
+    }
+  ]
+}

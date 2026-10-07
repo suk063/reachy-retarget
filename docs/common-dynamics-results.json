@@ -1,0 +1,96 @@
+{
+  "created": "2026-10-07T06:01:53.421502+00:00",
+  "run": "runs/object-matrix/runs/dynamics/common_matrix_v2",
+  "protocol": "Full original source intervals; same global configuration for every task; inspected local regression episodes, not unseen-object evaluation.",
+  "counts": {
+    "episodes": 20,
+    "unsupported": 9,
+    "audited_physical_pass": 1
+  },
+  "tasks": {
+    "PickPlaceCan": {
+      "episodes": 3,
+      "audited_physical_pass": 1,
+      "selected_failure_counts": {
+        "task_stable_final_1s": 1,
+        "bilateral_lifted_grasp": 1,
+        "carry_contact_95pct": 2,
+        "actual_arm_speed_1rad_s": 1,
+        "joint_margin_25mrad": 1,
+        "grasp_translation_3mm": 1,
+        "grasp_rotation_3deg": 1,
+        "object_environment_penetration_2mm": 1
+      }
+    },
+    "Lift": {
+      "episodes": 3,
+      "audited_physical_pass": 0,
+      "selected_failure_counts": {
+        "object_environment_penetration_2mm": 3
+      }
+    },
+    "NutAssemblySquare": {
+      "episodes": 3,
+      "audited_physical_pass": 0,
+      "selected_failure_counts": {
+        "task_stable_final_1s": 3,
+        "grasp_translation_3mm": 1,
+        "hand_object_penetration_1mm": 3,
+        "object_environment_penetration_2mm": 3,
+        "bilateral_lifted_grasp": 2,
+        "carry_contact_95pct": 2,
+        "actual_arm_speed_1rad_s": 1,
+        "self_clearance_9mm": 1
+      }
+    },
+    "PickCube-v1": {
+      "episodes": 5,
+      "audited_physical_pass": 0,
+      "selected_failure_counts": {
+        "RuntimeError: Early stop: severe robot collision": 5,
+        "task_stable_final_1s": 5,
+        "bilateral_lifted_grasp": 5,
+        "carry_contact_95pct": 5,
+        "robot_environment_penetration_2mm": 5,
+        "actual_arm_speed_1rad_s": 5,
+        "actual_base_speed_limits": 5,
+        "rollout_complete": 5
+      }
+    },
+    "Stack_D0": {
+      "episodes": 3,
+      "audited_physical_pass": 0,
+      "selected_failure_counts": {
+        "object_environment_penetration_2mm": 3,
+        "task_stable_final_1s": 1,
+        "bilateral_lifted_grasp": 1,
+        "carry_contact_95pct": 1
+      }
+    },
+    "Threading_D0": {
+      "episodes": 3,
+      "audited_physical_pass": 0,
+      "selected_failure_counts": {
+        "task_stable_final_1s": 3,
+        "grasp_translation_3mm": 3,
+        "grasp_rotation_3deg": 3,
+        "hand_object_penetration_1mm": 3,
+        "self_clearance_9mm": 2,
+        "object_environment_penetration_2mm": 1
+      }
+    }
+  },
+  "retained_trials": 96,
+  "complete_trial_rollouts": 71,
+  "actuator_audits_pass": 96,
+  "max_replay_error": 0,
+  "optimization_samples": 1424,
+  "optimization_sample_checksums_verified": true,
+  "optimizer_added_physical_passes": 0,
+  "raw_files_verified": 54,
+  "raw_bytes_verified": 673639339,
+  "config_sha256": "dd4bfc383253e61aa5fb24b9be5fe857fe6485645cbc03c23148bbb4e931852e",
+  "source_interval_start_s": 0,
+  "offline_tests_passed": 286,
+  "branch": "main"
+}

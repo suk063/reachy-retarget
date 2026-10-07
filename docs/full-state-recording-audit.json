@@ -1,0 +1,431 @@
+{
+  "audit_schema": "reachy-retarget-full-state-recording-audit-v1",
+  "audited_utc": "2026-10-07T07:17:49.545233+00:00",
+  "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/full-state-can-v3.hdf5",
+  "sha256": "d24b39f924fe57d36e3da5b9179f6e2732acf0ee108c9ebd03d23fd3dc575784",
+  "bytes": 9979369,
+  "scope": "Independent read-only audit of immutable v3. No cluster files or tasks modified. Kinematic restoration used isolated scratch MjData; no simulation stepping or new physics-success claim. Historical v2 audit retained separately.",
+  "supersedes_archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/full-state-can-v2.hdf5",
+  "historical_v2_audit": "docs/full-state-recording-audit-v2.json",
+  "runtime_source": "/mnt/reachy-retarget/releases/97ed2c808832e18871f769d0e4d7fcbff22127e81413ed51a98ce352539ea719",
+  "rows": 761,
+  "terminal_boundaries": 1,
+  "timestamp_range_s": [
+    0.0,
+    7.599999999999385
+  ],
+  "terminal_time_s": 7.609999999999384,
+  "physics_dt_s": 0.002,
+  "joint_names": [
+    "base_x",
+    "base_y",
+    "base_yaw",
+    "neck_roll",
+    "neck_pitch",
+    "neck_yaw",
+    "r_shoulder_pitch",
+    "r_shoulder_roll",
+    "r_elbow_yaw",
+    "r_elbow_pitch",
+    "r_wrist_roll",
+    "r_wrist_pitch",
+    "r_wrist_yaw",
+    "r_hand_finger",
+    "r_hand_finger_proximal",
+    "r_hand_finger_distal",
+    "r_hand_finger_proximal_mimic",
+    "r_hand_finger_distal_mimic",
+    "l_shoulder_pitch",
+    "l_shoulder_roll",
+    "l_elbow_yaw",
+    "l_elbow_pitch",
+    "l_wrist_roll",
+    "l_wrist_pitch",
+    "l_wrist_yaw",
+    "l_hand_finger",
+    "l_hand_finger_proximal",
+    "l_hand_finger_distal",
+    "l_hand_finger_proximal_mimic",
+    "l_hand_finger_distal_mimic"
+  ],
+  "joint_groups": {
+    "left_arm": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "right_arm": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "neck": [
+      3,
+      4,
+      5
+    ],
+    "left_gripper": [
+      25
+    ],
+    "right_gripper": [
+      13
+    ],
+    "base": [
+      0,
+      1,
+      2
+    ],
+    "no_direct_joint_actuator": [
+      14,
+      15,
+      16,
+      17,
+      26,
+      27,
+      28,
+      29
+    ]
+  },
+  "actuator_count": 22,
+  "body_count": 103,
+  "task_objects": {
+    "Can": "Can_main",
+    "pickup_bin": "bin1",
+    "receptacle": "bin2"
+  },
+  "camera_pose_names": [
+    "left_head",
+    "right_head",
+    "torso"
+  ],
+  "state_shape": [
+    761,
+    800
+  ],
+  "applied_controls_shape": [
+    761,
+    5,
+    22
+  ],
+  "checks": {
+    "sidecar_archive_sha256_matches": true,
+    "no_rgb_or_image_datasets": true,
+    "all_numeric_channels_finite": true,
+    "all_pre_action_channels_row_aligned": true,
+    "all_observations_have_terminal_boundary": true,
+    "strictly_increasing_time": true,
+    "uniform_100hz_rows": true,
+    "all_control_intervals_10ms": true,
+    "terminal_boundary_after_final_interval": true,
+    "all_five_substeps_valid": true,
+    "substep_time_matches_interval": true,
+    "command_matches_observed_actuator_control": true,
+    "command_matches_first_applied_substep": true,
+    "controller_targets_match_commands": true,
+    "servo_memory_targets_match_commands": true,
+    "all_controller_identity_and_format_present": true,
+    "scalar_joint_positions_match_qpos": true,
+    "scalar_joint_velocities_match_qvel": true,
+    "only_declared_task_object_channels": true,
+    "body_pose_inventory_exact_robot_plus_task": true,
+    "required_arm_neck_gripper_coverage": true,
+    "required_group_sizes": true,
+    "pickup_alias_matches_body": true,
+    "receptacle_alias_matches_body": true,
+    "all_rows_and_terminal_reproduce_kinematic_snapshots": true,
+    "base_local_twist_axes_rotation": true,
+    "base_planar_twist_projection": true,
+    "left_tcp_base_relative_position": true,
+    "left_tcp_base_relative_rotation": true,
+    "left_tcp_relative_velocity_transport": true,
+    "right_tcp_base_relative_position": true,
+    "right_tcp_base_relative_rotation": true,
+    "right_tcp_relative_velocity_transport": true,
+    "head_base_relative_position": true,
+    "head_base_relative_rotation": true,
+    "head_relative_velocity_transport": true,
+    "scene_sha256_matches_model_identity": true,
+    "urdf_sha256_matches_model_identity": true,
+    "all_replay_scene_asset_hashes_match": true,
+    "archive_inventory_and_sidecar_metadata_identical": true
+  },
+  "metadata_checks": {
+    "robot_type_is_target_reachy2": true,
+    "fps_and_clock_match_measured_100hz": true,
+    "source_only_model_and_actions_not_promoted": true,
+    "source_input_hash_explicitly_qualified": true,
+    "position_servo_action_semantics": true,
+    "actual_control_labels_present": true,
+    "source_url_and_revision_match_verified_ledger": true,
+    "external_source_provenance_raw_hash_matches_inherited_source": true,
+    "no_missing_source_provenance": true,
+    "target_model_reference_hash_verified": true,
+    "state_and_issued_controls_assess_complete": true,
+    "source_normalized_input_hash_verified_on_cluster": true
+  },
+  "max_absolute_errors": {
+    "uniform_100hz_rows": 1.1015494072452725e-15,
+    "all_control_intervals_10ms": 1.1015494072452725e-15,
+    "terminal_boundary_after_final_interval": 0.0,
+    "substep_time_matches_interval": 1.1015494072452725e-15,
+    "command_matches_observed_actuator_control": 0.0,
+    "command_matches_first_applied_substep": 0.0,
+    "controller_targets_match_commands": 0.0,
+    "servo_memory_targets_match_commands": 0.0,
+    "scalar_joint_positions_match_qpos": 0.0,
+    "scalar_joint_velocities_match_qvel": 0.0,
+    "pickup_alias_matches_body": 0.0,
+    "receptacle_alias_matches_body": 0.0,
+    "base_local_twist_axes_rotation": 1.6653345369377348e-16,
+    "base_planar_twist_projection": 1.6653345369377348e-16,
+    "left_tcp_base_relative_position": 2.220446049250313e-16,
+    "left_tcp_base_relative_rotation": 4.440892098500626e-16,
+    "left_tcp_relative_velocity_transport": 1.1102230246251565e-16,
+    "right_tcp_base_relative_position": 4.440892098500626e-16,
+    "right_tcp_base_relative_rotation": 6.661338147750939e-16,
+    "right_tcp_relative_velocity_transport": 8.881784197001252e-16,
+    "head_base_relative_position": 4.440892098500626e-16,
+    "head_base_relative_rotation": 5.551115123125783e-16,
+    "head_relative_velocity_transport": 3.469446951953614e-18
+  },
+  "kinematic_restoration_max_errors": {
+    "body_position_m": 0.0,
+    "body_rotation_matrix": 2.1094237467877974e-15,
+    "body_twist": 0.0,
+    "tcp_position_m": 0.0,
+    "tcp_rotation_matrix": 1.7763568394002505e-15,
+    "tcp_twist": 0.0,
+    "camera_position_m": 0.0,
+    "camera_rotation_matrix": 8.881784197001252e-16,
+    "physics_qpos": 0.0,
+    "physics_qvel": 0.0
+  },
+  "model_identity": {
+    "scene_sha256": "b4380eebae8c36dcb55d29703c74d539638f1d3db6f52366b46cf992eca2658b",
+    "source_urdf_sha256": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448"
+  },
+  "verified_scene_asset_count": 14,
+  "provenance": {
+    "source_urls": [
+      "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+    ],
+    "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+    "raw_sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+    "source_normalized_hdf5_sha256": "2551a7b158da391b63ce42f649b9ff6477b20f468a9c108399e01310c715a040"
+  },
+  "state_assessment": {
+    "state_contract": "reachy-retarget-state-observations-v1",
+    "rows": 761,
+    "state_observations_complete": true,
+    "table_fields_complete": true,
+    "rgb_required": false,
+    "missing_fields": [],
+    "undefined_task_roles": [],
+    "errors": [],
+    "recorded_command_fields": [
+      "command/joint_position"
+    ],
+    "command_fields_without_semantics": [],
+    "issued_control_modes": [
+      "joint_position"
+    ],
+    "command_profile": "position-servos-with-recorded-feedback-memory-v1",
+    "required_issued_command_fields": [
+      "command/joint_position"
+    ],
+    "issued_command_fields_without_semantics": [],
+    "missing_control_fields": [],
+    "control_errors": [],
+    "complete_recorded_command_profile": true,
+    "actual_controls_complete": true,
+    "control_recording_complete": true,
+    "all_control_modes_available": false,
+    "alternative_control_fields_missing": [
+      "command/joint_velocity",
+      "command/left_tcp_pose",
+      "command/right_tcp_pose",
+      "command/head_pose",
+      "command/base_twist"
+    ],
+    "physics_validated": false,
+    "policy_ready": false,
+    "native_v5_compatibility_assessed": false
+  },
+  "control_views": {
+    "status": "views_derived_from_saved_channels",
+    "derived_channel_count": 118,
+    "command_coverage": {
+      "left_arm": [
+        "joint_position"
+      ],
+      "right_arm": [
+        "joint_position"
+      ],
+      "neck": [
+        "joint_position"
+      ],
+      "base": [
+        "joint_position"
+      ],
+      "left_gripper": [
+        "joint_position"
+      ],
+      "right_gripper": [
+        "joint_position"
+      ]
+    },
+    "missing_alternative_commands": [
+      "recorded_command/left_arm/joint_velocity",
+      "recorded_command/left_arm/pose",
+      "recorded_command/left_arm/twist",
+      "recorded_command/right_arm/joint_velocity",
+      "recorded_command/right_arm/pose",
+      "recorded_command/right_arm/twist",
+      "recorded_command/neck/joint_velocity",
+      "recorded_command/neck/pose",
+      "recorded_command/neck/twist",
+      "recorded_command/base/joint_velocity",
+      "recorded_command/base/pose",
+      "recorded_command/base/twist",
+      "recorded_command/left_gripper/joint_velocity",
+      "recorded_command/right_gripper/joint_velocity"
+    ],
+    "measured_state_transitions_are_issued_commands": false
+  },
+  "physical_result": {
+    "status": "physical_fail",
+    "physics_validated": false,
+    "failure_reasons": [
+      "task_stable_final_1s",
+      "bilateral_lifted_grasp",
+      "carry_contact_95pct",
+      "hand_object_penetration_1mm",
+      "object_environment_penetration_2mm",
+      "actual_arm_speed_1rad_s"
+    ],
+    "max_lift_m": 0.00690817704219171,
+    "bilateral_carry_fraction": 0.0,
+    "max_object_environment_penetration_m": 0.010378756067854987,
+    "max_arm_speed_rad_s": 4.348692178857121,
+    "final_stable_s": 0.0,
+    "max_hand_object_penetration_m": 0.001224994027494752
+  },
+  "existing_actuator_replay_evidence": {
+    "actuator_replay_pass": true,
+    "max_qpos_error": 0.0,
+    "max_qvel_error": 0.0,
+    "max_object_pose_error": 0.0,
+    "meaning": "Control replay equivalence; task and contact success remain separate recorded gates"
+  },
+  "differences_from_v2_numeric_channels": {
+    "applied_controls": 2.220446049250313e-15,
+    "command/joint_position": 2.220446049250313e-15,
+    "observation/actuator_control": 2.220446049250313e-15,
+    "observation/actuator_force": 897.6299401929009,
+    "observation/actuator_velocity": 2.969102854557942,
+    "observation/base_pose": 0.005462531224549809,
+    "observation/base_twist": 0.298686811253782,
+    "observation/base_twist_local": 0.298686811253782,
+    "observation/base_twist_world": 0.29868681125378205,
+    "observation/body_poses": 1.423973760640583,
+    "observation/body_twists_world": 13.254889718939058,
+    "observation/cameras/left_head/pose": 1.0833678131021385,
+    "observation/cameras/right_head/pose": 1.0833678131021385,
+    "observation/cameras/torso/pose": 1.3129475168041638,
+    "observation/head_pose": 0.005437751954776117,
+    "observation/head_pose_base": 4.203440610250908e-05,
+    "observation/head_twist_base": 0.29756047694720444,
+    "observation/head_twist_relative_base": 0.0195489683087826,
+    "observation/head_twist_world": 0.2975604769472045,
+    "observation/joint_position": 0.05176749868682112,
+    "observation/joint_velocity": 2.969102854557942,
+    "observation/left_tcp_pose": 0.005289168929628135,
+    "observation/left_tcp_pose_base": 0.0035033291049149096,
+    "observation/left_tcp_twist_base": 0.5898579806014244,
+    "observation/left_tcp_twist_relative_base": 0.5898579806014244,
+    "observation/left_tcp_twist_world": 0.5893006486206098,
+    "observation/objects/Can/parts/body_0103/pose": 0.47688394889924685,
+    "observation/objects/Can/parts/body_0103/twist_world": 13.254889718939058,
+    "observation/objects/Can/pose": 0.47688394889924685,
+    "observation/objects/Can/qpos": 0.47688394889924685,
+    "observation/objects/Can/qvel": 16.2381040220796,
+    "observation/pickup_pose": 0.47688394889924685,
+    "observation/qpos": 0.47688394889924685,
+    "observation/qvel": 16.2381040220796,
+    "observation/right_tcp_pose": 1.42397372269314,
+    "observation/right_tcp_pose_base": 1.422539317777482,
+    "observation/right_tcp_twist_base": 1.8143544463208614,
+    "observation/right_tcp_twist_relative_base": 1.8143544463208614,
+    "observation/right_tcp_twist_world": 1.7941915585503192,
+    "physics_state": 2166.7132280442247,
+    "terminal/observation/actuator_force": 2.366614353377372e-07,
+    "terminal/observation/actuator_velocity": 1.156927837420454e-08,
+    "terminal/observation/base_pose": 3.78524989130824e-11,
+    "terminal/observation/base_twist": 5.242407443082075e-10,
+    "terminal/observation/base_twist_local": 5.242407443082075e-10,
+    "terminal/observation/base_twist_world": 5.521911234246991e-10,
+    "terminal/observation/body_poses": 0.4660152131415083,
+    "terminal/observation/body_twists_world": 0.0013201288970193243,
+    "terminal/observation/cameras/left_head/pose": 3.728328756835708e-11,
+    "terminal/observation/cameras/right_head/pose": 3.752953503521894e-11,
+    "terminal/observation/cameras/torso/pose": 3.783789948030858e-11,
+    "terminal/observation/head_pose": 3.7853165046897175e-11,
+    "terminal/observation/head_pose_base": 3.7339714653583655e-12,
+    "terminal/observation/head_twist_base": 5.242407443082075e-10,
+    "terminal/observation/head_twist_relative_base": 5.980418041953587e-11,
+    "terminal/observation/head_twist_world": 5.52202055959528e-10,
+    "terminal/observation/joint_position": 4.4272640469004756e-10,
+    "terminal/observation/joint_velocity": 2.3370780513779422e-08,
+    "terminal/observation/left_tcp_pose": 2.539332077944323e-10,
+    "terminal/observation/left_tcp_pose_base": 2.775036173074952e-10,
+    "terminal/observation/left_tcp_twist_base": 4.599749949177652e-09,
+    "terminal/observation/left_tcp_twist_relative_base": 4.599749949177652e-09,
+    "terminal/observation/left_tcp_twist_world": 4.788158939560941e-09,
+    "terminal/observation/objects/Can/parts/body_0103/pose": 0.4660152131415083,
+    "terminal/observation/objects/Can/parts/body_0103/twist_world": 0.0013201288970193243,
+    "terminal/observation/objects/Can/pose": 0.4660152131415083,
+    "terminal/observation/objects/Can/qpos": 0.46601521314150846,
+    "terminal/observation/objects/Can/qvel": 0.0015654526265556675,
+    "terminal/observation/pickup_pose": 0.4660152131415083,
+    "terminal/observation/qpos": 0.46601521314150846,
+    "terminal/observation/qvel": 0.0015654526265556675,
+    "terminal/observation/right_tcp_pose": 6.810352282116128e-11,
+    "terminal/observation/right_tcp_pose_base": 6.810352282116128e-11,
+    "terminal/observation/right_tcp_twist_base": 1.1225600530615401e-09,
+    "terminal/observation/right_tcp_twist_relative_base": 1.1225600530615401e-09,
+    "terminal/observation/right_tcp_twist_world": 1.0667260241736628e-09,
+    "terminal/physics_state": 0.46601521314150846
+  },
+  "metadata_issues": [],
+  "conclusion": {
+    "recorded_numeric_state_and_actual_controls_consistent": true,
+    "metadata_clean": true,
+    "physics_success": false,
+    "native_rgb_policy_ready": false
+  },
+  "comparison_with_v2": {
+    "note": "Distinct attempts of the same source demonstration, not independent demonstrations. Raw array component differences above include quaternion sign choices and are not geometric errors. Position/orientation differences below use sign-invariant rotation comparisons. Same-attempt actuator replay passes exactly; cross-attempt equality is not claimed.",
+    "pose_comparison": {
+      "base": {
+        "max_position_difference_m": 0.006536339393645128,
+        "max_orientation_difference_rad": 0.010927926896847042
+      },
+      "right_tcp": {
+        "max_position_difference_m": 0.029939943812421137,
+        "max_orientation_difference_rad": 0.054535234476989006
+      },
+      "Can": {
+        "max_position_difference_m": 0.06601148606517565,
+        "max_orientation_difference_rad": 1.0114427816865386
+      }
+    }
+  }
+}

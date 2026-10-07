@@ -1,0 +1,884 @@
+{
+  "label": "additional-can-supported-descent-v1",
+  "status": "pending_next_runtime_publication_and_storage_recovery_not_submitted",
+  "immutable_pending_manifest": true,
+  "runtime_binding": {
+    "required": true,
+    "placeholder": "PENDING_NEXT_PUBLISHED_RELEASE",
+    "procedure": "Preserve this pending file unchanged. Create a separate bound manifest containing its SHA256, replace every job runtime pin with the same verified published SHA256, then submit only the bound copy.",
+    "worker_rejection": "Placeholder is deliberately not a 64-character hexadecimal release hash."
+  },
+  "original_source_denominator": 22,
+  "selected_source_episode_count": 1,
+  "attempt_count": 6,
+  "policy": "Bounded extra robot descent at the unchanged selected placement. Compare 4 and 6 mm to retained 2 mm baseline for each of three existing closures; measured support stops descent. Do not change loaded rotation speed or source prefix control.",
+  "diagnosis_evidence": "docs/can-phase-diagnosis-v1.json",
+  "comparison": {
+    "variable": "supported_placement.extra_descent_m",
+    "values": [
+      0.004,
+      0.006
+    ],
+    "closures": [
+      "contact_005",
+      "contact_010",
+      "contact_020"
+    ],
+    "baseline_results_retained": [
+      {
+        "task": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_005",
+        "source_episode": "aec964373b1b75854938d701",
+        "variant": "contact_005",
+        "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd",
+        "parameter": "extra_descent_m",
+        "value": 0.002,
+        "result_path": "queue/tasks/additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_005/result.json"
+      },
+      {
+        "task": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_010",
+        "source_episode": "aec964373b1b75854938d701",
+        "variant": "contact_010",
+        "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd",
+        "parameter": "extra_descent_m",
+        "value": 0.002,
+        "result_path": "queue/tasks/additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_010/result.json"
+      },
+      {
+        "task": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_020",
+        "source_episode": "aec964373b1b75854938d701",
+        "variant": "contact_020",
+        "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd",
+        "parameter": "extra_descent_m",
+        "value": 0.002,
+        "result_path": "queue/tasks/additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_020/result.json"
+      }
+    ],
+    "baseline_runtime_caveat": "Historical baseline releases precede the measured opening guard. New experiments must report their exact release; no claim of a pure single-code-change causal trial across releases.",
+    "extra_conditions": "No new feedforward, approach order, geometric attachment, reset alignment, source timing, contact model or gate changes. Existing local retiming and selected base path are inherited unchanged."
+  },
+  "acquisition_state": "Existing source data and cached base admission only; no network transfers",
+  "publication_prerequisites": [
+    "Shared storage write/read/fsync health restored",
+    "Runtime SHA256 bound to a published verified release",
+    "Full IK/collision checks rerun for every candidate",
+    "Original source arrays and failed attempts retained"
+  ],
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-aec964373b1b75854938d701",
+      "parent_workspace": "workspaces/additional-independent-v1-aec964373b1b75854938d701",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/aec964373b1b75854938d701.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_005-descent004",
+      "workspace": "workspaces/additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_005-descent004",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_005",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.004,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          40.0,
+          -20.0
+        ]
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_selection": {
+        "admitted_base_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+        "admitted_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-complete",
+        "base_candidate": {
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "id": 9,
+          "rank": [
+            0.0,
+            1,
+            9
+          ],
+          "seed": "seed9"
+        },
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "full_geometric_admission_artifact": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09",
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "grasp_roll": {
+          "angle_rad": 0.2617993877991494
+        },
+        "physics_validated": false,
+        "placement_parameters": {
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "extra_descent_m": 0.002,
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "release_aperture_rad": 1.4,
+          "retreat_speed_factor": 1.0,
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ]
+        },
+        "selection_rank": [
+          0.2617993877991494,
+          0.0,
+          1,
+          9,
+          0.17666786039002658,
+          12,
+          0.2617993877991494
+        ],
+        "source_episode": "aec964373b1b75854938d701"
+      },
+      "causal_comparison": {
+        "task": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_005",
+        "source_episode": "aec964373b1b75854938d701",
+        "variant": "contact_005",
+        "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd",
+        "parameter": "extra_descent_m",
+        "value": 0.002,
+        "result_path": "queue/tasks/additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_005/result.json",
+        "baseline_manifest": "configs/additional-can-roll-physics-v1.json",
+        "baseline_manifest_sha256": "624f91db225ae87c6df13945e8f42d5f049bf536fd6009f398d0fae22eebb4ed",
+        "changed_parameter": "supported_placement.extra_descent_m",
+        "requested_value": 0.004,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-aec964373b1b75854938d701",
+      "parent_workspace": "workspaces/additional-independent-v1-aec964373b1b75854938d701",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/aec964373b1b75854938d701.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_005-descent006",
+      "workspace": "workspaces/additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_005-descent006",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_005",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.006,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          40.0,
+          -20.0
+        ]
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_selection": {
+        "admitted_base_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+        "admitted_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-complete",
+        "base_candidate": {
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "id": 9,
+          "rank": [
+            0.0,
+            1,
+            9
+          ],
+          "seed": "seed9"
+        },
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "full_geometric_admission_artifact": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09",
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "grasp_roll": {
+          "angle_rad": 0.2617993877991494
+        },
+        "physics_validated": false,
+        "placement_parameters": {
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "extra_descent_m": 0.002,
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "release_aperture_rad": 1.4,
+          "retreat_speed_factor": 1.0,
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ]
+        },
+        "selection_rank": [
+          0.2617993877991494,
+          0.0,
+          1,
+          9,
+          0.17666786039002658,
+          12,
+          0.2617993877991494
+        ],
+        "source_episode": "aec964373b1b75854938d701"
+      },
+      "causal_comparison": {
+        "task": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_005",
+        "source_episode": "aec964373b1b75854938d701",
+        "variant": "contact_005",
+        "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd",
+        "parameter": "extra_descent_m",
+        "value": 0.002,
+        "result_path": "queue/tasks/additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_005/result.json",
+        "baseline_manifest": "configs/additional-can-roll-physics-v1.json",
+        "baseline_manifest_sha256": "624f91db225ae87c6df13945e8f42d5f049bf536fd6009f398d0fae22eebb4ed",
+        "changed_parameter": "supported_placement.extra_descent_m",
+        "requested_value": 0.006,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-aec964373b1b75854938d701",
+      "parent_workspace": "workspaces/additional-independent-v1-aec964373b1b75854938d701",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/aec964373b1b75854938d701.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_010-descent004",
+      "workspace": "workspaces/additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_010-descent004",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_010",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.004,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          40.0,
+          -20.0
+        ]
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_selection": {
+        "admitted_base_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+        "admitted_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-complete",
+        "base_candidate": {
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "id": 9,
+          "rank": [
+            0.0,
+            1,
+            9
+          ],
+          "seed": "seed9"
+        },
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "full_geometric_admission_artifact": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09",
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "grasp_roll": {
+          "angle_rad": 0.2617993877991494
+        },
+        "physics_validated": false,
+        "placement_parameters": {
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "extra_descent_m": 0.002,
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "release_aperture_rad": 1.4,
+          "retreat_speed_factor": 1.0,
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ]
+        },
+        "selection_rank": [
+          0.2617993877991494,
+          0.0,
+          1,
+          9,
+          0.17666786039002658,
+          12,
+          0.2617993877991494
+        ],
+        "source_episode": "aec964373b1b75854938d701"
+      },
+      "causal_comparison": {
+        "task": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_010",
+        "source_episode": "aec964373b1b75854938d701",
+        "variant": "contact_010",
+        "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd",
+        "parameter": "extra_descent_m",
+        "value": 0.002,
+        "result_path": "queue/tasks/additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_010/result.json",
+        "baseline_manifest": "configs/additional-can-roll-physics-v1.json",
+        "baseline_manifest_sha256": "624f91db225ae87c6df13945e8f42d5f049bf536fd6009f398d0fae22eebb4ed",
+        "changed_parameter": "supported_placement.extra_descent_m",
+        "requested_value": 0.004,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-aec964373b1b75854938d701",
+      "parent_workspace": "workspaces/additional-independent-v1-aec964373b1b75854938d701",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/aec964373b1b75854938d701.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_010-descent006",
+      "workspace": "workspaces/additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_010-descent006",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_010",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.006,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          40.0,
+          -20.0
+        ]
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_selection": {
+        "admitted_base_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+        "admitted_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-complete",
+        "base_candidate": {
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "id": 9,
+          "rank": [
+            0.0,
+            1,
+            9
+          ],
+          "seed": "seed9"
+        },
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "full_geometric_admission_artifact": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09",
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "grasp_roll": {
+          "angle_rad": 0.2617993877991494
+        },
+        "physics_validated": false,
+        "placement_parameters": {
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "extra_descent_m": 0.002,
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "release_aperture_rad": 1.4,
+          "retreat_speed_factor": 1.0,
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ]
+        },
+        "selection_rank": [
+          0.2617993877991494,
+          0.0,
+          1,
+          9,
+          0.17666786039002658,
+          12,
+          0.2617993877991494
+        ],
+        "source_episode": "aec964373b1b75854938d701"
+      },
+      "causal_comparison": {
+        "task": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_010",
+        "source_episode": "aec964373b1b75854938d701",
+        "variant": "contact_010",
+        "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd",
+        "parameter": "extra_descent_m",
+        "value": 0.002,
+        "result_path": "queue/tasks/additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_010/result.json",
+        "baseline_manifest": "configs/additional-can-roll-physics-v1.json",
+        "baseline_manifest_sha256": "624f91db225ae87c6df13945e8f42d5f049bf536fd6009f398d0fae22eebb4ed",
+        "changed_parameter": "supported_placement.extra_descent_m",
+        "requested_value": 0.006,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-aec964373b1b75854938d701",
+      "parent_workspace": "workspaces/additional-independent-v1-aec964373b1b75854938d701",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/aec964373b1b75854938d701.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_020-descent004",
+      "workspace": "workspaces/additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_020-descent004",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_020",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.004,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          40.0,
+          -20.0
+        ]
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_selection": {
+        "admitted_base_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+        "admitted_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-complete",
+        "base_candidate": {
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "id": 9,
+          "rank": [
+            0.0,
+            1,
+            9
+          ],
+          "seed": "seed9"
+        },
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "full_geometric_admission_artifact": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09",
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "grasp_roll": {
+          "angle_rad": 0.2617993877991494
+        },
+        "physics_validated": false,
+        "placement_parameters": {
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "extra_descent_m": 0.002,
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "release_aperture_rad": 1.4,
+          "retreat_speed_factor": 1.0,
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ]
+        },
+        "selection_rank": [
+          0.2617993877991494,
+          0.0,
+          1,
+          9,
+          0.17666786039002658,
+          12,
+          0.2617993877991494
+        ],
+        "source_episode": "aec964373b1b75854938d701"
+      },
+      "causal_comparison": {
+        "task": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_020",
+        "source_episode": "aec964373b1b75854938d701",
+        "variant": "contact_020",
+        "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd",
+        "parameter": "extra_descent_m",
+        "value": 0.002,
+        "result_path": "queue/tasks/additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_020/result.json",
+        "baseline_manifest": "configs/additional-can-roll-physics-v1.json",
+        "baseline_manifest_sha256": "624f91db225ae87c6df13945e8f42d5f049bf536fd6009f398d0fae22eebb4ed",
+        "changed_parameter": "supported_placement.extra_descent_m",
+        "requested_value": 0.004,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-aec964373b1b75854938d701",
+      "parent_workspace": "workspaces/additional-independent-v1-aec964373b1b75854938d701",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/aec964373b1b75854938d701.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_020-descent006",
+      "workspace": "workspaces/additional-can-supported-descent-v1-aec964373b1b75854938d701-contact_020-descent006",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_020",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.006,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          40.0,
+          -20.0
+        ]
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_selection": {
+        "admitted_base_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-base",
+        "admitted_plan": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09/admitted-complete",
+        "base_candidate": {
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "id": 9,
+          "rank": [
+            0.0,
+            1,
+            9
+          ],
+          "seed": "seed9"
+        },
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "full_geometric_admission_artifact": "/mnt/reachy-retarget/workspaces/additional-can-roll-search-v1-aec964373b1b75854938d701-rollp15-chunk0/geometry-search/base-09",
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "grasp_roll": {
+          "angle_rad": 0.2617993877991494
+        },
+        "physics_validated": false,
+        "placement_parameters": {
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "extra_descent_m": 0.002,
+          "placement_xy_world": [
+            0.9775,
+            -0.3225
+          ],
+          "release_aperture_rad": 1.4,
+          "retreat_speed_factor": 1.0,
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            -20.0
+          ]
+        },
+        "selection_rank": [
+          0.2617993877991494,
+          0.0,
+          1,
+          9,
+          0.17666786039002658,
+          12,
+          0.2617993877991494
+        ],
+        "source_episode": "aec964373b1b75854938d701"
+      },
+      "causal_comparison": {
+        "task": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_020",
+        "source_episode": "aec964373b1b75854938d701",
+        "variant": "contact_020",
+        "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd",
+        "parameter": "extra_descent_m",
+        "value": 0.002,
+        "result_path": "queue/tasks/additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_020/result.json",
+        "baseline_manifest": "configs/additional-can-roll-physics-v1.json",
+        "baseline_manifest_sha256": "624f91db225ae87c6df13945e8f42d5f049bf536fd6009f398d0fae22eebb4ed",
+        "changed_parameter": "supported_placement.extra_descent_m",
+        "requested_value": 0.006,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    }
+  ]
+}

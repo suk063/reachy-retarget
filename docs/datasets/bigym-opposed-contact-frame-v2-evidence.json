@@ -1,0 +1,261 @@
+{
+  "source_group": "bigym/MovePlate/c795f62efb4f4d20ab899af96d766a2f",
+  "independent_source_demonstrations": 1,
+  "heldout_103d_used": false,
+  "source_reconstruction_version_caveat": "Lightweight recorded4.0.0 actions replayed with available pinned4.1.0 source; success in4.1 replay is not recovered original4.0 observation ground truth.",
+  "source_clock": {
+    "post_action_rows": 2256,
+    "first_time_s": 0.002,
+    "last_time_s": 4.512,
+    "available_interval_s": 4.51
+  },
+  "candidate": {
+    "workspace": "/mnt/reachy-retarget/workspaces/bigym-opposed-contact-candidates-20261007-01",
+    "manifest_sha256": "b354431d6e4c53e558b5652aad83ac5a210a1d901835007a2a6b93f6f7ac76d2",
+    "cross_node_verified": true,
+    "rows": 2256,
+    "fixed_patch_object_m": [
+      -0.0003847501720931967,
+      0.07395797913321084,
+      0.009218442105546483
+    ],
+    "additional_calibrated_wrist_rotation_rad": 0.1777234841,
+    "max_added_tcp_translation_m": 0.002244292065789724,
+    "nominal_aperture_rad": 0.25515526990672865,
+    "closed_command_rad": 0.20515526990672867,
+    "changes": "Measured contact-facet alignment; same original patch, object, material, gains and no feedforward. Apply only body-frame transform delta on already-blended parent. Rejected double-blend candidate retained and never simulated.",
+    "discrete_fullpath_18_aperture_admitted": true,
+    "swept_volume_certified": false
+  },
+  "runtime": {
+    "release_sha256": "aeb4c0888fa1d331ccf023aceb36e6d3e068da420c0467dbd7c370802538a156",
+    "physics_module_sha256": "4aa1c245be6188489aba972d9968a9b71a87c2e7e4c168134980fdc542437233",
+    "acquisition_overlay_sha256": "4d0be841c01e69c71fdd8bd3825d89ffb42abd9c0340362ec3edf1a7334773f2",
+    "protocol_sha256": "901fdc3964902cb9ef24be180194eba8611ee152ac9473951a02db8ea9191d6f"
+  },
+  "physical": {
+    "status": "diagnostic_failed",
+    "physics_validated": false,
+    "steps": 7421,
+    "duration_s": 14.842,
+    "timed_robot_path_s": 14.274,
+    "acquisition_pause_s": 0.568,
+    "rendezvous_robot_only_translation_m": 0.0004521518292,
+    "gates": {
+      "task_stable_final_1s": false,
+      "bilateral_lifted_grasp": true,
+      "carry_contact_95pct": false,
+      "grasp_translation_3mm": false,
+      "grasp_rotation_3deg": false,
+      "hand_object_penetration_1mm": true,
+      "robot_environment_penetration_2mm": true,
+      "object_environment_penetration_2mm": false,
+      "robot_self_penetration_2mm": true,
+      "no_nonhand_object_robot_contact": true,
+      "actual_arm_speed_1rad_s": true,
+      "actual_base_speed_limits": true,
+      "joint_margin_25mrad": true,
+      "self_clearance_9mm": true,
+      "rollout_complete": true,
+      "finite_integration": true,
+      "actuator_replay": true
+    },
+    "max_lift_m": 0.2577210895458186,
+    "grasp_hands": {
+      "left": {
+        "acquired": true,
+        "bilateral_carry_fraction": 0.3475836431226766,
+        "grasp_translation_m": 0.409521961406966,
+        "grasp_rotation_rad": 1.7191239141594767,
+        "measured_carry_duration_s": 5.380000000001797,
+        "phases": 1
+      }
+    },
+    "max_contact_depths_m": {
+      "hand_object": 0.00021869388844593645,
+      "robot_environment": 1.3877787807814457e-17,
+      "object_environment": 0.0072985423073463245,
+      "robot_self": 0.0
+    },
+    "object_state_writes_after_reset": 0,
+    "source_contact_parameters_preserved": true,
+    "replay": {
+      "actuator_replay_pass": true,
+      "max_absolute_errors": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "clock": 0.0
+      },
+      "control_rows": 7421,
+      "physical_steps": 7421,
+      "initial_time_s": 0.002,
+      "terminal_time_s": 14.844000000001627,
+      "scene_sha256": "b091b2ebe519e562763dfa46f2df64d55dee5ae79c3b3f5fdd7d7e3e68516a66"
+    },
+    "inactive_right_positive_contact_steps": 0
+  },
+  "carry_failure": {
+    "acquisition_time_s": 8.708,
+    "acquisition_source_row": 801,
+    "first_3mm_drift_time_s": 8.984,
+    "first_3mm_drift_source_row": 848,
+    "first_3mm_drift_m": 0.0030395,
+    "first_3mm_drift_support_force_n": 0.0,
+    "source900_drift_m": 0.014543,
+    "source900_rotation_rad": 0.1400085,
+    "source900_support_force_n": 0.0,
+    "first_sampled_target_rack_contact_time_s": 11.634,
+    "first_sampled_target_rack_contact_source_row": 1173,
+    "target_contact_identity_sampling_interval_s": 0.01,
+    "conclusion": "Free-carry loss before target-rack placement. Complete per-step support sums and exact force/state replay retained."
+  },
+  "export": {
+    "workspace": "/mnt/reachy-retarget/workspaces/bigym-opposed-contact-physical-source-20261007-01",
+    "manifest_sha256": "2cb337577c867b0197b4e3d6fdbcc0cfb1d0b6d9700a32ee4fd92fb1d0a14ee1",
+    "files": 57,
+    "bytes": 158283188,
+    "canonical_archive": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-opposed-contact-frame-v2-source.hdf5",
+    "canonical_sha256": "ade596149a6abd1aff3b5192502376e094c61e92a22cdc893368e33b7c769ef3",
+    "sidecar_sha256": "77343a54b8fd47e6e19f10ad4077f429a0a0cd2bc5480c3d1a6054fb5d642133",
+    "cross_node_verification_pod": "reachy-retarget-worker-7d46748688-nl77d",
+    "all_files_verified": true,
+    "common_archive_timed": true,
+    "missing_fields": [],
+    "rgb_required": false,
+    "policy_ready": false
+  },
+  "wrench_and_patch_audit": {
+    "workspace": "/mnt/reachy-retarget/workspaces/bigym-opposed-wrench-gravity-patch-audits-20261007-01",
+    "manifest_sha256": "15320535e96f831667c221a6d56993f318bc366b2ab06f0cfc1c0c7c2894cfbc",
+    "files": 15,
+    "bytes": 674195,
+    "corrected_wrench_directory": "opposed-contact-wrench-audit-v2",
+    "superseded_v1_reason": "Inactive condim3 spin coefficient was incorrectly included in descriptive capacity. Actual forces/geometry unchanged; active spin capacity in v2 is zero.",
+    "mass_kg": 0.4,
+    "com_object_m": [
+      9.337855202514302e-09,
+      -1.358206016591373e-08,
+      0.010580049761211345
+    ],
+    "active_contact_dimension": 3,
+    "direct_spin_moment_active": false,
+    "all_sampled_next_qpos_error": 0,
+    "rows": [
+      {
+        "source_row": 550,
+        "support_normal_force_n": 6.478316850625668,
+        "gravity_torque_norm_nm": 0.05466695435573327,
+        "gravity_torque_jaw_component_nm": 0.030577872642192996,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 600,
+        "support_normal_force_n": 4.40230322480847,
+        "gravity_torque_norm_nm": 0.044406434829163566,
+        "gravity_torque_jaw_component_nm": 0.029932152533692948,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 700,
+        "support_normal_force_n": 2.075386439420686,
+        "gravity_torque_norm_nm": 0.054057142841427465,
+        "gravity_torque_jaw_component_nm": -0.04386899469405512,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 780,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.06819857317784375,
+        "gravity_torque_jaw_component_nm": -0.0009303009688794127,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 801,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.08561207183286096,
+        "gravity_torque_jaw_component_nm": 0.010525727792528469,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 820,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.11174900225017775,
+        "gravity_torque_jaw_component_nm": -0.05255468667952892,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 848,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.10711929229767354,
+        "gravity_torque_jaw_component_nm": -0.025733188583385365,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 850,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.14286733210385047,
+        "gravity_torque_jaw_component_nm": -0.09344956251371593,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 875,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.1802588123089348,
+        "gravity_torque_jaw_component_nm": -0.13115111406238922,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 900,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.15352245365600783,
+        "gravity_torque_jaw_component_nm": -0.11530187898932895,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 950,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.14133154176703464,
+        "gravity_torque_jaw_component_nm": -0.11283238970662156,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 1000,
+        "support_normal_force_n": 12.384987005109055,
+        "gravity_torque_norm_nm": 0.1326421066648974,
+        "gravity_torque_jaw_component_nm": -0.11231803883146121,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 1050,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.1385746382815441,
+        "gravity_torque_jaw_component_nm": -0.11650607348151014,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 1100,
+        "support_normal_force_n": 0.0,
+        "gravity_torque_norm_nm": 0.12406677564028319,
+        "gravity_torque_jaw_component_nm": -0.10053785629086923,
+        "active_contact_spin_capacity_nm": 0.0
+      },
+      {
+        "source_row": 1149,
+        "support_normal_force_n": 4.993993038296409,
+        "gravity_torque_norm_nm": 0.15379681548609406,
+        "gravity_torque_jaw_component_nm": -0.13432079846197395,
+        "active_contact_spin_capacity_nm": 0.0
+      }
+    ],
+    "inward_translation_search": "All20 nonzero translations2..40mm fail3mm non-pad plate clearance with wrist fixed. Baseline controls retained.",
+    "next_candidate": "Coherent\u221212degree rotation about original plateZ, moving selected patch15.462mm along same rim; reduced source-clock gravity RMS moment; only static detached-hand CAD verified, no physical outcome yet.",
+    "cross_node_verified": true
+  },
+  "source_urls": [
+    "https://github.com/NeuracoreAI/bigym_data/releases/download/v0.9.0/demonstrations.zip#member=MovePlate/JointPositionActionMode_floating_pelvis_x_pelvis_y_pelvis_rz_absolute/lightweight/c795f62efb4f4d20ab899af96d766a2f.safetensors",
+    "https://github.com/NeuracoreAI/bigym/tree/52070fa73e8dd88a3d76eed4be575a6d01497931"
+  ],
+  "source_revision": "52070fa73e8dd88a3d76eed4be575a6d01497931",
+  "native_reconstructed_states_sha256": "3a0250b9bf4cf22f0def1ff13e5ea5275852052d578a3f205803a9bdfb1e4612"
+}

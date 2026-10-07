@@ -1,0 +1,68 @@
+{
+  "label": "feasible-bigym-upper-rim-blend-v1",
+  "jobs": [
+    {
+      "id": "feasible-bigym-upper-rim-blend-v1-ik",
+      "dataset": "bigym",
+      "operation": "source_pose_feasible",
+      "evaluation_split": "development",
+      "parent_task": "bigym-original-c795f62efb4f4d20ab899af96d766a2f",
+      "source_replay": "queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay",
+      "solver_settings": {
+        "jaw_sign": {
+          "left": 1,
+          "right": -1
+        },
+        "pad_calibration_gap_m": {
+          "left": 0.00798772839974704
+        },
+        "pad_calibration_evidence": {
+          "source": "workspaces/bigym-physical-performance-20261007-01/c795-upper-rim-geometry.json",
+          "source_sha256": "8f3296bc6a51feb3bf2c8ff0c0dc433f3e4eb0e44dc4b811055515e4fcaa2b7d",
+          "frame": 764,
+          "method": "Unchanged native plate convex-collider intersection at explicitly derived gravity-aligned upper-rim grasp; constant object-local robot contact relocation"
+        },
+        "grasp_relocation": {
+          "hand": "left",
+          "object_key": "objects/plate/pose",
+          "anchor_frame": 764,
+          "center_of_mass_local_m": [
+            9.337855360113342e-09,
+            -1.3582060230392212e-08,
+            0.01058004976121132
+          ],
+          "plane_normal_local": [
+            0.0005734709654451335,
+            0.0002637575610108153,
+            0.9999998007814807
+          ],
+          "gravity_world_m_s2": [
+            0.0,
+            0.0,
+            -9.81
+          ],
+          "geometry_evidence": {
+            "source_mjb": "/mnt/reachy-retarget/queue/tasks/feasible-acquisition-v1-bigym-native-c795f62efb4f4d20ab899af96d766a2f/attempts/1791363125067340922-reachy-retarget-worker-7d46748688-k8znf/native-replay/source-model.mjb",
+            "source_mjb_sha256": "02d31ee9af6bac55c0254d07b66551fc8bdc0e8bbf1a7537779b792e3f2ac986",
+            "method": "Native3.1.5 actual subtree center-of-mass and planar normal from unique unchanged collision vertices",
+            "plane_thickness_to_radius_singular_ratio": 0.11892110431008945,
+            "artifact": "workspaces/bigym-physical-performance-20261007-01/c795-upper-rim-geometry.json",
+            "artifact_sha256": "8f3296bc6a51feb3bf2c8ff0c0dc433f3e4eb0e44dc4b811055515e4fcaa2b7d"
+          },
+          "free_phase_blend": {
+            "clock_key": "timestamp",
+            "gripper_command": {
+              "array": "source/action",
+              "column": 13,
+              "closed_value": 1
+            },
+            "clear_distance_m": 0.2,
+            "return_distance_m": 0.3
+          }
+        }
+      },
+      "proposal": "Frozen geometry/source-phase alternative: original distant approach, full upper-rim relocation before verified closure and throughout hold. Retain full relocation in tail if observed source hand never withdraws.",
+      "runtime_source_sha256": "af368ba944399f4e6d787a27af7de3fd656e038819056e814c72eb2eaa6c6bdd"
+    }
+  ]
+}

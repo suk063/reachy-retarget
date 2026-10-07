@@ -1,0 +1,5307 @@
+{
+  "runtime": {
+    "python": "/mnt/reachy-retarget/runtime/run-python",
+    "source": "/mnt/reachy-retarget/releases/48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+    "control": "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+    "source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+    "control_sha256": "8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+    "reachy_agent_revision": "eb39c2e0f133e8955acfb949513512eaae193db1",
+    "reachy_agent_source": "/mnt/reachy-retarget/references/reachy-agent/eb39c2e0f133e8955acfb949513512eaae193db1"
+  },
+  "inputs": [
+    {
+      "id": "60f8d5d2c2ec17c0c57b4e5a-yaw0",
+      "source": "60f8d5d2c2ec17c0c57b4e5a",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+        "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+          "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+          "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": -90
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.3448275862068966",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 134,
+        "original_source_rows": 1614,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.3448275862068966,
+          "base": [
+            1.8264418368691535,
+            -0.09645959057075247,
+            -1.3831121842254974
+          ],
+          "q": [
+            1.8264418368691535,
+            -0.09645959057075247,
+            0.1865842087611613,
+            -0.9824389716623477,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.08686446848376546,
+            -1.0436670483421289,
+            0.47251002547773924,
+            0.06899999999999337,
+            -0.49259999999999965,
+            0.49259999999999987,
+            -1.5390000000000001
+          ],
+          "ik_errors": [
+            0.004050621072495837,
+            0.020146565888746786
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 46,
+            "certified_far_pairs": 328
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -5.9533956348209054e-05,
+            "original_base": [
+              1.8264593073100108,
+              -0.09634594676971908,
+              -1.382592991371131
+            ],
+            "transported_base": [
+              1.826473007676622,
+              -0.09639331784752436,
+              -1.3826525253274793
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "4b21f084d176109b7722cbefc680405f951448801c977313ed0d0135b1b71899",
+        "original_proposal_sha256": "24ba6d917fa35dccb00b66bb3f47a400e29a103aafde29c187d96e4dc04e545a",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.11422329902369677,
+              2.183260302568139
+            ],
+            [
+              -1.145,
+              1.421117384258948
+            ],
+            [
+              -4.635681105125708,
+              3.3004053812156386
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": -0.9508557741164899,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          0.3844506229291161,
+          -0.0665465775039363,
+          0.9207438685931758,
+          1.0306356732740385
+        ],
+        [
+          -0.25949841949801544,
+          -0.9649714678742847,
+          0.03860876152611864,
+          -0.3263773604468687
+        ],
+        [
+          0.8859222814713753,
+          -0.2537747410816555,
+          -0.388252613618366,
+          1.0603475493561318
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.8264418368691535,
+        -0.09645959057075247,
+        0.1865842087611613,
+        -0.9824389716623477,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.08686446848376546,
+        -1.0436670483421289,
+        0.47251002547773924,
+        0.06899999999999337,
+        -0.49259999999999965,
+        0.49259999999999987,
+        -1.5390000000000001
+      ],
+      "yaw_offset_deg": 0.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "comparison_candidate": 0,
+      "comparison_backup_sha256": "57e5abd21fc6c7cf9a794713c15db4272d42f2f3c9d7e1d46f6536f0d70a8e9d"
+    },
+    {
+      "id": "60f8d5d2c2ec17c0c57b4e5a-yaw90",
+      "source": "60f8d5d2c2ec17c0c57b4e5a",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+        "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+          "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+          "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": -90
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.3448275862068966",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 134,
+        "original_source_rows": 1614,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.3448275862068966,
+          "base": [
+            1.8264418368691535,
+            -0.09645959057075247,
+            -1.3831121842254974
+          ],
+          "q": [
+            1.8264418368691535,
+            -0.09645959057075247,
+            0.1865842087611613,
+            -0.9824389716623477,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.08686446848376546,
+            -1.0436670483421289,
+            0.47251002547773924,
+            0.06899999999999337,
+            -0.49259999999999965,
+            0.49259999999999987,
+            -1.5390000000000001
+          ],
+          "ik_errors": [
+            0.004050621072495837,
+            0.020146565888746786
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 46,
+            "certified_far_pairs": 328
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -5.9533956348209054e-05,
+            "original_base": [
+              1.8264593073100108,
+              -0.09634594676971908,
+              -1.382592991371131
+            ],
+            "transported_base": [
+              1.826473007676622,
+              -0.09639331784752436,
+              -1.3826525253274793
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "4b21f084d176109b7722cbefc680405f951448801c977313ed0d0135b1b71899",
+        "original_proposal_sha256": "24ba6d917fa35dccb00b66bb3f47a400e29a103aafde29c187d96e4dc04e545a",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.11422329902369677,
+              2.183260302568139
+            ],
+            [
+              -1.145,
+              1.421117384258948
+            ],
+            [
+              -4.635681105125708,
+              3.3004053812156386
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": -0.9508557741164899,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          0.3844506229291161,
+          -0.0665465775039363,
+          0.9207438685931758,
+          1.0306356732740385
+        ],
+        [
+          -0.25949841949801544,
+          -0.9649714678742847,
+          0.03860876152611864,
+          -0.3263773604468687
+        ],
+        [
+          0.8859222814713753,
+          -0.2537747410816555,
+          -0.388252613618366,
+          1.0603475493561318
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.8264418368691535,
+        -0.09645959057075247,
+        0.1865842087611613,
+        -0.9824389716623477,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.08686446848376546,
+        -1.0436670483421289,
+        0.47251002547773924,
+        0.06899999999999337,
+        -0.49259999999999965,
+        0.49259999999999987,
+        -1.5390000000000001
+      ],
+      "yaw_offset_deg": 90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "comparison_candidate": 0,
+      "comparison_backup_sha256": "57e5abd21fc6c7cf9a794713c15db4272d42f2f3c9d7e1d46f6536f0d70a8e9d"
+    },
+    {
+      "id": "60f8d5d2c2ec17c0c57b4e5a-yaw-90",
+      "source": "60f8d5d2c2ec17c0c57b4e5a",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+        "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+          "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+          "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": -90
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.3448275862068966",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 134,
+        "original_source_rows": 1614,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.3448275862068966,
+          "base": [
+            1.8264418368691535,
+            -0.09645959057075247,
+            -1.3831121842254974
+          ],
+          "q": [
+            1.8264418368691535,
+            -0.09645959057075247,
+            0.1865842087611613,
+            -0.9824389716623477,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.08686446848376546,
+            -1.0436670483421289,
+            0.47251002547773924,
+            0.06899999999999337,
+            -0.49259999999999965,
+            0.49259999999999987,
+            -1.5390000000000001
+          ],
+          "ik_errors": [
+            0.004050621072495837,
+            0.020146565888746786
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 46,
+            "certified_far_pairs": 328
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -5.9533956348209054e-05,
+            "original_base": [
+              1.8264593073100108,
+              -0.09634594676971908,
+              -1.382592991371131
+            ],
+            "transported_base": [
+              1.826473007676622,
+              -0.09639331784752436,
+              -1.3826525253274793
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "4b21f084d176109b7722cbefc680405f951448801c977313ed0d0135b1b71899",
+        "original_proposal_sha256": "24ba6d917fa35dccb00b66bb3f47a400e29a103aafde29c187d96e4dc04e545a",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.11422329902369677,
+              2.183260302568139
+            ],
+            [
+              -1.145,
+              1.421117384258948
+            ],
+            [
+              -4.635681105125708,
+              3.3004053812156386
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": -0.9508557741164899,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          0.3844506229291161,
+          -0.0665465775039363,
+          0.9207438685931758,
+          1.0306356732740385
+        ],
+        [
+          -0.25949841949801544,
+          -0.9649714678742847,
+          0.03860876152611864,
+          -0.3263773604468687
+        ],
+        [
+          0.8859222814713753,
+          -0.2537747410816555,
+          -0.388252613618366,
+          1.0603475493561318
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.8264418368691535,
+        -0.09645959057075247,
+        0.1865842087611613,
+        -0.9824389716623477,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.08686446848376546,
+        -1.0436670483421289,
+        0.47251002547773924,
+        0.06899999999999337,
+        -0.49259999999999965,
+        0.49259999999999987,
+        -1.5390000000000001
+      ],
+      "yaw_offset_deg": -90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "comparison_candidate": 0,
+      "comparison_backup_sha256": "57e5abd21fc6c7cf9a794713c15db4272d42f2f3c9d7e1d46f6536f0d70a8e9d"
+    },
+    {
+      "id": "68e6a0e494dbbc81efc2477b-yaw0",
+      "source": "68e6a0e494dbbc81efc2477b",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+        "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+          "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+          "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 120
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.6422764227642277",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 192,
+        "original_source_rows": 934,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.6422764227642277,
+          "base": [
+            1.560207512523884,
+            -0.7622166076895915,
+            3.3806243962162488
+          ],
+          "q": [
+            1.560207512523884,
+            -0.7622166076895915,
+            -0.9715676768113248,
+            -0.2367620099919855,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.3856959945289395,
+            -0.6174996817540083,
+            -0.5025519625046978,
+            -0.45002534970207847,
+            0.33623844734974384,
+            -0.2594989079867757,
+            -1.113246945028122
+          ],
+          "ik_errors": [
+            0.0020886323578271156,
+            0.02161025953419005
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 57,
+            "certified_far_pairs": 317
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 4.944469278785121e-06,
+            "original_base": [
+              1.561404755525781,
+              -0.7607247088860576,
+              -2.9036740202694933
+            ],
+            "transported_base": [
+              1.56243925782897,
+              -0.7607221405283187,
+              -2.9036690758002144
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "2d8b657a8c12a9093733073ad7ec8f8417adeeb7474d23be06abfed575bdd26f",
+        "original_proposal_sha256": "af5cdb11b0ad865d56d15b5f02aff85961ebc9e6320c7e79d0d1e6da3de4e4e4",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.3979202856853134,
+              1.875
+            ],
+            [
+              -1.6981951727325464,
+              0.55
+            ],
+            [
+              -1.2222779941346982,
+              5.7962320123777715
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 1.966670837271283,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          -0.02269959317458277,
+          -0.14884323309447578,
+          0.988600232870543,
+          1.0246536481646593
+        ],
+        [
+          0.6802454727523938,
+          -0.7269538714673777,
+          -0.09383051507086432,
+          -0.2632286493078277
+        ],
+        [
+          0.7326328038448597,
+          0.6703609182526791,
+          0.11775149260134381,
+          0.9236649148329339
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.560207512523884,
+        -0.7622166076895915,
+        -0.9715676768113248,
+        -0.2367620099919855,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.3856959945289395,
+        -0.6174996817540083,
+        -0.5025519625046978,
+        -0.45002534970207847,
+        0.33623844734974384,
+        -0.2594989079867757,
+        -1.113246945028122
+      ],
+      "yaw_offset_deg": 0.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+      "comparison_candidate": 3,
+      "comparison_backup_sha256": "8beb8bfa99092b828c076d4b8a070b452a32bbd2c8da7c06d221ed28dd661693"
+    },
+    {
+      "id": "68e6a0e494dbbc81efc2477b-yaw90",
+      "source": "68e6a0e494dbbc81efc2477b",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+        "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+          "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+          "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 120
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.6422764227642277",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 192,
+        "original_source_rows": 934,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.6422764227642277,
+          "base": [
+            1.560207512523884,
+            -0.7622166076895915,
+            3.3806243962162488
+          ],
+          "q": [
+            1.560207512523884,
+            -0.7622166076895915,
+            -0.9715676768113248,
+            -0.2367620099919855,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.3856959945289395,
+            -0.6174996817540083,
+            -0.5025519625046978,
+            -0.45002534970207847,
+            0.33623844734974384,
+            -0.2594989079867757,
+            -1.113246945028122
+          ],
+          "ik_errors": [
+            0.0020886323578271156,
+            0.02161025953419005
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 57,
+            "certified_far_pairs": 317
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 4.944469278785121e-06,
+            "original_base": [
+              1.561404755525781,
+              -0.7607247088860576,
+              -2.9036740202694933
+            ],
+            "transported_base": [
+              1.56243925782897,
+              -0.7607221405283187,
+              -2.9036690758002144
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "2d8b657a8c12a9093733073ad7ec8f8417adeeb7474d23be06abfed575bdd26f",
+        "original_proposal_sha256": "af5cdb11b0ad865d56d15b5f02aff85961ebc9e6320c7e79d0d1e6da3de4e4e4",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.3979202856853134,
+              1.875
+            ],
+            [
+              -1.6981951727325464,
+              0.55
+            ],
+            [
+              -1.2222779941346982,
+              5.7962320123777715
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 1.966670837271283,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          -0.02269959317458277,
+          -0.14884323309447578,
+          0.988600232870543,
+          1.0246536481646593
+        ],
+        [
+          0.6802454727523938,
+          -0.7269538714673777,
+          -0.09383051507086432,
+          -0.2632286493078277
+        ],
+        [
+          0.7326328038448597,
+          0.6703609182526791,
+          0.11775149260134381,
+          0.9236649148329339
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.560207512523884,
+        -0.7622166076895915,
+        -0.9715676768113248,
+        -0.2367620099919855,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.3856959945289395,
+        -0.6174996817540083,
+        -0.5025519625046978,
+        -0.45002534970207847,
+        0.33623844734974384,
+        -0.2594989079867757,
+        -1.113246945028122
+      ],
+      "yaw_offset_deg": 90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+      "comparison_candidate": 3,
+      "comparison_backup_sha256": "8beb8bfa99092b828c076d4b8a070b452a32bbd2c8da7c06d221ed28dd661693"
+    },
+    {
+      "id": "68e6a0e494dbbc81efc2477b-yaw-90",
+      "source": "68e6a0e494dbbc81efc2477b",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+        "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+          "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+          "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 120
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.6422764227642277",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 192,
+        "original_source_rows": 934,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.6422764227642277,
+          "base": [
+            1.560207512523884,
+            -0.7622166076895915,
+            3.3806243962162488
+          ],
+          "q": [
+            1.560207512523884,
+            -0.7622166076895915,
+            -0.9715676768113248,
+            -0.2367620099919855,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.3856959945289395,
+            -0.6174996817540083,
+            -0.5025519625046978,
+            -0.45002534970207847,
+            0.33623844734974384,
+            -0.2594989079867757,
+            -1.113246945028122
+          ],
+          "ik_errors": [
+            0.0020886323578271156,
+            0.02161025953419005
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 57,
+            "certified_far_pairs": 317
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 4.944469278785121e-06,
+            "original_base": [
+              1.561404755525781,
+              -0.7607247088860576,
+              -2.9036740202694933
+            ],
+            "transported_base": [
+              1.56243925782897,
+              -0.7607221405283187,
+              -2.9036690758002144
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "2d8b657a8c12a9093733073ad7ec8f8417adeeb7474d23be06abfed575bdd26f",
+        "original_proposal_sha256": "af5cdb11b0ad865d56d15b5f02aff85961ebc9e6320c7e79d0d1e6da3de4e4e4",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.3979202856853134,
+              1.875
+            ],
+            [
+              -1.6981951727325464,
+              0.55
+            ],
+            [
+              -1.2222779941346982,
+              5.7962320123777715
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 1.966670837271283,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          -0.02269959317458277,
+          -0.14884323309447578,
+          0.988600232870543,
+          1.0246536481646593
+        ],
+        [
+          0.6802454727523938,
+          -0.7269538714673777,
+          -0.09383051507086432,
+          -0.2632286493078277
+        ],
+        [
+          0.7326328038448597,
+          0.6703609182526791,
+          0.11775149260134381,
+          0.9236649148329339
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.560207512523884,
+        -0.7622166076895915,
+        -0.9715676768113248,
+        -0.2367620099919855,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.3856959945289395,
+        -0.6174996817540083,
+        -0.5025519625046978,
+        -0.45002534970207847,
+        0.33623844734974384,
+        -0.2594989079867757,
+        -1.113246945028122
+      ],
+      "yaw_offset_deg": -90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+      "comparison_candidate": 3,
+      "comparison_backup_sha256": "8beb8bfa99092b828c076d4b8a070b452a32bbd2c8da7c06d221ed28dd661693"
+    },
+    {
+      "id": "8479dbb1dcbbde2ea980fdb5-yaw0",
+      "source": "8479dbb1dcbbde2ea980fdb5",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+        "parent_workspace": "workspaces/additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/8479dbb1dcbbde2ea980fdb5.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+          "plan.h5": "d77fdf25f74d793e6b59d21ec10ede40a1641070d12c585845c1a86f5b1f58a8",
+          "result.json": "60c25c4c99b388d19baa2e8ce3beb8066737bba7ab17d26dd68cdd9a73298694"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 150
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.576923076923077",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 184,
+        "original_source_rows": 1030,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.576923076923077,
+          "base": [
+            1.6584858333565309,
+            -0.620624513078394,
+            3.5529481886006806
+          ],
+          "q": [
+            1.6584858333565309,
+            -0.620624513078394,
+            -0.9165796514890905,
+            -0.39985215077092867,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.4963497218182529,
+            -0.4726152681606089,
+            -0.6902453320138163,
+            -0.5176956176785771,
+            0.12945595128580525,
+            -0.2523786972538226,
+            -0.927569748151929
+          ],
+          "ik_errors": [
+            0.002115408577366113,
+            0.020180955899233955
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 57,
+            "certified_far_pairs": 317
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.991108886315981e-05,
+            "original_base": [
+              1.6589171505885727,
+              -0.6194367553176033,
+              -2.730227958543562
+            ],
+            "transported_base": [
+              1.6594898023320759,
+              -0.619423977176471,
+              -2.730208047454699
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "39008272b109bf76cade6407d51c601387afd17f989ec527a90dde0519b78b8f",
+        "original_proposal_sha256": "48fc4cc809ab45da8a507d6c11d47ac18686b76afba8fcb96cc8ab6bdd845b2b",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.1987806887162753,
+              1.875
+            ],
+            [
+              -1.8439384780220358,
+              0.55
+            ],
+            [
+              -1.005689893693464,
+              6.137845132923787
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 2.331957760103009,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          0.12009141752527425,
+          -0.03686070938490954,
+          0.9920782930497025,
+          1.0269074999440637
+        ],
+        [
+          0.6871811708170772,
+          -0.7181306072080265,
+          -0.10986568829940474,
+          -0.2615691029822882
+        ],
+        [
+          0.7164915141934627,
+          0.6949314492053675,
+          -0.06091133715562763,
+          0.9378643374018983
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.6584858333565309,
+        -0.620624513078394,
+        -0.9165796514890905,
+        -0.39985215077092867,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.4963497218182529,
+        -0.4726152681606089,
+        -0.6902453320138163,
+        -0.5176956176785771,
+        0.12945595128580525,
+        -0.2523786972538226,
+        -0.927569748151929
+      ],
+      "yaw_offset_deg": 0.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+      "comparison_candidate": 3,
+      "comparison_backup_sha256": "2c7bc2bf55820021733c89925f5e4d4470d50a4e20d5e037770eb431b20b9f29"
+    },
+    {
+      "id": "8479dbb1dcbbde2ea980fdb5-yaw90",
+      "source": "8479dbb1dcbbde2ea980fdb5",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+        "parent_workspace": "workspaces/additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/8479dbb1dcbbde2ea980fdb5.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+          "plan.h5": "d77fdf25f74d793e6b59d21ec10ede40a1641070d12c585845c1a86f5b1f58a8",
+          "result.json": "60c25c4c99b388d19baa2e8ce3beb8066737bba7ab17d26dd68cdd9a73298694"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 150
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.576923076923077",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 184,
+        "original_source_rows": 1030,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.576923076923077,
+          "base": [
+            1.6584858333565309,
+            -0.620624513078394,
+            3.5529481886006806
+          ],
+          "q": [
+            1.6584858333565309,
+            -0.620624513078394,
+            -0.9165796514890905,
+            -0.39985215077092867,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.4963497218182529,
+            -0.4726152681606089,
+            -0.6902453320138163,
+            -0.5176956176785771,
+            0.12945595128580525,
+            -0.2523786972538226,
+            -0.927569748151929
+          ],
+          "ik_errors": [
+            0.002115408577366113,
+            0.020180955899233955
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 57,
+            "certified_far_pairs": 317
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.991108886315981e-05,
+            "original_base": [
+              1.6589171505885727,
+              -0.6194367553176033,
+              -2.730227958543562
+            ],
+            "transported_base": [
+              1.6594898023320759,
+              -0.619423977176471,
+              -2.730208047454699
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "39008272b109bf76cade6407d51c601387afd17f989ec527a90dde0519b78b8f",
+        "original_proposal_sha256": "48fc4cc809ab45da8a507d6c11d47ac18686b76afba8fcb96cc8ab6bdd845b2b",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.1987806887162753,
+              1.875
+            ],
+            [
+              -1.8439384780220358,
+              0.55
+            ],
+            [
+              -1.005689893693464,
+              6.137845132923787
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 2.331957760103009,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          0.12009141752527425,
+          -0.03686070938490954,
+          0.9920782930497025,
+          1.0269074999440637
+        ],
+        [
+          0.6871811708170772,
+          -0.7181306072080265,
+          -0.10986568829940474,
+          -0.2615691029822882
+        ],
+        [
+          0.7164915141934627,
+          0.6949314492053675,
+          -0.06091133715562763,
+          0.9378643374018983
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.6584858333565309,
+        -0.620624513078394,
+        -0.9165796514890905,
+        -0.39985215077092867,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.4963497218182529,
+        -0.4726152681606089,
+        -0.6902453320138163,
+        -0.5176956176785771,
+        0.12945595128580525,
+        -0.2523786972538226,
+        -0.927569748151929
+      ],
+      "yaw_offset_deg": 90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+      "comparison_candidate": 3,
+      "comparison_backup_sha256": "2c7bc2bf55820021733c89925f5e4d4470d50a4e20d5e037770eb431b20b9f29"
+    },
+    {
+      "id": "8479dbb1dcbbde2ea980fdb5-yaw-90",
+      "source": "8479dbb1dcbbde2ea980fdb5",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+        "parent_workspace": "workspaces/additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/8479dbb1dcbbde2ea980fdb5.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+          "plan.h5": "d77fdf25f74d793e6b59d21ec10ede40a1641070d12c585845c1a86f5b1f58a8",
+          "result.json": "60c25c4c99b388d19baa2e8ce3beb8066737bba7ab17d26dd68cdd9a73298694"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 150
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.576923076923077",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 184,
+        "original_source_rows": 1030,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.576923076923077,
+          "base": [
+            1.6584858333565309,
+            -0.620624513078394,
+            3.5529481886006806
+          ],
+          "q": [
+            1.6584858333565309,
+            -0.620624513078394,
+            -0.9165796514890905,
+            -0.39985215077092867,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.4963497218182529,
+            -0.4726152681606089,
+            -0.6902453320138163,
+            -0.5176956176785771,
+            0.12945595128580525,
+            -0.2523786972538226,
+            -0.927569748151929
+          ],
+          "ik_errors": [
+            0.002115408577366113,
+            0.020180955899233955
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 57,
+            "certified_far_pairs": 317
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.991108886315981e-05,
+            "original_base": [
+              1.6589171505885727,
+              -0.6194367553176033,
+              -2.730227958543562
+            ],
+            "transported_base": [
+              1.6594898023320759,
+              -0.619423977176471,
+              -2.730208047454699
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "39008272b109bf76cade6407d51c601387afd17f989ec527a90dde0519b78b8f",
+        "original_proposal_sha256": "48fc4cc809ab45da8a507d6c11d47ac18686b76afba8fcb96cc8ab6bdd845b2b",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.1987806887162753,
+              1.875
+            ],
+            [
+              -1.8439384780220358,
+              0.55
+            ],
+            [
+              -1.005689893693464,
+              6.137845132923787
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 2.331957760103009,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          0.12009141752527425,
+          -0.03686070938490954,
+          0.9920782930497025,
+          1.0269074999440637
+        ],
+        [
+          0.6871811708170772,
+          -0.7181306072080265,
+          -0.10986568829940474,
+          -0.2615691029822882
+        ],
+        [
+          0.7164915141934627,
+          0.6949314492053675,
+          -0.06091133715562763,
+          0.9378643374018983
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.6584858333565309,
+        -0.620624513078394,
+        -0.9165796514890905,
+        -0.39985215077092867,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.4963497218182529,
+        -0.4726152681606089,
+        -0.6902453320138163,
+        -0.5176956176785771,
+        0.12945595128580525,
+        -0.2523786972538226,
+        -0.927569748151929
+      ],
+      "yaw_offset_deg": -90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+      "comparison_candidate": 3,
+      "comparison_backup_sha256": "2c7bc2bf55820021733c89925f5e4d4470d50a4e20d5e037770eb431b20b9f29"
+    },
+    {
+      "id": "89f903dbd89d3c10018d3a99-yaw0",
+      "source": "89f903dbd89d3c10018d3a99",
+      "job": {
+        "id": "can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+        "operation": "feasible_placement_search",
+        "dataset": "robomimic",
+        "parent_task": "can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99",
+        "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/workspace",
+        "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/89f903dbd89d3c10018d3a99.h5",
+        "source_normalized_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "evaluation_split": "development_after_frozen_heldout_evaluation",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "variant": "contact_0035",
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 120
+        },
+        "source_parent_materialization": {
+          "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/materialization.json",
+          "sha256": "4a37434b7ca51268572eb9476dc2c5f1e2aafa89adcfc0032f8824b698860eea",
+          "original_archive_sha256": "4e52cf4f667c3f3a65f4abf8c092b8cb179a1426d97c34256cf56348a9963906"
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+          "plan.h5": "216eadac708c56572d1700ba36927c5a978796e79ac892436454fe05bbf75d07",
+          "result.json": "cca81f606c5b0d7b36b2c389d35fbaec4170da435e8359e4508aa4f24f39888a"
+        },
+        "placement_search": {
+          "bank": "hand_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-89f903dbd89d3c10018d3a99-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.8086419753086419",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 255,
+        "original_source_rows": 932,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.8086419753086419,
+          "base": [
+            1.1471912034730734,
+            -0.6601308308911902,
+            3.6600338279227262
+          ],
+          "q": [
+            1.1471912034730734,
+            -0.6601308308911902,
+            -0.8685926745033389,
+            -0.49552675588623557,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.3226309919689756,
+            0.11759255856432561,
+            -0.332599826068689,
+            -1.928254741692259,
+            -0.49259999992292897,
+            -0.4925999999670235,
+            -1.3908370539453987
+          ],
+          "ik_errors": [
+            0.002001290644477024,
+            0.02001465984318555
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 72,
+            "certified_far_pairs": 302
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 0.0006957493785281655,
+            "original_base": [
+              1.1487942904353032,
+              -0.6598613314415757,
+              -2.623377348123735
+            ],
+            "transported_base": [
+              1.1502480973141078,
+              -0.6597341296751653,
+              -2.622681598745207
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "6821e32aedf06bc7265ee86620b4aa6716ecf312e6c85630db06708faca4a48c",
+        "original_proposal_sha256": "16b9dbb9f992d81388534518f495a33ea8cdf35a374d53236c47c7f7c316385a",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.42390048729884616,
+              1.875
+            ],
+            [
+              -1.5109054754204583,
+              0.55
+            ],
+            [
+              -1.138283407219427,
+              5.844124578468133
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 2.082805693426525,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          0.011002130274056866,
+          -0.07685520722800548,
+          0.9969815596345669,
+          0.9670345335426402
+        ],
+        [
+          0.4821042669803392,
+          -0.8730985077794253,
+          -0.07262555660847558,
+          -0.29030723837404016
+        ],
+        [
+          0.876044764203738,
+          0.48144809983557046,
+          0.027446279819605714,
+          0.8987338814448362
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.1471912034730734,
+        -0.6601308308911902,
+        -0.8685926745033389,
+        -0.49552675588623557,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.3226309919689756,
+        0.11759255856432561,
+        -0.332599826068689,
+        -1.928254741692259,
+        -0.49259999992292897,
+        -0.4925999999670235,
+        -1.3908370539453987
+      ],
+      "yaw_offset_deg": 0.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+      "comparison_candidate": 168,
+      "comparison_backup_sha256": "71e5f236c43ca197dc53fbeb5a4013453fd5ef0033d33b711f3259411f1bacfc"
+    },
+    {
+      "id": "89f903dbd89d3c10018d3a99-yaw90",
+      "source": "89f903dbd89d3c10018d3a99",
+      "job": {
+        "id": "can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+        "operation": "feasible_placement_search",
+        "dataset": "robomimic",
+        "parent_task": "can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99",
+        "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/workspace",
+        "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/89f903dbd89d3c10018d3a99.h5",
+        "source_normalized_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "evaluation_split": "development_after_frozen_heldout_evaluation",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "variant": "contact_0035",
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 120
+        },
+        "source_parent_materialization": {
+          "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/materialization.json",
+          "sha256": "4a37434b7ca51268572eb9476dc2c5f1e2aafa89adcfc0032f8824b698860eea",
+          "original_archive_sha256": "4e52cf4f667c3f3a65f4abf8c092b8cb179a1426d97c34256cf56348a9963906"
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+          "plan.h5": "216eadac708c56572d1700ba36927c5a978796e79ac892436454fe05bbf75d07",
+          "result.json": "cca81f606c5b0d7b36b2c389d35fbaec4170da435e8359e4508aa4f24f39888a"
+        },
+        "placement_search": {
+          "bank": "hand_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-89f903dbd89d3c10018d3a99-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.8086419753086419",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 255,
+        "original_source_rows": 932,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.8086419753086419,
+          "base": [
+            1.1471912034730734,
+            -0.6601308308911902,
+            3.6600338279227262
+          ],
+          "q": [
+            1.1471912034730734,
+            -0.6601308308911902,
+            -0.8685926745033389,
+            -0.49552675588623557,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.3226309919689756,
+            0.11759255856432561,
+            -0.332599826068689,
+            -1.928254741692259,
+            -0.49259999992292897,
+            -0.4925999999670235,
+            -1.3908370539453987
+          ],
+          "ik_errors": [
+            0.002001290644477024,
+            0.02001465984318555
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 72,
+            "certified_far_pairs": 302
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 0.0006957493785281655,
+            "original_base": [
+              1.1487942904353032,
+              -0.6598613314415757,
+              -2.623377348123735
+            ],
+            "transported_base": [
+              1.1502480973141078,
+              -0.6597341296751653,
+              -2.622681598745207
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "6821e32aedf06bc7265ee86620b4aa6716ecf312e6c85630db06708faca4a48c",
+        "original_proposal_sha256": "16b9dbb9f992d81388534518f495a33ea8cdf35a374d53236c47c7f7c316385a",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.42390048729884616,
+              1.875
+            ],
+            [
+              -1.5109054754204583,
+              0.55
+            ],
+            [
+              -1.138283407219427,
+              5.844124578468133
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 2.082805693426525,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          0.011002130274056866,
+          -0.07685520722800548,
+          0.9969815596345669,
+          0.9670345335426402
+        ],
+        [
+          0.4821042669803392,
+          -0.8730985077794253,
+          -0.07262555660847558,
+          -0.29030723837404016
+        ],
+        [
+          0.876044764203738,
+          0.48144809983557046,
+          0.027446279819605714,
+          0.8987338814448362
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.1471912034730734,
+        -0.6601308308911902,
+        -0.8685926745033389,
+        -0.49552675588623557,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.3226309919689756,
+        0.11759255856432561,
+        -0.332599826068689,
+        -1.928254741692259,
+        -0.49259999992292897,
+        -0.4925999999670235,
+        -1.3908370539453987
+      ],
+      "yaw_offset_deg": 90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+      "comparison_candidate": 168,
+      "comparison_backup_sha256": "71e5f236c43ca197dc53fbeb5a4013453fd5ef0033d33b711f3259411f1bacfc"
+    },
+    {
+      "id": "89f903dbd89d3c10018d3a99-yaw-90",
+      "source": "89f903dbd89d3c10018d3a99",
+      "job": {
+        "id": "can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+        "operation": "feasible_placement_search",
+        "dataset": "robomimic",
+        "parent_task": "can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99",
+        "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/workspace",
+        "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/89f903dbd89d3c10018d3a99.h5",
+        "source_normalized_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "evaluation_split": "development_after_frozen_heldout_evaluation",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "variant": "contact_0035",
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 120
+        },
+        "source_parent_materialization": {
+          "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/materialization.json",
+          "sha256": "4a37434b7ca51268572eb9476dc2c5f1e2aafa89adcfc0032f8824b698860eea",
+          "original_archive_sha256": "4e52cf4f667c3f3a65f4abf8c092b8cb179a1426d97c34256cf56348a9963906"
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+          "plan.h5": "216eadac708c56572d1700ba36927c5a978796e79ac892436454fe05bbf75d07",
+          "result.json": "cca81f606c5b0d7b36b2c389d35fbaec4170da435e8359e4508aa4f24f39888a"
+        },
+        "placement_search": {
+          "bank": "hand_mobile",
+          "chunk_index": 0,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-89f903dbd89d3c10018d3a99-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.8086419753086419",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 255,
+        "original_source_rows": 932,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.8086419753086419,
+          "base": [
+            1.1471912034730734,
+            -0.6601308308911902,
+            3.6600338279227262
+          ],
+          "q": [
+            1.1471912034730734,
+            -0.6601308308911902,
+            -0.8685926745033389,
+            -0.49552675588623557,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.3226309919689756,
+            0.11759255856432561,
+            -0.332599826068689,
+            -1.928254741692259,
+            -0.49259999992292897,
+            -0.4925999999670235,
+            -1.3908370539453987
+          ],
+          "ik_errors": [
+            0.002001290644477024,
+            0.02001465984318555
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 72,
+            "certified_far_pairs": 302
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 0.0006957493785281655,
+            "original_base": [
+              1.1487942904353032,
+              -0.6598613314415757,
+              -2.623377348123735
+            ],
+            "transported_base": [
+              1.1502480973141078,
+              -0.6597341296751653,
+              -2.622681598745207
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "6821e32aedf06bc7265ee86620b4aa6716ecf312e6c85630db06708faca4a48c",
+        "original_proposal_sha256": "16b9dbb9f992d81388534518f495a33ea8cdf35a374d53236c47c7f7c316385a",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.42390048729884616,
+              1.875
+            ],
+            [
+              -1.5109054754204583,
+              0.55
+            ],
+            [
+              -1.138283407219427,
+              5.844124578468133
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 2.082805693426525,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          0.011002130274056866,
+          -0.07685520722800548,
+          0.9969815596345669,
+          0.9670345335426402
+        ],
+        [
+          0.4821042669803392,
+          -0.8730985077794253,
+          -0.07262555660847558,
+          -0.29030723837404016
+        ],
+        [
+          0.876044764203738,
+          0.48144809983557046,
+          0.027446279819605714,
+          0.8987338814448362
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.1471912034730734,
+        -0.6601308308911902,
+        -0.8685926745033389,
+        -0.49552675588623557,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.3226309919689756,
+        0.11759255856432561,
+        -0.332599826068689,
+        -1.928254741692259,
+        -0.49259999992292897,
+        -0.4925999999670235,
+        -1.3908370539453987
+      ],
+      "yaw_offset_deg": -90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+      "comparison_candidate": 168,
+      "comparison_backup_sha256": "71e5f236c43ca197dc53fbeb5a4013453fd5ef0033d33b711f3259411f1bacfc"
+    },
+    {
+      "id": "c33dd8770f9c734425da52f8-yaw0",
+      "source": "c33dd8770f9c734425da52f8",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-c33dd8770f9c734425da52f8",
+        "parent_workspace": "workspaces/additional-independent-v1-c33dd8770f9c734425da52f8",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/c33dd8770f9c734425da52f8.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+          "plan.h5": "6ed3258e13f3c26c0498a613c9fbd7683c59ade627a0303c2b637af919d79afe",
+          "result.json": "690505ffed60cb29c5909cfbe31590d6202abcdff17c179116bf882c332b4fed"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 150
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 2,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.6692913385826772",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 240,
+        "original_source_rows": 1045,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.6692913385826772,
+          "base": [
+            1.7223670690302573,
+            -0.12718612618670244,
+            4.292870828970998
+          ],
+          "q": [
+            1.7223670690302573,
+            -0.12718612618670244,
+            -0.40732043512501753,
+            -0.9132853131029571,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5312260234908408,
+            -0.5556200451950981,
+            -0.5544396243454226,
+            -0.3912152913223859,
+            0.18673264743655799,
+            -0.07936565718501695,
+            -1.1331100190221925
+          ],
+          "ik_errors": [
+            0.002179866922287548,
+            0.022299699372364052
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 59,
+            "certified_far_pairs": 315
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 0.0007482138840666676,
+            "original_base": [
+              1.7198748179984626,
+              -0.11774772910534588,
+              -1.9827153633434131
+            ],
+            "transported_base": [
+              1.7197500665415622,
+              -0.11565748313101348,
+              -1.9819671494593465
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "a7774a62849b4870fdb82d4b10f5a2c7d36617441502dd4f744c48709bbaa54c",
+        "original_proposal_sha256": "528b8e5e58f7eb28201063ee0b05661e95d338e2cc6939c83f173f38cf8233e7",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.4275129092140464,
+              1.875
+            ],
+            [
+              -1.889303246593912,
+              0.55
+            ],
+            [
+              -0.9309672520514392,
+              6.144957968467782
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 2.2273492241667974,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          -0.5824650157518793,
+          0.2827826648931674,
+          0.7620816687606926,
+          1.0027484495847085
+        ],
+        [
+          0.5126606074776994,
+          -0.5997617312510136,
+          0.6143817764772841,
+          -0.28266770089198
+        ],
+        [
+          0.630803937024619,
+          0.7485451423679843,
+          0.20436869347220216,
+          0.9174288291529065
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.7223670690302573,
+        -0.12718612618670244,
+        -0.40732043512501753,
+        -0.9132853131029571,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.5312260234908408,
+        -0.5556200451950981,
+        -0.5544396243454226,
+        -0.3912152913223859,
+        0.18673264743655799,
+        -0.07936565718501695,
+        -1.1331100190221925
+      ],
+      "yaw_offset_deg": 0.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+      "comparison_candidate": 5,
+      "comparison_backup_sha256": "d3e28faa2cbf62d838af5aec7d40f732c69377556f7c67bc7ce2a0e5c71058f4"
+    },
+    {
+      "id": "c33dd8770f9c734425da52f8-yaw90",
+      "source": "c33dd8770f9c734425da52f8",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-c33dd8770f9c734425da52f8",
+        "parent_workspace": "workspaces/additional-independent-v1-c33dd8770f9c734425da52f8",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/c33dd8770f9c734425da52f8.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+          "plan.h5": "6ed3258e13f3c26c0498a613c9fbd7683c59ade627a0303c2b637af919d79afe",
+          "result.json": "690505ffed60cb29c5909cfbe31590d6202abcdff17c179116bf882c332b4fed"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 150
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 2,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.6692913385826772",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 240,
+        "original_source_rows": 1045,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.6692913385826772,
+          "base": [
+            1.7223670690302573,
+            -0.12718612618670244,
+            4.292870828970998
+          ],
+          "q": [
+            1.7223670690302573,
+            -0.12718612618670244,
+            -0.40732043512501753,
+            -0.9132853131029571,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5312260234908408,
+            -0.5556200451950981,
+            -0.5544396243454226,
+            -0.3912152913223859,
+            0.18673264743655799,
+            -0.07936565718501695,
+            -1.1331100190221925
+          ],
+          "ik_errors": [
+            0.002179866922287548,
+            0.022299699372364052
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 59,
+            "certified_far_pairs": 315
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 0.0007482138840666676,
+            "original_base": [
+              1.7198748179984626,
+              -0.11774772910534588,
+              -1.9827153633434131
+            ],
+            "transported_base": [
+              1.7197500665415622,
+              -0.11565748313101348,
+              -1.9819671494593465
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "a7774a62849b4870fdb82d4b10f5a2c7d36617441502dd4f744c48709bbaa54c",
+        "original_proposal_sha256": "528b8e5e58f7eb28201063ee0b05661e95d338e2cc6939c83f173f38cf8233e7",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.4275129092140464,
+              1.875
+            ],
+            [
+              -1.889303246593912,
+              0.55
+            ],
+            [
+              -0.9309672520514392,
+              6.144957968467782
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 2.2273492241667974,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          -0.5824650157518793,
+          0.2827826648931674,
+          0.7620816687606926,
+          1.0027484495847085
+        ],
+        [
+          0.5126606074776994,
+          -0.5997617312510136,
+          0.6143817764772841,
+          -0.28266770089198
+        ],
+        [
+          0.630803937024619,
+          0.7485451423679843,
+          0.20436869347220216,
+          0.9174288291529065
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.7223670690302573,
+        -0.12718612618670244,
+        -0.40732043512501753,
+        -0.9132853131029571,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.5312260234908408,
+        -0.5556200451950981,
+        -0.5544396243454226,
+        -0.3912152913223859,
+        0.18673264743655799,
+        -0.07936565718501695,
+        -1.1331100190221925
+      ],
+      "yaw_offset_deg": 90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+      "comparison_candidate": 5,
+      "comparison_backup_sha256": "d3e28faa2cbf62d838af5aec7d40f732c69377556f7c67bc7ce2a0e5c71058f4"
+    },
+    {
+      "id": "c33dd8770f9c734425da52f8-yaw-90",
+      "source": "c33dd8770f9c734425da52f8",
+      "job": {
+        "dataset": "robomimic",
+        "parent_task": "additional-independent-v1-c33dd8770f9c734425da52f8",
+        "parent_workspace": "workspaces/additional-independent-v1-c33dd8770f9c734425da52f8",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/c33dd8770f9c734425da52f8.h5",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+        "evaluation_split": "additional22_development_after_frozen_evaluation",
+        "id": "can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+        "operation": "feasible_placement_search",
+        "variant": "contact_0035",
+        "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+        "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+        "source_normalized_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+        "parent_attempt_files_sha256": {
+          "scene.xml": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+          "plan.h5": "6ed3258e13f3c26c0498a613c9fbd7683c59ade627a0303c2b637af919d79afe",
+          "result.json": "690505ffed60cb29c5909cfbe31590d6202abcdff17c179116bf882c332b4fed"
+        },
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level",
+          "azimuth_policy": "nearest_opposed_facets",
+          "azimuth_offset_deg": 150
+        },
+        "geometry_clearance": {
+          "minimum_m": 0.003
+        },
+        "parent_geometry_job": "can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+        "placement_search": {
+          "bank": "wall_mobile",
+          "chunk_index": 2,
+          "chunk_count": 3,
+          "wall_settings": {
+            "pitch_angles_deg": [
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "adaptive_midpoints": 3,
+          "refinement_options": {
+            "midpoint_minimum_motion": true,
+            "interval_knot_timing": true,
+            "midpoint_position_reserve_m": 0.0001,
+            "midpoint_fixture_reserve_m": 0.0001
+          }
+        },
+        "retiming_settings": {
+          "arm_speed_rad_s": 0.8,
+          "planar_speed_m_s": 0.4
+        },
+        "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0"
+      },
+      "failed_report": {
+        "admitted": false,
+        "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.6692913385826772",
+        "physics_validated": false,
+        "completed_frames": 0,
+        "total_frames": null,
+        "complete": false,
+        "completed_knot_count": 240,
+        "original_source_rows": 1045,
+        "failed_knot": {
+          "phase": "lower",
+          "weight": 0.6692913385826772,
+          "base": [
+            1.7223670690302573,
+            -0.12718612618670244,
+            4.292870828970998
+          ],
+          "q": [
+            1.7223670690302573,
+            -0.12718612618670244,
+            -0.40732043512501753,
+            -0.9132853131029571,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5312260234908408,
+            -0.5556200451950981,
+            -0.5544396243454226,
+            -0.3912152913223859,
+            0.18673264743655799,
+            -0.07936565718501695,
+            -1.1331100190221925
+          ],
+          "ik_errors": [
+            0.002179866922287548,
+            0.022299699372364052
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 59,
+            "certified_far_pairs": 315
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 0.0007482138840666676,
+            "original_base": [
+              1.7198748179984626,
+              -0.11774772910534588,
+              -1.9827153633434131
+            ],
+            "transported_base": [
+              1.7197500665415622,
+              -0.11565748313101348,
+              -1.9819671494593465
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003
+        },
+        "numeric_knots_sha256": "a7774a62849b4870fdb82d4b10f5a2c7d36617441502dd4f744c48709bbaa54c",
+        "original_proposal_sha256": "528b8e5e58f7eb28201063ee0b05661e95d338e2cc6939c83f173f38cf8233e7",
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.4275129092140464,
+              1.875
+            ],
+            [
+              -1.889303246593912,
+              0.55
+            ],
+            [
+              -0.9309672520514392,
+              6.144957968467782
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "max_iterations": 160,
+          "max_active_set_updates": 4,
+          "support_pairs": [
+            [
+              "drivewhl1_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl2_link_collision_0",
+              "floor"
+            ],
+            [
+              "drivewhl3_link_collision_0",
+              "floor"
+            ]
+          ],
+          "displacement_regularizer": 1e-08,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true,
+          "minimum_motion": false,
+          "motion_speed_caps": [
+            0.3,
+            0.3,
+            0.8,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+          "initial_base_yaw": 2.2273492241667974,
+          "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+          "pose_tolerances_m_rad": [
+            0.002,
+            0.02
+          ],
+          "pose_constraint_numerical_margin_fraction": 1e-05,
+          "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+        },
+        "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+        "rejection_kind": "mobile_knot_admission"
+      },
+      "goal": [
+        [
+          -0.5824650157518793,
+          0.2827826648931674,
+          0.7620816687606926,
+          1.0027484495847085
+        ],
+        [
+          0.5126606074776994,
+          -0.5997617312510136,
+          0.6143817764772841,
+          -0.28266770089198
+        ],
+        [
+          0.630803937024619,
+          0.7485451423679843,
+          0.20436869347220216,
+          0.9174288291529065
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": [
+        1.7223670690302573,
+        -0.12718612618670244,
+        -0.40732043512501753,
+        -0.9132853131029571,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.5312260234908408,
+        -0.5556200451950981,
+        -0.5544396243454226,
+        -0.3912152913223859,
+        0.18673264743655799,
+        -0.07936565718501695,
+        -1.1331100190221925
+      ],
+      "yaw_offset_deg": -90.0,
+      "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+      "comparison_candidate": 5,
+      "comparison_backup_sha256": "d3e28faa2cbf62d838af5aec7d40f732c69377556f7c67bc7ce2a0e5c71058f4"
+    }
+  ],
+  "results": [
+    {
+      "id": "60f8d5d2c2ec17c0c57b4e5a-yaw0",
+      "source": "60f8d5d2c2ec17c0c57b4e5a",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.3448275862068966,
+        "base": [
+          1.826441842528035,
+          -0.09645966935823631,
+          -1.3831124417122829
+        ],
+        "q": [
+          1.826441842528035,
+          -0.09645966935823631,
+          0.1865839557961024,
+          -0.9824390197052834,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.0868648889791481,
+          -1.0436670290919186,
+          0.4725104566487746,
+          0.0689999999999932,
+          -0.49259999999999904,
+          0.4925999999999995,
+          -1.539
+        ],
+        "ik_errors": [
+          0.004050621072663051,
+          0.020146565888556414
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 46,
+          "certified_far_pairs": 328
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": false,
+            "message": "Positive directional derivative for linesearch",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827769,
+      "joint_margin_rad": 0.03100000000000014,
+      "elapsed_s": 1.4363811016082764,
+      "error": null,
+      "numeric_sha256": "2792dffb853166887aca377e1aaf432ee64c9547c661c49ddb33c995be152b7a",
+      "source_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-47rp8"
+    },
+    {
+      "id": "60f8d5d2c2ec17c0c57b4e5a-yaw90",
+      "source": "60f8d5d2c2ec17c0c57b4e5a",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.3448275862068966,
+        "base": [
+          1.8190984102055454,
+          -0.06410587280484989,
+          -1.217201619891254
+        ],
+        "q": [
+          1.8190984102055454,
+          -0.06410587280484989,
+          0.34627235431279013,
+          -0.9381340291443848,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.22821983279416205,
+          -1.0313940911478827,
+          0.15716540921901895,
+          0.06899999999999985,
+          -0.4925999999999998,
+          0.49259999999999876,
+          -1.5389999999999997
+        ],
+        "ik_errors": [
+          0.003531842599495622,
+          0.020969022771673004
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 46,
+          "certified_far_pairs": 328
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827785,
+      "joint_margin_rad": 0.03100000000000014,
+      "elapsed_s": 2.8388044834136963,
+      "error": null,
+      "numeric_sha256": "8c0320d0197ae161f9a751e8159112d3e77f88f28a5f6dd40fb67cde82889fcf",
+      "source_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-47whn"
+    },
+    {
+      "id": "60f8d5d2c2ec17c0c57b4e5a-yaw-90",
+      "source": "60f8d5d2c2ec17c0c57b4e5a",
+      "point_admitted": true,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.3448275862068966,
+        "base": [
+          1.7484060728767334,
+          -0.5715017686713905,
+          -2.531202365210346
+        ],
+        "q": [
+          1.7484060728767334,
+          -0.5715017686713905,
+          -0.8194243719120659,
+          -0.5731873155579391,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.5789014101154284,
+          -0.8159708682060174,
+          0.17111848860431766,
+          -0.4671917834410171,
+          -0.4883549390847903,
+          -0.26390388765723416,
+          -0.8106241117276877
+        ],
+        "ik_errors": [
+          4.7167838588394576e-07,
+          1.636445482267925e-06
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 46,
+          "certified_far_pairs": 328
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827799,
+      "joint_margin_rad": 0.03524506091520968,
+      "elapsed_s": 0.43300557136535645,
+      "error": null,
+      "numeric_sha256": "dd578a4aaf22e90ac55aa737f086db61d28f2d1e83d2e1662f627dd0376323f7",
+      "source_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-525jz"
+    },
+    {
+      "id": "68e6a0e494dbbc81efc2477b-yaw0",
+      "source": "68e6a0e494dbbc81efc2477b",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.6422764227642277,
+        "base": [
+          1.7996989509942058,
+          -0.05580853614590628,
+          -1.221258045463938
+        ],
+        "q": [
+          1.7996989509942058,
+          -0.05580853614590628,
+          0.3424640450019677,
+          -0.939530935031354,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.2789771959627601,
+          -0.8929042056628589,
+          -1.2075131288175833,
+          0.06837458834275417,
+          -0.4768439891529486,
+          0.02155618514972883,
+          -1.5210984894159454
+        ],
+        "ik_errors": [
+          0.002109067933630454,
+          0.021142736786927987
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 56,
+          "certified_far_pairs": 318
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827783,
+      "joint_margin_rad": 0.03162541165724583,
+      "elapsed_s": 3.909615993499756,
+      "error": null,
+      "numeric_sha256": "5c0fbc25e50ad15e6bbd617c8f2d9abd7781fd6ed2862c248fc908220eb3a3dd",
+      "source_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-5lxqr"
+    },
+    {
+      "id": "68e6a0e494dbbc81efc2477b-yaw90",
+      "source": "68e6a0e494dbbc81efc2477b",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.6422764227642277,
+        "base": [
+          1.7993370739008674,
+          -0.05467728150981061,
+          -1.2180277418984318
+        ],
+        "q": [
+          1.7993370739008674,
+          -0.05467728150981061,
+          0.3454972230722357,
+          -0.9384197721965228,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.2815009609231212,
+          -0.8925432077298155,
+          -1.2029647232174443,
+          0.06899992886107432,
+          -0.4770770554689622,
+          0.025488948422674677,
+          -1.5278782885712512
+        ],
+        "ik_errors": [
+          0.0021092392526482467,
+          0.02126626631763081
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 56,
+          "certified_far_pairs": 318
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827783,
+      "joint_margin_rad": 0.03100007113892568,
+      "elapsed_s": 2.050922393798828,
+      "error": null,
+      "numeric_sha256": "a0c916ab8ee19cd7410d04a9f0c5d8eb4222768e1754749526cbf008d5f843ee",
+      "source_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-6gwhb"
+    },
+    {
+      "id": "68e6a0e494dbbc81efc2477b-yaw-90",
+      "source": "68e6a0e494dbbc81efc2477b",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.6422764227642277,
+        "base": [
+          1.7993260941783717,
+          -0.053905940599085655,
+          -1.2174942312988526
+        ],
+        "q": [
+          1.7993260941783717,
+          -0.053905940599085655,
+          0.34599783077375545,
+          -0.9382353122217558,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.3094226354160536,
+          -0.8445389562279391,
+          -1.1918182446083363,
+          -0.03447368939261686,
+          -0.47802113132366436,
+          0.08644393633925308,
+          -1.5328433435245405
+        ],
+        "ik_errors": [
+          0.002157476895773512,
+          0.020284772435677903
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 56,
+          "certified_far_pairs": 318
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.1245641237282776,
+      "joint_margin_rad": 0.037156656475459515,
+      "elapsed_s": 1.1923012733459473,
+      "error": null,
+      "numeric_sha256": "7bfa1e6af7947bc383896d0c999db5f43245e5307aa1a3b9fc1c707eb35c8ac4",
+      "source_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-6sn62"
+    },
+    {
+      "id": "8479dbb1dcbbde2ea980fdb5-yaw0",
+      "source": "8479dbb1dcbbde2ea980fdb5",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.576923076923077,
+        "base": [
+          1.7815378828191493,
+          -0.023267119321058887,
+          -1.0056898936934637
+        ],
+        "q": [
+          1.7815378828191493,
+          -0.023267119321058887,
+          0.535505705162595,
+          -0.8445316096738545,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.48427413968411104,
+          -0.64471693701703,
+          -2.0097836804517044,
+          -0.25774821679480203,
+          -0.47987914542289817,
+          -0.2636936454756906,
+          -0.9970365102389782
+        ],
+        "ik_errors": [
+          0.0020555901676982805,
+          0.02131458362272264
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 56,
+          "certified_far_pairs": 318
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.1245641237282778,
+      "joint_margin_rad": 0.043720854577101786,
+      "elapsed_s": 1.7200980186462402,
+      "error": null,
+      "numeric_sha256": "6207bf2c491fc962624ebb462896d6195dbfb9cc6713f8c62bd4d4f31132fd40",
+      "source_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-9mwtl"
+    },
+    {
+      "id": "8479dbb1dcbbde2ea980fdb5-yaw90",
+      "source": "8479dbb1dcbbde2ea980fdb5",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.576923076923077,
+        "base": [
+          1.779376143870757,
+          -0.011435115450146315,
+          -1.004124578399958
+        ],
+        "q": [
+          1.779376143870757,
+          -0.011435115450146315,
+          0.5368270068161104,
+          -0.8436923401055955,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.4618485450055691,
+          -0.68353233727395,
+          -2.1189554639963135,
+          -0.21008624772642523,
+          -0.4536326656152366,
+          -0.3411208759443296,
+          -0.8885411098764601
+        ],
+        "ik_errors": [
+          0.002098778411723277,
+          0.020501239452973195
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 56,
+          "certified_far_pairs": 318
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827785,
+      "joint_margin_rad": 0.06996733438476338,
+      "elapsed_s": 2.6962854862213135,
+      "error": null,
+      "numeric_sha256": "6e3965f5be2c78778b8876f0cd9e8bf6db593c3306b0789d532d1d5a0f9ffa20",
+      "source_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-bznzr"
+    },
+    {
+      "id": "8479dbb1dcbbde2ea980fdb5-yaw-90",
+      "source": "8479dbb1dcbbde2ea980fdb5",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.576923076923077,
+        "base": [
+          1.7613320911349721,
+          0.0035973651463572973,
+          -1.000862002973685
+        ],
+        "q": [
+          1.7613320911349721,
+          0.0035973651463572973,
+          0.5395767547312283,
+          -0.8419364143174447,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.35202839332448094,
+          -0.5872447307211678,
+          -2.039263932234541,
+          -0.4445805735833432,
+          -0.47700796823821545,
+          -0.24324003318562376,
+          -0.842660222615746
+        ],
+        "ik_errors": [
+          0.002107820513539767,
+          0.020328429368861634
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 56,
+          "certified_far_pairs": 318
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827788,
+      "joint_margin_rad": 0.0465920317617845,
+      "elapsed_s": 2.4470160007476807,
+      "error": null,
+      "numeric_sha256": "79b98065da86d63e7287b3ea50a63bfe9c4529cff0f8f9041da29fff1d631657",
+      "source_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-ccchs"
+    },
+    {
+      "id": "89f903dbd89d3c10018d3a99-yaw0",
+      "source": "89f903dbd89d3c10018d3a99",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.8086419753086419,
+        "base": [
+          1.5357350215070362,
+          -0.3589053498934402,
+          -1.1382834071663301
+        ],
+        "q": [
+          1.5357350215070362,
+          -0.3589053498934402,
+          0.4191536416793813,
+          -0.907915318004335,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0931887976286296,
+          0.4789999999999987,
+          -1.1191460831810056,
+          -1.5303746397210551,
+          -0.4925999999830121,
+          0.2323166769370247,
+          -1.5389999999999981
+        ],
+        "ik_errors": [
+          0.012788185568357615,
+          0.0490715916835636
+        ],
+        "fixture": {
+          "admitted": false,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.0015604784044149786,
+          "distance_is_lower_bound": false,
+          "closest_geom_pair": [
+            "r_elbow_forearm_link_collision_0",
+            "source_scene_geom_23"
+          ],
+          "closest_segment_world": [
+            1.1194690017125866,
+            -0.2706397660106116,
+            0.9014673560131781,
+            1.1199999999999999,
+            -0.27063976601061157,
+            0.9000000000000001
+          ],
+          "inspected_pairs": 374,
+          "exact_distance_queries": 63,
+          "certified_far_pairs": 311
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.06633640261101768,
+      "joint_margin_rad": 0.031000000000001304,
+      "elapsed_s": 2.0359973907470703,
+      "error": null,
+      "numeric_sha256": "4c8bc2a8016a7a9618e1d025722f207e02f3a4b7252e067ef73fb4c44efdf45a",
+      "source_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-ccxjh"
+    },
+    {
+      "id": "89f903dbd89d3c10018d3a99-yaw90",
+      "source": "89f903dbd89d3c10018d3a99",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.8086419753086419,
+        "base": [
+          1.536299207970135,
+          -0.3598334700364565,
+          -1.138283407219427
+        ],
+        "q": [
+          1.536299207970135,
+          -0.3598334700364565,
+          0.41915364163117386,
+          -0.9079153180265908,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0907373150229998,
+          0.479,
+          -1.1254385591650264,
+          -1.5267248649617151,
+          -0.49259999999999715,
+          0.22677860407944564,
+          -1.5389999999999997
+        ],
+        "ik_errors": [
+          0.013553371149149243,
+          0.04353365913530931
+        ],
+        "fixture": {
+          "admitted": false,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.0016226967534974657,
+          "distance_is_lower_bound": false,
+          "closest_geom_pair": [
+            "r_elbow_forearm_link_collision_0",
+            "source_scene_geom_23"
+          ],
+          "closest_segment_world": [
+            1.1194536554972427,
+            -0.2709917563966265,
+            0.9015279569490396,
+            1.1199999999999997,
+            -0.2709917563966265,
+            0.8999999999999999
+          ],
+          "inspected_pairs": 374,
+          "exact_distance_queries": 63,
+          "certified_far_pairs": 311
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Positive directional derivative for linesearch",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.06615423162181959,
+      "joint_margin_rad": 0.031000000000000028,
+      "elapsed_s": 2.0941619873046875,
+      "error": null,
+      "numeric_sha256": "bc46d8a811c90da6911ba0474ffcaf44cc17089cd0c5920c8a07d8b07298522e",
+      "source_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-cmbtk"
+    },
+    {
+      "id": "89f903dbd89d3c10018d3a99-yaw-90",
+      "source": "89f903dbd89d3c10018d3a99",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.8086419753086419,
+        "base": [
+          1.5363873061785713,
+          -0.3598848021312418,
+          -1.1382834072101229
+        ],
+        "q": [
+          1.5363873061785713,
+          -0.3598848021312418,
+          0.4191536416396212,
+          -0.9079153180226909,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0901591520945186,
+          0.479,
+          -1.1248403898510106,
+          -1.5255508088158556,
+          -0.4925999999999999,
+          0.22611905289589973,
+          -1.5390000000000001
+        ],
+        "ik_errors": [
+          0.01297873525703046,
+          0.04449925674965815
+        ],
+        "fixture": {
+          "admitted": false,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.0011994694238755541,
+          "distance_is_lower_bound": false,
+          "closest_geom_pair": [
+            "r_elbow_forearm_link_collision_0",
+            "source_scene_geom_23"
+          ],
+          "closest_segment_world": [
+            1.1195946952717177,
+            -0.2710396846433614,
+            0.9011289176126028,
+            1.1199999999999999,
+            -0.27103968464336137,
+            0.9000000000000001
+          ],
+          "inspected_pairs": 374,
+          "exact_distance_queries": 63,
+          "certified_far_pairs": 311
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Positive directional derivative for linesearch",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.06611561204181747,
+      "joint_margin_rad": 0.030999999999999917,
+      "elapsed_s": 1.8809056282043457,
+      "error": null,
+      "numeric_sha256": "48866d1d1d5189b489cf28bca0598a773dbd829ae544506c1876da5b09846fcc",
+      "source_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-cmg6c"
+    },
+    {
+      "id": "c33dd8770f9c734425da52f8-yaw0",
+      "source": "c33dd8770f9c734425da52f8",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.6692913385826772,
+        "base": [
+          1.512090743236447,
+          0.32205264310145637,
+          -0.9279269142913482
+        ],
+        "q": [
+          1.512090743236447,
+          0.32205264310145637,
+          0.599494523289764,
+          -0.8003788581325587,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.2115350794758782,
+          -0.792798985118762,
+          -0.9517596377452175,
+          -0.17527972950638354,
+          -0.39778390769107896,
+          0.04563028947383099,
+          -1.3291068688632584
+        ],
+        "ik_errors": [
+          0.002113860655930632,
+          0.023868187985919255
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 59,
+          "certified_far_pairs": 315
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827774,
+      "joint_margin_rad": 0.125816092308921,
+      "elapsed_s": 2.125318765640259,
+      "error": null,
+      "numeric_sha256": "67a68276fc9f2125557dadcc2e273e0ec86bcb80e9cf9eff8db1f718b7c02f25",
+      "source_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-fvb9p"
+    },
+    {
+      "id": "c33dd8770f9c734425da52f8-yaw90",
+      "source": "c33dd8770f9c734425da52f8",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.6692913385826772,
+        "base": [
+          1.4603775591267172,
+          0.3510765939673216,
+          -0.9184069680248776
+        ],
+        "q": [
+          1.4603775591267172,
+          0.3510765939673216,
+          0.6070868062174211,
+          -0.7946355200447129,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.34617803344898324,
+          -0.7645245925517057,
+          -0.9014052281229508,
+          -0.1652953519544943,
+          -0.49256460564693766,
+          0.044569571437444624,
+          -1.2659173762785656
+        ],
+        "ik_errors": [
+          0.0022127740047376753,
+          0.02152560206822629
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 59,
+          "certified_far_pairs": 315
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827774,
+      "joint_margin_rad": 0.031035394353062296,
+      "elapsed_s": 3.678668975830078,
+      "error": null,
+      "numeric_sha256": "974b55fe893cfb4d6b9404fcfe116929fc637e572cb58a4ca39053219c6b7866",
+      "source_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-hrkj4"
+    },
+    {
+      "id": "c33dd8770f9c734425da52f8-yaw-90",
+      "source": "c33dd8770f9c734425da52f8",
+      "point_admitted": false,
+      "full_path_admitted": false,
+      "physics_validated": false,
+      "ik_record": {
+        "phase": "failed_lower_knot_probe",
+        "weight": 0.6692913385826772,
+        "base": [
+          1.4905533529532873,
+          0.33107582895659315,
+          -0.929906486673866
+        ],
+        "q": [
+          1.4905533529532873,
+          0.33107582895659315,
+          0.5979089418202044,
+          -0.8015640319347191,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.23626470343178702,
+          -0.7440426452363446,
+          -0.9404868120155346,
+          -0.2603382565888908,
+          -0.43914093005593763,
+          0.08954579633854465,
+          -1.2921597258248574
+        ],
+        "ik_errors": [
+          0.002129172719992996,
+          0.023667114722009348
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 59,
+          "certified_far_pairs": 315
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "added_pairs": 1
+          },
+          {
+            "iteration": 1,
+            "success": false,
+            "message": "Inequality constraints incompatible",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": null,
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "self_gap_m": 0.12456412372827777,
+      "joint_margin_rad": 0.08445906994406233,
+      "elapsed_s": 0.7038171291351318,
+      "error": null,
+      "numeric_sha256": "81affc8e4b5a573c70ff490707b13be66cff7c156fd2625ca32aad70eb261aa8",
+      "source_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+      "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+      "scope": "Copied-state point feasibility query only. Same original goal, compiled object/reset, aperture envelope, fixture/self/joint/pose gates. No simulation integration or physical object-state changes. Alternate planar seed is not a trajectory.",
+      "pod": "reachy-retarget-worker-7d46748688-k8znf"
+    }
+  ]
+}

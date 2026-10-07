@@ -1,0 +1,1584 @@
+{
+  "schema": "momagen-fixed-base-reachability-audit-v1",
+  "verified_utc": "2026-10-07T07:29:10.602173+00:00",
+  "source_urls": [
+    "https://github.com/ChengshuLi/MoMaGen/blob/5da621667669b15b97d7a220d086283b3c8ad0e5/momagen/env_interfaces/omnigibson.py",
+    "https://github.com/StanfordVL/BEHAVIOR-1K/blob/2ca5503895b2c81e02226dbe11c3fee1a68b5d6c/OmniGibson/omnigibson/robots/holonomic_base_robot.py",
+    "https://github.com/StanfordVL/BEHAVIOR-1K/blob/2ca5503895b2c81e02226dbe11c3fee1a68b5d6c/OmniGibson/omnigibson/robots/r1.py"
+  ],
+  "diagnostic_only": true,
+  "physics_validated": false,
+  "no_source_changes": true,
+  "runtime": {
+    "python": "/mnt/reachy-retarget/runtime/run-python",
+    "source": "/mnt/reachy-retarget/releases/c97dcff96d3d92645d8d044eb80799fa98b31b6e485ae31ab0a002bdd55aee3d",
+    "control": "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+    "source_sha256": "c97dcff96d3d92645d8d044eb80799fa98b31b6e485ae31ab0a002bdd55aee3d",
+    "control_sha256": "8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+    "reachy_agent_revision": "eb39c2e0f133e8955acfb949513512eaae193db1",
+    "reachy_agent_source": "/mnt/reachy-retarget/references/reachy-agent/eb39c2e0f133e8955acfb949513512eaae193db1"
+  },
+  "frame_audit": {
+    "runtime": {
+      "python": "/mnt/reachy-retarget/runtime/run-python",
+      "source": "/mnt/reachy-retarget/releases/c97dcff96d3d92645d8d044eb80799fa98b31b6e485ae31ab0a002bdd55aee3d",
+      "control": "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+      "source_sha256": "c97dcff96d3d92645d8d044eb80799fa98b31b6e485ae31ab0a002bdd55aee3d",
+      "control_sha256": "8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+      "reachy_agent_revision": "eb39c2e0f133e8955acfb949513512eaae193db1",
+      "reachy_agent_source": "/mnt/reachy-retarget/references/reachy-agent/eb39c2e0f133e8955acfb949513512eaae193db1"
+    },
+    "reachy": {
+      "nq": 21,
+      "nv": 20,
+      "hands": [
+        "l_arm_tip",
+        "r_arm_tip"
+      ],
+      "home": [
+        [
+          [
+            0.9513686527080891,
+            0.15913194241736225,
+            -0.2637701869940435,
+            0.10969391514213046
+          ],
+          [
+            -0.24849798836269837,
+            0.9024805964147152,
+            -0.35182029912248153,
+            0.44406191342923557
+          ],
+          [
+            0.18206162809358728,
+            0.4002571648295848,
+            0.8981357166812234,
+            0.5681159901587209
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        [
+          [
+            0.9513686113820496,
+            -0.15913116197202695,
+            -0.26377080688814547,
+            0.1096940342143201
+          ],
+          [
+            0.2484982227343142,
+            0.9024791613639208,
+            0.35182381471662966,
+            -0.4440625887211782
+          ],
+          [
+            0.18206152414740986,
+            -0.4002607107789957,
+            0.8981341574797249,
+            0.5681162896575155
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      ],
+      "arm_q_indices": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "arm_v_indices": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "joints": {
+        "l_shoulder_pitch": {
+          "iq": 4,
+          "iv": 3,
+          "min": -3.141592653589793,
+          "max": 3.141592653589793
+        },
+        "l_shoulder_roll": {
+          "iq": 5,
+          "iv": 4,
+          "min": -0.51,
+          "max": 3.141592653589793
+        },
+        "l_elbow_yaw": {
+          "iq": 6,
+          "iv": 5,
+          "min": -3.141592653589793,
+          "max": 3.141592653589793
+        },
+        "l_elbow_pitch": {
+          "iq": 7,
+          "iv": 6,
+          "min": -2.25,
+          "max": 0.1
+        },
+        "l_wrist_roll": {
+          "iq": 8,
+          "iv": 7,
+          "min": -0.5236,
+          "max": 0.5236
+        },
+        "l_wrist_pitch": {
+          "iq": 9,
+          "iv": 8,
+          "min": -0.5236,
+          "max": 0.5236
+        },
+        "l_wrist_yaw": {
+          "iq": 10,
+          "iv": 9,
+          "min": -1.57,
+          "max": 1.57
+        },
+        "neck_roll": {
+          "iq": 11,
+          "iv": 10,
+          "min": -0.5236,
+          "max": 0.5236
+        },
+        "neck_pitch": {
+          "iq": 12,
+          "iv": 11,
+          "min": -0.5236,
+          "max": 0.5236
+        },
+        "neck_yaw": {
+          "iq": 13,
+          "iv": 12,
+          "min": -1.0471975511965976,
+          "max": 1.0471975511965976
+        },
+        "r_shoulder_pitch": {
+          "iq": 14,
+          "iv": 13,
+          "min": -3.141592653589793,
+          "max": 3.141592653589793
+        },
+        "r_shoulder_roll": {
+          "iq": 15,
+          "iv": 14,
+          "min": -3.141592653589793,
+          "max": 0.51
+        },
+        "r_elbow_yaw": {
+          "iq": 16,
+          "iv": 15,
+          "min": -3.141592653589793,
+          "max": 3.141592653589793
+        },
+        "r_elbow_pitch": {
+          "iq": 17,
+          "iv": 16,
+          "min": -2.25,
+          "max": 0.1
+        },
+        "r_wrist_roll": {
+          "iq": 18,
+          "iv": 17,
+          "min": -0.5236,
+          "max": 0.5236
+        },
+        "r_wrist_pitch": {
+          "iq": 19,
+          "iv": 18,
+          "min": -0.5236,
+          "max": 0.5236
+        },
+        "r_wrist_yaw": {
+          "iq": 20,
+          "iv": 19,
+          "min": -1.57,
+          "max": 1.57
+        }
+      },
+      "shoulders": [
+        [
+          -0.009999999999999995,
+          0.2,
+          1.166
+        ],
+        [
+          -0.009999999999999995,
+          -0.2,
+          1.166
+        ]
+      ],
+      "sampled_workspace_xyz_min": [
+        [
+          -0.6565622421659933,
+          -0.34905554543376344,
+          0.5221737624152354
+        ],
+        [
+          -0.662094799613257,
+          -0.8534879152690436,
+          0.5240997488623744
+        ]
+      ],
+      "sampled_workspace_xyz_max": [
+        [
+          0.6449965383131897,
+          0.8574991024417704,
+          1.8183531585729762
+        ],
+        [
+          0.644472671658281,
+          0.34084455402628894,
+          1.8232481331229213
+        ]
+      ],
+      "sampled_max_radius_from_shoulder_m": [
+        0.6598821310488289,
+        0.6599281113258425
+      ]
+    },
+    "results": [
+      {
+        "task": "momagen-r1_bringing_water-v3",
+        "frames": 3324,
+        "position_min": [
+          [
+            0.4982626203304941,
+            0.08732563742480526,
+            0.4320208015542569
+          ],
+          [
+            0.48783280759132347,
+            -0.5120688141380367,
+            0.4340828866283956
+          ]
+        ],
+        "position_max": [
+          [
+            0.6793623396013427,
+            0.35005521685696195,
+            0.7234426633051096
+          ],
+          [
+            0.9922329884154917,
+            0.13299227499508137,
+            1.1609902351699966
+          ]
+        ],
+        "initial_source_relative": [
+          [
+            0.66317361836906,
+            0.17458911005335173,
+            0.6812208234297918
+          ],
+          [
+            0.6602940211438941,
+            -0.17282368600197565,
+            0.6810446099239835
+          ]
+        ],
+        "first_frame_error_per_hand": [
+          0.2983438452732583,
+          0.319331892602241
+        ],
+        "worst_frame": 811,
+        "worst_time_s": 27.033333333333335,
+        "worst_target_relative": [
+          [
+            0.5450119212667115,
+            0.1564024014576746,
+            0.6212595048481178
+          ],
+          [
+            0.8648134728531173,
+            -0.03497481736462582,
+            0.9175389680824263
+          ]
+        ],
+        "worst_achieved_relative": [
+          [
+            0.4013027783465698,
+            0.26931804466068043,
+            0.6595345751364988
+          ],
+          [
+            0.34630930363841617,
+            -0.18480252559997656,
+            0.6290783527191236
+          ]
+        ],
+        "error_max_by_hand": [
+          0.34651096808719906,
+          0.6119676807347428
+        ],
+        "error_p95_by_hand": [
+          0.3455915278104768,
+          0.5376799152000664
+        ],
+        "pass_count": 0,
+        "base_z_range": [
+          0.003766849637031555,
+          0.00452008843421936
+        ],
+        "base_planarity_deviation": 0.01011141365580997,
+        "max_shoulder_distance_m": [
+          0.9469868504957788,
+          1.0133275548907705
+        ],
+        "arm_clipped_frame_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0048134777376654635,
+          0.1263537906137184,
+          0.016245487364620937,
+          0.0
+        ],
+        "source_versions": null,
+        "source_robot_config": null,
+        "original_keys": [
+          "action",
+          "action_time_s",
+          "gripper_action",
+          "left_gripper_action",
+          "reward",
+          "right_gripper_action",
+          "robot_root_pose",
+          "state",
+          "state_size",
+          "subtask_term_signals",
+          "terminated",
+          "truncated"
+        ]
+      },
+      {
+        "task": "momagen-r1_clean_pan-v3",
+        "frames": 1751,
+        "position_min": [
+          [
+            0.4100178443095652,
+            0.01589052382428502,
+            0.40938480814885164
+          ],
+          [
+            0.41222514262553034,
+            -0.29560604881632235,
+            0.42032217222739243
+          ]
+        ],
+        "position_max": [
+          [
+            0.7827498643604058,
+            0.4191941617565923,
+            1.3563703534748561
+          ],
+          [
+            0.8301148254267274,
+            0.06925770314434809,
+            1.3225269640843054
+          ]
+        ],
+        "initial_source_relative": [
+          [
+            0.6632239377285684,
+            0.1745195121747089,
+            0.6811737862928562
+          ],
+          [
+            0.66034528758373,
+            -0.17292979840408954,
+            0.6810104949942501
+          ]
+        ],
+        "first_frame_error_per_hand": [
+          0.28741916245218774,
+          0.2839581695806631
+        ],
+        "worst_frame": 1732,
+        "worst_time_s": 57.733333333333334,
+        "worst_target_relative": [
+          [
+            0.5184477454035537,
+            0.39905815086382757,
+            0.4709108463463727
+          ],
+          [
+            0.4478021138829642,
+            -0.2858490880621358,
+            0.4407344993367114
+          ]
+        ],
+        "worst_achieved_relative": [
+          [
+            -0.09393980212561281,
+            -0.2424030924769175,
+            1.6305280032692304
+          ],
+          [
+            0.5650374208466937,
+            -0.10958405158302753,
+            0.9237187710756763
+          ]
+        ],
+        "error_max_by_hand": [
+          1.4598640298695267,
+          0.5496696329493823
+        ],
+        "error_p95_by_hand": [
+          1.2503010336198594,
+          0.3224642557267301
+        ],
+        "pass_count": 0,
+        "base_z_range": [
+          -0.018614143133163452,
+          -0.01262696087360382
+        ],
+        "base_planarity_deviation": 0.017454455923995124,
+        "max_shoulder_distance_m": [
+          0.8955613315537586,
+          0.8644451909819456
+        ],
+        "arm_clipped_frame_fraction": [
+          0.9011993146773273,
+          0.8389491719017704,
+          0.8754997144488863,
+          0.9017704169046259,
+          0.9000571102227298,
+          0.9063392347230155,
+          0.8823529411764706,
+          0.0,
+          0.0,
+          0.905197030268418,
+          0.0005711022272986865,
+          0.8960593946316391,
+          0.006282124500285551,
+          0.44831524842946885
+        ],
+        "source_versions": null,
+        "source_robot_config": null,
+        "original_keys": [
+          "action",
+          "action_time_s",
+          "gripper_action",
+          "left_gripper_action",
+          "reward",
+          "right_gripper_action",
+          "robot_links",
+          "robot_root_pose",
+          "state",
+          "state_size",
+          "subtask_term_signals",
+          "terminated",
+          "truncated"
+        ],
+        "source/source/robot_links/torso_link4/pose": {
+          "relative_min": [
+            0.19073199414842845,
+            8.467093581820961e-07,
+            0.9482036107233206
+          ],
+          "relative_max": [
+            0.19129121132605453,
+            3.0292954412702855e-06,
+            0.948231095752556
+          ]
+        },
+        "source/source/robot_links/robot_r1/pose": {
+          "relative_min": [
+            -8.881784197001252e-16,
+            -4.440892098500626e-16,
+            -6.938893903907228e-18
+          ],
+          "relative_max": [
+            8.881784197001252e-16,
+            4.440892098500626e-16,
+            6.938893903907228e-18
+          ]
+        }
+      },
+      {
+        "task": "momagen-r1_dishes_away-v3",
+        "frames": 2788,
+        "position_min": [
+          [
+            -0.3340792637254565,
+            -0.04106380451842144,
+            0.3768176466392287
+          ],
+          [
+            -0.3866199606912438,
+            -0.43702422131900837,
+            0.3780282846724695
+          ]
+        ],
+        "position_max": [
+          [
+            0.8524660925426604,
+            0.4373407342896163,
+            1.6401943728190596
+          ],
+          [
+            0.8615028385093431,
+            0.06139948450846333,
+            1.668489328461466
+          ]
+        ],
+        "initial_source_relative": [
+          [
+            0.6632239377285682,
+            0.17451951217470896,
+            0.6811737862928562
+          ],
+          [
+            0.6603452875837299,
+            -0.17292979840408945,
+            0.6810104949942501
+          ]
+        ],
+        "first_frame_error_per_hand": [
+          0.28741916245220595,
+          0.28395816958065745
+        ],
+        "worst_frame": 2265,
+        "worst_time_s": 75.5,
+        "worst_target_relative": [
+          [
+            0.8507457262297922,
+            0.1355775677370059,
+            1.6140823434498597
+          ],
+          [
+            0.5908433843791836,
+            -0.42499843985048147,
+            1.326223649859992
+          ]
+        ],
+        "worst_achieved_relative": [
+          [
+            0.030114140978646287,
+            0.4251667134034145,
+            0.5795684423798629
+          ],
+          [
+            0.5756404475544334,
+            -0.4108425930487919,
+            1.3018120518407754
+          ]
+        ],
+        "error_max_by_hand": [
+          1.3518569020080018,
+          1.2541408414327249
+        ],
+        "error_p95_by_hand": [
+          1.2948680076811334,
+          1.1162876438536682
+        ],
+        "pass_count": 0,
+        "base_z_range": [
+          -0.018614470958709717,
+          -0.01262696087360382
+        ],
+        "base_planarity_deviation": 0.011824996103121446,
+        "max_shoulder_distance_m": [
+          0.9725282728605119,
+          1.011713484160435
+        ],
+        "arm_clipped_frame_fraction": [
+          0.4451219512195122,
+          0.44368723098995694,
+          0.3009325681492109,
+          0.7923242467718795,
+          0.5129124820659972,
+          0.4935437589670014,
+          0.4483500717360115,
+          0.3819942611190818,
+          0.042682926829268296,
+          0.20050215208034433,
+          0.6337876614060258,
+          0.6388091822094691,
+          0.5774748923959828,
+          0.5326398852223816
+        ],
+        "source_versions": null,
+        "source_robot_config": null,
+        "original_keys": [
+          "action",
+          "action_time_s",
+          "gripper_action",
+          "left_gripper_action",
+          "reward",
+          "right_gripper_action",
+          "robot_root_pose",
+          "state",
+          "state_size",
+          "subtask_term_signals",
+          "terminated",
+          "truncated"
+        ]
+      },
+      {
+        "task": "momagen-r1_pick_cup-v3",
+        "frames": 909,
+        "position_min": [
+          [
+            0.6382366693599225,
+            -0.02476668159398682,
+            0.6767104846455545
+          ],
+          [
+            0.3468196634052452,
+            -0.3542167292266767,
+            0.41561517025871964
+          ]
+        ],
+        "position_max": [
+          [
+            0.8322260360826026,
+            0.20968606715944646,
+            1.2121725214351338
+          ],
+          [
+            0.660293408749548,
+            -0.1549236895858937,
+            0.6810454731142811
+          ]
+        ],
+        "initial_source_relative": [
+          [
+            0.6631724783525746,
+            0.1745892105927061,
+            0.6812218634855702
+          ],
+          [
+            0.660293408749548,
+            -0.17282388342719426,
+            0.6810454731142811
+          ]
+        ],
+        "first_frame_error_per_hand": [
+          0.3255204342860038,
+          0.2979388818287777
+        ],
+        "worst_frame": 75,
+        "worst_time_s": 2.5,
+        "worst_target_relative": [
+          [
+            0.7566975994735224,
+            0.14232069179348905,
+            0.8119577195308056
+          ],
+          [
+            0.6258349200282851,
+            -0.17334929073780964,
+            0.5442247830204344
+          ]
+        ],
+        "worst_achieved_relative": [
+          [
+            0.3674543051413667,
+            0.2545004901847857,
+            0.6312829649722231
+          ],
+          [
+            0.3715943633941026,
+            -0.2462876675619423,
+            0.645142006175247
+          ]
+        ],
+        "error_max_by_hand": [
+          0.4435515937120114,
+          0.2979388818287777
+        ],
+        "error_p95_by_hand": [
+          0.3101161845810963,
+          0.2562821955391484
+        ],
+        "pass_count": 0,
+        "base_z_range": [
+          0.003762155771255493,
+          0.005143642425537109
+        ],
+        "base_planarity_deviation": 0.011117200253329863,
+        "max_shoulder_distance_m": [
+          0.907647439084557,
+          0.8962384901471698
+        ],
+        "arm_clipped_frame_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.9053905390539054,
+          0.8701870187018702,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "source_versions": null,
+        "source_robot_config": null,
+        "original_keys": [
+          "action",
+          "action_time_s",
+          "gripper_action",
+          "left_gripper_action",
+          "reward",
+          "right_gripper_action",
+          "robot_root_pose",
+          "state",
+          "state_size",
+          "subtask_term_signals",
+          "terminated",
+          "truncated"
+        ]
+      },
+      {
+        "task": "momagen-r1_picking_up_trash-v3",
+        "frames": 2483,
+        "position_min": [
+          [
+            0.3762802286645286,
+            0.09347792887520351,
+            0.20542231768689814
+          ],
+          [
+            0.3107515975783759,
+            -0.33306597760177625,
+            0.1945968081396504
+          ]
+        ],
+        "position_max": [
+          [
+            0.6631741364923013,
+            0.3309740271102921,
+            0.7314182596657941
+          ],
+          [
+            1.0216690694574604,
+            0.08082402052068605,
+            1.1298481876110849
+          ]
+        ],
+        "initial_source_relative": [
+          [
+            0.6631741364923013,
+            0.17458929641067306,
+            0.6812200695899426
+          ],
+          [
+            0.6602937921967909,
+            -0.1728249654854111,
+            0.6810440155701301
+          ]
+        ],
+        "first_frame_error_per_hand": [
+          0.27109535559987813,
+          0.30070942756239677
+        ],
+        "worst_frame": 482,
+        "worst_time_s": 16.066666666666666,
+        "worst_target_relative": [
+          [
+            0.6085989820636963,
+            0.16607230457673916,
+            0.690743667718466
+          ],
+          [
+            0.9799768736679522,
+            -0.18644335067272855,
+            1.1298481876110849
+          ]
+        ],
+        "worst_achieved_relative": [
+          [
+            0.5343647948873096,
+            0.21321662442602252,
+            0.8091157969954131
+          ],
+          [
+            0.4113951055040138,
+            -0.2231667274784288,
+            0.6864756305415827
+          ]
+        ],
+        "error_max_by_hand": [
+          0.531781346131364,
+          0.7219508694189604
+        ],
+        "error_p95_by_hand": [
+          0.5310370010667343,
+          0.6318074295641743
+        ],
+        "pass_count": 0,
+        "base_z_range": [
+          0.0037501454353332515,
+          0.005659833550453185
+        ],
+        "base_planarity_deviation": 0.010130920198423168,
+        "max_shoulder_distance_m": [
+          1.042938179556194,
+          1.0583178225643106
+        ],
+        "arm_clipped_frame_fraction": [
+          0.0,
+          0.0,
+          0.9971808296415626,
+          0.0,
+          0.005638340716874748,
+          0.49254933548127267,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.12041884816753927,
+          0.8183648811921064,
+          0.0004027386226339106
+        ],
+        "source_versions": null,
+        "source_robot_config": null,
+        "original_keys": [
+          "action",
+          "action_time_s",
+          "gripper_action",
+          "left_gripper_action",
+          "reward",
+          "right_gripper_action",
+          "robot_root_pose",
+          "state",
+          "state_size",
+          "terminated",
+          "truncated"
+        ]
+      },
+      {
+        "task": "momagen-r1_tidy_table-v3",
+        "frames": 1273,
+        "position_min": [
+          [
+            0.36240073692493,
+            0.055235781075186785,
+            0.40467772250277145
+          ],
+          [
+            -0.022825617224562906,
+            -0.18919345090576223,
+            0.4264668265468948
+          ]
+        ],
+        "position_max": [
+          [
+            0.7518454953841529,
+            0.2053947236286126,
+            1.2819884493788924
+          ],
+          [
+            0.6603452875837299,
+            -0.12657012576903207,
+            0.6810104949942501
+          ]
+        ],
+        "initial_source_relative": [
+          [
+            0.6632239377285682,
+            0.17451951217470896,
+            0.6811737862928562
+          ],
+          [
+            0.6603452875837299,
+            -0.17292979840408945,
+            0.6810104949942501
+          ]
+        ],
+        "first_frame_error_per_hand": [
+          0.28741916245220595,
+          0.28395816958065745
+        ],
+        "worst_frame": 1272,
+        "worst_time_s": 42.4,
+        "worst_target_relative": [
+          [
+            0.3778722411200355,
+            0.17329714475749225,
+            0.40467772250277145
+          ],
+          [
+            0.27510821287245024,
+            -0.1793517186689606,
+            0.4264668265468948
+          ]
+        ],
+        "worst_achieved_relative": [
+          [
+            0.518934739899795,
+            0.15621655141862878,
+            0.8259466253295707
+          ],
+          [
+            0.16730964599109432,
+            -0.1857994662838846,
+            0.5679663104738907
+          ]
+        ],
+        "error_max_by_hand": [
+          0.4445872959495048,
+          0.29785754197336445
+        ],
+        "error_p95_by_hand": [
+          0.3024080782648707,
+          0.16236639168095993
+        ],
+        "pass_count": 0,
+        "base_z_range": [
+          -0.018609553575515747,
+          -0.01262696087360382
+        ],
+        "base_planarity_deviation": 0.01639000110293363,
+        "max_shoulder_distance_m": [
+          0.8548505881867008,
+          0.8702067125690404
+        ],
+        "arm_clipped_frame_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.9654359780047133,
+          0.9725058915946583,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.9709347996857817,
+          0.0
+        ],
+        "source_versions": null,
+        "source_robot_config": null,
+        "original_keys": [
+          "action",
+          "action_time_s",
+          "gripper_action",
+          "left_gripper_action",
+          "reward",
+          "right_gripper_action",
+          "robot_root_pose",
+          "state",
+          "state_size",
+          "subtask_term_signals",
+          "terminated",
+          "truncated"
+        ]
+      }
+    ]
+  },
+  "reachability_audit": {
+    "shoulders": [
+      [
+        -0.009999999999999995,
+        0.2,
+        1.166
+      ],
+      [
+        -0.009999999999999995,
+        -0.2,
+        1.166
+      ]
+    ],
+    "triangle_inequality_radius_bound_m": [
+      0.66,
+      0.66
+    ],
+    "chain": [
+      [
+        {
+          "joint": "hand_frame_offset",
+          "translation": [
+            0.0,
+            -6.535897930762418e-08,
+            -0.09999999999997865
+          ],
+          "length": 0.1
+        },
+        {
+          "joint": "l_wrist_yaw",
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "length": 0.0
+        },
+        {
+          "joint": "l_wrist_pitch",
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "length": 0.0
+        },
+        {
+          "joint": "l_wrist_roll",
+          "translation": [
+            1.8300514206134771e-07,
+            -1.4823076576950257e-23,
+            -0.27999999999994024
+          ],
+          "length": 0.28
+        },
+        {
+          "joint": "l_elbow_pitch",
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "length": 0.0
+        },
+        {
+          "joint": "l_elbow_yaw",
+          "translation": [
+            -6.217248937900877e-17,
+            -1.2434497875801754e-16,
+            -0.28
+          ],
+          "length": 0.28
+        },
+        {
+          "joint": "l_shoulder_roll",
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "length": 0.0
+        }
+      ],
+      [
+        {
+          "joint": "hand_frame_offset",
+          "translation": [
+            0.0,
+            -6.535897930762418e-08,
+            -0.09999999999997865
+          ],
+          "length": 0.1
+        },
+        {
+          "joint": "r_wrist_yaw",
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "length": 0.0
+        },
+        {
+          "joint": "r_wrist_pitch",
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "length": 0.0
+        },
+        {
+          "joint": "r_wrist_roll",
+          "translation": [
+            1.8300514206134771e-07,
+            -1.4823076576950257e-23,
+            -0.27999999999994024
+          ],
+          "length": 0.28
+        },
+        {
+          "joint": "r_elbow_pitch",
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "length": 0.0
+        },
+        {
+          "joint": "r_elbow_yaw",
+          "translation": [
+            6.217248937900877e-17,
+            -1.2434497875801754e-16,
+            -0.28
+          ],
+          "length": 0.28
+        },
+        {
+          "joint": "r_shoulder_roll",
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "length": 0.0
+        }
+      ]
+    ],
+    "jacobian_finite_difference_max_abs_error": [
+      3.0603047776467385e-08,
+      3.060304805402314e-08
+    ],
+    "results": [
+      {
+        "task": "momagen-r1_bringing_water-v3",
+        "frames": 3324,
+        "initial_shoulder_distance_m": [
+          0.8289030434919802,
+          0.8273934523183956
+        ],
+        "initial_position_error_lower_bound_m": [
+          0.16890304349198015,
+          0.16739345231839553
+        ],
+        "max_shoulder_distance_m": [
+          0.9456135352623309,
+          1.0172440976369017
+        ],
+        "max_position_error_lower_bound_m": [
+          0.2856135352623309,
+          0.3572440976369017
+        ],
+        "position_impossible_beyond_2cm_by_hand": [
+          3324,
+          3057
+        ],
+        "position_impossible_beyond_2cm_any_hand": 3324,
+        "target_below_lowest_possible_tip_height_by_hand": [
+          187,
+          190
+        ],
+        "minimum_target_world_z": [
+          0.435627818107605,
+          0.43401411175727844
+        ],
+        "probes": [
+          {
+            "frame": 0,
+            "t": 0.0,
+            "old_error": [
+              0.319331892602241,
+              0.2591555130250199
+            ],
+            "fresh_300_error": [
+              0.31933189260224387,
+              0.2591555130250636
+            ],
+            "warm_300_error": [
+              0.31933189260224065,
+              0.25915551302504736
+            ]
+          },
+          {
+            "frame": 811,
+            "t": 27.033333333333335,
+            "old_error": [
+              0.6119676807347428,
+              1.1051072559116313
+            ],
+            "fresh_300_error": [
+              0.3263114748481822,
+              0.49686271590782527
+            ],
+            "warm_300_error": [
+              0.6119676807347428,
+              1.1051072559116313
+            ]
+          }
+        ]
+      },
+      {
+        "task": "momagen-r1_clean_pan-v3",
+        "frames": 1751,
+        "initial_shoulder_distance_m": [
+          0.8361423463993988,
+          0.8339841884024113
+        ],
+        "initial_position_error_lower_bound_m": [
+          0.17614234639939874,
+          0.17398418840241126
+        ],
+        "max_shoulder_distance_m": [
+          0.9095747267237183,
+          0.8857425391280548
+        ],
+        "max_position_error_lower_bound_m": [
+          0.24957472672371828,
+          0.22574253912805475
+        ],
+        "position_impossible_beyond_2cm_by_hand": [
+          943,
+          1263
+        ],
+        "position_impossible_beyond_2cm_any_hand": 1586,
+        "target_below_lowest_possible_tip_height_by_hand": [
+          21,
+          22
+        ],
+        "minimum_target_world_z": [
+          0.39163854718208313,
+          0.3974003791809082
+        ],
+        "probes": [
+          {
+            "frame": 0,
+            "t": 0.0,
+            "old_error": [
+              0.28741916245218774,
+              0.33533418355280686
+            ],
+            "fresh_300_error": [
+              0.28741916245218774,
+              0.33533418355280686
+            ],
+            "warm_300_error": [
+              0.28741916245218774,
+              0.33533418355280686
+            ]
+          },
+          {
+            "frame": 1732,
+            "t": 57.733333333333334,
+            "old_error": [
+              1.4598640298695267,
+              2.9565551073410825
+            ],
+            "fresh_300_error": [
+              0.37760689801277103,
+              0.2812249371937769
+            ],
+            "warm_300_error": [
+              1.4598640298695267,
+              2.9565551073410825
+            ]
+          }
+        ]
+      },
+      {
+        "task": "momagen-r1_dishes_away-v3",
+        "frames": 2788,
+        "initial_shoulder_distance_m": [
+          0.8361423463993988,
+          0.8339841884024113
+        ],
+        "initial_position_error_lower_bound_m": [
+          0.17614234639939874,
+          0.17398418840241126
+        ],
+        "max_shoulder_distance_m": [
+          0.9706637063869789,
+          1.005045170677504
+        ],
+        "max_position_error_lower_bound_m": [
+          0.3106637063869788,
+          0.34504517067750407
+        ],
+        "position_impossible_beyond_2cm_by_hand": [
+          1671,
+          1352
+        ],
+        "position_impossible_beyond_2cm_any_hand": 1972,
+        "target_below_lowest_possible_tip_height_by_hand": [
+          654,
+          322
+        ],
+        "minimum_target_world_z": [
+          0.3597470819950104,
+          0.3561868667602539
+        ],
+        "probes": [
+          {
+            "frame": 0,
+            "t": 0.0,
+            "old_error": [
+              0.28741916245220595,
+              0.3353341835528397
+            ],
+            "fresh_300_error": [
+              0.287419162452206,
+              0.3353341835528248
+            ],
+            "warm_300_error": [
+              0.28741916245220595,
+              0.3353341835528397
+            ]
+          },
+          {
+            "frame": 2265,
+            "t": 75.5,
+            "old_error": [
+              1.3518569020080018,
+              0.5531306515331214
+            ],
+            "fresh_300_error": [
+              0.7613441734300392,
+              1.7052956605748566
+            ],
+            "warm_300_error": [
+              1.3518569020080018,
+              0.5531306515331214
+            ]
+          }
+        ]
+      },
+      {
+        "task": "momagen-r1_pick_cup-v3",
+        "frames": 909,
+        "initial_shoulder_distance_m": [
+          0.8306404588530114,
+          0.8296279500114816
+        ],
+        "initial_position_error_lower_bound_m": [
+          0.17064045885301138,
+          0.16962795001148157
+        ],
+        "max_shoulder_distance_m": [
+          0.9124538849424235,
+          0.8987577457466519
+        ],
+        "max_position_error_lower_bound_m": [
+          0.2524538849424235,
+          0.23875774574665187
+        ],
+        "position_impossible_beyond_2cm_by_hand": [
+          897,
+          909
+        ],
+        "position_impossible_beyond_2cm_any_hand": 909,
+        "target_below_lowest_possible_tip_height_by_hand": [
+          0,
+          833
+        ],
+        "minimum_target_world_z": [
+          0.6788937449455261,
+          0.41488194465637207
+        ],
+        "probes": [
+          {
+            "frame": 0,
+            "t": 0.0,
+            "old_error": [
+              0.3255204342860038,
+              0.14038910909177618
+            ],
+            "fresh_300_error": [
+              0.32552043429906413,
+              0.14038910908754773
+            ],
+            "warm_300_error": [
+              0.32552043429906413,
+              0.14038910908754773
+            ]
+          },
+          {
+            "frame": 75,
+            "t": 2.5,
+            "old_error": [
+              0.4435515937120114,
+              0.4888371944993218
+            ],
+            "fresh_300_error": [
+              0.2927973509035712,
+              0.8320945777702324
+            ],
+            "warm_300_error": [
+              0.443551593712011,
+              0.48883719449931706
+            ]
+          }
+        ]
+      },
+      {
+        "task": "momagen-r1_picking_up_trash-v3",
+        "frames": 2483,
+        "initial_shoulder_distance_m": [
+          0.8249653474044932,
+          0.8223057221828087
+        ],
+        "initial_position_error_lower_bound_m": [
+          0.1649653474044932,
+          0.1623057221828087
+        ],
+        "max_shoulder_distance_m": [
+          1.0388822405096765,
+          1.060371978263351
+        ],
+        "max_position_error_lower_bound_m": [
+          0.37888224050967645,
+          0.4003719782633509
+        ],
+        "position_impossible_beyond_2cm_by_hand": [
+          1295,
+          2483
+        ],
+        "position_impossible_beyond_2cm_any_hand": 2483,
+        "target_below_lowest_possible_tip_height_by_hand": [
+          275,
+          283
+        ],
+        "minimum_target_world_z": [
+          0.21006098389625547,
+          0.1946640610694885
+        ],
+        "probes": [
+          {
+            "frame": 0,
+            "t": 0.0,
+            "old_error": [
+              0.30070942756239677,
+              0.16122177150575612
+            ],
+            "fresh_300_error": [
+              0.30070942756239455,
+              0.16122177150575204
+            ],
+            "warm_300_error": [
+              0.3007094275623971,
+              0.1612217715057593
+            ]
+          },
+          {
+            "frame": 482,
+            "t": 16.066666666666666,
+            "old_error": [
+              0.7219508694189604,
+              1.502622284782708
+            ],
+            "fresh_300_error": [
+              0.8029205045482609,
+              1.2016023388096073
+            ],
+            "warm_300_error": [
+              0.7219508694189604,
+              1.502622284782708
+            ]
+          }
+        ]
+      },
+      {
+        "task": "momagen-r1_tidy_table-v3",
+        "frames": 1273,
+        "initial_shoulder_distance_m": [
+          0.8361423463993988,
+          0.8339841884024113
+        ],
+        "initial_position_error_lower_bound_m": [
+          0.17614234639939874,
+          0.17398418840241126
+        ],
+        "max_shoulder_distance_m": [
+          0.8726408329009393,
+          0.8872520939248801
+        ],
+        "max_position_error_lower_bound_m": [
+          0.21264083290093927,
+          0.2272520939248801
+        ],
+        "position_impossible_beyond_2cm_by_hand": [
+          743,
+          1273
+        ],
+        "position_impossible_beyond_2cm_any_hand": 1273,
+        "target_below_lowest_possible_tip_height_by_hand": [
+          12,
+          1240
+        ],
+        "minimum_target_world_z": [
+          0.3858332633972168,
+          0.40494459867477417
+        ],
+        "probes": [
+          {
+            "frame": 0,
+            "t": 0.0,
+            "old_error": [
+              0.28741916245220595,
+              0.3353341835528397
+            ],
+            "fresh_300_error": [
+              0.287419162452206,
+              0.3353341835528248
+            ],
+            "warm_300_error": [
+              0.28741916245220595,
+              0.3353341835528397
+            ]
+          },
+          {
+            "frame": 1272,
+            "t": 42.4,
+            "old_error": [
+              0.4445872959495048,
+              0.2688368222500651
+            ],
+            "fresh_300_error": [
+              0.3095921068172698,
+              0.4271945159770954
+            ],
+            "warm_300_error": [
+              0.4445872959495048,
+              0.2688368222500651
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "audit_scripts": {
+    "momagen-frame-audit.py": {
+      "sha256": "452106ce7b7505962a6ee4d257badd589fddfcb030e036697cad6caefe3ec33a",
+      "source": "import os,sys,json\nfrom pathlib import Path\nimport numpy as np\nroot=Path('/mnt/reachy-retarget')\nruntime=json.loads((root/'runtime.json').read_text())\nsys.path.insert(0,runtime['source'])\nos.environ['REACHY_RETARGET_CONTROL']=runtime['control']\nos.environ['REACHY_RETARGET_BACKEND']='reference'\nfrom reachy_retarget.robot import Robot,ARMS\nfrom reachy_retarget.episodes import pose_to_matrices\nimport h5py\njobs=[]\nfor p in sorted((root/'queue/tasks').glob('momagen*v3/result.json')):\n jobs.append(json.loads(p.read_text()))\nrobot=Robot(Path(jobs[0]['attempt'])/'runtime-identity')\nmodel=robot.r.model\nhome=robot.fk(robot.q)\nreachy={'nq':model.nq,'nv':model.nv,'hands':[model.frames[f].name for f in robot.r.hands], 'home':home.tolist(),'arm_q_indices':robot.arm_ids.tolist(),'arm_v_indices':robot.arm_v.tolist(),'joints':{name:{'iq':robot.r.q_indices[name],'iv':robot.r.v_indices[name],'min':float(model.lowerPositionLimit[robot.r.q_indices[name]]),'max':float(model.upperPositionLimit[robot.r.q_indices[name]])}for name in robot.r.names}}\nshoulders=[]\nfor side in ('l_','r_'):\n jid=model.getJointId(side+'shoulder_pitch')\n shoulders.append(robot.r.data.oMi[jid].translation.copy())\nreachy['shoulders']=np.asarray(shoulders).tolist()\nrng=np.random.default_rng(502)\nsamples=[]\nfor _ in range(4000):\n q=robot.q.copy();q[robot.arm_ids]=rng.uniform(model.lowerPositionLimit[robot.arm_ids]+.031,model.upperPositionLimit[robot.arm_ids]-.031)\n samples.append(robot.fk(q)[:,:3,3])\nsamples=np.asarray(samples)\nreachy['sampled_workspace_xyz_min']=samples.min(axis=0).tolist()\nreachy['sampled_workspace_xyz_max']=samples.max(axis=0).tolist()\nreachy['sampled_max_radius_from_shoulder_m']=np.linalg.norm(samples-np.asarray(shoulders),axis=-1).max(axis=0).tolist()\nresults=[]\nfor job in jobs:\n with np.load(job['raw_ik_artifact']) as a:\n  base=a['source_base_reference_matrix']; target=a['target_hand_matrix'];achieved=a['achieved_hand_matrix']; q=a['robot_qpos']; clock=a['original_clock_s']; errors=a['ik_error_m_rad']\n  local=(np.linalg.inv(base)[:,None]@target)[:,:,:3,3]\n  actual_local=(np.linalg.inv(base)[:,None]@achieved)[:,:,:3,3]\n  pe=np.linalg.norm(target[:,:,:3,3]-achieved[:,:,:3,3],axis=-1)\n  worst=np.argmax(pe.max(axis=1))\n  entry={'task':job['task_id'],'frames':len(clock),'position_min':local.min(axis=0).tolist(),'position_max':local.max(axis=0).tolist(),'initial_source_relative':local[0].tolist(),'first_frame_error_per_hand':pe[0].tolist(),'worst_frame':int(worst),'worst_time_s':float(clock[worst]),'worst_target_relative':local[worst].tolist(),'worst_achieved_relative':actual_local[worst].tolist(),'error_max_by_hand':pe.max(axis=0).tolist(),'error_p95_by_hand':np.quantile(pe,.95,axis=0).tolist(),'pass_count':int(((errors[:,0]<=.02)&(errors[:,1]<=.15)).sum()),'base_z_range':[float(base[:,2,3].min()),float(base[:,2,3].max())],'base_planarity_deviation':float(np.max(np.abs(base[:,:3,2]-[0,0,1]))),'max_shoulder_distance_m':np.linalg.norm(local-np.asarray(shoulders),axis=-1).max(axis=0).tolist(),'arm_clipped_frame_fraction':((np.isclose(q[:,robot.arm_ids],model.lowerPositionLimit[robot.arm_ids]+.031,atol=1e-6))|(np.isclose(q[:,robot.arm_ids],model.upperPositionLimit[robot.arm_ids]-.031,atol=1e-6))).mean(axis=0).tolist()}\n  with h5py.File(job['archive'],'r')as h:\n   meta=json.loads(h.attrs['metadata_json'])\n   entry['source_versions']=meta.get('recorded_versions')\n   entry['source_robot_config']=meta.get('source_configuration',{}).get('robots')\n   entry['original_keys']=list(h['source/source'].keys()) if 'source/source'in h else list(h['source'].keys())\n   for key in ['source/source/robot_links/torso_link4/pose','source/source/robot_links/robot_r1/pose']:\n    if key in h:\n     pose=pose_to_matrices(h[key][()]);pb=a['placement']@pose;rel=np.linalg.inv(base)@pb\n     entry[key]={'relative_min':rel[:,:3,3].min(axis=0).tolist(),'relative_max':rel[:,:3,3].max(axis=0).tolist()}\n  results.append(entry)\nprint(json.dumps({'runtime':runtime,'reachy':reachy,'results':results},indent=2))\n"
+    },
+    "momagen-reachability-audit.py": {
+      "sha256": "bdeb963230c3785e79b786e0b96df92bded9f0f197125f8d5cb913b214f9b5e7",
+      "source": "import os,sys,json\nfrom pathlib import Path\nimport numpy as np\nroot=Path('/mnt/reachy-retarget');runtime=json.loads((root/'runtime.json').read_text())\nsys.path.insert(0,runtime['source']);os.environ['REACHY_RETARGET_CONTROL']=runtime['control'];os.environ['REACHY_RETARGET_BACKEND']='reference'\nfrom reachy_retarget.robot import Robot\njobs=[json.loads(p.read_text())for p in sorted((root/'queue/tasks').glob('momagen*v3/result.json'))]\nrobot=Robot(Path(jobs[0]['attempt'])/'runtime-identity');m=robot.r.model;robot.active=robot.arm_v.copy();robot.fk(robot.q)\nshoulder=[];radius=[];chains=[]\nfor side,fid in zip(('l_','r_'),robot.r.hands):\n sj=m.getJointId(side+'shoulder_pitch');shoulder.append(robot.r.data.oMi[sj].translation.copy());f=m.frames[fid];j=f.parentJoint;length=float(np.linalg.norm(f.placement.translation));chain=[{'joint':'hand_frame_offset','translation':f.placement.translation.tolist(),'length':length}]\n while j!=sj:\n  p=m.jointPlacements[j];d=float(np.linalg.norm(p.translation));length+=d;chain.append({'joint':m.names[j],'translation':p.translation.tolist(),'length':d});j=m.parents[j]\n radius.append(length);chains.append(chain)\n# Compare the exact IK Jacobian convention against finite differences at a nonzero planar pose.\nq=robot.q.copy();q[:4]=[.3,-.2,np.cos(.7),np.sin(.7)];start=robot.fk(q);dmax=[]\nfor hand,fid in enumerate(robot.r.hands):\n J=robot.pin.computeFrameJacobian(m,robot.r.data,q,fid,robot.pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)\n err=[]\n for vi in robot.arm_v:\n  v=np.zeros(m.nv);v[vi]=1e-7;changed=robot.fk(robot.integrate(q,v))[hand]\n  numeric=np.r_[(changed[:3,3]-start[hand,:3,3])/1e-7,robot.pin.log3(changed[:3,:3]@start[hand,:3,:3].T)/1e-7]\n  err.append(np.max(np.abs(numeric-J[:,vi])))\n dmax.append(float(max(err)))\nresults=[]\nfor job in jobs:\n with np.load(job['raw_ik_artifact'])as a:\n  t=a['target_hand_matrix'];q=a['robot_qpos'];clock=a['original_clock_s'];old=a['ik_error_m_rad'];base=a['source_base_reference_matrix']\n  yaw=np.arctan2(q[:,3],q[:,2]);rot=np.zeros((len(q),3,3));rot[:,0,0]=np.cos(yaw);rot[:,0,1]=-np.sin(yaw);rot[:,1,0]=np.sin(yaw);rot[:,1,1]=np.cos(yaw);rot[:,2,2]=1\n  centers=np.einsum('nij,hj->nhi',rot,np.asarray(shoulder))+np.pad(q[:,:2],((0,0),(0,1)))[:,None]\n  dist=np.linalg.norm(t[:,:,:3,3]-centers,axis=-1);lower_bound=np.maximum(dist-np.asarray(radius),0)\n  exact_lowest=np.asarray(shoulder)[:,2]-np.asarray(radius)\n  ix=int(np.argmax(old[:,0]));probes=[]\n  for frame in sorted({0,ix}):\n   qs=robot.q.copy();qs[:4]=q[frame,:4];fresh,pe,re=robot.ik(t[frame],qs,iterations=300)\n   _,warm_pe,warm_re=robot.ik(t[frame],q[frame],iterations=300)\n   probes.append({'frame':frame,'t':float(clock[frame]),'old_error':old[frame].tolist(),'fresh_300_error':[pe,re],'warm_300_error':[warm_pe,warm_re]})\n  results.append({'task':job['task_id'],'frames':len(q),'initial_shoulder_distance_m':dist[0].tolist(),'initial_position_error_lower_bound_m':lower_bound[0].tolist(),'max_shoulder_distance_m':dist.max(axis=0).tolist(),'max_position_error_lower_bound_m':lower_bound.max(axis=0).tolist(),'position_impossible_beyond_2cm_by_hand':(lower_bound>.02).sum(axis=0).tolist(),'position_impossible_beyond_2cm_any_hand':int((lower_bound>.02).any(axis=1).sum()),'target_below_lowest_possible_tip_height_by_hand':(t[:,:,2,3]<exact_lowest).sum(axis=0).tolist(),'minimum_target_world_z':t[:,:,2,3].min(axis=0).tolist(),'probes':probes})\nprint(json.dumps({'shoulders':np.asarray(shoulder).tolist(),'triangle_inequality_radius_bound_m':radius,'chain':chains,'jacobian_finite_difference_max_abs_error':dmax,'results':results},indent=2))\n"
+    }
+  }
+}

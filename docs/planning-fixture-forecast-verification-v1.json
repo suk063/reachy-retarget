@@ -1,0 +1,406 @@
+{
+  "output": "/tmp/verified-planning-fixtures-1791377451850138360",
+  "module_sha256": "b4885f6e526193cc53364a315bc79098a65d823ac6e7ab2ba5f72cef60584d6d",
+  "rows": [
+    {
+      "episode_id": "b0f44ee456375ef2a8a33b5b",
+      "original_rows": 771,
+      "retimed_with_hold_rows": 1117,
+      "max_depth_m": 0.00010152151769704518,
+      "old_diagnostic_depth_max_error": 0.0,
+      "binding": {
+        "schema": "planning-task-fixture-forecast-v1",
+        "status": "bound",
+        "physics_validated": false,
+        "source_path": "/mnt/reachy-retarget/workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+        "source_sha256": "dbacb889853c7b4bacd3e12c1e531b8bd21fd7c56b66186fc23802ce89f5aa4e",
+        "source_sidecar": "/mnt/reachy-retarget/workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.json",
+        "source_sidecar_sha256": "0d06a11560540819ab16be0601eea57f12729ce6cbeacce1622155c54569a7f4",
+        "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+        "source_sequence": "source/stack/demo_4",
+        "source_provenance": [
+          {
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418"
+          }
+        ],
+        "source_metadata_objects": {
+          "cubeA": {
+            "qpos_address": 9,
+            "body": "cubeA_main",
+            "joint": "cubeA_joint0",
+            "pose_frame": "world",
+            "pose_source": "recorded simulator free-joint qpos",
+            "geometry_source": "embedded model_xml; asset files may require separate acquisition",
+            "mass_friction": "source model values retained; not independently calibrated"
+          },
+          "cubeB": {
+            "qpos_address": 16,
+            "body": "cubeB_main",
+            "joint": "cubeB_joint0",
+            "pose_frame": "world",
+            "pose_source": "recorded simulator free-joint qpos",
+            "geometry_source": "embedded model_xml; asset files may require separate acquisition",
+            "mass_friction": "source model values retained; not independently calibrated"
+          }
+        },
+        "scene_sha256": "8e529888a49d9842a8aae6acf7272d8cdd92c87342c4fbddd286768a2f2bf7ed",
+        "source_to_scene": [
+          [
+            2.621152805087137e-16,
+            1.0,
+            0.0,
+            0.6
+          ],
+          [
+            -1.0,
+            3.4603936104136756e-16,
+            0.0,
+            -0.1
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "active_object_id": "cubeA",
+        "native_source_rows": 115,
+        "binding_control_rows": 771,
+        "evaluation_hold_s": 2.0,
+        "fixtures": [
+          {
+            "object_id": "cubeB",
+            "body": "cubeB_main",
+            "joint": "cubeB_joint0",
+            "source_channel": "objects/cubeB/pose",
+            "artifact_field": "fixture_pose_0",
+            "original_reset_pose_world": [
+              0.580736660096,
+              -0.152735136929,
+              0.835,
+              0.39016132511388485,
+              0.0,
+              0.0,
+              0.9207465125567283
+            ],
+            "qpos_address": 37,
+            "joint_id": 31
+          }
+        ],
+        "original_fixture_initial_joint_positions": {},
+        "artifact": "/tmp/verified-planning-fixtures-1791377451850138360/b0f44ee456375ef2a8a33b5b/bound/source-fixtures.npz",
+        "artifact_sha256": "b41d9cbb6bf62d07924f5d4e5ac87633667530e65ea9e5cf89bcf86844f91b72",
+        "assumption": "Inactive task objects follow their unchanged recorded source poses for kinematic planning only. Retiming uses the bound source-clock map; evaluation holds repeat the final recorded pose.",
+        "physical_policy": "Forecast is never applied to physical data. All task objects reset once and then remain fully dynamic; actual contacts and original gates decide success.",
+        "invalidated_previous_admissions": {},
+        "requires_fresh_full_ik_and_collision_admission": true
+      },
+      "query": {
+        "binding_artifact_sha256": "b41d9cbb6bf62d07924f5d4e5ac87633667530e65ea9e5cf89bcf86844f91b72",
+        "source_sha256": "dbacb889853c7b4bacd3e12c1e531b8bd21fd7c56b66186fc23802ce89f5aa4e",
+        "fixture_ids": [
+          "cubeB"
+        ],
+        "source_clock_map": null,
+        "rows": 771,
+        "scope": "Inactive task objects follow their unchanged recorded source poses for kinematic planning only. Retiming uses the bound source-clock map; evaluation holds repeat the final recorded pose.",
+        "physical_policy": "Forecast is never applied to physical data. All task objects reset once and then remain fully dynamic; actual contacts and original gates decide success.",
+        "query_artifact": "/tmp/verified-planning-fixtures-1791377451850138360/b0f44ee456375ef2a8a33b5b/planning-fixture-query.npz",
+        "query_artifact_sha256": "320fb51104fc0aa0c58e0d77d73a06b72b96b0eff4e8e46102e6c7ef60624f3f"
+      },
+      "retimed_query": {
+        "binding_artifact_sha256": "b41d9cbb6bf62d07924f5d4e5ac87633667530e65ea9e5cf89bcf86844f91b72",
+        "source_sha256": "dbacb889853c7b4bacd3e12c1e531b8bd21fd7c56b66186fc23802ce89f5aa4e",
+        "fixture_ids": [
+          "cubeB"
+        ],
+        "source_clock_map": {
+          "path": "/tmp/verified-planning-fixtures-1791377451850138360/b0f44ee456375ef2a8a33b5b/hold/time-map.npz",
+          "sha256": "742c7b04342154b4cf538e3ca89ccff266e9e46f7a0f64fdefb84aa458da1c70"
+        },
+        "rows": 1117,
+        "scope": "Inactive task objects follow their unchanged recorded source poses for kinematic planning only. Retiming uses the bound source-clock map; evaluation holds repeat the final recorded pose.",
+        "physical_policy": "Forecast is never applied to physical data. All task objects reset once and then remain fully dynamic; actual contacts and original gates decide success.",
+        "query_artifact": "/tmp/verified-planning-fixtures-1791377451850138360/b0f44ee456375ef2a8a33b5b/hold/planning-fixture-query.npz",
+        "query_artifact_sha256": "08cf29f691ff946366dd60ef117b6c5e6be2e8ad19e6e6d9c222aa504bed8b5c"
+      }
+    },
+    {
+      "episode_id": "b1d985821e4c4a4563c2e318",
+      "original_rows": 636,
+      "retimed_with_hold_rows": 1007,
+      "max_depth_m": 1.3877787807814457e-17,
+      "old_diagnostic_depth_max_error": 0.0,
+      "binding": {
+        "schema": "planning-task-fixture-forecast-v1",
+        "status": "bound",
+        "physics_validated": false,
+        "source_path": "/mnt/reachy-retarget/workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+        "source_sha256": "98e5b18bfaf7b898bee00e380ff94cd372d694ea3a1e483e0b811fe449fe2185",
+        "source_sidecar": "/mnt/reachy-retarget/workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.json",
+        "source_sidecar_sha256": "72599c472c6ee7cdd3c89880d32c74fd7a6527569d489f4d8fe30406110ffa99",
+        "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+        "source_sequence": "source/stack/demo_6",
+        "source_provenance": [
+          {
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418"
+          }
+        ],
+        "source_metadata_objects": {
+          "cubeA": {
+            "qpos_address": 9,
+            "body": "cubeA_main",
+            "joint": "cubeA_joint0",
+            "pose_frame": "world",
+            "pose_source": "recorded simulator free-joint qpos",
+            "geometry_source": "embedded model_xml; asset files may require separate acquisition",
+            "mass_friction": "source model values retained; not independently calibrated"
+          },
+          "cubeB": {
+            "qpos_address": 16,
+            "body": "cubeB_main",
+            "joint": "cubeB_joint0",
+            "pose_frame": "world",
+            "pose_source": "recorded simulator free-joint qpos",
+            "geometry_source": "embedded model_xml; asset files may require separate acquisition",
+            "mass_friction": "source model values retained; not independently calibrated"
+          }
+        },
+        "scene_sha256": "49b785d93ffba9abf873ef13bec90093aa71c8549b0a4f651baf231d8a761ac0",
+        "source_to_scene": [
+          [
+            2.3059799326806565e-16,
+            0.9999999999999999,
+            0.0,
+            0.6
+          ],
+          [
+            -1.0,
+            2.1498385201123782e-16,
+            0.0,
+            -0.1
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "active_object_id": "cubeA",
+        "native_source_rows": 88,
+        "binding_control_rows": 636,
+        "evaluation_hold_s": 2.0,
+        "fixtures": [
+          {
+            "object_id": "cubeB",
+            "body": "cubeB_main",
+            "joint": "cubeB_joint0",
+            "source_channel": "objects/cubeB/pose",
+            "artifact_field": "fixture_pose_0",
+            "original_reset_pose_world": [
+              0.531129848049,
+              -0.119739612959,
+              0.835,
+              0.47773952320396074,
+              0.0,
+              0.0,
+              0.8785015355529279
+            ],
+            "qpos_address": 37,
+            "joint_id": 31
+          }
+        ],
+        "original_fixture_initial_joint_positions": {},
+        "artifact": "/tmp/verified-planning-fixtures-1791377451850138360/b1d985821e4c4a4563c2e318/bound/source-fixtures.npz",
+        "artifact_sha256": "b28a779ada3942bf18f83e702eb742f6df9ef1d92778d621d060b80d5d80c97e",
+        "assumption": "Inactive task objects follow their unchanged recorded source poses for kinematic planning only. Retiming uses the bound source-clock map; evaluation holds repeat the final recorded pose.",
+        "physical_policy": "Forecast is never applied to physical data. All task objects reset once and then remain fully dynamic; actual contacts and original gates decide success.",
+        "invalidated_previous_admissions": {},
+        "requires_fresh_full_ik_and_collision_admission": true
+      },
+      "query": {
+        "binding_artifact_sha256": "b28a779ada3942bf18f83e702eb742f6df9ef1d92778d621d060b80d5d80c97e",
+        "source_sha256": "98e5b18bfaf7b898bee00e380ff94cd372d694ea3a1e483e0b811fe449fe2185",
+        "fixture_ids": [
+          "cubeB"
+        ],
+        "source_clock_map": null,
+        "rows": 636,
+        "scope": "Inactive task objects follow their unchanged recorded source poses for kinematic planning only. Retiming uses the bound source-clock map; evaluation holds repeat the final recorded pose.",
+        "physical_policy": "Forecast is never applied to physical data. All task objects reset once and then remain fully dynamic; actual contacts and original gates decide success.",
+        "query_artifact": "/tmp/verified-planning-fixtures-1791377451850138360/b1d985821e4c4a4563c2e318/planning-fixture-query.npz",
+        "query_artifact_sha256": "dd8dbed7d56df38c4d88f4dca6cf022af4e66a544180b684bc04a78dbca92399"
+      },
+      "retimed_query": {
+        "binding_artifact_sha256": "b28a779ada3942bf18f83e702eb742f6df9ef1d92778d621d060b80d5d80c97e",
+        "source_sha256": "98e5b18bfaf7b898bee00e380ff94cd372d694ea3a1e483e0b811fe449fe2185",
+        "fixture_ids": [
+          "cubeB"
+        ],
+        "source_clock_map": {
+          "path": "/tmp/verified-planning-fixtures-1791377451850138360/b1d985821e4c4a4563c2e318/hold/time-map.npz",
+          "sha256": "ea6379779729ee301322fdd57f0e900e610a033b5fce7d5af453b034f832f3bf"
+        },
+        "rows": 1007,
+        "scope": "Inactive task objects follow their unchanged recorded source poses for kinematic planning only. Retiming uses the bound source-clock map; evaluation holds repeat the final recorded pose.",
+        "physical_policy": "Forecast is never applied to physical data. All task objects reset once and then remain fully dynamic; actual contacts and original gates decide success.",
+        "query_artifact": "/tmp/verified-planning-fixtures-1791377451850138360/b1d985821e4c4a4563c2e318/hold/planning-fixture-query.npz",
+        "query_artifact_sha256": "2ebd16d2c9bb62b87ea140d30f460901aae5d5aaa4997f8099816c9350b6583f"
+      }
+    },
+    {
+      "episode_id": "9295ddc7f5668cb10cae9f98",
+      "original_rows": 671,
+      "retimed_with_hold_rows": 796,
+      "max_depth_m": 1.3877787807814457e-17,
+      "old_diagnostic_depth_max_error": 0.0,
+      "binding": {
+        "schema": "planning-task-fixture-forecast-v1",
+        "status": "bound",
+        "physics_validated": false,
+        "source_path": "/mnt/reachy-retarget/workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+        "source_sha256": "ef2ba6d42f74dd4b2189e5bd9eed4a1d83c27f16a8cd6e0b66319cbb447a1a75",
+        "source_sidecar": "/mnt/reachy-retarget/workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.json",
+        "source_sidecar_sha256": "73077bfe4b612461cb41e57a6c1e592ce633f587c4a3578beea4f5b70d940423",
+        "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+        "source_sequence": "source/stack/demo_9",
+        "source_provenance": [
+          {
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418"
+          }
+        ],
+        "source_metadata_objects": {
+          "cubeA": {
+            "qpos_address": 9,
+            "body": "cubeA_main",
+            "joint": "cubeA_joint0",
+            "pose_frame": "world",
+            "pose_source": "recorded simulator free-joint qpos",
+            "geometry_source": "embedded model_xml; asset files may require separate acquisition",
+            "mass_friction": "source model values retained; not independently calibrated"
+          },
+          "cubeB": {
+            "qpos_address": 16,
+            "body": "cubeB_main",
+            "joint": "cubeB_joint0",
+            "pose_frame": "world",
+            "pose_source": "recorded simulator free-joint qpos",
+            "geometry_source": "embedded model_xml; asset files may require separate acquisition",
+            "mass_friction": "source model values retained; not independently calibrated"
+          }
+        },
+        "scene_sha256": "77579c42cc22fe719122dc843f8ff105e9658d10438bc87712fe8f7ba47355e9",
+        "source_to_scene": [
+          [
+            -1.314233224998056e-16,
+            1.0000000000000002,
+            0.0,
+            0.5999999999999999
+          ],
+          [
+            -1.0,
+            -1.182769639240382e-16,
+            0.0,
+            -0.1
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "active_object_id": "cubeA",
+        "native_source_rows": 95,
+        "binding_control_rows": 671,
+        "evaluation_hold_s": 2.0,
+        "fixtures": [
+          {
+            "object_id": "cubeB",
+            "body": "cubeB_main",
+            "joint": "cubeB_joint0",
+            "source_channel": "objects/cubeB/pose",
+            "artifact_field": "fixture_pose_0",
+            "original_reset_pose_world": [
+              0.578538623185,
+              -0.136719186122,
+              0.835,
+              0.1295270204540263,
+              0.0,
+              0.0,
+              0.9915758926942014
+            ],
+            "qpos_address": 37,
+            "joint_id": 31
+          }
+        ],
+        "original_fixture_initial_joint_positions": {},
+        "artifact": "/tmp/verified-planning-fixtures-1791377451850138360/9295ddc7f5668cb10cae9f98/bound/source-fixtures.npz",
+        "artifact_sha256": "04302aee0005c033f6f7fff00d9ecae155441a237b029b60b086241a0ab466f0",
+        "assumption": "Inactive task objects follow their unchanged recorded source poses for kinematic planning only. Retiming uses the bound source-clock map; evaluation holds repeat the final recorded pose.",
+        "physical_policy": "Forecast is never applied to physical data. All task objects reset once and then remain fully dynamic; actual contacts and original gates decide success.",
+        "invalidated_previous_admissions": {},
+        "requires_fresh_full_ik_and_collision_admission": true
+      },
+      "query": {
+        "binding_artifact_sha256": "04302aee0005c033f6f7fff00d9ecae155441a237b029b60b086241a0ab466f0",
+        "source_sha256": "ef2ba6d42f74dd4b2189e5bd9eed4a1d83c27f16a8cd6e0b66319cbb447a1a75",
+        "fixture_ids": [
+          "cubeB"
+        ],
+        "source_clock_map": null,
+        "rows": 671,
+        "scope": "Inactive task objects follow their unchanged recorded source poses for kinematic planning only. Retiming uses the bound source-clock map; evaluation holds repeat the final recorded pose.",
+        "physical_policy": "Forecast is never applied to physical data. All task objects reset once and then remain fully dynamic; actual contacts and original gates decide success.",
+        "query_artifact": "/tmp/verified-planning-fixtures-1791377451850138360/9295ddc7f5668cb10cae9f98/planning-fixture-query.npz",
+        "query_artifact_sha256": "76b9faa6f11e95b2b4fbe2d87763686f81bf437ac4a070caf4073631c8802f56"
+      },
+      "retimed_query": {
+        "binding_artifact_sha256": "04302aee0005c033f6f7fff00d9ecae155441a237b029b60b086241a0ab466f0",
+        "source_sha256": "ef2ba6d42f74dd4b2189e5bd9eed4a1d83c27f16a8cd6e0b66319cbb447a1a75",
+        "fixture_ids": [
+          "cubeB"
+        ],
+        "source_clock_map": {
+          "path": "/tmp/verified-planning-fixtures-1791377451850138360/9295ddc7f5668cb10cae9f98/hold/time-map.npz",
+          "sha256": "027a0ac166a8764315ba89a0ca1ebaf2b562dbd3698a57ff2e6a3758158fe489"
+        },
+        "rows": 796,
+        "scope": "Inactive task objects follow their unchanged recorded source poses for kinematic planning only. Retiming uses the bound source-clock map; evaluation holds repeat the final recorded pose.",
+        "physical_policy": "Forecast is never applied to physical data. All task objects reset once and then remain fully dynamic; actual contacts and original gates decide success.",
+        "query_artifact": "/tmp/verified-planning-fixtures-1791377451850138360/9295ddc7f5668cb10cae9f98/hold/planning-fixture-query.npz",
+        "query_artifact_sha256": "0a29809844805ea437d7d7e32b1ca6d8b59cdcf64a7ac0081c92fef1dcff17e2"
+      }
+    }
+  ],
+  "backup": {
+    "archive": "runs/diagnostic-backups/stack-fixture-forecast-v1.tar.gz",
+    "bytes": 1146557,
+    "sha256": "c6c80b2b55f39a560e7e8a00822e9a8fc336c3ae0d270eac8a0a0d514d124465",
+    "pod": "reachy-retarget-worker-7d46748688-4tn7w",
+    "scope": "Independent raw query and final helper verification, including original bound inputs, source clocks, reset assumptions and forecast artifacts. All from isolated kinematic MjData; no physics success."
+  }
+}

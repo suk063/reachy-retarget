@@ -1,0 +1,394 @@
+{
+  "source_group": "bigym/MovePlate/c795f62efb4f4d20ab899af96d766a2f",
+  "parent_evidence": "bigym-fixed-patch-contact-frame-v1-evidence.json",
+  "independent_source_demonstrations": 1,
+  "new_physical_passes": 0,
+  "physics_validated": false,
+  "heldout_103d_used": false,
+  "source_objects_materials_gains_unchanged": true,
+  "source_clock_interval_s": 4.51,
+  "physical_steps_each": 8774,
+  "derived_physical_duration_s": 17.548,
+  "original_reference_rows_each": 2256,
+  "entry_settle_close_prefix_rows": 3945,
+  "policy": {
+    "activation": "after_measured_acquisition",
+    "scales": [
+      0.5,
+      1.0
+    ],
+    "boundary_taper_s": 0.1,
+    "arm_position_offset_cap_rad": 0.2,
+    "arm_command_rate_cap_rad_s": 1.0,
+    "zero_before_activation": true,
+    "source_release_sha256": "aeb4c0888fa1d331ccf023aceb36e6d3e068da420c0467dbd7c370802538a156",
+    "physics_overlay_sha256": "cf064cd15896620166ca5bac556ea853039b48ab6fcce2a0ad634d4553ef35fd"
+  },
+  "exports": {
+    "050": {
+      "workspace": "/mnt/reachy-retarget/workspaces/bigym-fixed-patch-postff-050-20261007-01",
+      "manifest_sha256": "1ba5faafc67ca4c55641eead4413089ca79e78f2c41731a696bb39a6225a9f4b",
+      "archive": {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-fixed-patch-postff-050-source.hdf5",
+        "sha256": "4d8e9e80b94fc526fab38b235c54b428cd72c02d79a54c266d0134b18bd2cb98",
+        "bytes": 78856532,
+        "sidecar_sha256": "04d7a11af926375df960739ee56110cc7f42283229d3888f1f0aa660aff71747"
+      },
+      "cross_pod": {
+        "pod": "reachy-retarget-worker-7d46748688-nl77d",
+        "files_verified": 45,
+        "manifest_sha256": "1ba5faafc67ca4c55641eead4413089ca79e78f2c41731a696bb39a6225a9f4b",
+        "canonical_sha256": "4d8e9e80b94fc526fab38b235c54b428cd72c02d79a54c266d0134b18bd2cb98",
+        "sidecar_sha256": "04d7a11af926375df960739ee56110cc7f42283229d3888f1f0aa660aff71747",
+        "verified": true
+      },
+      "steps": 8774,
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg",
+        "object_environment_penetration_2mm"
+      ],
+      "replay": {
+        "clock": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "qpos": 0.0,
+        "qvel": 0.0
+      },
+      "prefix": {
+        "baseline_scene_archive_sha256": "34083823cdb4956e363854f5a06548737c2e22d144dbadb696dce92dd855e2b0",
+        "compensation_zero_before_activation": true,
+        "identical_entry_settle_close": true,
+        "maximum_absolute_errors": {
+          "command/joint_position": 0.0,
+          "observation/qpos": 0.0,
+          "observation/qvel": 0.0,
+          "timestamp": 0.0
+        },
+        "rows_compared": 3945,
+        "scope": "Independent comparison of all measured prefix states and issued controls before compensation activates; same original contact model and geometry"
+      },
+      "inspection": {
+        "schema": "reachy-retarget-agent-archive-v1",
+        "rows": 8774,
+        "timed": true,
+        "policy_ready": false,
+        "dataset_id": "bigym",
+        "episode_id": "bigym-fixed-patch-postff-050-source",
+        "missing_fields": [],
+        "rgb_required": false,
+        "missing_native_v5_fields": [
+          "action",
+          "applied_controls",
+          "controller_state_json",
+          "image_tick",
+          "observation/cameras/torso/rgb",
+          "stage_index",
+          "state_tick"
+        ],
+        "sha256": "4d8e9e80b94fc526fab38b235c54b428cd72c02d79a54c266d0134b18bd2cb98",
+        "field_count": 155
+      }
+    },
+    "100": {
+      "workspace": "/mnt/reachy-retarget/workspaces/bigym-fixed-patch-postff-100-20261007-01",
+      "manifest_sha256": "4e29402572bc7f30b2933c91b5efb814ae790a24093b942b2647f994b7e14a27",
+      "archive": {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-fixed-patch-postff-100-source.hdf5",
+        "sha256": "3fcfc4dfe0a51124f8e86fe226804611e1d00fb1614632cced16801046c3ec43",
+        "bytes": 78803864,
+        "sidecar_sha256": "c8bbd5b3014a02639f0bcfa89a6cfda84e2f998d4ba231ce824b86ac12f3c229"
+      },
+      "cross_pod": {
+        "pod": "reachy-retarget-worker-7d46748688-frs8d",
+        "files_verified": 46,
+        "manifest_sha256": "4e29402572bc7f30b2933c91b5efb814ae790a24093b942b2647f994b7e14a27",
+        "canonical_sha256": "3fcfc4dfe0a51124f8e86fe226804611e1d00fb1614632cced16801046c3ec43",
+        "sidecar_sha256": "c8bbd5b3014a02639f0bcfa89a6cfda84e2f998d4ba231ce824b86ac12f3c229",
+        "verified": true
+      },
+      "steps": 8774,
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg",
+        "object_environment_penetration_2mm"
+      ],
+      "replay": {
+        "clock": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "qpos": 0.0,
+        "qvel": 0.0
+      },
+      "prefix": {
+        "baseline_scene_archive_sha256": "34083823cdb4956e363854f5a06548737c2e22d144dbadb696dce92dd855e2b0",
+        "compensation_zero_before_activation": true,
+        "identical_entry_settle_close": false,
+        "maximum_absolute_errors": {
+          "command/joint_position": 5.551115123125783e-17,
+          "observation/qpos": 0.0053063195595969915,
+          "observation/qvel": 0.21154702605309328,
+          "timestamp": 0.0
+        },
+        "rows_compared": 3945,
+        "scope": "Independent comparison of all measured prefix states and issued controls before compensation activates; same original contact model and geometry"
+      },
+      "inspection": {
+        "schema": "reachy-retarget-agent-archive-v1",
+        "rows": 8774,
+        "timed": true,
+        "policy_ready": false,
+        "dataset_id": "bigym",
+        "episode_id": "bigym-fixed-patch-postff-100-source",
+        "missing_fields": [],
+        "rgb_required": false,
+        "missing_native_v5_fields": [
+          "action",
+          "applied_controls",
+          "controller_state_json",
+          "image_tick",
+          "observation/cameras/torso/rgb",
+          "stage_index",
+          "state_tick"
+        ],
+        "sha256": "3fcfc4dfe0a51124f8e86fe226804611e1d00fb1614632cced16801046c3ec43",
+        "field_count": 155
+      }
+    },
+    "100-samepod": {
+      "workspace": "/mnt/reachy-retarget/workspaces/bigym-fixed-patch-postff-100-samepod-20261007-01",
+      "manifest_sha256": "26486a13e730f7b502710f02c3e0121c9e00fc37fb8933f9b05d0e6c0ab579dc",
+      "archive": {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-fixed-patch-postff-100-source-samepod.hdf5",
+        "sha256": "397b5374015fa7ff767c1d2162aaf8be990dbf07a62ef5f40abace350befa42d",
+        "bytes": 78854559,
+        "sidecar_sha256": "275d4bb6816f6d88b0cb54c9295159577ac3ef983c556855ba74378b81cccbdc"
+      },
+      "cross_pod": {
+        "pod": "reachy-retarget-worker-7d46748688-nl77d",
+        "files_verified": 48,
+        "manifest_sha256": "26486a13e730f7b502710f02c3e0121c9e00fc37fb8933f9b05d0e6c0ab579dc",
+        "canonical_sha256": "397b5374015fa7ff767c1d2162aaf8be990dbf07a62ef5f40abace350befa42d",
+        "sidecar_sha256": "275d4bb6816f6d88b0cb54c9295159577ac3ef983c556855ba74378b81cccbdc",
+        "verified": true
+      },
+      "steps": 8774,
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg",
+        "object_environment_penetration_2mm"
+      ],
+      "replay": {
+        "clock": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "qpos": 0.0,
+        "qvel": 0.0
+      },
+      "prefix": {
+        "baseline_scene_archive_sha256": "34083823cdb4956e363854f5a06548737c2e22d144dbadb696dce92dd855e2b0",
+        "compensation_zero_before_activation": true,
+        "identical_entry_settle_close": true,
+        "maximum_absolute_errors": {
+          "command/joint_position": 0.0,
+          "observation/qpos": 0.0,
+          "observation/qvel": 0.0,
+          "timestamp": 0.0
+        },
+        "rows_compared": 3945,
+        "scope": "Independent comparison of all measured prefix states and issued controls before compensation activates; same original contact model and geometry"
+      },
+      "inspection": {
+        "schema": "reachy-retarget-agent-archive-v1",
+        "rows": 8774,
+        "timed": true,
+        "policy_ready": false,
+        "dataset_id": "bigym",
+        "episode_id": "bigym-fixed-patch-postff-100-source-samepod",
+        "missing_fields": [],
+        "rgb_required": false,
+        "missing_native_v5_fields": [
+          "action",
+          "applied_controls",
+          "controller_state_json",
+          "image_tick",
+          "observation/cameras/torso/rgb",
+          "stage_index",
+          "state_tick"
+        ],
+        "sha256": "397b5374015fa7ff767c1d2162aaf8be990dbf07a62ef5f40abace350befa42d",
+        "field_count": 155
+      }
+    }
+  },
+  "causal_audit_scope": "Read-only sampled reconstruction from saved integration states, followed by one recorded actuator-only step per independent sample. Pre-step geometry/nominal-reference tracking; solved contact forces from next step. No new physical attempt and no object-state editing after each sample reset. All three attempts share bit-identical pre-acquisition prefix on frs8d.",
+  "row600": [
+    {
+      "scale": "0",
+      "nominal_tcp_error_m": 0.010720647640662287,
+      "nominal_tcp_error_rad": 0.0460877349790796,
+      "object_tool_drift_m": 0.0006536037952757514,
+      "object_tool_drift_rad": 0.02236679585509237,
+      "actual_gripper_rad": 0.3365870893460254,
+      "command_gripper_rad": 0.3,
+      "pad_forces_after_next_step_n": [
+        5.702380014412132,
+        4.75214538183572
+      ],
+      "exact_sampled_next_qpos_error": 0.0
+    },
+    {
+      "scale": ".5",
+      "nominal_tcp_error_m": 0.00696910874995318,
+      "nominal_tcp_error_rad": 0.02622477511142597,
+      "object_tool_drift_m": 0.0009733806039395738,
+      "object_tool_drift_rad": 0.02389879237790979,
+      "actual_gripper_rad": 0.3368682725522425,
+      "command_gripper_rad": 0.3,
+      "pad_forces_after_next_step_n": [
+        5.836201824005861,
+        5.429965873203017
+      ],
+      "exact_sampled_next_qpos_error": 0.0
+    },
+    {
+      "scale": "1",
+      "nominal_tcp_error_m": 0.003343050705233164,
+      "nominal_tcp_error_rad": 0.016608891570401622,
+      "object_tool_drift_m": 0.0013016480267214496,
+      "object_tool_drift_rad": 0.03956501986005051,
+      "actual_gripper_rad": 0.325966384586612,
+      "command_gripper_rad": 0.3,
+      "pad_forces_after_next_step_n": [
+        4.0967476095152,
+        3.9158361711612635
+      ],
+      "exact_sampled_next_qpos_error": 0.0
+    }
+  ],
+  "contact_geometry": {
+    "boundary_semantics": "External ConvexHull of all projected inward CAD-face vertices, not triangulation edges. Selected object-patch projected margin is not a force-bearing contact-point margin.",
+    "measured_pad_opposed_normal_dot": -0.9995778062110668,
+    "measured_pad_opposed_normal_error_rad": 0.029059370268842612,
+    "dominant_actual_load_points": [
+      {
+        "pad": 0,
+        "force_n": 9.122973461218534,
+        "force_world_n": [
+          5.845970961819953,
+          -8.525761968229011,
+          -1.936533760215794
+        ],
+        "torque_about_plate_com_world_nm": [
+          0.5502820140872188,
+          0.36933940299521767,
+          0.03513124384315587
+        ],
+        "contact_point_object_m": [
+          -0.016929182462019375,
+          0.06918658697699218,
+          0.0043540650233492625
+        ],
+        "whole_face_external_margin_m": 2.8093423798808415e-06,
+        "plate_outward_facet_normal_object": [
+          -0.03777731343882976,
+          0.25918318047857747,
+          -0.9650890909891964
+        ],
+        "pad_inward_normal_object": [
+          0.14666434339195764,
+          -0.12115302925427465,
+          0.9817390253422325
+        ],
+        "pad_plate_normal_abs_dot": 0.98440703587351,
+        "signed_nearest_plate_facet_plane_m": -1.943096015992983e-05
+      },
+      {
+        "pad": 1,
+        "force_n": 7.8632103674335045,
+        "force_world_n": [
+          -4.24368522793881,
+          7.529638358212291,
+          1.274475321813226
+        ],
+        "torque_about_plate_com_world_nm": [
+          -0.5490825842795177,
+          -0.33736734878431207,
+          0.1648682205084533
+        ],
+        "contact_point_object_m": [
+          0.015590058192175436,
+          0.07493395712686896,
+          0.013782417621626658
+        ],
+        "whole_face_external_margin_m": 2.0692368888630686e-06,
+        "plate_outward_facet_normal_object": [
+          0.019700191451265447,
+          -0.45113072149448463,
+          0.8922404242022715
+        ],
+        "pad_inward_normal_object": [
+          -0.17020883702193695,
+          0.13712237643347341,
+          -0.9758208881146552
+        ],
+        "pad_plate_normal_abs_dot": 0.9358801064463578,
+        "signed_nearest_plate_facet_plane_m": -1.6120834484111696e-05
+      },
+      {
+        "pad": 1,
+        "force_n": 1.0222430626854548,
+        "force_world_n": [
+          -1.0692036140860124,
+          0.9381670495611996,
+          0.2580852129823039
+        ],
+        "torque_about_plate_com_world_nm": [
+          -0.06769002221706334,
+          -0.08373249354912737,
+          0.02394809823437732
+        ],
+        "contact_point_object_m": [
+          0.01505401583853444,
+          0.07490837315196697,
+          0.013797763757689959
+        ],
+        "whole_face_external_margin_m": 0.0004311267299242135,
+        "plate_outward_facet_normal_object": [
+          0.019700191451265447,
+          -0.45113072149448463,
+          0.8922404242022715
+        ],
+        "pad_inward_normal_object": [
+          -0.17020883702193695,
+          0.13712237643347341,
+          -0.9758208881146552
+        ],
+        "pad_plate_normal_abs_dot": 0.9358801064463578,
+        "signed_nearest_plate_facet_plane_m": -1.4468114696124246e-06
+      }
+    ],
+    "failure_interpretation": "Measured arm tracking improves while early pad contact still weakens. The plate remains supported by its rack. The force-bearing contacts are near opposite pad boundaries and are skewed; selected patch remains inside the faces. This is a failed pre-lift acquisition, not successful carry."
+  },
+  "cross_node_limitation": "Scale1 first ran on nl77d, with numerically different pre-compensation states despite matching commands. It is retained separately. Same-pod scale1 repeat on frs8d exactly matches baseline prefix and is used for causal comparison. Every attempt independently replays its own states exactly.",
+  "additional_geometry_audits": {
+    "workspace": "/mnt/reachy-retarget/workspaces/bigym-postff-contact-geometry-audits-20261007-01",
+    "manifest_sha256": "9962984d3d25c6d139f1fee343e8a0356d6c4d68fb7fb458fa83aa3f64307c8f",
+    "files": 19,
+    "bytes": 1178976,
+    "cross_pod_verified": true,
+    "scope": "Recorded-state audits and unstepped CAD tests. Normals-v2 supersedes v1 torque origin; positive-clearance search-v3 supersedes zero-distance witness ambiguity in v2. No new physical rollout."
+  },
+  "lag_audits": {
+    "workspace": "/mnt/reachy-retarget/workspaces/bigym-fixed-patch-lag-audits-20261007-01",
+    "manifest_sha256": "a65518eb6b99ced13187d6d0eb1f95b26a15303181beb62f7f823b0f7ddc64ca",
+    "files": 6,
+    "cross_pod_verified": true
+  }
+}

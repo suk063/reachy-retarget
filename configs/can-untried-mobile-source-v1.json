@@ -1,0 +1,1891 @@
+{
+  "label": "can-untried-mobile-source-v1",
+  "jobs": [
+    {
+      "id": "can-untried-mobile-source-v1-106bb717624717f4024d9bc6-zero",
+      "workspace": "workspaces/can-untried-mobile-source-v1-106bb717624717f4024d9bc6-zero",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-aligned/106bb717624717f4024d9bc6",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/106bb717624717f4024d9bc6.h5",
+      "source_normalized_sha256": "55dd55766d4b81bc0950f5b0ad8903e16cd7b6e626568fbb6a515b7723031c91",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 0
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/materialization.json",
+        "sha256": "e48e57a76987344a67ebc11f5874fbf52e2b97df61a34b01337acfef3aab49ee",
+        "original_archive_sha256": "b3b46f3420c589396d87d050f18fea78634268425debeee8ba3c9256c4876e6e"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "56446c579744254be09d414e6b8864d8d89a65b26ec2c090fbb4cee17e5fb15a",
+        "scene.xml": "3a125056aba9c17398a1d7512a52b3735805b4fe6b5539bfb99aa2f8043c8511",
+        "result.json": "5f64faa3da873bd5b7286114502972489b4a6fd68a44f47a81b5b8a4fcd0d489"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 350,
+        "anchor_reference": [
+          -0.16221766698339057,
+          0.03803222716855881,
+          0.04026047977827825,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21416705193133995,
+          -0.3352753591655117,
+          -0.23906977215409062,
+          -1.1113234436493467,
+          0.42600288064719877,
+          -0.29076024250381755,
+          -0.6077734552097577
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.932642084530273,
+            1.1426874590426817
+          ],
+          [
+            -0.7195974355344764,
+            1.1149159415126741
+          ],
+          [
+            -1.5538837943875772,
+            1.6834036681318938
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "106bb717624717f4024d9bc6",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-aligned/106bb717624717f4024d9bc6",
+        "anchor_index": 350,
+        "anchor_reference": [
+          -0.16221766698339055,
+          0.03803222716855881,
+          0.04026047977827825,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21416705193133995,
+          -0.3352753591655117,
+          -0.23906977215409062,
+          -1.1113234436493467,
+          0.42600288064719877,
+          -0.29076024250381755,
+          -0.6077734552097577
+        ],
+        "reference_base_min": [
+          -0.182642084530273,
+          0.03040256446552356,
+          0.016912532407319436
+        ],
+        "reference_base_max": [
+          0.3926874590426816,
+          0.3649159415126742,
+          0.1126073413369972
+        ],
+        "object_anchor_pose": [
+          0.33949255118783006,
+          -0.2970334610171586,
+          0.8969703330704752,
+          0.9688951468762683,
+          0.04540234932368089,
+          -0.004514683219819999,
+          -0.24322918959477174
+        ],
+        "hand_anchor_pose": [
+          0.29382824568431254,
+          -0.31630407042662695,
+          0.9235179255013437,
+          0.7041770735999223,
+          0.17938496913260388,
+          -0.6845687113438865,
+          0.05763125293202315
+        ],
+        "frames": 816,
+        "duration_s": 8.15,
+        "parent_files": {
+          "plan.h5": "56446c579744254be09d414e6b8864d8d89a65b26ec2c090fbb4cee17e5fb15a",
+          "scene.xml": "3a125056aba9c17398a1d7512a52b3735805b4fe6b5539bfb99aa2f8043c8511",
+          "result.json": "5f64faa3da873bd5b7286114502972489b4a6fd68a44f47a81b5b8a4fcd0d489"
+        },
+        "requested_grasp_rotation_deg": 0,
+        "planar_yaw_transport_rad": 0.0,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-106bb717624717f4024d9bc6-p120",
+      "workspace": "workspaces/can-untried-mobile-source-v1-106bb717624717f4024d9bc6-p120",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-aligned/106bb717624717f4024d9bc6",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/106bb717624717f4024d9bc6.h5",
+      "source_normalized_sha256": "55dd55766d4b81bc0950f5b0ad8903e16cd7b6e626568fbb6a515b7723031c91",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/materialization.json",
+        "sha256": "e48e57a76987344a67ebc11f5874fbf52e2b97df61a34b01337acfef3aab49ee",
+        "original_archive_sha256": "b3b46f3420c589396d87d050f18fea78634268425debeee8ba3c9256c4876e6e"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "56446c579744254be09d414e6b8864d8d89a65b26ec2c090fbb4cee17e5fb15a",
+        "scene.xml": "3a125056aba9c17398a1d7512a52b3735805b4fe6b5539bfb99aa2f8043c8511",
+        "result.json": "5f64faa3da873bd5b7286114502972489b4a6fd68a44f47a81b5b8a4fcd0d489"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 350,
+        "anchor_reference": [
+          0.29931942503159786,
+          -0.8990037911428366,
+          2.1332389055249736,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21416705193133995,
+          -0.3352753591655117,
+          -0.23906977215409062,
+          -1.1113234436493467,
+          0.42600288064719877,
+          -0.29076024250381755,
+          -0.6077734552097577
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.932642084530273,
+            1.1426874590426817
+          ],
+          [
+            -1.6490037911428366,
+            1.1149159415126741
+          ],
+          [
+            -1.5538837943875772,
+            3.70403523231987
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "106bb717624717f4024d9bc6",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-aligned/106bb717624717f4024d9bc6",
+        "anchor_index": 350,
+        "anchor_reference": [
+          -0.16221766698339055,
+          0.03803222716855881,
+          0.04026047977827825,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21416705193133995,
+          -0.3352753591655117,
+          -0.23906977215409062,
+          -1.1113234436493467,
+          0.42600288064719877,
+          -0.29076024250381755,
+          -0.6077734552097577
+        ],
+        "reference_base_min": [
+          -0.182642084530273,
+          0.03040256446552356,
+          0.016912532407319436
+        ],
+        "reference_base_max": [
+          0.3926874590426816,
+          0.3649159415126742,
+          0.1126073413369972
+        ],
+        "object_anchor_pose": [
+          0.33949255118783006,
+          -0.2970334610171586,
+          0.8969703330704752,
+          0.9688951468762683,
+          0.04540234932368089,
+          -0.004514683219819999,
+          -0.24322918959477174
+        ],
+        "hand_anchor_pose": [
+          0.29382824568431254,
+          -0.31630407042662695,
+          0.9235179255013437,
+          0.7041770735999223,
+          0.17938496913260388,
+          -0.6845687113438865,
+          0.05763125293202315
+        ],
+        "frames": 816,
+        "duration_s": 8.15,
+        "parent_files": {
+          "plan.h5": "56446c579744254be09d414e6b8864d8d89a65b26ec2c090fbb4cee17e5fb15a",
+          "scene.xml": "3a125056aba9c17398a1d7512a52b3735805b4fe6b5539bfb99aa2f8043c8511",
+          "result.json": "5f64faa3da873bd5b7286114502972489b4a6fd68a44f47a81b5b8a4fcd0d489"
+        },
+        "requested_grasp_rotation_deg": 120,
+        "planar_yaw_transport_rad": 2.0929784257466952,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-106bb717624717f4024d9bc6-m120",
+      "workspace": "workspaces/can-untried-mobile-source-v1-106bb717624717f4024d9bc6-m120",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-aligned/106bb717624717f4024d9bc6",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/106bb717624717f4024d9bc6.h5",
+      "source_normalized_sha256": "55dd55766d4b81bc0950f5b0ad8903e16cd7b6e626568fbb6a515b7723031c91",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/materialization.json",
+        "sha256": "e48e57a76987344a67ebc11f5874fbf52e2b97df61a34b01337acfef3aab49ee",
+        "original_archive_sha256": "b3b46f3420c589396d87d050f18fea78634268425debeee8ba3c9256c4876e6e"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "56446c579744254be09d414e6b8864d8d89a65b26ec2c090fbb4cee17e5fb15a",
+        "scene.xml": "3a125056aba9c17398a1d7512a52b3735805b4fe6b5539bfb99aa2f8043c8511",
+        "result.json": "5f64faa3da873bd5b7286114502972489b4a6fd68a44f47a81b5b8a4fcd0d489"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 2,
+      "mobile_fixture_ik": {
+        "anchor_index": 350,
+        "anchor_reference": [
+          0.8812074351255701,
+          -0.031463991881297726,
+          -2.056704904218326,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21416705193133995,
+          -0.3352753591655117,
+          -0.23906977215409062,
+          -1.1113234436493467,
+          0.42600288064719877,
+          -0.29076024250381755,
+          -0.6077734552097577
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.932642084530273,
+            1.63120743512557
+          ],
+          [
+            -0.7814639918812978,
+            1.1149159415126741
+          ],
+          [
+            -3.6275012310132224,
+            1.6834036681318938
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "106bb717624717f4024d9bc6",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-106bb717624717f4024d9bc6-aligned/106bb717624717f4024d9bc6",
+        "anchor_index": 350,
+        "anchor_reference": [
+          -0.16221766698339055,
+          0.03803222716855881,
+          0.04026047977827825,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21416705193133995,
+          -0.3352753591655117,
+          -0.23906977215409062,
+          -1.1113234436493467,
+          0.42600288064719877,
+          -0.29076024250381755,
+          -0.6077734552097577
+        ],
+        "reference_base_min": [
+          -0.182642084530273,
+          0.03040256446552356,
+          0.016912532407319436
+        ],
+        "reference_base_max": [
+          0.3926874590426816,
+          0.3649159415126742,
+          0.1126073413369972
+        ],
+        "object_anchor_pose": [
+          0.33949255118783006,
+          -0.2970334610171586,
+          0.8969703330704752,
+          0.9688951468762683,
+          0.04540234932368089,
+          -0.004514683219819999,
+          -0.24322918959477174
+        ],
+        "hand_anchor_pose": [
+          0.29382824568431254,
+          -0.31630407042662695,
+          0.9235179255013437,
+          0.7041770735999223,
+          0.17938496913260388,
+          -0.6845687113438865,
+          0.05763125293202315
+        ],
+        "frames": 816,
+        "duration_s": 8.15,
+        "parent_files": {
+          "plan.h5": "56446c579744254be09d414e6b8864d8d89a65b26ec2c090fbb4cee17e5fb15a",
+          "scene.xml": "3a125056aba9c17398a1d7512a52b3735805b4fe6b5539bfb99aa2f8043c8511",
+          "result.json": "5f64faa3da873bd5b7286114502972489b4a6fd68a44f47a81b5b8a4fcd0d489"
+        },
+        "requested_grasp_rotation_deg": -120,
+        "planar_yaw_transport_rad": -2.0969653839966043,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-3205a26fd1502eb43c207b08-zero",
+      "workspace": "workspaces/can-untried-mobile-source-v1-3205a26fd1502eb43c207b08-zero",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-aligned/3205a26fd1502eb43c207b08",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/3205a26fd1502eb43c207b08.h5",
+      "source_normalized_sha256": "0a2e988b11b01a027f280c634b6a3ce43f4113f2a92809267aa38619f844d453",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 0
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/materialization.json",
+        "sha256": "2e2ed004c3e468e05c36cc3206e252b884398919c8e6304a70523bb1e49e5ec4",
+        "original_archive_sha256": "e76b73ea2ba8afa4a16f36aebbc8ba9a7a46bc66332db42812556fa09cc36220"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "d1bf9dab98f383d6c4241d013eaed0981706dcfdab6552d80604e498fef464d6",
+        "scene.xml": "536e90eb97daccee43c052e5633028a67409beb4861826d8bfb9cad960299760",
+        "result.json": "a744e756886bc1d7b6934d01b32620fc669d3b0e9833f62a1f4f946b738e0d84"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 295,
+        "anchor_reference": [
+          -0.03246720362292094,
+          0.10765533168597896,
+          0.02692367048125576,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.14146144122532453,
+          -0.39764291249657974,
+          -0.33358626125161694,
+          -1.021867021895046,
+          0.4057344870897386,
+          -0.3775475207674635,
+          -0.26876592478081685
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.8474761369733738,
+            1.1793432505889667
+          ],
+          [
+            -0.6510120958854739,
+            1.1239328016453225
+          ],
+          [
+            -1.561493719714983,
+            1.6665545031446953
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "3205a26fd1502eb43c207b08",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-aligned/3205a26fd1502eb43c207b08",
+        "anchor_index": 295,
+        "anchor_reference": [
+          -0.03246720362292093,
+          0.10765533168597893,
+          0.02692367048125576,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.14146144122532453,
+          -0.39764291249657974,
+          -0.33358626125161694,
+          -1.021867021895046,
+          0.4057344870897386,
+          -0.3775475207674635,
+          -0.26876592478081685
+        ],
+        "reference_base_min": [
+          -0.09747613697337372,
+          0.09898790411452606,
+          0.009302607079913585
+        ],
+        "reference_base_max": [
+          0.4293432505889666,
+          0.3739328016453224,
+          0.09575817634979882
+        ],
+        "object_anchor_pose": [
+          0.4384478425847269,
+          -0.3183502086166876,
+          0.8907978012237469,
+          0.13936138118627,
+          -0.0065396652745179275,
+          -0.020476949620463834,
+          0.9900082488273486
+        ],
+        "hand_anchor_pose": [
+          0.39215496692522595,
+          -0.32581307118888153,
+          0.9125673312368837,
+          -0.6934829137310965,
+          -0.0034253449444212763,
+          0.7085834471657961,
+          -0.1303043121990894
+        ],
+        "frames": 726,
+        "duration_s": 7.25,
+        "parent_files": {
+          "plan.h5": "d1bf9dab98f383d6c4241d013eaed0981706dcfdab6552d80604e498fef464d6",
+          "scene.xml": "536e90eb97daccee43c052e5633028a67409beb4861826d8bfb9cad960299760",
+          "result.json": "a744e756886bc1d7b6934d01b32620fc669d3b0e9833f62a1f4f946b738e0d84"
+        },
+        "requested_grasp_rotation_deg": 0,
+        "planar_yaw_transport_rad": 0.0,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-3205a26fd1502eb43c207b08-p120",
+      "workspace": "workspaces/can-untried-mobile-source-v1-3205a26fd1502eb43c207b08-p120",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-aligned/3205a26fd1502eb43c207b08",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/3205a26fd1502eb43c207b08.h5",
+      "source_normalized_sha256": "0a2e988b11b01a027f280c634b6a3ce43f4113f2a92809267aa38619f844d453",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/materialization.json",
+        "sha256": "2e2ed004c3e468e05c36cc3206e252b884398919c8e6304a70523bb1e49e5ec4",
+        "original_archive_sha256": "e76b73ea2ba8afa4a16f36aebbc8ba9a7a46bc66332db42812556fa09cc36220"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "d1bf9dab98f383d6c4241d013eaed0981706dcfdab6552d80604e498fef464d6",
+        "scene.xml": "536e90eb97daccee43c052e5633028a67409beb4861826d8bfb9cad960299760",
+        "result.json": "a744e756886bc1d7b6934d01b32620fc669d3b0e9833f62a1f4f946b738e0d84"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 295,
+        "anchor_reference": [
+          0.3046051416603329,
+          -0.9390980096781019,
+          2.1207250045189734,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.14146144122532453,
+          -0.39764291249657974,
+          -0.33358626125161694,
+          -1.021867021895046,
+          0.4057344870897386,
+          -0.3775475207674635,
+          -0.26876592478081685
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.8474761369733738,
+            1.1793432505889667
+          ],
+          [
+            -1.6890980096781019,
+            1.1239328016453225
+          ],
+          [
+            -1.561493719714983,
+            3.69152133131387
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "3205a26fd1502eb43c207b08",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-aligned/3205a26fd1502eb43c207b08",
+        "anchor_index": 295,
+        "anchor_reference": [
+          -0.03246720362292093,
+          0.10765533168597893,
+          0.02692367048125576,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.14146144122532453,
+          -0.39764291249657974,
+          -0.33358626125161694,
+          -1.021867021895046,
+          0.4057344870897386,
+          -0.3775475207674635,
+          -0.26876592478081685
+        ],
+        "reference_base_min": [
+          -0.09747613697337372,
+          0.09898790411452606,
+          0.009302607079913585
+        ],
+        "reference_base_max": [
+          0.4293432505889666,
+          0.3739328016453224,
+          0.09575817634979882
+        ],
+        "object_anchor_pose": [
+          0.4384478425847269,
+          -0.3183502086166876,
+          0.8907978012237469,
+          0.13936138118627,
+          -0.0065396652745179275,
+          -0.020476949620463834,
+          0.9900082488273486
+        ],
+        "hand_anchor_pose": [
+          0.39215496692522595,
+          -0.32581307118888153,
+          0.9125673312368837,
+          -0.6934829137310965,
+          -0.0034253449444212763,
+          0.7085834471657961,
+          -0.1303043121990894
+        ],
+        "frames": 726,
+        "duration_s": 7.25,
+        "parent_files": {
+          "plan.h5": "d1bf9dab98f383d6c4241d013eaed0981706dcfdab6552d80604e498fef464d6",
+          "scene.xml": "536e90eb97daccee43c052e5633028a67409beb4861826d8bfb9cad960299760",
+          "result.json": "a744e756886bc1d7b6934d01b32620fc669d3b0e9833f62a1f4f946b738e0d84"
+        },
+        "requested_grasp_rotation_deg": 120,
+        "planar_yaw_transport_rad": 2.0938013340377175,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-3205a26fd1502eb43c207b08-m120",
+      "workspace": "workspaces/can-untried-mobile-source-v1-3205a26fd1502eb43c207b08-m120",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-aligned/3205a26fd1502eb43c207b08",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/3205a26fd1502eb43c207b08.h5",
+      "source_normalized_sha256": "0a2e988b11b01a027f280c634b6a3ce43f4113f2a92809267aa38619f844d453",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/materialization.json",
+        "sha256": "2e2ed004c3e468e05c36cc3206e252b884398919c8e6304a70523bb1e49e5ec4",
+        "original_archive_sha256": "e76b73ea2ba8afa4a16f36aebbc8ba9a7a46bc66332db42812556fa09cc36220"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "d1bf9dab98f383d6c4241d013eaed0981706dcfdab6552d80604e498fef464d6",
+        "scene.xml": "536e90eb97daccee43c052e5633028a67409beb4861826d8bfb9cad960299760",
+        "result.json": "a744e756886bc1d7b6934d01b32620fc669d3b0e9833f62a1f4f946b738e0d84"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 2,
+      "mobile_fixture_ik": {
+        "anchor_index": 295,
+        "anchor_reference": [
+          1.0429325249262629,
+          -0.12382522326064074,
+          -2.0679621986413608,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.14146144122532453,
+          -0.39764291249657974,
+          -0.33358626125161694,
+          -1.021867021895046,
+          0.4057344870897386,
+          -0.3775475207674635,
+          -0.26876592478081685
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.8474761369733738,
+            1.7929325249262629
+          ],
+          [
+            -0.8738252232606407,
+            1.1239328016453225
+          ],
+          [
+            -3.6387585254362573,
+            1.6665545031446953
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "3205a26fd1502eb43c207b08",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3205a26fd1502eb43c207b08-aligned/3205a26fd1502eb43c207b08",
+        "anchor_index": 295,
+        "anchor_reference": [
+          -0.03246720362292093,
+          0.10765533168597893,
+          0.02692367048125576,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.14146144122532453,
+          -0.39764291249657974,
+          -0.33358626125161694,
+          -1.021867021895046,
+          0.4057344870897386,
+          -0.3775475207674635,
+          -0.26876592478081685
+        ],
+        "reference_base_min": [
+          -0.09747613697337372,
+          0.09898790411452606,
+          0.009302607079913585
+        ],
+        "reference_base_max": [
+          0.4293432505889666,
+          0.3739328016453224,
+          0.09575817634979882
+        ],
+        "object_anchor_pose": [
+          0.4384478425847269,
+          -0.3183502086166876,
+          0.8907978012237469,
+          0.13936138118627,
+          -0.0065396652745179275,
+          -0.020476949620463834,
+          0.9900082488273486
+        ],
+        "hand_anchor_pose": [
+          0.39215496692522595,
+          -0.32581307118888153,
+          0.9125673312368837,
+          -0.6934829137310965,
+          -0.0034253449444212763,
+          0.7085834471657961,
+          -0.1303043121990894
+        ],
+        "frames": 726,
+        "duration_s": 7.25,
+        "parent_files": {
+          "plan.h5": "d1bf9dab98f383d6c4241d013eaed0981706dcfdab6552d80604e498fef464d6",
+          "scene.xml": "536e90eb97daccee43c052e5633028a67409beb4861826d8bfb9cad960299760",
+          "result.json": "a744e756886bc1d7b6934d01b32620fc669d3b0e9833f62a1f4f946b738e0d84"
+        },
+        "requested_grasp_rotation_deg": -120,
+        "planar_yaw_transport_rad": -2.0948858691226167,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-bfbe8e3ffd5e49dfa8ccf627-zero",
+      "workspace": "workspaces/can-untried-mobile-source-v1-bfbe8e3ffd5e49dfa8ccf627-zero",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-aligned/bfbe8e3ffd5e49dfa8ccf627",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/bfbe8e3ffd5e49dfa8ccf627.h5",
+      "source_normalized_sha256": "95ba2d7b7a44c097f7104707ad9619be36f9ab02eccf648d14d5a88b7bdef665",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 0
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/materialization.json",
+        "sha256": "5cc7e1b0e6c2f8de1691ef5d33bcc8e6f4ba4796f344e253dbef32a73ee62e5d",
+        "original_archive_sha256": "bc05794cacd67666099da4c0e2290724d18283fa86d9f4667aa90adc58cc0175"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "ef60734e3b5e4e5128aaca2ca4f845ab53abf88bc1375fb0de93092119bb1b02",
+        "scene.xml": "85e6dfde622da04fb03eecc8fb669633c6113aacba355b2f2cd6dd8d841235b2",
+        "result.json": "45a70fce8b15e82754042d2b2f3def51965b620d6c7c93f6210021988381f333"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 375,
+        "anchor_reference": [
+          -0.2534969530728762,
+          -0.0766904072573441,
+          0.0990718516537044,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.23120609349601123,
+          -0.4240007926271241,
+          0.15308456887970837,
+          -1.2566313390060382,
+          0.36516045599916025,
+          -0.4112980519932571,
+          -0.6211117753288327
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.0466231956163532,
+            1.181017903942533
+          ],
+          [
+            -0.856365669202037,
+            1.1190201800823267
+          ],
+          [
+            -1.547404877311501,
+            1.6860192971888184
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "bfbe8e3ffd5e49dfa8ccf627",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-aligned/bfbe8e3ffd5e49dfa8ccf627",
+        "anchor_index": 375,
+        "anchor_reference": [
+          -0.2534969530728762,
+          -0.07669040725734409,
+          0.0990718516537044,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.23120609349601123,
+          -0.4240007926271241,
+          0.15308456887970837,
+          -1.2566313390060382,
+          0.36516045599916025,
+          -0.4112980519932571,
+          -0.6211117753288327
+        ],
+        "reference_base_min": [
+          -0.2966231956163531,
+          -0.10636566920203708,
+          0.023391449483395457
+        ],
+        "reference_base_max": [
+          0.4310179039425331,
+          0.36902018008232673,
+          0.11522297039392182
+        ],
+        "object_anchor_pose": [
+          0.23258675455037986,
+          -0.259006555216971,
+          0.8951857948662207,
+          -0.40341194928154334,
+          0.045824339126231343,
+          0.022980503039337293,
+          0.9135813185483647
+        ],
+        "hand_anchor_pose": [
+          0.20052224757477122,
+          -0.2909302283968989,
+          0.9228515929166927,
+          0.6596026124129132,
+          0.2749139739132236,
+          -0.6477368699641126,
+          0.26416594771922053
+        ],
+        "frames": 876,
+        "duration_s": 8.75,
+        "parent_files": {
+          "plan.h5": "ef60734e3b5e4e5128aaca2ca4f845ab53abf88bc1375fb0de93092119bb1b02",
+          "scene.xml": "85e6dfde622da04fb03eecc8fb669633c6113aacba355b2f2cd6dd8d841235b2",
+          "result.json": "45a70fce8b15e82754042d2b2f3def51965b620d6c7c93f6210021988381f333"
+        },
+        "requested_grasp_rotation_deg": 0,
+        "planar_yaw_transport_rad": 0.0,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-bfbe8e3ffd5e49dfa8ccf627-p120",
+      "workspace": "workspaces/can-untried-mobile-source-v1-bfbe8e3ffd5e49dfa8ccf627-p120",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-aligned/bfbe8e3ffd5e49dfa8ccf627",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/bfbe8e3ffd5e49dfa8ccf627.h5",
+      "source_normalized_sha256": "95ba2d7b7a44c097f7104707ad9619be36f9ab02eccf648d14d5a88b7bdef665",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/materialization.json",
+        "sha256": "5cc7e1b0e6c2f8de1691ef5d33bcc8e6f4ba4796f344e253dbef32a73ee62e5d",
+        "original_archive_sha256": "bc05794cacd67666099da4c0e2290724d18283fa86d9f4667aa90adc58cc0175"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "ef60734e3b5e4e5128aaca2ca4f845ab53abf88bc1375fb0de93092119bb1b02",
+        "scene.xml": "85e6dfde622da04fb03eecc8fb669633c6113aacba355b2f2cd6dd8d841235b2",
+        "result.json": "45a70fce8b15e82754042d2b2f3def51965b620d6c7c93f6210021988381f333"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 375,
+        "anchor_reference": [
+          0.31409608454145665,
+          -0.7717177582816334,
+          2.1863592534111196,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.23120609349601123,
+          -0.4240007926271241,
+          0.15308456887970837,
+          -1.2566313390060382,
+          0.36516045599916025,
+          -0.4112980519932571,
+          -0.6211117753288327
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.0466231956163532,
+            1.181017903942533
+          ],
+          [
+            -1.5217177582816332,
+            1.1190201800823267
+          ],
+          [
+            -1.547404877311501,
+            3.757155580206016
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "bfbe8e3ffd5e49dfa8ccf627",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-aligned/bfbe8e3ffd5e49dfa8ccf627",
+        "anchor_index": 375,
+        "anchor_reference": [
+          -0.2534969530728762,
+          -0.07669040725734409,
+          0.0990718516537044,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.23120609349601123,
+          -0.4240007926271241,
+          0.15308456887970837,
+          -1.2566313390060382,
+          0.36516045599916025,
+          -0.4112980519932571,
+          -0.6211117753288327
+        ],
+        "reference_base_min": [
+          -0.2966231956163531,
+          -0.10636566920203708,
+          0.023391449483395457
+        ],
+        "reference_base_max": [
+          0.4310179039425331,
+          0.36902018008232673,
+          0.11522297039392182
+        ],
+        "object_anchor_pose": [
+          0.23258675455037986,
+          -0.259006555216971,
+          0.8951857948662207,
+          -0.40341194928154334,
+          0.045824339126231343,
+          0.022980503039337293,
+          0.9135813185483647
+        ],
+        "hand_anchor_pose": [
+          0.20052224757477122,
+          -0.2909302283968989,
+          0.9228515929166927,
+          0.6596026124129132,
+          0.2749139739132236,
+          -0.6477368699641126,
+          0.26416594771922053
+        ],
+        "frames": 876,
+        "duration_s": 8.75,
+        "parent_files": {
+          "plan.h5": "ef60734e3b5e4e5128aaca2ca4f845ab53abf88bc1375fb0de93092119bb1b02",
+          "scene.xml": "85e6dfde622da04fb03eecc8fb669633c6113aacba355b2f2cd6dd8d841235b2",
+          "result.json": "45a70fce8b15e82754042d2b2f3def51965b620d6c7c93f6210021988381f333"
+        },
+        "requested_grasp_rotation_deg": 120,
+        "planar_yaw_transport_rad": 2.0872874017574152,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-bfbe8e3ffd5e49dfa8ccf627-m120",
+      "workspace": "workspaces/can-untried-mobile-source-v1-bfbe8e3ffd5e49dfa8ccf627-m120",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-aligned/bfbe8e3ffd5e49dfa8ccf627",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/bfbe8e3ffd5e49dfa8ccf627.h5",
+      "source_normalized_sha256": "95ba2d7b7a44c097f7104707ad9619be36f9ab02eccf648d14d5a88b7bdef665",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/materialization.json",
+        "sha256": "5cc7e1b0e6c2f8de1691ef5d33bcc8e6f4ba4796f344e253dbef32a73ee62e5d",
+        "original_archive_sha256": "bc05794cacd67666099da4c0e2290724d18283fa86d9f4667aa90adc58cc0175"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "ef60734e3b5e4e5128aaca2ca4f845ab53abf88bc1375fb0de93092119bb1b02",
+        "scene.xml": "85e6dfde622da04fb03eecc8fb669633c6113aacba355b2f2cd6dd8d841235b2",
+        "result.json": "45a70fce8b15e82754042d2b2f3def51965b620d6c7c93f6210021988381f333"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 2,
+      "mobile_fixture_ik": {
+        "anchor_index": 375,
+        "anchor_reference": [
+          0.6337250287804339,
+          0.07054561602658438,
+          -1.9959481183098426,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.23120609349601123,
+          -0.4240007926271241,
+          0.15308456887970837,
+          -1.2566313390060382,
+          0.36516045599916025,
+          -0.4112980519932571,
+          -0.6211117753288327
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.0466231956163532,
+            1.383725028780434
+          ],
+          [
+            -0.856365669202037,
+            1.1190201800823267
+          ],
+          [
+            -3.566744445104739,
+            1.6860192971888184
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "bfbe8e3ffd5e49dfa8ccf627",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-bfbe8e3ffd5e49dfa8ccf627-aligned/bfbe8e3ffd5e49dfa8ccf627",
+        "anchor_index": 375,
+        "anchor_reference": [
+          -0.2534969530728762,
+          -0.07669040725734409,
+          0.0990718516537044,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.23120609349601123,
+          -0.4240007926271241,
+          0.15308456887970837,
+          -1.2566313390060382,
+          0.36516045599916025,
+          -0.4112980519932571,
+          -0.6211117753288327
+        ],
+        "reference_base_min": [
+          -0.2966231956163531,
+          -0.10636566920203708,
+          0.023391449483395457
+        ],
+        "reference_base_max": [
+          0.4310179039425331,
+          0.36902018008232673,
+          0.11522297039392182
+        ],
+        "object_anchor_pose": [
+          0.23258675455037986,
+          -0.259006555216971,
+          0.8951857948662207,
+          -0.40341194928154334,
+          0.045824339126231343,
+          0.022980503039337293,
+          0.9135813185483647
+        ],
+        "hand_anchor_pose": [
+          0.20052224757477122,
+          -0.2909302283968989,
+          0.9228515929166927,
+          0.6596026124129132,
+          0.2749139739132236,
+          -0.6477368699641126,
+          0.26416594771922053
+        ],
+        "frames": 876,
+        "duration_s": 8.75,
+        "parent_files": {
+          "plan.h5": "ef60734e3b5e4e5128aaca2ca4f845ab53abf88bc1375fb0de93092119bb1b02",
+          "scene.xml": "85e6dfde622da04fb03eecc8fb669633c6113aacba355b2f2cd6dd8d841235b2",
+          "result.json": "45a70fce8b15e82754042d2b2f3def51965b620d6c7c93f6210021988381f333"
+        },
+        "requested_grasp_rotation_deg": -120,
+        "planar_yaw_transport_rad": -2.095019969963547,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-d755b0622b3466a973309e93-zero",
+      "workspace": "workspaces/can-untried-mobile-source-v1-d755b0622b3466a973309e93-zero",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 0
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 315,
+        "anchor_reference": [
+          -0.25039035828788,
+          0.05075281705165313,
+          0.08150715594213703,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -0.7098813176039843,
+            1.1176219941877514
+          ],
+          [
+            -1.559756350188001,
+            1.6816863132765554
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "d755b0622b3466a973309e93",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+        "anchor_index": 315,
+        "anchor_reference": [
+          -0.25039035828788,
+          0.050752817051653125,
+          0.08150715594213703,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.24641886209559916,
+          -0.15042409097967058,
+          0.8922883798681707,
+          0.26666476890317,
+          -0.005435270308612645,
+          0.0058577809288764306,
+          0.9637562167192907
+        ],
+        "hand_anchor_pose": [
+          0.20961613486167327,
+          -0.18169046816100876,
+          0.9123827463301141,
+          0.6658810588494276,
+          0.24724725984328244,
+          -0.6609631043112673,
+          0.24207226752514724
+        ],
+        "frames": 831,
+        "duration_s": 8.3,
+        "parent_files": {
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        },
+        "requested_grasp_rotation_deg": 0,
+        "planar_yaw_transport_rad": 0.0,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-d755b0622b3466a973309e93-p120",
+      "workspace": "workspaces/can-untried-mobile-source-v1-d755b0622b3466a973309e93-p120",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 315,
+        "anchor_reference": [
+          0.3206327829655337,
+          -0.6812572509576387,
+          2.1759655994033142,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -1.4312572509576387,
+            1.1176219941877514
+          ],
+          [
+            -1.559756350188001,
+            3.746761926198211
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "d755b0622b3466a973309e93",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+        "anchor_index": 315,
+        "anchor_reference": [
+          -0.25039035828788,
+          0.050752817051653125,
+          0.08150715594213703,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.24641886209559916,
+          -0.15042409097967058,
+          0.8922883798681707,
+          0.26666476890317,
+          -0.005435270308612645,
+          0.0058577809288764306,
+          0.9637562167192907
+        ],
+        "hand_anchor_pose": [
+          0.20961613486167327,
+          -0.18169046816100876,
+          0.9123827463301141,
+          0.6658810588494276,
+          0.24724725984328244,
+          -0.6609631043112673,
+          0.24207226752514724
+        ],
+        "frames": 831,
+        "duration_s": 8.3,
+        "parent_files": {
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        },
+        "requested_grasp_rotation_deg": 120,
+        "planar_yaw_transport_rad": 2.094458443461177,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    },
+    {
+      "id": "can-untried-mobile-source-v1-d755b0622b3466a973309e93-m120",
+      "workspace": "workspaces/can-untried-mobile-source-v1-d755b0622b3466a973309e93-m120",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "admission_only": true,
+      "geometry_seed_rank": 2,
+      "mobile_fixture_ik": {
+        "anchor_index": 315,
+        "anchor_reference": [
+          0.6690170690688229,
+          0.17927623544737514,
+          -2.012794776805081,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.4190170690688229
+          ],
+          [
+            -0.7098813176039843,
+            1.1176219941877514
+          ],
+          [
+            -3.5835911035999777,
+            1.6816863132765554
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "d755b0622b3466a973309e93",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+        "anchor_index": 315,
+        "anchor_reference": [
+          -0.25039035828788,
+          0.050752817051653125,
+          0.08150715594213703,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.24641886209559916,
+          -0.15042409097967058,
+          0.8922883798681707,
+          0.26666476890317,
+          -0.005435270308612645,
+          0.0058577809288764306,
+          0.9637562167192907
+        ],
+        "hand_anchor_pose": [
+          0.20961613486167327,
+          -0.18169046816100876,
+          0.9123827463301141,
+          0.6658810588494276,
+          0.24724725984328244,
+          -0.6609631043112673,
+          0.24207226752514724
+        ],
+        "frames": 831,
+        "duration_s": 8.3,
+        "parent_files": {
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        },
+        "requested_grasp_rotation_deg": -120,
+        "planar_yaw_transport_rad": -2.0943019327472183,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      }
+    }
+  ],
+  "unique_sources": 4,
+  "scope": "Four previously frozen-static-screen failures; first complete mobile source-path attempts with current approach reuse and existing native-facet grasp offsets. This is post-frozen adaptive development, not heldout evaluation or a claim of infeasibility. Preserve failed attempts and source arrays."
+}

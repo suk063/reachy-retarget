@@ -1,0 +1,1437 @@
+{
+  "label": "can-mobile-midpoint-physics-v2",
+  "jobs": [
+    {
+      "id": "can-mobile-midpoint-physics-v2-189550339df1d8cc8e063ea4-ff1",
+      "workspace": "workspaces/can-mobile-midpoint-physics-v2-189550339df1d8cc8e063ea4-ff1",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4-aligned/189550339df1d8cc8e063ea4",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/189550339df1d8cc8e063ea4.h5",
+      "source_normalized_sha256": "de3a6ca56e1aa2485a237962146ff285ecdabb65130dd7764efb065a8f32dbd5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4-v1/materialization.json",
+        "sha256": "3aa60b7805c5acc14a19d3f6564dc5c5ab998e0ca9b56de6ac125134092fad30",
+        "original_archive_sha256": "87aed4f8348901da21017f2eab2c8e99243febb4d739ab476e5260e82d222aa0"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 206,
+        "anchor_reference": [
+          -0.1700623663316797,
+          0.03796510470442741,
+          0.0689138709337923,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.27684764725211214,
+          -0.6247018098899142,
+          0.5101381507957958,
+          -1.1189732456518022,
+          -0.08201205950174596,
+          -0.4925999999999999,
+          -0.9628684373874066
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.5428152304031346,
+            0.8182286052030643
+          ],
+          [
+            -0.3146703954856065,
+            0.7188316407833535
+          ],
+          [
+            -0.48419344305175244,
+            0.6036587909302351
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "diagnostic_seed": {
+        "archived_screen_sha256": "f5df817d18643f764da7b29fa88930006b814a028b8be8aa7465fd6ed40a0b0e",
+        "sample_time_s": 2.06,
+        "body": "r_elbow_forearm_link",
+        "depth_m": 0.016251470661269505,
+        "seed_base_x_perturbation_m": 0.0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          -133.19926642852477
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.9629705334262709,
+              1.875
+            ],
+            [
+              -1.145,
+              1.1689919191868345
+            ],
+            [
+              -3.5635185962097586,
+              3.307943127296384
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true
+      },
+      "source_prefix_velocity_feedforward": 1.0,
+      "geometry_selection_rank": [
+        2.40517787782947,
+        0.06269968101992227,
+        220
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-189550339df1d8cc8e063ea4-chunk0/backup.json",
+          "sha256": "f41da37850864d70b99881cf9f25c9e92b2297b009f9b84d4b9d376f156d7881"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-189550339df1d8cc8e063ea4-chunk1/backup.json",
+          "sha256": "4e435df3dc5c3c166ecd4223b38ec98681627750f4d727185241a6249a9fec8c"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-189550339df1d8cc8e063ea4-chunk2/backup.json",
+          "sha256": "a4c7c03877d9100291b3f44cab5b5f11252c656ccb7cfb3dbd1e294231255e04"
+        }
+      ],
+      "comparison_scope": "OriginalXY/rotation minimumrank selectedacross3completegeometrychunks beforephysicaloutcomes. V44localseededminimum-motionmidpointsandintervaltime allocationre-admitfullgeometry beforesimulation.Originalcoarseknots/sourcearrays/model/gates preserved. Source-specific successseparatefromfrozenpolicy."
+    },
+    {
+      "id": "can-mobile-midpoint-physics-v2-189550339df1d8cc8e063ea4-ff0",
+      "workspace": "workspaces/can-mobile-midpoint-physics-v2-189550339df1d8cc8e063ea4-ff0",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4-aligned/189550339df1d8cc8e063ea4",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/189550339df1d8cc8e063ea4.h5",
+      "source_normalized_sha256": "de3a6ca56e1aa2485a237962146ff285ecdabb65130dd7764efb065a8f32dbd5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-189550339df1d8cc8e063ea4-v1/materialization.json",
+        "sha256": "3aa60b7805c5acc14a19d3f6564dc5c5ab998e0ca9b56de6ac125134092fad30",
+        "original_archive_sha256": "87aed4f8348901da21017f2eab2c8e99243febb4d739ab476e5260e82d222aa0"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 206,
+        "anchor_reference": [
+          -0.1700623663316797,
+          0.03796510470442741,
+          0.0689138709337923,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.27684764725211214,
+          -0.6247018098899142,
+          0.5101381507957958,
+          -1.1189732456518022,
+          -0.08201205950174596,
+          -0.4925999999999999,
+          -0.9628684373874066
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.5428152304031346,
+            0.8182286052030643
+          ],
+          [
+            -0.3146703954856065,
+            0.7188316407833535
+          ],
+          [
+            -0.48419344305175244,
+            0.6036587909302351
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "diagnostic_seed": {
+        "archived_screen_sha256": "f5df817d18643f764da7b29fa88930006b814a028b8be8aa7465fd6ed40a0b0e",
+        "sample_time_s": 2.06,
+        "body": "r_elbow_forearm_link",
+        "depth_m": 0.016251470661269505,
+        "seed_base_x_perturbation_m": 0.0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          -133.19926642852477
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.9629705334262709,
+              1.875
+            ],
+            [
+              -1.145,
+              1.1689919191868345
+            ],
+            [
+              -3.5635185962097586,
+              3.307943127296384
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        2.40517787782947,
+        0.06269968101992227,
+        220
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-189550339df1d8cc8e063ea4-chunk0/backup.json",
+          "sha256": "f41da37850864d70b99881cf9f25c9e92b2297b009f9b84d4b9d376f156d7881"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-189550339df1d8cc8e063ea4-chunk1/backup.json",
+          "sha256": "4e435df3dc5c3c166ecd4223b38ec98681627750f4d727185241a6249a9fec8c"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-189550339df1d8cc8e063ea4-chunk2/backup.json",
+          "sha256": "a4c7c03877d9100291b3f44cab5b5f11252c656ccb7cfb3dbd1e294231255e04"
+        }
+      ],
+      "comparison_scope": "OriginalXY/rotation minimumrank selectedacross3completegeometrychunks beforephysicaloutcomes. V44localseededminimum-motionmidpointsandintervaltime allocationre-admitfullgeometry beforesimulation.Originalcoarseknots/sourcearrays/model/gates preserved. Source-specific successseparatefromfrozenpolicy."
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-379ba29238cc2486ec03cebc",
+      "parent_workspace": "workspaces/additional-independent-v1-379ba29238cc2486ec03cebc",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/379ba29238cc2486ec03cebc.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-379ba29238cc2486ec03cebc/runs/dynamics/additional-independent-v1-379ba29238cc2486ec03cebc-aligned/379ba29238cc2486ec03cebc",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-mobile-midpoint-physics-v2-379ba29238cc2486ec03cebc-ff1",
+      "operation": "feasible_geometry_experiment",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-mobile-midpoint-physics-v2-379ba29238cc2486ec03cebc-ff1",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "source_normalized_sha256": "479f02f8203611d20726f2f33ff1c986d3cae531a1f7b50ec0024b52f3b66bcb",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "79ce70068413ed43c0730329d93fa79da3b93e25f3c924b985774612b175ee68",
+        "plan.h5": "1ede974a12494b443716cb167910ecc154edf8c19c51d81734662ba984698e80",
+        "result.json": "fd7235793eeb9af36b969263b906a644c82d3dff705e620ce7b3b8c817fc0b69"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source",
+        "azimuth_offset_deg": 0
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 245,
+        "anchor_reference": [
+          -0.013866452072187507,
+          0.22937508704286275,
+          0.050567064719921215,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21983848874866158,
+          -0.33051748376776724,
+          -0.3968700499113254,
+          -1.0451750268310775,
+          0.45472844748723235,
+          -0.2170190709634987,
+          -0.3473217391236326
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.4022322770971111,
+            0.8111351266365985
+          ],
+          [
+            -0.12772506480043833,
+            0.7091260311323584
+          ],
+          [
+            -0.46357866861672065,
+            0.5867673831236286
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "379ba29238cc2486ec03cebc",
+        "parent_attempt": "workspaces/additional-independent-v1-379ba29238cc2486ec03cebc/runs/dynamics/additional-independent-v1-379ba29238cc2486ec03cebc-aligned/379ba29238cc2486ec03cebc",
+        "source_normalized_sha256": "479f02f8203611d20726f2f33ff1c986d3cae531a1f7b50ec0024b52f3b66bcb",
+        "parent_files_sha256": {
+          "scene.xml": "79ce70068413ed43c0730329d93fa79da3b93e25f3c924b985774612b175ee68",
+          "plan.h5": "1ede974a12494b443716cb167910ecc154edf8c19c51d81734662ba984698e80",
+          "result.json": "fd7235793eeb9af36b969263b906a644c82d3dff705e620ce7b3b8c817fc0b69"
+        },
+        "anchor_index": 245,
+        "anchor_reference": [
+          -0.01386645207218747,
+          0.22937508704286275,
+          0.050567064719921215,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21983848874866158,
+          -0.33051748376776724,
+          -0.3968700499113254,
+          -1.0451750268310775,
+          0.45472844748723235,
+          -0.2170190709634987,
+          -0.3473217391236326
+        ],
+        "axis_world": [
+          0.009737260775566263,
+          0.025941774650522838,
+          0.9996160313243131
+        ],
+        "pivot_world": [
+          0.48702506269897483,
+          -0.16739773085679677,
+          0.897428984728771
+        ],
+        "original_rows": 666,
+        "original_seconds": 6.65,
+        "scene_sha256": "79ce70068413ed43c0730329d93fa79da3b93e25f3c924b985774612b175ee68",
+        "inspected": true,
+        "planar_yaw_transport_rad": 0.0,
+        "requested_grasp_rotation_deg": 0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          -129.72642726804077
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.9055663941983169,
+              1.875
+            ],
+            [
+              -1.145,
+              1.1866488000609556
+            ],
+            [
+              -3.303636580909092,
+              3.3444408879283123
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true
+      },
+      "source_prefix_velocity_feedforward": 1.0,
+      "geometry_selection_rank": [
+        2.3512157959751563,
+        0.06269968101992227,
+        168
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-379ba29238cc2486ec03cebc-chunk0/backup.json",
+          "sha256": "7c894cc3975ea576ce46dc703e61d84e5d647a380e4abae4f1196d21cba53c90"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-379ba29238cc2486ec03cebc-chunk1/backup.json",
+          "sha256": "6ad9907541e9101e3826869fdef5b09ab652529f0a00071336d0db31f0bd375a"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-379ba29238cc2486ec03cebc-chunk2/backup.json",
+          "sha256": "df476683acb5fbe5e04d363761438a131b57d80dea8ae906bee6aa5db5287090"
+        }
+      ],
+      "comparison_scope": "OriginalXY/rotation minimumrank selectedacross3completegeometrychunks beforephysicaloutcomes. V44localseededminimum-motionmidpointsandintervaltime allocationre-admitfullgeometry beforesimulation.Originalcoarseknots/sourcearrays/model/gates preserved. Source-specific successseparatefromfrozenpolicy."
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-379ba29238cc2486ec03cebc",
+      "parent_workspace": "workspaces/additional-independent-v1-379ba29238cc2486ec03cebc",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/379ba29238cc2486ec03cebc.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-379ba29238cc2486ec03cebc/runs/dynamics/additional-independent-v1-379ba29238cc2486ec03cebc-aligned/379ba29238cc2486ec03cebc",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-mobile-midpoint-physics-v2-379ba29238cc2486ec03cebc-ff0",
+      "operation": "feasible_geometry_experiment",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-mobile-midpoint-physics-v2-379ba29238cc2486ec03cebc-ff0",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "source_normalized_sha256": "479f02f8203611d20726f2f33ff1c986d3cae531a1f7b50ec0024b52f3b66bcb",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "79ce70068413ed43c0730329d93fa79da3b93e25f3c924b985774612b175ee68",
+        "plan.h5": "1ede974a12494b443716cb167910ecc154edf8c19c51d81734662ba984698e80",
+        "result.json": "fd7235793eeb9af36b969263b906a644c82d3dff705e620ce7b3b8c817fc0b69"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source",
+        "azimuth_offset_deg": 0
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "mobile_fixture_ik": {
+        "anchor_index": 245,
+        "anchor_reference": [
+          -0.013866452072187507,
+          0.22937508704286275,
+          0.050567064719921215,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21983848874866158,
+          -0.33051748376776724,
+          -0.3968700499113254,
+          -1.0451750268310775,
+          0.45472844748723235,
+          -0.2170190709634987,
+          -0.3473217391236326
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.4022322770971111,
+            0.8111351266365985
+          ],
+          [
+            -0.12772506480043833,
+            0.7091260311323584
+          ],
+          [
+            -0.46357866861672065,
+            0.5867673831236286
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "379ba29238cc2486ec03cebc",
+        "parent_attempt": "workspaces/additional-independent-v1-379ba29238cc2486ec03cebc/runs/dynamics/additional-independent-v1-379ba29238cc2486ec03cebc-aligned/379ba29238cc2486ec03cebc",
+        "source_normalized_sha256": "479f02f8203611d20726f2f33ff1c986d3cae531a1f7b50ec0024b52f3b66bcb",
+        "parent_files_sha256": {
+          "scene.xml": "79ce70068413ed43c0730329d93fa79da3b93e25f3c924b985774612b175ee68",
+          "plan.h5": "1ede974a12494b443716cb167910ecc154edf8c19c51d81734662ba984698e80",
+          "result.json": "fd7235793eeb9af36b969263b906a644c82d3dff705e620ce7b3b8c817fc0b69"
+        },
+        "anchor_index": 245,
+        "anchor_reference": [
+          -0.01386645207218747,
+          0.22937508704286275,
+          0.050567064719921215,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.21983848874866158,
+          -0.33051748376776724,
+          -0.3968700499113254,
+          -1.0451750268310775,
+          0.45472844748723235,
+          -0.2170190709634987,
+          -0.3473217391236326
+        ],
+        "axis_world": [
+          0.009737260775566263,
+          0.025941774650522838,
+          0.9996160313243131
+        ],
+        "pivot_world": [
+          0.48702506269897483,
+          -0.16739773085679677,
+          0.897428984728771
+        ],
+        "original_rows": 666,
+        "original_seconds": 6.65,
+        "scene_sha256": "79ce70068413ed43c0730329d93fa79da3b93e25f3c924b985774612b175ee68",
+        "inspected": true,
+        "planar_yaw_transport_rad": 0.0,
+        "requested_grasp_rotation_deg": 0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          -129.72642726804077
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.9055663941983169,
+              1.875
+            ],
+            [
+              -1.145,
+              1.1866488000609556
+            ],
+            [
+              -3.303636580909092,
+              3.3444408879283123
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        2.3512157959751563,
+        0.06269968101992227,
+        168
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-379ba29238cc2486ec03cebc-chunk0/backup.json",
+          "sha256": "7c894cc3975ea576ce46dc703e61d84e5d647a380e4abae4f1196d21cba53c90"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-379ba29238cc2486ec03cebc-chunk1/backup.json",
+          "sha256": "6ad9907541e9101e3826869fdef5b09ab652529f0a00071336d0db31f0bd375a"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-379ba29238cc2486ec03cebc-chunk2/backup.json",
+          "sha256": "df476683acb5fbe5e04d363761438a131b57d80dea8ae906bee6aa5db5287090"
+        }
+      ],
+      "comparison_scope": "OriginalXY/rotation minimumrank selectedacross3completegeometrychunks beforephysicaloutcomes. V44localseededminimum-motionmidpointsandintervaltime allocationre-admitfullgeometry beforesimulation.Originalcoarseknots/sourcearrays/model/gates preserved. Source-specific successseparatefromfrozenpolicy."
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-83ebd1ce9f226412a1313bcc",
+      "parent_workspace": "workspaces/additional-independent-v1-83ebd1ce9f226412a1313bcc",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/83ebd1ce9f226412a1313bcc.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-83ebd1ce9f226412a1313bcc/runs/dynamics/additional-independent-v1-83ebd1ce9f226412a1313bcc-aligned/83ebd1ce9f226412a1313bcc",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-mobile-midpoint-physics-v2-83ebd1ce9f226412a1313bcc-ff1",
+      "operation": "feasible_geometry_experiment",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-mobile-midpoint-physics-v2-83ebd1ce9f226412a1313bcc-ff1",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "source_normalized_sha256": "cefc5b5f2c18d40644c044b8db052b63a8d3d37730a7ab28aeb164c68240e82c",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "e5ddd303a983acdd808aa60cb0e5ba05e5d64be0c99d5e4cd2bc4ec9212a69a1",
+        "plan.h5": "75b9473e32f92f89f64cd6c70c857b15d022ee842bad43a13acb6c1fcad3889c",
+        "result.json": "6e50f806353e1325b16656bc6300c2be0959cd4d3051f37f7db0ec378c03cc34"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 300,
+        "anchor_reference": [
+          0.036830448129516635,
+          -0.6367171073064645,
+          1.6244701344582761,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2436117024619943,
+          -0.3729832722712606,
+          -0.08829400766916531,
+          -1.077592052024127,
+          0.42658370453029626,
+          -0.37395943009517396,
+          -0.41800697462513736
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.576971164911455,
+            0.8052378296476697
+          ],
+          [
+            -1.0439560283470326,
+            0.7103019228681567
+          ],
+          [
+            -0.4909351974087376,
+            2.150152119698094
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "83ebd1ce9f226412a1313bcc",
+        "parent_attempt": "workspaces/additional-independent-v1-83ebd1ce9f226412a1313bcc/runs/dynamics/additional-independent-v1-83ebd1ce9f226412a1313bcc-aligned/83ebd1ce9f226412a1313bcc",
+        "source_normalized_sha256": "cefc5b5f2c18d40644c044b8db052b63a8d3d37730a7ab28aeb164c68240e82c",
+        "parent_files_sha256": {
+          "scene.xml": "e5ddd303a983acdd808aa60cb0e5ba05e5d64be0c99d5e4cd2bc4ec9212a69a1",
+          "plan.h5": "75b9473e32f92f89f64cd6c70c857b15d022ee842bad43a13acb6c1fcad3889c",
+          "result.json": "6e50f806353e1325b16656bc6300c2be0959cd4d3051f37f7db0ec378c03cc34"
+        },
+        "anchor_index": 300,
+        "anchor_reference": [
+          -0.16970938322936915,
+          0.16206049823717214,
+          0.05480042230526462,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2436117024619943,
+          -0.3729832722712606,
+          -0.08829400766916531,
+          -1.077592052024127,
+          0.42658370453029626,
+          -0.37395943009517396,
+          -0.41800697462513736
+        ],
+        "axis_world": [
+          -0.03353038134608547,
+          0.03075652612783449,
+          0.9989643385163127
+        ],
+        "pivot_world": [
+          0.33339954614963085,
+          -0.13394197786865855,
+          0.8929754626293954
+        ],
+        "original_rows": 771,
+        "original_seconds": 7.7,
+        "scene_sha256": "e5ddd303a983acdd808aa60cb0e5ba05e5d64be0c99d5e4cd2bc4ec9212a69a1",
+        "inspected": true,
+        "planar_yaw_transport_rad": 1.5696697121530114,
+        "requested_grasp_rotation_deg": 90
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.96125,
+          -0.32625
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          131.15989457666205
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.7262590948059517,
+              1.875
+            ],
+            [
+              -1.4997995992320248,
+              0.55
+            ],
+            [
+              -1.9238516481554584,
+              5.1244442765699745
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true
+      },
+      "source_prefix_velocity_feedforward": 1.0,
+      "geometry_selection_rank": [
+        2.3734708794364634,
+        0.016677080080157898,
+        43
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-83ebd1ce9f226412a1313bcc-chunk0/backup.json",
+          "sha256": "c0b2aacb2fb3ef368e65fb2c2ae3463d01c8e71573abbc42a6a590f88803fe66"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-83ebd1ce9f226412a1313bcc-chunk1/backup.json",
+          "sha256": "77052489e6eb3f92100963fa72a23ffd087ddbc11bb15fbafa75c81c294d355f"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-83ebd1ce9f226412a1313bcc-chunk2/backup.json",
+          "sha256": "e896292a46b6efc30f348501efda13390157769c2e17ebfe4f03f8b1f2907e1e"
+        }
+      ],
+      "comparison_scope": "OriginalXY/rotation minimumrank selectedacross3completegeometrychunks beforephysicaloutcomes. V44localseededminimum-motionmidpointsandintervaltime allocationre-admitfullgeometry beforesimulation.Originalcoarseknots/sourcearrays/model/gates preserved. Source-specific successseparatefromfrozenpolicy."
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-83ebd1ce9f226412a1313bcc",
+      "parent_workspace": "workspaces/additional-independent-v1-83ebd1ce9f226412a1313bcc",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/83ebd1ce9f226412a1313bcc.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-83ebd1ce9f226412a1313bcc/runs/dynamics/additional-independent-v1-83ebd1ce9f226412a1313bcc-aligned/83ebd1ce9f226412a1313bcc",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-mobile-midpoint-physics-v2-83ebd1ce9f226412a1313bcc-ff0",
+      "operation": "feasible_geometry_experiment",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-mobile-midpoint-physics-v2-83ebd1ce9f226412a1313bcc-ff0",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "source_normalized_sha256": "cefc5b5f2c18d40644c044b8db052b63a8d3d37730a7ab28aeb164c68240e82c",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "e5ddd303a983acdd808aa60cb0e5ba05e5d64be0c99d5e4cd2bc4ec9212a69a1",
+        "plan.h5": "75b9473e32f92f89f64cd6c70c857b15d022ee842bad43a13acb6c1fcad3889c",
+        "result.json": "6e50f806353e1325b16656bc6300c2be0959cd4d3051f37f7db0ec378c03cc34"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 300,
+        "anchor_reference": [
+          0.036830448129516635,
+          -0.6367171073064645,
+          1.6244701344582761,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2436117024619943,
+          -0.3729832722712606,
+          -0.08829400766916531,
+          -1.077592052024127,
+          0.42658370453029626,
+          -0.37395943009517396,
+          -0.41800697462513736
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.576971164911455,
+            0.8052378296476697
+          ],
+          [
+            -1.0439560283470326,
+            0.7103019228681567
+          ],
+          [
+            -0.4909351974087376,
+            2.150152119698094
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "83ebd1ce9f226412a1313bcc",
+        "parent_attempt": "workspaces/additional-independent-v1-83ebd1ce9f226412a1313bcc/runs/dynamics/additional-independent-v1-83ebd1ce9f226412a1313bcc-aligned/83ebd1ce9f226412a1313bcc",
+        "source_normalized_sha256": "cefc5b5f2c18d40644c044b8db052b63a8d3d37730a7ab28aeb164c68240e82c",
+        "parent_files_sha256": {
+          "scene.xml": "e5ddd303a983acdd808aa60cb0e5ba05e5d64be0c99d5e4cd2bc4ec9212a69a1",
+          "plan.h5": "75b9473e32f92f89f64cd6c70c857b15d022ee842bad43a13acb6c1fcad3889c",
+          "result.json": "6e50f806353e1325b16656bc6300c2be0959cd4d3051f37f7db0ec378c03cc34"
+        },
+        "anchor_index": 300,
+        "anchor_reference": [
+          -0.16970938322936915,
+          0.16206049823717214,
+          0.05480042230526462,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.2436117024619943,
+          -0.3729832722712606,
+          -0.08829400766916531,
+          -1.077592052024127,
+          0.42658370453029626,
+          -0.37395943009517396,
+          -0.41800697462513736
+        ],
+        "axis_world": [
+          -0.03353038134608547,
+          0.03075652612783449,
+          0.9989643385163127
+        ],
+        "pivot_world": [
+          0.33339954614963085,
+          -0.13394197786865855,
+          0.8929754626293954
+        ],
+        "original_rows": 771,
+        "original_seconds": 7.7,
+        "scene_sha256": "e5ddd303a983acdd808aa60cb0e5ba05e5d64be0c99d5e4cd2bc4ec9212a69a1",
+        "inspected": true,
+        "planar_yaw_transport_rad": 1.5696697121530114,
+        "requested_grasp_rotation_deg": 90
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.96125,
+          -0.32625
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          131.15989457666205
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.7262590948059517,
+              1.875
+            ],
+            [
+              -1.4997995992320248,
+              0.55
+            ],
+            [
+              -1.9238516481554584,
+              5.1244442765699745
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        2.3734708794364634,
+        0.016677080080157898,
+        43
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-83ebd1ce9f226412a1313bcc-chunk0/backup.json",
+          "sha256": "c0b2aacb2fb3ef368e65fb2c2ae3463d01c8e71573abbc42a6a590f88803fe66"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-83ebd1ce9f226412a1313bcc-chunk1/backup.json",
+          "sha256": "77052489e6eb3f92100963fa72a23ffd087ddbc11bb15fbafa75c81c294d355f"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-83ebd1ce9f226412a1313bcc-chunk2/backup.json",
+          "sha256": "e896292a46b6efc30f348501efda13390157769c2e17ebfe4f03f8b1f2907e1e"
+        }
+      ],
+      "comparison_scope": "OriginalXY/rotation minimumrank selectedacross3completegeometrychunks beforephysicaloutcomes. V44localseededminimum-motionmidpointsandintervaltime allocationre-admitfullgeometry beforesimulation.Originalcoarseknots/sourcearrays/model/gates preserved. Source-specific successseparatefromfrozenpolicy."
+    },
+    {
+      "id": "can-mobile-midpoint-physics-v2-d0912d5367f7af1246091310-ff1",
+      "workspace": "workspaces/can-mobile-midpoint-physics-v2-d0912d5367f7af1246091310-ff1",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310-aligned/d0912d5367f7af1246091310",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d0912d5367f7af1246091310.h5",
+      "source_normalized_sha256": "528c89d72ae3924fa58f53dc6c056fa12e36c502300eb66193528b642a4f5852",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310-v1/materialization.json",
+        "sha256": "4b002dd32cbaec68dda40dab4681de350e5f818840082e878f5e555cc3c79f34",
+        "original_archive_sha256": "f68c49cbec17f28893cd1b8e02f80c2b19029bdea47cadfff12552f643ce662e"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 260,
+        "anchor_reference": [
+          -0.20983715848322645,
+          0.02255331307526159,
+          0.3537926048968564,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.06240461279564943,
+          -0.8327638865040685,
+          0.42978169233087815,
+          -1.3701185273330074,
+          -0.24584491288351007,
+          -0.4620893365319081,
+          -1.0940480204181564
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.5611910488425329,
+            0.7674542033536856
+          ],
+          [
+            -0.3316864201265983,
+            0.7262823766979211
+          ],
+          [
+            -0.4897764654836922,
+            0.621868714012828
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "diagnostic_seed": {
+        "archived_screen_sha256": "2c695182237e62bb73d720e26e8942358ddacc38af97486709988c2c67a978af",
+        "sample_time_s": 2.6,
+        "body": "r_elbow_forearm_link",
+        "depth_m": 0.005354307329670134,
+        "seed_base_x_perturbation_m": 0.0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          40.0,
+          -147.15438409163986
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.9807860901738146,
+              1.875
+            ],
+            [
+              -1.145,
+              1.1460784149501362
+            ],
+            [
+              -3.3159112333944014,
+              3.5127052818818094
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true
+      },
+      "source_prefix_velocity_feedforward": 1.0,
+      "geometry_selection_rank": [
+        2.603788747702941,
+        0.06269968101992227,
+        116
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-d0912d5367f7af1246091310-chunk0/backup.json",
+          "sha256": "81ee180359a0726e55467f6dd911ef99fe4774c26f0dea0eebcd7178829aa919"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-d0912d5367f7af1246091310-chunk1/backup.json",
+          "sha256": "d73fb4989b86e8442b8df4e2dcd100a9de6e2232bd07d9758e1732ddaf3a8c9e"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-d0912d5367f7af1246091310-chunk2/backup.json",
+          "sha256": "0ca6ea0ccd6ff30a129474954b10de6095d0347bc6aae797699b3feed6c1c5cd"
+        }
+      ],
+      "comparison_scope": "OriginalXY/rotation minimumrank selectedacross3completegeometrychunks beforephysicaloutcomes. V44localseededminimum-motionmidpointsandintervaltime allocationre-admitfullgeometry beforesimulation.Originalcoarseknots/sourcearrays/model/gates preserved. Source-specific successseparatefromfrozenpolicy."
+    },
+    {
+      "id": "can-mobile-midpoint-physics-v2-d0912d5367f7af1246091310-ff0",
+      "workspace": "workspaces/can-mobile-midpoint-physics-v2-d0912d5367f7af1246091310-ff0",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310-aligned/d0912d5367f7af1246091310",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d0912d5367f7af1246091310.h5",
+      "source_normalized_sha256": "528c89d72ae3924fa58f53dc6c056fa12e36c502300eb66193528b642a4f5852",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d0912d5367f7af1246091310-v1/materialization.json",
+        "sha256": "4b002dd32cbaec68dda40dab4681de350e5f818840082e878f5e555cc3c79f34",
+        "original_archive_sha256": "f68c49cbec17f28893cd1b8e02f80c2b19029bdea47cadfff12552f643ce662e"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 260,
+        "anchor_reference": [
+          -0.20983715848322645,
+          0.02255331307526159,
+          0.3537926048968564,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.06240461279564943,
+          -0.8327638865040685,
+          0.42978169233087815,
+          -1.3701185273330074,
+          -0.24584491288351007,
+          -0.4620893365319081,
+          -1.0940480204181564
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.5611910488425329,
+            0.7674542033536856
+          ],
+          [
+            -0.3316864201265983,
+            0.7262823766979211
+          ],
+          [
+            -0.4897764654836922,
+            0.621868714012828
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 0,
+      "diagnostic_seed": {
+        "archived_screen_sha256": "2c695182237e62bb73d720e26e8942358ddacc38af97486709988c2c67a978af",
+        "sample_time_s": 2.6,
+        "body": "r_elbow_forearm_link",
+        "depth_m": 0.005354307329670134,
+        "seed_base_x_perturbation_m": 0.0
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          40.0,
+          -147.15438409163986
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.9807860901738146,
+              1.875
+            ],
+            [
+              -1.145,
+              1.1460784149501362
+            ],
+            [
+              -3.3159112333944014,
+              3.5127052818818094
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        2.603788747702941,
+        0.06269968101992227,
+        116
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-d0912d5367f7af1246091310-chunk0/backup.json",
+          "sha256": "81ee180359a0726e55467f6dd911ef99fe4774c26f0dea0eebcd7178829aa919"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-d0912d5367f7af1246091310-chunk1/backup.json",
+          "sha256": "d73fb4989b86e8442b8df4e2dcd100a9de6e2232bd07d9758e1732ddaf3a8c9e"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-midpoint-refinement-v1/can-mobile-midpoint-refinement-v1-midpoint-d0912d5367f7af1246091310-chunk2/backup.json",
+          "sha256": "0ca6ea0ccd6ff30a129474954b10de6095d0347bc6aae797699b3feed6c1c5cd"
+        }
+      ],
+      "comparison_scope": "OriginalXY/rotation minimumrank selectedacross3completegeometrychunks beforephysicaloutcomes. V44localseededminimum-motionmidpointsandintervaltime allocationre-admitfullgeometry beforesimulation.Originalcoarseknots/sourcearrays/model/gates preserved. Source-specific successseparatefromfrozenpolicy."
+    }
+  ]
+}

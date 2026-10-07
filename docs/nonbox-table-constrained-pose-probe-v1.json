@@ -1,0 +1,1214 @@
+{
+  "scope": "Representative-pose optimization only, not whole-path/clock/physics admission; original target matrices and object reset preserved",
+  "code_release": "af843d7673fec92230740ee90f28393a86120f2e694922ae4567afea61b1aad5",
+  "script_sha256": "237222c51b1b8f4f9d1364d91e841faa5ae8d2c608f5cc4f95258d88734ae332",
+  "rows": [
+    {
+      "job": "nonbox-task-center-v1-2aef318f4c607ad8ed448123-axis0-base38",
+      "source": "2aef318f4c607ad8ed448123",
+      "axis": 0,
+      "frame": 305,
+      "phase": "closed",
+      "time_s": 3.0500000000000003,
+      "table_aabb": [
+        [
+          0.20000000000000007,
+          -0.4999999999999999,
+          0.77
+        ],
+        [
+          0.9999999999999999,
+          0.29999999999999993,
+          0.8200000000000001
+        ]
+      ],
+      "bar_names": [
+        "back_bar_base_collision_0",
+        "back_bar_inner_collision_0",
+        "left_bar_inner_collision_0",
+        "left_bar_base_collision_0",
+        "right_bar_inner_collision_0",
+        "right_bar_base_collision_0",
+        "left_bar_anchor_collision_0",
+        "right_bar_anchor_collision_0"
+      ],
+      "original_target": [
+        [
+          -0.029869075623552732,
+          0.6025321893899964,
+          -0.7975354531745229,
+          0.6966987321473609
+        ],
+        [
+          0.005667684278134788,
+          0.7979807227955494,
+          0.6026563227923653,
+          -0.004874520664266269
+        ],
+        [
+          0.9995377510010902,
+          0.013480608131285024,
+          -0.027249908772193354,
+          0.8381547226415234
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "original_q": [
+        0.033813270480655855,
+        -0.04705142311782007,
+        1.0,
+        0.0,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.3752389031511068,
+        0.33333404487887086,
+        -0.2605880405670581,
+        0.05007670233248221,
+        -0.4925999999999999,
+        -0.36986516628862687,
+        -0.18976881726817482
+      ],
+      "numeric_sha256": "1294654db874bb4ed4e8657368f4b3de0188b568f5b5aec68033e99d21e0f5bc",
+      "scene_sha256": "ff03c2e18638265fe160844ab0d499e32b37ff1006f74009779ed09bb7872387",
+      "solutions": [
+        {
+          "access_face": "x-",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 26,
+          "wall_s": 0.27212615200551227,
+          "position_error_m": 3.611483181884074e-08,
+          "rotation_error_rad": 1.2059642770347607e-07,
+          "min_bar_table_clearance_m": 0.003000504098041372,
+          "base": [
+            0.14747293638405734,
+            0.36462667578519425,
+            0.24495954376703524
+          ],
+          "collision_depths": {
+            "environment": 0.011403120971401724,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": [
+              "table_collision",
+              "r_hand_palm_link_collision_0"
+            ],
+            "self": null
+          },
+          "saturated_joints": [],
+          "q": [
+            0.14747293638405734,
+            0.36462667578519425,
+            0.9701471370939002,
+            0.24251707648845908,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6034508090001235,
+            -0.25978518502635695,
+            -0.6005698729210398,
+            -0.28046889984586204,
+            -0.4925525932459676,
+            -0.44814575243096894,
+            -0.30119581918332444
+          ]
+        },
+        {
+          "access_face": "x+",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 27,
+          "wall_s": 0.286859554995317,
+          "position_error_m": 0.15224809359407004,
+          "rotation_error_rad": 0.4743607761470626,
+          "min_bar_table_clearance_m": 0.0030000000000000022,
+          "base": [
+            1.0432053552439238,
+            0.14011006876383195,
+            3.141592653589793
+          ],
+          "collision_depths": {
+            "environment": 0.04634332638839423,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": [
+              "table_collision",
+              "l_elbow_forearm_link_collision_0"
+            ],
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_wrist_roll",
+              "angle": 0.4925999999999998
+            },
+            {
+              "joint": "r_wrist_pitch",
+              "angle": -0.49259999999999987
+            }
+          ],
+          "q": [
+            1.0432053552439238,
+            0.14011006876383195,
+            -1.0,
+            1.2246467991473532e-16,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.8573970781462271,
+            0.01236357788603806,
+            1.3390158544400135,
+            -1.3020081439995084,
+            0.4925999999999998,
+            -0.49259999999999987,
+            -0.5878309073048841
+          ]
+        },
+        {
+          "access_face": "y-",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 25,
+          "wall_s": 0.21913046500412747,
+          "position_error_m": 1.158516770398056e-07,
+          "rotation_error_rad": 3.628066933388626e-07,
+          "min_bar_table_clearance_m": 0.03677289674385004,
+          "base": [
+            0.08778744055747703,
+            0.22434331427873463,
+            0.6826049742779698
+          ],
+          "collision_depths": {
+            "environment": 0.01180905365326845,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": [
+              "table_collision",
+              "r_elbow_forearm_link_collision_0"
+            ],
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_wrist_pitch",
+              "angle": -0.4925937132659234
+            }
+          ],
+          "q": [
+            0.08778744055747703,
+            0.22434331427873463,
+            0.7759320926893681,
+            0.6308164451999472,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.4710294993984104,
+            -0.10171159217717943,
+            -1.269832447864939,
+            -0.6867915071896546,
+            -0.37530478454716537,
+            -0.4925937132659234,
+            0.15321171667018932
+          ]
+        },
+        {
+          "access_face": "y+",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 19,
+          "wall_s": 0.18129752100503538,
+          "position_error_m": 1.1570439712761046e-07,
+          "rotation_error_rad": 1.0015615053257637e-07,
+          "min_bar_table_clearance_m": 0.007726764218247292,
+          "base": [
+            0.4339825767180769,
+            0.36920216626337604,
+            -1.147362811648418
+          ],
+          "collision_depths": {
+            "environment": 0.011403058339760628,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": [
+              "table_collision",
+              "r_hand_palm_link_collision_0"
+            ],
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_wrist_pitch",
+              "angle": -0.49259940671817226
+            }
+          ],
+          "q": [
+            0.4339825767180769,
+            0.36920216626337604,
+            0.41089314805926286,
+            -0.9116835091620056,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.7759223314173047,
+            0.46363052711182373,
+            0.08029326748950595,
+            -0.35726246895363956,
+            -0.0591900625370292,
+            -0.49259940671817226,
+            -0.017722861145916726
+          ]
+        }
+      ]
+    },
+    {
+      "job": "nonbox-task-center-v1-31bb4a33156a48823d3f6daf-axis0-base52",
+      "source": "31bb4a33156a48823d3f6daf",
+      "axis": 0,
+      "frame": 664,
+      "phase": "open_suffix",
+      "time_s": 6.640000000000001,
+      "table_aabb": [
+        [
+          0.20000000000000007,
+          -0.4999999999999999,
+          0.77
+        ],
+        [
+          0.9999999999999999,
+          0.29999999999999993,
+          0.8200000000000001
+        ]
+      ],
+      "bar_names": [
+        "back_bar_base_collision_0",
+        "back_bar_inner_collision_0",
+        "left_bar_inner_collision_0",
+        "left_bar_base_collision_0",
+        "right_bar_inner_collision_0",
+        "right_bar_base_collision_0",
+        "left_bar_anchor_collision_0",
+        "right_bar_anchor_collision_0"
+      ],
+      "original_target": [
+        [
+          -0.012537735458410852,
+          -0.9958297631422517,
+          -0.0903653032398014,
+          0.7640619918643708
+        ],
+        [
+          0.027620809879143973,
+          0.08999300912607751,
+          -0.9955593147422476,
+          -0.33352775205099733
+        ],
+        [
+          0.9995398421529754,
+          -0.014978022181852775,
+          0.02637731601821603,
+          0.9046544373881185
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "original_q": [
+        0.032759042853826914,
+        -0.06693374309389716,
+        0.9659258262890683,
+        0.25881904510252074,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.1819953864891168,
+        -0.6542009063168033,
+        0.10836808521523358,
+        0.050906646381330106,
+        0.4925999999999999,
+        -0.44159950545606264,
+        -0.3255619878636282
+      ],
+      "numeric_sha256": "2cb2632a2aeac0d3df7e964a0ece90bfed2dd5b2466bd0799606d9a9811ef935",
+      "scene_sha256": "967199e6d1637575f8c6a3c6e1ba6194b0ccc807f64a5f9ec7b2634722109541",
+      "solutions": [
+        {
+          "access_face": "x-",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 18,
+          "wall_s": 0.14291484300338197,
+          "position_error_m": 4.476113790474021e-08,
+          "rotation_error_rad": 5.2312701969437375e-08,
+          "min_bar_table_clearance_m": 0.06674262335350598,
+          "base": [
+            0.31824819253652165,
+            -0.6491793170459627,
+            0.699888988897798
+          ],
+          "collision_depths": {
+            "environment": 0.020716859194338518,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": [
+              "source_scene_geom_13",
+              "r_hand_proximal_mimic_link_collision_0"
+            ],
+            "self": null
+          },
+          "saturated_joints": [],
+          "q": [
+            0.31824819253652165,
+            -0.6491793170459627,
+            0.764913697887107,
+            0.6441327772941474,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.9633252837625361,
+            0.08450378803478482,
+            0.25550731048558556,
+            -0.2787385801533351,
+            0.4004057861439024,
+            -0.49257916517561934,
+            -0.22275623525842625
+          ]
+        },
+        {
+          "access_face": "x+",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 19,
+          "wall_s": 0.15381376699951943,
+          "position_error_m": 1.432629773510328e-07,
+          "rotation_error_rad": 3.0108898326385883e-07,
+          "min_bar_table_clearance_m": 0.5002215277071947,
+          "base": [
+            0.739155832861784,
+            -1.0884228125695916,
+            2.6125614792025282
+          ],
+          "collision_depths": {
+            "environment": 0.02071683738958374,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": [
+              "source_scene_geom_13",
+              "r_hand_proximal_mimic_link_collision_0"
+            ],
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_wrist_roll",
+              "angle": -0.4925999999999999
+            }
+          ],
+          "q": [
+            0.739155832861784,
+            -1.0884228125695916,
+            -0.8632964391619149,
+            0.5046971944942414,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6282230462692472,
+            -0.6620825450007839,
+            -0.2932330967867552,
+            0.012749710836306454,
+            -0.4925999999999999,
+            -0.2037278619589924,
+            -0.6975940723828874
+          ]
+        },
+        {
+          "access_face": "y-",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 17,
+          "wall_s": 0.13914275000570342,
+          "position_error_m": 3.227811958002766e-08,
+          "rotation_error_rad": 1.2905254923453687e-07,
+          "min_bar_table_clearance_m": 0.321392060648602,
+          "base": [
+            0.35058682098802113,
+            -0.8664668125190631,
+            1.5296851253308534
+          ],
+          "collision_depths": {
+            "environment": 0.020716832184917374,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": [
+              "source_scene_geom_13",
+              "r_hand_proximal_mimic_link_collision_0"
+            ],
+            "self": null
+          },
+          "saturated_joints": [],
+          "q": [
+            0.35058682098802113,
+            -0.8664668125190631,
+            0.04109962189074499,
+            0.9991550535729866,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.8731326958863549,
+            -0.3371954802747962,
+            -0.09973532006279354,
+            -0.09452301479156468,
+            0.1417733922858911,
+            -0.4923934048128238,
+            -0.3002679852036101
+          ]
+        },
+        {
+          "access_face": "y+",
+          "optimizer_success": false,
+          "optimizer_message": "Iteration limit reached",
+          "iterations": 500,
+          "wall_s": 8.685699247012963,
+          "position_error_m": 0.2912221047126475,
+          "rotation_error_rad": 0.9017969598924211,
+          "min_bar_table_clearance_m": 0.002999999693875139,
+          "base": [
+            0.44001569749316966,
+            0.377025442080781,
+            0.1908866568315759
+          ],
+          "collision_depths": {
+            "environment": 0.0,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": null,
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_wrist_roll",
+              "angle": 0.4925999999999999
+            },
+            {
+              "joint": "r_wrist_pitch",
+              "angle": -0.4925999999999999
+            }
+          ],
+          "q": [
+            0.44001569749316966,
+            0.377025442080781,
+            0.9818363961034114,
+            0.18972952138943733,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.6799796312202065,
+            -0.8062999249459445,
+            -0.32167544634098466,
+            -1.5000896882620753,
+            0.4925999999999999,
+            -0.4925999999999999,
+            -0.513945278395659
+          ]
+        }
+      ]
+    },
+    {
+      "job": "nonbox-task-center-v1-c1f6fdd7b4fa919be783b8a6-axis0-base53",
+      "source": "c1f6fdd7b4fa919be783b8a6",
+      "axis": 0,
+      "frame": 484,
+      "phase": "closed",
+      "time_s": 4.84,
+      "table_aabb": [
+        [
+          0.20000000000000007,
+          -0.4999999999999999,
+          0.75
+        ],
+        [
+          0.9999999999999999,
+          0.29999999999999993,
+          0.8
+        ]
+      ],
+      "bar_names": [
+        "back_bar_base_collision_0",
+        "back_bar_inner_collision_0",
+        "left_bar_inner_collision_0",
+        "left_bar_base_collision_0",
+        "right_bar_inner_collision_0",
+        "right_bar_base_collision_0",
+        "left_bar_anchor_collision_0",
+        "right_bar_anchor_collision_0"
+      ],
+      "original_target": [
+        [
+          0.15175190128312244,
+          -0.49100982466275006,
+          0.8578348981835687,
+          0.6767593718502992
+        ],
+        [
+          -0.2828109932292139,
+          -0.853171404943091,
+          -0.43831095799231223,
+          -0.167430975958554
+        ],
+        [
+          0.9470951919240556,
+          -0.17609061835341647,
+          -0.2683333590186814,
+          0.9973079630340324
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "original_q": [
+        0.02472727040224354,
+        0.011219836594231702,
+        0.9659258262890683,
+        0.25881904510252074,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.4641916077588202,
+        -0.1849081738454172,
+        3.0221249444113742,
+        -0.09898703392094388,
+        0.4925999999999999,
+        -0.4925999999999999,
+        1.5390000000000001
+      ],
+      "numeric_sha256": "e83a79689b4a1bc42ded4143fe0c0c846a6724fb853b13f9c06572b3c74b1f8c",
+      "scene_sha256": "4deea6e9679782d89f87c764a1387588deadbe0c73a6951aea96df62639e8ce5",
+      "solutions": [
+        {
+          "access_face": "x-",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 34,
+          "wall_s": 0.23772079599439166,
+          "position_error_m": 4.562927886362447e-08,
+          "rotation_error_rad": 2.1897650583793507e-07,
+          "min_bar_table_clearance_m": 0.15174655308797433,
+          "base": [
+            1.259346849749321,
+            0.13596637659216668,
+            -0.63108142517837
+          ],
+          "collision_depths": {
+            "environment": 0.0,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": null,
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_wrist_pitch",
+              "angle": -0.4925958997569996
+            }
+          ],
+          "q": [
+            1.259346849749321,
+            0.13596637659216668,
+            0.8073899199752634,
+            -0.5900182345676594,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.045849475094401064,
+            -0.8678666326406871,
+            3.0471937342819095,
+            -1.208329897143435,
+            0.4183694010984688,
+            -0.4925958997569996,
+            1.4852574144424502
+          ]
+        },
+        {
+          "access_face": "x+",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 20,
+          "wall_s": 0.13536050099355634,
+          "position_error_m": 0.030591081376637432,
+          "rotation_error_rad": 0.3754279167213474,
+          "min_bar_table_clearance_m": 0.3835220998194758,
+          "base": [
+            0.8439337170230301,
+            -0.9655831442200558,
+            3.141592653589793
+          ],
+          "collision_depths": {
+            "environment": 0.0,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": null,
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_elbow_yaw",
+              "angle": 3.110592653589793
+            },
+            {
+              "joint": "r_elbow_pitch",
+              "angle": 0.0689999999999999
+            },
+            {
+              "joint": "r_wrist_roll",
+              "angle": 0.4925999999999999
+            },
+            {
+              "joint": "r_wrist_pitch",
+              "angle": 0.4925999999999999
+            },
+            {
+              "joint": "r_wrist_yaw",
+              "angle": 1.5390000000000001
+            }
+          ],
+          "q": [
+            0.8439337170230301,
+            -0.9655831442200558,
+            -1.0,
+            1.2246467991473532e-16,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.00035542908399304,
+            -1.0205919031079627,
+            3.110592653589793,
+            0.0689999999999999,
+            0.4925999999999999,
+            0.4925999999999999,
+            1.5390000000000001
+          ]
+        },
+        {
+          "access_face": "y-",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 22,
+          "wall_s": 0.14561617700383067,
+          "position_error_m": 0.03059105159071835,
+          "rotation_error_rad": 0.37542793653397705,
+          "min_bar_table_clearance_m": 0.38352206233972314,
+          "base": [
+            0.8439337269025037,
+            -0.9655831067247118,
+            3.141592653589793
+          ],
+          "collision_depths": {
+            "environment": 0.0,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": null,
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_elbow_yaw",
+              "angle": 3.110592653589793
+            },
+            {
+              "joint": "r_elbow_pitch",
+              "angle": 0.069
+            },
+            {
+              "joint": "r_wrist_roll",
+              "angle": 0.4925999999999999
+            },
+            {
+              "joint": "r_wrist_pitch",
+              "angle": 0.4925999999999999
+            },
+            {
+              "joint": "r_wrist_yaw",
+              "angle": 1.539
+            }
+          ],
+          "q": [
+            0.8439337269025037,
+            -0.9655831067247118,
+            -1.0,
+            1.2246467991473532e-16,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.0003555162366462892,
+            -1.0205918454630667,
+            3.110592653589793,
+            0.069,
+            0.4925999999999999,
+            0.4925999999999999,
+            1.539
+          ]
+        },
+        {
+          "access_face": "y+",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 24,
+          "wall_s": 0.17465691699180752,
+          "position_error_m": 2.5914546417227954e-08,
+          "rotation_error_rad": 9.78610335365612e-08,
+          "min_bar_table_clearance_m": 0.2414362418303096,
+          "base": [
+            1.3281671906629184,
+            -0.0519159328529809,
+            -0.9562819211867797
+          ],
+          "collision_depths": {
+            "environment": 0.0,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": null,
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_wrist_roll",
+              "angle": 0.49259963323664585
+            }
+          ],
+          "q": [
+            1.3281671906629184,
+            -0.0519159328529809,
+            0.5765618336717696,
+            -0.8170535184142141,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.09832401669571499,
+            -0.8281957640505293,
+            3.1105027606088442,
+            -1.304083077665449,
+            0.49259963323664585,
+            -0.1599372180081021,
+            1.3571394941706942
+          ]
+        }
+      ]
+    },
+    {
+      "job": "nonbox-task-center-v1-c1f6fdd7b4fa919be783b8a6-axis2-base16",
+      "source": "c1f6fdd7b4fa919be783b8a6",
+      "axis": 2,
+      "frame": 560,
+      "phase": "closed",
+      "time_s": 5.6000000000000005,
+      "table_aabb": [
+        [
+          0.20000000000000007,
+          -0.4999999999999999,
+          0.75
+        ],
+        [
+          0.9999999999999999,
+          0.29999999999999993,
+          0.8
+        ]
+      ],
+      "bar_names": [
+        "back_bar_base_collision_0",
+        "back_bar_inner_collision_0",
+        "left_bar_inner_collision_0",
+        "left_bar_base_collision_0",
+        "right_bar_inner_collision_0",
+        "right_bar_base_collision_0",
+        "left_bar_anchor_collision_0",
+        "right_bar_anchor_collision_0"
+      ],
+      "original_target": [
+        [
+          0.9956864291050753,
+          0.07249789573522973,
+          -0.05790155446918942,
+          0.6142578541783272
+        ],
+        [
+          -0.04313939791065715,
+          -0.1907643877863858,
+          -0.98068748370742,
+          -0.19371082248965746
+        ],
+        [
+          -0.08214333353286017,
+          0.978955056918575,
+          -0.18681399650363478,
+          0.9845657882174712
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "original_q": [
+        0.18469586578726488,
+        0.06407027861741432,
+        0.9659258262890683,
+        0.25881904510252074,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.01810366786066639,
+        -0.7535214320658389,
+        -0.14816663592098112,
+        -1.269211140433704,
+        0.4925999999999999,
+        -0.4925999999999999,
+        -1.5390000000000001
+      ],
+      "numeric_sha256": "8c6c005f1d07eadad5436f63230724a37d67d80e1e563315f3d08289a07b9cca",
+      "scene_sha256": "4deea6e9679782d89f87c764a1387588deadbe0c73a6951aea96df62639e8ce5",
+      "solutions": [
+        {
+          "access_face": "x-",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 22,
+          "wall_s": 0.16069734901248012,
+          "position_error_m": 4.72413944626202e-08,
+          "rotation_error_rad": 9.20337778383654e-08,
+          "min_bar_table_clearance_m": 0.01703869230357658,
+          "base": [
+            0.24701574720156996,
+            -0.5856333447333221,
+            1.0506807711764716
+          ],
+          "collision_depths": {
+            "environment": 0.0,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": null,
+            "self": null
+          },
+          "saturated_joints": [],
+          "q": [
+            0.24701574720156996,
+            -0.5856333447333221,
+            0.4969804159080569,
+            0.8677617565921275,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6750330939836992,
+            0.2418302758040979,
+            -0.4181405003722821,
+            -1.0205470227096864,
+            0.49195712542996123,
+            -0.032267708220871556,
+            -1.530432966836366
+          ]
+        },
+        {
+          "access_face": "x+",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 15,
+          "wall_s": 0.09962091498891823,
+          "position_error_m": 3.5197411455213356e-08,
+          "rotation_error_rad": 1.509012922610241e-07,
+          "min_bar_table_clearance_m": 0.29788531574746374,
+          "base": [
+            0.7255886735857382,
+            -0.8874078168863176,
+            2.768472865670904
+          ],
+          "collision_depths": {
+            "environment": 0.0,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": null,
+            "self": null
+          },
+          "saturated_joints": [],
+          "q": [
+            0.7255886735857382,
+            -0.8874078168863176,
+            -0.931194646777106,
+            0.36452233102192905,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.4656197804903967,
+            -0.26453241198432625,
+            -1.0169977225410172,
+            -0.9312803919381281,
+            -0.4283693381802197,
+            -0.19277322869387112,
+            -1.5226934827567409
+          ]
+        },
+        {
+          "access_face": "y-",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 17,
+          "wall_s": 0.11388649500440806,
+          "position_error_m": 1.490090707239686e-08,
+          "rotation_error_rad": 3.308348094436183e-08,
+          "min_bar_table_clearance_m": 0.09579999451737309,
+          "base": [
+            0.2501067141056725,
+            -0.6446829399840642,
+            1.412773539114702
+          ],
+          "collision_depths": {
+            "environment": 0.0,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": null,
+            "self": null
+          },
+          "saturated_joints": [],
+          "q": [
+            0.2501067141056725,
+            -0.6446829399840642,
+            0.15736593852223554,
+            0.9875403593742466,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.572255366614255,
+            0.11240813460396397,
+            -0.6629758133561723,
+            -1.1429138496081324,
+            0.4464717855727574,
+            0.005157405753108224,
+            -1.5321083882806867
+          ]
+        },
+        {
+          "access_face": "y+",
+          "optimizer_success": true,
+          "optimizer_message": "Optimization terminated successfully",
+          "iterations": 30,
+          "wall_s": 0.22152266799821518,
+          "position_error_m": 0.3273043181232316,
+          "rotation_error_rad": 0.6979516599734626,
+          "min_bar_table_clearance_m": 0.0030000000000002434,
+          "base": [
+            0.5446464838851669,
+            0.3770254423040049,
+            0.19088665875384095
+          ],
+          "collision_depths": {
+            "environment": 0.0,
+            "self": 0.0
+          },
+          "collision_pairs": {
+            "environment": null,
+            "self": null
+          },
+          "saturated_joints": [
+            {
+              "joint": "r_elbow_pitch",
+              "angle": -2.219
+            },
+            {
+              "joint": "r_wrist_roll",
+              "angle": 0.4925999999999999
+            },
+            {
+              "joint": "r_wrist_pitch",
+              "angle": -0.4925999999999999
+            },
+            {
+              "joint": "r_wrist_yaw",
+              "angle": -1.5390000000000001
+            }
+          ],
+          "q": [
+            0.5446464838851669,
+            0.3770254423040049,
+            0.981836395738701,
+            0.1897295232767871,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.352531088750299,
+            -0.6952926273763108,
+            -0.05996245558545745,
+            -2.219,
+            0.4925999999999999,
+            -0.4925999999999999,
+            -1.5390000000000001
+          ]
+        }
+      ]
+    }
+  ]
+}

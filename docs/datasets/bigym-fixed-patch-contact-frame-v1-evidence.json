@@ -1,0 +1,131 @@
+{
+  "source_id": "bigym",
+  "source_group": "bigym/MovePlate/c795f62efb4f4d20ab899af96d766a2f",
+  "source_revision": "52070fa73e8dd88a3d76eed4be575a6d01497931",
+  "source_urls": [
+    "https://github.com/NeuracoreAI/bigym_data/releases/download/v0.9.0/demonstrations.zip#member=MovePlate/JointPositionActionMode_floating_pelvis_x_pelvis_y_pelvis_rz_absolute/lightweight/c795f62efb4f4d20ab899af96d766a2f.safetensors",
+    "https://github.com/NeuracoreAI/bigym/tree/52070fa73e8dd88a3d76eed4be575a6d01497931"
+  ],
+  "source_pose_rows": 2256,
+  "source_pose_interval_s": 4.51,
+  "source_version_limitations": "Recorded lightweight actions report BiGym4.0.0; reconstructed object/robot observations and timestamps use pinned public4.1.0 source. Original observations are unavailable. Native success under this runtime is not original4.0 ground truth. First available pose is post-action at0.002s.",
+  "independent_demonstrations": 1,
+  "heldout_103d_used": false,
+  "moving_object_changes": false,
+  "prior_failure": {
+    "palm_target_overlap_m": 0.01355297,
+    "settle_timeout_s": 2.0,
+    "actual_terminal_tcp_error_m": 0.024692,
+    "actual_terminal_palm_force_n": 12.0004,
+    "bilateral_pad_force_n": [
+      0.0,
+      0.0
+    ],
+    "workspace": "/mnt/reachy-retarget/workspaces/bigym-palm-obstruction-audit-20261007-01"
+  },
+  "fixed_patch_local_m": [
+    -0.0003847501720931967,
+    0.07395797913321084,
+    0.009218442105546483
+  ],
+  "declared_robot_reference_changes": {
+    "calibration_tcp_translation_m": 0.02387135423076378,
+    "calibration_wrist_rotation_rad": 0.3356378169571814,
+    "maximum_additional_base_xy_correction_m": 0.06491950963790048,
+    "maximum_additional_base_yaw_correction_rad": 0.09305372406585875,
+    "maximum_left_reference_translation_change_m": 0.06742630424933271,
+    "nominal_gripper_rad": 0.35,
+    "closed_command_rad": 0.3,
+    "method": "Constant plate-local tool transform applied to unchanged source plate matrices; quintic original-to-derived left-hand blend over rows340..450; retained through release tail, which keeps original open intent from row1989. Right-hand reference remains unchanged. Derived robot-base path is explicit.",
+    "original_references_retained": true
+  },
+  "full_preflight": {
+    "complete": true,
+    "physics_steps": 0,
+    "max_two_hand_position_error_m": 0.00019995881877420192,
+    "max_two_hand_rotation_error_rad": 0.0016084340724773578,
+    "minimum_self_sphere_gap_m": 0.02097426485272831,
+    "maximum_mesh_self_penetration_m": 0.0,
+    "nonpad_and_fixture_minimum_gap_m": 0.003,
+    "aperture_samples": 18,
+    "nominal_anchor_margin_min_m": 0.011591297127225925,
+    "nominal_pad_signed_gap_range_m": [
+      -0.0004647666034163483,
+      2.0798965461236195e-05
+    ],
+    "nominal_closest_point_inward_plane_distance_max_m": 1.63696271735032e-05,
+    "nominal_contact_normal_alignment_min_abs": 0.9791076910457427,
+    "open_pad_overlap": false,
+    "limitations": "Discrete full-frame/aperture geometry only; does not certify swept volume, actual servo tracking, actual contact forces or physical success."
+  },
+  "retiming": {
+    "derived_baseline_duration_s": 17.01,
+    "source_model_physics_steps": 8505,
+    "arm_target_rad_s": 0.8,
+    "base_axis_target_m_s": 0.6,
+    "base_yaw_target_rad_s": 1.2,
+    "shared_interval_grid_s": 0.002,
+    "planning_caps_on_source_clock": {
+      "base_axis_m_s": 1.2,
+      "base_yaw_rad_s": 2.4
+    },
+    "measured_speed_validation": false,
+    "maximum_added_rendezvous_time_s": 4.0,
+    "pause_rule": "Each settle/close wait <=2s, with0.1s contiguous measured guards. Source clock pauses; actual simulator clock advances."
+  },
+  "artifacts": {
+    "candidate_workspace": "/mnt/reachy-retarget/workspaces/bigym-fixed-patch-candidate-20261007-01",
+    "candidate_manifest_sha256": "919b54eaf3fbeb998dcc1c0771bcbaeadc55f902b08c5b3b702c41fff8d779a2",
+    "candidate_files": 57,
+    "candidate_bytes": 21367065,
+    "cross_pod_verified": true,
+    "raw_ik_sha256": "7043e76ad31ad543d43a1c829f0e61ddfd8c885b4203d31280a13ae1deba2ce2",
+    "protocol_workspace": "/mnt/reachy-retarget/workspaces/bigym-fixed-patch-protocol-20261007-01",
+    "protocol_sha256": "6594bc0c4c99f3afdeb0b81023790c590506e100fb0d0ed0dcd71fb992e3c7e5",
+    "base_source_release_sha256": "aeb4c0888fa1d331ccf023aceb36e6d3e068da420c0467dbd7c370802538a156",
+    "rendezvous_overlay_sha256": "4d0be841c01e69c71fdd8bd3825d89ffb42abd9c0340362ec3edf1a7334773f2"
+  },
+  "physics_validated": false,
+  "physical_execution_status": "Two completed retained failures; source completed all2256 reference rows, alternate model rejected at measured source550 geometry",
+  "physical_results": {
+    "source": {
+      "physical_steps": 8774,
+      "full_source_coverage": true,
+      "task_success": false,
+      "acquisition_settle_s": 0.102,
+      "acquisition_close_s": 0.436,
+      "common_lifted_grasp": false,
+      "nonhand_object_contact_samples": 0,
+      "inactive_hand_contact_samples": 0,
+      "actuator_replay_qpos_qvel_clock_errors": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "canonical_archive": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-fixed-patch-frame-v1-source.hdf5",
+      "sha256": "34083823cdb4956e363854f5a06548737c2e22d144dbadb696dce92dd855e2b0",
+      "workspace": "/mnt/reachy-retarget/workspaces/bigym-fixed-patch-physical-source-20261007-01",
+      "export_manifest_sha256": "44414ce9686be612a042d6e6b6a954eb231f93dad0855d825aaf989a22e933f3",
+      "cross_pod_verified": true
+    },
+    "global-contact-4ms": {
+      "physical_steps": 7352,
+      "full_source_coverage": false,
+      "task_success": false,
+      "error": "Measured rendezvous target has non-pad robot/plate obstruction",
+      "palm_plate_gap_m": 0.0020086478685033965,
+      "minimum_required_gap_m": 0.003,
+      "translation_correction_m": 0.00940099629083721,
+      "actuator_replay_qpos_qvel_clock_errors": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "canonical_archive": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-fixed-patch-frame-v1-global-contact-4ms.hdf5",
+      "sha256": "b61fd7cf35c2691b75545e2f78d26fda10f91d341c449f7f64706ad364c35d30",
+      "workspace": "/mnt/reachy-retarget/workspaces/bigym-fixed-patch-physical-global-contact-4ms-20261007-01",
+      "export_manifest_sha256": "eb49cc1e545e8f337ef9b6ce8954b6344710efea4703078e504e1692d9bfad78",
+      "cross_pod_verified": true
+    }
+  }
+}

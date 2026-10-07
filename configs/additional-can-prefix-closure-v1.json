@@ -1,0 +1,167 @@
+{
+  "label": "additional-can-prefix-closure-v1",
+  "status": "ready_for_local_spool_not_submitted",
+  "attempt_count": 2,
+  "source_episode_count": 1,
+  "original_source_denominator": 22,
+  "source_model": "Original geometry, mass, friction, controller gains and validation gates unchanged",
+  "policy": "Only compare predeclared contact010/020 aperture offsets against same-source contact005 with source-prefix feedforward1. Full geometric admission and independent actuator/control audit required.",
+  "diagnostic_evidence": "docs/can-prefix-slip-contact-v1.json",
+  "storage_execution": "Pod-local spool; shared PVC inputs read-only, complete operator backup before publication",
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "evaluation_split": "adaptive_causal_closure_followup_same_source",
+      "geometry_selection": {
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-fe117e32c6f13e7ae68c4be4-chunk0/geometry-search/base-09",
+        "policy": "can-geometry-bank-v1",
+        "selection_rank": [
+          0.0,
+          1,
+          9,
+          0.2597141722479699,
+          26
+        ],
+        "source_episode": "fe117e32c6f13e7ae68c4be4"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "id": "additional-can-prefix-closure-v1-fe117e32c6f13e7ae68c4be4-contact_010-gain100",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-fe117e32c6f13e7ae68c4be4-chunk0/geometry-search/base-09/admitted-base",
+      "parent_task": "additional-independent-v1-fe117e32c6f13e7ae68c4be4",
+      "parent_workspace": "workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "runtime_source_sha256": "af843d7673fec92230740ee90f28393a86120f2e694922ae4567afea61b1aad5",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/fe117e32c6f13e7ae68c4be4.h5",
+      "source_prefix_velocity_feedforward": 1.0,
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          1.0275,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ]
+      },
+      "variant": "contact_010",
+      "workspace": "workspaces/additional-can-prefix-closure-v1-fe117e32c6f13e7ae68c4be4-contact_010-gain100",
+      "causal_comparison": {
+        "baseline_job": "local-spool-can-prefix-v1-fe117e32c6f13e7ae68c4be4-contact_005-gain100",
+        "baseline_backup": "runs/local-spool-backups/can-prefix005-gain1-v23.tar.gz",
+        "baseline_backup_sha256": "bacf70516c41d6ff51399c3427d70cda4e1143e880d899e38647eeddaa9a5edc",
+        "changed_parameter": "variant",
+        "baseline_variant": "contact_005",
+        "baseline_release_sha256": "af843d7673fec92230740ee90f28393a86120f2e694922ae4567afea61b1aad5"
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "evaluation_split": "adaptive_causal_closure_followup_same_source",
+      "geometry_selection": {
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-fe117e32c6f13e7ae68c4be4-chunk0/geometry-search/base-09",
+        "policy": "can-geometry-bank-v1",
+        "selection_rank": [
+          0.0,
+          1,
+          9,
+          0.2597141722479699,
+          26
+        ],
+        "source_episode": "fe117e32c6f13e7ae68c4be4"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "id": "additional-can-prefix-closure-v1-fe117e32c6f13e7ae68c4be4-contact_020-gain100",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-fe117e32c6f13e7ae68c4be4-chunk0/geometry-search/base-09/admitted-base",
+      "parent_task": "additional-independent-v1-fe117e32c6f13e7ae68c4be4",
+      "parent_workspace": "workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "runtime_source_sha256": "af843d7673fec92230740ee90f28393a86120f2e694922ae4567afea61b1aad5",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/fe117e32c6f13e7ae68c4be4.h5",
+      "source_prefix_velocity_feedforward": 1.0,
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          1.0275,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ]
+      },
+      "variant": "contact_020",
+      "workspace": "workspaces/additional-can-prefix-closure-v1-fe117e32c6f13e7ae68c4be4-contact_020-gain100",
+      "causal_comparison": {
+        "baseline_job": "local-spool-can-prefix-v1-fe117e32c6f13e7ae68c4be4-contact_005-gain100",
+        "baseline_backup": "runs/local-spool-backups/can-prefix005-gain1-v23.tar.gz",
+        "baseline_backup_sha256": "bacf70516c41d6ff51399c3427d70cda4e1143e880d899e38647eeddaa9a5edc",
+        "changed_parameter": "variant",
+        "baseline_variant": "contact_005",
+        "baseline_release_sha256": "af843d7673fec92230740ee90f28393a86120f2e694922ae4567afea61b1aad5"
+      }
+    }
+  ]
+}

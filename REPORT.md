@@ -1,5 +1,11 @@
 # Reachy retarget collection report
 
+> Historical acquisition snapshot. Its counts describe an earlier environment
+> and are not the currently available payloads in this checkout. Robot-only
+> local selections have since been removed. See the [current dynamics
+> validation](docs/dynamics-validation.md), [earlier kinematic audit](docs/coverage-audit.md)
+> and [dataset survey](docs/datasets/README.md).
+
 Snapshot: 2026-10-07T03:21:47.798237+00:00
 
 **Acquisition is still incomplete:** 574,827 files remain in the durable queue. Provider cooldowns, live workers and individual failures are separate from completed conversions. See `runs/collector-status.json` and `runs/collector.log`.

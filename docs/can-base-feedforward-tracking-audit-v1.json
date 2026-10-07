@@ -1,0 +1,145 @@
+{
+  "scope": "Matched source-prefix base command compensation; original reference numeric arrays compared exactly, no simulator state assigned.",
+  "original_reference_arrays_bit_identical": false,
+  "trials": [
+    {
+      "job": "can-finite-pad-tracking-v1-fe117e32c6f13e7ae68c4be4-contact_005-finitepad",
+      "reference_hashes": {
+        "time_s": "36c2f4c17791c5ab8ca20161988acaa52bf4757104aa94281a441205bac1aef3",
+        "reference": "27fbd60de7f893952c2d3fd60eb7abd7c3d409d2bf234db8320370817a7eff69",
+        "hand_goals": "4a5addfde5ab2e47d90836651c288c10b7f6c6344df6e572ba58393ec1c4de79",
+        "object_goals": "c726c56e761a30544f0cd3fdff5b5e6dcf8e46417529f3c86830192ac8e60c3a",
+        "gripper": "fc659d916bb35d17e85469799237d701e27bf950586c28911d2fc48cccf17653"
+      },
+      "samples": [
+        {
+          "time_s": 4.369999999999741,
+          "tcp_error_mm": 18.327309615190178,
+          "grasp_drift_mm": 3.356642049240596,
+          "grasp_drift_deg": 1.316727188632191
+        },
+        {
+          "time_s": 5.339999999999634,
+          "tcp_error_mm": 15.265975151902518,
+          "grasp_drift_mm": 13.467071362653549,
+          "grasp_drift_deg": 0.4562212957185419
+        },
+        {
+          "time_s": 6.819999999999471,
+          "tcp_error_mm": 13.646755116649402,
+          "grasp_drift_mm": 14.476536087909253,
+          "grasp_drift_deg": 0.20707200718572416
+        },
+        {
+          "time_s": 4.369999999999741,
+          "tcp_error_mm": 18.327309615190178,
+          "grasp_drift_mm": 3.356642049240596,
+          "grasp_drift_deg": 1.316727188632191
+        }
+      ],
+      "max_translation_drift_mm": 14.476536087909253,
+      "failures": [
+        "grasp_translation_3mm"
+      ]
+    },
+    {
+      "job": "can-prefix-base-tracking-v1-fe117e32c6f13e7ae68c4be4-contact_005-jawlevel",
+      "reference_hashes": {
+        "time_s": "36c2f4c17791c5ab8ca20161988acaa52bf4757104aa94281a441205bac1aef3",
+        "reference": "6fd28ff929ec6f40194834daf9ab5538e78514329bce45802ed4e1342c958eeb",
+        "hand_goals": "89173a8d65d3b8343ef62948c5f63c059c3ff7e230f80d7c860720a5deb84f4d",
+        "object_goals": "318bdaa14be87b2dd124dae86ec5cd5e355761e4ec74751d62910fa29283c278",
+        "gripper": "fc659d916bb35d17e85469799237d701e27bf950586c28911d2fc48cccf17653"
+      },
+      "samples": [
+        {
+          "time_s": 4.369999999999741,
+          "tcp_error_mm": 8.57574381216195,
+          "grasp_drift_mm": 9.155230488145866,
+          "grasp_drift_deg": 0.8009986952503927
+        },
+        {
+          "time_s": 5.339999999999634,
+          "tcp_error_mm": 10.279149194928763,
+          "grasp_drift_mm": 14.327823751526925,
+          "grasp_drift_deg": 0.433557202179149
+        },
+        {
+          "time_s": 6.819999999999471,
+          "tcp_error_mm": 10.890496718089555,
+          "grasp_drift_mm": 15.13022758335328,
+          "grasp_drift_deg": 0.7554820169997477
+        },
+        {
+          "time_s": 3.609999999999824,
+          "tcp_error_mm": 6.769017229967817,
+          "grasp_drift_mm": 5.151809538627925,
+          "grasp_drift_deg": 1.8859419542578766
+        }
+      ],
+      "max_translation_drift_mm": 15.135632073695065,
+      "failures": [
+        "grasp_translation_3mm"
+      ]
+    }
+  ],
+  "reference_numeric_differences": {
+    "time_s": {
+      "shape_a": [
+        2139
+      ],
+      "shape_b": [
+        2139
+      ],
+      "max_abs": 0.0,
+      "changed_values": 0
+    },
+    "reference": {
+      "shape_a": [
+        2139,
+        17
+      ],
+      "shape_b": [
+        2139,
+        17
+      ],
+      "max_abs": 6.183942247162122e-14,
+      "changed_values": 18368
+    },
+    "hand_goals": {
+      "shape_a": [
+        2139,
+        7
+      ],
+      "shape_b": [
+        2139,
+        7
+      ],
+      "max_abs": 1.1268763699945339e-14,
+      "changed_values": 11739
+    },
+    "object_goals": {
+      "shape_a": [
+        2139,
+        7
+      ],
+      "shape_b": [
+        2139,
+        7
+      ],
+      "max_abs": 1.5259321584082386e-13,
+      "changed_values": 10526
+    },
+    "gripper": {
+      "shape_a": [
+        2139
+      ],
+      "shape_b": [
+        2139
+      ],
+      "max_abs": 0.0,
+      "changed_values": 0
+    }
+  },
+  "interpretation": "This comparison crosses frozen runtime versions. Reference arrays are not bit-identical; numeric differences are disclosed. The new optional base compensation is not adopted because it does not recover slip and breaks one passing regression."
+}

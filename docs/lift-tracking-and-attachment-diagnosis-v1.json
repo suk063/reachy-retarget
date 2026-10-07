@@ -1,0 +1,1560 @@
+{
+  "scope": "Independent exact original-control replay of twofailed and onepassing Lift originals; onlyinitial reset and recorded robotctrlwrites. Contactforces sampled immediatelyaftermj_step, geometrytime labels explicit; no source/object/model/gate changes.",
+  "runtime_source_sha256": "8b2ce5b8b3fe65653e9f0a9446c355b86804d659c700fd829ddf4a61ac9cb5be",
+  "output": "/tmp/box-tracking-replay-1791374088231597237",
+  "rows": [
+    {
+      "episode": "1e4657fe4ba06369b80a5084",
+      "label": "Lift4-acquisition-fail",
+      "attempt": "/mnt/reachy-retarget/workspaces/additional-box-policy-v1-1e4657fe4ba06369b80a5084/runs/dynamics/additional-box-policy-v1-1e4657fe4ba06369b80a5084/1e4657fe4ba06369b80a5084",
+      "artifact": "/tmp/box-tracking-replay-1791374088231597237/1e4657fe4ba06369b80a5084",
+      "input_hashes": {
+        "result.json": "545e70e63802b560dbe1ce5e72cf628a0179e355dd5a57db6ff574ba5176ddce",
+        "scene.xml": "779990004ecdd9cf7cd65f5047ef0e73f623acd9389a7b86409f3707a179518c",
+        "plan.h5": "529c34b2f5abbfc12d7f43fb235ea024d6c72e16bb48d44692708960e3c97739",
+        "replay.h5": "6daf789a426678c9a8494b32ce7f9360153a7cc63506f0092be87225369e1577"
+      },
+      "trace_sha256": "ed5fd87de3f7b8a0ba609a59fbec952d5440e3f5e328dcc61b69e769b0bf9278",
+      "reported_failures": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "actual_arm_speed_1rad_s"
+      ],
+      "reported_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "source_model_profile": "reachy-object-dynamics-v1",
+      "replay_max_qpos_qvel_error": [
+        0.0,
+        0.0
+      ],
+      "replay_exact": true,
+      "max_closed_tcp_error_m": 0.029040330013675755,
+      "first_events": {
+        "first_hand_object": {
+          "control_row": 273,
+          "physics_time_s": 2.73199999999981,
+          "computed_geometry_time_s": 2.7309999999998102,
+          "pad_midpoint_actual_object_m": [
+            -0.014840018876052883,
+            0.006774597124236161,
+            0.005193122043294713
+          ],
+          "pad_midpoint_reset_object_m": [
+            -0.014840003407305959,
+            0.006774581392862967,
+            -0.004811240957674823
+          ],
+          "tcp_tracking_error_m": 0.020964635727177945,
+          "object_displacement_world_m": [
+            8.585613331391073e-10,
+            -2.2019562812003457e-08,
+            -0.010004363000969518
+          ],
+          "applied_gripper_target_rad": 2.0,
+          "finger_normal_force_sum_N": [
+            0.9593102629441382,
+            0.0
+          ],
+          "contacts": [
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_link_collision_0"
+              ],
+              "point_world": [
+                0.5953396095190092,
+                -0.15182585046962155,
+                0.8403141884688459
+              ],
+              "normal_force_N": 0.9593102629441382,
+              "depth_m": 1.2775629111454755e-05
+            }
+          ]
+        },
+        "first_negative_intent": {
+          "time": 2.859999999999796,
+          "tcp_error_m": 0.02702715363302786,
+          "tcp_error_world": [
+            -0.009335305974868535,
+            0.014653962073219035,
+            0.020702185667593964
+          ],
+          "tcp_rotation_error_rad": 0.06813753226302731,
+          "pad_tracking_error_world": [
+            -0.009489333946135381,
+            0.015933561226236848,
+            0.023389334843879617
+          ],
+          "pad_actual_object": [
+            -0.01577253330596773,
+            0.008376252004222914,
+            0.010652830021545516
+          ],
+          "target_pad_actual_object": [
+            0.0020784889196438137,
+            0.003349572574694471,
+            -0.012736490531735162
+          ],
+          "nominal_target_pad_reference_object": [
+            0.003169258688532591,
+            0.006703838079491981,
+            -0.012691301951064405
+          ],
+          "pad_reset_object": [
+            -0.01598718099511233,
+            0.008235622395090122,
+            0.0006484604013016204
+          ],
+          "actual_object_displacement_world": [
+            -0.0005575913096783625,
+            -6.388435468114573e-05,
+            -0.010004382852396243
+          ],
+          "reference_object_displacement_world": [
+            -0.0011812080386601753,
+            -0.00028007795163902116,
+            -0.010375147015955877
+          ],
+          "pad_gap_m": 0.08837644043178833,
+          "finger_force_N": [
+            0.0,
+            0.0
+          ],
+          "robot_fixture_force_max_N": 240.193115208908,
+          "robot_fixture_pair": [
+            "table_collision",
+            "r_elbow_forearm_link_collision_0"
+          ],
+          "bilateral_fraction": 0.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            null,
+            null
+          ],
+          "control_row": 285,
+          "source_control_time_s": 2.85
+        },
+        "first_bilateral_substep": {
+          "control_row": 315,
+          "physics_time_s": 3.159999999999763,
+          "computed_geometry_time_s": 3.158999999999763,
+          "pad_midpoint_actual_object_m": [
+            -0.00039923360414247675,
+            0.019713243664097907,
+            0.010749026436713358
+          ],
+          "pad_midpoint_reset_object_m": [
+            0.0040723722303785855,
+            0.020164987965134377,
+            0.0008009946152633951
+          ],
+          "tcp_tracking_error_m": 0.02483429552330834,
+          "object_displacement_world_m": [
+            0.00012480744624332463,
+            0.00132680600304666,
+            -0.009953196885554516
+          ],
+          "applied_gripper_target_rad": 1.0374718868104944,
+          "finger_normal_force_sum_N": [
+            4.460301881098468,
+            4.186802600940792
+          ],
+          "contacts": [
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_link_collision_0"
+              ],
+              "point_world": [
+                0.6228593402421965,
+                -0.12770157830290207,
+                0.8404277932548687
+              ],
+              "normal_force_N": 4.460301881098468,
+              "depth_m": 3.1120059117688325e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.587409712674575,
+                -0.09836423861692134,
+                0.8127628363581201
+              ],
+              "normal_force_N": 4.186802600940792,
+              "depth_m": 1.977248468225591e-05
+            }
+          ]
+        },
+        "first_reference_lift_15mm": {
+          "time": 3.449999999999731,
+          "tcp_error_m": 0.028929823585239586,
+          "tcp_error_world": [
+            0.02347209581938925,
+            -0.01689325411926773,
+            -0.0007831831077967921
+          ],
+          "tcp_rotation_error_rad": 0.01426581952032613,
+          "pad_tracking_error_world": [
+            0.023583934277301988,
+            -0.017308730758273258,
+            -0.0012340127400858325
+          ],
+          "pad_actual_object": [
+            0.0009312265296699755,
+            0.02039914100193704,
+            0.008717745654958326
+          ],
+          "target_pad_actual_object": [
+            -0.02685838742556126,
+            0.01436011641479837,
+            0.015687999750494685
+          ],
+          "nominal_target_pad_reference_object": [
+            1.0665753085230288e-05,
+            -0.005465603087533288,
+            -0.004662608606673117
+          ],
+          "pad_reset_object": [
+            0.029842434617511376,
+            0.0006330753427277745,
+            0.010539059685248708
+          ],
+          "actual_object_displacement_world": [
+            0.009191570801607263,
+            -0.03169539136022516,
+            -0.0026160309698953776
+          ],
+          "reference_object_displacement_world": [
+            0.0027888848746955297,
+            0.0017497804121656274,
+            0.01614575915743066
+          ],
+          "pad_gap_m": 0.04670652857679516,
+          "finger_force_N": [
+            6.629347282606249,
+            7.266252293984879
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 1.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            null,
+            null
+          ],
+          "control_row": 344
+        }
+      },
+      "pad_section": {
+        "width_m": 0.04697142581772525,
+        "center_object": [
+          -3.469446951953614e-18,
+          -0.005465495368152786,
+          -0.004666296540542339
+        ],
+        "collision_regions": [
+          "cube_g0"
+        ],
+        "line_bounds_m": [
+          -0.03727585524313733,
+          0.009695570574587921
+        ]
+      },
+      "recorded_bilateral_matches": true
+    },
+    {
+      "episode": "f7a0da6cfd445c85197fc0fd",
+      "label": "Lift5-rotation-fail",
+      "attempt": "/mnt/reachy-retarget/workspaces/additional-box-policy-v1-f7a0da6cfd445c85197fc0fd/runs/dynamics/additional-box-policy-v1-f7a0da6cfd445c85197fc0fd/f7a0da6cfd445c85197fc0fd",
+      "artifact": "/tmp/box-tracking-replay-1791374088231597237/f7a0da6cfd445c85197fc0fd",
+      "input_hashes": {
+        "result.json": "b5f60bc0357ac3c32a5f75432d595d109dff03b030ddfb40f59430099111954b",
+        "scene.xml": "a9d72c8ef89d0d6139fbda91cb8c8a8f81f6d02d63973974491c8c3bb883e93b",
+        "plan.h5": "f7e20eaaed48d3259a093c319b98998fc01ac8f6e1e5d7205a0c013d865a8e6a",
+        "replay.h5": "391a089f223504f0e35c4d624e68e5fe24d48298dc0c012e1d8514018ae6feac"
+      },
+      "trace_sha256": "ee2f0c0c583d4f7af569806df39edcfca21d4fb055bbce7818ffae8023a1eab7",
+      "reported_failures": [
+        "grasp_rotation_3deg"
+      ],
+      "reported_gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "source_model_profile": "reachy-object-dynamics-v1",
+      "replay_max_qpos_qvel_error": [
+        0.0,
+        0.0
+      ],
+      "replay_exact": true,
+      "max_closed_tcp_error_m": 0.020702917488975216,
+      "first_events": {
+        "first_negative_intent": {
+          "time": 2.6199999999998225,
+          "tcp_error_m": 0.004702430407099215,
+          "tcp_error_world": [
+            0.002124760598742559,
+            -0.004167000448241684,
+            0.0004840985395516695
+          ],
+          "tcp_rotation_error_rad": 0.0019362160722127817,
+          "pad_tracking_error_world": [
+            0.002139359531947216,
+            -0.004157760904897584,
+            0.0005270619259586384
+          ],
+          "pad_actual_object": [
+            0.005648598818229544,
+            0.0018755329327430578,
+            0.009611840847781293
+          ],
+          "target_pad_actual_object": [
+            0.009911238025884764,
+            -4.63780783572696e-05,
+            0.00908477892182267
+          ],
+          "nominal_target_pad_reference_object": [
+            0.006711575767921996,
+            -0.0008052218083139424,
+            0.00932436074105869
+          ],
+          "pad_reset_object": [
+            0.005648600928255178,
+            0.001875535032038733,
+            -0.00039253876718825536
+          ],
+          "actual_object_displacement_world": [
+            -2.9797282419252724e-09,
+            -3.880321619575966e-10,
+            -0.010004379614969472
+          ],
+          "reference_object_displacement_world": [
+            -4.1466829969749597e-13,
+            -3.362587985833443e-14,
+            -0.010215518446434091
+          ],
+          "pad_gap_m": 0.08837223947080267,
+          "finger_force_N": [
+            0.0,
+            0.0
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 0.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            null,
+            null
+          ],
+          "control_row": 261,
+          "source_control_time_s": 2.61
+        },
+        "first_hand_object": {
+          "control_row": 277,
+          "physics_time_s": 2.7729999999998056,
+          "computed_geometry_time_s": 2.7719999999998057,
+          "pad_midpoint_actual_object_m": [
+            0.008004620778712977,
+            0.00024756683193005155,
+            0.0007923172987154392
+          ],
+          "pad_midpoint_reset_object_m": [
+            0.008004622871967133,
+            0.00024756889504230463,
+            -0.009212062316254158
+          ],
+          "tcp_tracking_error_m": 0.0010598708730313218,
+          "object_displacement_world_m": [
+            -2.9797261325015256e-09,
+            -3.8803418811461654e-10,
+            -0.010004379614969472
+          ],
+          "applied_gripper_target_rad": 0.9177082324106131,
+          "finger_normal_force_sum_N": [
+            2.707996636549091,
+            0.0
+          ],
+          "contacts": [
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_link_collision_0"
+              ],
+              "point_world": [
+                0.5762966085477486,
+                -0.14075231511323918,
+                0.8194492380760174
+              ],
+              "normal_force_N": 2.707996636549091,
+              "depth_m": 4.1209973798077485e-05
+            }
+          ]
+        },
+        "first_bilateral_substep": {
+          "control_row": 279,
+          "physics_time_s": 2.794999999999803,
+          "computed_geometry_time_s": 2.7939999999998033,
+          "pad_midpoint_actual_object_m": [
+            0.007730131663813076,
+            0.0010609063399691174,
+            0.0013984590725197824
+          ],
+          "pad_midpoint_reset_object_m": [
+            0.007989134522683477,
+            0.0002352500354654335,
+            -0.00848572410618809
+          ],
+          "tcp_tracking_error_m": 0.0017010595979379758,
+          "object_displacement_world_m": [
+            0.00036855696736737276,
+            0.0009047925552818914,
+            -0.009882386704203938
+          ],
+          "applied_gripper_target_rad": 0.9177082324106131,
+          "finger_normal_force_sum_N": [
+            17.42846628391738,
+            20.485731817920147
+          ],
+          "contacts": [
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_link_collision_0"
+              ],
+              "point_world": [
+                0.5768339167459138,
+                -0.13966735561550242,
+                0.8203193033412965
+              ],
+              "normal_force_N": 17.42846628391738,
+              "depth_m": 8.302846982787469e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.5724892615924881,
+                -0.08493001346491151,
+                0.8358620843156617
+              ],
+              "normal_force_N": 10.242865908960386,
+              "depth_m": 5.544622080897929e-06
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.5724892615924881,
+                -0.08493001346491152,
+                0.8358620843156617
+              ],
+              "normal_force_N": 10.242865908959761,
+              "depth_m": 5.544622080885353e-06
+            }
+          ]
+        },
+        "first_reference_lift_15mm": {
+          "time": 3.2299999999997553,
+          "tcp_error_m": 0.01014821256350409,
+          "tcp_error_world": [
+            0.009527555979074287,
+            -0.0025367112567527134,
+            -0.0024035372473777405
+          ],
+          "tcp_rotation_error_rad": 0.008757232804673843,
+          "pad_tracking_error_world": [
+            0.009517352728524275,
+            -0.0024165335395161247,
+            -0.002817328559198806
+          ],
+          "pad_actual_object": [
+            0.0080063715779562,
+            0.0009209368399312846,
+            0.002028223898798094
+          ],
+          "target_pad_actual_object": [
+            0.017024854498570986,
+            0.004544742005679116,
+            0.0051733756357593905
+          ],
+          "nominal_target_pad_reference_object": [
+            0.0005887345679673429,
+            -6.0820384008626245e-05,
+            0.0006355845606394465
+          ],
+          "pad_reset_object": [
+            -0.0173004231199858,
+            -0.008246145863372602,
+            0.014969316810948936
+          ],
+          "actual_object_displacement_world": [
+            0.025746625196553796,
+            -0.008309213516746877,
+            0.013212797456565673
+          ],
+          "reference_object_displacement_world": [
+            0.009424902529727497,
+            -0.0022331490647469615,
+            0.017159625847840254
+          ],
+          "pad_gap_m": 0.04626121297026061,
+          "finger_force_N": [
+            21.619610092067933,
+            24.607355097236415
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 1.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            null,
+            null
+          ],
+          "control_row": 322
+        },
+        "first_actual_lift_15mm": {
+          "time": 3.239999999999754,
+          "tcp_error_m": 0.011222236720398533,
+          "tcp_error_world": [
+            0.01051697183778677,
+            -0.003070851024194479,
+            -0.0024293567788747916
+          ],
+          "tcp_rotation_error_rad": 0.00904878835229726,
+          "pad_tracking_error_world": [
+            0.010504775448127002,
+            -0.002950695970854081,
+            -0.0028565630241360607
+          ],
+          "pad_actual_object": [
+            0.008014546479086115,
+            0.0009132648696080076,
+            0.0020415626659478292
+          ],
+          "target_pad_actual_object": [
+            0.018146669194845956,
+            0.004674748817635151,
+            0.005267735944053817
+          ],
+          "nominal_target_pad_reference_object": [
+            0.0005896346315772887,
+            -4.897046930990085e-05,
+            0.0006266941229575606
+          ],
+          "pad_reset_object": [
+            -0.018673003823051176,
+            -0.008515987182211063,
+            0.017076457136040342
+          ],
+          "actual_object_displacement_world": [
+            0.026995333654824982,
+            -0.008956635644243802,
+            0.015307016399783602
+          ],
+          "reference_object_displacement_world": [
+            0.009688211585041073,
+            -0.002332972538494779,
+            0.019315337594120185
+          ],
+          "pad_gap_m": 0.04624359963397354,
+          "finger_force_N": [
+            21.530779007165595,
+            24.694175605523064
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 1.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            1.734723475976807e-18,
+            1.3118779413551291e-17
+          ],
+          "control_row": 323
+        },
+        "recorded_drift_anchor": {
+          "time": 3.239999999999754,
+          "tcp_error_m": 0.011222236720398533,
+          "tcp_error_world": [
+            0.01051697183778677,
+            -0.003070851024194479,
+            -0.0024293567788747916
+          ],
+          "tcp_rotation_error_rad": 0.00904878835229726,
+          "pad_tracking_error_world": [
+            0.010504775448127002,
+            -0.002950695970854081,
+            -0.0028565630241360607
+          ],
+          "pad_actual_object": [
+            0.008014546479086115,
+            0.0009132648696080076,
+            0.0020415626659478292
+          ],
+          "target_pad_actual_object": [
+            0.018146669194845956,
+            0.004674748817635151,
+            0.005267735944053817
+          ],
+          "nominal_target_pad_reference_object": [
+            0.0005896346315772887,
+            -4.897046930990085e-05,
+            0.0006266941229575606
+          ],
+          "pad_reset_object": [
+            -0.018673003823051176,
+            -0.008515987182211063,
+            0.017076457136040342
+          ],
+          "actual_object_displacement_world": [
+            0.026995333654824982,
+            -0.008956635644243802,
+            0.015307016399783602
+          ],
+          "reference_object_displacement_world": [
+            0.009688211585041073,
+            -0.002332972538494779,
+            0.019315337594120185
+          ],
+          "pad_gap_m": 0.04624359963397354,
+          "finger_force_N": [
+            21.530779007165595,
+            24.694175605523064
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 1.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            1.734723475976807e-18,
+            1.3118779413551291e-17
+          ],
+          "control_row": 323
+        },
+        "max_rotation_drift": {
+          "time": 5.390000000000135,
+          "tcp_error_m": 9.075558871937984e-05,
+          "tcp_error_world": [
+            5.8437742332939635e-05,
+            -6.882869135602099e-05,
+            -9.177058409304273e-06
+          ],
+          "tcp_rotation_error_rad": 2.0233403991684938e-05,
+          "pad_tracking_error_world": [
+            5.8566420381489515e-05,
+            -6.827856580367275e-05,
+            -9.979615859356805e-06
+          ],
+          "pad_actual_object": [
+            0.008351801247877476,
+            0.000546262217116315,
+            0.0017870776474256391
+          ],
+          "target_pad_actual_object": [
+            0.00843676860137802,
+            0.0005175421538361038,
+            0.0017992138610651083
+          ],
+          "nominal_target_pad_reference_object": [
+            0.0006366940092930335,
+            0.0001078751257295983,
+            0.0005403946543863131
+          ],
+          "pad_reset_object": [
+            -0.010018001608025295,
+            -0.0061317608385433415,
+            0.0486358979854157
+          ],
+          "actual_object_displacement_world": [
+            0.019171247766642918,
+            -0.005257257807580518,
+            0.047153241895317444
+          ],
+          "reference_object_displacement_world": [
+            0.012093629550535279,
+            -0.0016115662727894248,
+            0.04812543211882736
+          ],
+          "pad_gap_m": 0.04372179966740671,
+          "finger_force_N": [
+            14.897224467546195,
+            15.985648328846775
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 1.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            0.00040437150789471776,
+            0.08436910223224645
+          ],
+          "control_row": 538
+        }
+      },
+      "pad_section": {
+        "width_m": 0.04137139572743177,
+        "center_object": [
+          0.0006369947616999784,
+          -2.0599841277224584e-18,
+          0.0006328063666053428
+        ],
+        "collision_regions": [
+          "cube_g0"
+        ],
+        "line_bounds_m": [
+          -0.019757423918629197,
+          0.021613971808802576
+        ]
+      },
+      "recorded_bilateral_matches": true
+    },
+    {
+      "episode": "773c714741a7886fa9f72156",
+      "label": "Lift6-pass",
+      "attempt": "/mnt/reachy-retarget/workspaces/additional-box-policy-v1-773c714741a7886fa9f72156/runs/dynamics/additional-box-policy-v1-773c714741a7886fa9f72156/773c714741a7886fa9f72156",
+      "artifact": "/tmp/box-tracking-replay-1791374088231597237/773c714741a7886fa9f72156",
+      "input_hashes": {
+        "result.json": "c644a44f9340feef56c2dc815b673f6bfb85a5f870b6fc23da8f719be28bfd9f",
+        "scene.xml": "d754c51a572c4ee0b4c344ce3e9ce6fd02a3f8556032834c9e27cdee40b08094",
+        "plan.h5": "749da509b5e457f3c67285222d5cfe1ecaaba4806ce063cab1a1fdc8a77f10de",
+        "replay.h5": "774524a7d5fd96634335601c816e4479445960a7a74415a8a33cfc679580587b"
+      },
+      "trace_sha256": "175000589f7407c14f884c7b955e432add55ba3775983f766ab0a0ab2a6b6a8a",
+      "reported_failures": [],
+      "reported_gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "source_model_profile": "reachy-object-dynamics-v1",
+      "replay_max_qpos_qvel_error": [
+        0.0,
+        0.0
+      ],
+      "replay_exact": true,
+      "max_closed_tcp_error_m": 0.026806414361237877,
+      "first_events": {
+        "first_negative_intent": {
+          "time": 2.249999999999863,
+          "tcp_error_m": 0.010146938868712981,
+          "tcp_error_world": [
+            0.004895625603606901,
+            -0.008885921111446926,
+            0.0001833694517869855
+          ],
+          "tcp_rotation_error_rad": 0.0008921623945846032,
+          "pad_tracking_error_world": [
+            0.0048914592393612955,
+            -0.008848549230632455,
+            0.00018278174721386709
+          ],
+          "pad_actual_object": [
+            0.0008505245187136748,
+            -0.006790191322645023,
+            0.02094016340095966
+          ],
+          "target_pad_actual_object": [
+            -0.003039822946843377,
+            0.002541924920442242,
+            0.020757381653745903
+          ],
+          "nominal_target_pad_reference_object": [
+            0.0003437616065744006,
+            0.002460938910930128,
+            0.02099495914312921
+          ],
+          "pad_reset_object": [
+            0.0008505361578750074,
+            -0.006790191301020988,
+            0.01093581579299019
+          ],
+          "actual_object_displacement_world": [
+            1.1555033485599608e-08,
+            1.2967093926397055e-09,
+            -0.010004347607969533
+          ],
+          "reference_object_displacement_world": [
+            3.745892485085278e-13,
+            1.5638879080626111e-13,
+            -0.010215486439536181
+          ],
+          "pad_gap_m": 0.08837312137160182,
+          "finger_force_N": [
+            0.0,
+            0.0
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 0.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            null,
+            null
+          ],
+          "control_row": 224,
+          "source_control_time_s": 2.24
+        },
+        "first_hand_object": {
+          "control_row": 239,
+          "physics_time_s": 2.3999999999998467,
+          "computed_geometry_time_s": 2.398999999999847,
+          "pad_midpoint_actual_object_m": [
+            0.00392790852829,
+            -0.0035471255447892514,
+            0.012790264923674558
+          ],
+          "pad_midpoint_reset_object_m": [
+            0.00392792016610827,
+            -0.003547125513239799,
+            0.002785917315704878
+          ],
+          "tcp_tracking_error_m": 0.009603499660392546,
+          "object_displacement_world_m": [
+            1.1555033707644213e-08,
+            1.2967176776790268e-09,
+            -0.010004347607969533
+          ],
+          "applied_gripper_target_rad": 0.9634791472152968,
+          "finger_normal_force_sum_N": [
+            0.0,
+            6.305146931382719
+          ],
+          "contacts": [
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.6394730835353317,
+                -0.07810071135572319,
+                0.8400077430586619
+              ],
+              "normal_force_N": 0.9793930624293692,
+              "depth_m": 1.0080654575569243e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.6388018117845977,
+                -0.07819263900373273,
+                0.8408232195324552
+              ],
+              "normal_force_N": 2.6125380938551177,
+              "depth_m": 4.536707492624979e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.639079385915927,
+                -0.07816354633969586,
+                0.8408233013520074
+              ],
+              "normal_force_N": 2.7132157750982318,
+              "depth_m": 4.848229499858833e-05
+            }
+          ]
+        },
+        "first_bilateral_substep": {
+          "control_row": 252,
+          "physics_time_s": 2.5279999999998326,
+          "computed_geometry_time_s": 2.5269999999998327,
+          "pad_midpoint_actual_object_m": [
+            0.00459337849653876,
+            -0.00027121558872464667,
+            0.014197157588472412
+          ],
+          "pad_midpoint_reset_object_m": [
+            0.00574443549721939,
+            -0.005991438376541626,
+            0.00462337105642563
+          ],
+          "tcp_tracking_error_m": 0.012095600733302413,
+          "object_displacement_world_m": [
+            0.0017467403293088823,
+            -0.005266838861263515,
+            -0.009567359102040207
+          ],
+          "applied_gripper_target_rad": 0.9634791472152968,
+          "finger_normal_force_sum_N": [
+            10.395014490137312,
+            9.785481197164623
+          ],
+          "contacts": [
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_link_collision_0"
+              ],
+              "point_world": [
+                0.6455149705421367,
+                -0.12740914285872557,
+                0.83950453483035
+              ],
+              "normal_force_N": 3.5478321360590748,
+              "depth_m": 2.7001026727025203e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_link_collision_0"
+              ],
+              "point_world": [
+                0.6455171798473992,
+                -0.12742768512907426,
+                0.8409807630770398
+              ],
+              "normal_force_N": 3.4970365836315445,
+              "depth_m": 2.6021758215840486e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_link_collision_0"
+              ],
+              "point_world": [
+                0.6450965529490307,
+                -0.1274649469679252,
+                0.8409809274799696
+              ],
+              "normal_force_N": 3.350145770446693,
+              "depth_m": 2.249099030019197e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.6404285202172686,
+                -0.08406990615383672,
+                0.8279451784566365
+              ],
+              "normal_force_N": 2.4293076366028865,
+              "depth_m": 4.532512037500291e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.6326910910872268,
+                -0.08468153523221358,
+                0.8245481364753919
+              ],
+              "normal_force_N": 2.8760577199052415,
+              "depth_m": 4.690982466071475e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.6112504994958197,
+                -0.08643170234467876,
+                0.8209206498187183
+              ],
+              "normal_force_N": 2.5900794121888855,
+              "depth_m": 1.9121263787106398e-05
+            },
+            {
+              "pair": [
+                "cube_g0",
+                "r_hand_distal_mimic_link_collision_0"
+              ],
+              "point_world": [
+                0.6110543958229506,
+                -0.08669496215125962,
+                0.8415296338954799
+              ],
+              "normal_force_N": 1.89003642846761,
+              "depth_m": 3.403278279306629e-06
+            }
+          ]
+        },
+        "first_reference_lift_15mm": {
+          "time": 2.6899999999998148,
+          "tcp_error_m": 0.021960430765268834,
+          "tcp_error_world": [
+            0.01770811164529018,
+            -0.012933365126938476,
+            -0.0011880100367404056
+          ],
+          "tcp_rotation_error_rad": 0.006408251539152367,
+          "pad_tracking_error_world": [
+            0.017640245593692705,
+            -0.012854240864978841,
+            -0.0014746393016873416
+          ],
+          "pad_actual_object": [
+            0.004587811615436622,
+            -0.000245615575472749,
+            0.014537127702381676
+          ],
+          "target_pad_actual_object": [
+            -0.01201413022338715,
+            0.013922110108356752,
+            0.01603225646567864
+          ],
+          "nominal_target_pad_reference_object": [
+            -0.0007869676562206561,
+            1.4933372136298689e-05,
+            0.011421978172495432
+          ],
+          "pad_reset_object": [
+            0.01275782389534181,
+            -0.013885064326492029,
+            0.02592606684980759
+          ],
+          "actual_object_displacement_world": [
+            0.009403239740692682,
+            -0.01282573735435362,
+            0.011462441788924083
+          ],
+          "reference_object_displacement_world": [
+            -0.002136844525478576,
+            0.00023689443272420507,
+            0.016030608112983513
+          ],
+          "pad_gap_m": 0.043957251331939916,
+          "finger_force_N": [
+            9.69015390595541,
+            9.883145210601349
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 1.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            null,
+            null
+          ],
+          "control_row": 268
+        },
+        "first_actual_lift_15mm": {
+          "time": 2.7099999999998126,
+          "tcp_error_m": 0.02330039112531446,
+          "tcp_error_world": [
+            0.018491598299616552,
+            -0.014134194048722792,
+            -0.001092509730528879
+          ],
+          "tcp_rotation_error_rad": 0.006171644567741915,
+          "pad_tracking_error_world": [
+            0.018426004713648192,
+            -0.01408776931673665,
+            -0.0013819641087526868
+          ],
+          "pad_actual_object": [
+            0.004592449465858002,
+            -0.0002431286557197792,
+            0.014517557600728575
+          ],
+          "target_pad_actual_object": [
+            -0.01269885873781146,
+            0.015210456577087004,
+            0.015963269496281466
+          ],
+          "nominal_target_pad_reference_object": [
+            -0.0007691442118113841,
+            7.747711649376537e-06,
+            0.011415755817255248
+          ],
+          "pad_reset_object": [
+            0.014056384533360675,
+            -0.014111005140209286,
+            0.0306772997487701
+          ],
+          "actual_object_displacement_world": [
+            0.010714199630341814,
+            -0.012938579013655152,
+            0.0162343697508206
+          ],
+          "reference_object_displacement_world": [
+            -0.001630562998945706,
+            0.0013795834367196919,
+            0.020694133548837867
+          ],
+          "pad_gap_m": 0.043959787473625014,
+          "finger_force_N": [
+            10.002285074441744,
+            9.770542052624345
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 1.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            0.0,
+            6.7527964649286435e-19
+          ],
+          "control_row": 270
+        },
+        "recorded_drift_anchor": {
+          "time": 2.7099999999998126,
+          "tcp_error_m": 0.02330039112531446,
+          "tcp_error_world": [
+            0.018491598299616552,
+            -0.014134194048722792,
+            -0.001092509730528879
+          ],
+          "tcp_rotation_error_rad": 0.006171644567741915,
+          "pad_tracking_error_world": [
+            0.018426004713648192,
+            -0.01408776931673665,
+            -0.0013819641087526868
+          ],
+          "pad_actual_object": [
+            0.004592449465858002,
+            -0.0002431286557197792,
+            0.014517557600728575
+          ],
+          "target_pad_actual_object": [
+            -0.01269885873781146,
+            0.015210456577087004,
+            0.015963269496281466
+          ],
+          "nominal_target_pad_reference_object": [
+            -0.0007691442118113841,
+            7.747711649376537e-06,
+            0.011415755817255248
+          ],
+          "pad_reset_object": [
+            0.014056384533360675,
+            -0.014111005140209286,
+            0.0306772997487701
+          ],
+          "actual_object_displacement_world": [
+            0.010714199630341814,
+            -0.012938579013655152,
+            0.0162343697508206
+          ],
+          "reference_object_displacement_world": [
+            -0.001630562998945706,
+            0.0013795834367196919,
+            0.020694133548837867
+          ],
+          "pad_gap_m": 0.043959787473625014,
+          "finger_force_N": [
+            10.002285074441744,
+            9.770542052624345
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 1.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            0.0,
+            6.7527964649286435e-19
+          ],
+          "control_row": 270
+        },
+        "max_rotation_drift": {
+          "time": 4.849999999999954,
+          "tcp_error_m": 0.00024245060683361874,
+          "tcp_error_world": [
+            1.0358716431846382e-05,
+            0.00010927506940276721,
+            -0.00021618037134507606
+          ],
+          "tcp_rotation_error_rad": 0.0005041443162969637,
+          "pad_tracking_error_world": [
+            8.544339072602547e-06,
+            0.00011612738457801586,
+            -0.00022188487273011592
+          ],
+          "pad_actual_object": [
+            0.004508252472442699,
+            -0.00019171160298070682,
+            0.014451794661578136
+          ],
+          "target_pad_actual_object": [
+            0.004491922032048423,
+            -0.0003119484733276173,
+            0.014671038552373951
+          ],
+          "nominal_target_pad_reference_object": [
+            -0.0007941977034303294,
+            -1.7458528056276604e-05,
+            0.01145625242823309
+          ],
+          "pad_reset_object": [
+            0.0034098317861701575,
+            0.010292417849451707,
+            0.06332546057136924
+          ],
+          "actual_object_displacement_world": [
+            -0.002108877113152996,
+            0.010094398857115008,
+            0.04883837834354898
+          ],
+          "reference_object_displacement_world": [
+            0.0035079935257251726,
+            0.010329109109010567,
+            0.05213666553501117
+          ],
+          "pad_gap_m": 0.0439114366687023,
+          "finger_force_N": [
+            9.448575273128192,
+            9.459996353504753
+          ],
+          "robot_fixture_force_max_N": 0.0,
+          "robot_fixture_pair": null,
+          "bilateral_fraction": 1.0,
+          "source_intent": -0.06,
+          "recorded_drift_m_rad": [
+            0.00038875093193270255,
+            0.020576081715805113
+          ],
+          "control_row": 484
+        }
+      },
+      "pad_section": {
+        "width_m": 0.043508832511515716,
+        "center_object": [
+          -0.0008124220649607023,
+          -3.0357660829594124e-18,
+          0.011446363842711534
+        ],
+        "collision_regions": [
+          "cube_g0"
+        ],
+        "line_bounds_m": [
+          -0.01891621542752163,
+          0.024592617083994087
+        ]
+      },
+      "recorded_bilateral_matches": true
+    }
+  ],
+  "rotation_only_cohort": [
+    {
+      "episode": "f7a0da6cfd445c85197fc0fd",
+      "measured_relative_rotation_deg": [
+        0.028787893137381323,
+        -0.3509865850543517,
+        4.8211484763931916
+      ],
+      "reference_relative_rotation_deg": [
+        0.2449004678544579,
+        0.17957176840497666,
+        0.3316723937341998
+      ],
+      "measured_rotation_axis": [
+        0.005955302434964643,
+        -0.07260799721046354,
+        0.9973427761376695
+      ],
+      "axis_closing_line_abs_cosine": 0.07137357250851674,
+      "events": [
+        {
+          "index": 323,
+          "time": 3.239999999999754,
+          "measured_jaw_object": [
+            0.18863153985036793,
+            -0.9820473637975687,
+            -0.0010570865267656967
+          ],
+          "reference_jaw_object": [
+            0.1840407480168695,
+            -0.9829178139629842,
+            -0.0012546169213683085
+          ],
+          "angle_to_nearest_box_face_deg": 10.873106003795296,
+          "reference_angle_to_nearest_box_face_deg": 10.605460337389111
+        },
+        {
+          "index": 538,
+          "time": 5.390000000000135,
+          "measured_jaw_object": [
+            0.10541933595039164,
+            -0.994426783511833,
+            -0.0014614520480541226
+          ],
+          "reference_jaw_object": [
+            0.17834426149643873,
+            -0.9839618673256826,
+            0.0035168224643807203
+          ],
+          "angle_to_nearest_box_face_deg": 6.051910471875375,
+          "reference_angle_to_nearest_box_face_deg": 10.275351443542636
+        }
+      ]
+    },
+    {
+      "episode": "700a59388f33b29472d59243",
+      "measured_relative_rotation_deg": [
+        0.01635514812835479,
+        -2.0444824069344474,
+        3.321985452859443
+      ],
+      "reference_relative_rotation_deg": [
+        0.11727695530435729,
+        -0.2171527079058397,
+        0.3573049295654132
+      ],
+      "measured_rotation_axis": [
+        0.004192833456691919,
+        -0.5241269703055312,
+        0.8516298134435815
+      ],
+      "axis_closing_line_abs_cosine": 0.01061311040039794,
+      "events": [
+        {
+          "index": 281,
+          "time": 2.8199999999998004,
+          "measured_jaw_object": [
+            -0.9957015607387019,
+            -0.08561734306582193,
+            -0.03532806970190477
+          ],
+          "reference_jaw_object": [
+            -0.981171368349916,
+            -0.1658352595175192,
+            -0.09900208397357552
+          ],
+          "angle_to_nearest_box_face_deg": 5.314332409289293,
+          "reference_angle_to_nearest_box_face_deg": 11.136040591947555
+        },
+        {
+          "index": 495,
+          "time": 4.959999999999991,
+          "measured_jaw_object": [
+            -0.9996146773658421,
+            -0.027756189182918924,
+            0.00030125873441405403
+          ],
+          "reference_jaw_object": [
+            -0.9825546119836651,
+            -0.1599106833586538,
+            -0.09494739500059007
+          ],
+          "angle_to_nearest_box_face_deg": 1.590610469939655,
+          "reference_angle_to_nearest_box_face_deg": 10.717940596378781
+        }
+      ]
+    },
+    {
+      "episode": "8d2d7f3d29228ccaf19c5ae9",
+      "measured_relative_rotation_deg": [
+        2.8518510706970988,
+        -1.8120608616504699,
+        0.8288889180948418
+      ],
+      "reference_relative_rotation_deg": [
+        -0.009401060417222749,
+        -0.008340411372475511,
+        0.069183709362214
+      ],
+      "measured_rotation_axis": [
+        0.8197250339517577,
+        -0.5208517606692545,
+        0.23825262248405008
+      ],
+      "axis_closing_line_abs_cosine": 0.8288990355440919,
+      "events": [
+        {
+          "index": 284,
+          "time": 2.849999999999797,
+          "measured_jaw_object": [
+            -0.9986241526700215,
+            -0.004133479126039448,
+            -0.05227538669772389
+          ],
+          "reference_jaw_object": [
+            -0.9987369449699082,
+            0.009313929980349887,
+            -0.04937373249507891
+          ],
+          "angle_to_nearest_box_face_deg": 3.0058863694161326,
+          "reference_angle_to_nearest_box_face_deg": 2.8800132691306017
+        },
+        {
+          "index": 489,
+          "time": 4.899999999999971,
+          "measured_jaw_object": [
+            -0.999748002602947,
+            0.008507486912573477,
+            -0.020773876813195154
+          ],
+          "reference_jaw_object": [
+            -0.9987321421004755,
+            0.010527974786491737,
+            -0.049226721222232775
+          ],
+          "angle_to_nearest_box_face_deg": 1.2863074298716346,
+          "reference_angle_to_nearest_box_face_deg": 2.885484971229476
+        }
+      ]
+    },
+    {
+      "episode": "247ce7204e1b7227dfa0ec2d",
+      "measured_relative_rotation_deg": [
+        1.5774861773572395,
+        4.133742418949336,
+        0.9755303553302956
+      ],
+      "reference_relative_rotation_deg": [
+        -0.04325120022344858,
+        -0.09213473063153393,
+        0.14779088150880818
+      ],
+      "measured_rotation_axis": [
+        0.3481711546062384,
+        0.9123692438697297,
+        0.2153118899195686
+      ],
+      "axis_closing_line_abs_cosine": 0.9176322234122092,
+      "events": [
+        {
+          "index": 255,
+          "time": 2.559999999999829,
+          "measured_jaw_object": [
+            0.0024729372496012825,
+            -0.9995342707653275,
+            -0.030415886424454055
+          ],
+          "reference_jaw_object": [
+            0.00821204823255494,
+            -0.9996804364567605,
+            -0.023907890526908625
+          ],
+          "angle_to_nearest_box_face_deg": 1.7487238656774033,
+          "reference_angle_to_nearest_box_face_deg": 1.4485310542575893
+        },
+        {
+          "index": 467,
+          "time": 4.679999999999898,
+          "measured_jaw_object": [
+            -0.01334160742193007,
+            -0.9999056524885821,
+            -0.003269194515915129
+          ],
+          "reference_jaw_object": [
+            0.0055943727228297945,
+            -0.9996799063493208,
+            -0.024673626309316767
+          ],
+          "angle_to_nearest_box_face_deg": 0.7870571516783983,
+          "reference_angle_to_nearest_box_face_deg": 1.4497320671031102
+        }
+      ]
+    },
+    {
+      "episode": "773c714741a7886fa9f72156",
+      "measured_relative_rotation_deg": [
+        -0.21787028539376008,
+        -1.130160888449286,
+        0.25520089923693345
+      ],
+      "reference_relative_rotation_deg": [
+        -0.005448316348215915,
+        0.11266070677249382,
+        0.20777893599073227
+      ],
+      "measured_rotation_axis": [
+        -0.18480456458626102,
+        -0.958638717183569,
+        0.21646958868331528
+      ],
+      "axis_closing_line_abs_cosine": 0.9563402038514636,
+      "events": [
+        {
+          "index": 270,
+          "time": 2.7099999999998126,
+          "measured_jaw_object": [
+            -0.015868441622099633,
+            0.9998679135206564,
+            -0.003513982404047057
+          ],
+          "reference_jaw_object": [
+            0.013732188817246662,
+            0.9999024547700003,
+            0.0025510655058784176
+          ],
+          "angle_to_nearest_box_face_deg": 0.931261380323706,
+          "reference_angle_to_nearest_box_face_deg": 0.800284082829251
+        },
+        {
+          "index": 484,
+          "time": 4.849999999999954,
+          "measured_jaw_object": [
+            -0.011443786223789599,
+            0.9999343622060678,
+            0.0005577063825003983
+          ],
+          "reference_jaw_object": [
+            0.017353024427959045,
+            0.9998458420111986,
+            0.0026767062073601478
+          ],
+          "angle_to_nearest_box_face_deg": 0.6564731890834591,
+          "reference_angle_to_nearest_box_face_deg": 1.0060654328158225
+        }
+      ]
+    }
+  ],
+  "interpretation": [
+    "Lift4 closure27.03mm tracking error coincides with240.19N forearm/table load and the independently inspected nominal path has15.665mm table penetration; this is fixture obstruction, not evidence that a free-space servo is intrinsically too slow.",
+    "Lift5 first bilateral acquisition has1.70mm TCP error. It later drifts4.83deg primarily about boxZ while TCP error is0.091mm; measured jaw skew reduces10.87deg to6.05deg. Its source-relative reference rotation is much smaller.",
+    "Passing Lift6 has23.3mm TCP lag at the lift anchor but only0.93deg box-face skew and1.18deg eventual rotational drift; peak tracking error alone does not explain success.",
+    "The four rotation-only failures do not share identical axes: axis alignment is most directly motivated for Lift5/15. Lift16/23 already have smaller face skew and stronger other-axis rotation; the same bounded intervention is diagnostic there, not guaranteed recovery."
+  ],
+  "reproduction_script_sha256": "8378d9abfc60670b6e911fbfe1bcf5f33c6da2100b00551db0cbc3c76882cffc",
+  "no_new_physics_success": true
+}

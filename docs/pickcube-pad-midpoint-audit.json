@@ -1,0 +1,115 @@
+{
+  "attempt": "/mnt/reachy-retarget/workspaces/feasible-geometry-v1-8a7847a26e8fbb00783e4114-both-contact_010/runs/dynamics/feasible-geometry-v1-8a7847a26e8fbb00783e4114-both-contact_010/8a7847a26e8fbb00783e4114",
+  "scene_sha256": "f9f518d2549e02a78b4a8cff9fee8206dd9daefdaae37cda6cd762517f287272",
+  "report_sha256": "4bf08aebd2dd6271955045488416d949c398ec1fa55235cd0e01d5f009517e36",
+  "replay_sha256": "0484c65e654403cbe3527d5f3aaef8ddfb2ad67e476fad0c5ee765715925fbaa",
+  "semantics": "Independent recorded-controls-only replay; current pad collision centroids from interval-end FK, compared with unchanged reference poses. No object assignment after reset.",
+  "implementation_sha256": "5d85f83645c7f3eb3707a120c8efc994553f3402bd08b33750772ba1d9c59c99",
+  "implementation_python": "import json,os,sys\nfrom pathlib import Path\nimport numpy as np,mujoco,h5py\nfrom scipy.spatial.transform import Rotation\nruntime=json.loads(Path('/mnt/reachy-retarget/runtime.json').read_text());sys.path.insert(0,runtime['source'])\nos.environ.update(REACHY_RETARGET_CONTROL=runtime['control'],REACHY_RETARGET_BACKEND='reference')\nfrom reachy_retarget.pad_alignment import pad_surfaces\nfrom reachy_retarget.dynamics_audit import _load_recording,_verify_assets,_verify_no_object_assistance\nname='feasible-geometry-v1-8a7847a26e8fbb00783e4114-both-contact_010'\np=Path('/mnt/reachy-retarget/workspaces')/name/'runs/dynamics'/name/'8a7847a26e8fbb00783e4114'\nr=json.loads((p/'result.json').read_text());_verify_assets(p/'scene.xml',r['physics']);m=mujoco.MjModel.from_xml_path(str(p/'scene.xml'));_verify_no_object_assistance(m,r['physics']['objects'])\nwith h5py.File(p/'replay.h5') as f:\n a,steps=_load_recording(f,m,r,r['physics']['objects']);goals=f['target/applied_right_hand_pose_world'][()];objgoals=f['target/object_pose_world'][()]\nd=mujoco.MjData(m)\nfor k in ['qpos','qvel','ctrl']:getattr(d,k)[:]=a['initial/'+k]\nmujoco.mj_forward(m,d);tcp=m.site('r_arm_tip_tcp').id;ob=m.body(r['physics']['objects']['cube']['body']).id\nout=[]\nfor i,count in enumerate(steps):\n d.ctrl[:]=a['simulation/actuator_control'][i]\n for _ in range(int(count)):mujoco.mj_step(m,d)\n mujoco.mj_forward(m,d)\n if i not in [204,304,365,762]:continue\n pad=pad_surfaces(m,d);R=d.site_xmat[tcp].reshape(3,3);O=d.xmat[ob].reshape(3,3);T=Rotation.from_quat(goals[i,3:],scalar_first=True).as_matrix();Og=Rotation.from_quat(objgoals[i,3:],scalar_first=True).as_matrix();mid=np.asarray(r['plan']['pad_alignment']['pad']['midpoint_tcp'])\n item=dict(frame=i,time=d.time,actual_pad_midpoint_object=O.T@(R@pad['midpoint_tcp']+d.site_xpos[tcp]-d.xpos[ob]),calibrated_pad_midpoint_target_object=Og.T@(T@mid+goals[i,:3]-objgoals[i,:3]),actual_jaw_object=O.T@R@(pad['points_tcp'][1]-pad['points_tcp'][0])/pad['gap_m'],actual_grip=d.qpos[m.joint('r_hand_finger').qposadr[0]],actual_gap=pad['gap_m'],current_midpoint_tcp=pad['midpoint_tcp'])\n item={k:v.tolist() if isinstance(v,np.ndarray) else float(v) if isinstance(v,np.floating) else v for k,v in item.items()};out.append(item)\nprint(json.dumps(out,indent=2))\n",
+  "snapshots": [
+    {
+      "frame": 204,
+      "time": 2.049999999999996,
+      "actual_pad_midpoint_object": [
+        0.007214549841850791,
+        0.001051133022773605,
+        0.005672885156981255
+      ],
+      "calibrated_pad_midpoint_target_object": [
+        0.00949993738081093,
+        0.00029565639998236655,
+        0.0013486266912877563
+      ],
+      "actual_jaw_object": [
+        -0.028854401138031116,
+        0.9995388621825377,
+        -0.009459731592706558
+      ],
+      "actual_grip": 1.9999986371644816,
+      "actual_gap": 0.08882053225678178,
+      "current_midpoint_tcp": [
+        -0.010195999999999986,
+        -1.556348203438085e-08,
+        -0.04459516781749368
+      ]
+    },
+    {
+      "frame": 304,
+      "time": 3.0499999999998857,
+      "actual_pad_midpoint_object": [
+        0.009541840703449697,
+        1.836645355283149e-05,
+        0.003153761610517913
+      ],
+      "calibrated_pad_midpoint_target_object": [
+        1.4215850917341385e-05,
+        -4.922468737372798e-06,
+        -8.2391945121014e-06
+      ],
+      "actual_jaw_object": [
+        0.008569088762714368,
+        0.9999632839912902,
+        3.724423760077927e-05
+      ],
+      "actual_grip": 0.9152786435950024,
+      "actual_gap": 0.0391101092210559,
+      "current_midpoint_tcp": [
+        -0.010195999999999993,
+        2.0238172947250818e-05,
+        -0.04786666345737291
+      ]
+    },
+    {
+      "frame": 365,
+      "time": 3.6599999999998185,
+      "actual_pad_midpoint_object": [
+        0.009887643163400744,
+        2.56584615210932e-05,
+        0.005229147446795564
+      ],
+      "calibrated_pad_midpoint_target_object": [
+        -1.753295935675028e-05,
+        3.68548522281268e-06,
+        4.697629925419497e-06
+      ],
+      "actual_jaw_object": [
+        0.00847937352675055,
+        0.999964047580565,
+        -6.140756799381899e-05
+      ],
+      "actual_grip": 0.9152702367870055,
+      "actual_gap": 0.03911175186748743,
+      "current_midpoint_tcp": [
+        -0.010196000000000087,
+        2.0498088640873158e-05,
+        -0.0478668976872687
+      ]
+    },
+    {
+      "frame": 762,
+      "time": 7.629999999999382,
+      "actual_pad_midpoint_object": [
+        0.011203386010117888,
+        1.3508731774896487e-05,
+        0.00643821669321989
+      ],
+      "calibrated_pad_midpoint_target_object": [
+        0.000149275164705919,
+        -0.0004318507804108247,
+        0.000173613799032033
+      ],
+      "actual_jaw_object": [
+        0.008508329786948375,
+        0.9999467236622035,
+        -0.0058444983929804625
+      ],
+      "actual_grip": 0.9139258186202248,
+      "actual_gap": 0.03904001879474581,
+      "current_midpoint_tcp": [
+        -0.010196000000000139,
+        2.0124083299299586e-05,
+        -0.04786171311785657
+      ]
+    }
+  ]
+}

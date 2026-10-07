@@ -1,0 +1,2758 @@
+{
+  "manifest": {
+    "jobs": [
+      {
+        "dataset": "bigym",
+        "id": "bigym-feasible-pose-v1-l1-r1",
+        "operation": "source_pose_feasible",
+        "parent_task": "bigym-native-replay-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "left": 1,
+            "right": 1
+          }
+        },
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      },
+      {
+        "dataset": "bigym",
+        "id": "bigym-feasible-pose-v1-l1-r-1",
+        "operation": "source_pose_feasible",
+        "parent_task": "bigym-native-replay-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "left": 1,
+            "right": -1
+          }
+        },
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      },
+      {
+        "dataset": "bigym",
+        "id": "bigym-feasible-pose-v1-l-1-r1",
+        "operation": "source_pose_feasible",
+        "parent_task": "bigym-native-replay-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "left": -1,
+            "right": 1
+          }
+        },
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      },
+      {
+        "dataset": "bigym",
+        "id": "bigym-feasible-pose-v1-l-1-r-1",
+        "operation": "source_pose_feasible",
+        "parent_task": "bigym-native-replay-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "left": -1,
+            "right": -1
+          }
+        },
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      },
+      {
+        "dataset": "robocasa",
+        "id": "robocasa-feasible-pose-v1-r1",
+        "operation": "source_pose_feasible",
+        "parent_task": "robocasa-fk-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "right": 1
+          }
+        }
+      },
+      {
+        "dataset": "robocasa",
+        "id": "robocasa-feasible-pose-v1-r-1",
+        "operation": "source_pose_feasible",
+        "parent_task": "robocasa-fk-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "right": -1
+          }
+        }
+      }
+    ],
+    "label": "feasible-pose-v1",
+    "policy": "Complete clocks and task-object poses preserved; compare geometrically symmetric jaw signs, retain every IK failure. No collision or dynamics success inferred."
+  },
+  "jobs": [
+    {
+      "job": {
+        "dataset": "bigym",
+        "id": "bigym-feasible-pose-v1-l1-r1",
+        "operation": "source_pose_feasible",
+        "parent_task": "bigym-native-replay-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "left": 1,
+            "right": 1
+          }
+        },
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      },
+      "result": {
+        "active_hands": [
+          "left",
+          "right"
+        ],
+        "attempt": "/mnt/reachy-retarget/queue/tasks/bigym-feasible-pose-v1-l1-r1/attempts/1791361546482021396-reachy-retarget-worker-7d46748688-6sn62",
+        "base_max_abs_correction_xyyaw": [
+          0.16479320119643528,
+          0.376100720827777,
+          0.37383191193024806
+        ],
+        "base_max_abs_interval_velocity_xyyaw": [
+          0.5999999999999999,
+          0.5999999999999995,
+          1.199014700849908
+        ],
+        "base_max_planar_speed_m_s": 0.8485281374238561,
+        "base_tube_failure_frames": [],
+        "finished_unix": 1791361559.8616939,
+        "frames": 2253,
+        "joint_max_abs_interval_velocity_rad_s": [
+          9.287070919755138,
+          7.428094139112517,
+          7.906455678815298,
+          24.180791473558052,
+          2.7182043961845532,
+          11.293442436220763,
+          6.806752068750227,
+          4.882842419855797,
+          19.32228583243025,
+          15.367666822352382,
+          39.74900447860388,
+          5.776293371648253,
+          20.836516367870225,
+          17.445633496038592
+        ],
+        "kinematic_passed": true,
+        "kinematic_valid_frames": 2253,
+        "max_position_error_m": 0.0007965131876162787,
+        "max_rotation_error_rad": 0.00023051389432438566,
+        "pad_calibration": {
+          "axis_evidence": "Pinned URDF arm_tip fixed transform: translation [0,0,0.10], rotation Rx(pi) from palm.",
+          "hands": {
+            "left": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.010196000000000042,
+                -4.336808689942018e-17,
+                -0.04657015178622076
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220732
+                  ],
+                  "gap_m": 0.003599304002510842,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    1.0299920638612292e-17,
+                    -0.03999757263063322
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.01019195252014981,
+                      0.0017996474497883024,
+                      -0.039997572630633194
+                    ],
+                    [
+                      -0.01020004747985021,
+                      -0.0017996474497882818,
+                      -0.039997572630633256
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220736
+                  ],
+                  "gap_m": 0.025807653019011372,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000042,
+                    -4.336808689942018e-17,
+                    -0.04657015178622076
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149847,
+                      -0.012903825874729156,
+                      -0.046570151786220766
+                    ],
+                    [
+                      -0.010200047479850238,
+                      0.01290382587472907,
+                      -0.046570151786220745
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220726,
+                    0.0007191648182220743
+                  ],
+                  "gap_m": 0.08882060068152711,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000038,
+                    4.5102810375396984e-17,
+                    -0.044595155415061746
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149816,
+                      -0.04441030015632327,
+                      -0.04459515541506166
+                    ],
+                    [
+                      -0.010200047479850259,
+                      0.04441030015632336,
+                      -0.04459515541506182
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            },
+            "right": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.01019600000000001,
+                -2.42861286636753e-17,
+                -0.04657015178622073
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220732,
+                    0.0007191648182220734
+                  ],
+                  "gap_m": 0.0035993040025107336,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000021,
+                    -1.3660947373317356e-16,
+                    -0.039997572630633194
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149813,
+                      0.0017996474497881014,
+                      -0.03999757263063317
+                    ],
+                    [
+                      -0.010200047479850228,
+                      -0.0017996474497883747,
+                      -0.03999757263063322
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220733,
+                    0.0007191648182220731
+                  ],
+                  "gap_m": 0.025807653019011372,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    -2.42861286636753e-17,
+                    -0.04657015178622073
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149799,
+                      -0.012903825874729137,
+                      -0.046570151786220655
+                    ],
+                    [
+                      -0.01020004747985022,
+                      0.012903825874729088,
+                      -0.0465701517862208
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.000719164818222073,
+                    0.0007191648182220741
+                  ],
+                  "gap_m": 0.08882060068152708,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000014,
+                    -3.8163916471489756e-17,
+                    -0.04459515541506172
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149835,
+                      -0.044410300156323336,
+                      -0.04459515541506171
+                    ],
+                    [
+                      -0.010200047479850193,
+                      0.04441030015632326,
+                      -0.04459515541506172
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            }
+          },
+          "mesh_sha256": {
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_base_collider.dae": "b401f412d5da03eb23567840529cf855cc65497d2fd1eeb16214125e27a5d9d1",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_distal_collider.dae": "3c05adbfb9c82d30574517a5a31520f0af5154597fdf9a6c49b621973f626f88",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_proximal_collider.dae": "26f93a69116ace0d066541f49592f99fd5e715936037faed6b0bfdfff889ab36",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/forearm_collider.dae": "f67a41d2e176b8389da09e4ea48db257dad178202130f8e7300b889241740980",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/head_collider.dae": "dffaaad236b7d08b1e2928342dd3c7af781350506bdc7aac68940f41253cb2a2",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/torso_collider.dae": "597fdf91878589847c20701513b5c2c4a3fed345a05266cb49b95a9d2a6d64e0",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/upper_arm_collider.dae": "c8f0b665870b60b307cbf2d8b9b53b49b76c2ff32141345bd8065426977c9d68"
+          },
+          "method": "Area-weighted inward collision-face centers, 0.95 cosine threshold; fixed nominal aperture.",
+          "scope": "CAD surface proxy, not calibrated deformable pad contact; sampled variation is not a continuous bound.",
+          "urdf_sha256": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448"
+        },
+        "physical_limitations": [
+          "No robot/scene or self-collision admission",
+          "No actuator tracking or contact verification",
+          "Arm velocity, acceleration and torque feasibility not enforced",
+          "No inferred neck target"
+        ],
+        "physics_validated": false,
+        "placement": [
+          [
+            0.9999998044601272,
+            0.0006253636604477196,
+            0.0,
+            4.829017907336185e-05
+          ],
+          [
+            -0.0006253636604477196,
+            0.9999998044601272,
+            -0.0,
+            -4.256949537477079e-05
+          ],
+          [
+            -0.0,
+            0.0,
+            1.0000000000000002,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "position_threshold_m": 0.02,
+        "raw_ik_artifact": "/mnt/reachy-retarget/queue/tasks/bigym-feasible-pose-v1-l1-r1/attempts/1791361546482021396-reachy-retarget-worker-7d46748688-6sn62/raw-ik.npz",
+        "retarget_archive": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-feasible-pose-v1-l1-r1-ik.hdf5",
+        "retargeted": true,
+        "rotation_threshold_rad": 0.15,
+        "solver_attempt_count": 2253,
+        "solver_settings": {},
+        "source_axes": {
+          "left": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Pinned Robotiq 2F85 pinch site lies on gripper +Z; native pad separation is -Y.",
+            "jaw_sign": 1,
+            "measured_body_pair": [
+              "h1/robotiq_2f85_left/left_pad",
+              "h1/robotiq_2f85_left/right_pad"
+            ],
+            "measured_initial_closing_axis_source": [
+              -1.3474201681577673e-15,
+              -1.0,
+              0.0
+            ],
+            "source_channel": "source/left_pinch_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": null,
+            "source_to_reachy_tcp_rotation": [
+              [
+                1.0,
+                0.0,
+                -0.0
+              ],
+              [
+                0.0,
+                -1.0,
+                -0.0
+              ],
+              [
+                -0.0,
+                0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [
+              "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+            ],
+            "unsigned_closing_axis_source": [
+              0.0,
+              -1.0,
+              0.0
+            ]
+          },
+          "right": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Pinned Robotiq 2F85 pinch site lies on gripper +Z; native pad separation is -Y.",
+            "jaw_sign": 1,
+            "measured_body_pair": [
+              "h1/robotiq_2f85_right/left_pad",
+              "h1/robotiq_2f85_right/right_pad"
+            ],
+            "measured_initial_closing_axis_source": [
+              -2.687103292892129e-15,
+              -1.0,
+              0.0
+            ],
+            "source_channel": "source/right_pinch_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": null,
+            "source_to_reachy_tcp_rotation": [
+              [
+                1.0,
+                0.0,
+                -0.0
+              ],
+              [
+                0.0,
+                -1.0,
+                -0.0
+              ],
+              [
+                -0.0,
+                0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [
+              "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+            ],
+            "unsigned_closing_axis_source": [
+              0.0,
+              -1.0,
+              0.0
+            ]
+          }
+        },
+        "source_mapping": {
+          "base": "Derived bounded mobile robot placement relative to unchanged source chassis trajectory",
+          "clock": "actual native mjData.time, post-action state; unchanged through IK",
+          "grippers": {
+            "left": {
+              "native_actuator_closed": 255.0,
+              "native_actuator_open": 0.0,
+              "native_gripper_mode": "discrete normalized command; GripperConfig.discrete=True",
+              "reachy_closed_joint_target_rad": -0.06,
+              "reachy_joint": "l_hand_finger",
+              "reachy_open_joint_target_rad": 2.0,
+              "resampling": "none; original consumed source action row retained",
+              "semantics": "derived desired joint target; not issued control, measured aperture, or contact label",
+              "source_channel": "source/action[:,13]",
+              "source_closed": 1.0,
+              "source_open": 0.0
+            },
+            "right": {
+              "native_actuator_closed": 255.0,
+              "native_actuator_open": 0.0,
+              "native_gripper_mode": "discrete normalized command; GripperConfig.discrete=True",
+              "reachy_closed_joint_target_rad": -0.06,
+              "reachy_joint": "r_hand_finger",
+              "reachy_open_joint_target_rad": 2.0,
+              "resampling": "none; original consumed source action row retained",
+              "semantics": "derived desired joint target; not issued control, measured aperture, or contact label",
+              "source_channel": "source/action[:,14]",
+              "source_closed": 1.0,
+              "source_open": 0.0
+            }
+          },
+          "hands": {
+            "left": {
+              "mapping": "Native approach/closing axes to calibrated Reachy pad midpoint; constant tool attachment",
+              "source": "source/left_pinch_pose"
+            },
+            "right": {
+              "mapping": "Native approach/closing axes to calibrated Reachy pad midpoint; constant tool attachment",
+              "source": "source/right_pinch_pose"
+            }
+          },
+          "head_neck_semantics": "H1 camera pose remains a source observation; no Reachy neck target inferred",
+          "native_polarity_evidence": {
+            "observed_left_pad_origin_distance_closed_m": 0.014675922653635421,
+            "observed_left_pad_origin_distance_open_m": 0.09784520395158099,
+            "scope": "same native replay, last stable binary open/closed commands; pad-origin distance, not aperture calibration"
+          },
+          "object_geometry_or_trajectory_optimization": false,
+          "reachy_endpoint_evidence": "Existing reachy_retarget/contact.py and retarget.py convention; within pinned URDF gripper limits",
+          "source_dataset": "bigym",
+          "source_gripper_evidence": [
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/action_modes.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/gripper.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/config.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/configs/robotiq.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+          ],
+          "source_record_preserved": true,
+          "source_replay_completed": true,
+          "source_task_objects": [
+            "plate",
+            "rack_start",
+            "rack_target",
+            "table"
+          ],
+          "source_task_success": false,
+          "source_task_success_is_not_reachy_success": true,
+          "unmapped_source_channels": [
+            "source/cameras/head/pose"
+          ]
+        },
+        "source_task_success": false,
+        "status": "kinematic_candidate",
+        "task_id": "bigym-feasible-pose-v1-l1-r1"
+      },
+      "claims": [
+        {
+          "time": 1791361546.5309503,
+          "worker": "reachy-retarget-worker-7d46748688-6sn62",
+          "finished_unix": 1791361559.8616939
+        }
+      ]
+    },
+    {
+      "job": {
+        "dataset": "bigym",
+        "id": "bigym-feasible-pose-v1-l1-r-1",
+        "operation": "source_pose_feasible",
+        "parent_task": "bigym-native-replay-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "left": 1,
+            "right": -1
+          }
+        },
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      },
+      "result": {
+        "active_hands": [
+          "left",
+          "right"
+        ],
+        "attempt": "/mnt/reachy-retarget/queue/tasks/bigym-feasible-pose-v1-l1-r-1/attempts/1791361535083003902-reachy-retarget-worker-7d46748688-b4chm",
+        "base_max_abs_correction_xyyaw": [
+          0.15692023809758068,
+          0.2945871042633542,
+          0.40545344681003054
+        ],
+        "base_max_abs_interval_velocity_xyyaw": [
+          0.41032611243966954,
+          0.354306034104759,
+          1.1972205441769201
+        ],
+        "base_max_planar_speed_m_s": 0.4735087170663792,
+        "base_tube_failure_frames": [],
+        "finished_unix": 1791361588.6194541,
+        "frames": 2253,
+        "joint_max_abs_interval_velocity_rad_s": [
+          4.57817247225722,
+          13.34840685044579,
+          5.35998944823068,
+          25.261042856684988,
+          1.738321406479404,
+          10.706808871270887,
+          4.029966797771456,
+          9.797817522675135,
+          4.814967477816553,
+          5.355657182262769,
+          18.905611360315955,
+          2.7118842631594298,
+          8.995602145476502,
+          8.289871589894574
+        ],
+        "kinematic_passed": true,
+        "kinematic_valid_frames": 2253,
+        "max_position_error_m": 1.7756900004442139e-06,
+        "max_rotation_error_rad": 7.400885615690235e-07,
+        "pad_calibration": {
+          "axis_evidence": "Pinned URDF arm_tip fixed transform: translation [0,0,0.10], rotation Rx(pi) from palm.",
+          "hands": {
+            "left": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.010196000000000042,
+                -4.423544863740858e-17,
+                -0.04657015178622076
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587531,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220732
+                  ],
+                  "gap_m": 0.0035993040025108437,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    1.214306433183765e-17,
+                    -0.03999757263063323
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.01019195252014981,
+                      0.0017996474497883053,
+                      -0.039997572630633194
+                    ],
+                    [
+                      -0.01020004747985021,
+                      -0.001799647449788281,
+                      -0.03999757263063326
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220736
+                  ],
+                  "gap_m": 0.025807653019011365,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000042,
+                    -4.423544863740858e-17,
+                    -0.04657015178622076
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149847,
+                      -0.012903825874729154,
+                      -0.04657015178622077
+                    ],
+                    [
+                      -0.010200047479850238,
+                      0.012903825874729066,
+                      -0.046570151786220745
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220726,
+                    0.0007191648182220743
+                  ],
+                  "gap_m": 0.08882060068152711,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000038,
+                    4.85722573273506e-17,
+                    -0.04459515541506174
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149816,
+                      -0.04441030015632326,
+                      -0.04459515541506166
+                    ],
+                    [
+                      -0.01020004747985026,
+                      0.04441030015632336,
+                      -0.044595155415061816
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            },
+            "right": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.01019600000000001,
+                -2.2551405187698492e-17,
+                -0.04657015178622073
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220732,
+                    0.0007191648182220734
+                  ],
+                  "gap_m": 0.0035993040025107293,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000021,
+                    -1.3530843112619095e-16,
+                    -0.039997572630633194
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149813,
+                      0.0017996474497881006,
+                      -0.03999757263063317
+                    ],
+                    [
+                      -0.010200047479850228,
+                      -0.0017996474497883712,
+                      -0.03999757263063322
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220733,
+                    0.0007191648182220731
+                  ],
+                  "gap_m": 0.02580765301901137,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    -2.2551405187698492e-17,
+                    -0.04657015178622073
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149799,
+                      -0.012903825874729134,
+                      -0.046570151786220655
+                    ],
+                    [
+                      -0.010200047479850222,
+                      0.012903825874729088,
+                      -0.04657015178622081
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.000719164818222073,
+                    0.0007191648182220741
+                  ],
+                  "gap_m": 0.08882060068152708,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000014,
+                    -3.8163916471489756e-17,
+                    -0.04459515541506172
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149835,
+                      -0.044410300156323336,
+                      -0.04459515541506171
+                    ],
+                    [
+                      -0.010200047479850195,
+                      0.04441030015632326,
+                      -0.04459515541506172
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            }
+          },
+          "mesh_sha256": {
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_base_collider.dae": "b401f412d5da03eb23567840529cf855cc65497d2fd1eeb16214125e27a5d9d1",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_distal_collider.dae": "3c05adbfb9c82d30574517a5a31520f0af5154597fdf9a6c49b621973f626f88",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_proximal_collider.dae": "26f93a69116ace0d066541f49592f99fd5e715936037faed6b0bfdfff889ab36",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/forearm_collider.dae": "f67a41d2e176b8389da09e4ea48db257dad178202130f8e7300b889241740980",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/head_collider.dae": "dffaaad236b7d08b1e2928342dd3c7af781350506bdc7aac68940f41253cb2a2",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/torso_collider.dae": "597fdf91878589847c20701513b5c2c4a3fed345a05266cb49b95a9d2a6d64e0",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/upper_arm_collider.dae": "c8f0b665870b60b307cbf2d8b9b53b49b76c2ff32141345bd8065426977c9d68"
+          },
+          "method": "Area-weighted inward collision-face centers, 0.95 cosine threshold; fixed nominal aperture.",
+          "scope": "CAD surface proxy, not calibrated deformable pad contact; sampled variation is not a continuous bound.",
+          "urdf_sha256": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448"
+        },
+        "physical_limitations": [
+          "No robot/scene or self-collision admission",
+          "No actuator tracking or contact verification",
+          "Arm velocity, acceleration and torque feasibility not enforced",
+          "No inferred neck target"
+        ],
+        "physics_validated": false,
+        "placement": [
+          [
+            0.9999998044601272,
+            0.0006253636604477196,
+            0.0,
+            4.829017907336185e-05
+          ],
+          [
+            -0.0006253636604477196,
+            0.9999998044601272,
+            -0.0,
+            -4.256949537477079e-05
+          ],
+          [
+            -0.0,
+            0.0,
+            1.0000000000000002,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "position_threshold_m": 0.02,
+        "raw_ik_artifact": "/mnt/reachy-retarget/queue/tasks/bigym-feasible-pose-v1-l1-r-1/attempts/1791361535083003902-reachy-retarget-worker-7d46748688-b4chm/raw-ik.npz",
+        "retarget_archive": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-feasible-pose-v1-l1-r-1-ik.hdf5",
+        "retargeted": true,
+        "rotation_threshold_rad": 0.15,
+        "solver_attempt_count": 2253,
+        "solver_settings": {},
+        "source_axes": {
+          "left": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Pinned Robotiq 2F85 pinch site lies on gripper +Z; native pad separation is -Y.",
+            "jaw_sign": 1,
+            "measured_body_pair": [
+              "h1/robotiq_2f85_left/left_pad",
+              "h1/robotiq_2f85_left/right_pad"
+            ],
+            "measured_initial_closing_axis_source": [
+              -1.3473341593026406e-15,
+              -1.0,
+              0.0
+            ],
+            "source_channel": "source/left_pinch_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": null,
+            "source_to_reachy_tcp_rotation": [
+              [
+                1.0,
+                0.0,
+                -0.0
+              ],
+              [
+                0.0,
+                -1.0,
+                -0.0
+              ],
+              [
+                -0.0,
+                0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [
+              "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+            ],
+            "unsigned_closing_axis_source": [
+              0.0,
+              -1.0,
+              0.0
+            ]
+          },
+          "right": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Pinned Robotiq 2F85 pinch site lies on gripper +Z; native pad separation is -Y.",
+            "jaw_sign": -1,
+            "measured_body_pair": [
+              "h1/robotiq_2f85_right/left_pad",
+              "h1/robotiq_2f85_right/right_pad"
+            ],
+            "measured_initial_closing_axis_source": [
+              -2.6872993113852873e-15,
+              -1.0,
+              0.0
+            ],
+            "source_channel": "source/right_pinch_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": null,
+            "source_to_reachy_tcp_rotation": [
+              [
+                -1.0,
+                -0.0,
+                -0.0
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                0.0,
+                -0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [
+              "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+            ],
+            "unsigned_closing_axis_source": [
+              0.0,
+              -1.0,
+              0.0
+            ]
+          }
+        },
+        "source_mapping": {
+          "base": "Derived bounded mobile robot placement relative to unchanged source chassis trajectory",
+          "clock": "actual native mjData.time, post-action state; unchanged through IK",
+          "grippers": {
+            "left": {
+              "native_actuator_closed": 255.0,
+              "native_actuator_open": 0.0,
+              "native_gripper_mode": "discrete normalized command; GripperConfig.discrete=True",
+              "reachy_closed_joint_target_rad": -0.06,
+              "reachy_joint": "l_hand_finger",
+              "reachy_open_joint_target_rad": 2.0,
+              "resampling": "none; original consumed source action row retained",
+              "semantics": "derived desired joint target; not issued control, measured aperture, or contact label",
+              "source_channel": "source/action[:,13]",
+              "source_closed": 1.0,
+              "source_open": 0.0
+            },
+            "right": {
+              "native_actuator_closed": 255.0,
+              "native_actuator_open": 0.0,
+              "native_gripper_mode": "discrete normalized command; GripperConfig.discrete=True",
+              "reachy_closed_joint_target_rad": -0.06,
+              "reachy_joint": "r_hand_finger",
+              "reachy_open_joint_target_rad": 2.0,
+              "resampling": "none; original consumed source action row retained",
+              "semantics": "derived desired joint target; not issued control, measured aperture, or contact label",
+              "source_channel": "source/action[:,14]",
+              "source_closed": 1.0,
+              "source_open": 0.0
+            }
+          },
+          "hands": {
+            "left": {
+              "mapping": "Native approach/closing axes to calibrated Reachy pad midpoint; constant tool attachment",
+              "source": "source/left_pinch_pose"
+            },
+            "right": {
+              "mapping": "Native approach/closing axes to calibrated Reachy pad midpoint; constant tool attachment",
+              "source": "source/right_pinch_pose"
+            }
+          },
+          "head_neck_semantics": "H1 camera pose remains a source observation; no Reachy neck target inferred",
+          "native_polarity_evidence": {
+            "observed_left_pad_origin_distance_closed_m": 0.014675922653635421,
+            "observed_left_pad_origin_distance_open_m": 0.09784520395158099,
+            "scope": "same native replay, last stable binary open/closed commands; pad-origin distance, not aperture calibration"
+          },
+          "object_geometry_or_trajectory_optimization": false,
+          "reachy_endpoint_evidence": "Existing reachy_retarget/contact.py and retarget.py convention; within pinned URDF gripper limits",
+          "source_dataset": "bigym",
+          "source_gripper_evidence": [
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/action_modes.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/gripper.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/config.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/configs/robotiq.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+          ],
+          "source_record_preserved": true,
+          "source_replay_completed": true,
+          "source_task_objects": [
+            "plate",
+            "rack_start",
+            "rack_target",
+            "table"
+          ],
+          "source_task_success": false,
+          "source_task_success_is_not_reachy_success": true,
+          "unmapped_source_channels": [
+            "source/cameras/head/pose"
+          ]
+        },
+        "source_task_success": false,
+        "status": "kinematic_candidate",
+        "task_id": "bigym-feasible-pose-v1-l1-r-1"
+      },
+      "claims": [
+        {
+          "time": 1791361535.1580286,
+          "worker": "reachy-retarget-worker-7d46748688-b4chm",
+          "finished_unix": 1791361588.6194541
+        }
+      ]
+    },
+    {
+      "job": {
+        "dataset": "bigym",
+        "id": "bigym-feasible-pose-v1-l-1-r1",
+        "operation": "source_pose_feasible",
+        "parent_task": "bigym-native-replay-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "left": -1,
+            "right": 1
+          }
+        },
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      },
+      "result": {
+        "active_hands": [
+          "left",
+          "right"
+        ],
+        "attempt": "/mnt/reachy-retarget/queue/tasks/bigym-feasible-pose-v1-l-1-r1/attempts/1791361549335039711-reachy-retarget-worker-7d46748688-rs6bv",
+        "base_max_abs_correction_xyyaw": [
+          0.15666526714264248,
+          0.383347791939545,
+          0.3445075353604137
+        ],
+        "base_max_abs_interval_velocity_xyyaw": [
+          0.5999999999999991,
+          0.5999999999999998,
+          1.199999982005275
+        ],
+        "base_max_planar_speed_m_s": 0.8485281374238539,
+        "base_tube_failure_frames": [],
+        "finished_unix": 1791361593.7815769,
+        "frames": 2253,
+        "joint_max_abs_interval_velocity_rad_s": [
+          16.250557690907662,
+          7.588927486862102,
+          20.994991853527626,
+          34.086762436857555,
+          7.985565306615127,
+          14.308128883293323,
+          17.861112063195684,
+          5.75065688465925,
+          21.598405081471363,
+          16.135665354166328,
+          43.53522494502607,
+          6.067347631258437,
+          17.670313774701548,
+          18.46436246489195
+        ],
+        "kinematic_passed": true,
+        "kinematic_valid_frames": 2253,
+        "max_position_error_m": 0.003970867897002463,
+        "max_rotation_error_rad": 0.0014316085684137273,
+        "pad_calibration": {
+          "axis_evidence": "Pinned URDF arm_tip fixed transform: translation [0,0,0.10], rotation Rx(pi) from palm.",
+          "hands": {
+            "left": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.010196000000000042,
+                -4.336808689942018e-17,
+                -0.04657015178622076
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220732
+                  ],
+                  "gap_m": 0.003599304002510842,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    1.0299920638612292e-17,
+                    -0.03999757263063322
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.01019195252014981,
+                      0.0017996474497883024,
+                      -0.039997572630633194
+                    ],
+                    [
+                      -0.01020004747985021,
+                      -0.0017996474497882818,
+                      -0.039997572630633256
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220736
+                  ],
+                  "gap_m": 0.025807653019011372,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000042,
+                    -4.336808689942018e-17,
+                    -0.04657015178622076
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149847,
+                      -0.012903825874729156,
+                      -0.046570151786220766
+                    ],
+                    [
+                      -0.010200047479850238,
+                      0.01290382587472907,
+                      -0.046570151786220745
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220726,
+                    0.0007191648182220743
+                  ],
+                  "gap_m": 0.08882060068152711,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000038,
+                    4.5102810375396984e-17,
+                    -0.044595155415061746
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149816,
+                      -0.04441030015632327,
+                      -0.04459515541506166
+                    ],
+                    [
+                      -0.010200047479850259,
+                      0.04441030015632336,
+                      -0.04459515541506182
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            },
+            "right": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.01019600000000001,
+                -2.42861286636753e-17,
+                -0.04657015178622073
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220732,
+                    0.0007191648182220734
+                  ],
+                  "gap_m": 0.0035993040025107336,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000021,
+                    -1.3660947373317356e-16,
+                    -0.039997572630633194
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149813,
+                      0.0017996474497881014,
+                      -0.03999757263063317
+                    ],
+                    [
+                      -0.010200047479850228,
+                      -0.0017996474497883747,
+                      -0.03999757263063322
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220733,
+                    0.0007191648182220731
+                  ],
+                  "gap_m": 0.025807653019011372,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    -2.42861286636753e-17,
+                    -0.04657015178622073
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149799,
+                      -0.012903825874729137,
+                      -0.046570151786220655
+                    ],
+                    [
+                      -0.01020004747985022,
+                      0.012903825874729088,
+                      -0.0465701517862208
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.000719164818222073,
+                    0.0007191648182220741
+                  ],
+                  "gap_m": 0.08882060068152708,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000014,
+                    -3.8163916471489756e-17,
+                    -0.04459515541506172
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149835,
+                      -0.044410300156323336,
+                      -0.04459515541506171
+                    ],
+                    [
+                      -0.010200047479850193,
+                      0.04441030015632326,
+                      -0.04459515541506172
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            }
+          },
+          "mesh_sha256": {
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_base_collider.dae": "b401f412d5da03eb23567840529cf855cc65497d2fd1eeb16214125e27a5d9d1",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_distal_collider.dae": "3c05adbfb9c82d30574517a5a31520f0af5154597fdf9a6c49b621973f626f88",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_proximal_collider.dae": "26f93a69116ace0d066541f49592f99fd5e715936037faed6b0bfdfff889ab36",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/forearm_collider.dae": "f67a41d2e176b8389da09e4ea48db257dad178202130f8e7300b889241740980",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/head_collider.dae": "dffaaad236b7d08b1e2928342dd3c7af781350506bdc7aac68940f41253cb2a2",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/torso_collider.dae": "597fdf91878589847c20701513b5c2c4a3fed345a05266cb49b95a9d2a6d64e0",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/upper_arm_collider.dae": "c8f0b665870b60b307cbf2d8b9b53b49b76c2ff32141345bd8065426977c9d68"
+          },
+          "method": "Area-weighted inward collision-face centers, 0.95 cosine threshold; fixed nominal aperture.",
+          "scope": "CAD surface proxy, not calibrated deformable pad contact; sampled variation is not a continuous bound.",
+          "urdf_sha256": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448"
+        },
+        "physical_limitations": [
+          "No robot/scene or self-collision admission",
+          "No actuator tracking or contact verification",
+          "Arm velocity, acceleration and torque feasibility not enforced",
+          "No inferred neck target"
+        ],
+        "physics_validated": false,
+        "placement": [
+          [
+            0.9999998044601272,
+            0.0006253636604477196,
+            0.0,
+            4.829017907336185e-05
+          ],
+          [
+            -0.0006253636604477196,
+            0.9999998044601272,
+            -0.0,
+            -4.256949537477079e-05
+          ],
+          [
+            -0.0,
+            0.0,
+            1.0000000000000002,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "position_threshold_m": 0.02,
+        "raw_ik_artifact": "/mnt/reachy-retarget/queue/tasks/bigym-feasible-pose-v1-l-1-r1/attempts/1791361549335039711-reachy-retarget-worker-7d46748688-rs6bv/raw-ik.npz",
+        "retarget_archive": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-feasible-pose-v1-l-1-r1-ik.hdf5",
+        "retargeted": true,
+        "rotation_threshold_rad": 0.15,
+        "solver_attempt_count": 2253,
+        "solver_settings": {},
+        "source_axes": {
+          "left": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Pinned Robotiq 2F85 pinch site lies on gripper +Z; native pad separation is -Y.",
+            "jaw_sign": -1,
+            "measured_body_pair": [
+              "h1/robotiq_2f85_left/left_pad",
+              "h1/robotiq_2f85_left/right_pad"
+            ],
+            "measured_initial_closing_axis_source": [
+              -1.3474201681577673e-15,
+              -1.0,
+              0.0
+            ],
+            "source_channel": "source/left_pinch_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": null,
+            "source_to_reachy_tcp_rotation": [
+              [
+                -1.0,
+                -0.0,
+                -0.0
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                0.0,
+                -0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [
+              "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+            ],
+            "unsigned_closing_axis_source": [
+              0.0,
+              -1.0,
+              0.0
+            ]
+          },
+          "right": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Pinned Robotiq 2F85 pinch site lies on gripper +Z; native pad separation is -Y.",
+            "jaw_sign": 1,
+            "measured_body_pair": [
+              "h1/robotiq_2f85_right/left_pad",
+              "h1/robotiq_2f85_right/right_pad"
+            ],
+            "measured_initial_closing_axis_source": [
+              -2.687103292892129e-15,
+              -1.0,
+              0.0
+            ],
+            "source_channel": "source/right_pinch_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": null,
+            "source_to_reachy_tcp_rotation": [
+              [
+                1.0,
+                0.0,
+                -0.0
+              ],
+              [
+                0.0,
+                -1.0,
+                -0.0
+              ],
+              [
+                -0.0,
+                0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [
+              "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+            ],
+            "unsigned_closing_axis_source": [
+              0.0,
+              -1.0,
+              0.0
+            ]
+          }
+        },
+        "source_mapping": {
+          "base": "Derived bounded mobile robot placement relative to unchanged source chassis trajectory",
+          "clock": "actual native mjData.time, post-action state; unchanged through IK",
+          "grippers": {
+            "left": {
+              "native_actuator_closed": 255.0,
+              "native_actuator_open": 0.0,
+              "native_gripper_mode": "discrete normalized command; GripperConfig.discrete=True",
+              "reachy_closed_joint_target_rad": -0.06,
+              "reachy_joint": "l_hand_finger",
+              "reachy_open_joint_target_rad": 2.0,
+              "resampling": "none; original consumed source action row retained",
+              "semantics": "derived desired joint target; not issued control, measured aperture, or contact label",
+              "source_channel": "source/action[:,13]",
+              "source_closed": 1.0,
+              "source_open": 0.0
+            },
+            "right": {
+              "native_actuator_closed": 255.0,
+              "native_actuator_open": 0.0,
+              "native_gripper_mode": "discrete normalized command; GripperConfig.discrete=True",
+              "reachy_closed_joint_target_rad": -0.06,
+              "reachy_joint": "r_hand_finger",
+              "reachy_open_joint_target_rad": 2.0,
+              "resampling": "none; original consumed source action row retained",
+              "semantics": "derived desired joint target; not issued control, measured aperture, or contact label",
+              "source_channel": "source/action[:,14]",
+              "source_closed": 1.0,
+              "source_open": 0.0
+            }
+          },
+          "hands": {
+            "left": {
+              "mapping": "Native approach/closing axes to calibrated Reachy pad midpoint; constant tool attachment",
+              "source": "source/left_pinch_pose"
+            },
+            "right": {
+              "mapping": "Native approach/closing axes to calibrated Reachy pad midpoint; constant tool attachment",
+              "source": "source/right_pinch_pose"
+            }
+          },
+          "head_neck_semantics": "H1 camera pose remains a source observation; no Reachy neck target inferred",
+          "native_polarity_evidence": {
+            "observed_left_pad_origin_distance_closed_m": 0.014675922653635421,
+            "observed_left_pad_origin_distance_open_m": 0.09784520395158099,
+            "scope": "same native replay, last stable binary open/closed commands; pad-origin distance, not aperture calibration"
+          },
+          "object_geometry_or_trajectory_optimization": false,
+          "reachy_endpoint_evidence": "Existing reachy_retarget/contact.py and retarget.py convention; within pinned URDF gripper limits",
+          "source_dataset": "bigym",
+          "source_gripper_evidence": [
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/action_modes.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/gripper.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/config.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/configs/robotiq.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+          ],
+          "source_record_preserved": true,
+          "source_replay_completed": true,
+          "source_task_objects": [
+            "plate",
+            "rack_start",
+            "rack_target",
+            "table"
+          ],
+          "source_task_success": false,
+          "source_task_success_is_not_reachy_success": true,
+          "unmapped_source_channels": [
+            "source/cameras/head/pose"
+          ]
+        },
+        "source_task_success": false,
+        "status": "kinematic_candidate",
+        "task_id": "bigym-feasible-pose-v1-l-1-r1"
+      },
+      "claims": [
+        {
+          "time": 1791361549.3998945,
+          "worker": "reachy-retarget-worker-7d46748688-rs6bv",
+          "finished_unix": 1791361593.7815769
+        }
+      ]
+    },
+    {
+      "job": {
+        "dataset": "bigym",
+        "id": "bigym-feasible-pose-v1-l-1-r-1",
+        "operation": "source_pose_feasible",
+        "parent_task": "bigym-native-replay-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "left": -1,
+            "right": -1
+          }
+        },
+        "source_replay": "workspaces/bigym-native-20261007-01/attempt-01"
+      },
+      "result": {
+        "active_hands": [
+          "left",
+          "right"
+        ],
+        "attempt": "/mnt/reachy-retarget/queue/tasks/bigym-feasible-pose-v1-l-1-r-1/attempts/1791361545240521504-reachy-retarget-worker-7d46748688-ccxjh",
+        "base_max_abs_correction_xyyaw": [
+          0.19201529169614706,
+          0.37098556495494595,
+          0.38155612470443556
+        ],
+        "base_max_abs_interval_velocity_xyyaw": [
+          0.5999999999999991,
+          0.5999999999999991,
+          1.1952977650264696
+        ],
+        "base_max_planar_speed_m_s": 0.8485281374238547,
+        "base_tube_failure_frames": [],
+        "finished_unix": 1791361569.9290304,
+        "frames": 2253,
+        "joint_max_abs_interval_velocity_rad_s": [
+          8.021037233144838,
+          8.254032624065093,
+          29.986758172178636,
+          18.89367409324754,
+          3.745969993563244,
+          9.932120251439647,
+          30.23139407925135,
+          23.779012853073553,
+          2.4614064575408494,
+          11.338743552204239,
+          40.86210652327785,
+          4.709539090265799,
+          19.77085500068916,
+          19.149403408901946
+        ],
+        "kinematic_passed": true,
+        "kinematic_valid_frames": 2253,
+        "max_position_error_m": 0.0011504004271857078,
+        "max_rotation_error_rad": 0.0002893860660295729,
+        "pad_calibration": {
+          "axis_evidence": "Pinned URDF arm_tip fixed transform: translation [0,0,0.10], rotation Rx(pi) from palm.",
+          "hands": {
+            "left": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.010196000000000042,
+                -4.336808689942018e-17,
+                -0.04657015178622076
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220732
+                  ],
+                  "gap_m": 0.003599304002510842,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    1.0299920638612292e-17,
+                    -0.03999757263063322
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.01019195252014981,
+                      0.0017996474497883024,
+                      -0.039997572630633194
+                    ],
+                    [
+                      -0.01020004747985021,
+                      -0.0017996474497882818,
+                      -0.039997572630633256
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220736
+                  ],
+                  "gap_m": 0.025807653019011372,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000042,
+                    -4.336808689942018e-17,
+                    -0.04657015178622076
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149847,
+                      -0.012903825874729156,
+                      -0.046570151786220766
+                    ],
+                    [
+                      -0.010200047479850238,
+                      0.01290382587472907,
+                      -0.046570151786220745
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220726,
+                    0.0007191648182220743
+                  ],
+                  "gap_m": 0.08882060068152711,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000038,
+                    4.5102810375396984e-17,
+                    -0.044595155415061746
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149816,
+                      -0.04441030015632327,
+                      -0.04459515541506166
+                    ],
+                    [
+                      -0.010200047479850259,
+                      0.04441030015632336,
+                      -0.04459515541506182
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            },
+            "right": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.01019600000000001,
+                -2.42861286636753e-17,
+                -0.04657015178622073
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220732,
+                    0.0007191648182220734
+                  ],
+                  "gap_m": 0.0035993040025107336,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000021,
+                    -1.3660947373317356e-16,
+                    -0.039997572630633194
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149813,
+                      0.0017996474497881014,
+                      -0.03999757263063317
+                    ],
+                    [
+                      -0.010200047479850228,
+                      -0.0017996474497883747,
+                      -0.03999757263063322
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220733,
+                    0.0007191648182220731
+                  ],
+                  "gap_m": 0.025807653019011372,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    -2.42861286636753e-17,
+                    -0.04657015178622073
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149799,
+                      -0.012903825874729137,
+                      -0.046570151786220655
+                    ],
+                    [
+                      -0.01020004747985022,
+                      0.012903825874729088,
+                      -0.0465701517862208
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.000719164818222073,
+                    0.0007191648182220741
+                  ],
+                  "gap_m": 0.08882060068152708,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000014,
+                    -3.8163916471489756e-17,
+                    -0.04459515541506172
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149835,
+                      -0.044410300156323336,
+                      -0.04459515541506171
+                    ],
+                    [
+                      -0.010200047479850193,
+                      0.04441030015632326,
+                      -0.04459515541506172
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            }
+          },
+          "mesh_sha256": {
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_base_collider.dae": "b401f412d5da03eb23567840529cf855cc65497d2fd1eeb16214125e27a5d9d1",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_distal_collider.dae": "3c05adbfb9c82d30574517a5a31520f0af5154597fdf9a6c49b621973f626f88",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_proximal_collider.dae": "26f93a69116ace0d066541f49592f99fd5e715936037faed6b0bfdfff889ab36",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/forearm_collider.dae": "f67a41d2e176b8389da09e4ea48db257dad178202130f8e7300b889241740980",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/head_collider.dae": "dffaaad236b7d08b1e2928342dd3c7af781350506bdc7aac68940f41253cb2a2",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/torso_collider.dae": "597fdf91878589847c20701513b5c2c4a3fed345a05266cb49b95a9d2a6d64e0",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/upper_arm_collider.dae": "c8f0b665870b60b307cbf2d8b9b53b49b76c2ff32141345bd8065426977c9d68"
+          },
+          "method": "Area-weighted inward collision-face centers, 0.95 cosine threshold; fixed nominal aperture.",
+          "scope": "CAD surface proxy, not calibrated deformable pad contact; sampled variation is not a continuous bound.",
+          "urdf_sha256": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448"
+        },
+        "physical_limitations": [
+          "No robot/scene or self-collision admission",
+          "No actuator tracking or contact verification",
+          "Arm velocity, acceleration and torque feasibility not enforced",
+          "No inferred neck target"
+        ],
+        "physics_validated": false,
+        "placement": [
+          [
+            0.9999998044601272,
+            0.0006253636604477196,
+            0.0,
+            4.829017907336185e-05
+          ],
+          [
+            -0.0006253636604477196,
+            0.9999998044601272,
+            -0.0,
+            -4.256949537477079e-05
+          ],
+          [
+            -0.0,
+            0.0,
+            1.0000000000000002,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "position_threshold_m": 0.02,
+        "raw_ik_artifact": "/mnt/reachy-retarget/queue/tasks/bigym-feasible-pose-v1-l-1-r-1/attempts/1791361545240521504-reachy-retarget-worker-7d46748688-ccxjh/raw-ik.npz",
+        "retarget_archive": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-feasible-pose-v1-l-1-r-1-ik.hdf5",
+        "retargeted": true,
+        "rotation_threshold_rad": 0.15,
+        "solver_attempt_count": 2253,
+        "solver_settings": {},
+        "source_axes": {
+          "left": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Pinned Robotiq 2F85 pinch site lies on gripper +Z; native pad separation is -Y.",
+            "jaw_sign": -1,
+            "measured_body_pair": [
+              "h1/robotiq_2f85_left/left_pad",
+              "h1/robotiq_2f85_left/right_pad"
+            ],
+            "measured_initial_closing_axis_source": [
+              -1.3474201681577673e-15,
+              -1.0,
+              0.0
+            ],
+            "source_channel": "source/left_pinch_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": null,
+            "source_to_reachy_tcp_rotation": [
+              [
+                -1.0,
+                -0.0,
+                -0.0
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                0.0,
+                -0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [
+              "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+            ],
+            "unsigned_closing_axis_source": [
+              0.0,
+              -1.0,
+              0.0
+            ]
+          },
+          "right": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Pinned Robotiq 2F85 pinch site lies on gripper +Z; native pad separation is -Y.",
+            "jaw_sign": -1,
+            "measured_body_pair": [
+              "h1/robotiq_2f85_right/left_pad",
+              "h1/robotiq_2f85_right/right_pad"
+            ],
+            "measured_initial_closing_axis_source": [
+              -2.687103292892129e-15,
+              -1.0,
+              0.0
+            ],
+            "source_channel": "source/right_pinch_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": null,
+            "source_to_reachy_tcp_rotation": [
+              [
+                -1.0,
+                -0.0,
+                -0.0
+              ],
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                0.0,
+                -0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [
+              "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+            ],
+            "unsigned_closing_axis_source": [
+              0.0,
+              -1.0,
+              0.0
+            ]
+          }
+        },
+        "source_mapping": {
+          "base": "Derived bounded mobile robot placement relative to unchanged source chassis trajectory",
+          "clock": "actual native mjData.time, post-action state; unchanged through IK",
+          "grippers": {
+            "left": {
+              "native_actuator_closed": 255.0,
+              "native_actuator_open": 0.0,
+              "native_gripper_mode": "discrete normalized command; GripperConfig.discrete=True",
+              "reachy_closed_joint_target_rad": -0.06,
+              "reachy_joint": "l_hand_finger",
+              "reachy_open_joint_target_rad": 2.0,
+              "resampling": "none; original consumed source action row retained",
+              "semantics": "derived desired joint target; not issued control, measured aperture, or contact label",
+              "source_channel": "source/action[:,13]",
+              "source_closed": 1.0,
+              "source_open": 0.0
+            },
+            "right": {
+              "native_actuator_closed": 255.0,
+              "native_actuator_open": 0.0,
+              "native_gripper_mode": "discrete normalized command; GripperConfig.discrete=True",
+              "reachy_closed_joint_target_rad": -0.06,
+              "reachy_joint": "r_hand_finger",
+              "reachy_open_joint_target_rad": 2.0,
+              "resampling": "none; original consumed source action row retained",
+              "semantics": "derived desired joint target; not issued control, measured aperture, or contact label",
+              "source_channel": "source/action[:,14]",
+              "source_closed": 1.0,
+              "source_open": 0.0
+            }
+          },
+          "hands": {
+            "left": {
+              "mapping": "Native approach/closing axes to calibrated Reachy pad midpoint; constant tool attachment",
+              "source": "source/left_pinch_pose"
+            },
+            "right": {
+              "mapping": "Native approach/closing axes to calibrated Reachy pad midpoint; constant tool attachment",
+              "source": "source/right_pinch_pose"
+            }
+          },
+          "head_neck_semantics": "H1 camera pose remains a source observation; no Reachy neck target inferred",
+          "native_polarity_evidence": {
+            "observed_left_pad_origin_distance_closed_m": 0.014675922653635421,
+            "observed_left_pad_origin_distance_open_m": 0.09784520395158099,
+            "scope": "same native replay, last stable binary open/closed commands; pad-origin distance, not aperture calibration"
+          },
+          "object_geometry_or_trajectory_optimization": false,
+          "reachy_endpoint_evidence": "Existing reachy_retarget/contact.py and retarget.py convention; within pinned URDF gripper limits",
+          "source_dataset": "bigym",
+          "source_gripper_evidence": [
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/action_modes.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/gripper.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/config.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/robots/configs/robotiq.py",
+            "https://github.com/NeuracoreAI/bigym/blob/52070fa73e8dd88a3d76eed4be575a6d01497931/bigym/envs/xmls/robotiq_2f85/2f85.xml"
+          ],
+          "source_record_preserved": true,
+          "source_replay_completed": true,
+          "source_task_objects": [
+            "plate",
+            "rack_start",
+            "rack_target",
+            "table"
+          ],
+          "source_task_success": false,
+          "source_task_success_is_not_reachy_success": true,
+          "unmapped_source_channels": [
+            "source/cameras/head/pose"
+          ]
+        },
+        "source_task_success": false,
+        "status": "kinematic_candidate",
+        "task_id": "bigym-feasible-pose-v1-l-1-r-1"
+      },
+      "claims": [
+        {
+          "time": 1791361545.3068283,
+          "worker": "reachy-retarget-worker-7d46748688-ccxjh",
+          "finished_unix": 1791361569.9290304
+        }
+      ]
+    },
+    {
+      "job": {
+        "dataset": "robocasa",
+        "id": "robocasa-feasible-pose-v1-r1",
+        "operation": "source_pose_feasible",
+        "parent_task": "robocasa-fk-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "right": 1
+          }
+        }
+      },
+      "result": {
+        "active_hands": [
+          "right"
+        ],
+        "attempt": "/mnt/reachy-retarget/queue/tasks/robocasa-feasible-pose-v1-r1/attempts/1791361536940697378-reachy-retarget-worker-7d46748688-pzkc8",
+        "base_max_abs_correction_xyyaw": [
+          0.435152690003235,
+          0.1701521298743638,
+          0.4733014089487922
+        ],
+        "base_max_abs_interval_velocity_xyyaw": [
+          0.5999999999999998,
+          0.5999999999999994,
+          1.1999999986057497
+        ],
+        "base_max_planar_speed_m_s": 0.8485281374238565,
+        "base_tube_failure_frames": [],
+        "finished_unix": 1791361568.245658,
+        "frames": 232,
+        "joint_max_abs_interval_velocity_rad_s": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          124.42269096940502,
+          62.072558916719274,
+          119.09118307039151,
+          2.4123416304387058,
+          19.703999999999976,
+          0.9829896910970498,
+          18.93911721722612
+        ],
+        "kinematic_passed": false,
+        "kinematic_valid_frames": 126,
+        "max_position_error_m": 0.12082197172591483,
+        "max_rotation_error_rad": 0.37671750388283953,
+        "pad_calibration": {
+          "axis_evidence": "Pinned URDF arm_tip fixed transform: translation [0,0,0.10], rotation Rx(pi) from palm.",
+          "hands": {
+            "left": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.010196000000000042,
+                -4.423544863740858e-17,
+                -0.04657015178622076
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587531,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220732
+                  ],
+                  "gap_m": 0.0035993040025108437,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    1.214306433183765e-17,
+                    -0.03999757263063323
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.01019195252014981,
+                      0.0017996474497883053,
+                      -0.039997572630633194
+                    ],
+                    [
+                      -0.01020004747985021,
+                      -0.001799647449788281,
+                      -0.03999757263063326
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220736
+                  ],
+                  "gap_m": 0.025807653019011365,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000042,
+                    -4.423544863740858e-17,
+                    -0.04657015178622076
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149847,
+                      -0.012903825874729154,
+                      -0.04657015178622077
+                    ],
+                    [
+                      -0.010200047479850238,
+                      0.012903825874729066,
+                      -0.046570151786220745
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220726,
+                    0.0007191648182220743
+                  ],
+                  "gap_m": 0.08882060068152711,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000038,
+                    4.85722573273506e-17,
+                    -0.04459515541506174
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149816,
+                      -0.04441030015632326,
+                      -0.04459515541506166
+                    ],
+                    [
+                      -0.01020004747985026,
+                      0.04441030015632336,
+                      -0.044595155415061816
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            },
+            "right": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.01019600000000001,
+                -2.2551405187698492e-17,
+                -0.04657015178622073
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220732,
+                    0.0007191648182220734
+                  ],
+                  "gap_m": 0.0035993040025107293,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000021,
+                    -1.3530843112619095e-16,
+                    -0.039997572630633194
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149813,
+                      0.0017996474497881006,
+                      -0.03999757263063317
+                    ],
+                    [
+                      -0.010200047479850228,
+                      -0.0017996474497883712,
+                      -0.03999757263063322
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220733,
+                    0.0007191648182220731
+                  ],
+                  "gap_m": 0.02580765301901137,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    -2.2551405187698492e-17,
+                    -0.04657015178622073
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149799,
+                      -0.012903825874729134,
+                      -0.046570151786220655
+                    ],
+                    [
+                      -0.010200047479850222,
+                      0.012903825874729088,
+                      -0.04657015178622081
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.000719164818222073,
+                    0.0007191648182220741
+                  ],
+                  "gap_m": 0.08882060068152708,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000014,
+                    -3.8163916471489756e-17,
+                    -0.04459515541506172
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149835,
+                      -0.044410300156323336,
+                      -0.04459515541506171
+                    ],
+                    [
+                      -0.010200047479850195,
+                      0.04441030015632326,
+                      -0.04459515541506172
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            }
+          },
+          "mesh_sha256": {
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_base_collider.dae": "b401f412d5da03eb23567840529cf855cc65497d2fd1eeb16214125e27a5d9d1",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_distal_collider.dae": "3c05adbfb9c82d30574517a5a31520f0af5154597fdf9a6c49b621973f626f88",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_proximal_collider.dae": "26f93a69116ace0d066541f49592f99fd5e715936037faed6b0bfdfff889ab36",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/forearm_collider.dae": "f67a41d2e176b8389da09e4ea48db257dad178202130f8e7300b889241740980",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/head_collider.dae": "dffaaad236b7d08b1e2928342dd3c7af781350506bdc7aac68940f41253cb2a2",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/torso_collider.dae": "597fdf91878589847c20701513b5c2c4a3fed345a05266cb49b95a9d2a6d64e0",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/upper_arm_collider.dae": "c8f0b665870b60b307cbf2d8b9b53b49b76c2ff32141345bd8065426977c9d68"
+          },
+          "method": "Area-weighted inward collision-face centers, 0.95 cosine threshold; fixed nominal aperture.",
+          "scope": "CAD surface proxy, not calibrated deformable pad contact; sampled variation is not a continuous bound.",
+          "urdf_sha256": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448"
+        },
+        "physical_limitations": [
+          "No robot/scene or self-collision admission",
+          "No actuator tracking or contact verification",
+          "Arm velocity, acceleration and torque feasibility not enforced",
+          "No inferred neck target"
+        ],
+        "physics_validated": false,
+        "placement": [
+          [
+            -0.9999999544530286,
+            0.0003018177278425974,
+            0.0,
+            0.8007910281011807
+          ],
+          [
+            -0.0003018177278425974,
+            -0.9999999544530286,
+            -0.0,
+            -2.1896209531746655
+          ],
+          [
+            -0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "position_threshold_m": 0.02,
+        "raw_ik_artifact": "/mnt/reachy-retarget/queue/tasks/robocasa-feasible-pose-v1-r1/attempts/1791361536940697378-reachy-retarget-worker-7d46748688-pzkc8/raw-ik.npz",
+        "retarget_archive": "/mnt/reachy-retarget/datasets/robocasa/episodes/robocasa-feasible-pose-v1-r1-ik.hdf5",
+        "retargeted": true,
+        "rotation_threshold_rad": 0.15,
+        "solver_attempt_count": 974,
+        "solver_settings": {},
+        "source_axes": {
+          "right": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Saved source MJCF: grip_site on eef +Z; finger Y slide rotated 90 degrees gives unsigned X separation.",
+            "jaw_sign": 1,
+            "measured_body_pair": [
+              "gripper0_right_finger_joint1_tip",
+              "gripper0_right_finger_joint2_tip"
+            ],
+            "measured_initial_closing_axis_source": [
+              -1.0,
+              -2.3832108581410747e-15,
+              0.0
+            ],
+            "source_channel": "source/right_tcp_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": "2a9652be9d833bf5bedba20195b73bee70277c8095e5e186ffa6e7ea9620439d",
+            "source_to_reachy_tcp_rotation": [
+              [
+                0.0,
+                -1.0,
+                -0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                -0.0
+              ],
+              [
+                0.0,
+                0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [],
+            "unsigned_closing_axis_source": [
+              -1.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "source_mapping": {
+          "base": "Derived bounded mobile robot placement relative to recorded chassis",
+          "clock": "Unchanged source simulator timestamps",
+          "gripper": "No target invented; original source actions preserved",
+          "hands": "Verified native grip axes to calibrated Reachy pad midpoint"
+        },
+        "source_task_success": null,
+        "status": "kinematic_failed",
+        "task_id": "robocasa-feasible-pose-v1-r1"
+      },
+      "claims": [
+        {
+          "time": 1791361537.044166,
+          "worker": "reachy-retarget-worker-7d46748688-pzkc8",
+          "finished_unix": 1791361568.245658
+        }
+      ]
+    },
+    {
+      "job": {
+        "dataset": "robocasa",
+        "id": "robocasa-feasible-pose-v1-r-1",
+        "operation": "source_pose_feasible",
+        "parent_task": "robocasa-fk-v1",
+        "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+        "solver_settings": {
+          "jaw_sign": {
+            "right": -1
+          }
+        }
+      },
+      "result": {
+        "active_hands": [
+          "right"
+        ],
+        "attempt": "/mnt/reachy-retarget/queue/tasks/robocasa-feasible-pose-v1-r-1/attempts/1791361543181831585-reachy-retarget-worker-7d46748688-jp4tv",
+        "base_max_abs_correction_xyyaw": [
+          0.49999999999999994,
+          0.49999999999932354,
+          0.7217629570472791
+        ],
+        "base_max_abs_interval_velocity_xyyaw": [
+          0.5999999999999311,
+          0.5999999999999998,
+          1.2
+        ],
+        "base_max_planar_speed_m_s": 0.8231580502068575,
+        "base_tube_failure_frames": [],
+        "finished_unix": 1791361630.7164414,
+        "frames": 232,
+        "joint_max_abs_interval_velocity_rad_s": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          64.91285250523683,
+          64.56418331125906,
+          98.10445804748757,
+          0.7406250742170101,
+          19.704000000002164,
+          0.27329697395804275,
+          33.773241401862975
+        ],
+        "kinematic_passed": false,
+        "kinematic_valid_frames": 26,
+        "max_position_error_m": 0.13819867215739282,
+        "max_rotation_error_rad": 0.7187721867693401,
+        "pad_calibration": {
+          "axis_evidence": "Pinned URDF arm_tip fixed transform: translation [0,0,0.10], rotation Rx(pi) from palm.",
+          "hands": {
+            "left": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.010196000000000042,
+                -4.336808689942018e-17,
+                -0.04657015178622076
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220732
+                  ],
+                  "gap_m": 0.003599304002510842,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    1.0299920638612292e-17,
+                    -0.03999757263063322
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.01019195252014981,
+                      0.0017996474497883024,
+                      -0.039997572630633194
+                    ],
+                    [
+                      -0.01020004747985021,
+                      -0.0017996474497882818,
+                      -0.039997572630633256
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220728,
+                    0.0007191648182220736
+                  ],
+                  "gap_m": 0.025807653019011372,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000042,
+                    -4.336808689942018e-17,
+                    -0.04657015178622076
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149847,
+                      -0.012903825874729156,
+                      -0.046570151786220766
+                    ],
+                    [
+                      -0.010200047479850238,
+                      0.01290382587472907,
+                      -0.046570151786220745
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220726,
+                    0.0007191648182220743
+                  ],
+                  "gap_m": 0.08882060068152711,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000038,
+                    4.5102810375396984e-17,
+                    -0.044595155415061746
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149816,
+                      -0.04441030015632327,
+                      -0.04459515541506166
+                    ],
+                    [
+                      -0.010200047479850259,
+                      0.04441030015632336,
+                      -0.04459515541506182
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            },
+            "right": {
+              "approach_axis_tcp": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "constant_pad_midpoint_tcp_m": [
+                -0.01019600000000001,
+                -2.42861286636753e-17,
+                -0.04657015178622073
+              ],
+              "nominal_gripper_rad": 0.63,
+              "sampled_midpoint_variation_m": 0.006572579155587538,
+              "sampled_open_nominal_closed": [
+                {
+                  "face_area_m2": [
+                    0.0007191648182220732,
+                    0.0007191648182220734
+                  ],
+                  "gap_m": 0.0035993040025107336,
+                  "gripper_rad": -0.06,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000021,
+                    -1.3660947373317356e-16,
+                    -0.039997572630633194
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149813,
+                      0.0017996474497881014,
+                      -0.03999757263063317
+                    ],
+                    [
+                      -0.010200047479850228,
+                      -0.0017996474497883747,
+                      -0.03999757263063322
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.0007191648182220733,
+                    0.0007191648182220731
+                  ],
+                  "gap_m": 0.025807653019011372,
+                  "gripper_rad": 0.63,
+                  "midpoint_tcp_m": [
+                    -0.01019600000000001,
+                    -2.42861286636753e-17,
+                    -0.04657015178622073
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149799,
+                      -0.012903825874729137,
+                      -0.046570151786220655
+                    ],
+                    [
+                      -0.01020004747985022,
+                      0.012903825874729088,
+                      -0.0465701517862208
+                    ]
+                  ]
+                },
+                {
+                  "face_area_m2": [
+                    0.000719164818222073,
+                    0.0007191648182220741
+                  ],
+                  "gap_m": 0.08882060068152708,
+                  "gripper_rad": 2.0,
+                  "midpoint_tcp_m": [
+                    -0.010196000000000014,
+                    -3.8163916471489756e-17,
+                    -0.04459515541506172
+                  ],
+                  "points_tcp_m": [
+                    [
+                      -0.010191952520149835,
+                      -0.044410300156323336,
+                      -0.04459515541506171
+                    ],
+                    [
+                      -0.010200047479850193,
+                      0.04441030015632326,
+                      -0.04459515541506172
+                    ]
+                  ]
+                }
+              ],
+              "unsigned_closing_axis_tcp": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            }
+          },
+          "mesh_sha256": {
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_base_collider.dae": "b401f412d5da03eb23567840529cf855cc65497d2fd1eeb16214125e27a5d9d1",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_distal_collider.dae": "3c05adbfb9c82d30574517a5a31520f0af5154597fdf9a6c49b621973f626f88",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/dynamixel_description/meshes/pincette_proximal_collider.dae": "26f93a69116ace0d066541f49592f99fd5e715936037faed6b0bfdfff889ab36",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/forearm_collider.dae": "f67a41d2e176b8389da09e4ea48db257dad178202130f8e7300b889241740980",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/head_collider.dae": "dffaaad236b7d08b1e2928342dd3c7af781350506bdc7aac68940f41253cb2a2",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/torso_collider.dae": "597fdf91878589847c20701513b5c2c4a3fed345a05266cb49b95a9d2a6d64e0",
+            "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/packages/reachy_description/meshes/upper_arm_collider.dae": "c8f0b665870b60b307cbf2d8b9b53b49b76c2ff32141345bd8065426977c9d68"
+          },
+          "method": "Area-weighted inward collision-face centers, 0.95 cosine threshold; fixed nominal aperture.",
+          "scope": "CAD surface proxy, not calibrated deformable pad contact; sampled variation is not a continuous bound.",
+          "urdf_sha256": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448"
+        },
+        "physical_limitations": [
+          "No robot/scene or self-collision admission",
+          "No actuator tracking or contact verification",
+          "Arm velocity, acceleration and torque feasibility not enforced",
+          "No inferred neck target"
+        ],
+        "physics_validated": false,
+        "placement": [
+          [
+            -0.9999999544530286,
+            0.0003018177278425974,
+            0.0,
+            0.8007910281011807
+          ],
+          [
+            -0.0003018177278425974,
+            -0.9999999544530286,
+            -0.0,
+            -2.1896209531746655
+          ],
+          [
+            -0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "position_threshold_m": 0.02,
+        "raw_ik_artifact": "/mnt/reachy-retarget/queue/tasks/robocasa-feasible-pose-v1-r-1/attempts/1791361543181831585-reachy-retarget-worker-7d46748688-jp4tv/raw-ik.npz",
+        "retarget_archive": "/mnt/reachy-retarget/datasets/robocasa/episodes/robocasa-feasible-pose-v1-r-1-ik.hdf5",
+        "retargeted": true,
+        "rotation_threshold_rad": 0.15,
+        "solver_attempt_count": 1674,
+        "solver_settings": {},
+        "source_axes": {
+          "right": {
+            "approach_axis_source": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "axis_evidence": "Saved source MJCF: grip_site on eef +Z; finger Y slide rotated 90 degrees gives unsigned X separation.",
+            "jaw_sign": -1,
+            "measured_body_pair": [
+              "gripper0_right_finger_joint1_tip",
+              "gripper0_right_finger_joint2_tip"
+            ],
+            "measured_initial_closing_axis_source": [
+              -1.0,
+              -2.379688671076406e-15,
+              0.0
+            ],
+            "source_channel": "source/right_tcp_pose",
+            "source_contact_semantics": "Documented grip/pinch site proxy; no measured contact patch is asserted",
+            "source_model_xml_sha256": "2a9652be9d833bf5bedba20195b73bee70277c8095e5e186ffa6e7ea9620439d",
+            "source_to_reachy_tcp_rotation": [
+              [
+                0.0,
+                1.0,
+                -0.0
+              ],
+              [
+                1.0,
+                -0.0,
+                -0.0
+              ],
+              [
+                -0.0,
+                -0.0,
+                -1.0
+              ]
+            ],
+            "source_urls": [],
+            "unsigned_closing_axis_source": [
+              -1.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "source_mapping": {
+          "base": "Derived bounded mobile robot placement relative to recorded chassis",
+          "clock": "Unchanged source simulator timestamps",
+          "gripper": "No target invented; original source actions preserved",
+          "hands": "Verified native grip axes to calibrated Reachy pad midpoint"
+        },
+        "source_task_success": null,
+        "status": "kinematic_failed",
+        "task_id": "robocasa-feasible-pose-v1-r-1"
+      },
+      "claims": [
+        {
+          "time": 1791361543.2469287,
+          "worker": "reachy-retarget-worker-7d46748688-jp4tv",
+          "finished_unix": 1791361630.7164414
+        }
+      ]
+    }
+  ],
+  "collected_unix": 1791361654.9357905,
+  "summary": {
+    "jobs": 6,
+    "claimed": 6,
+    "workers_used": 6,
+    "peak_overlapping_claims": 6,
+    "statuses": {
+      "kinematic_candidate": 4,
+      "kinematic_failed": 2
+    },
+    "physical_passes": 0,
+    "alternate_model_passes": 0,
+    "unique_sources": 2
+  }
+}

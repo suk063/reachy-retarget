@@ -1,0 +1,330 @@
+[
+  {
+    "source": "c1f6fdd7b4fa919be783b8a6",
+    "axis": 0,
+    "input_job": "nonbox-task-center-v1-c1f6fdd7b4fa919be783b8a6-axis0-base53",
+    "scope": "One stationary base derived from exact table-side worst-pose feasibility; original complete clock and hand/object targets unchanged; no physics",
+    "selection": "Minimum XY displacement from original initial base among table-side exact-pose solutions",
+    "code_release": "af843d7673fec92230740ee90f28393a86120f2e694922ae4567afea61b1aad5",
+    "script_sha256": "9b088e0cd4043100a46af57b88d93593caae0566f2d9d07ff0e1b1ed94009c48",
+    "source_numeric_sha256": "e83a79689b4a1bc42ded4143fe0c0c846a6724fb853b13f9c06572b3c74b1f8c",
+    "original_stationary_bank_preserved": true,
+    "anchor": {
+      "access_face": "x-",
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully",
+      "iterations": 34,
+      "wall_s": 0.23772079599439166,
+      "position_error_m": 4.562927886362447e-08,
+      "rotation_error_rad": 2.1897650583793507e-07,
+      "min_bar_table_clearance_m": 0.15174655308797433,
+      "base": [
+        1.259346849749321,
+        0.13596637659216668,
+        -0.63108142517837
+      ],
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "saturated_joints": [
+        {
+          "joint": "r_wrist_pitch",
+          "angle": -0.4925958997569996
+        }
+      ],
+      "q": [
+        1.259346849749321,
+        0.13596637659216668,
+        0.8073899199752634,
+        -0.5900182345676594,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.045849475094401064,
+        -0.8678666326406871,
+        3.0471937342819095,
+        -1.208329897143435,
+        0.4183694010984688,
+        -0.4925958997569996,
+        1.4852574144424502
+      ]
+    },
+    "result": {
+      "base_xyyaw": [
+        1.259346849749321,
+        0.13596637659216668,
+        -0.63108142517837
+      ],
+      "right_arm_seed": [
+        -0.045849475094401064,
+        -0.8678666326406871,
+        3.0471937342819095,
+        -1.208329897143435,
+        0.4183694010984688,
+        -0.4925958997569996,
+        1.4852574144424502
+      ],
+      "gripper_admission": "intent_envelope",
+      "gripper_closed_target_rad": 0.8882904848842998,
+      "inactive_left_gripper_rad": 2.0,
+      "gripper_admission_scope": "Static sampled robot aperture envelopes; actual gripper tracking and all contacts remain independently physics-gated",
+      "initial_base_xyyaw": [
+        1.259346849749321,
+        0.13596637659216668,
+        -0.63108142517837
+      ],
+      "final_base_xyyaw": [
+        1.259346849749321,
+        0.13596637659216668,
+        -0.63108142517837
+      ],
+      "base_policy": "stationary",
+      "completed_frames": 1257,
+      "total_frames": 1257,
+      "exception": null,
+      "physics_validated": false,
+      "max_ik_position_error_m": 0.16907328551270126,
+      "max_ik_rotation_error_rad": 1.746064641876347,
+      "max_environment_penetration_m": 0.04419390721343308,
+      "max_self_penetration_m": 0.0,
+      "min_self_clearance_m": 0.12456412372827785,
+      "min_joint_margin_rad": 0.030999999999999917,
+      "worst_collision_pairs": {
+        "environment": [
+          "table_collision",
+          "r_hand_distal_link_collision_0"
+        ],
+        "self": null
+      },
+      "artifact_sha256": "63727debcce38300ce2842f8581fea251c75f13b4f1e31a3f5f6f2d49638f632",
+      "frozen_scene_sha256": "4deea6e9679782d89f87c764a1387588deadbe0c73a6951aea96df62639e8ce5",
+      "controller_identity": {
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/reachy.py": "28bb18ac71bbf38e2ce45db1b0b523005ffc2141dfef97215d144390bc41cac8",
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/collision.py": "155a338b662028192011ccf611e433b6b5fede677b336dc551e4d28427ee208b",
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/reachy.urdf": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448",
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/collision_spheres.json": "8d581c1954e16769601234585c2b15897223b381171bc46f36449e76230a2bd0"
+      },
+      "native_source_clock_sha256": null,
+      "scope": "Robot base and right-arm joint configuration only; no source or scene changes",
+      "object_collision_scope": "Source reset object stays unchanged; static admission checks environment and robot self only",
+      "admission_checks": {
+        "completed": true,
+        "right_hand_ik": false,
+        "environment": false,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "admitted": false,
+      "peak_reference_base_speed_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "peak_reference_arm_speed_rad_s": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.768328978494848,
+        24.2275414110343,
+        27.56178078001793,
+        3.3502335793114173,
+        98.52000000000209,
+        1.9925962327247069,
+        78.01624984155326
+      ]
+    },
+    "bad_ik_frames_by_phase": {
+      "closed": 218,
+      "open": 262
+    },
+    "environment_failed_by_phase": {
+      "closed": 75,
+      "open": 59
+    },
+    "first_failed_frame": {
+      "index": 0,
+      "time_s": 0.0,
+      "errors": [
+        0.10920899356633404,
+        1.1290188050629217
+      ]
+    }
+  },
+  {
+    "source": "c1f6fdd7b4fa919be783b8a6",
+    "axis": 2,
+    "input_job": "nonbox-task-center-v1-c1f6fdd7b4fa919be783b8a6-axis2-base16",
+    "scope": "One stationary base derived from exact table-side worst-pose feasibility; original complete clock and hand/object targets unchanged; no physics",
+    "selection": "Minimum XY displacement from original initial base among table-side exact-pose solutions",
+    "code_release": "af843d7673fec92230740ee90f28393a86120f2e694922ae4567afea61b1aad5",
+    "script_sha256": "9b088e0cd4043100a46af57b88d93593caae0566f2d9d07ff0e1b1ed94009c48",
+    "source_numeric_sha256": "8c6c005f1d07eadad5436f63230724a37d67d80e1e563315f3d08289a07b9cca",
+    "original_stationary_bank_preserved": true,
+    "anchor": {
+      "access_face": "x-",
+      "optimizer_success": true,
+      "optimizer_message": "Optimization terminated successfully",
+      "iterations": 22,
+      "wall_s": 0.16069734901248012,
+      "position_error_m": 4.72413944626202e-08,
+      "rotation_error_rad": 9.20337778383654e-08,
+      "min_bar_table_clearance_m": 0.01703869230357658,
+      "base": [
+        0.24701574720156996,
+        -0.5856333447333221,
+        1.0506807711764716
+      ],
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "saturated_joints": [],
+      "q": [
+        0.24701574720156996,
+        -0.5856333447333221,
+        0.4969804159080569,
+        0.8677617565921275,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.6750330939836992,
+        0.2418302758040979,
+        -0.4181405003722821,
+        -1.0205470227096864,
+        0.49195712542996123,
+        -0.032267708220871556,
+        -1.530432966836366
+      ]
+    },
+    "result": {
+      "base_xyyaw": [
+        0.24701574720156996,
+        -0.5856333447333221,
+        1.0506807711764716
+      ],
+      "right_arm_seed": [
+        -0.6750330939836992,
+        0.2418302758040979,
+        -0.4181405003722821,
+        -1.0205470227096864,
+        0.49195712542996123,
+        -0.032267708220871556,
+        -1.530432966836366
+      ],
+      "gripper_admission": "intent_envelope",
+      "gripper_closed_target_rad": 0.8882904848842997,
+      "inactive_left_gripper_rad": 2.0,
+      "gripper_admission_scope": "Static sampled robot aperture envelopes; actual gripper tracking and all contacts remain independently physics-gated",
+      "initial_base_xyyaw": [
+        0.24701574720156996,
+        -0.5856333447333221,
+        1.0506807711764716
+      ],
+      "final_base_xyyaw": [
+        0.24701574720156996,
+        -0.5856333447333221,
+        1.0506807711764716
+      ],
+      "base_policy": "stationary",
+      "completed_frames": 1257,
+      "total_frames": 1257,
+      "exception": null,
+      "physics_validated": false,
+      "max_ik_position_error_m": 0.2787914325484014,
+      "max_ik_rotation_error_rad": 0.8636602637833414,
+      "max_environment_penetration_m": 0.0,
+      "max_self_penetration_m": 0.0,
+      "min_self_clearance_m": 0.05870562764326259,
+      "min_joint_margin_rad": 0.031000000000000028,
+      "worst_collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "artifact_sha256": "077bc788642d627f942ecf94105c494869af87710b0fc33cbeb1b549c7c8dfd1",
+      "frozen_scene_sha256": "4deea6e9679782d89f87c764a1387588deadbe0c73a6951aea96df62639e8ce5",
+      "controller_identity": {
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/reachy.py": "28bb18ac71bbf38e2ce45db1b0b523005ffc2141dfef97215d144390bc41cac8",
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/collision.py": "155a338b662028192011ccf611e433b6b5fede677b336dc551e4d28427ee208b",
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/reachy.urdf": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448",
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/collision_spheres.json": "8d581c1954e16769601234585c2b15897223b381171bc46f36449e76230a2bd0"
+      },
+      "native_source_clock_sha256": null,
+      "scope": "Robot base and right-arm joint configuration only; no source or scene changes",
+      "object_collision_scope": "Source reset object stays unchanged; static admission checks environment and robot self only",
+      "admission_checks": {
+        "completed": true,
+        "right_hand_ik": false,
+        "environment": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "admitted": false,
+      "peak_reference_base_speed_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "peak_reference_arm_speed_rad_s": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.703000678155902,
+        5.199506498455349,
+        3.6210799298305782,
+        5.668396362475284,
+        2.083553642030314,
+        2.7896840821745412,
+        8.095974789432416
+      ]
+    },
+    "bad_ik_frames_by_phase": {
+      "closed": 151,
+      "open": 262
+    },
+    "environment_failed_by_phase": {
+      "closed": 0,
+      "open": 0
+    },
+    "first_failed_frame": {
+      "index": 0,
+      "time_s": 0.0,
+      "errors": [
+        0.1259985461963206,
+        0.5746904596813799
+      ]
+    }
+  }
+]

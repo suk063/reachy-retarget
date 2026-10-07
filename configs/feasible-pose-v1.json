@@ -1,0 +1,86 @@
+{
+  "label": "feasible-pose-v1",
+  "jobs": [
+    {
+      "id": "bigym-feasible-pose-v1-l1-r1",
+      "operation": "source_pose_feasible",
+      "dataset": "bigym",
+      "source_replay": "workspaces/bigym-native-20261007-01/attempt-01",
+      "solver_settings": {
+        "jaw_sign": {
+          "left": 1,
+          "right": 1
+        }
+      },
+      "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+      "parent_task": "bigym-native-replay-v1"
+    },
+    {
+      "id": "bigym-feasible-pose-v1-l1-r-1",
+      "operation": "source_pose_feasible",
+      "dataset": "bigym",
+      "source_replay": "workspaces/bigym-native-20261007-01/attempt-01",
+      "solver_settings": {
+        "jaw_sign": {
+          "left": 1,
+          "right": -1
+        }
+      },
+      "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+      "parent_task": "bigym-native-replay-v1"
+    },
+    {
+      "id": "bigym-feasible-pose-v1-l-1-r1",
+      "operation": "source_pose_feasible",
+      "dataset": "bigym",
+      "source_replay": "workspaces/bigym-native-20261007-01/attempt-01",
+      "solver_settings": {
+        "jaw_sign": {
+          "left": -1,
+          "right": 1
+        }
+      },
+      "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+      "parent_task": "bigym-native-replay-v1"
+    },
+    {
+      "id": "bigym-feasible-pose-v1-l-1-r-1",
+      "operation": "source_pose_feasible",
+      "dataset": "bigym",
+      "source_replay": "workspaces/bigym-native-20261007-01/attempt-01",
+      "solver_settings": {
+        "jaw_sign": {
+          "left": -1,
+          "right": -1
+        }
+      },
+      "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+      "parent_task": "bigym-native-replay-v1"
+    },
+    {
+      "id": "robocasa-feasible-pose-v1-r1",
+      "operation": "source_pose_feasible",
+      "dataset": "robocasa",
+      "solver_settings": {
+        "jaw_sign": {
+          "right": 1
+        }
+      },
+      "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+      "parent_task": "robocasa-fk-v1"
+    },
+    {
+      "id": "robocasa-feasible-pose-v1-r-1",
+      "operation": "source_pose_feasible",
+      "dataset": "robocasa",
+      "solver_settings": {
+        "jaw_sign": {
+          "right": -1
+        }
+      },
+      "runtime_source_sha256": "2a5d1576a5a89de43941685b49e07dd3f6e667db4a04869d3abeded8c121f2a8",
+      "parent_task": "robocasa-fk-v1"
+    }
+  ],
+  "policy": "Complete clocks and task-object poses preserved; compare geometrically symmetric jaw signs, retain every IK failure. No collision or dynamics success inferred."
+}

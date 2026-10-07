@@ -1,0 +1,427 @@
+{
+  "attempt": "/mnt/reachy-retarget/workspaces/feasible-timing-v1-31bb4a33156a48823d3f6daf-contact005_velocity/runs/dynamics/feasible-timing-v1-31bb4a33156a48823d3f6daf-contact005_velocity/31bb4a33156a48823d3f6daf",
+  "report_sha256": "e07353d6143b33b5db11df40c64b030e12465a8fc45156f484a6f5ad3d94c633",
+  "replay_sha256": "d317841e52a3b2bd1619a30b0b3440cc72afaf2f300a7cd1916b6ba45b54741c",
+  "scene_sha256": "02eaa49139dfa408b18066e41b6eaf05ab9388d4973ce02dad1ff18e85257040",
+  "source_hdf5_sha256": "3948241b1d7177e411e6d83ef4a8aa13e1415952aaff8eb7e38f6d2059ae1d53",
+  "source_sequence": "v1.5/square/ph/demo_1",
+  "runtime_mujoco_version": "3.15.0",
+  "recorded_runtime": {
+    "mujoco": "3.15.0",
+    "numpy": "2.5.3",
+    "pin": "4.1.0"
+  },
+  "source_window": 0.0,
+  "candidate": {
+    "depth": 0.025,
+    "height": 0.0,
+    "tilt": 15.0,
+    "yaw": 0.0,
+    "time_scale": 3.0,
+    "close_duration": 0.5,
+    "close_hold": 0,
+    "grasp_force": 2.0,
+    "force_feedback": false,
+    "placement_x": 0.5,
+    "placement_y": -0.1,
+    "geometry_center": true,
+    "controller": "joint_reference",
+    "object_relative": false,
+    "mobile_base": false,
+    "align_object_axes": true,
+    "scene_heading": 0.0,
+    "base_x_max": 100.0,
+    "base_y_min": -100.0,
+    "balanced_force": false,
+    "calibrate_attachment": false,
+    "grasp_local_x": 0.0,
+    "grasp_local_y": 0.0,
+    "soft_force_feedback": false,
+    "controlled_place": false,
+    "source_start_s": 0.0,
+    "place_clearance": 0.04,
+    "automatic_grasp": false,
+    "grasp_region_rank": 0,
+    "force_scale": 1.0,
+    "contact_release": false,
+    "integral_compensation": true,
+    "gripper_closed_target": 1.2460389359878128,
+    "force_preclose_target": null,
+    "arm_velocity_feedforward": 1.0
+  },
+  "plan_summary": {
+    "alignment_variant": "pad_translation",
+    "source_time_scale": 1.1250537035914534,
+    "velocity_dilation": 1.0,
+    "trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+    "frozen_motion_sha256": "4c76a6be59bbd73acea4d88222fbaa41be490fb0b6be05cfb0bb39a7b69be22c"
+  },
+  "initial": {
+    "qvel_max_abs": 0.0,
+    "joint_velocity": {},
+    "actuator_position_errors": {
+      "base_x": 0.0,
+      "base_y": 0.0,
+      "base_yaw": 0.0,
+      "neck_roll": 0.0,
+      "neck_pitch": 0.0,
+      "neck_yaw": 0.0,
+      "r_shoulder_pitch": 0.0,
+      "r_shoulder_roll": 0.0,
+      "r_elbow_yaw": 0.0,
+      "r_elbow_pitch": 0.0,
+      "r_wrist_roll": 0.0,
+      "r_wrist_pitch": 0.0,
+      "r_wrist_yaw": 0.0,
+      "r_hand_finger": 0.0,
+      "l_shoulder_pitch": 0.0,
+      "l_shoulder_roll": 0.0,
+      "l_elbow_yaw": 0.0,
+      "l_elbow_pitch": 0.0,
+      "l_wrist_roll": 0.0,
+      "l_wrist_pitch": 0.0,
+      "l_wrist_yaw": 0.0,
+      "l_hand_finger": 0.0
+    },
+    "first_control_position_errors": {
+      "base_x": 0.0,
+      "base_y": 0.0,
+      "base_yaw": 0.0,
+      "neck_roll": 0.0,
+      "neck_pitch": 0.0,
+      "neck_yaw": 0.0,
+      "r_shoulder_pitch": 0.005538600884800182,
+      "r_shoulder_roll": 0.023481878946343848,
+      "r_elbow_yaw": -0.007269032938169329,
+      "r_elbow_pitch": 0.005974113419250693,
+      "r_wrist_roll": 0.0005711347178564696,
+      "r_wrist_pitch": -0.011655938118724589,
+      "r_wrist_yaw": -0.01221521507909068,
+      "r_hand_finger": 0.0,
+      "l_shoulder_pitch": 0.0,
+      "l_shoulder_roll": 0.0,
+      "l_elbow_yaw": 0.0,
+      "l_elbow_pitch": 0.0,
+      "l_wrist_roll": 0.0,
+      "l_wrist_pitch": 0.0,
+      "l_wrist_yaw": 0.0,
+      "l_hand_finger": 0.0
+    }
+  },
+  "initial_contacts": [
+    {
+      "category": "robot_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "floor",
+        "drivewhl1_link_collision_0"
+      ],
+      "bodies": [
+        "world",
+        "drivewhl1_link"
+      ],
+      "depth_m": 0.0,
+      "normal_force_n": 0.0,
+      "position_world_m": [
+        0.16756380619957065,
+        0.2177346045434375,
+        0.0
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    },
+    {
+      "category": "robot_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "floor",
+        "drivewhl1_link_collision_0"
+      ],
+      "bodies": [
+        "world",
+        "drivewhl1_link"
+      ],
+      "depth_m": 0.0,
+      "normal_force_n": 0.0,
+      "position_world_m": [
+        0.14682137575009094,
+        0.24592594326738773,
+        0.0
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    },
+    {
+      "category": "robot_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "floor",
+        "drivewhl2_link_collision_0"
+      ],
+      "bodies": [
+        "world",
+        "drivewhl2_link"
+      ],
+      "depth_m": 0.0,
+      "normal_force_n": 0.0,
+      "position_world_m": [
+        0.12631568899450196,
+        0.5887054158299163,
+        0.0
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    },
+    {
+      "category": "robot_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "floor",
+        "drivewhl2_link_collision_0"
+      ],
+      "bodies": [
+        "world",
+        "drivewhl2_link"
+      ],
+      "depth_m": 0.0,
+      "normal_force_n": 0.0,
+      "position_world_m": [
+        0.11227248871754728,
+        0.556646274762487,
+        0.0
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    },
+    {
+      "category": "robot_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "floor",
+        "drivewhl3_link_collision_0"
+      ],
+      "bodies": [
+        "world",
+        "drivewhl3_link"
+      ],
+      "depth_m": 0.0,
+      "normal_force_n": 0.0,
+      "position_world_m": [
+        -0.1743303990401552,
+        0.3674980928287452,
+        0.0
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    },
+    {
+      "category": "robot_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "floor",
+        "drivewhl3_link_collision_0"
+      ],
+      "bodies": [
+        "world",
+        "drivewhl3_link"
+      ],
+      "depth_m": 0.0,
+      "normal_force_n": 0.0,
+      "position_world_m": [
+        -0.13954476831377874,
+        0.3713658951722179,
+        0.0
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    }
+  ],
+  "contacts": {
+    "robot_environment": {
+      "first": {
+        "time_s": 0.002,
+        "geoms": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "bodies": [
+          "world",
+          "drivewhl1_link"
+        ],
+        "depth_m": 0.0,
+        "normal_force_n": 0.0,
+        "position_world_m": [
+          0.16756380619957065,
+          0.2177346045434375,
+          0.0
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0000008478492433
+      },
+      "maximum_depth": {
+        "time_s": 6.331999999999525,
+        "geoms": [
+          "right_bar_inner_collision_0",
+          "table_collision"
+        ],
+        "bodies": [
+          "right_bar_inner",
+          "table"
+        ],
+        "depth_m": 0.00033704854217302767,
+        "normal_force_n": 2106.2446380896026,
+        "position_world_m": [
+          0.2001666345482345,
+          0.20364826314420661,
+          0.7700251665905502
+        ],
+        "gripper_target_rad": 1.2460389359878128,
+        "gripper_position_rad": 1.2460343518005552
+      },
+      "contact_samples": 31108
+    },
+    "object_environment": {
+      "first": {
+        "time_s": 0.11400000000000009,
+        "geoms": [
+          "table_collision",
+          "SquareNut_g0"
+        ],
+        "bodies": [
+          "table",
+          "SquareNut_main"
+        ],
+        "depth_m": 0.001994507049024966,
+        "normal_force_n": 0.09838888182614942,
+        "position_world_m": [
+          0.7513993340284681,
+          0.0419367514259881,
+          0.8190027464754875
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 1.9999985994392786
+      },
+      "maximum_depth": {
+        "time_s": 0.1300000000000001,
+        "geoms": [
+          "table_collision",
+          "SquareNut_g4"
+        ],
+        "bodies": [
+          "table",
+          "SquareNut_main"
+        ],
+        "depth_m": 0.00784164274013692,
+        "normal_force_n": 0.026528854306038373,
+        "position_world_m": [
+          0.7428179966572034,
+          -0.06345449908394346,
+          0.8160791786299316
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.00000027970649
+      },
+      "contact_samples": 87508
+    },
+    "hand_object": {
+      "first": {
+        "time_s": 2.8239999999999106,
+        "geoms": [
+          "SquareNut_g2",
+          "r_hand_distal_mimic_link_collision_0"
+        ],
+        "bodies": [
+          "SquareNut_main",
+          "r_hand_distal_mimic_link"
+        ],
+        "depth_m": 5.7015611010871546e-05,
+        "normal_force_n": 1.4693233270177917,
+        "position_world_m": [
+          0.6663815985217914,
+          0.020610042974797085,
+          0.839961913790181
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 1.9999913051019973
+      },
+      "maximum_depth": {
+        "time_s": 3.511999999999835,
+        "geoms": [
+          "SquareNut_g2",
+          "r_hand_distal_mimic_link_collision_0"
+        ],
+        "bodies": [
+          "SquareNut_main",
+          "r_hand_distal_mimic_link"
+        ],
+        "depth_m": 0.0013991079358136912,
+        "normal_force_n": 19.89786805528353,
+        "position_world_m": [
+          0.671622255332597,
+          0.01786348521356501,
+          0.838010958557972
+        ],
+        "gripper_target_rad": 1.2460389359878128,
+        "gripper_position_rad": 1.3912164435291947
+      },
+      "contact_samples": 1434
+    }
+  },
+  "finger_force_peaks": {
+    "r_hand_distal_link": {
+      "normal_force_sum_n": 15.847383898862955,
+      "time_s": 3.5419999999998315
+    },
+    "r_hand_distal_mimic_link": {
+      "normal_force_sum_n": 32.1461905315849,
+      "time_s": 3.6419999999998205
+    }
+  },
+  "peak_gripper_actuator_force": 2.0,
+  "peak_scalar_joint_speed": {},
+  "recorded_contact_metrics": {
+    "first_full_bilateral_interval_end_s": 3.519999999999834,
+    "full_bilateral_intervals": 37,
+    "intervals": 957,
+    "first_recorded_drift_anchor_interval_end_s": null,
+    "grasp_drift_available": false,
+    "issued_gripper_range_rad": [
+      1.2460389359878128,
+      2.0
+    ],
+    "first_requested_closure_plan_time_s": 3.3200000000000003
+  },
+  "replay": {
+    "max_qpos_error": 0.0,
+    "max_qvel_error": 0.0,
+    "exact_within_1e7": true
+  },
+  "reported_gates": {
+    "task_stable_final_1s": false,
+    "bilateral_lifted_grasp": false,
+    "carry_contact_95pct": false,
+    "grasp_translation_3mm": true,
+    "grasp_rotation_3deg": true,
+    "hand_object_penetration_1mm": false,
+    "robot_environment_penetration_2mm": true,
+    "object_environment_penetration_2mm": false,
+    "no_nonhand_object_robot_contact": true,
+    "robot_self_penetration_2mm": true,
+    "actual_arm_speed_1rad_s": true,
+    "actual_base_speed_limits": true,
+    "joint_margin_25mrad": true,
+    "self_clearance_9mm": true,
+    "rollout_complete": true
+  },
+  "reported_failures": [
+    "task_stable_final_1s",
+    "bilateral_lifted_grasp",
+    "carry_contact_95pct",
+    "hand_object_penetration_1mm",
+    "object_environment_penetration_2mm"
+  ],
+  "reported_physics_validated": false,
+  "semantics": "Independent actuator-only replay diagnosis; original gates/results unchanged; zero drift without an acquired anchor is unavailable, not success",
+  "runtime_source_sha256": "f78c8d9dc1e39fe41cad80579232ab0016de4bcbc4767974f420b3496be8ed74",
+  "diagnostic_worker": "reachy-retarget-worker-7d46748688-47rp8"
+}

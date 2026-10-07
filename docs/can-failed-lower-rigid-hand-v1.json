@@ -1,0 +1,363 @@
+{
+  "runtime": {
+    "python": "/mnt/reachy-retarget/runtime/run-python",
+    "source": "/mnt/reachy-retarget/releases/48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+    "control": "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+    "source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+    "control_sha256": "8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e",
+    "reachy_agent_revision": "eb39c2e0f133e8955acfb949513512eaae193db1",
+    "reachy_agent_source": "/mnt/reachy-retarget/references/reachy-agent/eb39c2e0f133e8955acfb949513512eaae193db1"
+  },
+  "script_sha256": "a73ec3751dca890ecf9ad6a90a5b0708910ee4203b360d7179c19e19c9011dad",
+  "input_sha256": "0a02c5ab0955cb4a18850160d644b6313903323a1695393e9050cb9d8215984d",
+  "rows": [
+    {
+      "id": "60f8d5d2c2ec17c0c57b4e5a-yaw0",
+      "source": "60f8d5d2c2ec17c0c57b4e5a",
+      "scene_sha256": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+      "exact_target_native_hand_gap_m": 0.09652290307048612,
+      "exact_target_worst_pair": [
+        "r_hand_palm_link_collision_0",
+        "source_scene_geom_23",
+        1.107969075205669
+      ],
+      "exact_target_fixed_hand_clear": true,
+      "optimizations": [],
+      "checked_physical_pairs": 65,
+      "apertures_rad": [
+        1.107969075205669,
+        1.1809768064042516,
+        1.2539845376028345,
+        1.3269922688014173,
+        1.4
+      ],
+      "object_and_joint_state_unchanged": true,
+      "physics_validated": false,
+      "scope": "Rigid gripper condition only; independent native hand geoms posed from TCP target in copied planning data. Exact clear target disproves a fixed-hand obstruction but does not certify arm/base/joint feasibility. Failed local optimization is not a global impossibility proof."
+    },
+    {
+      "id": "68e6a0e494dbbc81efc2477b-yaw0",
+      "source": "68e6a0e494dbbc81efc2477b",
+      "scene_sha256": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+      "exact_target_native_hand_gap_m": -0.0001620906490327439,
+      "exact_target_worst_pair": [
+        "r_hand_palm_link_collision_0",
+        "source_scene_geom_23",
+        1.1079703620556955
+      ],
+      "exact_target_fixed_hand_clear": false,
+      "optimizations": [
+        {
+          "seed": "exact_desired",
+          "success": true,
+          "message": "Optimization terminated successfully",
+          "required_squared_tolerance_factor": 1.1112427436729673,
+          "position_error_m": 0.0021083099806935113,
+          "rotation_error_rad": 0.021083099806935197,
+          "minimum_fixed_hand_gap_m": 0.0029999999999999953,
+          "worst_pair": [
+            "r_hand_palm_link_collision_0",
+            "source_scene_geom_23",
+            1.1079703620556955
+          ],
+          "constraint_minimum": -9.769962616701378e-15,
+          "fixed_hand_pose_admitted": false,
+          "parameters": [
+            -0.7594332177738089,
+            -5.065788177367638e-09,
+            0.7310977577688821,
+            -0.008396346335828375,
+            -1.0540854532401345,
+            -0.008723663721519621,
+            1.1112427436729673
+          ]
+        },
+        {
+          "seed": "failed_fk",
+          "success": true,
+          "message": "Optimization terminated successfully",
+          "required_squared_tolerance_factor": 1.1112427436746104,
+          "position_error_m": 0.0021083099806950864,
+          "rotation_error_rad": 0.02108309980695079,
+          "minimum_fixed_hand_gap_m": 0.0029999999999997585,
+          "worst_pair": [
+            "r_hand_palm_link_collision_0",
+            "source_scene_geom_23",
+            1.1079703620556955
+          ],
+          "constraint_minimum": -8.052008134325679e-14,
+          "fixed_hand_pose_admitted": false,
+          "parameters": [
+            -0.7594314270219672,
+            -1.2941893034414487e-08,
+            0.7310996179222138,
+            -0.008399268704010799,
+            -1.0540854225739857,
+            -0.00872455597038073,
+            1.1112427436746104
+          ]
+        }
+      ],
+      "checked_physical_pairs": 65,
+      "apertures_rad": [
+        1.1079703620556955,
+        1.1809777715417717,
+        1.2539851810278477,
+        1.3269925905139237,
+        1.4
+      ],
+      "object_and_joint_state_unchanged": true,
+      "physics_validated": false,
+      "scope": "Rigid gripper condition only; independent native hand geoms posed from TCP target in copied planning data. Exact clear target disproves a fixed-hand obstruction but does not certify arm/base/joint feasibility. Failed local optimization is not a global impossibility proof."
+    },
+    {
+      "id": "8479dbb1dcbbde2ea980fdb5-yaw0",
+      "source": "8479dbb1dcbbde2ea980fdb5",
+      "scene_sha256": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+      "exact_target_native_hand_gap_m": -0.00019478160981688616,
+      "exact_target_worst_pair": [
+        "r_hand_palm_link_collision_0",
+        "source_scene_geom_23",
+        1.1079729895894674
+      ],
+      "exact_target_fixed_hand_clear": false,
+      "optimizations": [
+        {
+          "seed": "exact_desired",
+          "success": true,
+          "message": "Optimization terminated successfully",
+          "required_squared_tolerance_factor": 1.0768077596772618,
+          "position_error_m": 0.002075386961197628,
+          "rotation_error_rad": 0.02075386961197624,
+          "minimum_fixed_hand_gap_m": 0.002999999999999769,
+          "worst_pair": [
+            "r_hand_palm_link_collision_0",
+            "source_scene_geom_23",
+            1.1079729895894674
+          ],
+          "constraint_minimum": -7.705063439130318e-14,
+          "fixed_hand_pose_admitted": false,
+          "parameters": [
+            -0.61214510763848,
+            5.2900135189434575e-08,
+            0.8379057983279218,
+            -0.0681100527788599,
+            -1.0342595759072266,
+            -0.04975851717989413,
+            1.0768077596772618
+          ]
+        },
+        {
+          "seed": "failed_fk",
+          "success": true,
+          "message": "Optimization terminated successfully",
+          "required_squared_tolerance_factor": 1.0768077596770163,
+          "position_error_m": 0.002075386961197369,
+          "rotation_error_rad": 0.02075386961197366,
+          "minimum_fixed_hand_gap_m": 0.0030000000000000135,
+          "worst_pair": [
+            "r_hand_palm_link_collision_0",
+            "source_scene_geom_23",
+            1.1079729895894674
+          ],
+          "constraint_minimum": 4.218847493575595e-15,
+          "fixed_hand_pose_admitted": false,
+          "parameters": [
+            -0.6121445210219434,
+            -9.716924170946407e-08,
+            0.8379062268892732,
+            -0.06810926607405085,
+            -1.0342596632612238,
+            -0.04975777831298036,
+            1.0768077596770163
+          ]
+        }
+      ],
+      "checked_physical_pairs": 65,
+      "apertures_rad": [
+        1.1079729895894674,
+        1.1809797421921004,
+        1.2539864947947337,
+        1.326993247397367,
+        1.4
+      ],
+      "object_and_joint_state_unchanged": true,
+      "physics_validated": false,
+      "scope": "Rigid gripper condition only; independent native hand geoms posed from TCP target in copied planning data. Exact clear target disproves a fixed-hand obstruction but does not certify arm/base/joint feasibility. Failed local optimization is not a global impossibility proof."
+    },
+    {
+      "id": "89f903dbd89d3c10018d3a99-yaw0",
+      "source": "89f903dbd89d3c10018d3a99",
+      "scene_sha256": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+      "exact_target_native_hand_gap_m": 0.00839623888762417,
+      "exact_target_worst_pair": [
+        "r_hand_distal_mimic_link_collision_0",
+        "source_scene_geom_25",
+        1.1809762481859183
+      ],
+      "exact_target_fixed_hand_clear": true,
+      "optimizations": [],
+      "checked_physical_pairs": 65,
+      "apertures_rad": [
+        1.1079683309145576,
+        1.1809762481859183,
+        1.2539841654572788,
+        1.3269920827286392,
+        1.4
+      ],
+      "object_and_joint_state_unchanged": true,
+      "physics_validated": false,
+      "scope": "Rigid gripper condition only; independent native hand geoms posed from TCP target in copied planning data. Exact clear target disproves a fixed-hand obstruction but does not certify arm/base/joint feasibility. Failed local optimization is not a global impossibility proof."
+    },
+    {
+      "id": "c33dd8770f9c734425da52f8-yaw0",
+      "source": "c33dd8770f9c734425da52f8",
+      "scene_sha256": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+      "exact_target_native_hand_gap_m": -8.562282870371416e-05,
+      "exact_target_worst_pair": [
+        "r_hand_palm_link_collision_0",
+        "source_scene_geom_31",
+        1.1079683601039103
+      ],
+      "exact_target_fixed_hand_clear": false,
+      "optimizations": [
+        {
+          "seed": "exact_desired",
+          "success": true,
+          "message": "Optimization terminated successfully",
+          "required_squared_tolerance_factor": 1.1967282429982666,
+          "position_error_m": 0.0021879014996096834,
+          "rotation_error_rad": 0.021879014996095927,
+          "minimum_fixed_hand_gap_m": 0.003000000000000055,
+          "worst_pair": [
+            "r_hand_palm_link_collision_0",
+            "source_scene_geom_31",
+            1.1079683601039103
+          ],
+          "constraint_minimum": -3.0886404545071855e-13,
+          "fixed_hand_pose_admitted": false,
+          "parameters": [
+            7.088194620083255e-08,
+            -1.0046227430714028,
+            0.4329681132626982,
+            0.3311785544395079,
+            -0.4126487910043037,
+            -0.9574810616197692,
+            1.1967282429982666
+          ]
+        },
+        {
+          "seed": "failed_fk",
+          "success": true,
+          "message": "Optimization terminated successfully",
+          "required_squared_tolerance_factor": 1.1967282429936204,
+          "position_error_m": 0.0021879014996053305,
+          "rotation_error_rad": 0.02187901499605605,
+          "minimum_fixed_hand_gap_m": 0.002999999999999008,
+          "worst_pair": [
+            "r_hand_palm_link_collision_0",
+            "source_scene_geom_31",
+            1.1079683601039103
+          ],
+          "constraint_minimum": -4.936051567483446e-13,
+          "fixed_hand_pose_admitted": false,
+          "parameters": [
+            -4.628550250546779e-09,
+            -1.0046223105280496,
+            0.43296911689299067,
+            0.3311790917713325,
+            -0.4126516133880817,
+            -0.9574796593849096,
+            1.1967282429936204
+          ]
+        }
+      ],
+      "checked_physical_pairs": 65,
+      "apertures_rad": [
+        1.1079683601039103,
+        1.1809762700779327,
+        1.253984180051955,
+        1.3269920900259775,
+        1.4
+      ],
+      "object_and_joint_state_unchanged": true,
+      "physics_validated": false,
+      "scope": "Rigid gripper condition only; independent native hand geoms posed from TCP target in copied planning data. Exact clear target disproves a fixed-hand obstruction but does not certify arm/base/joint feasibility. Failed local optimization is not a global impossibility proof."
+    },
+    {
+      "id": "60f8d5d2c2ec17c0c57b4e5a-continued-lower",
+      "source": "60f8d5d2c2ec17c0c57b4e5a",
+      "scene_sha256": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+      "exact_target_native_hand_gap_m": -0.0002502429506126826,
+      "exact_target_worst_pair": [
+        "r_hand_palm_link_collision_0",
+        "source_scene_geom_23",
+        1.107969075205669
+      ],
+      "exact_target_fixed_hand_clear": false,
+      "optimizations": [
+        {
+          "seed": "exact_desired",
+          "success": true,
+          "message": "Optimization terminated successfully",
+          "required_squared_tolerance_factor": 2.143572592842128,
+          "position_error_m": 0.0029281889234420142,
+          "rotation_error_rad": 0.02928188923442016,
+          "minimum_fixed_hand_gap_m": 0.0030000000000002286,
+          "worst_pair": [
+            "r_hand_palm_link_collision_0",
+            "source_scene_geom_23",
+            1.107969075205669
+          ],
+          "constraint_minimum": 0.0,
+          "fixed_hand_pose_admitted": false,
+          "parameters": [
+            -1.2977505875985873,
+            2.135651425387629e-07,
+            0.6778023349248666,
+            -0.5042113794773752,
+            0.9784469188159634,
+            -0.9653937563021618,
+            2.143572592842128
+          ]
+        },
+        {
+          "seed": "failed_fk",
+          "success": true,
+          "message": "Optimization terminated successfully",
+          "required_squared_tolerance_factor": 2.5505870219851157,
+          "position_error_m": 0.0031941114708073344,
+          "rotation_error_rad": 0.031941114708069186,
+          "minimum_fixed_hand_gap_m": 0.0029999999999997906,
+          "worst_pair": [
+            "r_hand_palm_link_collision_0",
+            "source_scene_geom_23",
+            1.107969075205669
+          ],
+          "constraint_minimum": -6.328271240363392e-13,
+          "fixed_hand_pose_admitted": false,
+          "parameters": [
+            -1.2944276777194168,
+            -3.0390678573243004e-07,
+            0.9354378702722985,
+            0.8025911697443509,
+            -0.8203682854984073,
+            1.1105990781474124,
+            2.5505870219851157
+          ]
+        }
+      ],
+      "checked_physical_pairs": 65,
+      "apertures_rad": [
+        1.107969075205669,
+        1.1809768064042516,
+        1.2539845376028345,
+        1.3269922688014173,
+        1.4
+      ],
+      "object_and_joint_state_unchanged": true,
+      "physics_validated": false,
+      "scope": "Rigid gripper condition only; independent native hand geoms posed from TCP target in copied planning data. Exact clear target disproves a fixed-hand obstruction but does not certify arm/base/joint feasibility. Failed local optimization is not a global impossibility proof."
+    }
+  ]
+}

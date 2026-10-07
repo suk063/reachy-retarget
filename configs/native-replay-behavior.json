@@ -1,0 +1,267 @@
+{
+  "schema": "reachy-native-replay-plan-v1",
+  "dataset": "behavior",
+  "checked_on": "2026-10-06",
+  "status": "not_launched_requires_RTX_GPU_asset_terms_and_assets",
+  "automatic_launch": false,
+  "source_pilot": {
+    "path": "task-0002/episode_00021890.hdf5",
+    "url": "https://huggingface.co/datasets/behavior-1k/2026-challenge-rawdata/resolve/f9d2901112993d75684223820eec70722806c2c4/task-0002/episode_00021890.hdf5",
+    "bytes": 667124,
+    "sha256": "b01e7b8183e2c738edf1f5e65bba53163fee30713970845631401e20e6cd1a75"
+  },
+  "recorded_source_runtime": {
+    "omnigibson": "3.7.0-alpha",
+    "commit": "c1736c23fe8083bb210da158008ad0bfa1638423",
+    "og_dataset": "1.2.0rc21"
+  },
+  "container": {
+    "reference": "docker.io/stanfordvl/behavior@sha256:3dda0241dae8c6afc5dc3b5d29f9d6e52035d96cc68e8117db37723e7fbb674e",
+    "publisher_tag": "3.9.3-post1",
+    "platform": "linux/amd64",
+    "manifest_digest": "sha256:3dda0241dae8c6afc5dc3b5d29f9d6e52035d96cc68e8117db37723e7fbb674e",
+    "config_digest": "sha256:d27e4f947c99feb36b185da0d3a0674ba6364f3fca8772767ed099499a6b279c",
+    "compressed_layer_bytes": 14605247329,
+    "source_revision": "bd049de3119acdcdf2334fe9e1ebe060fa20c108",
+    "oci_revision_verified": true,
+    "availability": "registry manifest/config verified; no layer pull or runtime test performed",
+    "python": "3.11",
+    "isaac_sim": "5.1.0",
+    "cuda_toolkit_build": "12.8",
+    "entrypoint": [
+      "/entrypoint.sh"
+    ],
+    "persistent_idle_args": [
+      "sleep",
+      "infinity"
+    ],
+    "registry_source": "https://hub.docker.com/v2/repositories/stanfordvl/behavior/tags/3.9.3-post1",
+    "docs_discrepancy": "Installation page says Docker temporarily unavailable; public CI, registry manifest and matching OCI revision confirm an image is published."
+  },
+  "hardware": {
+    "cpu_only_replay_supported": false,
+    "gpu_count": 1,
+    "gpu_must_have_RT_cores": true,
+    "isaac_5_1_documented_minimum_gpu": "GeForce RTX 4080",
+    "isaac_5_1_documented_minimum_vram_gb": 16,
+    "unsupported_gpu_examples": [
+      "A100",
+      "H100"
+    ],
+    "minimum_host_ram_gb": 32,
+    "minimum_cpu_cores": 4,
+    "linux_driver_tested_version": "580.65.06",
+    "os": [
+      "Ubuntu22.04",
+      "Ubuntu24.04"
+    ],
+    "gpu_requirement_source": "https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/requirements.html",
+    "headless_note": "Headless mode removes GUI requirements, not the RTX GPU/runtime dependency."
+  },
+  "assets": {
+    "repository": "behavior-1k/zipped-datasets",
+    "revision": "9f0d57d465726976ed98138d3f8b8ca3e2186775",
+    "members": [
+      {
+        "path": "behavior-1k-assets-3.9.0.zip",
+        "url": "https://huggingface.co/datasets/behavior-1k/zipped-datasets/resolve/9f0d57d465726976ed98138d3f8b8ca3e2186775/behavior-1k-assets-3.9.0.zip",
+        "bytes": 31457673073,
+        "sha256": "09e9fce600f841dc611aa96c0b1b9f9074f56f0e67898b37b39bd00c38a0095e",
+        "members": 141485,
+        "uncompressed_bytes": 34742171984,
+        "metadata_inspection": "ZIP central-directory HTTP range; no members extracted",
+        "prefixes": [
+          "VERSION",
+          "metadata",
+          "objects",
+          "scenes",
+          "systems"
+        ],
+        "extraction_subdirectory": "behavior-1k-assets"
+      },
+      {
+        "path": "omnigibson-robot-assets-3.8.2.zip",
+        "url": "https://huggingface.co/datasets/behavior-1k/zipped-datasets/resolve/9f0d57d465726976ed98138d3f8b8ca3e2186775/omnigibson-robot-assets-3.8.2.zip",
+        "bytes": 641004353,
+        "sha256": "3d813b2181e0581cf2300a40892de70f8475fe59346ceeea4fb9bf7ff21ce126",
+        "members": 3992,
+        "uncompressed_bytes": 2927238404,
+        "metadata_inspection": "ZIP central-directory HTTP range; no members extracted",
+        "prefixes": [
+          ".gitattributes",
+          ".gitignore",
+          "README.md",
+          "VERSION",
+          "fonts",
+          "models",
+          "source",
+          "test"
+        ],
+        "extraction_subdirectory": "omnigibson-robot-assets"
+      },
+      {
+        "path": "2026-challenge-task-instances.zip",
+        "url": "https://huggingface.co/datasets/behavior-1k/zipped-datasets/resolve/9f0d57d465726976ed98138d3f8b8ca3e2186775/2026-challenge-task-instances.zip",
+        "bytes": 108543852,
+        "sha256": "d4ac3d72dd585178e85d542f28d1b48233b886c80e196e2f9d3aa5993ba21f81",
+        "members": 32643,
+        "uncompressed_bytes": 577219383,
+        "metadata_inspection": "ZIP central-directory HTTP range; no members extracted",
+        "prefixes": [
+          "README.md",
+          "metadata",
+          "scene_test",
+          "scenes"
+        ],
+        "extraction_subdirectory": "2026-challenge-task-instances"
+      }
+    ],
+    "total_compressed_bytes": 32207221278,
+    "total_uncompressed_bytes": 38246629771,
+    "minimum_peak_asset_bytes_if_archives_retained": 70453851049,
+    "free_space_floor_bytes": 50000000000,
+    "minimum_free_before_complete_archive_fetch_and_extract": 120453851049,
+    "space_excludes": "container layers, shader/runtime caches, replay outputs, filesystem overhead and other concurrent transfers",
+    "subset_policy": "No verified per-scene dependency selector yet. These are the three official prerequisite archives, not the 1.44TB raw demonstration release."
+  },
+  "terms": {
+    "state": "acceptance_not_recorded_by_this_recipe",
+    "nvidia_eula_required": true,
+    "behavior_bundle_terms_required": true,
+    "terms_source": "https://github.com/StanfordVL/BEHAVIOR-1K/blob/bd049de3119acdcdf2334fe9e1ebe060fa20c108/OmniGibson/omnigibson/utils/asset_utils.py",
+    "observed_restrictions": [
+      "noncommercial academic research",
+      "asset use only within OmniGibson",
+      "no asset extraction/reverse engineering",
+      "no redistribution of key or asset elements"
+    ],
+    "mujoco_asset_conversion": "blocked unless separate rights are established; public file access is not permission to export encrypted assets",
+    "alternative": "Run Reachy target validation in OmniGibson while retaining assets there, or obtain separately licensed corresponding assets. Neither is implemented or physics-validated by this recipe."
+  },
+  "paths": {
+    "shared_root": "/mnt/reachy-retarget",
+    "source_archive_root": "/mnt/reachy-retarget/data/raw/behavior",
+    "runtime_root": "/mnt/reachy-retarget/native/behavior",
+    "asset_root": "/mnt/reachy-retarget/native/behavior/datasets",
+    "replay_data_folder": "/mnt/reachy-retarget/native/behavior",
+    "expected_input": "/mnt/reachy-retarget/native/behavior/2026-challenge-rawdata/task-0002/episode_00021890.hdf5",
+    "source_checkout_in_container": "/behavior-src",
+    "replayed_output": "/mnt/reachy-retarget/native/behavior/replayed",
+    "shader_cache": "/mnt/reachy-retarget/native/behavior/cache"
+  },
+  "environment": {
+    "OMNIGIBSON_DATA_PATH": "/mnt/reachy-retarget/native/behavior/datasets",
+    "OMNIGIBSON_APPDATA_PATH": "/mnt/reachy-retarget/native/behavior/cache/appdata",
+    "OMNIGIBSON_HEADLESS": "1",
+    "OMNIGIBSON_GPU_ID": "0",
+    "NVIDIA_DRIVER_CAPABILITIES": "compute,utility,graphics,display"
+  },
+  "license_environment_after_acceptance_only": {
+    "OMNI_KIT_ACCEPT_EULA": "YES"
+  },
+  "commands": {
+    "source_version_check": [
+      "/opt/conda/envs/behavior/bin/python",
+      "-c",
+      "import hashlib,pathlib; p=pathlib.Path('/behavior-src/OmniGibson/scripts/learning/replay_obs.py'); print(hashlib.sha256(p.read_bytes()).hexdigest())"
+    ],
+    "gpu_check": [
+      "nvidia-smi",
+      "--query-gpu=name,memory.total,driver_version",
+      "--format=csv,noheader"
+    ],
+    "python_runtime_check": [
+      "/opt/conda/envs/behavior/bin/python",
+      "-c",
+      "import sys, importlib.metadata as m; print(sys.version); print(m.version('isaacsim'))"
+    ],
+    "official_asset_license_prompt_after_verified_archives_extracted": [
+      "/opt/conda/envs/behavior/bin/python",
+      "-m",
+      "omnigibson.utils.asset_utils",
+      "--download_behavior_1k_assets"
+    ],
+    "reference_replay": [
+      "/opt/conda/envs/behavior/bin/python",
+      "/behavior-src/OmniGibson/scripts/learning/replay_obs.py",
+      "--data_folder",
+      "/mnt/reachy-retarget/native/behavior",
+      "--demo_id",
+      "21890",
+      "--output_format",
+      "hdf5"
+    ],
+    "interactive_use": [
+      "kubectl",
+      "exec",
+      "-it",
+      "NATIVE_GPU_WORKER",
+      "--",
+      "/entrypoint.sh",
+      "bash"
+    ]
+  },
+  "replay_export": {
+    "entry_point": "OmniGibson/scripts/learning/replay_obs.py",
+    "source_revision": "bd049de3119acdcdf2334fe9e1ebe060fa20c108",
+    "standard_output": "RGB/depth/proprioception HDF5; does not include our complete object-pose export automatically",
+    "pose_callback": "reachy_retarget.adapters.behavior.capture_replay_frame(env, object_names)",
+    "callback_hook": "HDF5PlaybackWrapper.playback_episode(post_state_update_callback=callback)",
+    "object_selection": "Task-related declared objects from source BDDL scope, excluding robot and fixed world ground; no irrelevant scene-object pose features",
+    "named_robot_joint_state_export_implemented": false,
+    "source_to_current_runtime_compatibility_validated": false,
+    "compatibility_gates": [
+      "source shape T149\u00d7701 and T148\u00d723 maintained",
+      "source task object identities/asset hashes checked",
+      "restored world poses inspected before any training export",
+      "all selected task objects and their articulated links accounted for",
+      "no source assistance copied into target dynamics validation"
+    ],
+    "all_task_object_pose_export_implemented": false,
+    "selected_task_object_names": [
+      "bottom_cabinet_rhdbzv_0",
+      "cauldron_92",
+      "coffee_table_koagbh_0",
+      "pillar_candle_89",
+      "pillar_candle_90",
+      "pillar_candle_91",
+      "pumpkin_93",
+      "pumpkin_94"
+    ],
+    "excluded_fixed_ground_pose_names": [
+      "floors_ulujpr_0"
+    ]
+  },
+  "readiness_gates": [
+    {
+      "id": "RTX_GPU_runtime",
+      "satisfied": false
+    },
+    {
+      "id": "asset_terms_acceptance",
+      "satisfied": false
+    },
+    {
+      "id": "pinned_assets_on_cluster",
+      "satisfied": false
+    },
+    {
+      "id": "source_replay_compatibility",
+      "satisfied": false
+    },
+    {
+      "id": "selected_task_object_and_robot_state_export",
+      "satisfied": false
+    }
+  ],
+  "reachy_agent_reference": {
+    "url": "https://github.com/suk063/reachy-agent",
+    "branch": "main",
+    "revision": "eb39c2e0f133e8955acfb949513512eaae193db1",
+    "verification": "git ls-remote origin refs/heads/main; sibling local HEAD matched; read-only"
+  },
+  "evidence": "docs/datasets/behavior-momagen-integration-evidence.json",
+  "source_file_checksums": {
+    "OmniGibson/scripts/learning/replay_obs.py": "c13d768953037e968de12b5f6337d9c392b20b62987a4407854c37bd4858ea27"
+  }
+}

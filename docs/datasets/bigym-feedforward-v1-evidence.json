@@ -1,0 +1,402 @@
+{
+  "independent_demonstrations": 1,
+  "source_group": "c795f62efb4f4d20ab899af96d766a2f",
+  "physical_successes": 0,
+  "default_controller_changed": false,
+  "producer_overlay_sha256": "1716817bfec572be9d685cce0b95e99524bc266802d7f2c5488dcd4d3416c818",
+  "protocol": "/mnt/reachy-retarget/workspaces/bigym-feedforward-protocol-20261007-01/protocol.json",
+  "experiments": [
+    {
+      "profile": "source",
+      "workspace": "/mnt/reachy-retarget/workspaces/bigym-feedforward-frs8d-20261007-01",
+      "status": "diagnostic_failed",
+      "physics_validated": false,
+      "physical_steps": 8753,
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg",
+        "object_environment_penetration_2mm"
+      ],
+      "all_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": false,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "robot_self_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "finite_integration": true,
+        "actuator_replay": true
+      },
+      "lift_m": 0.0,
+      "grasp": {
+        "left": {
+          "acquired": false,
+          "bilateral_carry_fraction": null,
+          "grasp_translation_m": null,
+          "grasp_rotation_rad": null,
+          "measured_carry_duration_s": 0.0,
+          "phases": 1
+        }
+      },
+      "actual_peak_arm_rad_s": 0.9851580116383033,
+      "actual_peak_base_vx_vy_wz": [
+        0.38986524667805666,
+        0.529449944223872,
+        0.6460004928180658
+      ],
+      "inactive_hand_audit": {
+        "passed": true,
+        "complete": true,
+        "measured_steps": 8753,
+        "expected_steps": 8753,
+        "inactive_hands": [
+          "right"
+        ],
+        "positive_contact_force_threshold_n": 1e-06,
+        "positive_force_contacts": 0,
+        "events": [],
+        "timing": "Solved contacts immediately after each mj_step, before cache synchronization",
+        "scope": "Measured additional guard; source intent unchanged, no inactive hand excluded from collision checks"
+      },
+      "replay_max_absolute_errors": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "clock": 0.0
+      },
+      "arm_feedforward": {
+        "enabled": true,
+        "method": "bounded_velocity",
+        "changed_groups": [
+          "left_arm",
+          "right_arm"
+        ],
+        "arm_joint_names": [
+          "l_shoulder_pitch",
+          "l_shoulder_roll",
+          "l_elbow_yaw",
+          "l_elbow_pitch",
+          "l_wrist_roll",
+          "l_wrist_pitch",
+          "l_wrist_yaw",
+          "r_shoulder_pitch",
+          "r_shoulder_roll",
+          "r_elbow_yaw",
+          "r_elbow_pitch",
+          "r_wrist_roll",
+          "r_wrist_pitch",
+          "r_wrist_yaw"
+        ],
+        "kp": [
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0
+        ],
+        "kv": [
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0
+        ],
+        "damping_lag_s": [
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333
+        ],
+        "scale": 1.0,
+        "max_offset_rad": 0.2,
+        "max_command_speed_rad_s": 1.0,
+        "joint_margin_rad": 0.025,
+        "boundary_taper_s": 0.1,
+        "position_clamps": 1771,
+        "slew_clamps": 37012,
+        "maximum_applied_offset_rad": 0.10655369946108895,
+        "maximum_command_rate_rad_s": 1.0000000000000555,
+        "reference_clock_unchanged": true,
+        "source_gripper_intent_unchanged": true,
+        "evidence": {
+          "lag_artifact": "/mnt/reachy-retarget/workspaces/bigym-servo-lag-decomposition-20261007-01/result.json",
+          "lag_sha256": "255ac860053c3fabf0b97b41df70c369f8f59fececad6a77831160153301ae90",
+          "acquisition_artifact": "/mnt/reachy-retarget/workspaces/bigym-policy-acquisition-audit-20261007-01/result.json",
+          "acquisition_sha256": "532a3accbc08358f4247cd1c71e2b2ba457ae33fc83f58cd3e9b0f03320ca30b",
+          "first_close_arm_correction_m": 0.032497672344434576
+        },
+        "semantics": "Applied position targets include bounded kv/kp times reference angular velocity; source poses, base/neck/gripper targets, model gains and all object states are unchanged"
+      },
+      "memory_max_sampled_bytes": 3545333760,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "common_archive": {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-side-baseplan-ff1-margin-020-source.hdf5",
+        "sha256": "257ae9b37c250991d411db9ceafd56307341a8df3a61a8327e84e7ee023b5e91",
+        "bytes": 78307344,
+        "sidecar_sha256": "d5d8a90a231f9157db2d155a477a543f78461cbc0c7ad13ed2b3e1aa1605b7aa"
+      },
+      "verified_files": 151,
+      "verified_bytes": 486379478,
+      "cross_pod_verification": "/mnt/reachy-retarget/workspaces/bigym-feedforward-frs8d-20261007-01/cross-pod-and-sidecars-verification.json"
+    },
+    {
+      "profile": "global-contact-4ms",
+      "workspace": "/mnt/reachy-retarget/workspaces/bigym-feedforward-nl77d-20261007-01",
+      "status": "diagnostic_failed",
+      "physics_validated": false,
+      "physical_steps": 17506,
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg",
+        "actual_arm_speed_1rad_s",
+        "actual_base_speed_limits"
+      ],
+      "all_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": false,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "robot_self_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": false,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "finite_integration": true,
+        "actuator_replay": true
+      },
+      "lift_m": 0.0,
+      "grasp": {
+        "left": {
+          "acquired": false,
+          "bilateral_carry_fraction": null,
+          "grasp_translation_m": null,
+          "grasp_rotation_rad": null,
+          "measured_carry_duration_s": 0.0,
+          "phases": 1
+        }
+      },
+      "actual_peak_arm_rad_s": 1.0831197400271289,
+      "actual_peak_base_vx_vy_wz": [
+        0.6152705935160849,
+        0.4621690410286862,
+        0.8196360321705501
+      ],
+      "inactive_hand_audit": {
+        "passed": true,
+        "complete": true,
+        "measured_steps": 17506,
+        "expected_steps": 17506,
+        "inactive_hands": [
+          "right"
+        ],
+        "positive_contact_force_threshold_n": 1e-06,
+        "positive_force_contacts": 0,
+        "events": [],
+        "timing": "Solved contacts immediately after each mj_step, before cache synchronization",
+        "scope": "Measured additional guard; source intent unchanged, no inactive hand excluded from collision checks"
+      },
+      "replay_max_absolute_errors": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "clock": 0.0
+      },
+      "arm_feedforward": {
+        "enabled": true,
+        "method": "bounded_velocity",
+        "changed_groups": [
+          "left_arm",
+          "right_arm"
+        ],
+        "arm_joint_names": [
+          "l_shoulder_pitch",
+          "l_shoulder_roll",
+          "l_elbow_yaw",
+          "l_elbow_pitch",
+          "l_wrist_roll",
+          "l_wrist_pitch",
+          "l_wrist_yaw",
+          "r_shoulder_pitch",
+          "r_shoulder_roll",
+          "r_elbow_yaw",
+          "r_elbow_pitch",
+          "r_wrist_roll",
+          "r_wrist_pitch",
+          "r_wrist_yaw"
+        ],
+        "kp": [
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0,
+          180.0
+        ],
+        "kv": [
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0,
+          24.0
+        ],
+        "damping_lag_s": [
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333,
+          0.13333333333333333
+        ],
+        "scale": 1.0,
+        "max_offset_rad": 0.2,
+        "max_command_speed_rad_s": 1.0,
+        "joint_margin_rad": 0.025,
+        "boundary_taper_s": 0.1,
+        "position_clamps": 3637,
+        "slew_clamps": 80332,
+        "maximum_applied_offset_rad": 0.10653691622043526,
+        "maximum_command_rate_rad_s": 1.000000000000111,
+        "reference_clock_unchanged": true,
+        "source_gripper_intent_unchanged": true,
+        "evidence": {
+          "lag_artifact": "/mnt/reachy-retarget/workspaces/bigym-servo-lag-decomposition-20261007-01/result.json",
+          "lag_sha256": "255ac860053c3fabf0b97b41df70c369f8f59fececad6a77831160153301ae90",
+          "acquisition_artifact": "/mnt/reachy-retarget/workspaces/bigym-policy-acquisition-audit-20261007-01/result.json",
+          "acquisition_sha256": "532a3accbc08358f4247cd1c71e2b2ba457ae33fc83f58cd3e9b0f03320ca30b",
+          "first_close_arm_correction_m": 0.032497672344434576
+        },
+        "semantics": "Applied position targets include bounded kv/kp times reference angular velocity; source poses, base/neck/gripper targets, model gains and all object states are unchanged"
+      },
+      "memory_max_sampled_bytes": 3650617344,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "common_archive": {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-side-baseplan-ff1-margin-020-global-contact-4ms.hdf5",
+        "sha256": "19d5c1d5a76ef94c6cb490f3496d05319007600d9c8ab004727ee21ab91157c9",
+        "bytes": 161174921,
+        "sidecar_sha256": "c01d3f0b0b94401e59a55aa2307abeaed103836caa0a9ad4b39362cf7816f631"
+      },
+      "verified_files": 166,
+      "verified_bytes": 834322804,
+      "cross_pod_verification": "/mnt/reachy-retarget/workspaces/bigym-feedforward-nl77d-20261007-01/cross-pod-and-sidecars-verification.json"
+    }
+  ],
+  "tracking_comparison": {
+    "path": "/mnt/reachy-retarget/workspaces/bigym-ff-tracking-comparison-20261007-01/result.json",
+    "sha256": "1bb8fbcdaac893b8ac51b783114670f3043a215d736589e93ab238e78be8567a",
+    "result": {
+      "scope": "Comparison against unchanged interpolated pose reference, not against compensated actuator targets. Both data streams are actually recorded full physics observations.",
+      "results": {
+        "baseline": {
+          "first_close_error_m": 0.03188021385498778,
+          "closure_through_anchor_max_error_m": 0.03627367571743431,
+          "closure_through_anchor_median_error_m": 0.032719718953512625,
+          "samples": {
+            "515": 0.03188021385498778,
+            "536": 0.029361422233514546,
+            "550": 0.030789011400201804,
+            "600": 0.03564899019536425,
+            "650": 0.033559432740066855,
+            "700": 0.030325533701519535,
+            "764": 0.009748373940917326,
+            "800": 0.033487786947450214,
+            "900": 0.02061812173628378
+          },
+          "physical_rows": 8753,
+          "recording_sha256": "1ef6197d30b31c0c82c4afe73afbfa92b9e1b6a59f464c722f5bf69e87afcd95"
+        },
+        "feedforward": {
+          "first_close_error_m": 0.03854602747371071,
+          "closure_through_anchor_max_error_m": 0.038694575025668185,
+          "closure_through_anchor_median_error_m": 0.028051037171901015,
+          "samples": {
+            "515": 0.03854602747371071,
+            "536": 0.026781492066982687,
+            "550": 0.02736102885469506,
+            "600": 0.03126758456159189,
+            "650": 0.02831798791269521,
+            "700": 0.0224248300953648,
+            "764": 0.0036942997180581865,
+            "800": 0.0033688972484363154,
+            "900": 0.009908261834113866
+          },
+          "physical_rows": 8753,
+          "recording_sha256": "530b86696672affe9e440a1e8d37cb8cf29e4a7cbb92aad4edc15648c550af39"
+        }
+      }
+    }
+  }
+}

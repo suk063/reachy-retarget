@@ -1,0 +1,178 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "reachy-retarget-data",
+        "namespace": "erl-ucsd",
+        "labels": {
+          "app.kubernetes.io/name": "reachy-retarget-worker"
+        }
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteMany"
+        ],
+        "storageClassName": "rook-cephfs",
+        "resources": {
+          "requests": {
+            "storage": "1Ti"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "metadata": {
+        "name": "reachy-retarget-service",
+        "namespace": "erl-ucsd",
+        "labels": {
+          "app.kubernetes.io/name": "reachy-retarget-worker"
+        }
+      },
+      "data": {
+        "worker_service.py": "\"\"\"Persistent queue consumer. Only explicit queued tasks can transfer data.\"\"\"\nimport fcntl\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport random\nimport re\nimport socket\nimport subprocess\nimport time\nimport uuid\n\nROOT = Path(os.environ.get('REACHY_RETARGET_ROOT', '/mnt/reachy-retarget'))\nWORKER = os.environ.get('POD_NAME', socket.gethostname())\nSERVICE_REVISION = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()\n\n\ndef atomic(path, value):\n    path.parent.mkdir(parents=True, exist_ok=True)\n    tmp = path.with_name(path.name + '.' + uuid.uuid4().hex + '.tmp')\n    tmp.write_text(json.dumps(value, indent=2, sort_keys=True))\n    os.replace(tmp, path)\n\n\ndef heartbeat(status, **extra):\n    atomic(ROOT / 'workers' / (WORKER + '.json'), dict(worker=WORKER,\n           node=os.environ.get('NODE_NAME'), time=time.time(), status=status,\n           service_revision=SERVICE_REVISION, **extra))\n\n\ndef pending_jobs(queue, completed):\n    # Skip immutable terminal IDs before traversing each directory on CephFS.\n    return [folder/'job.json' for folder in queue.iterdir()\n            if not folder.name.startswith('.') and folder.name not in completed]\n\n\ndef claim_runtime(root, job):\n    \"\"\"Read activation at claim time, with an optional immutable source pin.\"\"\"\n    runtime=json.loads((root/'runtime.json').read_text())\n    pinned=job.get('runtime_source_sha256')\n    if pinned:\n        if not re.fullmatch('[0-9a-f]{64}',pinned):raise ValueError('Invalid source release pin')\n        source=root/'releases'/pinned\n        proof=json.loads((root/'provenance'/f'{pinned}.json').read_text())\n        if proof['source_sha256']!=pinned or not source.is_dir():raise ValueError('Missing pinned release')\n        if proof['control_sha256']!=runtime['control_sha256']:raise ValueError('Pinned controller reference differs')\n        runtime.update(source=str(source),source_sha256=pinned)\n    return runtime\n\n\ndef serve():\n    queue = ROOT / 'queue' / 'tasks'\n    queue.mkdir(parents=True, exist_ok=True)\n    heartbeat('waiting_for_runtime')\n    completed=set()\n    while True:\n        pointer = ROOT / 'runtime.json'\n        if not pointer.exists():\n            heartbeat('waiting_for_runtime')\n            time.sleep(5)\n            continue\n        runtime = json.loads(pointer.read_text())\n        jobs = pending_jobs(queue,completed)\n        random.shuffle(jobs)\n        handled = False\n        for job in jobs:\n            folder = job.parent\n            try:\n                claim = (folder / 'claim.lock').open('a')\n            except FileNotFoundError:\n                # A stale scan must not terminate a persistent worker.\n                continue\n            with claim as lock:\n                try:\n                    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)\n                except BlockingIOError:\n                    continue\n                result_path = folder / 'result.json'\n                if result_path.exists():\n                    result = json.loads(result_path.read_text())\n                    if result.get('status') != 'waiting_for_agent':\n                        completed.add(folder.name)\n                        continue\n                    response = folder / 'agent' / 'response.json'\n                    if not response.exists():\n                        continue\n                    response_hash = hashlib.sha256(response.read_bytes()).hexdigest()\n                    if response_hash == result.get('response_sha256'):\n                        continue\n                attempt = folder / 'attempts' / (str(time.time_ns()) + '-' + WORKER)\n                attempt.mkdir(parents=True)\n                runtime=claim_runtime(ROOT,json.loads(job.read_text()))\n                atomic(attempt / 'runtime.json', runtime)\n                atomic(attempt / 'claim.json', dict(worker=WORKER, time=time.time()))\n                env = dict(os.environ, PYTHONPATH=runtime['source'],\n                           REACHY_RETARGET_CONTROL=runtime['control'],\n                           REACHY_RETARGET_BACKEND='reference',\n                           OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1')\n                command = [runtime['python'], '-m', 'reachy_retarget.cluster_pipeline',\n                           'execute', '--root', str(ROOT), '--task', str(folder),\n                           '--attempt', str(attempt)]\n                with (attempt / 'stdout.log').open('w') as log:\n                    child = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, env=env)\n                    while child.poll() is None:\n                        heartbeat('working', task=folder.name, attempt=str(attempt), pid=child.pid)\n                        time.sleep(5)\n                    if child.returncode != 0:\n                        value = dict(status='failed', returncode=child.returncode,\n                                     log=str(attempt / 'stdout.log'), worker=WORKER)\n                        atomic(attempt / 'result.json', value)\n                        atomic(result_path, value)\n                handled = True\n                if result_path.exists() and json.loads(result_path.read_text()).get('status')!='waiting_for_agent':\n                    completed.add(folder.name)\n        heartbeat('idle', source_revision=runtime.get('source_sha256'))\n        time.sleep(2 if handled else 8)\n\n\nif __name__ == '__main__':\n    serve()\n"
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "name": "reachy-retarget-worker",
+        "namespace": "erl-ucsd",
+        "labels": {
+          "app.kubernetes.io/name": "reachy-retarget-worker"
+        },
+        "annotations": {
+          "reachy-retarget/retention": "NRP Deployment maximum 2 weeks; PVC and task records persist. No automatic policy evasion."
+        }
+      },
+      "spec": {
+        "replicas": 50,
+        "strategy": {
+          "type": "RollingUpdate",
+          "rollingUpdate": {
+            "maxSurge": 0,
+            "maxUnavailable": 1
+          }
+        },
+        "selector": {
+          "matchLabels": {
+            "app.kubernetes.io/name": "reachy-retarget-worker"
+          }
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "app.kubernetes.io/name": "reachy-retarget-worker"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "nodeSelector": {
+              "kubernetes.io/arch": "amd64",
+              "topology.kubernetes.io/region": "us-west"
+            },
+            "affinity": {
+              "podAntiAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": [
+                  {
+                    "labelSelector": {
+                      "matchLabels": {
+                        "app.kubernetes.io/name": "reachy-retarget-worker"
+                      }
+                    },
+                    "topologyKey": "kubernetes.io/hostname"
+                  }
+                ]
+              }
+            },
+            "containers": [
+              {
+                "name": "worker",
+                "image": "python:3.12-bookworm",
+                "command": [
+                  "python",
+                  "-u",
+                  "/service/worker_service.py"
+                ],
+                "env": [
+                  {
+                    "name": "POD_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "metadata.name"
+                      }
+                    }
+                  },
+                  {
+                    "name": "NODE_NAME",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "spec.nodeName"
+                      }
+                    }
+                  },
+                  {
+                    "name": "PYTHONDONTWRITEBYTECODE",
+                    "value": "1"
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "10m",
+                    "memory": "128Mi"
+                  },
+                  "limits": {
+                    "cpu": "2",
+                    "memory": "4Gi"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "data",
+                    "mountPath": "/mnt/reachy-retarget"
+                  },
+                  {
+                    "name": "service",
+                    "mountPath": "/service",
+                    "readOnly": true
+                  }
+                ],
+                "readinessProbe": {
+                  "exec": {
+                    "command": [
+                      "python",
+                      "-c",
+                      "import json,os,time;from pathlib import Path;p=Path('/mnt/reachy-retarget/workers')/(os.environ['POD_NAME']+'.json');assert time.time()-json.loads(p.read_text())['time']<45"
+                    ]
+                  },
+                  "initialDelaySeconds": 5,
+                  "periodSeconds": 20
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "data",
+                "persistentVolumeClaim": {
+                  "claimName": "reachy-retarget-data"
+                }
+              },
+              {
+                "name": "service",
+                "configMap": {
+                  "name": "reachy-retarget-service"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

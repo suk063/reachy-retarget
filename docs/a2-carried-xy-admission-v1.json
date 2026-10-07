@@ -1,0 +1,907 @@
+{
+  "job": {
+    "approach_before_base_admission": true,
+    "comparison_scope": "Minimum declared placement rank selected across all three completed chunks before physics. Fresh-source reconstruction retains the exact retimed-source repair and qualified placement parameters. Original source arrays, coarse knots, object model and physical gates remain unchanged. This is adaptive development, separate from frozen-policy evaluation.",
+    "cylindrical_grasp": {
+      "azimuth_policy": "source",
+      "end_margin_m": 0.001,
+      "orientation_policy": "jaw_level"
+    },
+    "dataset": "robomimic",
+    "diagnostic_seed": {
+      "archived_screen_sha256": "8bb787f53a267874632c7645d26049531d8ba51899481dbfd56f9df797987c55",
+      "body": "r_elbow_forearm_link",
+      "depth_m": 0.01847521523506147,
+      "sample_time_s": 3.5500000000000003,
+      "seed_base_x_perturbation_m": 0.0
+    },
+    "evaluation_split": "development_after_frozen_heldout_evaluation",
+    "geometry_clearance": {
+      "minimum_m": 0.003
+    },
+    "geometry_seed_rank": 0,
+    "geometry_selection_evidence": [
+      {
+        "path": "runs/local-spool-pool/can-quarter-approach-recovery-v1/can-quarter-approach-recovery-v1-a2e2-chunk0/backup.json",
+        "sha256": "2eeb97127ca472d29041bdbaa1d6e10177779187019f2f530dd93a4e272271e6"
+      },
+      {
+        "path": "runs/local-spool-pool/can-quarter-approach-recovery-v1/can-quarter-approach-recovery-v1-a2e2-chunk1/backup.json",
+        "sha256": "f7fd145617e6adec395e7cb803e2a2137c9f208eaa9c23c93f280d67bc115a7f"
+      },
+      {
+        "path": "runs/local-spool-pool/can-quarter-approach-recovery-v1/can-quarter-approach-recovery-v1-a2e2-chunk2/backup.json",
+        "sha256": "045d8aee0aff76e587f4b975d1c837a27df5515d832f96bef4fbd05e27c47121"
+      }
+    ],
+    "geometry_selection_rank": [
+      2.1567647407339083,
+      0.06269968101992227,
+      220
+    ],
+    "grasp_approach": {
+      "lift_m": 0.12,
+      "traverse_fraction": 0.5
+    },
+    "id": "can-a2-carried-xy-admission-v2",
+    "mobile_fixture_ik": {
+      "anchor_index": 355,
+      "anchor_reference": [
+        -0.11994698171930931,
+        0.06801962165215322,
+        0.02956302674179026,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        -0.13870270679638722,
+        -0.6187826865631704,
+        0.2654314939544917,
+        -1.0519419064595639,
+        -0.1886264591743445,
+        -0.4357143055292584,
+        -0.9773764249319957
+      ],
+      "base_bounds_xyyaw": [
+        [
+          -0.5027340058145638,
+          0.8223371175548317
+        ],
+        [
+          -0.284748848051077,
+          0.7175567615200504
+        ],
+        [
+          -0.48242888008643325,
+          0.5753945698601672
+        ]
+      ],
+      "minimum_fixture_gap_m": 0.003
+    },
+    "operation": "feasible_geometry_experiment",
+    "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-aligned/a2e2fc296eb53e00fdc56596",
+    "parent_task": "can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596",
+    "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/workspace",
+    "retime": true,
+    "retiming_settings": {
+      "arm_speed_rad_s": 0.8,
+      "planar_speed_m_s": 0.4
+    },
+    "runtime_source_sha256": "42423340d9429494cab1aa2f493e61782cce15c9d1524ebb41e63442f9282dae",
+    "source": "data/normalized/hf__robomimic__robomimic_datasets/a2e2fc296eb53e00fdc56596.h5",
+    "source_normalized_sha256": "701f3e7982590f572633e169b2bc9845d0fc04cfbfd2947989c93b34cac566b6",
+    "source_parent_materialization": {
+      "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/materialization.json",
+      "original_archive_sha256": "6a89d9ebee9586a08869d76d3766e3c5e8fcb51dcfe69a8c7e6d3b306960ba16",
+      "sha256": "975ad3bce247b8a014c1a420f556db8e8a8b3b03896e5cfa82b41762855e850e"
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "source_provenance": {
+      "provenance": [
+        {
+          "bytes": 46889752,
+          "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+          "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+          "source_id": "hf__robomimic__robomimic_datasets",
+          "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        }
+      ],
+      "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+      "source_urls": [
+        "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+      ]
+    },
+    "supported_placement": {
+      "adaptive_midpoints": 3,
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "extra_descent_m": 0.002,
+      "interval_knot_timing": true,
+      "midpoint_fixture_reserve_m": 0.0001,
+      "midpoint_minimum_motion": true,
+      "midpoint_position_reserve_m": 0.0001,
+      "midpoint_quarter_probes": true,
+      "mobile_ik": {
+        "base_bounds_xyyaw": [
+          [
+            -0.8402484305969045,
+            1.875
+          ],
+          [
+            -1.145,
+            1.2228331610933565
+          ],
+          [
+            -3.511089408490112,
+            3.1515859547846987
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "orientation_transport": true,
+        "pose_tolerance_constraints": true
+      },
+      "placement_xy_world": [
+        0.927,
+        -0.2975
+      ],
+      "release_aperture_rad": 1.4,
+      "retreat_speed_factor": 1.0,
+      "rotation_xyz_deg": [
+        0.0,
+        50.0,
+        -117.117125579951
+      ]
+    },
+    "variant": "contact_0035",
+    "workspace": "workspace",
+    "admission_only": true,
+    "carried_object_clearance": {
+      "support_geoms": [
+        "source_scene_geom_21"
+      ]
+    }
+  },
+  "original_job": {
+    "approach_before_base_admission": true,
+    "comparison_scope": "Minimum declared placement rank selected across all three completed chunks before physics. Fresh-source reconstruction retains the exact retimed-source repair and qualified placement parameters. Original source arrays, coarse knots, object model and physical gates remain unchanged. This is adaptive development, separate from frozen-policy evaluation.",
+    "cylindrical_grasp": {
+      "azimuth_policy": "source",
+      "end_margin_m": 0.001,
+      "orientation_policy": "jaw_level"
+    },
+    "dataset": "robomimic",
+    "diagnostic_seed": {
+      "archived_screen_sha256": "8bb787f53a267874632c7645d26049531d8ba51899481dbfd56f9df797987c55",
+      "body": "r_elbow_forearm_link",
+      "depth_m": 0.01847521523506147,
+      "sample_time_s": 3.5500000000000003,
+      "seed_base_x_perturbation_m": 0.0
+    },
+    "evaluation_split": "development_after_frozen_heldout_evaluation",
+    "geometry_clearance": {
+      "minimum_m": 0.003
+    },
+    "geometry_seed_rank": 0,
+    "geometry_selection_evidence": [
+      {
+        "path": "runs/local-spool-pool/can-quarter-approach-recovery-v1/can-quarter-approach-recovery-v1-a2e2-chunk0/backup.json",
+        "sha256": "2eeb97127ca472d29041bdbaa1d6e10177779187019f2f530dd93a4e272271e6"
+      },
+      {
+        "path": "runs/local-spool-pool/can-quarter-approach-recovery-v1/can-quarter-approach-recovery-v1-a2e2-chunk1/backup.json",
+        "sha256": "f7fd145617e6adec395e7cb803e2a2137c9f208eaa9c23c93f280d67bc115a7f"
+      },
+      {
+        "path": "runs/local-spool-pool/can-quarter-approach-recovery-v1/can-quarter-approach-recovery-v1-a2e2-chunk2/backup.json",
+        "sha256": "045d8aee0aff76e587f4b975d1c837a27df5515d832f96bef4fbd05e27c47121"
+      }
+    ],
+    "geometry_selection_rank": [
+      2.1567647407339083,
+      0.06269968101992227,
+      220
+    ],
+    "grasp_approach": {
+      "lift_m": 0.12,
+      "traverse_fraction": 0.5
+    },
+    "id": "can-quarter-physics-v1-a2e2fc296eb53e00fdc56596-ff0",
+    "mobile_fixture_ik": {
+      "anchor_index": 355,
+      "anchor_reference": [
+        -0.11994698171930931,
+        0.06801962165215322,
+        0.02956302674179026,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        -0.13870270679638722,
+        -0.6187826865631704,
+        0.2654314939544917,
+        -1.0519419064595639,
+        -0.1886264591743445,
+        -0.4357143055292584,
+        -0.9773764249319957
+      ],
+      "base_bounds_xyyaw": [
+        [
+          -0.5027340058145638,
+          0.8223371175548317
+        ],
+        [
+          -0.284748848051077,
+          0.7175567615200504
+        ],
+        [
+          -0.48242888008643325,
+          0.5753945698601672
+        ]
+      ],
+      "minimum_fixture_gap_m": 0.003
+    },
+    "operation": "feasible_geometry_experiment",
+    "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-aligned/a2e2fc296eb53e00fdc56596",
+    "parent_task": "can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596",
+    "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/workspace",
+    "retime": true,
+    "retiming_settings": {
+      "arm_speed_rad_s": 0.8,
+      "planar_speed_m_s": 0.4
+    },
+    "runtime_source_sha256": "48c10b1a6728e4965b1dd46030e8d6c1a443084019cfea4e696fda0bc38f64a8",
+    "source": "data/normalized/hf__robomimic__robomimic_datasets/a2e2fc296eb53e00fdc56596.h5",
+    "source_normalized_sha256": "701f3e7982590f572633e169b2bc9845d0fc04cfbfd2947989c93b34cac566b6",
+    "source_parent_materialization": {
+      "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/materialization.json",
+      "original_archive_sha256": "6a89d9ebee9586a08869d76d3766e3c5e8fcb51dcfe69a8c7e6d3b306960ba16",
+      "sha256": "975ad3bce247b8a014c1a420f556db8e8a8b3b03896e5cfa82b41762855e850e"
+    },
+    "source_prefix_velocity_feedforward": 0.0,
+    "source_provenance": {
+      "provenance": [
+        {
+          "bytes": 46889752,
+          "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+          "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+          "source_id": "hf__robomimic__robomimic_datasets",
+          "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        }
+      ],
+      "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+      "source_urls": [
+        "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+      ]
+    },
+    "supported_placement": {
+      "adaptive_midpoints": 3,
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "extra_descent_m": 0.002,
+      "interval_knot_timing": true,
+      "midpoint_fixture_reserve_m": 0.0001,
+      "midpoint_minimum_motion": true,
+      "midpoint_position_reserve_m": 0.0001,
+      "midpoint_quarter_probes": true,
+      "mobile_ik": {
+        "base_bounds_xyyaw": [
+          [
+            -0.8402484305969045,
+            1.875
+          ],
+          [
+            -1.145,
+            1.2228331610933565
+          ],
+          [
+            -3.511089408490112,
+            3.1515859547846987
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "orientation_transport": true,
+        "pose_tolerance_constraints": true
+      },
+      "placement_xy_world": [
+        0.92,
+        -0.2975
+      ],
+      "release_aperture_rad": 1.4,
+      "retreat_speed_factor": 1.0,
+      "rotation_xyz_deg": [
+        0.0,
+        50.0,
+        -117.117125579951
+      ]
+    },
+    "variant": "contact_0035",
+    "workspace": "workspaces/can-quarter-physics-v1-a2e2fc296eb53e00fdc56596-ff0"
+  },
+  "original_archive_sha256": "c2e9a7563d1bcb563686633ace48f533ed707c6ed0e52e5d480b86a19d5c8caa",
+  "scope": "Explicit7mm placement +X from exact CAD and measured acquisition attachment wall clearance; original source, lower law, orientation, descent and all physical gates remain unchanged. Fresh full robot and carried-object admission required.",
+  "physics_validated": false,
+  "result": {
+    "status": "kinematic_candidate",
+    "physics_tested": false,
+    "physics_validated": false,
+    "source_episode": "a2e2fc296eb53e00fdc56596",
+    "admitted_plan": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/admitted-plan",
+    "evaluation_split": "development_after_frozen_heldout_evaluation",
+    "parent_task": "can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596",
+    "variant": "contact_0035",
+    "admission": {
+      "admitted": true,
+      "admission_checks": {
+        "completed": true,
+        "ik": true,
+        "environment": true,
+        "self_collision": true,
+        "positive_fixture_clearance": true,
+        "joint_margin": true,
+        "self_clearance": true,
+        "inactive_left_reference": true,
+        "source_arrays_unchanged": true
+      },
+      "completed_frames": 841,
+      "total_frames": 841,
+      "exception": null,
+      "events": [],
+      "method": "Anchored backward/forward mobile/right-arm SLSQP with an active set of compiled fixture-distance constraints",
+      "anchor_index": 355,
+      "anchor_reference": [
+        -0.11994698171930931,
+        0.06801962165215322,
+        0.02956302674179026,
+        0.0,
+        0.15,
+        0.0,
+        -0.2,
+        0.0,
+        0.0,
+        0.0,
+        -0.13870270679638722,
+        -0.6187826865631704,
+        0.2654314939544917,
+        -1.0519419064595639,
+        -0.1886264591743445,
+        -0.4357143055292584,
+        -0.9773764249319957
+      ],
+      "base_bounds_xyyaw": [
+        [
+          -0.5027340058145638,
+          0.8223371175548317
+        ],
+        [
+          -0.284748848051077,
+          0.7175567615200504
+        ],
+        [
+          -0.48242888008643325,
+          0.5753945698601672
+        ]
+      ],
+      "source_array_sha256": {
+        "time_s": "ae13b8ea419d9043ed960e954054bb879e7b25f348225aa24459208b76b19aba",
+        "reference": "2a94e2ee17297fd8ed6f4a7ba14e70cab5f73c5f900e959651582b418190bd1b",
+        "gripper_intent": "6003fb321c51d61e5d987c173dbae8fed8c593b4efcfb96bef9dfd3882f3f2bd",
+        "hand_goals": "4ca2a3c0094591ebd423a51da3716f6ee065d71f44d111b73a6808336dda5472",
+        "object_goals": "8a9d33af2f8ebc9755e305eb3838af3f6bada7901adaec2274ac4893f70b2aae"
+      },
+      "scene_sha256": "95ff5235f70347e25511e5d67f4fc697be91e1bf53612137a68b6fb0fa9d5a9c",
+      "source_metadata": {
+        "source_format": "robomimic-hdf5",
+        "robot_type": "Panda",
+        "env_args": {
+          "env_name": "PickPlaceCan",
+          "env_version": "1.5.1",
+          "type": 1,
+          "env_kwargs": {
+            "has_renderer": false,
+            "has_offscreen_renderer": false,
+            "ignore_done": true,
+            "use_object_obs": true,
+            "use_camera_obs": false,
+            "control_freq": 20,
+            "controller_configs": {
+              "type": "BASIC",
+              "body_parts": {
+                "right": {
+                  "type": "OSC_POSE",
+                  "input_max": 1,
+                  "input_min": -1,
+                  "output_max": [
+                    0.05,
+                    0.05,
+                    0.05,
+                    0.5,
+                    0.5,
+                    0.5
+                  ],
+                  "output_min": [
+                    -0.05,
+                    -0.05,
+                    -0.05,
+                    -0.5,
+                    -0.5,
+                    -0.5
+                  ],
+                  "kp": 150,
+                  "damping": 1,
+                  "impedance_mode": "fixed",
+                  "kp_limits": [
+                    0,
+                    300
+                  ],
+                  "damping_limits": [
+                    0,
+                    10
+                  ],
+                  "position_limits": null,
+                  "orientation_limits": null,
+                  "uncouple_pos_ori": true,
+                  "control_delta": true,
+                  "interpolation": null,
+                  "ramp_ratio": 0.2,
+                  "input_ref_frame": "world",
+                  "gripper": {
+                    "type": "GRIP"
+                  }
+                }
+              }
+            },
+            "robots": [
+              "Panda"
+            ],
+            "camera_depths": false,
+            "camera_heights": 84,
+            "camera_widths": 84,
+            "lite_physics": false,
+            "reward_shaping": false
+          }
+        },
+        "objects": {
+          "Can": {
+            "qpos_address": 30,
+            "body": "Can_main",
+            "joint": "Can_joint0",
+            "pose_frame": "world",
+            "pose_source": "recorded simulator free-joint qpos",
+            "geometry_source": "embedded model_xml; asset files may require separate acquisition",
+            "mass_friction": "source model values retained; not independently calibrated",
+            "asset": "robosuite/models/assets/objects/can.xml"
+          }
+        },
+        "object_state_decoding": {
+          "nq": 37,
+          "nv": 33,
+          "layout": "time, qpos, qvel",
+          "quaternion": "wxyz",
+          "inactive_free_bodies_omitted": [
+            "Bread",
+            "Cereal",
+            "Milk"
+          ],
+          "references": [
+            "https://github.com/ARISE-Initiative/robosuite/blob/v1.4.1/robosuite/utils/binding_utils.py",
+            "https://github.com/ARISE-Initiative/robosuite/blob/v1.5.1/robosuite/utils/binding_utils.py",
+            "https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-joint"
+          ],
+          "independent_can_sensor_check": true
+        },
+        "model_xml": "<?xml version='1.0' encoding='utf8'?>\n<mujoco model=\"base\">\n  <compiler angle=\"radian\" meshdir=\"meshes/\" autolimits=\"true\" />\n  <option impratio=\"20\" density=\"1.2\" viscosity=\"2e-05\" cone=\"elliptic\" />\n  <size njmax=\"5000\" nconmax=\"5000\" />\n  <visual>\n    <map znear=\"0.001\" />\n  </visual>\n  <default />\n  <asset>\n    <texture type=\"skybox\" builtin=\"gradient\" rgb1=\"0.9 0.9 1\" rgb2=\"0.2 0.3 0.4\" width=\"256\" height=\"1536\" />\n    <texture type=\"2d\" name=\"texplane\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/light-gray-floor-tile.png\" />\n    <texture type=\"cube\" name=\"tex-steel-brushed\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/steel-brushed.png\" />\n    <texture type=\"2d\" name=\"tex-light-gray-plaster\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/light-gray-plaster.png\" />\n    <texture type=\"2d\" name=\"tex-light-wood\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/light-wood.png\" />\n    <texture type=\"2d\" name=\"tex-dark-wood\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/arenas/../textures/dark-wood.png\" />\n    <texture type=\"2d\" name=\"Milk_tex-ceramic\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/../textures/ceramic.png\" />\n    <texture type=\"2d\" name=\"Bread_tex-bread\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/../textures/bread.png\" />\n    <texture type=\"2d\" name=\"Cereal_tex-cereal\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/../textures/cereal.png\" />\n    <texture type=\"2d\" name=\"Can_tex-can\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/../textures/soda.png\" />\n    <material name=\"floorplane\" texture=\"texplane\" texuniform=\"true\" texrepeat=\"2 2\" specular=\"0\" shininess=\"0\" reflectance=\"0.01\" />\n    <material name=\"table_legs_metal\" texture=\"tex-steel-brushed\" shininess=\"0.8\" reflectance=\"0.8\" />\n    <material name=\"walls_mat\" texture=\"tex-light-gray-plaster\" texuniform=\"true\" texrepeat=\"3 3\" specular=\"0.1\" shininess=\"0.1\" />\n    <material name=\"light-wood\" texture=\"tex-light-wood\" texuniform=\"true\" texrepeat=\"15 15\" />\n    <material name=\"dark-wood\" texture=\"tex-dark-wood\" texuniform=\"true\" texrepeat=\"5 5\" />\n    <material name=\"robot0_Face636_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Part__Feature017_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature018_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature019_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature022_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Part__Feature023_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Shell001_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Shell002_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Shell003_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Shell009_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Shell010_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Shell_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature024\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature001_010_001_002\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature002_007_001_002\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature003_004_001_002\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature_001_001_001_002\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature001_001_003_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature002_001_003_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature003_001_003_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature_002_003_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Feature_002_004_003\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell001_001_001_003\" shininess=\"0.45\" rgba=\"0.25 0.25 0.25 1\" />\n    <material name=\"robot0_Shell_001_001_003\" shininess=\"0.45\" />\n    <material name=\"robot0_Face064_002_001_002_001\" shininess=\"0.45\" rgba=\"1 0 0 1\" />\n    <material name=\"robot0_Face065_002_001_002_001\" shininess=\"0.45\" rgba=\"0 1 0 1\" />\n    <material name=\"robot0_Face374_002_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Face539_002_001_002_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature001_009_001_002_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Feature002_006_001_002_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Shell002_002_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell003_002_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell004_001_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell005_001_001_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell006_003_002_001\" shininess=\"0.45\" rgba=\"0.901961 0.921569 0.929412 1\" />\n    <material name=\"robot0_Shell007_002_002_001\" shininess=\"0.45\" rgba=\"0.25 0.25 0.25 1\" />\n    <material name=\"robot0_Shell011_002_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell012_002_002_001\" shininess=\"0.45\" />\n    <material name=\"robot0_Shell_003_001_002_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Union001_001_001_002_001\" shininess=\"0.45\" rgba=\"0.039216 0.541176 0.780392 1\" />\n    <material name=\"robot0_Union_001_001_002_001\" shininess=\"0.45\" rgba=\"0.039216 0.541176 0.780392 1\" />\n    <material name=\"robot0_Part__Mirroring001_004_002\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring002_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring003_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring004_004_002\" shininess=\"0.45\" />\n    <material name=\"robot0_Part__Mirroring005_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring006_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring007_004_001\" shininess=\"0.45\" rgba=\"0.25098 0.25098 0.25098 1\" />\n    <material name=\"robot0_Part__Mirroring_004_001\" shininess=\"0.45\" rgba=\"0.898039 0.917647 0.929412 1\" />\n    <material name=\"Milk_ceramic\" texture=\"Milk_tex-ceramic\" texuniform=\"true\" reflectance=\"0.5\" />\n    <material name=\"Bread_bread\" texture=\"Bread_tex-bread\" texuniform=\"true\" texrepeat=\"15 15\" reflectance=\"0.7\" />\n    <material name=\"Cereal_cereal\" texture=\"Cereal_tex-cereal\" reflectance=\"0.5\" />\n    <material name=\"Can_coke\" texture=\"Can_tex-can\" texuniform=\"true\" texrepeat=\"5 5\" reflectance=\"0.7\" />\n    <mesh name=\"robot0_link0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link0.stl\" />\n    <mesh name=\"robot0_link1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link1.stl\" />\n    <mesh name=\"robot0_link2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link2.stl\" />\n    <mesh name=\"robot0_link3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link3.stl\" />\n    <mesh name=\"robot0_link4\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link4.stl\" />\n    <mesh name=\"robot0_link5\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link5.stl\" />\n    <mesh name=\"robot0_link6\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link6.stl\" />\n    <mesh name=\"robot0_link7\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/meshes/link7.stl\" />\n    <mesh name=\"robot0_link0_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_0.obj\" />\n    <mesh name=\"robot0_link0_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_1.obj\" />\n    <mesh name=\"robot0_link0_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_2.obj\" />\n    <mesh name=\"robot0_link0_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_3.obj\" />\n    <mesh name=\"robot0_link0_vis_4\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_4.obj\" />\n    <mesh name=\"robot0_link0_vis_5\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_5.obj\" />\n    <mesh name=\"robot0_link0_vis_6\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_6.obj\" />\n    <mesh name=\"robot0_link0_vis_7\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_7.obj\" />\n    <mesh name=\"robot0_link0_vis_8\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_8.obj\" />\n    <mesh name=\"robot0_link0_vis_9\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_9.obj\" />\n    <mesh name=\"robot0_link0_vis_10\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_10.obj\" />\n    <mesh name=\"robot0_link0_vis_11\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link0_vis/link0_vis_11.obj\" />\n    <mesh name=\"robot0_link1_vis\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link1_vis/link1_vis.obj\" />\n    <mesh name=\"robot0_link2_vis\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link2_vis/link2_vis.obj\" />\n    <mesh name=\"robot0_link3_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link3_vis/link3_vis_0.obj\" />\n    <mesh name=\"robot0_link3_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link3_vis/link3_vis_1.obj\" />\n    <mesh name=\"robot0_link3_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link3_vis/link3_vis_2.obj\" />\n    <mesh name=\"robot0_link3_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link3_vis/link3_vis_3.obj\" />\n    <mesh name=\"robot0_link4_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link4_vis/link4_vis_0.obj\" />\n    <mesh name=\"robot0_link4_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link4_vis/link4_vis_1.obj\" />\n    <mesh name=\"robot0_link4_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link4_vis/link4_vis_2.obj\" />\n    <mesh name=\"robot0_link4_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link4_vis/link4_vis_3.obj\" />\n    <mesh name=\"robot0_link5_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link5_vis/link5_vis_0.obj\" />\n    <mesh name=\"robot0_link5_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link5_vis/link5_vis_1.obj\" />\n    <mesh name=\"robot0_link5_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link5_vis/link5_vis_2.obj\" />\n    <mesh name=\"robot0_link6_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_0.obj\" />\n    <mesh name=\"robot0_link6_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_1.obj\" />\n    <mesh name=\"robot0_link6_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_2.obj\" />\n    <mesh name=\"robot0_link6_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_3.obj\" />\n    <mesh name=\"robot0_link6_vis_4\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_4.obj\" />\n    <mesh name=\"robot0_link6_vis_5\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_5.obj\" />\n    <mesh name=\"robot0_link6_vis_6\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_6.obj\" />\n    <mesh name=\"robot0_link6_vis_7\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_7.obj\" />\n    <mesh name=\"robot0_link6_vis_8\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_8.obj\" />\n    <mesh name=\"robot0_link6_vis_9\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_9.obj\" />\n    <mesh name=\"robot0_link6_vis_10\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_10.obj\" />\n    <mesh name=\"robot0_link6_vis_11\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_11.obj\" />\n    <mesh name=\"robot0_link6_vis_12\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_12.obj\" />\n    <mesh name=\"robot0_link6_vis_13\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_13.obj\" />\n    <mesh name=\"robot0_link6_vis_14\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_14.obj\" />\n    <mesh name=\"robot0_link6_vis_15\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_15.obj\" />\n    <mesh name=\"robot0_link6_vis_16\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link6_vis/link6_vis_16.obj\" />\n    <mesh name=\"robot0_link7_vis_0\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_0.obj\" />\n    <mesh name=\"robot0_link7_vis_1\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_1.obj\" />\n    <mesh name=\"robot0_link7_vis_2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_2.obj\" />\n    <mesh name=\"robot0_link7_vis_3\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_3.obj\" />\n    <mesh name=\"robot0_link7_vis_4\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_4.obj\" />\n    <mesh name=\"robot0_link7_vis_5\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_5.obj\" />\n    <mesh name=\"robot0_link7_vis_6\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_6.obj\" />\n    <mesh name=\"robot0_link7_vis_7\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/robots/panda/obj_meshes/link7_vis/link7_vis_7.obj\" />\n    <mesh name=\"fixed_mount0_pedestal\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/bases/meshes/rethink_mount/pedestal.stl\" />\n    <mesh name=\"gripper0_right_hand\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/hand.stl\" />\n    <mesh name=\"gripper0_right_hand_vis\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/hand_vis.stl\" />\n    <mesh name=\"gripper0_right_finger\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/finger.stl\" />\n    <mesh name=\"gripper0_right_finger_vis\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/finger_vis.stl\" />\n    <mesh name=\"gripper0_right_finger_vis2\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/grippers/meshes/panda_gripper/finger_longer.stl\" />\n    <mesh name=\"VisualMilk_milk_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/milk.stl\" scale=\"0.9 0.9 0.9\" />\n    <mesh name=\"VisualBread_bread_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/bread.stl\" scale=\"0.8 0.8 0.8\" />\n    <mesh name=\"VisualCereal_cereal_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/cereal.stl\" />\n    <mesh name=\"VisualCan_can_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/can.stl\" />\n    <mesh name=\"Milk_milk_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/milk.msh\" scale=\"0.9 0.9 0.9\" />\n    <mesh name=\"Bread_bread_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/bread.stl\" scale=\"0.8 0.8 0.8\" />\n    <mesh name=\"Cereal_cereal_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/cereal.msh\" />\n    <mesh name=\"Can_can_mesh\" file=\"/home/soroushn/code/robosuite-dev/robosuite/models/assets/objects/meshes/can.msh\" />\n  </asset>\n  <worldbody>\n    <geom name=\"floor\" size=\"3 3 0.125\" type=\"plane\" group=\"1\" material=\"floorplane\" />\n    <geom name=\"wall_leftcorner_visual\" size=\"1.06 1.5 0.01\" pos=\"-1.25 2.25 1.5\" quat=\"0.653281 0.653281 0.270598 0.270598\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_rightcorner_visual\" size=\"1.06 1.5 0.01\" pos=\"-1.25 -2.25 1.5\" quat=\"0.653281 0.653281 -0.270598 -0.270598\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_left_visual\" size=\"1.75 1.5 0.01\" pos=\"1.25 3 1.5\" quat=\"0.707107 0.707107 0 0\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_right_visual\" size=\"1.75 1.5 0.01\" pos=\"1.25 -3 1.5\" quat=\"0.707107 -0.707107 0 0\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_rear_visual\" size=\"1.5 1.5 0.01\" pos=\"-2 0 1.5\" quat=\"0.5 0.5 0.5 0.5\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <geom name=\"wall_front_visual\" size=\"3 1.5 0.01\" pos=\"3 0 1.5\" quat=\"0.5 0.5 -0.5 -0.5\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"walls_mat\" />\n    <camera name=\"frontview\" pos=\"1.6 0 1.45\" quat=\"0.560842 0.430646 0.430646 0.560842\" />\n    <camera name=\"birdview\" pos=\"-0.2 0 3\" quat=\"0.707107 0 0 0.707107\" />\n    <camera name=\"agentview\" pos=\"1 0 1.75\" quat=\"0.653098 0.271041 0.271041 0.653098\" />\n    <light pos=\"1 1 1.5\" dir=\"-0.19245 -0.19245 -0.96225\" directional=\"true\" castshadow=\"false\" />\n    <body name=\"bin1\" pos=\"0.1 -0.25 0.8\" gravcomp=\"0\">\n      <geom size=\"0.2 0.25 0.02\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.2 0.25 0.02\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 0.25 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 0.25 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 -0.25 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 -0.25 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0.2 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0.2 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"-0.2 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"-0.2 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"light-wood\" />\n      <geom name=\"bin1_leg1_visual\" size=\"0.01 0.4\" pos=\"0.15 0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin1_leg2_visual\" size=\"0.01 0.4\" pos=\"-0.15 0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin1_leg3_visual\" size=\"0.01 0.4\" pos=\"-0.15 -0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin1_leg4_visual\" size=\"0.01 0.4\" pos=\"0.15 -0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n    </body>\n    <body name=\"bin2\" pos=\"0.1 0.28 0.8\" gravcomp=\"0\">\n      <geom size=\"0.2 0.25 0.02\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.2 0.25 0.02\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 0.25 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 0.25 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.2 0.01 0.05\" pos=\"0 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.2 0.01 0.05\" pos=\"0 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 -0.25 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.21 0.01 0.05\" pos=\"0 -0.25 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0.2 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0.2 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"0 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"-0.2 0 0.05\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n      <geom size=\"0.01 0.25 0.05\" pos=\"-0.2 0 0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"dark-wood\" />\n      <geom name=\"bin2_leg1_visual\" size=\"0.01 0.4\" pos=\"0.15 0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin2_leg2_visual\" size=\"0.01 0.4\" pos=\"-0.15 0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin2_leg3_visual\" size=\"0.01 0.4\" pos=\"-0.15 -0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n      <geom name=\"bin2_leg4_visual\" size=\"0.01 0.4\" pos=\"0.15 -0.2 -0.4\" type=\"cylinder\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"table_legs_metal\" />\n    </body>\n    <body name=\"robot0_base\" pos=\"-0.5 -0.1 0.912\" gravcomp=\"0\">\n      <inertial pos=\"0 0 0\" mass=\"0\" diaginertia=\"0 0 0\" />\n      <camera name=\"robot0_robotview\" pos=\"1 0 0.4\" quat=\"0.653098 0.271041 0.271041 0.653098\" />\n      <body name=\"robot0_link0\" pos=\"0 0 0\" gravcomp=\"0\">\n        <inertial pos=\"0 0 0.05\" mass=\"4\" diaginertia=\"0.4 0.4 0.4\" />\n        <geom name=\"robot0_g0_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell010_001\" mesh=\"robot0_link0_vis_0\" />\n        <geom name=\"robot0_g1_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell009_001\" mesh=\"robot0_link0_vis_1\" />\n        <geom name=\"robot0_g2_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell003_001\" mesh=\"robot0_link0_vis_2\" />\n        <geom name=\"robot0_g3_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell_001\" mesh=\"robot0_link0_vis_3\" />\n        <geom name=\"robot0_g4_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell002_001\" mesh=\"robot0_link0_vis_4\" />\n        <geom name=\"robot0_g5_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell001_001\" mesh=\"robot0_link0_vis_5\" />\n        <geom name=\"robot0_g6_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face636_001\" mesh=\"robot0_link0_vis_6\" />\n        <geom name=\"robot0_g7_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature018_001\" mesh=\"robot0_link0_vis_7\" />\n        <geom name=\"robot0_g8_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature019_001\" mesh=\"robot0_link0_vis_8\" />\n        <geom name=\"robot0_g9_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature023_001\" mesh=\"robot0_link0_vis_9\" />\n        <geom name=\"robot0_g10_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature022_001\" mesh=\"robot0_link0_vis_10\" />\n        <geom name=\"robot0_g11_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature017_001\" mesh=\"robot0_link0_vis_11\" />\n        <geom name=\"robot0_link0_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link0\" />\n        <body name=\"robot0_link1\" pos=\"0 0 0.333\" gravcomp=\"0\">\n          <inertial pos=\"0 0 -0.07\" mass=\"3\" diaginertia=\"0.3 0.3 0.3\" />\n          <joint name=\"robot0_joint1\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-2.8973 2.8973\" armature=\"5\" damping=\"0.1\" frictionloss=\"0.1\" />\n          <geom name=\"robot0_g12_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature_001\" mesh=\"robot0_link1_vis\" />\n          <geom name=\"robot0_link1_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link1\" />\n          <body name=\"robot0_link2\" pos=\"0 0 0\" quat=\"0.707107 -0.707107 0 0\" gravcomp=\"0\">\n            <inertial pos=\"0 -0.1 0\" mass=\"3\" diaginertia=\"0.3 0.3 0.3\" />\n            <joint name=\"robot0_joint2\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-1.7628 1.7628\" armature=\"2.5\" damping=\"0.1\" frictionloss=\"0.1\" />\n            <geom name=\"robot0_g13_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature024\" mesh=\"robot0_link2_vis\" />\n            <geom name=\"robot0_link2_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link2\" />\n            <body name=\"robot0_link3\" pos=\"0 -0.316 0\" quat=\"0.707107 0.707107 0 0\" gravcomp=\"0\">\n              <inertial pos=\"0.04 0 -0.05\" mass=\"2\" diaginertia=\"0.2 0.2 0.2\" />\n              <joint name=\"robot0_joint3\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-2.8973 2.8973\" armature=\"1.66667\" damping=\"0.1\" frictionloss=\"0.1\" />\n              <geom name=\"robot0_g14_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature003_004_001_002\" mesh=\"robot0_link3_vis_0\" />\n              <geom name=\"robot0_g15_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature002_007_001_002\" mesh=\"robot0_link3_vis_1\" />\n              <geom name=\"robot0_g16_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature001_010_001_002\" mesh=\"robot0_link3_vis_2\" />\n              <geom name=\"robot0_g17_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature_001_001_001_002\" mesh=\"robot0_link3_vis_3\" />\n              <geom name=\"robot0_link3_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link3\" />\n              <body name=\"robot0_link4\" pos=\"0.0825 0 0\" quat=\"0.707107 0.707107 0 0\" gravcomp=\"0\">\n                <inertial pos=\"-0.04 0.05 0\" mass=\"2\" diaginertia=\"0.2 0.2 0.2\" />\n                <joint name=\"robot0_joint4\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-3.0718 -0.0698\" armature=\"1.25\" damping=\"0.1\" frictionloss=\"0.1\" />\n                <geom name=\"robot0_g18_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature001_001_003_001\" mesh=\"robot0_link4_vis_0\" />\n                <geom name=\"robot0_g19_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature003_001_003_001\" mesh=\"robot0_link4_vis_1\" />\n                <geom name=\"robot0_g20_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature002_001_003_001\" mesh=\"robot0_link4_vis_2\" />\n                <geom name=\"robot0_g21_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature_002_003_001\" mesh=\"robot0_link4_vis_3\" />\n                <geom name=\"robot0_link4_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link4\" />\n                <body name=\"robot0_link5\" pos=\"-0.0825 0.384 0\" quat=\"0.707107 -0.707107 0 0\" gravcomp=\"0\">\n                  <inertial pos=\"0 0 -0.15\" mass=\"2\" diaginertia=\"0.2 0.2 0.2\" />\n                  <joint name=\"robot0_joint5\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-2.8973 2.8973\" armature=\"1\" damping=\"0.1\" frictionloss=\"0.1\" />\n                  <geom name=\"robot0_g22_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell001_001_001_003\" mesh=\"robot0_link5_vis_0\" />\n                  <geom name=\"robot0_g23_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell_001_001_003\" mesh=\"robot0_link5_vis_1\" />\n                  <geom name=\"robot0_g24_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature_002_004_003\" mesh=\"robot0_link5_vis_2\" />\n                  <geom name=\"robot0_link5_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link5\" />\n                  <body name=\"robot0_link6\" pos=\"0 0 0\" quat=\"0.707107 0.707107 0 0\" gravcomp=\"0\">\n                    <inertial pos=\"0.06 0 0\" mass=\"1.5\" diaginertia=\"0.1 0.1 0.1\" />\n                    <joint name=\"robot0_joint6\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-0.0175 3.7525\" armature=\"0.833333\" damping=\"0.01\" frictionloss=\"0.1\" />\n                    <geom name=\"robot0_g25_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell006_003_002_001\" mesh=\"robot0_link6_vis_0\" />\n                    <geom name=\"robot0_g26_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell011_002_002_001\" mesh=\"robot0_link6_vis_1\" />\n                    <geom name=\"robot0_g27_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell007_002_002_001\" mesh=\"robot0_link6_vis_2\" />\n                    <geom name=\"robot0_g28_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell005_001_001_002_001\" mesh=\"robot0_link6_vis_3\" />\n                    <geom name=\"robot0_g29_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell004_001_001_002_001\" mesh=\"robot0_link6_vis_4\" />\n                    <geom name=\"robot0_g30_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell003_002_001_002_001\" mesh=\"robot0_link6_vis_5\" />\n                    <geom name=\"robot0_g31_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell002_002_001_002_001\" mesh=\"robot0_link6_vis_6\" />\n                    <geom name=\"robot0_g32_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Union001_001_001_002_001\" mesh=\"robot0_link6_vis_7\" />\n                    <geom name=\"robot0_g33_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Union_001_001_002_001\" mesh=\"robot0_link6_vis_8\" />\n                    <geom name=\"robot0_g34_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face539_002_001_002_001\" mesh=\"robot0_link6_vis_9\" />\n                    <geom name=\"robot0_g35_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell_003_001_002_001\" mesh=\"robot0_link6_vis_10\" />\n                    <geom name=\"robot0_g36_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face374_002_001_002_001\" mesh=\"robot0_link6_vis_11\" />\n                    <geom name=\"robot0_g37_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face065_002_001_002_001\" mesh=\"robot0_link6_vis_12\" />\n                    <geom name=\"robot0_g38_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Face064_002_001_002_001\" mesh=\"robot0_link6_vis_13\" />\n                    <geom name=\"robot0_g39_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature002_006_001_002_001\" mesh=\"robot0_link6_vis_14\" />\n                    <geom name=\"robot0_g40_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Feature001_009_001_002_001\" mesh=\"robot0_link6_vis_15\" />\n                    <geom name=\"robot0_g41_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Shell012_002_002_001\" mesh=\"robot0_link6_vis_16\" />\n                    <geom name=\"robot0_link6_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link6\" />\n                    <body name=\"robot0_link7\" pos=\"0.088 0 0\" quat=\"0.707107 0.707107 0 0\" gravcomp=\"0\">\n                      <inertial pos=\"0 0 0.08\" mass=\"0.5\" diaginertia=\"0.05 0.05 0.05\" />\n                      <joint name=\"robot0_joint7\" pos=\"0 0 0\" axis=\"0 0 1\" range=\"-2.8973 2.8973\" armature=\"0.714286\" damping=\"0.01\" frictionloss=\"0.1\" />\n                      <geom name=\"robot0_g42_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring004_004_002\" mesh=\"robot0_link7_vis_0\" />\n                      <geom name=\"robot0_g43_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring001_004_002\" mesh=\"robot0_link7_vis_1\" />\n                      <geom name=\"robot0_g44_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring007_004_001\" mesh=\"robot0_link7_vis_2\" />\n                      <geom name=\"robot0_g45_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring006_004_001\" mesh=\"robot0_link7_vis_3\" />\n                      <geom name=\"robot0_g46_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring005_004_001\" mesh=\"robot0_link7_vis_4\" />\n                      <geom name=\"robot0_g47_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring003_004_001\" mesh=\"robot0_link7_vis_5\" />\n                      <geom name=\"robot0_g48_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring002_004_001\" mesh=\"robot0_link7_vis_6\" />\n                      <geom name=\"robot0_g49_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" material=\"robot0_Part__Mirroring_004_001\" mesh=\"robot0_link7_vis_7\" />\n                      <geom name=\"robot0_link7_collision\" type=\"mesh\" rgba=\"0 0.5 0 1\" mesh=\"robot0_link7\" />\n                      <body name=\"robot0_right_hand\" pos=\"0 0 0.1065\" quat=\"0.923785 0 0 -0.382911\" gravcomp=\"0\">\n                        <inertial pos=\"0 0 0\" mass=\"0.5\" diaginertia=\"0.05 0.05 0.05\" />\n                        <camera name=\"robot0_eye_in_hand\" pos=\"0.05 0 0\" quat=\"0 0.707107 0.707107 0\" fovy=\"75\" />\n                        <body name=\"gripper0_right_right_gripper\" pos=\"0 0 0\" quat=\"0.707107 0 0 -0.707107\" gravcomp=\"0\">\n                          <inertial pos=\"0 0 0.17\" quat=\"0.707107 0.707107 0 0\" mass=\"0.3\" diaginertia=\"0.09 0.07 0.05\" />\n                          <geom name=\"gripper0_right_hand_visual\" quat=\"0.707107 0 0 0.707107\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"1 1 1 1\" mesh=\"gripper0_right_hand_vis\" />\n                          <geom name=\"gripper0_right_hand_collision\" quat=\"0.707107 0 0 0.707107\" type=\"mesh\" rgba=\"0 0 0.5 1\" mesh=\"gripper0_right_hand\" />\n                          <site name=\"gripper0_right_ft_frame\" pos=\"0 0 0\" size=\"0.01\" group=\"1\" rgba=\"1 0 0 -1\" />\n                          <body name=\"gripper0_right_eef\" pos=\"0 0 0.097\" gravcomp=\"0\">\n                            <site name=\"gripper0_right_grip_site\" pos=\"0 0 0\" size=\"0.01\" group=\"1\" rgba=\"1 0 0 -0.5\" />\n                            <site name=\"gripper0_right_ee_x\" pos=\"0.1 0 0\" quat=\"0.707105 0 0.707108 0\" size=\"0.005 0.1\" group=\"1\" type=\"cylinder\" rgba=\"1 0 0 0\" />\n                            <site name=\"gripper0_right_ee_y\" pos=\"0 0.1 0\" quat=\"0.707105 0.707108 0 0\" size=\"0.005 0.1\" group=\"1\" type=\"cylinder\" rgba=\"0 1 0 0\" />\n                            <site name=\"gripper0_right_ee_z\" pos=\"0 0 0.1\" size=\"0.005 0.1\" group=\"1\" type=\"cylinder\" rgba=\"0 0 1 0\" />\n                            <site name=\"gripper0_right_grip_site_cylinder\" pos=\"0 0 0\" size=\"0.005 10\" group=\"1\" type=\"cylinder\" rgba=\"0 1 0 -0.3\" />\n                          </body>\n                          <body name=\"gripper0_right_leftfinger\" pos=\"0 0 0.0524\" quat=\"0.707107 0 0 0.707107\" gravcomp=\"0\">\n                            <inertial pos=\"0 0 0.05\" mass=\"0.1\" diaginertia=\"0.01 0.01 0.005\" />\n                            <joint name=\"gripper0_right_finger_joint1\" pos=\"0 0 0\" axis=\"0 1 0\" type=\"slide\" range=\"0 0.04\" armature=\"1\" damping=\"100\" frictionloss=\"1\" />\n                            <geom name=\"gripper0_right_finger1_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"0.499 0.499 0.499 1\" mesh=\"gripper0_right_finger_vis\" />\n                            <geom name=\"gripper0_right_finger1_collision\" type=\"mesh\" contype=\"0\" condim=\"4\" rgba=\"0 0 0.5 1\" mesh=\"gripper0_right_finger\" />\n                            <body name=\"gripper0_right_finger_joint1_tip\" pos=\"0 0.0085 0.056\" gravcomp=\"0\">\n                              <inertial pos=\"0 0 0\" quat=\"0 0 0 1\" mass=\"0.01\" diaginertia=\"0.01 0.01 0.01\" />\n                              <geom name=\"gripper0_right_finger1_pad_collision\" size=\"0.008 0.004 0.008\" pos=\"0 -0.005 -0.015\" quat=\"0 0 0 1\" type=\"box\" friction=\"2 0.05 0.0001\" solref=\"0.01 0.5\" rgba=\"0 0 0.5 1\" />\n                            </body>\n                          </body>\n                          <body name=\"gripper0_right_rightfinger\" pos=\"0 0 0.0524\" quat=\"0.707107 0 0 0.707107\" gravcomp=\"0\">\n                            <inertial pos=\"0 0 0.05\" mass=\"0.1\" diaginertia=\"0.01 0.01 0.005\" />\n                            <joint name=\"gripper0_right_finger_joint2\" pos=\"0 0 0\" axis=\"0 1 0\" type=\"slide\" range=\"-0.04 0\" armature=\"1\" damping=\"100\" frictionloss=\"1\" />\n                            <geom name=\"gripper0_right_finger2_visual\" quat=\"0 0 0 1\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"0.499 0.499 0.499 1\" mesh=\"gripper0_right_finger_vis\" />\n                            <geom name=\"gripper0_right_finger2_collision\" quat=\"0 0 0 1\" type=\"mesh\" contype=\"0\" condim=\"4\" rgba=\"0 0 0.5 1\" mesh=\"gripper0_right_finger\" />\n                            <body name=\"gripper0_right_finger_joint2_tip\" pos=\"0 -0.0085 0.056\" gravcomp=\"0\">\n                              <inertial pos=\"0 0 0\" quat=\"0 0 0 1\" mass=\"0.01\" diaginertia=\"0.01 0.01 0.01\" />\n                              <geom name=\"gripper0_right_finger2_pad_collision\" size=\"0.008 0.004 0.008\" pos=\"0 0.005 -0.015\" quat=\"0 0 0 1\" type=\"box\" friction=\"2 0.05 0.0001\" solref=\"0.01 0.5\" rgba=\"0 0 0.5 1\" />\n                            </body>\n                          </body>\n                        </body>\n                      </body>\n                    </body>\n                  </body>\n                </body>\n              </body>\n            </body>\n          </body>\n        </body>\n      <site name=\"robot0_right_center\" pos=\"0 0 0\" size=\"0.01\" rgba=\"1 0.3 0.3 1\" group=\"2\" /></body>\n      <body name=\"fixed_mount0_base\" pos=\"0 0 0.01\" gravcomp=\"0\">\n        <body name=\"fixed_mount0_controller_box\" pos=\"0 0 0\" gravcomp=\"0\">\n          <inertial pos=\"-0.325 0 -0.38\" mass=\"46.64\" diaginertia=\"1.71363 1.27988 0.809981\" />\n          <geom name=\"fixed_mount0_controller_box_col\" size=\"0.11 0.2 0.265\" pos=\"-0.325 0 -0.38\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n        </body>\n        <body name=\"fixed_mount0_pedestal_feet\" pos=\"0 0 0\" gravcomp=\"0\">\n          <inertial pos=\"-0.1225 0 -0.758\" mass=\"167.09\" diaginertia=\"8.16095 9.59375 15.0785\" />\n          <geom name=\"fixed_mount0_pedestal_feet_col\" size=\"0.385 0.35 0.155\" pos=\"-0.1225 0 -0.758\" type=\"box\" rgba=\"0.5 0.5 0 1\" />\n        </body>\n        <body name=\"fixed_mount0_torso\" pos=\"0 0 0\" gravcomp=\"0\">\n          <inertial pos=\"0 0 0\" mass=\"0.0001\" diaginertia=\"1e-08 1e-08 1e-08\" />\n          <geom name=\"fixed_mount0_torso_vis\" size=\"0.05 0.05 0.05\" pos=\"0 0 -0.05\" type=\"box\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"0.2 0.2 0.2 1\" />\n        </body>\n        <body name=\"fixed_mount0_pedestal\" pos=\"0 0 0\" gravcomp=\"0\">\n          <inertial pos=\"0 0 0\" quat=\"0.659267 -0.259505 -0.260945 0.655692\" mass=\"60.864\" diaginertia=\"6.0869 5.81635 4.20915\" />\n          <geom name=\"fixed_mount0_pedestal_vis\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" rgba=\"0.2 0.2 0.2 1\" mesh=\"fixed_mount0_pedestal\" />\n          <geom name=\"fixed_mount0_pedestal_col\" size=\"0.18 0.31\" pos=\"-0.02 0 -0.29\" type=\"cylinder\" rgba=\"0.5 0.5 0 1\" />\n        </body>\n      </body>\n    </body>\n    <body name=\"VisualMilk_main\" pos=\"0.0025 0.1575 0.885\" gravcomp=\"0\">\n      <geom name=\"VisualMilk_g0\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" mass=\"0\" rgba=\"0.8 0.8 0.8 0.3\" mesh=\"VisualMilk_milk_mesh\" />\n      <site name=\"VisualMilk_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"VisualBread_main\" pos=\"0.1975 0.1575 0.845\" gravcomp=\"0\">\n      <geom name=\"VisualBread_g0\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" mass=\"0\" rgba=\"0.8 0.8 0.8 0.3\" mesh=\"VisualBread_bread_mesh\" />\n      <site name=\"VisualBread_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"VisualCereal_main\" pos=\"0.0025 0.4025 0.9\" gravcomp=\"0\">\n      <geom name=\"VisualCereal_g0\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" mass=\"0\" rgba=\"0.8 0.8 0.8 0.3\" mesh=\"VisualCereal_cereal_mesh\" />\n      <site name=\"VisualCereal_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"VisualCan_main\" pos=\"0.1975 0.4025 0.86\" gravcomp=\"0\">\n      <geom name=\"VisualCan_g0\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" group=\"1\" mass=\"0\" rgba=\"0.8 0.8 0.8 0.3\" mesh=\"VisualCan_can_mesh\" />\n      <site name=\"VisualCan_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"Milk_main\" pos=\"0 0 0\" gravcomp=\"0\">\n      <joint name=\"Milk_joint0\" type=\"free\" damping=\"0.0005\" />\n      <geom name=\"Milk_g0\" type=\"mesh\" condim=\"4\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" density=\"100\" rgba=\"0.5 0 0 1\" mesh=\"Milk_milk_mesh\" />\n      <geom name=\"Milk_g0_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" condim=\"4\" group=\"1\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" mass=\"0\" material=\"Milk_ceramic\" mesh=\"Milk_milk_mesh\" />\n      <site name=\"Milk_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"Bread_main\" pos=\"0 0 0\" gravcomp=\"0\">\n      <joint name=\"Bread_joint0\" type=\"free\" damping=\"0.0005\" />\n      <geom name=\"Bread_g0\" type=\"mesh\" condim=\"4\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" density=\"50\" rgba=\"0.5 0 0 1\" mesh=\"Bread_bread_mesh\" />\n      <geom name=\"Bread_g0_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" condim=\"4\" group=\"1\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" mass=\"0\" material=\"Bread_bread\" mesh=\"Bread_bread_mesh\" />\n      <site name=\"Bread_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"Cereal_main\" pos=\"0 0 0\" gravcomp=\"0\">\n      <joint name=\"Cereal_joint0\" type=\"free\" damping=\"0.0005\" />\n      <geom name=\"Cereal_g0\" type=\"mesh\" condim=\"4\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" density=\"150\" rgba=\"0.5 0 0 1\" mesh=\"Cereal_cereal_mesh\" />\n      <geom name=\"Cereal_g0_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" condim=\"4\" group=\"1\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" mass=\"0\" material=\"Cereal_cereal\" mesh=\"Cereal_cereal_mesh\" />\n      <site name=\"Cereal_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n    <body name=\"Can_main\" pos=\"0 0 0\" gravcomp=\"0\">\n      <joint name=\"Can_joint0\" type=\"free\" damping=\"0.0005\" />\n      <geom name=\"Can_g0\" type=\"mesh\" condim=\"4\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" density=\"100\" rgba=\"0.5 0 0 1\" mesh=\"Can_can_mesh\" />\n      <geom name=\"Can_g0_visual\" type=\"mesh\" contype=\"0\" conaffinity=\"0\" condim=\"4\" group=\"1\" friction=\"0.95 0.3 0.1\" solref=\"0.001 1\" solimp=\"0.998 0.998 0.001 0.5 2\" mass=\"0\" material=\"Can_coke\" mesh=\"Can_can_mesh\" />\n      <site name=\"Can_default_site\" pos=\"0 0 0\" size=\"0.002\" rgba=\"1 0 0 0\" />\n    </body>\n  </worldbody>\n  <actuator>\n    <general name=\"robot0_torq_j1\" joint=\"robot0_joint1\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j2\" joint=\"robot0_joint2\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j3\" joint=\"robot0_joint3\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j4\" joint=\"robot0_joint4\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j5\" joint=\"robot0_joint5\" ctrlrange=\"-80 80\" actdim=\"0\" />\n    <general name=\"robot0_torq_j6\" joint=\"robot0_joint6\" ctrlrange=\"-12 12\" actdim=\"0\" />\n    <general name=\"robot0_torq_j7\" joint=\"robot0_joint7\" ctrlrange=\"-12 12\" actdim=\"0\" />\n    <general name=\"gripper0_right_gripper_finger_joint1\" joint=\"gripper0_right_finger_joint1\" ctrlrange=\"0 0.04\" forcerange=\"-20 20\" actdim=\"0\" biastype=\"affine\" gainprm=\"1000 0 0 0 0 0 0 0 0 0\" biasprm=\"0 -1000 0 0 0 0 0 0 0 0\" />\n    <general name=\"gripper0_right_gripper_finger_joint2\" joint=\"gripper0_right_finger_joint2\" ctrlrange=\"-0.04 0\" forcerange=\"-20 20\" actdim=\"0\" biastype=\"affine\" gainprm=\"1000 0 0 0 0 0 0 0 0 0\" biasprm=\"0 -1000 0 0 0 0 0 0 0 0\" />\n  </actuator>\n  <sensor>\n    <force site=\"gripper0_right_ft_frame\" name=\"gripper0_right_force_ee\" />\n    <torque site=\"gripper0_right_ft_frame\" name=\"gripper0_right_torque_ee\" />\n  </sensor>\n</mujoco>",
+        "fps": 20,
+        "source_group": "hf__robomimic__robomimic_datasets/v1.5/can/ph/demo_47",
+        "provenance": [
+          {
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962"
+          }
+        ],
+        "hand_assignment": "robot0 to Reachy right; robot1 to Reachy left when present; shared world frame",
+        "quaternion_evidence": "robosuite observables use xyzw; converted to wxyz",
+        "action_semantics": "source OSC command, not a Reachy joint command",
+        "schema": "reachy-retarget-episode-v1",
+        "source_id": "hf__robomimic__robomimic_datasets",
+        "source_sequence": "v1.5/can/ph/demo_47",
+        "episode_id": "a2e2fc296eb53e00fdc56596",
+        "split": "test",
+        "content_fingerprint": "95ea5cecdc2762af77bab57e8050b4d1c413742a3d480b406dfa27b7e2534f75",
+        "canonical_units": {
+          "length": "m",
+          "angle": "rad",
+          "time": "s",
+          "quaternion": "wxyz"
+        },
+        "physics_validated": false
+      },
+      "frozen_parent_binding": {
+        "parent_attempt": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-aligned/a2e2fc296eb53e00fdc56596",
+        "files": {
+          "scene.xml": "95ff5235f70347e25511e5d67f4fc697be91e1bf53612137a68b6fb0fa9d5a9c",
+          "plan.h5": "d9e281fe940f4983b95bbd877b96e1079ddcdff4edbfb00598e5956e18a2703a",
+          "result.json": "ccf36cf802e5f166d6c86237c587f53b165f6a2571df40ba5a80ba42aff65f5e"
+        }
+      },
+      "scene_asset_hashes": {
+        "meshes": {
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8"
+        },
+        "textures": {
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+          "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d"
+        },
+        "hfields": {}
+      },
+      "artifact_sha256": "7601134d2c247ffc085cb349c2b7fe398ccfd954c9fb39a243b485d3d01231e8",
+      "artifact": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/robot-initialization/robot-mobile-path.npz",
+      "physics_validated": false,
+      "object_state_assignment": "none; isolated robot-only FK queries",
+      "fixture_assumption": "Original compiled reset; task fixtures are not predicted or rewritten",
+      "source_clock_scope": "Every complete original control row retained; this module does not retime",
+      "controller_identity": {
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/reachy.py": "28bb18ac71bbf38e2ce45db1b0b523005ffc2141dfef97215d144390bc41cac8",
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/control/collision.py": "155a338b662028192011ccf611e433b6b5fede677b336dc551e4d28427ee208b",
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/reachy.urdf": "63a1ecab3312a72c35f19a4bb1142005d74e4d7101da87822d02fea96696d448",
+        "/mnt/reachy-retarget/references/reachy-control/8a9d6a49de54e494b8eb837f6e755cea6ada0f9e2fe3ab81f7e8b0e8221e6c2e/asset/collision_spheres.json": "8d581c1954e16769601234585c2b15897223b381171bc46f36449e76230a2bd0"
+      },
+      "minimum_fixture_gap_m": 0.003,
+      "support_pairs": [
+        [
+          "drivewhl1_link_collision_0",
+          "floor"
+        ],
+        [
+          "drivewhl2_link_collision_0",
+          "floor"
+        ],
+        [
+          "drivewhl3_link_collision_0",
+          "floor"
+        ]
+      ],
+      "gripper_closed_target_rad": 1.1119007202496456,
+      "inferred_contact_angle_rad": 1.1469007202496455,
+      "aperture_scope": "Five samples across declared contact/command interval and intent transitions; inactive left2rad; continuous sweep not asserted",
+      "max_iterations": 160,
+      "max_active_set_updates": 4,
+      "stop_on_first_invalid": false,
+      "pose_tolerance_constraints": false,
+      "pose_constraint_tolerances": null,
+      "incomplete_path_scope": "Unvisited rows retain original references; no full-path feasibility claim",
+      "displacement_regularizer": 1e-08,
+      "wall_s": 32.11439756501932,
+      "constrained_pairs": [
+        [
+          "r_elbow_forearm_link_collision_0",
+          "source_scene_geom_11"
+        ]
+      ],
+      "max_ik_errors": [
+        1.2431530979625113e-06,
+        3.3171146100171328e-06
+      ],
+      "max_collision_depths_m": [
+        1.3877787807814457e-17,
+        0.0
+      ],
+      "min_fixture_clearance_m": 0.003001,
+      "min_self_clearance_m": 0.12456412372827758,
+      "min_joint_margin_rad": 0.031000000000000028,
+      "peak_original_clock_reference_speed": [
+        0.5135467205573772,
+        0.33446109707800903,
+        0.371129041052216,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.26889256396381517,
+        0.6476539016885412,
+        0.5940015182900065,
+        0.3753042055083613,
+        0.48869318705898546,
+        0.6088958321436583,
+        0.5746646827194402
+      ]
+    }
+  },
+  "matched_geometry_checks": {
+    "original_time_s": true,
+    "original_reference": true,
+    "original_gripper_intent": true,
+    "original_hand_targets": true,
+    "original_object_targets": true,
+    "waypoints": false
+  },
+  "original_source_exact": true,
+  "placement": {
+    "admitted": true,
+    "admission_checks": {
+      "complete": true,
+      "hand_ik": true,
+      "environment": true,
+      "self_collision": true,
+      "self_clearance": true,
+      "joint_margin": true,
+      "loaded_rotation_speed": true,
+      "inserted_reference_speed": true,
+      "mobile_positive_fixture_clearance": true,
+      "mobile_inserted_reference_speed": true,
+      "mobile_boundary_reference_speed": true,
+      "original_references_exact": true,
+      "original_hands_exact": true,
+      "original_objects_exact": true
+    },
+    "physics_validated": false,
+    "completed_frames": 3002,
+    "total_frames": 3002,
+    "exception": null,
+    "original_release_frame": 615,
+    "inserted_frames": 2125,
+    "phase_frames": {
+      "traverse": [
+        615,
+        1247
+      ],
+      "lower": [
+        1247,
+        1620
+      ],
+      "hold": [
+        1620,
+        1655
+      ],
+      "open": [
+        1655,
+        1735
+      ],
+      "retreat": [
+        1735,
+        2108
+      ],
+      "return": [
+        2108,
+        2740
+      ]
+    },
+    "support_hold_s": 0.12,
+    "support_wait_s": 0.35,
+    "support_min_weight_fraction": 0.5,
+    "extra_descent_m": 0.002,
+    "arm_speed_rad_s": 0.65,
+    "loaded_rotation_speed_rad_s": 0.8,
+    "loaded_traverse_angular_peak_rad_s": 0.5549071829058332,
+    "nominal_loaded_traverse_duration_s": 5.054917361095097,
+    "nominal_unloaded_return_duration_s": 5.054917361095097,
+    "loaded_rotation_scope": "Time dilation of inserted loaded traverse only; geometric IK knots, original source rows and unloaded return remain unchanged",
+    "placement_position_world": [
+      0.927,
+      -0.2975,
+      0.8643392039698872
+    ],
+    "base_offset_xyyaw": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation_xyz_deg": [
+      0.0,
+      50.0,
+      -117.117125579951
+    ],
+    "release_aperture_rad": 1.4,
+    "requested_retreat_speed_factor": 1.0,
+    "effective_retreat_speed_factor": 1.0,
+    "source_clock_artifact": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/supported-placement/placement-admission.npz",
+    "artifact_sha256": "324f865188faa614e7774e88a84f4a5250547975920c3422dca785aafddffc69",
+    "original_artifact": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/supported-placement/original-and-proposal.npz",
+    "original_artifact_sha256": "2efc9ea88f9c5f4db94e1a9a404ba859212cd3330b6c2cb6e42c3bb40e632db1",
+    "inserted_duration_s": 21.25,
+    "peak_reference_speed_rad_s": 0.6484584206041699,
+    "adaptive_midpoints": 3,
+    "midpoint_minimum_motion": true,
+    "midpoint_position_reserve_m": 0.0001,
+    "midpoint_fixture_reserve_m": 0.0001,
+    "midpoint_quarter_probes": true,
+    "lower_acceleration_limits": null,
+    "lower_acceleration_scope": "Optional time-only per-segment quintic in lower and exactly reversed retreat; source and traverse unchanged",
+    "interval_knot_timing": true,
+    "interval_clock_artifacts": [
+      {
+        "phase": "traverse",
+        "loaded": false,
+        "seconds": 6.310382519261674,
+        "artifact": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/supported-placement/interval-clock-traverse-return.npz",
+        "artifact_sha256": "c5dc7c8cfd226f1805306fff0e05ce425fe7d6d3ca69084383fe14a0dd6f6bcd",
+        "angular_cap_rad_s": 0.8,
+        "progress_law": "linear",
+        "acceleration_limits": null
+      },
+      {
+        "phase": "traverse",
+        "loaded": true,
+        "seconds": 6.310382519261674,
+        "artifact": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/supported-placement/interval-clock-traverse-loaded.npz",
+        "artifact_sha256": "c5dc7c8cfd226f1805306fff0e05ce425fe7d6d3ca69084383fe14a0dd6f6bcd",
+        "angular_cap_rad_s": 0.8,
+        "progress_law": "linear",
+        "acceleration_limits": null
+      },
+      {
+        "phase": "lower",
+        "loaded": true,
+        "seconds": 3.7211537059284456,
+        "artifact": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/supported-placement/interval-clock-lower-loaded.npz",
+        "artifact_sha256": "ad243ca0d0f08530c8f8de87d037a69f8899ebc63b81ba73daaa419284ebbe36",
+        "angular_cap_rad_s": 0.8,
+        "progress_law": "linear",
+        "acceleration_limits": null
+      },
+      {
+        "phase": "hold",
+        "loaded": true,
+        "seconds": 0.35,
+        "artifact": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/supported-placement/interval-clock-hold-loaded.npz",
+        "artifact_sha256": "7b46d977e5bceda35e15809994f53a25541ac0b10f9dcf99e5fc8b625a089ece",
+        "angular_cap_rad_s": 0.8,
+        "progress_law": "linear",
+        "acceleration_limits": null
+      },
+      {
+        "phase": "open",
+        "loaded": true,
+        "seconds": 0.8,
+        "artifact": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/supported-placement/interval-clock-open-loaded.npz",
+        "artifact_sha256": "4b19ee552ccf47f846b7a33268adf8d02bfbb063a6e30797c7f7b477f760db70",
+        "angular_cap_rad_s": 0.8,
+        "progress_law": "linear",
+        "acceleration_limits": null
+      }
+    ],
+    "original_interval_complete": true,
+    "object_state_assignment": "none",
+    "support_guard_version": 1,
+    "support_position_tolerance_m": 0.04,
+    "support_grasp_recency_s": 0.2,
+    "admitted_gripper_apertures_rad": {
+      "inside_bin": [
+        1.1119007202496456,
+        1.1839255401872342,
+        1.2559503601248228,
+        1.3279751800624113,
+        1.4
+      ],
+      "above_bin": [
+        1.1119007202496456,
+        1.3339255401872343,
+        1.5559503601248228,
+        1.7779751800624113,
+        2.0
+      ]
+    },
+    "scope": "Inserted robot-only placement posture, support-gated opening and retreat; every original row retained",
+    "object_reference_semantics": "Inserted object references repeat the paused source release pose; they are neither measured nor prescribed physical object states",
+    "max_ik_errors": [
+      0.001929084758845815,
+      0.005489390740134246
+    ],
+    "max_collision_depths_m": [
+      2.7755575615628914e-17,
+      0.0
+    ],
+    "min_self_clearance_m": 0.12456412372827735,
+    "min_joint_margin_rad": 0.030999999999999917,
+    "mobile_ik": {
+      "base_bounds_xyyaw": [
+        [
+          -0.8402484305969045,
+          1.875
+        ],
+        [
+          -1.145,
+          1.2228331610933565
+        ],
+        [
+          -3.511089408490112,
+          3.1515859547846987
+        ]
+      ],
+      "minimum_fixture_gap_m": 0.003,
+      "max_iterations": 160,
+      "max_active_set_updates": 4,
+      "support_pairs": [
+        [
+          "drivewhl1_link_collision_0",
+          "floor"
+        ],
+        [
+          "drivewhl2_link_collision_0",
+          "floor"
+        ],
+        [
+          "drivewhl3_link_collision_0",
+          "floor"
+        ]
+      ],
+      "displacement_regularizer": 1e-08,
+      "orientation_transport": true,
+      "pose_tolerance_constraints": true,
+      "minimum_motion": false,
+      "motion_speed_caps": [
+        0.3,
+        0.3,
+        0.8,
+        0.65,
+        0.65,
+        0.65,
+        0.65,
+        0.65,
+        0.65,
+        0.65
+      ],
+      "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+      "initial_base_yaw": -0.35267567684326007,
+      "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+      "pose_tolerances_m_rad": [
+        0.002,
+        0.02
+      ],
+      "pose_constraint_numerical_margin_fraction": 1e-05,
+      "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged",
+      "knot_artifact": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/supported-placement/mobile-ik-knots.json",
+      "knot_sha256": "95aacf95eb0389a8613ad48c1097f576af4d9b19da34f4c3d0d71e49242b340a",
+      "minimum_signed_distance_or_lower_bound_m": 0.003001,
+      "inserted_speed_peak": [
+        0.29954347401559556,
+        0.29954347401559556,
+        0.5192515437705048,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.5038786977220044,
+        0.29563507903740405,
+        0.4795366735818096,
+        0.6484584206041588,
+        0.2990113770715397,
+        0.6484584206041533,
+        0.6484584206041699
+      ],
+      "source_prefix_suffix_exact": true,
+      "controller": "Unchanged measured-support Controller",
+      "fixture_gap_artifact_sha256": "85015e50fc92acb445469523918f52743508c0b75fb4f708fbf65168559f4206"
+    }
+  },
+  "complete_geometry_admitted": true,
+  "wall_s": 67.21421902091242
+}

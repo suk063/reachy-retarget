@@ -1,0 +1,96 @@
+{
+  "scope": "Development full-source mobile wall placement original-model trials. Both exact-replay rollouts fail measured support and stable task gates; all other physical gates pass. Subsequent support-gap diagnosis does not change these failures.",
+  "unique_sources": 1,
+  "passed_sources": 0,
+  "trials": 2,
+  "passed_trials": 0,
+  "publication_summary_sha256": "ae0009a4c2455a47354b764777c8ca388fd98b9205d5f32114012674d4022d35",
+  "rows": [
+    {
+      "job": "can-mobile-wall-364-physics-v1-ff1",
+      "source_episode": "3641974ddfbb197d490d6785",
+      "status": "physical_fail",
+      "physics_validated": false,
+      "gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": false
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.0012424491041419,
+        "max_grasp_drift_deg": 1.8079684929817847,
+        "max_hand_object_penetration_m": 0.0004752315214922409,
+        "final_stable_s": 0.0,
+        "recorded_frames": 3320,
+        "simulated_s": 33.19999999999461
+      },
+      "independent_actuator_replay": {
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "independent_validation_pass": true
+      },
+      "source_coverage": true,
+      "state_observations_complete": true,
+      "control_recording_complete": true,
+      "archive_sha256": "f84c2133d7df4e2aee5337569e1b50f5f176d1606dc67546cea3be3b427c165e"
+    },
+    {
+      "job": "can-mobile-wall-364-physics-v1-ff0",
+      "source_episode": "3641974ddfbb197d490d6785",
+      "status": "physical_fail",
+      "physics_validated": false,
+      "gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": false
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.001432663604122296,
+        "max_grasp_drift_deg": 1.9915131434584032,
+        "max_hand_object_penetration_m": 0.00018783698047889884,
+        "final_stable_s": 0.0,
+        "recorded_frames": 3320,
+        "simulated_s": 33.19999999999461
+      },
+      "independent_actuator_replay": {
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "independent_validation_pass": true
+      },
+      "source_coverage": true,
+      "state_observations_complete": true,
+      "control_recording_complete": true,
+      "archive_sha256": "2716fb86a6fab65c4720f660943c3054c3d3b84f441f7e4e5f12fc27bebe886c"
+    }
+  ]
+}

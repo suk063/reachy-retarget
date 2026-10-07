@@ -1,0 +1,52 @@
+{
+  "schema": "same-pod-support-deadline-counterfactual-v1",
+  "source": "a3e36b51e26c9ddf834c9948",
+  "same_pod": true,
+  "before_original_open_deadline_rows": 1943,
+  "comparisons": [
+    {
+      "field": "time_s",
+      "bit_equal": true,
+      "max_absolute_error": 0.0
+    },
+    {
+      "field": "command/joint_reference",
+      "bit_equal": true,
+      "max_absolute_error": 0.0
+    },
+    {
+      "field": "command/applied_joint_reference",
+      "bit_equal": true,
+      "max_absolute_error": 0.0
+    },
+    {
+      "field": "simulation/actuator_control",
+      "bit_equal": true,
+      "max_absolute_error": 0.0
+    },
+    {
+      "field": "simulation/qpos",
+      "bit_equal": true,
+      "max_absolute_error": 0.0
+    },
+    {
+      "field": "simulation/qvel",
+      "bit_equal": true,
+      "max_absolute_error": 0.0
+    }
+  ],
+  "original_source_interval_preserved": true,
+  "original_model_unchanged": true,
+  "hold_s": [
+    0.35,
+    0.55
+  ],
+  "debounce_s": 0.12,
+  "old_status": "physical_fail",
+  "new_status": "physical_pass",
+  "archive_sha256": [
+    "3172abbea59ac0afce5207cc56038037325ba227a1177ac405ba8120fe81d204",
+    "6e35ba74a245bfabc7ce27cda21e81ff2ee237a83212d9787b50e30c6000d5c1"
+  ],
+  "scope": "Fullmeasuredprefix andactualcontrolcomparison before originalopeningdeadline; source/internalgeometrycalculations may introduce numericaldifferences and are reportedwithoutassumingbitidentity."
+}

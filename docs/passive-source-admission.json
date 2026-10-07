@@ -1,0 +1,2878 @@
+{
+  "denominator": 20,
+  "denominator_policy": "All20 original evaluated sources retained regardless of admission diagnosis",
+  "rows": [
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-0cacb4e6f5eb9ea88fc84d7c/runs/dynamics/legacy-all-v1-0cacb4e6f5eb9ea88fc84d7c-aligned/0cacb4e6f5eb9ea88fc84d7c",
+      "source_sequence": "v1.5/lift/ph/demo_1",
+      "source_hdf5_sha256": "60b3c7915973c5fd5c83231fd7c74e8d8497ecdf32b1a32cd90f25812fb03bb9",
+      "scene_sha256": "d9e7df8419c905fd930194ad646411f77596ff1c9755c6917a560bd8b234e7a6",
+      "replay_sha256": "5f2bb07d29dc4f7b81d9badef71670ca1d5216a970d1aa1f242f1c6e160faa3b",
+      "original_recorded_frames": 486,
+      "original_gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": false,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.009999981773999966,
+        "geoms": [
+          "cube_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.6034195784705767,
+          -0.1098903427730162,
+          0.8099999817739999,
+          0.6034195784705765,
+          -0.10989034277301621,
+          0.8
+        ],
+        "gravity_alignment": 0.9999999999999889
+      },
+      "initial_support_gap": {
+        "distance_m": 0.009999981773999966,
+        "geoms": [
+          "cube_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.6034195784705767,
+          -0.1098903427730162,
+          0.8099999817739999,
+          0.6034195784705765,
+          -0.10989034277301621,
+          0.8
+        ],
+        "gravity_alignment": 0.9999999999999889
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.04800000000000003,
+          "depth_m": 0.0008296177338225422,
+          "geoms": [
+            "table_collision",
+            "cube_g0"
+          ],
+          "bodies": [
+            "table",
+            "cube_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.002,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.06400000000000004,
+          "depth_m": 0.0032364699346730348,
+          "geoms": [
+            "table_collision",
+            "cube_g0"
+          ],
+          "bodies": [
+            "table",
+            "cube_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": false,
+      "classification": "isolated_passive_source_model_gate_failure",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-12e2ae6265014dfd0fec63c2/runs/dynamics/legacy-all-v1-12e2ae6265014dfd0fec63c2-aligned/12e2ae6265014dfd0fec63c2",
+      "source_sequence": "demos/PickCube-v1/teleop/traj_1",
+      "source_hdf5_sha256": "87857e964ede5dacff6ae83b25e94a91ae7c168167bfbe281545e4b6acadf612",
+      "scene_sha256": "fc91985fb11e1d5005a93bfcfadb284565378698d455e2ecb29e0da99051ad71",
+      "replay_sha256": "7e90383cada9d79cff4296c450fbe8ba492f5adf7f54014bebac01e9cccc6fa3",
+      "original_recorded_frames": 1,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": false
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": -2.98632448436642e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.5744341386355336,
+          -0.14200721620889112,
+          0.7999999995529999,
+          0.5744341386355337,
+          -0.14200721620889112,
+          0.8000002981854484
+        ],
+        "gravity_alignment": 1.0000000000000002
+      },
+      "initial_support_gap": {
+        "distance_m": -2.98632448436642e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.5744341386355336,
+          -0.14200721620889112,
+          0.7999999995529999,
+          0.5744341386355337,
+          -0.14200721620889112,
+          0.8000002981854484
+        ],
+        "gravity_alignment": 1.0000000000000002
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.17479010184278043,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.9863244843664205e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.17479010184278043,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.9863244843664205e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.012,
+          "depth_m": 0.1747901018427808,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1500000000000001,
+          "depth_m": 0.00010671151232599683,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": true,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/runs/dynamics/legacy-all-v1-1d0214a54bfcfdfd95faa196-aligned/1d0214a54bfcfdfd95faa196",
+      "source_sequence": "v1.5/can/ph/demo_2",
+      "source_hdf5_sha256": "2551a7b158da391b63ce42f649b9ff6477b20f468a9c108399e01310c715a040",
+      "scene_sha256": "148b8b2b5ca45aab550eab5f5009f437dcd7a664f71e6f08e8bcc1d57228483a",
+      "replay_sha256": "cb1b3291daf35dd8bca3ab298be7a93e18cd3af961eec9d88dead172a7453275",
+      "original_recorded_frames": 761,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": false,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": -0.00029700337819105194,
+        "geoms": [
+          "Can_g0",
+          "source_scene_geom_7"
+        ],
+        "closest_points_world_m": [
+          0.4873695509947096,
+          -0.2463532860016979,
+          0.819702996621809,
+          0.4873695509947096,
+          -0.24635328600169787,
+          0.82
+        ],
+        "gravity_alignment": 0.9999999999996262
+      },
+      "initial_support_gap": {
+        "distance_m": -0.00029700337819105194,
+        "geoms": [
+          "Can_g0",
+          "source_scene_geom_7"
+        ],
+        "closest_points_world_m": [
+          0.4873695509947096,
+          -0.2463532860016979,
+          0.819702996621809,
+          0.4873695509947096,
+          -0.24635328600169787,
+          0.82
+        ],
+        "gravity_alignment": 0.9999999999996262
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0002970027638318217,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0002970027638318217,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.08600000000000006,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.002,
+          "depth_m": 0.0002970027638318217,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-26bc046d91c0174be7312e5d/runs/dynamics/legacy-all-v1-26bc046d91c0174be7312e5d-aligned/26bc046d91c0174be7312e5d",
+      "source_sequence": "demos/PickCube-v1/teleop/traj_2",
+      "source_hdf5_sha256": "636a0996287b3956f1fb651aa7673c55c254afee1d88a759e727d01274919adf",
+      "scene_sha256": "33911da3b4ee2cdd65b331f0d5cc448667fbb44c36ccc6014c6c6ab361624efa",
+      "replay_sha256": "0440d113bee41372ce8c6dc327fafc7514d25bdf8956da352aceb8d5d4c74cb9",
+      "original_recorded_frames": 1,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": false
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": -2.9863244843664205e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.5578585582854066,
+          -0.11352882511964556,
+          0.799999999553,
+          0.5578585582854068,
+          -0.1135288251196456,
+          0.8000002981854484
+        ],
+        "gravity_alignment": 0.9999999996282309
+      },
+      "initial_support_gap": {
+        "distance_m": -2.9863244843664205e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.5578585582854066,
+          -0.11352882511964556,
+          0.799999999553,
+          0.5578585582854068,
+          -0.1135288251196456,
+          0.8000002981854484
+        ],
+        "gravity_alignment": 0.9999999996282309
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.17479010184278043,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.986324484366421e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.17479010184278043,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.986324484366421e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.014,
+          "depth_m": 0.1747901018427808,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1500000000000001,
+          "depth_m": 0.00010671151232599848,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": true,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-2aef318f4c607ad8ed448123/runs/dynamics/legacy-all-v1-2aef318f4c607ad8ed448123-aligned/2aef318f4c607ad8ed448123",
+      "source_sequence": "v1.5/square/ph/demo_2",
+      "source_hdf5_sha256": "2a7598472ef64d3968cc64ab1a8491e1aa7bda0438cb55a2ee328b5ccb7b9f3c",
+      "scene_sha256": "ff03c2e18638265fe160844ab0d499e32b37ff1006f74009779ed09bb7872387",
+      "replay_sha256": "6a2cb11e2113692e071afb2001a73d532fa1095561872f9994b9655493277bea",
+      "original_recorded_frames": 816,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.05999999999999993,
+        "geoms": [
+          "SquareNut_g1",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.784838648069093,
+          -0.010830080723101676,
+          0.88,
+          0.784838648069093,
+          -0.010830080723101723,
+          0.82
+        ],
+        "gravity_alignment": 1.000000000000002
+      },
+      "initial_support_gap": {
+        "distance_m": 0.05999999999999993,
+        "geoms": [
+          "SquareNut_g1",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.784838648069093,
+          -0.010830080723101676,
+          0.88,
+          0.784838648069093,
+          -0.010830080723101723,
+          0.82
+        ],
+        "gravity_alignment": 1.000000000000002
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.11400000000000009,
+          "depth_m": 0.001994507049024966,
+          "geoms": [
+            "table_collision",
+            "SquareNut_g0"
+          ],
+          "bodies": [
+            "table",
+            "SquareNut_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.022000000000000006,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1300000000000001,
+          "depth_m": 0.007841642740136497,
+          "geoms": [
+            "table_collision",
+            "SquareNut_g4"
+          ],
+          "bodies": [
+            "table",
+            "SquareNut_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": false,
+      "classification": "isolated_passive_source_model_gate_failure",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-2dbc8c98b3dfab7ffa338c58/runs/dynamics/legacy-all-v1-2dbc8c98b3dfab7ffa338c58-aligned/2dbc8c98b3dfab7ffa338c58",
+      "source_sequence": "v1.5/lift/ph/demo_2",
+      "source_hdf5_sha256": "5e106e18ef1afe7cb24655ec42f8b0a0c28b816ffca3d7c242c32856e650b661",
+      "scene_sha256": "cb3f92a2085c915c268d78e7c1e6a3dae3942c6a307a59e2d1f43b43afe8c6ec",
+      "replay_sha256": "32b0d3bf6a06a4de2bf1d6c0d363b24eb4638a27dea4f749b52b5b680d49e607",
+      "original_recorded_frames": 481,
+      "original_gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": false,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": false,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.009999965481000017,
+        "geoms": [
+          "cube_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.5779433123588162,
+          -0.09914017995144117,
+          0.8099999654810001,
+          0.5779433123588162,
+          -0.09914017995144114,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "initial_support_gap": {
+        "distance_m": 0.009999965481000017,
+        "geoms": [
+          "cube_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.5779433123588162,
+          -0.09914017995144117,
+          0.8099999654810001,
+          0.5779433123588162,
+          -0.09914017995144114,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.04800000000000003,
+          "depth_m": 0.0008296278086410529,
+          "geoms": [
+            "table_collision",
+            "cube_g0"
+          ],
+          "bodies": [
+            "table",
+            "cube_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.002,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.06400000000000004,
+          "depth_m": 0.0032364762247946493,
+          "geoms": [
+            "table_collision",
+            "cube_g0"
+          ],
+          "bodies": [
+            "table",
+            "cube_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": false,
+      "classification": "isolated_passive_source_model_gate_failure",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-31bb4a33156a48823d3f6daf/runs/dynamics/legacy-all-v1-31bb4a33156a48823d3f6daf-aligned/31bb4a33156a48823d3f6daf",
+      "source_sequence": "v1.5/square/ph/demo_1",
+      "source_hdf5_sha256": "3948241b1d7177e411e6d83ef4a8aa13e1415952aaff8eb7e38f6d2059ae1d53",
+      "scene_sha256": "967199e6d1637575f8c6a3c6e1ba6194b0ccc807f64a5f9ec7b2634722109541",
+      "replay_sha256": "32fb3849ee4d0a6a4e904394e81f4b7c31d39ee12897263c3162b41b9dcf00f0",
+      "original_recorded_frames": 887,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.05999999999999993,
+        "geoms": [
+          "SquareNut_g3",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.7075330462448322,
+          -0.025273641231837916,
+          0.8799999999999999,
+          0.7075330462448322,
+          -0.02527364123183795,
+          0.8200000000000001
+        ],
+        "gravity_alignment": 0.9999999999999983
+      },
+      "initial_support_gap": {
+        "distance_m": 0.05999999999999993,
+        "geoms": [
+          "SquareNut_g3",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.7075330462448322,
+          -0.025273641231837916,
+          0.8799999999999999,
+          0.7075330462448322,
+          -0.02527364123183795,
+          0.8200000000000001
+        ],
+        "gravity_alignment": 0.9999999999999983
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.11400000000000009,
+          "depth_m": 0.001994507049024966,
+          "geoms": [
+            "table_collision",
+            "SquareNut_g0"
+          ],
+          "bodies": [
+            "table",
+            "SquareNut_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.018000000000000002,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1300000000000001,
+          "depth_m": 0.00784164274013692,
+          "geoms": [
+            "table_collision",
+            "SquareNut_g4"
+          ],
+          "bodies": [
+            "table",
+            "SquareNut_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": false,
+      "classification": "isolated_passive_source_model_gate_failure",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-47e8070939d3458ac7e7b09b/runs/dynamics/legacy-all-v1-47e8070939d3458ac7e7b09b-baseline/47e8070939d3458ac7e7b09b",
+      "source_sequence": "source/threading/demo_1",
+      "source_hdf5_sha256": "816f94ed769e1c7bff6e5a699a3412582b42465a270598fed8234363c4eb9887",
+      "scene_sha256": "4b19f588b8a848d63cf8f654dc5000689bc60e1c4afda251d4c5d687f130477b",
+      "replay_sha256": "0d2d918fa3745b1898d99f24bcd45b5eb9ea6391d941bb2bbe51240502f04466",
+      "original_recorded_frames": 1106,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": false,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.0,
+        "geoms": [
+          "needle_obj_handle",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.7685978616288504,
+          0.024297937735047577,
+          0.8,
+          0.7685978616288504,
+          0.024297937735047487,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "initial_support_gap": {
+        "distance_m": 0.0,
+        "geoms": [
+          "needle_obj_handle",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.7685978616288504,
+          0.024297937735047577,
+          0.8,
+          0.7685978616288504,
+          0.024297937735047487,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 6.591949208711867e-17,
+          "geoms": [
+            "table_collision",
+            "needle_obj_handle"
+          ],
+          "bodies": [
+            "table",
+            "needle_obj_root"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 6.591949208711867e-17,
+          "geoms": [
+            "table_collision",
+            "needle_obj_handle"
+          ],
+          "bodies": [
+            "table",
+            "needle_obj_root"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.032000000000000015,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1500000000000001,
+          "depth_m": 0.00017119993483015415,
+          "geoms": [
+            "table_collision",
+            "needle_obj_handle"
+          ],
+          "bodies": [
+            "table",
+            "needle_obj_root"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-58e7f4f3c4178bc2c5f3f2c7/runs/dynamics/legacy-all-v1-58e7f4f3c4178bc2c5f3f2c7-aligned/58e7f4f3c4178bc2c5f3f2c7",
+      "source_sequence": "v1.5/lift/ph/demo_0",
+      "source_hdf5_sha256": "f6d52ad8868f4d189a60daeb73a5add65916924b67fab3deab48a09653b6d5d8",
+      "scene_sha256": "ecdb4bcac9b5decbc07e592e08ef6dc45b686ed22177b8523bfc0938b184ea9e",
+      "replay_sha256": "f303f77837f7052e16f2c93b95421dc5d77297bebe3db938d561be0e1aebda3e",
+      "original_recorded_frames": 491,
+      "original_gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": false,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.00999997280399989,
+        "geoms": [
+          "cube_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.6264417480892428,
+          -0.12466449715560743,
+          0.8099999728039999,
+          0.6264417480892427,
+          -0.12466449715560743,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "initial_support_gap": {
+        "distance_m": 0.00999997280399989,
+        "geoms": [
+          "cube_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.6264417480892428,
+          -0.12466449715560743,
+          0.8099999728039999,
+          0.6264417480892427,
+          -0.12466449715560743,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.04800000000000003,
+          "depth_m": 0.0008296586390094396,
+          "geoms": [
+            "table_collision",
+            "cube_g0"
+          ],
+          "bodies": [
+            "table",
+            "cube_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.018000000000000002,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.06400000000000004,
+          "depth_m": 0.0032364036154638714,
+          "geoms": [
+            "table_collision",
+            "cube_g0"
+          ],
+          "bodies": [
+            "table",
+            "cube_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": false,
+      "classification": "isolated_passive_source_model_gate_failure",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/runs/dynamics/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2-aligned/6ad5cc23ec6d1c207da3e4b2",
+      "source_sequence": "v1.5/can/ph/demo_0",
+      "source_hdf5_sha256": "347be3e0244310898da826732f7b793e160870c266321c5ee3b388c9d1c0d408",
+      "scene_sha256": "1f0af732c4e0c6b5f6f4be1a256712446ceef3df92ed8fbb453804c8d7705f7f",
+      "replay_sha256": "bce32727ba3be0de666057ebfe12e0ccdfa3eefa7902c5bff31e5e729250d22a",
+      "original_recorded_frames": 483,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": false,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": false
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": -0.00029700337819105194,
+        "geoms": [
+          "Can_g0",
+          "source_scene_geom_7"
+        ],
+        "closest_points_world_m": [
+          0.41406985918938055,
+          -0.24073603934704368,
+          0.819702996621809,
+          0.4140698591893806,
+          -0.24073603934704366,
+          0.8200000000000001
+        ],
+        "gravity_alignment": 1.0
+      },
+      "initial_support_gap": {
+        "distance_m": -0.00029700337819105194,
+        "geoms": [
+          "Can_g0",
+          "source_scene_geom_7"
+        ],
+        "closest_points_world_m": [
+          0.41406985918938055,
+          -0.24073603934704368,
+          0.819702996621809,
+          0.4140698591893806,
+          -0.24073603934704366,
+          0.8200000000000001
+        ],
+        "gravity_alignment": 1.0
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0002970027638318217,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0002970027638318217,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.032000000000000015,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.002,
+          "depth_m": 0.0002970027638318217,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-8a7847a26e8fbb00783e4114/runs/dynamics/legacy-all-v1-8a7847a26e8fbb00783e4114-aligned/8a7847a26e8fbb00783e4114",
+      "source_sequence": "demos/PickCube-v1/teleop/traj_0",
+      "source_hdf5_sha256": "5483e8d57a6c09f80b29b3b24651a61f86db4c9deb08b00cb3bb5e1ad59c08c6",
+      "scene_sha256": "f9f518d2549e02a78b4a8cff9fee8206dd9daefdaae37cda6cd762517f287272",
+      "replay_sha256": "31d5dc8444b8660153e16bf45d9deb3adbe5edebdef088e1476a0cb29b3317d7",
+      "original_recorded_frames": 1,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": false
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": -2.9863244843664205e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.6575935733486022,
+          -0.11269447431619667,
+          0.7999999995530002,
+          0.6575935733486025,
+          -0.11269447431619661,
+          0.8000002981854486
+        ],
+        "gravity_alignment": 1.0
+      },
+      "initial_support_gap": {
+        "distance_m": -2.9863244843664205e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.6575935733486022,
+          -0.11269447431619667,
+          0.7999999995530002,
+          0.6575935733486025,
+          -0.11269447431619661,
+          0.8000002981854486
+        ],
+        "gravity_alignment": 1.0
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.17479010184278043,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.986324484366421e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.17479010184278043,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.986324484366421e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.07200000000000005,
+          "depth_m": 0.1747901018427808,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1500000000000001,
+          "depth_m": 0.00010671151232599868,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": true,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-970dc25cbc48adcabbbe06cf/runs/dynamics/legacy-all-v1-970dc25cbc48adcabbbe06cf-aligned/970dc25cbc48adcabbbe06cf",
+      "source_sequence": "demos/PickCube-v1/teleop/traj_4",
+      "source_hdf5_sha256": "c5c00522091dcf230e04667289aaab3a009ad882190f642d0c6e95ed68e4ba2c",
+      "scene_sha256": "30e4e75b6c1857ede085e6939d7cf66211ff431ef04aac25048677bfb8c33398",
+      "replay_sha256": "ef1fc4bbc3f1ac1c00598c1f1ea914aa1f2aaf61329cce2ca3305a1e69140cd8",
+      "original_recorded_frames": 1,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": false
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": -2.9863244843664205e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.6121644316470242,
+          -0.12619702783838216,
+          0.7999999995529998,
+          0.6121644316470242,
+          -0.12619702783838221,
+          0.8000002981854484
+        ],
+        "gravity_alignment": 1.000000000371769
+      },
+      "initial_support_gap": {
+        "distance_m": -2.9863244843664205e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.6121644316470242,
+          -0.12619702783838216,
+          0.7999999995529998,
+          0.6121644316470242,
+          -0.12619702783838221,
+          0.8000002981854484
+        ],
+        "gravity_alignment": 1.000000000371769
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.1747901018427808,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.9863244843664205e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.1747901018427808,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.9863244843664205e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.002,
+          "depth_m": 0.1747901018427808,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1500000000000001,
+          "depth_m": 0.00010671151232599894,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": true,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-a3cc117492cbe040d6a22525/runs/dynamics/legacy-all-v1-a3cc117492cbe040d6a22525-aligned/a3cc117492cbe040d6a22525",
+      "source_sequence": "source/stack/demo_2",
+      "source_hdf5_sha256": "b51dc2de8fcbb5a502145496ebe144496cb2470340092b4a1a4ec1bab1996481",
+      "scene_sha256": "4e6a4ffcf98c3b2cabba3eeac67a28b2c3c31177b3a73e2d6fd68212041d3c78",
+      "replay_sha256": "71a2d91d536d3f21be9961ed43af2d44aa314276817ef9f9ff18c1de6e4050f5",
+      "original_recorded_frames": 626,
+      "original_gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": false,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.009999999999999898,
+        "geoms": [
+          "cubeA_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.5248106363916432,
+          -0.14235288582338126,
+          0.8099999999999998,
+          0.5248106363916433,
+          -0.1423528858233813,
+          0.8
+        ],
+        "gravity_alignment": 0.9999999999999889
+      },
+      "initial_support_gap": {
+        "distance_m": 0.009999999999999898,
+        "geoms": [
+          "cubeA_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.5248106363916432,
+          -0.14235288582338126,
+          0.8099999999999998,
+          0.5248106363916433,
+          -0.1423528858233813,
+          0.8
+        ],
+        "gravity_alignment": 0.9999999999999889
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.04800000000000003,
+          "depth_m": 0.0008295877062328254,
+          "geoms": [
+            "table_collision",
+            "cubeA_g0"
+          ],
+          "bodies": [
+            "table",
+            "cubeA_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.018000000000000002,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.06400000000000004,
+          "depth_m": 0.0032363441062942828,
+          "geoms": [
+            "table_collision",
+            "cubeA_g0"
+          ],
+          "bodies": [
+            "table",
+            "cubeA_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": false,
+      "classification": "isolated_passive_source_model_gate_failure",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-a630ebea03b2f07fdda1b7d3/runs/dynamics/legacy-all-v1-a630ebea03b2f07fdda1b7d3-aligned/a630ebea03b2f07fdda1b7d3",
+      "source_sequence": "demos/PickCube-v1/teleop/traj_3",
+      "source_hdf5_sha256": "bc10ee1fb5bb12ce8aa69693681e43838c9409065ab7186e2aa4da216f48da4d",
+      "scene_sha256": "67c909c4509c0cf3ed1bc931f1c3fd6cf0d022539de9d3e27a8111b8e5d215b0",
+      "replay_sha256": "6ea8f58f02ef8f4e44a976f8808d59af4a020f6583eca4b4b18203e45d1335b6",
+      "original_recorded_frames": 1,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": false
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": -2.9863244843664205e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.5193203481710809,
+          -0.0177730538856488,
+          0.7999999995529998,
+          0.519320348171081,
+          -0.017773053885648815,
+          0.8000002981854484
+        ],
+        "gravity_alignment": 1.000000000371769
+      },
+      "initial_support_gap": {
+        "distance_m": -2.9863244843664205e-07,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "closest_points_world_m": [
+          0.5193203481710809,
+          -0.0177730538856488,
+          0.7999999995529998,
+          0.519320348171081,
+          -0.017773053885648815,
+          0.8000002981854484
+        ],
+        "gravity_alignment": 1.000000000371769
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.17479010184278043,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.9863244843664205e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.17479010184278043,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 2.9863244843664205e-07,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.07800000000000006,
+          "depth_m": 0.1747901018427808,
+          "geoms": [
+            "back_bar_inner_collision_0",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "back_bar_inner",
+            "table-workspace"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1500000000000001,
+          "depth_m": 0.00010671151232599966,
+          "geoms": [
+            "cube_collision",
+            "ms_table_3_collision_0"
+          ],
+          "bodies": [
+            "cube_main",
+            "table-workspace"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": true,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-b6c2b8facf7aa4c978b6bd6d/runs/dynamics/legacy-all-v1-b6c2b8facf7aa4c978b6bd6d-aligned/b6c2b8facf7aa4c978b6bd6d",
+      "source_sequence": "source/stack/demo_0",
+      "source_hdf5_sha256": "029e3f813dd7f5998901b2518c3cdc727e63ca5b283565cc09a7a360a385df8b",
+      "scene_sha256": "2af5d144f1e01b3f4acb3ca4a30760a417bcecb1f179feaee672c71196299099",
+      "replay_sha256": "a4682902190e6d158097a1ff5e7cdfc932103ba25e3374ea64131efecf04d043",
+      "original_recorded_frames": 631,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": false,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": false,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.009999999999999898,
+        "geoms": [
+          "cubeA_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.611208503156983,
+          -0.027892734536971716,
+          0.8099999999999999,
+          0.611208503156983,
+          -0.02789273453697172,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "initial_support_gap": {
+        "distance_m": 0.009999999999999898,
+        "geoms": [
+          "cubeA_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.611208503156983,
+          -0.027892734536971716,
+          0.8099999999999999,
+          0.611208503156983,
+          -0.02789273453697172,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.04800000000000003,
+          "depth_m": 0.0008295877062328323,
+          "geoms": [
+            "table_collision",
+            "cubeA_g0"
+          ],
+          "bodies": [
+            "table",
+            "cubeA_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.020000000000000004,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.06400000000000004,
+          "depth_m": 0.003236363599716607,
+          "geoms": [
+            "table_collision",
+            "cubeA_g0"
+          ],
+          "bodies": [
+            "table",
+            "cubeA_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": false,
+      "classification": "isolated_passive_source_model_gate_failure",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-b728fefc8a22104c63e1e4bd/runs/dynamics/legacy-all-v1-b728fefc8a22104c63e1e4bd-baseline/b728fefc8a22104c63e1e4bd",
+      "source_sequence": "source/threading/demo_2",
+      "source_hdf5_sha256": "92244e67ca35157a7883f3ce740b5211dcd84d86550e81e0c5dc08ff9f10911f",
+      "scene_sha256": "74a848965a8cc2084b2249e64b8ad8f6c193fa9d968a3934927d018a3735e393",
+      "replay_sha256": "2f8056047e1e9b7f8b5851010042ea4ba07e2cb3d112aa3d51da215fc7dd1f11",
+      "original_recorded_frames": 1441,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": false,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.0,
+        "geoms": [
+          "needle_obj_handle",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.7838940410473831,
+          -0.1121520410351973,
+          0.8000000000000002,
+          0.7838940410473831,
+          -0.11215204103519727,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "initial_support_gap": {
+        "distance_m": 0.0,
+        "geoms": [
+          "needle_obj_handle",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.7838940410473831,
+          -0.1121520410351973,
+          0.8000000000000002,
+          0.7838940410473831,
+          -0.11215204103519727,
+          0.8
+        ],
+        "gravity_alignment": 1.0
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 6.591949208711867e-17,
+          "geoms": [
+            "table_collision",
+            "needle_obj_handle"
+          ],
+          "bodies": [
+            "table",
+            "needle_obj_root"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 6.591949208711867e-17,
+          "geoms": [
+            "table_collision",
+            "needle_obj_handle"
+          ],
+          "bodies": [
+            "table",
+            "needle_obj_root"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.018000000000000002,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1500000000000001,
+          "depth_m": 0.0001711999348301391,
+          "geoms": [
+            "table_collision",
+            "needle_obj_handle"
+          ],
+          "bodies": [
+            "table",
+            "needle_obj_root"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-c1f6fdd7b4fa919be783b8a6/runs/dynamics/legacy-all-v1-c1f6fdd7b4fa919be783b8a6-aligned/c1f6fdd7b4fa919be783b8a6",
+      "source_sequence": "source/threading/demo_0",
+      "source_hdf5_sha256": "91b5e0e8781dc730d82f3e582aa1ed3e8db637443d2f3c466fc25e8de520ea5d",
+      "scene_sha256": "4deea6e9679782d89f87c764a1387588deadbe0c73a6951aea96df62639e8ce5",
+      "replay_sha256": "6c16fdecf899f01dd6d7116f1e565d60a8fcde259c94dd2932c44b88d4cf311d",
+      "original_recorded_frames": 1257,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": false,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.0,
+        "geoms": [
+          "needle_obj_handle",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.7838533366357465,
+          -0.06208391529013595,
+          0.7999999999999999,
+          0.7838533366357465,
+          -0.062083915290136,
+          0.7999999999999999
+        ],
+        "gravity_alignment": 1.0
+      },
+      "initial_support_gap": {
+        "distance_m": 0.0,
+        "geoms": [
+          "needle_obj_handle",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.7838533366357465,
+          -0.06208391529013595,
+          0.7999999999999999,
+          0.7838533366357465,
+          -0.062083915290136,
+          0.7999999999999999
+        ],
+        "gravity_alignment": 1.0
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 7.28583859910259e-17,
+          "geoms": [
+            "table_collision",
+            "needle_obj_handle"
+          ],
+          "bodies": [
+            "table",
+            "needle_obj_root"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 7.28583859910259e-17,
+          "geoms": [
+            "table_collision",
+            "needle_obj_handle"
+          ],
+          "bodies": [
+            "table",
+            "needle_obj_root"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.002,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1500000000000001,
+          "depth_m": 0.00017119993483006034,
+          "geoms": [
+            "table_collision",
+            "needle_obj_handle"
+          ],
+          "bodies": [
+            "table",
+            "needle_obj_root"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-d1c98eab070e1de3803eb075/runs/dynamics/legacy-all-v1-d1c98eab070e1de3803eb075-baseline/d1c98eab070e1de3803eb075",
+      "source_sequence": "v1.5/square/ph/demo_0",
+      "source_hdf5_sha256": "19b0aae50d65089a0ffd0902b413f667778ad5c65ad30c82a7b50f5a2658ca96",
+      "scene_sha256": "2d902d8f4de95f04c27d9cdad53bc45245f1325c6f55c56770fbad38a4d14ce7",
+      "replay_sha256": "46ed27a37fbf682f8c8b3e5c67a45787c5b92adee09b8fd5c7f5e0792553a0f0",
+      "original_recorded_frames": 831,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": false,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.059999999999999935,
+        "geoms": [
+          "SquareNut_g1",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.742051303661624,
+          -0.007446788343395171,
+          0.8799999999999999,
+          0.7420513036616241,
+          -0.007446788343395183,
+          0.8200000000000001
+        ],
+        "gravity_alignment": 0.9999999999999982
+      },
+      "initial_support_gap": {
+        "distance_m": 0.059999999999999935,
+        "geoms": [
+          "SquareNut_g1",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.742051303661624,
+          -0.007446788343395171,
+          0.8799999999999999,
+          0.7420513036616241,
+          -0.007446788343395183,
+          0.8200000000000001
+        ],
+        "gravity_alignment": 0.9999999999999982
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.11400000000000009,
+          "depth_m": 0.001994507049024973,
+          "geoms": [
+            "table_collision",
+            "SquareNut_g0"
+          ],
+          "bodies": [
+            "table",
+            "SquareNut_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.002,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.1300000000000001,
+          "depth_m": 0.007841642740136795,
+          "geoms": [
+            "table_collision",
+            "SquareNut_g4"
+          ],
+          "bodies": [
+            "table",
+            "SquareNut_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": false,
+      "classification": "isolated_passive_source_model_gate_failure",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-e876dc89127d7d36642c3439/runs/dynamics/legacy-all-v1-e876dc89127d7d36642c3439-aligned/e876dc89127d7d36642c3439",
+      "source_sequence": "v1.5/can/ph/demo_1",
+      "source_hdf5_sha256": "7c7b6185afb5c22c8f29f23e1aaa83875dae15c40cde43b4ee8469a9ca82ea1f",
+      "scene_sha256": "e4ce3bacea9a02879cb81e46f39be6f32e4bed62e45adc57aeb3bc9459350da5",
+      "replay_sha256": "1c2f95780c5c3d12ca880058ed1d13f5298fbb2d7bbb03d59e80c58209fdf76f",
+      "original_recorded_frames": 786,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": false,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": -0.00029700337819105194,
+        "geoms": [
+          "Can_g0",
+          "source_scene_geom_7"
+        ],
+        "closest_points_world_m": [
+          0.42159393770051024,
+          -0.21740801805707105,
+          0.819702996621809,
+          0.42159393770051024,
+          -0.21740801805707105,
+          0.8200000000000001
+        ],
+        "gravity_alignment": 1.0
+      },
+      "initial_support_gap": {
+        "distance_m": -0.00029700337819105194,
+        "geoms": [
+          "Can_g0",
+          "source_scene_geom_7"
+        ],
+        "closest_points_world_m": [
+          0.42159393770051024,
+          -0.21740801805707105,
+          0.819702996621809,
+          0.42159393770051024,
+          -0.21740801805707105,
+          0.8200000000000001
+        ],
+        "gravity_alignment": 1.0
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0002970027638318217,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0002970027638318217,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.05800000000000004,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.002,
+          "depth_m": 0.0002970027638318217,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": true,
+      "classification": "no_passive_object_gate_failure_in_short_prefix",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    },
+    {
+      "attempt": "/mnt/reachy-retarget/workspaces/legacy-all-v1-f099a0bb20161c285250f38b/runs/dynamics/legacy-all-v1-f099a0bb20161c285250f38b-aligned/f099a0bb20161c285250f38b",
+      "source_sequence": "source/stack/demo_1",
+      "source_hdf5_sha256": "de706c0cbe380dc8918c18df060d4413c0894407a8f35905da4931ecc43a6540",
+      "scene_sha256": "088ba03b6299c4635e4eaa2e3e3873788bac03ee1dfb993ddb7e0356e11582ee",
+      "replay_sha256": "4c8a19c4546cb68b75dd83f9d41eec62d5462725e4e051627fa71be427a0734b",
+      "original_recorded_frames": 711,
+      "original_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": false,
+        "object_environment_penetration_2mm": false,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": false,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true
+      },
+      "original_physics_validated": false,
+      "duration_requested_s": 0.15,
+      "duration_completed_s": 0.1500000000000001,
+      "completed": true,
+      "failure": null,
+      "initial_qvel_max_abs": 0.0,
+      "initial_nearest_environment": {
+        "distance_m": 0.009999999999999898,
+        "geoms": [
+          "cubeA_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.6601171816282534,
+          -0.10207909002905362,
+          0.8099999999999998,
+          0.6601171816282534,
+          -0.1020790900290536,
+          0.8
+        ],
+        "gravity_alignment": 0.9999999999999889
+      },
+      "initial_support_gap": {
+        "distance_m": 0.009999999999999898,
+        "geoms": [
+          "cubeA_g0",
+          "table_collision"
+        ],
+        "closest_points_world_m": [
+          0.6601171816282534,
+          -0.10207909002905362,
+          0.8099999999999998,
+          0.6601171816282534,
+          -0.1020790900290536,
+          0.8
+        ],
+        "gravity_alignment": 0.9999999999999889
+      },
+      "support_gap_semantics": "Closest signed collision-surface distance whose object-to-environment segment is aligned with gravity; not a universal tabletop-height approximation",
+      "initial_contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        }
+      },
+      "first_contacts": {
+        "robot_environment": {
+          "time_s": 0.0,
+          "depth_m": 0.0,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.04800000000000003,
+          "depth_m": 0.0008295877062328254,
+          "geoms": [
+            "table_collision",
+            "cubeA_g0"
+          ],
+          "bodies": [
+            "table",
+            "cubeA_main"
+          ]
+        }
+      },
+      "contact_peaks": {
+        "robot_environment": {
+          "time_s": 0.03800000000000002,
+          "depth_m": 1.3877787807814457e-17,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ]
+        },
+        "object_environment": {
+          "time_s": 0.06400000000000004,
+          "depth_m": 0.003236353222107552,
+          "geoms": [
+            "table_collision",
+            "cubeA_g0"
+          ],
+          "bodies": [
+            "table",
+            "cubeA_main"
+          ]
+        }
+      },
+      "robot_object_contact_time_s": null,
+      "isolated_passive_object": true,
+      "passive_object_environment_gate_pass": false,
+      "classification": "isolated_passive_source_model_gate_failure",
+      "initial_robot_placement_collision": false,
+      "control_policy": "Constant recorded initial actuator targets for the entire prefix",
+      "semantics": "Separate unchanged-model initial-hold diagnostic; does not remove sources or alter any original failure/pass"
+    }
+  ]
+}

@@ -1,0 +1,3531 @@
+{
+  "stage": "Original-model physical passes on two development episodes; separate transfer evaluation and retained earlier failures",
+  "policy_training_episodes": [
+    "1d0214a54bfcfdfd95faa196",
+    "6ad5cc23ec6d1c207da3e4b2"
+  ],
+  "heldout_policy_tuning": false,
+  "nearpass_exact_replay": {
+    "attempt": "/mnt/reachy-retarget/workspaces/feasible-geometry-v1-6ad5cc23ec6d1c207da3e4b2-can-force_2n/runs/dynamics/feasible-geometry-v1-6ad5cc23ec6d1c207da3e4b2-can-force_2n/6ad5cc23ec6d1c207da3e4b2",
+    "report_sha256": "d472aa899c69656c695b0e244ace4d303c0eacd1645307752d08f83f0150b134",
+    "replay_sha256": "8b1157575fd2c5f24a720a7d5d68b3dc5fc7a84731a3eae788e02af63595d60f",
+    "scene_sha256": "1f0af732c4e0c6b5f6f4be1a256712446ceef3df92ed8fbb453804c8d7705f7f",
+    "source_hdf5_sha256": "347be3e0244310898da826732f7b793e160870c266321c5ee3b388c9d1c0d408",
+    "source_sequence": "v1.5/can/ph/demo_0",
+    "runtime_mujoco_version": "3.15.0",
+    "recorded_runtime": {
+      "mujoco": "3.15.0",
+      "numpy": "2.5.3",
+      "pin": "4.1.0"
+    },
+    "source_window": 0.0,
+    "candidate": {
+      "depth": 0.025,
+      "height": 0.0,
+      "tilt": 15.0,
+      "yaw": 0.0,
+      "time_scale": 3.0,
+      "close_duration": 0.5,
+      "close_hold": 0,
+      "grasp_force": 2.0,
+      "force_feedback": true,
+      "placement_x": 0.5,
+      "placement_y": -0.1,
+      "geometry_center": true,
+      "controller": "joint_reference",
+      "object_relative": false,
+      "mobile_base": false,
+      "align_object_axes": true,
+      "scene_heading": 0.0,
+      "base_x_max": 100.0,
+      "base_y_min": -100.0,
+      "balanced_force": true,
+      "calibrate_attachment": false,
+      "grasp_local_x": 0.0,
+      "grasp_local_y": 0.0,
+      "soft_force_feedback": true,
+      "controlled_place": false,
+      "source_start_s": 0.0,
+      "place_clearance": 0.04,
+      "automatic_grasp": false,
+      "grasp_region_rank": 0,
+      "force_scale": 1.0,
+      "contact_release": false,
+      "integral_compensation": false,
+      "gripper_closed_target": -0.06,
+      "force_preclose_target": null,
+      "arm_velocity_feedforward": 0.0
+    },
+    "plan_summary": {
+      "alignment_variant": "pad_translation",
+      "source_time_scale": 1.0,
+      "velocity_dilation": 1.0,
+      "trajectory_seed": "Existing hand/object targets and source clock; right-arm IK at an explicit collision-checked robot base reference",
+      "frozen_motion_sha256": "204669bfdd8b47e6ca7613d7863aa323926ec3625f564ab2bb0d5742b199375f"
+    },
+    "initial": {
+      "qvel_max_abs": 0.0,
+      "joint_velocity": {},
+      "actuator_position_errors": {
+        "base_x": 0.0,
+        "base_y": 0.0,
+        "base_yaw": 0.0,
+        "neck_roll": 0.0,
+        "neck_pitch": 0.0,
+        "neck_yaw": 0.0,
+        "r_shoulder_pitch": 0.0,
+        "r_shoulder_roll": 0.0,
+        "r_elbow_yaw": 0.0,
+        "r_elbow_pitch": 0.0,
+        "r_wrist_roll": 0.0,
+        "r_wrist_pitch": 0.0,
+        "r_wrist_yaw": 0.0,
+        "r_hand_finger": 0.0,
+        "l_shoulder_pitch": 0.0,
+        "l_shoulder_roll": 0.0,
+        "l_elbow_yaw": 0.0,
+        "l_elbow_pitch": 0.0,
+        "l_wrist_roll": 0.0,
+        "l_wrist_pitch": 0.0,
+        "l_wrist_yaw": 0.0,
+        "l_hand_finger": 0.0
+      },
+      "first_control_position_errors": {
+        "base_x": 0.0,
+        "base_y": 0.0,
+        "base_yaw": 0.0,
+        "neck_roll": 0.0,
+        "neck_pitch": 0.0,
+        "neck_yaw": 0.0,
+        "r_shoulder_pitch": 0.0,
+        "r_shoulder_roll": 0.0,
+        "r_elbow_yaw": 0.0,
+        "r_elbow_pitch": 0.0,
+        "r_wrist_roll": 0.0,
+        "r_wrist_pitch": 0.0,
+        "r_wrist_yaw": 0.0,
+        "r_hand_finger": 0.0,
+        "l_shoulder_pitch": 0.0,
+        "l_shoulder_roll": 0.0,
+        "l_elbow_yaw": 0.0,
+        "l_elbow_pitch": 0.0,
+        "l_wrist_roll": 0.0,
+        "l_wrist_pitch": 0.0,
+        "l_wrist_yaw": 0.0,
+        "l_hand_finger": 0.0
+      }
+    },
+    "initial_contacts": [
+      {
+        "category": "robot_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "bodies": [
+          "world",
+          "drivewhl1_link"
+        ],
+        "depth_m": 0.0,
+        "normal_force_n": 0.0,
+        "position_world_m": [
+          0.1875333618886722,
+          0.1887724699626258,
+          0.0
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      {
+        "category": "robot_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "bodies": [
+          "world",
+          "drivewhl1_link"
+        ],
+        "depth_m": 0.0,
+        "normal_force_n": 0.0,
+        "position_world_m": [
+          0.16849851845911235,
+          0.21814379501976516,
+          0.0
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      {
+        "category": "robot_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "floor",
+          "drivewhl2_link_collision_0"
+        ],
+        "bodies": [
+          "world",
+          "drivewhl2_link"
+        ],
+        "depth_m": 0.0,
+        "normal_force_n": 0.0,
+        "position_world_m": [
+          0.16834800335503403,
+          0.5615360304368856,
+          0.0
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      {
+        "category": "robot_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "floor",
+          "drivewhl2_link_collision_0"
+        ],
+        "bodies": [
+          "world",
+          "drivewhl2_link"
+        ],
+        "depth_m": 0.0,
+        "normal_force_n": 0.0,
+        "position_world_m": [
+          0.1524291114274609,
+          0.5303657099412883,
+          0.0
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      {
+        "category": "robot_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "floor",
+          "drivewhl3_link_collision_0"
+        ],
+        "bodies": [
+          "world",
+          "drivewhl3_link"
+        ],
+        "depth_m": 0.0,
+        "normal_force_n": 0.0,
+        "position_world_m": [
+          -0.1448820303545734,
+          0.35853924232888257,
+          0.0
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      {
+        "category": "robot_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "floor",
+          "drivewhl3_link_collision_0"
+        ],
+        "bodies": [
+          "world",
+          "drivewhl3_link"
+        ],
+        "depth_m": 0.0,
+        "normal_force_n": 0.0,
+        "position_world_m": [
+          -0.10992829499749865,
+          0.3603382377673374,
+          0.0
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      {
+        "category": "object_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "source_scene_geom_7",
+          "Can_g0"
+        ],
+        "bodies": [
+          "bin1",
+          "Can_main"
+        ],
+        "depth_m": 0.0002970027638318217,
+        "normal_force_n": 0.05331392229698795,
+        "position_world_m": [
+          0.3977416347349559,
+          -0.2470746154507326,
+          0.8198514986180842
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      {
+        "category": "object_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "source_scene_geom_7",
+          "Can_g0"
+        ],
+        "bodies": [
+          "bin1",
+          "Can_main"
+        ],
+        "depth_m": 0.00029699996906784593,
+        "normal_force_n": 0.043802153360176524,
+        "position_world_m": [
+          0.42113414225309725,
+          -0.22470853512542055,
+          0.8198515000154661
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      {
+        "category": "object_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "source_scene_geom_7",
+          "Can_g0"
+        ],
+        "bodies": [
+          "bin1",
+          "Can_main"
+        ],
+        "depth_m": 0.0002970013422793904,
+        "normal_force_n": 0.045348771457377784,
+        "position_world_m": [
+          0.40467203045428246,
+          -0.20222897411727214,
+          0.8198514993288604
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      {
+        "category": "object_environment",
+        "time_s": 0.0,
+        "geoms": [
+          "source_scene_geom_7",
+          "Can_g0"
+        ],
+        "bodies": [
+          "bin1",
+          "Can_main"
+        ],
+        "depth_m": 0.00029700216550021524,
+        "normal_force_n": 0.055321980753085184,
+        "position_world_m": [
+          0.3762885004779313,
+          -0.21777813841014684,
+          0.81985149891725
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      }
+    ],
+    "contacts": {
+      "robot_environment": {
+        "first": {
+          "time_s": 0.002,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ],
+          "depth_m": 0.0,
+          "normal_force_n": 0.0,
+          "position_world_m": [
+            0.1875333618886722,
+            0.1887724699626258,
+            0.0
+          ],
+          "gripper_target_rad": 2.0,
+          "gripper_position_rad": 2.0
+        },
+        "maximum_depth": {
+          "time_s": 0.018000000000000002,
+          "geoms": [
+            "floor",
+            "drivewhl1_link_collision_0"
+          ],
+          "bodies": [
+            "world",
+            "drivewhl1_link"
+          ],
+          "depth_m": 1.3877787807814457e-17,
+          "normal_force_n": 3.2884692919276466,
+          "position_world_m": [
+            0.18752732713904963,
+            0.1887720600109426,
+            -6.93889390390723e-18
+          ],
+          "gripper_target_rad": 2.0,
+          "gripper_position_rad": 1.9999995899843268
+        },
+        "contact_samples": 24876
+      },
+      "object_environment": {
+        "first": {
+          "time_s": 0.002,
+          "geoms": [
+            "source_scene_geom_7",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin1",
+            "Can_main"
+          ],
+          "depth_m": 0.0002970027638318217,
+          "normal_force_n": 0.05331392229698795,
+          "position_world_m": [
+            0.3977416347349559,
+            -0.2470746154507326,
+            0.8198514986180842
+          ],
+          "gripper_target_rad": 2.0,
+          "gripper_position_rad": 2.0
+        },
+        "maximum_depth": {
+          "time_s": 6.219999999999537,
+          "geoms": [
+            "source_scene_geom_21",
+            "Can_g0"
+          ],
+          "bodies": [
+            "bin2",
+            "Can_main"
+          ],
+          "depth_m": 0.004066224437431209,
+          "normal_force_n": 0.0951728247983493,
+          "position_world_m": [
+            0.9829311704867986,
+            -0.265498679480434,
+            0.8179668877812845
+          ],
+          "gripper_target_rad": 2.0,
+          "gripper_position_rad": 1.9804661486634694
+        },
+        "contact_samples": 10047
+      },
+      "hand_object": {
+        "first": {
+          "time_s": 1.7760000000000014,
+          "geoms": [
+            "r_hand_distal_link_collision_0",
+            "Can_g0"
+          ],
+          "bodies": [
+            "r_hand_distal_link",
+            "Can_main"
+          ],
+          "depth_m": 0.00012511449106061048,
+          "normal_force_n": 4.371994834268506,
+          "position_world_m": [
+            0.37660575048978906,
+            -0.2317562263696755,
+            0.8999208255109744
+          ],
+          "gripper_target_rad": 2.0,
+          "gripper_position_rad": 2.000006780154181
+        },
+        "maximum_depth": {
+          "time_s": 2.9439999999998974,
+          "geoms": [
+            "r_hand_distal_link_collision_0",
+            "Can_g0"
+          ],
+          "bodies": [
+            "r_hand_distal_link",
+            "Can_main"
+          ],
+          "depth_m": 0.0006058242823205401,
+          "normal_force_n": 23.30927660285155,
+          "position_world_m": [
+            0.40777290614223827,
+            -0.2803260685599417,
+            0.8721831349184107
+          ],
+          "gripper_target_rad": 1.910000000000001,
+          "gripper_position_rad": 2.001660299346237
+        },
+        "contact_samples": 7685
+      }
+    },
+    "finger_force_peaks": {
+      "r_hand_distal_link": {
+        "normal_force_sum_n": 37.36632463618203,
+        "time_s": 2.2439999999999745
+      },
+      "r_hand_distal_mimic_link": {
+        "normal_force_sum_n": 14.274675248981122,
+        "time_s": 3.155999999999874
+      }
+    },
+    "peak_gripper_actuator_force": 1.4451307332775816,
+    "peak_scalar_joint_speed": {},
+    "recorded_contact_metrics": {
+      "first_full_bilateral_interval_end_s": 3.1499999999998747,
+      "full_bilateral_intervals": 286,
+      "intervals": 881,
+      "first_recorded_drift_anchor_interval_end_s": 3.609999999999824,
+      "grasp_drift_available": true,
+      "issued_gripper_range_rad": [
+        1.745000000000003,
+        2.0
+      ],
+      "first_requested_closure_plan_time_s": 2.85
+    },
+    "replay": {
+      "max_qpos_error": 0.0,
+      "max_qvel_error": 0.0,
+      "exact_within_1e7": true
+    },
+    "reported_gates": {
+      "task_stable_final_1s": true,
+      "bilateral_lifted_grasp": true,
+      "carry_contact_95pct": true,
+      "grasp_translation_3mm": true,
+      "grasp_rotation_3deg": true,
+      "hand_object_penetration_1mm": true,
+      "robot_environment_penetration_2mm": true,
+      "object_environment_penetration_2mm": false,
+      "no_nonhand_object_robot_contact": true,
+      "robot_self_penetration_2mm": true,
+      "actual_arm_speed_1rad_s": true,
+      "actual_base_speed_limits": true,
+      "joint_margin_25mrad": true,
+      "self_clearance_9mm": true,
+      "rollout_complete": true
+    },
+    "reported_failures": [
+      "object_environment_penetration_2mm"
+    ],
+    "reported_physics_validated": false,
+    "semantics": "Independent actuator-only replay diagnosis; original gates/results unchanged; zero drift without an acquired anchor is unavailable, not success",
+    "tracking": {
+      "close_index": 285,
+      "release_index": 601,
+      "max_hand_error_m": 0.03503833852628212,
+      "closure_hand_error_m": 0.02703584822343087,
+      "contact_angle": 1.1377928961653672,
+      "samples": [
+        {
+          "frame": 0,
+          "t": 0.01,
+          "hand_error_m": 0.0004283357313229924,
+          "object_reference_error_m": 8.605606921032763e-05,
+          "object_actual": [
+            0.3984976992066091,
+            -0.22372544047042256,
+            0.8600860475775653
+          ],
+          "object_goal": [
+            0.39849878681883716,
+            -0.22372491269895106,
+            0.8600000000000001
+          ],
+          "gripper_q": 2.0,
+          "gripper_ctrl": 2.0,
+          "bilateral": 0.0
+        },
+        {
+          "frame": 255,
+          "t": 2.5599999999999397,
+          "hand_error_m": 0.03470416085841856,
+          "object_reference_error_m": 0.0333766188253435,
+          "object_actual": [
+            0.40835631065197797,
+            -0.2554790280602996,
+            0.8629446013496843
+          ],
+          "object_goal": [
+            0.3984693854575029,
+            -0.22373148354029215,
+            0.8600565550617462
+          ],
+          "gripper_q": 2.056390339590479,
+          "gripper_ctrl": 2.0,
+          "bilateral": 0.0
+        },
+        {
+          "frame": 285,
+          "t": 2.8599999999999066,
+          "hand_error_m": 0.02703584822343087,
+          "object_reference_error_m": 0.030285037040530566,
+          "object_actual": [
+            0.4118580014360692,
+            -0.25078452698888093,
+            0.862257240873396
+          ],
+          "object_goal": [
+            0.3984729157008828,
+            -0.22370759554442776,
+            0.8600520805707421
+          ],
+          "gripper_q": 2.0411608966184778,
+          "gripper_ctrl": 1.995,
+          "bilateral": 0.0
+        },
+        {
+          "frame": 295,
+          "t": 2.9599999999998956,
+          "hand_error_m": 0.019832403916578246,
+          "object_reference_error_m": 0.024086845947588687,
+          "object_actual": [
+            0.4136053262257572,
+            -0.24259948593747138,
+            0.8592443400687615
+          ],
+          "object_goal": [
+            0.39834095454741225,
+            -0.22396835619083702,
+            0.8594812141540621
+          ],
+          "gripper_q": 1.9920283555775662,
+          "gripper_ctrl": 1.9050000000000011,
+          "bilateral": 0.0
+        },
+        {
+          "frame": 305,
+          "t": 3.0599999999998846,
+          "hand_error_m": 0.01118521633771981,
+          "object_reference_error_m": 0.019090180562858133,
+          "object_actual": [
+            0.41417103177229087,
+            -0.23106949503983162,
+            0.8513590039790018
+          ],
+          "object_goal": [
+            0.3977865838286747,
+            -0.22448391672366175,
+            0.8586126249883358
+          ],
+          "gripper_q": 1.8976097304495947,
+          "gripper_ctrl": 1.7950000000000021,
+          "bilateral": 0.0
+        },
+        {
+          "frame": 315,
+          "t": 3.1599999999998736,
+          "hand_error_m": 0.003714595434168123,
+          "object_reference_error_m": 0.025937505974086176,
+          "object_actual": [
+            0.41454083458342617,
+            -0.22743550162620435,
+            0.8448111587498344
+          ],
+          "object_goal": [
+            0.3955749735493527,
+            -0.2252289370341865,
+            0.8623662549926131
+          ],
+          "gripper_q": 1.8167673031848426,
+          "gripper_ctrl": 1.7550000000000028,
+          "bilateral": 1.0
+        },
+        {
+          "frame": 335,
+          "t": 3.3599999999998515,
+          "hand_error_m": 0.012387554177641744,
+          "object_reference_error_m": 0.02939720386589988,
+          "object_actual": [
+            0.4165292150141923,
+            -0.22360024359641245,
+            0.8491856259608355
+          ],
+          "object_goal": [
+            0.4082539824087089,
+            -0.2222978218033607,
+            0.8773639832218861
+          ],
+          "gripper_q": 1.8243189461409983,
+          "gripper_ctrl": 1.8015215213975126,
+          "bilateral": 1.0
+        },
+        {
+          "frame": 385,
+          "t": 3.8599999999997965,
+          "hand_error_m": 0.02417167018388121,
+          "object_reference_error_m": 0.029129699758685557,
+          "object_actual": [
+            0.4849123310448216,
+            -0.20730497382246763,
+            0.8965647018809529
+          ],
+          "object_goal": [
+            0.4903233273858404,
+            -0.2072878829476553,
+            0.9251874242275545
+          ],
+          "gripper_q": 1.8242182076196582,
+          "gripper_ctrl": 1.8016836068191353,
+          "bilateral": 1.0
+        },
+        {
+          "frame": 601,
+          "t": 6.019999999999559,
+          "hand_error_m": 0.017311146162091336,
+          "object_reference_error_m": 0.019582522621681118,
+          "object_actual": [
+            0.894190212537686,
+            -0.2879478972611713,
+            0.9801879834471142
+          ],
+          "object_goal": [
+            0.8920505874725603,
+            -0.2860284729876712,
+            0.9995583992213726
+          ],
+          "gripper_q": 1.8257114373345182,
+          "gripper_ctrl": 2.0,
+          "bilateral": 0.8
+        },
+        {
+          "frame": 880,
+          "t": 8.809999999999611,
+          "hand_error_m": 3.64740005613864e-06,
+          "object_reference_error_m": 0.020047423893391633,
+          "object_actual": [
+            0.9609674729524892,
+            -0.2966227663851701,
+            0.8447288899453508
+          ],
+          "object_goal": [
+            0.948917136918539,
+            -0.30088983080739373,
+            0.8601717124673771
+          ],
+          "gripper_q": 2.000000000002767,
+          "gripper_ctrl": 2.0,
+          "bilateral": 0.0
+        }
+      ]
+    }
+  },
+  "phase_maxima": {
+    "attempt": "/mnt/reachy-retarget/workspaces/feasible-geometry-v1-6ad5cc23ec6d1c207da3e4b2-can-force_2n/runs/dynamics/feasible-geometry-v1-6ad5cc23ec6d1c207da3e4b2-can-force_2n/6ad5cc23ec6d1c207da3e4b2",
+    "close": 2.85,
+    "release": 6.01,
+    "phase_maxima": {
+      "approach": {
+        "time": 2.6799999999999264,
+        "depth": 0.003217269199883854,
+        "geoms": [
+          "source_scene_geom_7",
+          "Can_g0"
+        ],
+        "force": 18.724123820133464,
+        "object_pos": [
+          0.4091032878055406,
+          -0.2551714910549075,
+          0.861281173654229
+        ]
+      },
+      "closed": {
+        "time": 3.0719999999998833,
+        "depth": 0.0010315613238491836,
+        "geoms": [
+          "source_scene_geom_7",
+          "Can_g0"
+        ],
+        "force": 0.15793329144253243,
+        "object_pos": [
+          0.4143229189024101,
+          -0.23165378319448363,
+          0.8490685710682392
+        ]
+      },
+      "release": {
+        "time": 6.219999999999537,
+        "depth": 0.004066224437431209,
+        "geoms": [
+          "source_scene_geom_21",
+          "Can_g0"
+        ],
+        "force": 0.0951728247983493,
+        "object_pos": [
+          0.9633734094031504,
+          -0.2907884155937472,
+          0.8483709479878832
+        ]
+      }
+    },
+    "violation_intervals": {
+      "approach": [
+        1.9660000000000015,
+        2.721999999999922
+      ],
+      "closed": [
+        null,
+        null
+      ],
+      "release": [
+        6.127999999999547,
+        6.2519999999995335
+      ]
+    },
+    "hand_target_samples": [
+      {
+        "time": 0.0,
+        "hand_pos": [
+          0.5141021190118794,
+          -0.034419026811315756,
+          0.9929871857108189
+        ],
+        "object_pos": [
+          0.39849878681883716,
+          -0.22372491269895106,
+          0.8600000000000001
+        ]
+      },
+      {
+        "time": 2.85,
+        "hand_pos": [
+          0.3473879908377037,
+          -0.22788989896682196,
+          0.8812504448044536
+        ],
+        "object_pos": [
+          0.3984729157008828,
+          -0.22370759554442776,
+          0.8600520805707421
+        ]
+      },
+      {
+        "time": 5.91,
+        "hand_pos": [
+          0.8332519298978207,
+          -0.24809350070408262,
+          1.0079614894704623
+        ],
+        "object_pos": [
+          0.8749256353448805,
+          -0.2804491869630509,
+          0.9962158400721833
+        ]
+      },
+      {
+        "time": 6.01,
+        "hand_pos": [
+          0.8515080720786682,
+          -0.25207589728044405,
+          1.0109097669390323
+        ],
+        "object_pos": [
+          0.8920505874725603,
+          -0.2860284729876712,
+          0.9995583992213726
+        ]
+      },
+      {
+        "time": 6.11,
+        "hand_pos": [
+          0.8693713346427154,
+          -0.2562092173572313,
+          1.0141992326146554
+        ],
+        "object_pos": [
+          0.9075917064607668,
+          -0.2908446884240122,
+          1.003133296991433
+        ]
+      },
+      {
+        "time": 6.21,
+        "hand_pos": [
+          0.8897056725991341,
+          -0.26301481245067504,
+          1.0171142901949668
+        ],
+        "object_pos": [
+          0.9211999236202174,
+          -0.29487166152554606,
+          1.006373878335132
+        ]
+      },
+      {
+        "time": 6.3100000000000005,
+        "hand_pos": [
+          0.9101177142357113,
+          -0.27262054868233715,
+          1.0203756901379961
+        ],
+        "object_pos": [
+          0.9307553034984843,
+          -0.29767028411396507,
+          1.0097985303059096
+        ]
+      },
+      {
+        "time": 6.51,
+        "hand_pos": [
+          0.937352925244437,
+          -0.2917896051164876,
+          1.0159716841159105
+        ],
+        "object_pos": [
+          0.9367166405541801,
+          -0.30139620176017046,
+          0.9746838185719339
+        ]
+      },
+      {
+        "time": 7.01,
+        "hand_pos": [
+          0.9289597707513952,
+          -0.2910239054148327,
+          1.0142750761112898
+        ],
+        "object_pos": [
+          0.948917136918539,
+          -0.30088983080739373,
+          0.8601717124673771
+        ]
+      },
+      {
+        "time": 8.8,
+        "hand_pos": [
+          0.9289597707513952,
+          -0.2910239054148327,
+          1.0142750761112898
+        ],
+        "object_pos": [
+          0.948917136918539,
+          -0.30088983080739373,
+          0.8601717124673771
+        ]
+      }
+    ]
+  },
+  "vertical_approach_diagnostics": [
+    {
+      "job": "feasible-geometry-v1-1d0214a54bfcfdfd95faa196-can-force_2n",
+      "close_frame": 321,
+      "close_time": 3.21,
+      "first_planned_collision": {
+        "frame": 216,
+        "time": 2.16,
+        "contacts": [
+          {
+            "depth": 0.0004743742960214111,
+            "geoms": [
+              "r_hand_distal_mimic_link_collision_0",
+              "Can_g0"
+            ]
+          },
+          {
+            "depth": 0.0005411213070570335,
+            "geoms": [
+              "r_hand_distal_mimic_link_collision_0",
+              "Can_g0"
+            ]
+          },
+          {
+            "depth": 0.0005542051004599885,
+            "geoms": [
+              "r_hand_distal_mimic_link_collision_0",
+              "Can_g0"
+            ]
+          }
+        ]
+      },
+      "worst_planned_collision": {
+        "frame": 223,
+        "time": 2.23,
+        "contacts": [
+          {
+            "depth": 0.006119693181739966,
+            "geoms": [
+              "r_hand_distal_mimic_link_collision_0",
+              "Can_g0"
+            ]
+          },
+          {
+            "depth": 0.006216275666969704,
+            "geoms": [
+              "r_hand_distal_mimic_link_collision_0",
+              "Can_g0"
+            ]
+          },
+          {
+            "depth": 0.006263429945456277,
+            "geoms": [
+              "r_hand_distal_mimic_link_collision_0",
+              "Can_g0"
+            ]
+          },
+          {
+            "depth": 0.0061883773242959175,
+            "geoms": [
+              "r_hand_distal_mimic_link_collision_0",
+              "Can_g0"
+            ]
+          }
+        ]
+      },
+      "close_pose_collision": [],
+      "vertical_approach_max_collision": 0.0,
+      "vertical_approach_max_ik": [
+        0.0004631176294373187,
+        0.0048036863600738515
+      ]
+    },
+    {
+      "job": "feasible-geometry-v1-6ad5cc23ec6d1c207da3e4b2-can-force_2n",
+      "close_frame": 285,
+      "close_time": 2.85,
+      "first_planned_collision": {
+        "frame": 164,
+        "time": 1.6400000000000001,
+        "contacts": [
+          {
+            "depth": 0.00041326246731678744,
+            "geoms": [
+              "r_hand_distal_link_collision_0",
+              "Can_g0"
+            ]
+          },
+          {
+            "depth": 0.00041326246731678744,
+            "geoms": [
+              "r_hand_distal_link_collision_0",
+              "Can_g0"
+            ]
+          }
+        ]
+      },
+      "worst_planned_collision": {
+        "frame": 176,
+        "time": 1.76,
+        "contacts": [
+          {
+            "depth": 0.009919624092636624,
+            "geoms": [
+              "r_hand_distal_link_collision_0",
+              "Can_g0"
+            ]
+          },
+          {
+            "depth": 0.009885991202305757,
+            "geoms": [
+              "r_hand_distal_link_collision_0",
+              "Can_g0"
+            ]
+          },
+          {
+            "depth": 0.009907756482978973,
+            "geoms": [
+              "r_hand_distal_link_collision_0",
+              "Can_g0"
+            ]
+          },
+          {
+            "depth": 0.009918168199074836,
+            "geoms": [
+              "r_hand_distal_link_collision_0",
+              "Can_g0"
+            ]
+          }
+        ]
+      },
+      "close_pose_collision": [],
+      "vertical_approach_max_collision": 0.0,
+      "vertical_approach_max_ik": [
+        0.0003750756144631864,
+        0.003945359896180071
+      ]
+    }
+  ],
+  "limitations": [
+    "Vertical approach was inspected at 61 poses with the close-frame base; a complete prefix still requires full-frame robot/environment checks and actuator-only physical rollout.",
+    "The two object-floor penetration intervals require separate approach and release corrections.",
+    "Object pose/geometry/materials and physical validation thresholds were unchanged."
+  ],
+  "implemented_approach": {
+    "module": "reachy_retarget/grasp_approach.py",
+    "tests": "tests/test_grasp_approach.py",
+    "admission": "Both development episodes, every frame, original source clock and all postclose references retained",
+    "physical_evidence": "docs/feasible-acquisition-v1-evidence.json",
+    "contact_002": "Both development episodes pass all physical gates except object_environment_penetration_2mm",
+    "heldout_tuned": false
+  },
+  "supported_release": {
+    "module": "reachy_retarget/supported_placement.py",
+    "tests": "tests/test_supported_placement.py",
+    "status": "Both development sources pass the original physical model using the shared closure-candidate bank and 2mm supported descent",
+    "source_preservation": "Every original input row and complete clock retained; inserted robot phase pauses source clock",
+    "object_state_writes": false,
+    "admission": [
+      {
+        "episode": "1d0214a54bfcfdfd95faa196",
+        "status": "admitted",
+        "report": {
+          "admitted": true,
+          "admission_checks": {
+            "complete": true,
+            "hand_ik": true,
+            "environment": true,
+            "self_collision": true,
+            "self_clearance": true,
+            "joint_margin": true,
+            "inserted_reference_speed": true
+          },
+          "physics_validated": false,
+          "exception": null,
+          "original_release_frame": 564,
+          "inserted_frames": 1679,
+          "phase_frames": {
+            "traverse": [
+              564,
+              865
+            ],
+            "lower": [
+              865,
+              1346
+            ],
+            "hold": [
+              1346,
+              1381
+            ],
+            "open": [
+              1381,
+              1461
+            ],
+            "retreat": [
+              1461,
+              1942
+            ],
+            "return": [
+              1942,
+              2243
+            ]
+          },
+          "support_hold_s": 0.12,
+          "support_min_weight_fraction": 0.5,
+          "extra_descent_m": 0.0,
+          "arm_speed_rad_s": 0.65,
+          "placement_position_world": [
+            1.0275,
+            -0.3225,
+            0.8611381013799517
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "source_clock_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v5/1d0214a54bfcfdfd95faa196/placement-admission.npz",
+          "artifact_sha256": "53474f8dedfe5ac32a23dbfc28dc051edc8f7f0fa7fcc1cd132e21ca7f3cafd8",
+          "original_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v5/1d0214a54bfcfdfd95faa196/original-and-proposal.npz",
+          "original_artifact_sha256": "8d4f4ba7da133fd24d58ef0accc36fad7c356bf9afdbe834d4c094ba1fad8d36",
+          "inserted_duration_s": 16.79,
+          "peak_reference_speed_rad_s": 0.8000000000000285,
+          "original_interval_complete": true,
+          "object_state_assignment": "none",
+          "admitted_gripper_apertures_rad": {
+            "inside_bin": [
+              1.13125056777594,
+              1.1984379258319549,
+              1.26562528388797,
+              1.332812641943985,
+              1.4
+            ],
+            "above_bin": [
+              1.13125056777594,
+              1.348437925831955,
+              1.5656252838879698,
+              1.782812641943985,
+              2.0
+            ]
+          },
+          "scope": "Inserted robot-only placement posture, support-gated opening and retreat; every original row retained",
+          "object_reference_semantics": "Inserted object references repeat the paused source release pose; they are neither measured nor prescribed physical object states",
+          "max_ik_errors": [
+            0.0009699729287332411,
+            0.009943983726945695
+          ],
+          "max_collision_depths_m": [
+            1.3877787807814457e-17,
+            0.0
+          ],
+          "min_self_clearance_m": 0.1245641237282776,
+          "min_joint_margin_rad": 0.031000000000000028
+        }
+      },
+      {
+        "episode": "6ad5cc23ec6d1c207da3e4b2",
+        "status": "admitted",
+        "report": {
+          "admitted": true,
+          "admission_checks": {
+            "complete": true,
+            "hand_ik": true,
+            "environment": true,
+            "self_collision": true,
+            "self_clearance": true,
+            "joint_margin": true,
+            "inserted_reference_speed": true
+          },
+          "physics_validated": false,
+          "exception": null,
+          "original_release_frame": 602,
+          "inserted_frames": 1205,
+          "phase_frames": {
+            "traverse": [
+              602,
+              835
+            ],
+            "lower": [
+              835,
+              1147
+            ],
+            "hold": [
+              1147,
+              1182
+            ],
+            "open": [
+              1182,
+              1262
+            ],
+            "retreat": [
+              1262,
+              1574
+            ],
+            "return": [
+              1574,
+              1807
+            ]
+          },
+          "support_hold_s": 0.12,
+          "support_min_weight_fraction": 0.5,
+          "extra_descent_m": 0.0,
+          "arm_speed_rad_s": 0.65,
+          "placement_position_world": [
+            1.0275,
+            -0.3225,
+            0.8601717124673771
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "source_clock_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v5/6ad5cc23ec6d1c207da3e4b2/placement-admission.npz",
+          "artifact_sha256": "0b934febac97cde204ed9532f609ca0f7e02d8be8966e5de796d336e3a7719ae",
+          "original_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v5/6ad5cc23ec6d1c207da3e4b2/original-and-proposal.npz",
+          "original_artifact_sha256": "a0bdc6e4b044c75eaa48bf51eb3e66449c351d6d8430a61cd2f073f7ce733fa9",
+          "inserted_duration_s": 12.05,
+          "peak_reference_speed_rad_s": 0.8000000000000673,
+          "original_interval_complete": true,
+          "object_state_assignment": "none",
+          "admitted_gripper_apertures_rad": {
+            "inside_bin": [
+              1.1177928961653671,
+              1.1883446721240254,
+              1.2588964480826834,
+              1.3294482240413417,
+              1.4
+            ],
+            "above_bin": [
+              1.1177928961653671,
+              1.3383446721240253,
+              1.5588964480826837,
+              1.7794482240413418,
+              2.0
+            ]
+          },
+          "scope": "Inserted robot-only placement posture, support-gated opening and retreat; every original row retained",
+          "object_reference_semantics": "Inserted object references repeat the paused source release pose; they are neither measured nor prescribed physical object states",
+          "max_ik_errors": [
+            0.0009508356420164986,
+            0.00998898104119937
+          ],
+          "max_collision_depths_m": [
+            1.3877787807814457e-17,
+            0.0
+          ],
+          "min_self_clearance_m": 0.1245641237282776,
+          "min_joint_margin_rad": 0.031000000000000028
+        }
+      }
+    ],
+    "runtime_reference_speed_checks": {
+      "support_stop_fractions": [
+        0.1,
+        0.5,
+        0.9
+      ],
+      "peak_full_path_rad_s": 0.8
+    },
+    "policy": {
+      "placement_xy_world": [
+        1.0275,
+        -0.3225
+      ],
+      "base_offset_xyyaw": [
+        0.15,
+        0,
+        0
+      ],
+      "rotation_xyz_deg": [
+        0,
+        40,
+        20
+      ],
+      "release_aperture_rad": 1.4,
+      "extra_descent_m": 0
+    },
+    "investigation_scripts": "/mnt/reachy-retarget/diagnostics/can-placement-investigation-v1",
+    "rejected_attempts": [
+      "/mnt/reachy-retarget/diagnostics/can-supported-placement-v1",
+      "/mnt/reachy-retarget/diagnostics/can-supported-placement-v2"
+    ],
+    "offline_tests_passed": 19,
+    "backup_admission": [
+      {
+        "episode": "1d0214a54bfcfdfd95faa196",
+        "status": "admitted",
+        "report": {
+          "admitted": true,
+          "admission_checks": {
+            "complete": true,
+            "hand_ik": true,
+            "environment": true,
+            "self_collision": true,
+            "self_clearance": true,
+            "joint_margin": true,
+            "inserted_reference_speed": true
+          },
+          "physics_validated": false,
+          "exception": null,
+          "original_release_frame": 564,
+          "inserted_frames": 1775,
+          "phase_frames": {
+            "traverse": [
+              564,
+              873
+            ],
+            "lower": [
+              873,
+              1394
+            ],
+            "hold": [
+              1394,
+              1429
+            ],
+            "open": [
+              1429,
+              1509
+            ],
+            "retreat": [
+              1509,
+              2030
+            ],
+            "return": [
+              2030,
+              2339
+            ]
+          },
+          "support_hold_s": 0.12,
+          "support_min_weight_fraction": 0.5,
+          "extra_descent_m": 0.02,
+          "arm_speed_rad_s": 0.65,
+          "placement_position_world": [
+            1.0275,
+            -0.3225,
+            0.8611381013799517
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "source_clock_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v6/1d0214a54bfcfdfd95faa196/placement-admission.npz",
+          "artifact_sha256": "289022852a3549a33b193196c55278cd85085fb810fc81157d8eddd7a7421cfa",
+          "original_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v6/1d0214a54bfcfdfd95faa196/original-and-proposal.npz",
+          "original_artifact_sha256": "3acff35417a3f204b8e7af69a759c01248466ce4035a619ec0f1572ba5c16e9b",
+          "inserted_duration_s": 17.75,
+          "peak_reference_speed_rad_s": 0.8000000000000285,
+          "original_interval_complete": true,
+          "object_state_assignment": "none",
+          "admitted_gripper_apertures_rad": {
+            "inside_bin": [
+              1.13125056777594,
+              1.1984379258319549,
+              1.26562528388797,
+              1.332812641943985,
+              1.4
+            ],
+            "above_bin": [
+              1.13125056777594,
+              1.348437925831955,
+              1.5656252838879698,
+              1.782812641943985,
+              2.0
+            ]
+          },
+          "scope": "Inserted robot-only placement posture, support-gated opening and retreat; every original row retained",
+          "object_reference_semantics": "Inserted object references repeat the paused source release pose; they are neither measured nor prescribed physical object states",
+          "max_ik_errors": [
+            0.0009691628787569311,
+            0.009943983726945695
+          ],
+          "max_collision_depths_m": [
+            1.3877787807814457e-17,
+            0.0
+          ],
+          "min_self_clearance_m": 0.1245641237282776,
+          "min_joint_margin_rad": 0.031000000000000028
+        }
+      },
+      {
+        "episode": "6ad5cc23ec6d1c207da3e4b2",
+        "status": "Supported placement admission rejected; inspect /mnt/reachy-retarget/diagnostics/can-supported-placement-v6/6ad5cc23ec6d1c207da3e4b2/result.json",
+        "report": {
+          "admitted": false,
+          "admission_checks": {
+            "complete": true,
+            "hand_ik": false,
+            "environment": true,
+            "self_collision": true,
+            "self_clearance": true,
+            "joint_margin": true,
+            "inserted_reference_speed": true
+          },
+          "physics_validated": false,
+          "exception": null,
+          "original_release_frame": 602,
+          "inserted_frames": 2457,
+          "phase_frames": {
+            "traverse": [
+              602,
+              1417
+            ],
+            "lower": [
+              1417,
+              1773
+            ],
+            "hold": [
+              1773,
+              1808
+            ],
+            "open": [
+              1808,
+              1888
+            ],
+            "retreat": [
+              1888,
+              2244
+            ],
+            "return": [
+              2244,
+              3059
+            ]
+          },
+          "support_hold_s": 0.12,
+          "support_min_weight_fraction": 0.5,
+          "extra_descent_m": 0.02,
+          "arm_speed_rad_s": 0.65,
+          "placement_position_world": [
+            1.0275,
+            -0.3225,
+            0.8601717124673771
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "source_clock_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v6/6ad5cc23ec6d1c207da3e4b2/placement-admission.npz",
+          "artifact_sha256": "2b0325ec0a09dc8d3e0aafe7481eccc96380b954689f5ea62af9ffa17f41d8bc",
+          "original_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v6/6ad5cc23ec6d1c207da3e4b2/original-and-proposal.npz",
+          "original_artifact_sha256": "3c97a6163a13ccd538d9c3420be02f18a51f13a212b9eca409ff8b8e2ebbf629",
+          "inserted_duration_s": 24.57,
+          "peak_reference_speed_rad_s": 0.8000000000000673,
+          "original_interval_complete": true,
+          "object_state_assignment": "none",
+          "admitted_gripper_apertures_rad": {
+            "inside_bin": [
+              1.1177928961653671,
+              1.1883446721240254,
+              1.2588964480826834,
+              1.3294482240413417,
+              1.4
+            ],
+            "above_bin": [
+              1.1177928961653671,
+              1.3383446721240253,
+              1.5588964480826837,
+              1.7794482240413418,
+              2.0
+            ]
+          },
+          "scope": "Inserted robot-only placement posture, support-gated opening and retreat; every original row retained",
+          "object_reference_semantics": "Inserted object references repeat the paused source release pose; they are neither measured nor prescribed physical object states",
+          "max_ik_errors": [
+            0.0032458613511053115,
+            0.03199160182569428
+          ],
+          "max_collision_depths_m": [
+            5.756570158788053e-05,
+            0.0
+          ],
+          "min_self_clearance_m": 0.1245641237282776,
+          "min_joint_margin_rad": 0.031000000000000028
+        }
+      }
+    ],
+    "implementation_sha256": "9ceacdc4ac3e1f8ddb2d39f60555e657e85a8f1b317217b1c974456e939f59b5",
+    "measured_attachment_prediction": [
+      {
+        "ep": "1d0214a54bfcfdfd95faa196",
+        "version": 5,
+        "measured_attachment_from_previous_attempt": true,
+        "minimum_collision_surface_z_m": 0.8196334632131321,
+        "source_support_surface_z_m": 0.82,
+        "predicted_support_gap_m": -0.00036653678686782154,
+        "predicted_object_origin": [
+          1.0298725108959776,
+          -0.32294313219219617,
+          0.8651964913982577
+        ],
+        "hand_object_attachment": [
+          [
+            -0.02400634926749191,
+            -0.0037619229824312505,
+            0.9997047279723743,
+            -0.017322351164933303
+          ],
+          [
+            -0.7768538845126934,
+            -0.6293298581732186,
+            -0.02102312367876724,
+            0.00017306980452458376
+          ],
+          [
+            0.6292231220420809,
+            -0.7771291897407718,
+            0.012185447897628212,
+            -0.047335512900165355
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "limitation": "Prediction from previous physically observed attachment, not measurement of the new placement rollout"
+      },
+      {
+        "ep": "1d0214a54bfcfdfd95faa196",
+        "version": 6,
+        "measured_attachment_from_previous_attempt": true,
+        "minimum_collision_surface_z_m": 0.7986629804111282,
+        "source_support_surface_z_m": 0.82,
+        "predicted_support_gap_m": -0.021337019588871797,
+        "predicted_object_origin": [
+          1.0305050786128136,
+          -0.3227128963721102,
+          0.844774016848927
+        ],
+        "hand_object_attachment": [
+          [
+            -0.02400634926749191,
+            -0.0037619229824312505,
+            0.9997047279723743,
+            -0.017322351164933303
+          ],
+          [
+            -0.7768538845126934,
+            -0.6293298581732186,
+            -0.02102312367876724,
+            0.00017306980452458376
+          ],
+          [
+            0.6292231220420809,
+            -0.7771291897407718,
+            0.012185447897628212,
+            -0.047335512900165355
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "limitation": "Prediction from previous physically observed attachment, not measurement of the new placement rollout"
+      },
+      {
+        "ep": "6ad5cc23ec6d1c207da3e4b2",
+        "version": 5,
+        "measured_attachment_from_previous_attempt": true,
+        "minimum_collision_surface_z_m": 0.8150933112125754,
+        "source_support_surface_z_m": 0.82,
+        "predicted_support_gap_m": -0.004906688787424507,
+        "predicted_object_origin": [
+          1.0302645616379984,
+          -0.32223903734160125,
+          0.8610400558763307
+        ],
+        "hand_object_attachment": [
+          [
+            -0.008026020071693308,
+            0.020891940108291002,
+            0.9997495235509335,
+            -0.01621527163839187
+          ],
+          [
+            -0.8443940192452216,
+            -0.5357044336189196,
+            0.004415887671896128,
+            -6.0355838383041593e-05
+          ],
+          [
+            0.5356625087354043,
+            -0.84414707642658,
+            0.021940603814590898,
+            -0.052777822012929465
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "limitation": "Prediction from previous physically observed attachment, not measurement of the new placement rollout"
+      }
+    ],
+    "physical_results": [
+      {
+        "job": "feasible-placement-v1-can-6ad5cc23ec6d1c207da3e4b2-supported40",
+        "attempt": "/mnt/reachy-retarget/workspaces/feasible-placement-v1-can-6ad5cc23ec6d1c207da3e4b2-supported40/runs/dynamics/feasible-placement-v1-can-6ad5cc23ec6d1c207da3e4b2-supported40/6ad5cc23ec6d1c207da3e4b2",
+        "status": "physical_pass",
+        "failed_gates": [],
+        "placement": {
+          "failed": false,
+          "failure_reason": null,
+          "opened": true,
+          "phase": "source",
+          "stable_support_s": 0.11999999999999998,
+          "support_confirmed": true,
+          "support_contact_frame": 1106,
+          "support_force_N": 0.1569228489031051,
+          "support_threshold_N": 0.078461425246671
+        },
+        "gates": {
+          "actual_arm_speed_1rad_s": true,
+          "actual_base_speed_limits": true,
+          "bilateral_lifted_grasp": true,
+          "carry_contact_95pct": true,
+          "grasp_rotation_3deg": true,
+          "grasp_translation_3mm": true,
+          "hand_object_penetration_1mm": true,
+          "joint_margin_25mrad": true,
+          "no_nonhand_object_robot_contact": true,
+          "object_environment_penetration_2mm": true,
+          "placement_opened_after_measured_support": true,
+          "robot_environment_penetration_2mm": true,
+          "robot_self_penetration_2mm": true,
+          "rollout_complete": true,
+          "self_clearance_9mm": true,
+          "task_stable_final_1s": true
+        },
+        "metrics": {
+          "max_grasp_drift_m": 0.0007738468553154825,
+          "max_grasp_drift_deg": 2.0171486281604847,
+          "bilateral_carry_fraction": 1.0,
+          "max_object_environment_penetration_m": 0.0004867823634706613,
+          "max_environment_penetration_m": 1.3877787807814457e-17,
+          "max_hand_object_penetration_m": 0.0001940307373241722,
+          "max_lift_m": 0.14781846513329844,
+          "min_joint_margin_rad": 0.031040367351282294,
+          "best_stable_s": 5.0599999999999365,
+          "final_stable_s": 5.0599999999999365
+        },
+        "phase_summary": {
+          "source": {
+            "frames": 882,
+            "max_support_N": 0.5459174935467956,
+            "first_frame": 0,
+            "last_frame": 2086,
+            "max_rotation_drift_deg": 1.0300629938050687,
+            "max_translation_drift_m": 0.0005834138140973824
+          },
+          "traverse": {
+            "frames": 233,
+            "max_support_N": 0.0,
+            "first_frame": 602,
+            "last_frame": 834,
+            "max_rotation_drift_deg": 1.2667338981288416,
+            "max_translation_drift_m": 0.0005808346423894951
+          },
+          "lower": {
+            "frames": 312,
+            "max_support_N": 3.001014743634059,
+            "first_frame": 835,
+            "last_frame": 1146,
+            "max_rotation_drift_deg": 1.9026224174496615,
+            "max_translation_drift_m": 0.0007738468553154825
+          },
+          "hold": {
+            "frames": 35,
+            "max_support_N": 2.123765187671628,
+            "first_frame": 1147,
+            "last_frame": 1181,
+            "max_rotation_drift_deg": 2.0171486281604847,
+            "max_translation_drift_m": 0.0004365975926753061
+          },
+          "open": {
+            "frames": 80,
+            "max_support_N": 1.372836000057439,
+            "first_frame": 1182,
+            "last_frame": 1261,
+            "max_rotation_drift_deg": null,
+            "max_translation_drift_m": null
+          },
+          "retreat": {
+            "frames": 312,
+            "max_support_N": 0.20348979948199217,
+            "first_frame": 1262,
+            "last_frame": 1573,
+            "max_rotation_drift_deg": null,
+            "max_translation_drift_m": null
+          },
+          "return": {
+            "frames": 233,
+            "max_support_N": 0.15692284890330016,
+            "first_frame": 1574,
+            "last_frame": 1806,
+            "max_rotation_drift_deg": null,
+            "max_translation_drift_m": null
+          }
+        },
+        "controller_events": [
+          {
+            "frame": 0,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 0.01,
+            "object_position": [
+              0.3984976992066091,
+              -0.22372544047042256,
+              0.8600860475775653
+            ],
+            "hand_object_attachment": [
+              [
+                2.892000716587792e-05,
+                2.6841078842033413e-05,
+                0.9999999992215952,
+                -0.13289056827330303
+              ],
+              [
+                -0.9048440310487985,
+                -0.4257432067126145,
+                3.759550286903104e-05,
+                -0.18940900220194148
+              ],
+              [
+                0.4257432073903175,
+                -0.9048440314317253,
+                1.1974493388066459e-05,
+                0.1159767384077649
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 602,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "traverse",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 6.019999999999559,
+            "object_position": [
+              0.8769443503632595,
+              -0.2780685633648499,
+              0.9982807282152097
+            ],
+            "hand_object_attachment": [
+              [
+                -0.008026020071493698,
+                0.020891940109238484,
+                0.9997495235509165,
+                -0.01621527163801373
+              ],
+              [
+                -0.844394019245336,
+                -0.5357044336187362,
+                0.00441588767256767,
+                -6.035583843244652e-05
+              ],
+              [
+                0.5356625087352291,
+                -0.8441470764266744,
+                0.021940603815284756,
+                -0.05277782201309278
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 835,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 8.349999999999458,
+            "object_position": [
+              1.0300426612799192,
+              -0.32181699063923874,
+              0.9771096862494406
+            ],
+            "hand_object_attachment": [
+              [
+                -0.011417854568660095,
+                0.018473622166049204,
+                0.9997641511282125,
+                -0.01649362459628767
+              ],
+              [
+                -0.8414109419151078,
+                -0.5403956748666715,
+                0.0003760464405166709,
+                -5.854528359287847e-05
+              ],
+              [
+                0.5402751700962944,
+                -0.8412082024501785,
+                0.02171406705247982,
+                -0.05290315524802025
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1118,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1106,
+            "support_force_N": 2.740062386450072,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 11.180000000000403,
+            "object_position": [
+              1.0305975746608753,
+              -0.32253705722201903,
+              0.865468591809412
+            ],
+            "hand_object_attachment": [
+              [
+                -0.012939488746437166,
+                0.018216259153548294,
+                0.9997503376010594,
+                -0.016375966358942007
+              ],
+              [
+                -0.8343092813802874,
+                -0.5512961597343494,
+                -0.0007531698795904055,
+                -5.066608228118663e-05
+              ],
+              [
+                0.55114480187487,
+                -0.8341107313568205,
+                0.022331484538670583,
+                -0.05306063083718349
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1147,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "hold",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1106,
+            "support_force_N": 1.9578974702384397,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 11.4700000000005,
+            "object_position": [
+              1.0309272289337943,
+              -0.3226722407609231,
+              0.8654808329964351
+            ],
+            "hand_object_attachment": [
+              [
+                -0.01281498581894863,
+                0.01703855663252183,
+                0.9997727060318964,
+                -0.01641684683506206
+              ],
+              [
+                -0.8322418179113231,
+                -0.5544114630673711,
+                -0.0012190730712327792,
+                -2.9444737827358236e-05
+              ],
+              [
+                0.554264677440405,
+                -0.8320682767702285,
+                0.0212849743835059,
+                -0.05287288244343935
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1182,
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "open",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1106,
+            "support_force_N": 1.372836000057439,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 11.820000000000617,
+            "object_position": [
+              1.0310987057494958,
+              -0.32271151045394164,
+              0.8655512234187277
+            ],
+            "hand_object_attachment": [
+              [
+                -0.012645877792303632,
+                0.01762510187524147,
+                0.999764691094234,
+                -0.016407771855064368
+              ],
+              [
+                -0.8313143126829802,
+                -0.5558021228169708,
+                -0.0007167988372073365,
+                -5.161633105456309e-05
+              ],
+              [
+                0.5556587039750986,
+                -0.8311277615722124,
+                0.0216806051732303,
+                -0.052801403428964444
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1262,
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "retreat",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1106,
+            "support_force_N": 0.18563593648741109,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 12.620000000000884,
+            "object_position": [
+              1.0248234823246432,
+              -0.3241933932089359,
+              0.864872220708645
+            ],
+            "hand_object_attachment": [
+              [
+                -0.1461752959347367,
+                0.06437787801286837,
+                0.9871617251904333,
+                -0.017342132912069985
+              ],
+              [
+                -0.8270050283477358,
+                -0.5555421209251561,
+                -0.08623012794574748,
+                -0.00412451960538876
+              ],
+              [
+                0.5428586058505038,
+                -0.828992424995874,
+                0.13444736276144537,
+                -0.048576318993808654
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1574,
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "return",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1106,
+            "support_force_N": 0.15692284890308952,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 15.740000000001926,
+            "object_position": [
+              1.0124061826565594,
+              -0.3254264894291702,
+              0.8602823124797696
+            ],
+            "hand_object_attachment": [
+              [
+                -0.39012057956311363,
+                0.1723085013220958,
+                0.9044974924086158,
+                -0.12976420323324023
+              ],
+              [
+                -0.7816421528346903,
+                -0.5811811916334065,
+                -0.22641547518560756,
+                0.016709536430527916
+              ],
+              [
+                0.48666361926210494,
+                -0.7953227036013162,
+                0.3614143312363276,
+                -0.0815966134496976
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1807,
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "source",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1106,
+            "support_force_N": 0.15692284890309524,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 18.070000000000864,
+            "object_position": [
+              1.0124061748272801,
+              -0.32542648835060617,
+              0.8602823124797694
+            ],
+            "hand_object_attachment": [
+              [
+                0.2624949884598543,
+                -0.046259626989534806,
+                0.9638238573226179,
+                -0.1773516753328338
+              ],
+              [
+                -0.9268234206036507,
+                -0.29002958418152225,
+                0.23849777214901124,
+                0.01353473217494372
+              ],
+              [
+                0.2685046145860612,
+                -0.9558989942511092,
+                -0.11900581807503449,
+                -0.14707176011751832
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          }
+        ],
+        "peak_translation_drift": {
+          "frame": 1019,
+          "time_s": 10.200000000000076,
+          "drift_m_rad": [
+            0.0007738468553154825,
+            0.027959387517752902
+          ],
+          "phase": "lower",
+          "support_force_N": 0.0
+        },
+        "peak_rotation_drift": {
+          "frame": 1175,
+          "time_s": 11.760000000000597,
+          "drift_m_rad": [
+            0.0004068820363333937,
+            0.03520588506348726
+          ],
+          "phase": "hold",
+          "support_force_N": 1.6813865204372584
+        },
+        "first_rotation_limit_exceedance": null
+      },
+      {
+        "job": "feasible-placement-v1-can-1d0214a54bfcfdfd95faa196-supported40",
+        "attempt": "/mnt/reachy-retarget/workspaces/feasible-placement-v1-can-1d0214a54bfcfdfd95faa196-supported40/runs/dynamics/feasible-placement-v1-can-1d0214a54bfcfdfd95faa196-supported40/1d0214a54bfcfdfd95faa196",
+        "status": "physical_fail",
+        "failed_gates": [
+          "grasp_rotation_3deg"
+        ],
+        "placement": {
+          "failed": false,
+          "failure_reason": null,
+          "opened": true,
+          "phase": "source",
+          "stable_support_s": 0.11999999999999998,
+          "support_confirmed": true,
+          "support_contact_frame": 1329,
+          "support_force_N": 0.15692284890311528,
+          "support_threshold_N": 0.078461425246671
+        },
+        "gates": {
+          "actual_arm_speed_1rad_s": true,
+          "actual_base_speed_limits": true,
+          "bilateral_lifted_grasp": true,
+          "carry_contact_95pct": true,
+          "grasp_rotation_3deg": false,
+          "grasp_translation_3mm": true,
+          "hand_object_penetration_1mm": true,
+          "joint_margin_25mrad": true,
+          "no_nonhand_object_robot_contact": true,
+          "object_environment_penetration_2mm": true,
+          "placement_opened_after_measured_support": true,
+          "robot_environment_penetration_2mm": true,
+          "robot_self_penetration_2mm": true,
+          "rollout_complete": true,
+          "self_clearance_9mm": true,
+          "task_stable_final_1s": true
+        },
+        "metrics": {
+          "max_grasp_drift_m": 0.0007815129257522863,
+          "max_grasp_drift_deg": 3.4532444049873305,
+          "bilateral_carry_fraction": 1.0,
+          "max_object_environment_penetration_m": 0.0007926761103668187,
+          "max_environment_penetration_m": 1.3877787807814457e-17,
+          "max_hand_object_penetration_m": 0.00018569579881751215,
+          "max_lift_m": 0.24437342283796648,
+          "min_joint_margin_rad": 0.030982329402683972,
+          "best_stable_s": 5.899999999999919,
+          "final_stable_s": 5.899999999999919
+        },
+        "phase_summary": {
+          "source": {
+            "frames": 860,
+            "max_support_N": 0.6812809859973248,
+            "first_frame": 0,
+            "last_frame": 2538,
+            "max_rotation_drift_deg": 2.0433113334160398,
+            "max_translation_drift_m": 0.0006209550161286429
+          },
+          "traverse": {
+            "frames": 301,
+            "max_support_N": 0.0,
+            "first_frame": 564,
+            "last_frame": 864,
+            "max_rotation_drift_deg": 3.368925795352475,
+            "max_translation_drift_m": 0.0006728518209312065
+          },
+          "lower": {
+            "frames": 481,
+            "max_support_N": 0.7295609708278659,
+            "first_frame": 865,
+            "last_frame": 1345,
+            "max_rotation_drift_deg": 3.4532444049873305,
+            "max_translation_drift_m": 0.0007815129257522863
+          },
+          "hold": {
+            "frames": 35,
+            "max_support_N": 0.7141008773080819,
+            "first_frame": 1346,
+            "last_frame": 1380,
+            "max_rotation_drift_deg": 3.431849475389177,
+            "max_translation_drift_m": 0.0007038906674773961
+          },
+          "open": {
+            "frames": 80,
+            "max_support_N": 0.5465976575966138,
+            "first_frame": 1381,
+            "last_frame": 1460,
+            "max_rotation_drift_deg": null,
+            "max_translation_drift_m": null
+          },
+          "retreat": {
+            "frames": 481,
+            "max_support_N": 0.15692284890330477,
+            "first_frame": 1461,
+            "last_frame": 1941,
+            "max_rotation_drift_deg": null,
+            "max_translation_drift_m": null
+          },
+          "return": {
+            "frames": 301,
+            "max_support_N": 0.1569228489032098,
+            "first_frame": 1942,
+            "last_frame": 2242,
+            "max_rotation_drift_deg": null,
+            "max_translation_drift_m": null
+          }
+        },
+        "controller_events": [
+          {
+            "frame": 0,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 0.01,
+            "object_position": [
+              0.47483858668305584,
+              -0.22699282180038308,
+              0.8600860475775653
+            ],
+            "hand_object_attachment": [
+              [
+                1.2874592228106217e-05,
+                2.8101728567205146e-05,
+                0.9999999995222689,
+                -0.1451064851318885
+              ],
+              [
+                -0.8216638155754039,
+                -0.5699724321989018,
+                2.659579716727212e-05,
+                -0.17701322781679696
+              ],
+              [
+                0.5699724326739962,
+                -0.8216638155252798,
+                1.575201087315832e-05,
+                0.02533835368391435
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 564,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "traverse",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 5.639999999999601,
+            "object_position": [
+              0.855831959304658,
+              -0.24062123459607612,
+              1.0859614415948018
+            ],
+            "hand_object_attachment": [
+              [
+                -0.024006349267138766,
+                -0.0037619229815575995,
+                0.9997047279723875,
+                -0.017322351164602567
+              ],
+              [
+                -0.7768538845129042,
+                -0.6293298581729879,
+                -0.02102312367794673,
+                0.0001730698045198653
+              ],
+              [
+                0.6292231220418364,
+                -0.7771291897409643,
+                0.012185447898078409,
+                -0.047335512900289034
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 865,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 8.649999999999558,
+            "object_position": [
+              1.0294346757862494,
+              -0.3223473494549746,
+              1.0442800408836166
+            ],
+            "hand_object_attachment": [
+              [
+                0.005512965871914915,
+                -0.009112832234155814,
+                0.9999432801394124,
+                -0.01756355167967749
+              ],
+              [
+                -0.781834055631049,
+                -0.6234850665864734,
+                -0.0013715681412629621,
+                1.1211298487107113e-05
+              ],
+              [
+                0.6234622014707872,
+                -0.7817821487040573,
+                -0.010561974477655164,
+                -0.047574350151634026
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1341,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1329,
+            "support_force_N": 0.6977360625229729,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 13.410000000001148,
+            "object_position": [
+              1.0299842085054074,
+              -0.3231325064058588,
+              0.8654693210124894
+            ],
+            "hand_object_attachment": [
+              [
+                0.00555702223791943,
+                -0.0077926476538046525,
+                0.9999541960241933,
+                -0.01753262297027014
+              ],
+              [
+                -0.783234471101403,
+                -0.6217262426156678,
+                -0.0004924647292548065,
+                8.429155862382798e-06
+              ],
+              [
+                0.6217016026860097,
+                -0.7831958592111856,
+                -0.009558416819720654,
+                -0.04761645419575167
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1346,
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "hold",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1329,
+            "support_force_N": 0.7141008773080819,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 13.460000000001164,
+            "object_position": [
+              1.0300116832690787,
+              -0.3231729479749567,
+              0.8654656799984743
+            ],
+            "hand_object_attachment": [
+              [
+                0.005547950034093794,
+                -0.008122830231939266,
+                0.9999516187693493,
+                -0.017535828018782063
+              ],
+              [
+                -0.7825315180248186,
+                -0.6226105610372666,
+                -0.0007159487642952108,
+                1.034138159619613e-05
+              ],
+              [
+                0.6225862539023748,
+                -0.7824896861389822,
+                -0.00981058295539113,
+                -0.04760345444605851
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1381,
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "open",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1329,
+            "support_force_N": 0.5465976575966138,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 13.810000000001281,
+            "object_position": [
+              1.0301273282640757,
+              -0.3232374396844305,
+              0.8654935904405124
+            ],
+            "hand_object_attachment": [
+              [
+                0.005806552028629699,
+                -0.007980680424050757,
+                0.9999512951606734,
+                -0.017535690640820167
+              ],
+              [
+                -0.7829170275379848,
+                -0.6221259940422232,
+                -0.0004189606928597031,
+                5.239640144538704e-06
+              ],
+              [
+                0.6220990370870423,
+                -0.7828764629728913,
+                -0.009860617548097451,
+                -0.047592165616566096
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1461,
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "retreat",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1329,
+            "support_force_N": 0.15692284890310687,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 14.610000000001548,
+            "object_position": [
+              1.0138291850084509,
+              -0.3224690311578108,
+              0.860282312479769
+            ],
+            "hand_object_attachment": [
+              [
+                -0.2473187207801232,
+                0.25463705197362524,
+                0.9348761533560817,
+                -0.027726595028256806
+              ],
+              [
+                -0.775682609569457,
+                -0.6302310733807605,
+                -0.03354524343109511,
+                -0.0012368443225588832
+              ],
+              [
+                0.5806461397126482,
+                -0.7334635409531379,
+                0.3533854758323888,
+                -0.03420014138796279
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 1942,
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "return",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1329,
+            "support_force_N": 0.1569228489031054,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 19.420000000000115,
+            "object_position": [
+              1.0138291687476944,
+              -0.32246903249970454,
+              0.8602823124797698
+            ],
+            "hand_object_attachment": [
+              [
+                -0.24320293394098244,
+                0.2527885683900896,
+                0.93645623101872,
+                -0.19565655179604158
+              ],
+              [
+                -0.7771796540468594,
+                -0.6284548320178274,
+                -0.03219176057701988,
+                0.003959086223771641
+              ],
+              [
+                0.5803827342866962,
+                -0.7356238602742119,
+                0.34930419112453365,
+                -0.09687669341154959
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "frame": 2243,
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "source",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1329,
+            "support_force_N": 0.15692284890309566,
+            "support_threshold_N": 0.078461425246671,
+            "measured_after_previous_interval_s": 22.429999999998447,
+            "object_position": [
+              1.0138291585724655,
+              -0.3224690333377565,
+              0.8602823124797693
+            ],
+            "hand_object_attachment": [
+              [
+                0.33913867406538306,
+                -0.13667614712651455,
+                0.930754849871772,
+                -0.2526948534672608
+              ],
+              [
+                -0.8827578070848467,
+                -0.38820347751470285,
+                0.26464450509361387,
+                -0.07446765230905777
+              ],
+              [
+                0.3251516781194987,
+                -0.911382296762529,
+                -0.25230674855011487,
+                -0.15203459144041642
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          }
+        ],
+        "peak_translation_drift": {
+          "frame": 1130,
+          "time_s": 11.310000000000446,
+          "drift_m_rad": [
+            0.0007815129257522863,
+            0.060109995949728386
+          ],
+          "phase": "lower",
+          "support_force_N": 0.0
+        },
+        "peak_rotation_drift": {
+          "frame": 1062,
+          "time_s": 10.63000000000022,
+          "drift_m_rad": [
+            0.0007706112356729849,
+            0.06027048474310141
+          ],
+          "phase": "lower",
+          "support_force_N": 0.0
+        },
+        "first_rotation_limit_exceedance": {
+          "frame": 720,
+          "time_s": 7.209999999999428,
+          "drift_m_rad": [
+            0.0006601130423284926,
+            0.05237561725638943
+          ],
+          "phase": "traverse",
+          "support_force_N": 0.0
+        }
+      }
+    ],
+    "closure_followup_evidence": "docs/feasible-contact-followup-v1-evidence.json",
+    "retreat_speedup": {
+      "implementation_sha256": "3a20dd5bdafce54e9004a29135b739a45fc8e934929d8e4e5909d72a9fdae29d",
+      "default_factor": 1,
+      "physical_validation": "pending",
+      "scope": "Only post-opening retreat resampling; pre-retreat reference/hand/command rows are byte-equal to baseline",
+      "tested_support_stop_fractions": [
+        0.1,
+        0.5,
+        0.9,
+        1.0
+      ],
+      "maximum_selected_retreat_reference_rad_s": {
+        "1d0214a54bfcfdfd95faa196": 0.588893,
+        "6ad5cc23ec6d1c207da3e4b2": 0.520404
+      },
+      "admission": [
+        {
+          "episode": "1d0214a54bfcfdfd95faa196",
+          "speed": 2.0,
+          "status": "admitted",
+          "report": {
+            "admitted": true,
+            "admission_checks": {
+              "complete": true,
+              "hand_ik": true,
+              "environment": true,
+              "self_collision": true,
+              "self_clearance": true,
+              "joint_margin": true,
+              "inserted_reference_speed": true
+            },
+            "physics_validated": false,
+            "exception": null,
+            "original_release_frame": 564,
+            "inserted_frames": 1446,
+            "phase_frames": {
+              "traverse": [
+                564,
+                865
+              ],
+              "lower": [
+                865,
+                1351
+              ],
+              "hold": [
+                1351,
+                1386
+              ],
+              "open": [
+                1386,
+                1466
+              ],
+              "retreat": [
+                1466,
+                1709
+              ],
+              "return": [
+                1709,
+                2010
+              ]
+            },
+            "support_hold_s": 0.12,
+            "support_min_weight_fraction": 0.5,
+            "extra_descent_m": 0.002,
+            "arm_speed_rad_s": 0.65,
+            "placement_position_world": [
+              1.0275,
+              -0.3225,
+              0.8611381013799517
+            ],
+            "base_offset_xyyaw": [
+              0.15,
+              0.0,
+              0.0
+            ],
+            "rotation_xyz_deg": [
+              0.0,
+              40.0,
+              20.0
+            ],
+            "release_aperture_rad": 1.4,
+            "requested_retreat_speed_factor": 2.0,
+            "effective_retreat_speed_factor": 2.0,
+            "source_clock_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v9/1d0214a54bfcfdfd95faa196/2/placement-admission.npz",
+            "artifact_sha256": "d56df5ffca77326bf3dfd8de6e93ca29b97178884deefd4224e0a59bdb42e3e7",
+            "original_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v9/1d0214a54bfcfdfd95faa196/2/original-and-proposal.npz",
+            "original_artifact_sha256": "f5ef6c56056bde8221ef4bea4b50845430e784ea5234392fc1bfe2ab79433034",
+            "inserted_duration_s": 14.46,
+            "peak_reference_speed_rad_s": 0.8000000000000285,
+            "original_interval_complete": true,
+            "object_state_assignment": "none",
+            "admitted_gripper_apertures_rad": {
+              "inside_bin": [
+                1.0512505677759398,
+                1.1384379258319548,
+                1.22562528388797,
+                1.312812641943985,
+                1.4
+              ],
+              "above_bin": [
+                1.0512505677759398,
+                1.288437925831955,
+                1.5256252838879698,
+                1.762812641943985,
+                2.0
+              ]
+            },
+            "scope": "Inserted robot-only placement posture, support-gated opening and retreat; every original row retained",
+            "object_reference_semantics": "Inserted object references repeat the paused source release pose; they are neither measured nor prescribed physical object states",
+            "max_ik_errors": [
+              0.0009598243650558619,
+              0.009943983726945695
+            ],
+            "max_collision_depths_m": [
+              1.3877787807814457e-17,
+              0.0
+            ],
+            "min_self_clearance_m": 0.1245641237282776,
+            "min_joint_margin_rad": 0.031000000000000028
+          }
+        },
+        {
+          "episode": "1d0214a54bfcfdfd95faa196",
+          "speed": 3.0,
+          "status": "admitted",
+          "report": {
+            "admitted": true,
+            "admission_checks": {
+              "complete": true,
+              "hand_ik": true,
+              "environment": true,
+              "self_collision": true,
+              "self_clearance": true,
+              "joint_margin": true,
+              "inserted_reference_speed": true
+            },
+            "physics_validated": false,
+            "exception": null,
+            "original_release_frame": 564,
+            "inserted_frames": 1365,
+            "phase_frames": {
+              "traverse": [
+                564,
+                865
+              ],
+              "lower": [
+                865,
+                1351
+              ],
+              "hold": [
+                1351,
+                1386
+              ],
+              "open": [
+                1386,
+                1466
+              ],
+              "retreat": [
+                1466,
+                1628
+              ],
+              "return": [
+                1628,
+                1929
+              ]
+            },
+            "support_hold_s": 0.12,
+            "support_min_weight_fraction": 0.5,
+            "extra_descent_m": 0.002,
+            "arm_speed_rad_s": 0.65,
+            "placement_position_world": [
+              1.0275,
+              -0.3225,
+              0.8611381013799517
+            ],
+            "base_offset_xyyaw": [
+              0.15,
+              0.0,
+              0.0
+            ],
+            "rotation_xyz_deg": [
+              0.0,
+              40.0,
+              20.0
+            ],
+            "release_aperture_rad": 1.4,
+            "requested_retreat_speed_factor": 3.0,
+            "effective_retreat_speed_factor": 3.0,
+            "source_clock_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v9/1d0214a54bfcfdfd95faa196/3/placement-admission.npz",
+            "artifact_sha256": "867efc242e03fb2b87429d75fc7cb9292ca529a50b434c0f55f57b6c06eea255",
+            "original_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v9/1d0214a54bfcfdfd95faa196/3/original-and-proposal.npz",
+            "original_artifact_sha256": "f5ef6c56056bde8221ef4bea4b50845430e784ea5234392fc1bfe2ab79433034",
+            "inserted_duration_s": 13.65,
+            "peak_reference_speed_rad_s": 0.8000000000000285,
+            "original_interval_complete": true,
+            "object_state_assignment": "none",
+            "admitted_gripper_apertures_rad": {
+              "inside_bin": [
+                1.0512505677759398,
+                1.1384379258319548,
+                1.22562528388797,
+                1.312812641943985,
+                1.4
+              ],
+              "above_bin": [
+                1.0512505677759398,
+                1.288437925831955,
+                1.5256252838879698,
+                1.762812641943985,
+                2.0
+              ]
+            },
+            "scope": "Inserted robot-only placement posture, support-gated opening and retreat; every original row retained",
+            "object_reference_semantics": "Inserted object references repeat the paused source release pose; they are neither measured nor prescribed physical object states",
+            "max_ik_errors": [
+              0.0009598243650558619,
+              0.009943983726945695
+            ],
+            "max_collision_depths_m": [
+              1.3877787807814457e-17,
+              0.0
+            ],
+            "min_self_clearance_m": 0.1245641237282776,
+            "min_joint_margin_rad": 0.031000000000000028
+          }
+        },
+        {
+          "episode": "6ad5cc23ec6d1c207da3e4b2",
+          "speed": 2.0,
+          "status": "admitted",
+          "report": {
+            "admitted": true,
+            "admission_checks": {
+              "complete": true,
+              "hand_ik": true,
+              "environment": true,
+              "self_collision": true,
+              "self_clearance": true,
+              "joint_margin": true,
+              "inserted_reference_speed": true
+            },
+            "physics_validated": false,
+            "exception": null,
+            "original_release_frame": 602,
+            "inserted_frames": 1057,
+            "phase_frames": {
+              "traverse": [
+                602,
+                835
+              ],
+              "lower": [
+                835,
+                1152
+              ],
+              "hold": [
+                1152,
+                1187
+              ],
+              "open": [
+                1187,
+                1267
+              ],
+              "retreat": [
+                1267,
+                1426
+              ],
+              "return": [
+                1426,
+                1659
+              ]
+            },
+            "support_hold_s": 0.12,
+            "support_min_weight_fraction": 0.5,
+            "extra_descent_m": 0.002,
+            "arm_speed_rad_s": 0.65,
+            "placement_position_world": [
+              1.0275,
+              -0.3225,
+              0.8601717124673771
+            ],
+            "base_offset_xyyaw": [
+              0.15,
+              0.0,
+              0.0
+            ],
+            "rotation_xyz_deg": [
+              0.0,
+              40.0,
+              20.0
+            ],
+            "release_aperture_rad": 1.4,
+            "requested_retreat_speed_factor": 2.0,
+            "effective_retreat_speed_factor": 1.9937106918238994,
+            "source_clock_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v9/6ad5cc23ec6d1c207da3e4b2/2/placement-admission.npz",
+            "artifact_sha256": "9f10d972b3fcfc213edde47c005830aefdab879935ce392719458caad236e250",
+            "original_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v9/6ad5cc23ec6d1c207da3e4b2/2/original-and-proposal.npz",
+            "original_artifact_sha256": "d4d859a8d544ad100224cf4bf2b6803057b53cad150e419e4a74c6a94cda614d",
+            "inserted_duration_s": 10.57,
+            "peak_reference_speed_rad_s": 0.8000000000000673,
+            "original_interval_complete": true,
+            "object_state_assignment": "none",
+            "admitted_gripper_apertures_rad": {
+              "inside_bin": [
+                1.0877928961653671,
+                1.1658446721240252,
+                1.2438964480826835,
+                1.3219482240413418,
+                1.4
+              ],
+              "above_bin": [
+                1.0877928961653671,
+                1.3158446721240253,
+                1.5438964480826836,
+                1.7719482240413418,
+                2.0
+              ]
+            },
+            "scope": "Inserted robot-only placement posture, support-gated opening and retreat; every original row retained",
+            "object_reference_semantics": "Inserted object references repeat the paused source release pose; they are neither measured nor prescribed physical object states",
+            "max_ik_errors": [
+              0.0009565501308158321,
+              0.00998898104119937
+            ],
+            "max_collision_depths_m": [
+              0.001790542822786789,
+              0.0
+            ],
+            "min_self_clearance_m": 0.1245641237282776,
+            "min_joint_margin_rad": 0.031000000000000028
+          }
+        },
+        {
+          "episode": "6ad5cc23ec6d1c207da3e4b2",
+          "speed": 3.0,
+          "status": "admitted",
+          "report": {
+            "admitted": true,
+            "admission_checks": {
+              "complete": true,
+              "hand_ik": true,
+              "environment": true,
+              "self_collision": true,
+              "self_clearance": true,
+              "joint_margin": true,
+              "inserted_reference_speed": true
+            },
+            "physics_validated": false,
+            "exception": null,
+            "original_release_frame": 602,
+            "inserted_frames": 1004,
+            "phase_frames": {
+              "traverse": [
+                602,
+                835
+              ],
+              "lower": [
+                835,
+                1152
+              ],
+              "hold": [
+                1152,
+                1187
+              ],
+              "open": [
+                1187,
+                1267
+              ],
+              "retreat": [
+                1267,
+                1373
+              ],
+              "return": [
+                1373,
+                1606
+              ]
+            },
+            "support_hold_s": 0.12,
+            "support_min_weight_fraction": 0.5,
+            "extra_descent_m": 0.002,
+            "arm_speed_rad_s": 0.65,
+            "placement_position_world": [
+              1.0275,
+              -0.3225,
+              0.8601717124673771
+            ],
+            "base_offset_xyyaw": [
+              0.15,
+              0.0,
+              0.0
+            ],
+            "rotation_xyz_deg": [
+              0.0,
+              40.0,
+              20.0
+            ],
+            "release_aperture_rad": 1.4,
+            "requested_retreat_speed_factor": 3.0,
+            "effective_retreat_speed_factor": 2.990566037735849,
+            "source_clock_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v9/6ad5cc23ec6d1c207da3e4b2/3/placement-admission.npz",
+            "artifact_sha256": "057f6d04d139ce3281d210a6f31badc25627b00294f0fb0af33dabb5e864e9d9",
+            "original_artifact": "/mnt/reachy-retarget/diagnostics/can-supported-placement-v9/6ad5cc23ec6d1c207da3e4b2/3/original-and-proposal.npz",
+            "original_artifact_sha256": "d4d859a8d544ad100224cf4bf2b6803057b53cad150e419e4a74c6a94cda614d",
+            "inserted_duration_s": 10.040000000000001,
+            "peak_reference_speed_rad_s": 0.8000000000000673,
+            "original_interval_complete": true,
+            "object_state_assignment": "none",
+            "admitted_gripper_apertures_rad": {
+              "inside_bin": [
+                1.0877928961653671,
+                1.1658446721240252,
+                1.2438964480826835,
+                1.3219482240413418,
+                1.4
+              ],
+              "above_bin": [
+                1.0877928961653671,
+                1.3158446721240253,
+                1.5438964480826836,
+                1.7719482240413418,
+                2.0
+              ]
+            },
+            "scope": "Inserted robot-only placement posture, support-gated opening and retreat; every original row retained",
+            "object_reference_semantics": "Inserted object references repeat the paused source release pose; they are neither measured nor prescribed physical object states",
+            "max_ik_errors": [
+              0.0009565501308158321,
+              0.00998898104119937
+            ],
+            "max_collision_depths_m": [
+              0.001790542822786789,
+              0.0
+            ],
+            "min_self_clearance_m": 0.1245641237282776,
+            "min_joint_margin_rad": 0.031000000000000028
+          }
+        }
+      ]
+    },
+    "retreat_speed_physics": [
+      {
+        "job": "feasible-speed-and-pad-v1-1d0214a54bfcfdfd95faa196-contact_010-descent2mm-retreat2",
+        "baseline": "feasible-contact-followup-v1-1d0214a54bfcfdfd95faa196-contact_010-descent2mm",
+        "status": "physical_pass",
+        "physics_validated": true,
+        "failed_gates": [],
+        "audit": {
+          "actuator_replay_pass": true,
+          "attempt": "/mnt/reachy-retarget/workspaces/feasible-speed-and-pad-v1-1d0214a54bfcfdfd95faa196-contact_010-descent2mm-retreat2/runs/dynamics/feasible-speed-and-pad-v1-1d0214a54bfcfdfd95faa196-contact_010-descent2mm-retreat2/1d0214a54bfcfdfd95faa196",
+          "final_recorded_time_s": 23.059999999998098,
+          "frames": 2306,
+          "max_object_pose_error": 0.0,
+          "max_qpos_error": 0.0,
+          "max_qvel_error": 0.0,
+          "meaning": "Control replay equivalence; task and contact success remain separate recorded gates",
+          "object_state_assignments": "initial reset only",
+          "object_welds_actuators": false,
+          "reported_duration_checked": true,
+          "scene_asset_hashes": {
+            "hfields": {},
+            "meshes": {
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/meshes/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82"
+            },
+            "textures": {
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5"
+            }
+          },
+          "scene_sha256": "148b8b2b5ca45aab550eab5f5009f437dcd7a664f71e6f08e8bcc1d57228483a"
+        },
+        "pre_retreat_rows": 1466,
+        "prefix_comparison": {
+          "plan.h5:time_s": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:reference": {
+            "exact": false,
+            "max_absolute_error": 2.4980018054066022e-15
+          },
+          "plan.h5:gripper": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:hand_goals": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:object_goals": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:simulation/qpos": {
+            "exact": false,
+            "max_absolute_error": 0.009503743350653262
+          },
+          "replay.h5:simulation/qvel": {
+            "exact": false,
+            "max_absolute_error": 0.5441281170571952
+          },
+          "replay.h5:simulation/actuator_control": {
+            "exact": false,
+            "max_absolute_error": 2.4980018054066022e-15
+          },
+          "replay.h5:objects/Can/pose": {
+            "exact": false,
+            "max_absolute_error": 0.009503743350653262
+          }
+        },
+        "baseline_simulated_s": 25.48999999999675,
+        "simulated_s": 23.059999999998098,
+        "saved_simulated_s": 2.4299999999986532,
+        "grasp_drift_m": 0.0007731366621126091,
+        "grasp_drift_deg": 2.3358759273418572,
+        "support": {
+          "failed": false,
+          "failure_reason": null,
+          "opened": true,
+          "phase": "source",
+          "stable_support_s": 0.11999999999999998,
+          "support_confirmed": true,
+          "support_contact_frame": 1316,
+          "support_force_N": 0.15692284890306926,
+          "support_threshold_N": 0.078461425246671
+        },
+        "peak_arm_velocity": 0.7995771203560693,
+        "object_environment_depth_m": 0.0006239483078476215
+      },
+      {
+        "job": "feasible-speed-and-pad-v1-1d0214a54bfcfdfd95faa196-contact_010-descent2mm-retreat3",
+        "baseline": "feasible-contact-followup-v1-1d0214a54bfcfdfd95faa196-contact_010-descent2mm",
+        "status": "physical_pass",
+        "physics_validated": true,
+        "failed_gates": [],
+        "audit": {
+          "actuator_replay_pass": true,
+          "attempt": "/mnt/reachy-retarget/workspaces/feasible-speed-and-pad-v1-1d0214a54bfcfdfd95faa196-contact_010-descent2mm-retreat3/runs/dynamics/feasible-speed-and-pad-v1-1d0214a54bfcfdfd95faa196-contact_010-descent2mm-retreat3/1d0214a54bfcfdfd95faa196",
+          "final_recorded_time_s": 22.249999999998547,
+          "frames": 2225,
+          "max_object_pose_error": 0.0,
+          "max_qpos_error": 0.0,
+          "max_qvel_error": 0.0,
+          "meaning": "Control replay equivalence; task and contact success remain separate recorded gates",
+          "object_state_assignments": "initial reset only",
+          "object_welds_actuators": false,
+          "reported_duration_checked": true,
+          "scene_asset_hashes": {
+            "hfields": {},
+            "meshes": {
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/meshes/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-1d0214a54bfcfdfd95faa196/data/assets/reachy_mujoco_state/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82"
+            },
+            "textures": {
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5"
+            }
+          },
+          "scene_sha256": "148b8b2b5ca45aab550eab5f5009f437dcd7a664f71e6f08e8bcc1d57228483a"
+        },
+        "pre_retreat_rows": 1466,
+        "prefix_comparison": {
+          "plan.h5:time_s": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:reference": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:gripper": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:hand_goals": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:object_goals": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:simulation/qpos": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:simulation/qvel": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:simulation/actuator_control": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:objects/Can/pose": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          }
+        },
+        "baseline_simulated_s": 25.48999999999675,
+        "simulated_s": 22.249999999998547,
+        "saved_simulated_s": 3.2399999999982043,
+        "grasp_drift_m": 0.0007740595913798948,
+        "grasp_drift_deg": 2.2350946054326357,
+        "support": {
+          "failed": false,
+          "failure_reason": null,
+          "opened": true,
+          "phase": "source",
+          "stable_support_s": 0.11999999999999998,
+          "support_confirmed": true,
+          "support_contact_frame": 1316,
+          "support_force_N": 0.15692284890303934,
+          "support_threshold_N": 0.078461425246671
+        },
+        "peak_arm_velocity": 0.7995771203560693,
+        "object_environment_depth_m": 0.0008136989754060628
+      },
+      {
+        "job": "feasible-speed-and-pad-v1-6ad5cc23ec6d1c207da3e4b2-contact_005-descent2mm-retreat2",
+        "baseline": "feasible-contact-followup-v1-6ad5cc23ec6d1c207da3e4b2-contact_005-descent2mm",
+        "status": "physical_pass",
+        "physics_validated": true,
+        "failed_gates": [],
+        "audit": {
+          "actuator_replay_pass": true,
+          "attempt": "/mnt/reachy-retarget/workspaces/feasible-speed-and-pad-v1-6ad5cc23ec6d1c207da3e4b2-contact_005-descent2mm-retreat2/runs/dynamics/feasible-speed-and-pad-v1-6ad5cc23ec6d1c207da3e4b2-contact_005-descent2mm-retreat2/6ad5cc23ec6d1c207da3e4b2",
+          "final_recorded_time_s": 19.390000000000132,
+          "frames": 1939,
+          "max_object_pose_error": 0.0,
+          "max_qpos_error": 0.0,
+          "max_qvel_error": 0.0,
+          "meaning": "Control replay equivalence; task and contact success remain separate recorded gates",
+          "object_state_assignments": "initial reset only",
+          "object_welds_actuators": false,
+          "reported_duration_checked": true,
+          "scene_asset_hashes": {
+            "hfields": {},
+            "meshes": {
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/meshes/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82"
+            },
+            "textures": {
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5"
+            }
+          },
+          "scene_sha256": "1f0af732c4e0c6b5f6f4be1a256712446ceef3df92ed8fbb453804c8d7705f7f"
+        },
+        "pre_retreat_rows": 1267,
+        "prefix_comparison": {
+          "plan.h5:time_s": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:reference": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:gripper": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:hand_goals": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:object_goals": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:simulation/qpos": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:simulation/qvel": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:simulation/actuator_control": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:objects/Can/pose": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          }
+        },
+        "baseline_simulated_s": 20.969999999999256,
+        "simulated_s": 19.390000000000132,
+        "saved_simulated_s": 1.5799999999991243,
+        "grasp_drift_m": 0.0008508522268634358,
+        "grasp_drift_deg": 2.3707693966076255,
+        "support": {
+          "failed": false,
+          "failure_reason": null,
+          "opened": true,
+          "phase": "source",
+          "stable_support_s": 0.11999999999999998,
+          "support_confirmed": true,
+          "support_contact_frame": 1102,
+          "support_force_N": 0.15692284890310368,
+          "support_threshold_N": 0.078461425246671
+        },
+        "peak_arm_velocity": 0.7524480089026152,
+        "object_environment_depth_m": 0.0005466343023081687
+      },
+      {
+        "job": "feasible-speed-and-pad-v1-6ad5cc23ec6d1c207da3e4b2-contact_005-descent2mm-retreat3",
+        "baseline": "feasible-contact-followup-v1-6ad5cc23ec6d1c207da3e4b2-contact_005-descent2mm",
+        "status": "physical_pass",
+        "physics_validated": true,
+        "failed_gates": [],
+        "audit": {
+          "actuator_replay_pass": true,
+          "attempt": "/mnt/reachy-retarget/workspaces/feasible-speed-and-pad-v1-6ad5cc23ec6d1c207da3e4b2-contact_005-descent2mm-retreat3/runs/dynamics/feasible-speed-and-pad-v1-6ad5cc23ec6d1c207da3e4b2-contact_005-descent2mm-retreat3/6ad5cc23ec6d1c207da3e4b2",
+          "final_recorded_time_s": 18.860000000000426,
+          "frames": 1886,
+          "max_object_pose_error": 0.0,
+          "max_qpos_error": 0.0,
+          "max_qvel_error": 0.0,
+          "meaning": "Control replay equivalence; task and contact success remain separate recorded gates",
+          "object_state_assignments": "initial reset only",
+          "object_welds_actuators": false,
+          "reported_duration_checked": true,
+          "scene_asset_hashes": {
+            "hfields": {},
+            "meshes": {
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/meshes/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+              "/mnt/reachy-retarget/workspaces/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2/data/assets/reachy_mujoco_state/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82"
+            },
+            "textures": {
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d",
+              "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5"
+            }
+          },
+          "scene_sha256": "1f0af732c4e0c6b5f6f4be1a256712446ceef3df92ed8fbb453804c8d7705f7f"
+        },
+        "pre_retreat_rows": 1267,
+        "prefix_comparison": {
+          "plan.h5:time_s": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:reference": {
+            "exact": false,
+            "max_absolute_error": 1.1102230246251565e-15
+          },
+          "plan.h5:gripper": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:hand_goals": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "plan.h5:object_goals": {
+            "exact": true,
+            "max_absolute_error": 0.0
+          },
+          "replay.h5:simulation/qpos": {
+            "exact": false,
+            "max_absolute_error": 0.0030726859786778934
+          },
+          "replay.h5:simulation/qvel": {
+            "exact": false,
+            "max_absolute_error": 1.4878154624062236
+          },
+          "replay.h5:simulation/actuator_control": {
+            "exact": false,
+            "max_absolute_error": 1.1102230246251565e-15
+          },
+          "replay.h5:objects/Can/pose": {
+            "exact": false,
+            "max_absolute_error": 0.00304989112475762
+          }
+        },
+        "baseline_simulated_s": 20.969999999999256,
+        "simulated_s": 18.860000000000426,
+        "saved_simulated_s": 2.1099999999988306,
+        "grasp_drift_m": 0.0008514810671136764,
+        "grasp_drift_deg": 2.3480965510093825,
+        "support": {
+          "failed": false,
+          "failure_reason": null,
+          "opened": true,
+          "phase": "source",
+          "stable_support_s": 0.11999999999999998,
+          "support_confirmed": true,
+          "support_contact_frame": 1102,
+          "support_force_N": 0.1569228489031414,
+          "support_threshold_N": 0.078461425246671
+        },
+        "peak_arm_velocity": 0.7524480089026152,
+        "object_environment_depth_m": 0.0005376341065681521
+      }
+    ]
+  }
+}

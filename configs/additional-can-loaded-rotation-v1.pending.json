@@ -1,0 +1,748 @@
+{
+  "label": "additional-can-loaded-rotation-v1",
+  "status": "pending_next_runtime_publication_and_storage_recovery_not_submitted",
+  "immutable_pending_manifest": true,
+  "runtime_binding": {
+    "required": true,
+    "placeholder": "PENDING_NEXT_PUBLISHED_RELEASE",
+    "procedure": "Preserve this pending file unchanged. Create a separate bound manifest containing its SHA256, replace every job runtime pin with the same verified published SHA256, then submit only the bound copy.",
+    "worker_rejection": "Placeholder is deliberately not a 64-character hexadecimal release hash."
+  },
+  "original_source_denominator": 22,
+  "selected_source_episode_count": 2,
+  "attempt_count": 8,
+  "policy": "Time-dilate only inserted loaded rotation to 0.6 or 0.4 rad/s versus retained 0.8 baseline, at identical geometric IK knots and unchanged original carry/suffix, unloaded return, closure and descent. Slower motion may increase grip creep; preserve phase-level drift evidence.",
+  "diagnosis_evidence": "docs/can-phase-diagnosis-v1.json",
+  "comparison": {
+    "variable": "supported_placement.loaded_rotation_speed_rad_s",
+    "values": [
+      0.6,
+      0.4
+    ],
+    "closures": [
+      "contact_002",
+      "contact_005"
+    ],
+    "baseline_results_retained": [
+      {
+        "task": "additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_002",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "variant": "contact_002",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_002/result.json"
+      },
+      {
+        "task": "additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_005",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "variant": "contact_005",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_005/result.json"
+      },
+      {
+        "task": "additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_002",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "variant": "contact_002",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_002/result.json"
+      },
+      {
+        "task": "additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_005",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "variant": "contact_005",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_005/result.json"
+      }
+    ],
+    "baseline_runtime_caveat": "Historical baseline releases precede the measured opening guard. New experiments must report their exact release; no claim of a pure single-code-change causal trial across releases.",
+    "extra_conditions": "No new feedforward, approach order, geometric attachment, reset alignment, source timing, contact model or gate changes. Existing local retiming and selected base path are inherited unchanged."
+  },
+  "acquisition_state": "Existing source data and cached base admission only; no network transfers",
+  "publication_prerequisites": [
+    "Shared storage write/read/fsync health restored",
+    "Runtime SHA256 bound to a published verified release",
+    "Full IK/collision checks rerun for every candidate",
+    "Original source arrays and failed attempts retained"
+  ],
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "parent_workspace": "workspaces/additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/47cc92a1a140ab580b44c6c1.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-loaded-rotation-v1-47cc92a1a140ab580b44c6c1-contact_002-speed600",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-47cc92a1a140ab580b44c6c1-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_002",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          0.0
+        ],
+        "loaded_rotation_speed_rad_s": 0.6
+      },
+      "geometry_selection": {
+        "policy": "can-geometry-bank-v1",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "selection_rank": [
+          0.0,
+          1,
+          9,
+          0.2106394046116487,
+          16
+        ],
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-47cc92a1a140ab580b44c6c1-chunk0/geometry-search/base-09"
+      },
+      "workspace": "workspaces/additional-can-loaded-rotation-v1-47cc92a1a140ab580b44c6c1-contact_002-speed600",
+      "causal_comparison": {
+        "task": "additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_002",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "variant": "contact_002",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_002/result.json",
+        "baseline_manifest": "configs/additional-can-selected-physics-v1.json",
+        "baseline_manifest_sha256": "a5741b07c180a9d0f87a695e9e55565fe899a0f8409816fc35052b0390733454",
+        "changed_parameter": "supported_placement.loaded_rotation_speed_rad_s",
+        "requested_value": 0.6,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "parent_workspace": "workspaces/additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/47cc92a1a140ab580b44c6c1.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-loaded-rotation-v1-47cc92a1a140ab580b44c6c1-contact_002-speed400",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-47cc92a1a140ab580b44c6c1-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_002",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          0.0
+        ],
+        "loaded_rotation_speed_rad_s": 0.4
+      },
+      "geometry_selection": {
+        "policy": "can-geometry-bank-v1",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "selection_rank": [
+          0.0,
+          1,
+          9,
+          0.2106394046116487,
+          16
+        ],
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-47cc92a1a140ab580b44c6c1-chunk0/geometry-search/base-09"
+      },
+      "workspace": "workspaces/additional-can-loaded-rotation-v1-47cc92a1a140ab580b44c6c1-contact_002-speed400",
+      "causal_comparison": {
+        "task": "additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_002",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "variant": "contact_002",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_002/result.json",
+        "baseline_manifest": "configs/additional-can-selected-physics-v1.json",
+        "baseline_manifest_sha256": "a5741b07c180a9d0f87a695e9e55565fe899a0f8409816fc35052b0390733454",
+        "changed_parameter": "supported_placement.loaded_rotation_speed_rad_s",
+        "requested_value": 0.4,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "parent_workspace": "workspaces/additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/47cc92a1a140ab580b44c6c1.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-loaded-rotation-v1-47cc92a1a140ab580b44c6c1-contact_005-speed600",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-47cc92a1a140ab580b44c6c1-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_005",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          0.0
+        ],
+        "loaded_rotation_speed_rad_s": 0.6
+      },
+      "geometry_selection": {
+        "policy": "can-geometry-bank-v1",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "selection_rank": [
+          0.0,
+          1,
+          9,
+          0.2106394046116487,
+          16
+        ],
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-47cc92a1a140ab580b44c6c1-chunk0/geometry-search/base-09"
+      },
+      "workspace": "workspaces/additional-can-loaded-rotation-v1-47cc92a1a140ab580b44c6c1-contact_005-speed600",
+      "causal_comparison": {
+        "task": "additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_005",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "variant": "contact_005",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_005/result.json",
+        "baseline_manifest": "configs/additional-can-selected-physics-v1.json",
+        "baseline_manifest_sha256": "a5741b07c180a9d0f87a695e9e55565fe899a0f8409816fc35052b0390733454",
+        "changed_parameter": "supported_placement.loaded_rotation_speed_rad_s",
+        "requested_value": 0.6,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "parent_workspace": "workspaces/additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/47cc92a1a140ab580b44c6c1.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-loaded-rotation-v1-47cc92a1a140ab580b44c6c1-contact_005-speed400",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-47cc92a1a140ab580b44c6c1-chunk0/geometry-search/base-09/admitted-base",
+      "variant": "contact_005",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          0.0
+        ],
+        "loaded_rotation_speed_rad_s": 0.4
+      },
+      "geometry_selection": {
+        "policy": "can-geometry-bank-v1",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "selection_rank": [
+          0.0,
+          1,
+          9,
+          0.2106394046116487,
+          16
+        ],
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-47cc92a1a140ab580b44c6c1-chunk0/geometry-search/base-09"
+      },
+      "workspace": "workspaces/additional-can-loaded-rotation-v1-47cc92a1a140ab580b44c6c1-contact_005-speed400",
+      "causal_comparison": {
+        "task": "additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_005",
+        "source_episode": "47cc92a1a140ab580b44c6c1",
+        "variant": "contact_005",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_005/result.json",
+        "baseline_manifest": "configs/additional-can-selected-physics-v1.json",
+        "baseline_manifest_sha256": "a5741b07c180a9d0f87a695e9e55565fe899a0f8409816fc35052b0390733454",
+        "changed_parameter": "supported_placement.loaded_rotation_speed_rad_s",
+        "requested_value": 0.4,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "parent_workspace": "workspaces/additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/6e13ca00e7023c648b2d22f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-loaded-rotation-v1-6e13ca00e7023c648b2d22f8-contact_002-speed600",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-6e13ca00e7023c648b2d22f8-chunk2/geometry-search/base-11/admitted-base",
+      "variant": "contact_002",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          1.0025,
+          -0.2975
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ],
+        "loaded_rotation_speed_rad_s": 0.6
+      },
+      "geometry_selection": {
+        "policy": "can-geometry-bank-v1",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "selection_rank": [
+          0.07853981633974481,
+          1,
+          11,
+          0.24912622683094177,
+          8
+        ],
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-6e13ca00e7023c648b2d22f8-chunk2/geometry-search/base-11"
+      },
+      "workspace": "workspaces/additional-can-loaded-rotation-v1-6e13ca00e7023c648b2d22f8-contact_002-speed600",
+      "causal_comparison": {
+        "task": "additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_002",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "variant": "contact_002",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_002/result.json",
+        "baseline_manifest": "configs/additional-can-selected-physics-v1.json",
+        "baseline_manifest_sha256": "a5741b07c180a9d0f87a695e9e55565fe899a0f8409816fc35052b0390733454",
+        "changed_parameter": "supported_placement.loaded_rotation_speed_rad_s",
+        "requested_value": 0.6,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "parent_workspace": "workspaces/additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/6e13ca00e7023c648b2d22f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-loaded-rotation-v1-6e13ca00e7023c648b2d22f8-contact_002-speed400",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-6e13ca00e7023c648b2d22f8-chunk2/geometry-search/base-11/admitted-base",
+      "variant": "contact_002",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          1.0025,
+          -0.2975
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ],
+        "loaded_rotation_speed_rad_s": 0.4
+      },
+      "geometry_selection": {
+        "policy": "can-geometry-bank-v1",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "selection_rank": [
+          0.07853981633974481,
+          1,
+          11,
+          0.24912622683094177,
+          8
+        ],
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-6e13ca00e7023c648b2d22f8-chunk2/geometry-search/base-11"
+      },
+      "workspace": "workspaces/additional-can-loaded-rotation-v1-6e13ca00e7023c648b2d22f8-contact_002-speed400",
+      "causal_comparison": {
+        "task": "additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_002",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "variant": "contact_002",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_002/result.json",
+        "baseline_manifest": "configs/additional-can-selected-physics-v1.json",
+        "baseline_manifest_sha256": "a5741b07c180a9d0f87a695e9e55565fe899a0f8409816fc35052b0390733454",
+        "changed_parameter": "supported_placement.loaded_rotation_speed_rad_s",
+        "requested_value": 0.4,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "parent_workspace": "workspaces/additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/6e13ca00e7023c648b2d22f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-loaded-rotation-v1-6e13ca00e7023c648b2d22f8-contact_005-speed600",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-6e13ca00e7023c648b2d22f8-chunk2/geometry-search/base-11/admitted-base",
+      "variant": "contact_005",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          1.0025,
+          -0.2975
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ],
+        "loaded_rotation_speed_rad_s": 0.6
+      },
+      "geometry_selection": {
+        "policy": "can-geometry-bank-v1",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "selection_rank": [
+          0.07853981633974481,
+          1,
+          11,
+          0.24912622683094177,
+          8
+        ],
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-6e13ca00e7023c648b2d22f8-chunk2/geometry-search/base-11"
+      },
+      "workspace": "workspaces/additional-can-loaded-rotation-v1-6e13ca00e7023c648b2d22f8-contact_005-speed600",
+      "causal_comparison": {
+        "task": "additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_005",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "variant": "contact_005",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_005/result.json",
+        "baseline_manifest": "configs/additional-can-selected-physics-v1.json",
+        "baseline_manifest_sha256": "a5741b07c180a9d0f87a695e9e55565fe899a0f8409816fc35052b0390733454",
+        "changed_parameter": "supported_placement.loaded_rotation_speed_rad_s",
+        "requested_value": 0.6,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "parent_workspace": "workspaces/additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/6e13ca00e7023c648b2d22f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "adaptive_causal_followup_same_22_source_cohort",
+      "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+      "id": "additional-can-loaded-rotation-v1-6e13ca00e7023c648b2d22f8-contact_005-speed400",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-can-geometry-search-v1-6e13ca00e7023c648b2d22f8-chunk2/geometry-search/base-11/admitted-base",
+      "variant": "contact_005",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          1.0025,
+          -0.2975
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 1.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ],
+        "loaded_rotation_speed_rad_s": 0.4
+      },
+      "geometry_selection": {
+        "policy": "can-geometry-bank-v1",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "selection_rank": [
+          0.07853981633974481,
+          1,
+          11,
+          0.24912622683094177,
+          8
+        ],
+        "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+        "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-6e13ca00e7023c648b2d22f8-chunk2/geometry-search/base-11"
+      },
+      "workspace": "workspaces/additional-can-loaded-rotation-v1-6e13ca00e7023c648b2d22f8-contact_005-speed400",
+      "causal_comparison": {
+        "task": "additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_005",
+        "source_episode": "6e13ca00e7023c648b2d22f8",
+        "variant": "contact_005",
+        "runtime_source_sha256": "24ba99342c89362cda5d5f29a2108f09389be16d0625bb3e5f8346c15ad0ddf5",
+        "parameter": "loaded_rotation_speed_rad_s",
+        "value": 0.8,
+        "result_path": "queue/tasks/additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_005/result.json",
+        "baseline_manifest": "configs/additional-can-selected-physics-v1.json",
+        "baseline_manifest_sha256": "a5741b07c180a9d0f87a695e9e55565fe899a0f8409816fc35052b0390733454",
+        "changed_parameter": "supported_placement.loaded_rotation_speed_rad_s",
+        "requested_value": 0.4,
+        "source_model_unchanged": true,
+        "requires_complete_current_path_admission": true
+      }
+    }
+  ]
+}

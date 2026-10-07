@@ -1,0 +1,366 @@
+[
+  {
+    "attempt": "threading-mobile-post-acquisition-baseff-v1-050",
+    "runtime_pin": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+    "scene_sha256": "4deea6e9679782d89f87c764a1387588deadbe0c73a6951aea96df62639e8ce5",
+    "scale": 0.5,
+    "gates": {
+      "task_stable_final_1s": false,
+      "bilateral_lifted_grasp": true,
+      "carry_contact_95pct": true,
+      "grasp_translation_3mm": false,
+      "grasp_rotation_3deg": false,
+      "hand_object_penetration_1mm": false,
+      "robot_environment_penetration_2mm": true,
+      "object_environment_penetration_2mm": true,
+      "no_nonhand_object_robot_contact": true,
+      "robot_self_penetration_2mm": true,
+      "actual_arm_speed_1rad_s": true,
+      "actual_base_speed_limits": true,
+      "joint_margin_25mrad": true,
+      "self_clearance_9mm": true,
+      "rollout_complete": true,
+      "measured_acquisition_before_carry": true
+    },
+    "max_drift_m_rad": [
+      0.005759208854611062,
+      0.11882698854268535
+    ],
+    "max_depth_m": 0.0011349869426609746,
+    "actual_rows": 1410,
+    "source_rows": 1257,
+    "first_effect": {
+      "actual_index": 443,
+      "source_index": 290,
+      "time_s": 4.439999999999733,
+      "tracking_m": 0.0011782379263035204,
+      "drift_m_rad": [
+        null,
+        null
+      ],
+      "depth_m": 0.0003876529205757953
+    },
+    "first_translation3mm": {
+      "actual_index": 613,
+      "source_index": 460,
+      "time_s": 6.139999999999546,
+      "tracking_m": 0.007743059881217184,
+      "drift_m_rad": [
+        0.003010084454265275,
+        0.024093444031952002
+      ],
+      "depth_m": 0.0003877396674385105
+    },
+    "max_rotation": {
+      "actual_index": 1409,
+      "source_index": 1256,
+      "time_s": 14.100000000001378,
+      "tracking_m": 2.0193095769701876e-05,
+      "drift_m_rad": [
+        0.005759208854611062,
+        0.11882698854268535
+      ],
+      "depth_m": 0.00031229549596656705
+    },
+    "max_carry_tracking_m": 0.012902458133800821,
+    "pre_effect_comparison_max_errors": {
+      "time_s": 0.0,
+      "simulation/qpos": 0.0,
+      "simulation/qvel": 0.0,
+      "simulation/actuator_control": 0.0,
+      "source/reference_index": 0.0
+    },
+    "independent_offset_recompute_error": 0.0,
+    "independent_actual_clock_error": 0.0,
+    "zero_before_resume": true,
+    "zero_acquisition_exit": true,
+    "maximum_offset": [
+      0.0065859820373017275,
+      0.013868161620027802,
+      0.014625748198212968,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "resume_state": {
+      "actual_resume_time_s": 4.419999999999735,
+      "actual_time_s": 4.429999999999734,
+      "offset": [
+        -2.9514019573737465e-06,
+        1.7426345454918677e-06,
+        -2.7248580783074286e-06,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "phase": "source",
+      "resume_index": 289,
+      "scale": 0.5,
+      "source_index": 290,
+      "source_resume_time_s": 2.89,
+      "source_time_s": 2.9,
+      "started": true,
+      "taper_s": 0.1,
+      "weight": 0.008559999999997323
+    },
+    "acquisition": {
+      "phase": "carry",
+      "failure": null,
+      "inserted_steps": 143,
+      "inserted_duration_s": 1.4299999999999695,
+      "wait_limit_per_phase_s": 2.0,
+      "stable_guard_s": 0.1,
+      "events": [
+        {
+          "event": "settle_started",
+          "hold_step": 0
+        },
+        {
+          "event": "settle_guard_passed",
+          "hold_step": 93,
+          "elapsed_phase_s": 0.9299999999999802
+        },
+        {
+          "event": "close_guard_passed",
+          "hold_step": 143,
+          "elapsed_phase_s": 0.49999999999998934
+        }
+      ],
+      "phase_codes": {
+        "approach": 0,
+        "settle": 1,
+        "close": 2,
+        "carry": 3,
+        "failed": 4
+      },
+      "source_clock_semantics": "Pause command progression during settle/close; never alter the integration clock or source samples",
+      "complete_source_progression": true,
+      "original_reference_rows": 1257,
+      "first_close_index": 262,
+      "acquisition_index": 278,
+      "entry_rows": 11,
+      "exit_source_indices": [
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288
+      ],
+      "clock_scope": "Source rows are retained; entry and measured waits repeat the acquisition index. Physical time must advance at every frame.",
+      "total_repeated_reference_frames": 153,
+      "total_inserted_duration_s": 1.53
+    },
+    "actuator_replay_pass": true,
+    "independent_guard_audit_pass": true,
+    "state_complete": true
+  },
+  {
+    "attempt": "threading-mobile-post-acquisition-baseff-v1-100",
+    "runtime_pin": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+    "scene_sha256": "4deea6e9679782d89f87c764a1387588deadbe0c73a6951aea96df62639e8ce5",
+    "scale": 1.0,
+    "gates": {
+      "task_stable_final_1s": false,
+      "bilateral_lifted_grasp": true,
+      "carry_contact_95pct": true,
+      "grasp_translation_3mm": false,
+      "grasp_rotation_3deg": false,
+      "hand_object_penetration_1mm": true,
+      "robot_environment_penetration_2mm": true,
+      "object_environment_penetration_2mm": true,
+      "no_nonhand_object_robot_contact": true,
+      "robot_self_penetration_2mm": true,
+      "actual_arm_speed_1rad_s": true,
+      "actual_base_speed_limits": true,
+      "joint_margin_25mrad": true,
+      "self_clearance_9mm": true,
+      "rollout_complete": true,
+      "measured_acquisition_before_carry": true
+    },
+    "max_drift_m_rad": [
+      0.005446195136244129,
+      0.11080162106610601
+    ],
+    "max_depth_m": 0.0008372655828238272,
+    "actual_rows": 1410,
+    "source_rows": 1257,
+    "first_effect": {
+      "actual_index": 443,
+      "source_index": 290,
+      "time_s": 4.439999999999733,
+      "tracking_m": 0.0011810772228256637,
+      "drift_m_rad": [
+        null,
+        null
+      ],
+      "depth_m": 0.00038617577083778607
+    },
+    "first_translation3mm": {
+      "actual_index": 614,
+      "source_index": 461,
+      "time_s": 6.149999999999545,
+      "tracking_m": 0.0028692973983903618,
+      "drift_m_rad": [
+        0.0030111785095790346,
+        0.022375340477555915
+      ],
+      "depth_m": 0.00043001709289327596
+    },
+    "max_rotation": {
+      "actual_index": 1409,
+      "source_index": 1256,
+      "time_s": 14.100000000001378,
+      "tracking_m": 9.223856215203517e-06,
+      "drift_m_rad": [
+        0.005446195136244129,
+        0.11080162106610601
+      ],
+      "depth_m": 0.00033162251628962493
+    },
+    "max_carry_tracking_m": 0.009076559506198466,
+    "pre_effect_comparison_max_errors": {
+      "time_s": 0.0,
+      "simulation/qpos": 0.0,
+      "simulation/qvel": 0.0,
+      "simulation/actuator_control": 0.0,
+      "source/reference_index": 0.0
+    },
+    "independent_offset_recompute_error": 0.0,
+    "independent_actual_clock_error": 0.0,
+    "zero_before_resume": true,
+    "zero_acquisition_exit": true,
+    "maximum_offset": [
+      0.013171964074603455,
+      0.027736323240055604,
+      0.029251496396425936,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "resume_state": {
+      "actual_resume_time_s": 4.419999999999735,
+      "actual_time_s": 4.429999999999734,
+      "offset": [
+        -5.902803914747493e-06,
+        3.4852690909837354e-06,
+        -5.449716156614857e-06,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "phase": "source",
+      "resume_index": 289,
+      "scale": 1.0,
+      "source_index": 290,
+      "source_resume_time_s": 2.89,
+      "source_time_s": 2.9,
+      "started": true,
+      "taper_s": 0.1,
+      "weight": 0.008559999999997323
+    },
+    "acquisition": {
+      "phase": "carry",
+      "failure": null,
+      "inserted_steps": 143,
+      "inserted_duration_s": 1.4299999999999695,
+      "wait_limit_per_phase_s": 2.0,
+      "stable_guard_s": 0.1,
+      "events": [
+        {
+          "event": "settle_started",
+          "hold_step": 0
+        },
+        {
+          "event": "settle_guard_passed",
+          "hold_step": 93,
+          "elapsed_phase_s": 0.9299999999999802
+        },
+        {
+          "event": "close_guard_passed",
+          "hold_step": 143,
+          "elapsed_phase_s": 0.49999999999998934
+        }
+      ],
+      "phase_codes": {
+        "approach": 0,
+        "settle": 1,
+        "close": 2,
+        "carry": 3,
+        "failed": 4
+      },
+      "source_clock_semantics": "Pause command progression during settle/close; never alter the integration clock or source samples",
+      "complete_source_progression": true,
+      "original_reference_rows": 1257,
+      "first_close_index": 262,
+      "acquisition_index": 278,
+      "entry_rows": 11,
+      "exit_source_indices": [
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288
+      ],
+      "clock_scope": "Source rows are retained; entry and measured waits repeat the acquisition index. Physical time must advance at every frame.",
+      "total_repeated_reference_frames": 153,
+      "total_inserted_duration_s": 1.53
+    },
+    "actuator_replay_pass": true,
+    "independent_guard_audit_pass": true,
+    "state_complete": true
+  }
+]

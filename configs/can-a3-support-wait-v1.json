@@ -1,0 +1,393 @@
+{
+  "label": "can-a3-support-wait-v1",
+  "jobs": [
+    {
+      "id": "can-a3-support-wait-v1-wait35",
+      "workspace": "workspaces/can-a3-support-wait-v1-wait35",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948-aligned/a3e36b51e26c9ddf834c9948",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/a3e36b51e26c9ddf834c9948.h5",
+      "source_normalized_sha256": "e516905606b9cdfe8945a4adf67813cd6fcabddf1cf59c704d405d292f3c0ccd",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948-v1/materialization.json",
+        "sha256": "cf09e51363730dba72603df78ae146c925aaa9413d9e7683a5a0ba50cc9e5ba1",
+        "original_archive_sha256": "8d6787faf5de0221398a1c43c4965bbc50c5c4bfb953d62b1488a9e72975eaaa"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 310,
+        "anchor_reference": [
+          0.4154181301496377,
+          -0.6635836611966556,
+          1.6248084563526863,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -1.1290565971587647,
+          0.36976989428695417,
+          0.8475559008828819,
+          0.069,
+          -0.46968634516779,
+          -0.26132145508615884,
+          -1.0608105342294203
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.5464816957169493,
+            0.8317579257824839
+          ],
+          [
+            -1.0135836611966555,
+            0.7199571113136558
+          ],
+          [
+            -0.4862016556951765,
+            2.1549679746397103
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "stop_on_first_invalid": true
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 3,
+      "diagnostic_seed": {
+        "source_mobile_archive": "runs/local-spool-pool/can-forearm-mobile-development-v1/can-forearm-mobile-development-v1-a3e36b51e26c9ddf834c9948-seed0/artifact.tar.gz",
+        "archive_sha256": "d25e8e32a72b44629af6790dc247649348baa889493f030b758709fe53800ea4",
+        "source_numeric_sha256": "24ca341dd4086bb37039df8a2d6b7b1f2b8f8efbe5a7f428c762a0079f41a8ac",
+        "original_anchor": [
+          -0.22632401261911664,
+          -0.18989874014155317,
+          0.05405181033817758,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -1.1290565971587647,
+          0.36976989428695417,
+          0.8475559008828819,
+          0.069,
+          -0.46968634516779,
+          -0.26132145508615884,
+          -1.0608105342294203
+        ],
+        "transport_pivot_world": [
+          0.33139891757294127,
+          -0.10585739661758813,
+          0.8560710346083309
+        ],
+        "cylinder_axis_world": [
+          0.006299125839424976,
+          -0.0032100492978023574,
+          0.9999750079862821
+        ],
+        "requested_axis_rotation_deg": 90,
+        "planar_seed_yaw_rad": 1.5707566460145088,
+        "scope": "Physical axial grasp redundancy of the same unchanged Can. Planar base seed follows the new grasp azimuth around original cylinder axis origin; arm seed stays fixed. Full fresh geometric admission required. Explicit bounds contain original and transported source-base extents plus0.35m/0.5rad. Facet snapping may add a small angular correction; seed is never accepted by construction."
+      },
+      "parent_geometry_job": "can-forearm-mobile-development-v1-a3e36b51e26c9ddf834c9948-seed0",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          128.0487732050144
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.5204850309037307,
+              1.875
+            ],
+            [
+              -1.5977643340142857,
+              0.55
+            ],
+            [
+              -2.327069638747056,
+              4.766247331251374
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "support_wait_s": 0.35
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        2.325204477546079,
+        0.06269968101992227,
+        168
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-hand-placement-v1/can-mobile-hand-placement-v1-a3e36b51e26c9ddf834c9948-chunk0/backup.json",
+          "sha256": "8cfd0def77de5d0eb96645ef66ca1667c2791ef25eba0fc85f4a82dcda4d37ec"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-hand-placement-v1/can-mobile-hand-placement-v1-a3e36b51e26c9ddf834c9948-chunk1/backup.json",
+          "sha256": "21b9435593c3d883a539cd0c447b5e7a2a95403d2c6a2a6ad61d24cb0d30bc97"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-hand-placement-v1/can-mobile-hand-placement-v1-a3e36b51e26c9ddf834c9948-chunk2/backup.json",
+          "sha256": "12cf5f40aca957dd13dfd531c150d96924e76597f41d4f361a2628adbb0cd554"
+        }
+      ],
+      "support_wait_comparison": {
+        "parent_job": "can-mobile-hand-physics-v1-a3e36b51e26c9ddf834c9948-ff0",
+        "evidence": "docs/can-mobile-hand-support-deadline-v1.json",
+        "evidence_sha256": "c8e6788371753420e3e33506a3a538b92b0ae31586b571256de1ea2c3e6a18e1",
+        "scope": "Samepod/runtimematchedFF0 originalmodel. Firststablegroundforce appears30msafteroldopeningdeadline. Add200mscommandholdwhilephysicscontinues, preservingposes,force/location/graspdebounceandfulloriginalsource. No movingobjectassignments ornewdescent."
+      }
+    },
+    {
+      "id": "can-a3-support-wait-v1-wait55",
+      "workspace": "workspaces/can-a3-support-wait-v1-wait55",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948-aligned/a3e36b51e26c9ddf834c9948",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/a3e36b51e26c9ddf834c9948.h5",
+      "source_normalized_sha256": "e516905606b9cdfe8945a4adf67813cd6fcabddf1cf59c704d405d292f3c0ccd",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a3e36b51e26c9ddf834c9948-v1/materialization.json",
+        "sha256": "cf09e51363730dba72603df78ae146c925aaa9413d9e7683a5a0ba50cc9e5ba1",
+        "original_archive_sha256": "8d6787faf5de0221398a1c43c4965bbc50c5c4bfb953d62b1488a9e72975eaaa"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 310,
+        "anchor_reference": [
+          0.4154181301496377,
+          -0.6635836611966556,
+          1.6248084563526863,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -1.1290565971587647,
+          0.36976989428695417,
+          0.8475559008828819,
+          0.069,
+          -0.46968634516779,
+          -0.26132145508615884,
+          -1.0608105342294203
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.5464816957169493,
+            0.8317579257824839
+          ],
+          [
+            -1.0135836611966555,
+            0.7199571113136558
+          ],
+          [
+            -0.4862016556951765,
+            2.1549679746397103
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "stop_on_first_invalid": true
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 3,
+      "diagnostic_seed": {
+        "source_mobile_archive": "runs/local-spool-pool/can-forearm-mobile-development-v1/can-forearm-mobile-development-v1-a3e36b51e26c9ddf834c9948-seed0/artifact.tar.gz",
+        "archive_sha256": "d25e8e32a72b44629af6790dc247649348baa889493f030b758709fe53800ea4",
+        "source_numeric_sha256": "24ca341dd4086bb37039df8a2d6b7b1f2b8f8efbe5a7f428c762a0079f41a8ac",
+        "original_anchor": [
+          -0.22632401261911664,
+          -0.18989874014155317,
+          0.05405181033817758,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -1.1290565971587647,
+          0.36976989428695417,
+          0.8475559008828819,
+          0.069,
+          -0.46968634516779,
+          -0.26132145508615884,
+          -1.0608105342294203
+        ],
+        "transport_pivot_world": [
+          0.33139891757294127,
+          -0.10585739661758813,
+          0.8560710346083309
+        ],
+        "cylinder_axis_world": [
+          0.006299125839424976,
+          -0.0032100492978023574,
+          0.9999750079862821
+        ],
+        "requested_axis_rotation_deg": 90,
+        "planar_seed_yaw_rad": 1.5707566460145088,
+        "scope": "Physical axial grasp redundancy of the same unchanged Can. Planar base seed follows the new grasp azimuth around original cylinder axis origin; arm seed stays fixed. Full fresh geometric admission required. Explicit bounds contain original and transported source-base extents plus0.35m/0.5rad. Facet snapping may add a small angular correction; seed is never accepted by construction."
+      },
+      "parent_geometry_job": "can-forearm-mobile-development-v1-a3e36b51e26c9ddf834c9948-seed0",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.2975
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          128.0487732050144
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.5204850309037307,
+              1.875
+            ],
+            [
+              -1.5977643340142857,
+              0.55
+            ],
+            [
+              -2.327069638747056,
+              4.766247331251374
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "support_wait_s": 0.55
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        2.325204477546079,
+        0.06269968101992227,
+        168
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-hand-placement-v1/can-mobile-hand-placement-v1-a3e36b51e26c9ddf834c9948-chunk0/backup.json",
+          "sha256": "8cfd0def77de5d0eb96645ef66ca1667c2791ef25eba0fc85f4a82dcda4d37ec"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-hand-placement-v1/can-mobile-hand-placement-v1-a3e36b51e26c9ddf834c9948-chunk1/backup.json",
+          "sha256": "21b9435593c3d883a539cd0c447b5e7a2a95403d2c6a2a6ad61d24cb0d30bc97"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-hand-placement-v1/can-mobile-hand-placement-v1-a3e36b51e26c9ddf834c9948-chunk2/backup.json",
+          "sha256": "12cf5f40aca957dd13dfd531c150d96924e76597f41d4f361a2628adbb0cd554"
+        }
+      ],
+      "support_wait_comparison": {
+        "parent_job": "can-mobile-hand-physics-v1-a3e36b51e26c9ddf834c9948-ff0",
+        "evidence": "docs/can-mobile-hand-support-deadline-v1.json",
+        "evidence_sha256": "c8e6788371753420e3e33506a3a538b92b0ae31586b571256de1ea2c3e6a18e1",
+        "scope": "Samepod/runtimematchedFF0 originalmodel. Firststablegroundforce appears30msafteroldopeningdeadline. Add200mscommandholdwhilephysicscontinues, preservingposes,force/location/graspdebounceandfulloriginalsource. No movingobjectassignments ornewdescent."
+      }
+    }
+  ]
+}

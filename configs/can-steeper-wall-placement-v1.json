@@ -1,0 +1,2947 @@
+{
+  "label": "can-steeper-wall-placement-v1",
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+        "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+        "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk1",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk1",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+        "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+        "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk2",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-68e6a0e494dbbc81efc2477b-chunk2",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+        "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+        "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+        "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+        "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk1",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk1",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+        "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+        "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "parent_workspace": "workspaces/additional-independent-v1-68e6a0e494dbbc81efc2477b",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/68e6a0e494dbbc81efc2477b.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk2",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk2",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "f3d390f08c8bad854a7c435c9a47ed8f579e010671985ad684ca037fa849addf",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "8fee715edb8b787142a34218fbb6e6478b3c854dc615e73a247043fb66813c04",
+        "plan.h5": "7b45200a11cd47d7a014355e9072313585e3a97d4bebd534f7d1c4f0ee3e50e6",
+        "result.json": "17e612f1362f89135b0e37d82dd3ca3e78020b2ed0012c6803418d47fca7258d"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-68e6a0e494dbbc81efc2477b-p120",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-68e6a0e494dbbc81efc2477b-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-c33dd8770f9c734425da52f8",
+      "parent_workspace": "workspaces/additional-independent-v1-c33dd8770f9c734425da52f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/c33dd8770f9c734425da52f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk0",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+        "plan.h5": "6ed3258e13f3c26c0498a613c9fbd7683c59ade627a0303c2b637af919d79afe",
+        "result.json": "690505ffed60cb29c5909cfbe31590d6202abcdff17c179116bf882c332b4fed"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-c33dd8770f9c734425da52f8",
+      "parent_workspace": "workspaces/additional-independent-v1-c33dd8770f9c734425da52f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/c33dd8770f9c734425da52f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk1",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk1",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+        "plan.h5": "6ed3258e13f3c26c0498a613c9fbd7683c59ade627a0303c2b637af919d79afe",
+        "result.json": "690505ffed60cb29c5909cfbe31590d6202abcdff17c179116bf882c332b4fed"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-c33dd8770f9c734425da52f8",
+      "parent_workspace": "workspaces/additional-independent-v1-c33dd8770f9c734425da52f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/c33dd8770f9c734425da52f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-c33dd8770f9c734425da52f8-chunk2",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+        "plan.h5": "6ed3258e13f3c26c0498a613c9fbd7683c59ade627a0303c2b637af919d79afe",
+        "result.json": "690505ffed60cb29c5909cfbe31590d6202abcdff17c179116bf882c332b4fed"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-c33dd8770f9c734425da52f8",
+      "parent_workspace": "workspaces/additional-independent-v1-c33dd8770f9c734425da52f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/c33dd8770f9c734425da52f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+        "plan.h5": "6ed3258e13f3c26c0498a613c9fbd7683c59ade627a0303c2b637af919d79afe",
+        "result.json": "690505ffed60cb29c5909cfbe31590d6202abcdff17c179116bf882c332b4fed"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-c33dd8770f9c734425da52f8",
+      "parent_workspace": "workspaces/additional-independent-v1-c33dd8770f9c734425da52f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/c33dd8770f9c734425da52f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk1",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk1",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+        "plan.h5": "6ed3258e13f3c26c0498a613c9fbd7683c59ade627a0303c2b637af919d79afe",
+        "result.json": "690505ffed60cb29c5909cfbe31590d6202abcdff17c179116bf882c332b4fed"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-c33dd8770f9c734425da52f8",
+      "parent_workspace": "workspaces/additional-independent-v1-c33dd8770f9c734425da52f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/c33dd8770f9c734425da52f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk2",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk2",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "b63b89124175943044fde6f13fdffaaeda421302eb382ef61eea6ed70a3ee6dd",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "be1eb87730f6c7355b2fc7f96ca1c096570927c00695048c3d71e082d19c84f6",
+        "plan.h5": "6ed3258e13f3c26c0498a613c9fbd7683c59ade627a0303c2b637af919d79afe",
+        "result.json": "690505ffed60cb29c5909cfbe31590d6202abcdff17c179116bf882c332b4fed"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-c33dd8770f9c734425da52f8-p150",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-c33dd8770f9c734425da52f8-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "parent_workspace": "workspaces/additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8479dbb1dcbbde2ea980fdb5.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+        "plan.h5": "d77fdf25f74d793e6b59d21ec10ede40a1641070d12c585845c1a86f5b1f58a8",
+        "result.json": "60c25c4c99b388d19baa2e8ce3beb8066737bba7ab17d26dd68cdd9a73298694"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "parent_workspace": "workspaces/additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8479dbb1dcbbde2ea980fdb5.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk1",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk1",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+        "plan.h5": "d77fdf25f74d793e6b59d21ec10ede40a1641070d12c585845c1a86f5b1f58a8",
+        "result.json": "60c25c4c99b388d19baa2e8ce3beb8066737bba7ab17d26dd68cdd9a73298694"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "parent_workspace": "workspaces/additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8479dbb1dcbbde2ea980fdb5.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk2",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-8479dbb1dcbbde2ea980fdb5-chunk2",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+        "plan.h5": "d77fdf25f74d793e6b59d21ec10ede40a1641070d12c585845c1a86f5b1f58a8",
+        "result.json": "60c25c4c99b388d19baa2e8ce3beb8066737bba7ab17d26dd68cdd9a73298694"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "parent_workspace": "workspaces/additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8479dbb1dcbbde2ea980fdb5.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+        "plan.h5": "d77fdf25f74d793e6b59d21ec10ede40a1641070d12c585845c1a86f5b1f58a8",
+        "result.json": "60c25c4c99b388d19baa2e8ce3beb8066737bba7ab17d26dd68cdd9a73298694"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "parent_workspace": "workspaces/additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8479dbb1dcbbde2ea980fdb5.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk1",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk1",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+        "plan.h5": "d77fdf25f74d793e6b59d21ec10ede40a1641070d12c585845c1a86f5b1f58a8",
+        "result.json": "60c25c4c99b388d19baa2e8ce3beb8066737bba7ab17d26dd68cdd9a73298694"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "parent_workspace": "workspaces/additional-independent-v1-8479dbb1dcbbde2ea980fdb5",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8479dbb1dcbbde2ea980fdb5.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk2",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk2",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "48a9e361ec74acb85d821859e5fa4def5db39815fe9a246352b627c47b8b978b",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "23fe0778536dc8d918165f003cd53a8f514c4936cc86abeccb90d9636c61ea73",
+        "plan.h5": "d77fdf25f74d793e6b59d21ec10ede40a1641070d12c585845c1a86f5b1f58a8",
+        "result.json": "60c25c4c99b388d19baa2e8ce3beb8066737bba7ab17d26dd68cdd9a73298694"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 150
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-continuation-v4-axial-8479dbb1dcbbde2ea980fdb5-p150",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-interior-reserve-v1-hand_mobile-8479dbb1dcbbde2ea980fdb5-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-wall_mobile-7029a692638703eab22dcb91-chunk0",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-7029a692638703eab22dcb91-chunk0",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/7029a692638703eab22dcb91.h5",
+      "source_normalized_sha256": "d4c127a925118b6aa4fb6f9c2e1a5fc22f9e6b8b371b65959ef228ed502209e8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/materialization.json",
+        "sha256": "68fa9f3496a72434713efb16f8c78e6acf5aeb803ee1ed9a4728c620327148ac",
+        "original_archive_sha256": "b4d17da397e2337a179d532165b789c64844b1457d07f66b6d2b60867c2aa974"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "ca152a00a02dfb568544f6090d4cabd013a4c08e3c5b014b14c5563a53a43b19",
+        "plan.h5": "a5129bc899cbdc7216e9509265ebe3f1f69b061805d09d985d6b0ccc3bf38040",
+        "result.json": "036bef63ba898898142ba0a72b3eb26ee3b321c33d83ef219eab2aa6e23a8569"
+      },
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-7029a692638703eab22dcb91-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-wall_mobile-7029a692638703eab22dcb91-chunk1",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-7029a692638703eab22dcb91-chunk1",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/7029a692638703eab22dcb91.h5",
+      "source_normalized_sha256": "d4c127a925118b6aa4fb6f9c2e1a5fc22f9e6b8b371b65959ef228ed502209e8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/materialization.json",
+        "sha256": "68fa9f3496a72434713efb16f8c78e6acf5aeb803ee1ed9a4728c620327148ac",
+        "original_archive_sha256": "b4d17da397e2337a179d532165b789c64844b1457d07f66b6d2b60867c2aa974"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "ca152a00a02dfb568544f6090d4cabd013a4c08e3c5b014b14c5563a53a43b19",
+        "plan.h5": "a5129bc899cbdc7216e9509265ebe3f1f69b061805d09d985d6b0ccc3bf38040",
+        "result.json": "036bef63ba898898142ba0a72b3eb26ee3b321c33d83ef219eab2aa6e23a8569"
+      },
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-7029a692638703eab22dcb91-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-wall_mobile-7029a692638703eab22dcb91-chunk2",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-7029a692638703eab22dcb91-chunk2",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/7029a692638703eab22dcb91.h5",
+      "source_normalized_sha256": "d4c127a925118b6aa4fb6f9c2e1a5fc22f9e6b8b371b65959ef228ed502209e8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/materialization.json",
+        "sha256": "68fa9f3496a72434713efb16f8c78e6acf5aeb803ee1ed9a4728c620327148ac",
+        "original_archive_sha256": "b4d17da397e2337a179d532165b789c64844b1457d07f66b6d2b60867c2aa974"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "ca152a00a02dfb568544f6090d4cabd013a4c08e3c5b014b14c5563a53a43b19",
+        "plan.h5": "a5129bc899cbdc7216e9509265ebe3f1f69b061805d09d985d6b0ccc3bf38040",
+        "result.json": "036bef63ba898898142ba0a72b3eb26ee3b321c33d83ef219eab2aa6e23a8569"
+      },
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-7029a692638703eab22dcb91-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-hand_mobile-7029a692638703eab22dcb91-chunk0",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-7029a692638703eab22dcb91-chunk0",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/7029a692638703eab22dcb91.h5",
+      "source_normalized_sha256": "d4c127a925118b6aa4fb6f9c2e1a5fc22f9e6b8b371b65959ef228ed502209e8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/materialization.json",
+        "sha256": "68fa9f3496a72434713efb16f8c78e6acf5aeb803ee1ed9a4728c620327148ac",
+        "original_archive_sha256": "b4d17da397e2337a179d532165b789c64844b1457d07f66b6d2b60867c2aa974"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "ca152a00a02dfb568544f6090d4cabd013a4c08e3c5b014b14c5563a53a43b19",
+        "plan.h5": "a5129bc899cbdc7216e9509265ebe3f1f69b061805d09d985d6b0ccc3bf38040",
+        "result.json": "036bef63ba898898142ba0a72b3eb26ee3b321c33d83ef219eab2aa6e23a8569"
+      },
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-7029a692638703eab22dcb91-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-hand_mobile-7029a692638703eab22dcb91-chunk1",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-7029a692638703eab22dcb91-chunk1",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/7029a692638703eab22dcb91.h5",
+      "source_normalized_sha256": "d4c127a925118b6aa4fb6f9c2e1a5fc22f9e6b8b371b65959ef228ed502209e8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/materialization.json",
+        "sha256": "68fa9f3496a72434713efb16f8c78e6acf5aeb803ee1ed9a4728c620327148ac",
+        "original_archive_sha256": "b4d17da397e2337a179d532165b789c64844b1457d07f66b6d2b60867c2aa974"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "ca152a00a02dfb568544f6090d4cabd013a4c08e3c5b014b14c5563a53a43b19",
+        "plan.h5": "a5129bc899cbdc7216e9509265ebe3f1f69b061805d09d985d6b0ccc3bf38040",
+        "result.json": "036bef63ba898898142ba0a72b3eb26ee3b321c33d83ef219eab2aa6e23a8569"
+      },
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-7029a692638703eab22dcb91-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-hand_mobile-7029a692638703eab22dcb91-chunk2",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-7029a692638703eab22dcb91-chunk2",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/7029a692638703eab22dcb91.h5",
+      "source_normalized_sha256": "d4c127a925118b6aa4fb6f9c2e1a5fc22f9e6b8b371b65959ef228ed502209e8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 30
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-7029a692638703eab22dcb91-v1/materialization.json",
+        "sha256": "68fa9f3496a72434713efb16f8c78e6acf5aeb803ee1ed9a4728c620327148ac",
+        "original_archive_sha256": "b4d17da397e2337a179d532165b789c64844b1457d07f66b6d2b60867c2aa974"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-7029a692638703eab22dcb91-p30",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "ca152a00a02dfb568544f6090d4cabd013a4c08e3c5b014b14c5563a53a43b19",
+        "plan.h5": "a5129bc899cbdc7216e9509265ebe3f1f69b061805d09d985d6b0ccc3bf38040",
+        "result.json": "036bef63ba898898142ba0a72b3eb26ee3b321c33d83ef219eab2aa6e23a8569"
+      },
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-7029a692638703eab22dcb91-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-wall_mobile-89f903dbd89d3c10018d3a99-chunk0",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-89f903dbd89d3c10018d3a99-chunk0",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/89f903dbd89d3c10018d3a99.h5",
+      "source_normalized_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/materialization.json",
+        "sha256": "4a37434b7ca51268572eb9476dc2c5f1e2aafa89adcfc0032f8824b698860eea",
+        "original_archive_sha256": "4e52cf4f667c3f3a65f4abf8c092b8cb179a1426d97c34256cf56348a9963906"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+        "plan.h5": "216eadac708c56572d1700ba36927c5a978796e79ac892436454fe05bbf75d07",
+        "result.json": "cca81f606c5b0d7b36b2c389d35fbaec4170da435e8359e4508aa4f24f39888a"
+      },
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-89f903dbd89d3c10018d3a99-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-wall_mobile-89f903dbd89d3c10018d3a99-chunk1",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-89f903dbd89d3c10018d3a99-chunk1",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/89f903dbd89d3c10018d3a99.h5",
+      "source_normalized_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/materialization.json",
+        "sha256": "4a37434b7ca51268572eb9476dc2c5f1e2aafa89adcfc0032f8824b698860eea",
+        "original_archive_sha256": "4e52cf4f667c3f3a65f4abf8c092b8cb179a1426d97c34256cf56348a9963906"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+        "plan.h5": "216eadac708c56572d1700ba36927c5a978796e79ac892436454fe05bbf75d07",
+        "result.json": "cca81f606c5b0d7b36b2c389d35fbaec4170da435e8359e4508aa4f24f39888a"
+      },
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-89f903dbd89d3c10018d3a99-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-wall_mobile-89f903dbd89d3c10018d3a99-chunk2",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-89f903dbd89d3c10018d3a99-chunk2",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/89f903dbd89d3c10018d3a99.h5",
+      "source_normalized_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/materialization.json",
+        "sha256": "4a37434b7ca51268572eb9476dc2c5f1e2aafa89adcfc0032f8824b698860eea",
+        "original_archive_sha256": "4e52cf4f667c3f3a65f4abf8c092b8cb179a1426d97c34256cf56348a9963906"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+        "plan.h5": "216eadac708c56572d1700ba36927c5a978796e79ac892436454fe05bbf75d07",
+        "result.json": "cca81f606c5b0d7b36b2c389d35fbaec4170da435e8359e4508aa4f24f39888a"
+      },
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-89f903dbd89d3c10018d3a99-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk0",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/89f903dbd89d3c10018d3a99.h5",
+      "source_normalized_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/materialization.json",
+        "sha256": "4a37434b7ca51268572eb9476dc2c5f1e2aafa89adcfc0032f8824b698860eea",
+        "original_archive_sha256": "4e52cf4f667c3f3a65f4abf8c092b8cb179a1426d97c34256cf56348a9963906"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+        "plan.h5": "216eadac708c56572d1700ba36927c5a978796e79ac892436454fe05bbf75d07",
+        "result.json": "cca81f606c5b0d7b36b2c389d35fbaec4170da435e8359e4508aa4f24f39888a"
+      },
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-89f903dbd89d3c10018d3a99-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk1",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk1",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/89f903dbd89d3c10018d3a99.h5",
+      "source_normalized_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/materialization.json",
+        "sha256": "4a37434b7ca51268572eb9476dc2c5f1e2aafa89adcfc0032f8824b698860eea",
+        "original_archive_sha256": "4e52cf4f667c3f3a65f4abf8c092b8cb179a1426d97c34256cf56348a9963906"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+        "plan.h5": "216eadac708c56572d1700ba36927c5a978796e79ac892436454fe05bbf75d07",
+        "result.json": "cca81f606c5b0d7b36b2c389d35fbaec4170da435e8359e4508aa4f24f39888a"
+      },
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-89f903dbd89d3c10018d3a99-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk2",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-89f903dbd89d3c10018d3a99-chunk2",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/89f903dbd89d3c10018d3a99.h5",
+      "source_normalized_sha256": "cc93e06dbdbc62ca7afdc141fca121a59f679ff4b26b642847a1713ade4f3c57",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-89f903dbd89d3c10018d3a99-v1/materialization.json",
+        "sha256": "4a37434b7ca51268572eb9476dc2c5f1e2aafa89adcfc0032f8824b698860eea",
+        "original_archive_sha256": "4e52cf4f667c3f3a65f4abf8c092b8cb179a1426d97c34256cf56348a9963906"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-remaining-axial-development-v2-89f903dbd89d3c10018d3a99-p120",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "1d700a2da999238686bebd57da4bd41926c5821e3da9dc47c7ea04472523ab33",
+        "plan.h5": "216eadac708c56572d1700ba36927c5a978796e79ac892436454fe05bbf75d07",
+        "result.json": "cca81f606c5b0d7b36b2c389d35fbaec4170da435e8359e4508aa4f24f39888a"
+      },
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-continuation-v4-geometry-original-89f903dbd89d3c10018d3a99-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-wall_mobile-f15d1b35a8928f31a3a98749-chunk0",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-f15d1b35a8928f31a3a98749-chunk0",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f15d1b35a8928f31a3a98749.h5",
+      "source_normalized_sha256": "7299ec333036a356971085969a555c2bd39b179468aa3eec894e23ad657bffae",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/materialization.json",
+        "sha256": "221fcaa8476dc0c9f85dd2d9fe94152933e7dfe2e49836c81c4b589d54809b37",
+        "original_archive_sha256": "7410ddef933af30753e1aa8f1c7509bcbf1421d0350b1bdec77024a137b9f9de"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "977844f1d35c364005740d9a297c580232e8506a6c93bce945b392e9b3f5c065",
+        "plan.h5": "769d7eef16316128d907aeff3777b010d728d32258d218d9f6c933f4ffe75738",
+        "result.json": "415d4402cee3556e13fa41c0dfdbc639c3450d3edb497f404e2697d84e63fc7e"
+      },
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-f15d1b35a8928f31a3a98749-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-wall_mobile-f15d1b35a8928f31a3a98749-chunk1",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-f15d1b35a8928f31a3a98749-chunk1",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f15d1b35a8928f31a3a98749.h5",
+      "source_normalized_sha256": "7299ec333036a356971085969a555c2bd39b179468aa3eec894e23ad657bffae",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/materialization.json",
+        "sha256": "221fcaa8476dc0c9f85dd2d9fe94152933e7dfe2e49836c81c4b589d54809b37",
+        "original_archive_sha256": "7410ddef933af30753e1aa8f1c7509bcbf1421d0350b1bdec77024a137b9f9de"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "977844f1d35c364005740d9a297c580232e8506a6c93bce945b392e9b3f5c065",
+        "plan.h5": "769d7eef16316128d907aeff3777b010d728d32258d218d9f6c933f4ffe75738",
+        "result.json": "415d4402cee3556e13fa41c0dfdbc639c3450d3edb497f404e2697d84e63fc7e"
+      },
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-f15d1b35a8928f31a3a98749-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-wall_mobile-f15d1b35a8928f31a3a98749-chunk2",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-f15d1b35a8928f31a3a98749-chunk2",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f15d1b35a8928f31a3a98749.h5",
+      "source_normalized_sha256": "7299ec333036a356971085969a555c2bd39b179468aa3eec894e23ad657bffae",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/materialization.json",
+        "sha256": "221fcaa8476dc0c9f85dd2d9fe94152933e7dfe2e49836c81c4b589d54809b37",
+        "original_archive_sha256": "7410ddef933af30753e1aa8f1c7509bcbf1421d0350b1bdec77024a137b9f9de"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "977844f1d35c364005740d9a297c580232e8506a6c93bce945b392e9b3f5c065",
+        "plan.h5": "769d7eef16316128d907aeff3777b010d728d32258d218d9f6c933f4ffe75738",
+        "result.json": "415d4402cee3556e13fa41c0dfdbc639c3450d3edb497f404e2697d84e63fc7e"
+      },
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-f15d1b35a8928f31a3a98749-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-hand_mobile-f15d1b35a8928f31a3a98749-chunk0",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-f15d1b35a8928f31a3a98749-chunk0",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f15d1b35a8928f31a3a98749.h5",
+      "source_normalized_sha256": "7299ec333036a356971085969a555c2bd39b179468aa3eec894e23ad657bffae",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/materialization.json",
+        "sha256": "221fcaa8476dc0c9f85dd2d9fe94152933e7dfe2e49836c81c4b589d54809b37",
+        "original_archive_sha256": "7410ddef933af30753e1aa8f1c7509bcbf1421d0350b1bdec77024a137b9f9de"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "977844f1d35c364005740d9a297c580232e8506a6c93bce945b392e9b3f5c065",
+        "plan.h5": "769d7eef16316128d907aeff3777b010d728d32258d218d9f6c933f4ffe75738",
+        "result.json": "415d4402cee3556e13fa41c0dfdbc639c3450d3edb497f404e2697d84e63fc7e"
+      },
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-f15d1b35a8928f31a3a98749-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-hand_mobile-f15d1b35a8928f31a3a98749-chunk1",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-f15d1b35a8928f31a3a98749-chunk1",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f15d1b35a8928f31a3a98749.h5",
+      "source_normalized_sha256": "7299ec333036a356971085969a555c2bd39b179468aa3eec894e23ad657bffae",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/materialization.json",
+        "sha256": "221fcaa8476dc0c9f85dd2d9fe94152933e7dfe2e49836c81c4b589d54809b37",
+        "original_archive_sha256": "7410ddef933af30753e1aa8f1c7509bcbf1421d0350b1bdec77024a137b9f9de"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "977844f1d35c364005740d9a297c580232e8506a6c93bce945b392e9b3f5c065",
+        "plan.h5": "769d7eef16316128d907aeff3777b010d728d32258d218d9f6c933f4ffe75738",
+        "result.json": "415d4402cee3556e13fa41c0dfdbc639c3450d3edb497f404e2697d84e63fc7e"
+      },
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-f15d1b35a8928f31a3a98749-chunk0"
+    },
+    {
+      "id": "can-steeper-wall-placement-v1-hand_mobile-f15d1b35a8928f31a3a98749-chunk2",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-f15d1b35a8928f31a3a98749-chunk2",
+      "operation": "feasible_placement_search",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/workspace",
+      "parent_attempt": "materialized-geometry-parents/can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f15d1b35a8928f31a3a98749.h5",
+      "source_normalized_sha256": "7299ec333036a356971085969a555c2bd39b179468aa3eec894e23ad657bffae",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-f15d1b35a8928f31a3a98749-v1/materialization.json",
+        "sha256": "221fcaa8476dc0c9f85dd2d9fe94152933e7dfe2e49836c81c4b589d54809b37",
+        "original_archive_sha256": "7410ddef933af30753e1aa8f1c7509bcbf1421d0350b1bdec77024a137b9f9de"
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-mobile-geometry-refinement-v2-poseconstraints-f15d1b35a8928f31a3a98749-seed0",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "977844f1d35c364005740d9a297c580232e8506a6c93bce945b392e9b3f5c065",
+        "plan.h5": "769d7eef16316128d907aeff3777b010d728d32258d218d9f6c933f4ffe75738",
+        "result.json": "415d4402cee3556e13fa41c0dfdbc639c3450d3edb497f404e2697d84e63fc7e"
+      },
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-f15d1b35a8928f31a3a98749-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+        "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+        "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk1",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk1",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+        "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+        "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk2",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk2",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+        "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+        "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+        "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+        "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk1",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk1",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+        "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+        "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 1,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-hand_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk2",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-hand_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk2",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+        "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+        "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 2,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+    }
+  ],
+  "unique_sources": 7,
+  "scope": "Development alternative robot placement orientations: prior30/40/50degree tilts did not admit these seven source paths. Forearm/bin contacts at coarse lower knots motivate60/70/80degree declared candidates. No source/object/grasp/contact-model changes; full CAD aperture/whole-path fixture admission required. These are geometry jobs, not physical passes."
+}

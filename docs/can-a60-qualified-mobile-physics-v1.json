@@ -1,0 +1,362 @@
+{
+  "runtime": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+  "cache": "/tmp/a60-hand-clear-mobile-placement-v4/admitted-final",
+  "cache_files": {
+    "binding.json": "f1259cbec37707cea9aadf9730a53f01a654a8d25493cb39b1d9d1a3509d15b7",
+    "scene.xml": "a62ef1083f83bae111691335898d9ab89b02ff979b04784be1029a7b2f3abff9",
+    "plan.h5": "8fc9271f17de74ce6a4978a56be40115a64a738399b6f3357b39eb416b9bcdeb",
+    "result.json": "ec3d5aa3cc808ead8f7361c562d634910dbd39870c002483535579188cc44608"
+  },
+  "original_input": {
+    "id": "can-heldout-cohort-v2-baseline-a60a58d34b6125e76627e883",
+    "operation": "legacy_pipeline",
+    "dataset": "robomimic",
+    "parent_workspace": "imports/can-heldout-cohort-v2",
+    "workspace": "workspaces/can-heldout-cohort-v2-baseline-a60a58d34b6125e76627e883",
+    "source": "data/normalized/hf__robomimic__robomimic_datasets/a60a58d34b6125e76627e883.h5",
+    "source_normalized_sha256": "05ae70bafcf63ae042a54d8b68a8fb580c9043bd11deb65f4f29113420d962ef",
+    "source_provenance": {
+      "provenance": [
+        {
+          "bytes": 46889752,
+          "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+          "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+          "source_id": "hf__robomimic__robomimic_datasets",
+          "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        }
+      ],
+      "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+      "source_urls": [
+        "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+      ]
+    },
+    "evaluation_split": "frozen_policy_heldout_v2",
+    "source_group": "hf__robomimic__robomimic_datasets/v1.5/can/ph/demo_29",
+    "source_episode_id": "a60a58d34b6125e76627e883",
+    "runtime_source_sha256": "PENDING_NEXT_PUBLISHED_RELEASE",
+    "scope": "Full-source diagnostic baseline and fresh frozen numeric parent; not the held-out corrected-policy outcome"
+  },
+  "jobs": [
+    {
+      "job": {
+        "id": "can-a60-mobile-localmidpoint-physics-v1-ff1",
+        "workspace": "workspaces/can-a60-mobile-localmidpoint-physics-v1-ff1",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/a60a58d34b6125e76627e883.h5",
+        "dataset": "robomimic",
+        "variant": "contact_0035",
+        "parent_task": "can-heldout-cohort-v2-baseline-a60a58d34b6125e76627e883",
+        "parent_attempt": "/tmp/a60-hand-clear-mobile-placement-v4/admitted-final",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "evaluation_split": "development_after_frozen_heldout_evaluation",
+        "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+        "source_prefix_velocity_feedforward": 1.0
+      },
+      "status": "physical_fail",
+      "physics_validated": false,
+      "physics_attempt": "/tmp/a60-admitted-physics-v1/workspaces/can-a60-mobile-localmidpoint-physics-v1-ff1/runs/dynamics/can-a60-mobile-localmidpoint-physics-v1-ff1/a60a58d34b6125e76627e883",
+      "local_archive": "/tmp/a60-admitted-physics-v1/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff1.hdf5",
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": false,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": true
+      },
+      "failure_reasons": [
+        "actual_base_speed_limits"
+      ],
+      "metrics": {
+        "final_stable_s": 9.869999999999834,
+        "max_grasp_drift_m": 0.0016671716486181616,
+        "max_grasp_drift_deg": 1.3706507699467785,
+        "max_hand_object_penetration_m": 0.0004076963707996765,
+        "peak_base_velocity": [
+          0.7491560462276949,
+          0.6316035444002632,
+          0.6323740557689635
+        ]
+      },
+      "independent_validation_pass": true,
+      "actuator_replay_pass": true,
+      "state_assessment": {
+        "state_contract": "reachy-retarget-state-observations-v1",
+        "rows": 3279,
+        "state_observations_complete": true,
+        "table_fields_complete": true,
+        "rgb_required": false,
+        "missing_fields": [],
+        "undefined_task_roles": [],
+        "errors": [],
+        "recorded_command_fields": [
+          "command/joint_position"
+        ],
+        "command_fields_without_semantics": [],
+        "issued_control_modes": [
+          "joint_position"
+        ],
+        "command_profile": "position-servos-with-recorded-feedback-memory-v1",
+        "required_issued_command_fields": [
+          "command/joint_position"
+        ],
+        "issued_command_fields_without_semantics": [],
+        "missing_control_fields": [],
+        "control_errors": [],
+        "complete_recorded_command_profile": true,
+        "actual_controls_complete": true,
+        "control_recording_complete": true,
+        "all_control_modes_available": false,
+        "alternative_control_fields_missing": [
+          "command/joint_velocity",
+          "command/left_tcp_pose",
+          "command/right_tcp_pose",
+          "command/head_pose",
+          "command/base_twist"
+        ],
+        "physics_validated": false,
+        "policy_ready": false,
+        "native_v5_compatibility_assessed": false
+      }
+    },
+    {
+      "job": {
+        "id": "can-a60-mobile-localmidpoint-physics-v1-ff0",
+        "workspace": "workspaces/can-a60-mobile-localmidpoint-physics-v1-ff0",
+        "source": "data/normalized/hf__robomimic__robomimic_datasets/a60a58d34b6125e76627e883.h5",
+        "dataset": "robomimic",
+        "variant": "contact_0035",
+        "parent_task": "can-heldout-cohort-v2-baseline-a60a58d34b6125e76627e883",
+        "parent_attempt": "/tmp/a60-hand-clear-mobile-placement-v4/admitted-final",
+        "source_provenance": {
+          "provenance": [
+            {
+              "bytes": 46889752,
+              "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+              "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+              "source_id": "hf__robomimic__robomimic_datasets",
+              "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+            }
+          ],
+          "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+          "source_urls": [
+            "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          ]
+        },
+        "evaluation_split": "development_after_frozen_heldout_evaluation",
+        "runtime_source_sha256": "fe05236025b5d0731dd8a5fa713e1b1d06cc5e1aaf8eac1de3ef18bba12d6eb1",
+        "source_prefix_velocity_feedforward": 0.0
+      },
+      "status": "physical_fail",
+      "physics_validated": false,
+      "physics_attempt": "/tmp/a60-admitted-physics-v1/workspaces/can-a60-mobile-localmidpoint-physics-v1-ff0/runs/dynamics/can-a60-mobile-localmidpoint-physics-v1-ff0/a60a58d34b6125e76627e883",
+      "local_archive": "/tmp/a60-admitted-physics-v1/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff0.hdf5",
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": false,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": true
+      },
+      "failure_reasons": [
+        "actual_base_speed_limits"
+      ],
+      "metrics": {
+        "final_stable_s": 9.869999999999834,
+        "max_grasp_drift_m": 0.00126658516603825,
+        "max_grasp_drift_deg": 2.013710688894609,
+        "max_hand_object_penetration_m": 0.00025071783826287157,
+        "peak_base_velocity": [
+          0.8147419135516145,
+          0.8448804598861259,
+          0.6956260295006178
+        ]
+      },
+      "independent_validation_pass": true,
+      "actuator_replay_pass": true,
+      "state_assessment": {
+        "state_contract": "reachy-retarget-state-observations-v1",
+        "rows": 3279,
+        "state_observations_complete": true,
+        "table_fields_complete": true,
+        "rgb_required": false,
+        "missing_fields": [],
+        "undefined_task_roles": [],
+        "errors": [],
+        "recorded_command_fields": [
+          "command/joint_position"
+        ],
+        "command_fields_without_semantics": [],
+        "issued_control_modes": [
+          "joint_position"
+        ],
+        "command_profile": "position-servos-with-recorded-feedback-memory-v1",
+        "required_issued_command_fields": [
+          "command/joint_position"
+        ],
+        "issued_command_fields_without_semantics": [],
+        "missing_control_fields": [],
+        "control_errors": [],
+        "complete_recorded_command_profile": true,
+        "actual_controls_complete": true,
+        "control_recording_complete": true,
+        "all_control_modes_available": false,
+        "alternative_control_fields_missing": [
+          "command/joint_velocity",
+          "command/left_tcp_pose",
+          "command/right_tcp_pose",
+          "command/head_pose",
+          "command/base_twist"
+        ],
+        "physics_validated": false,
+        "policy_ready": false,
+        "native_v5_compatibility_assessed": false
+      }
+    }
+  ],
+  "durable_export": {
+    "schema": "immutable-a60-node-local-export-v1",
+    "archive": "/mnt/reachy-retarget/node-local-exports/a60-qualified-mobile-v1/artifact.tar.gz",
+    "archive_sha256": "68cbae0d683bd59e354d4dcdebc1e084564230c791d90018787e4e018c970a1f",
+    "archive_bytes": 187145126,
+    "original_node": "reachy-retarget-worker-7d46748688-4tn7w",
+    "original_prefix": "/tmp",
+    "folders": [
+      "a60-mobile-module-pilot-v2",
+      "a60-hand-clear-mobile-placement-v1",
+      "a60-hand-clear-mobile-placement-v2",
+      "a60-hand-clear-mobile-placement-v3",
+      "a60-hand-clear-mobile-placement-v4",
+      "a60-placement-interpolation-diagnosis-v1",
+      "a60-admitted-physics-v1"
+    ],
+    "canonical_files": [
+      {
+        "source": "/tmp/a60-admitted-physics-v1/datasets/robomimic/metadata.json",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/metadata.json",
+        "sha256": "fd7feaaf7aed2c4ed222373a3955f6de617fac147f24e2997110a8e4572b4c2c",
+        "bytes": 422
+      },
+      {
+        "source": "/tmp/a60-admitted-physics-v1/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff0.hdf5",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff0.hdf5",
+        "sha256": "5789f530eb1cd4082f5fd1d8a021e5f935b71df486a31450d2ab522ce37ebd80",
+        "bytes": 47042523
+      },
+      {
+        "source": "/tmp/a60-admitted-physics-v1/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff0.json",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff0.json",
+        "sha256": "367b108a433eacab5b48c6b42b281ff87d0abde774f2ee772d28670611460fc3",
+        "bytes": 328167
+      },
+      {
+        "source": "/tmp/a60-admitted-physics-v1/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff1.hdf5",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff1.hdf5",
+        "sha256": "f9595d711714ed18738ce73e379d4756e2e169211d7c50b78966a6c2e53e8419",
+        "bytes": 47250009
+      },
+      {
+        "source": "/tmp/a60-admitted-physics-v1/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff1.json",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff1.json",
+        "sha256": "bf718f5f994afe84c84e192fdef3d9129eb94fc021edc60a030895d26256d86c",
+        "bytes": 328463
+      }
+    ],
+    "canonical_inspections": [
+      {
+        "rows": 3279,
+        "timed": true,
+        "episode_id": "can-a60-mobile-localmidpoint-physics-v1-ff0",
+        "schema": "reachy-retarget-agent-archive-v1",
+        "missing_fields": [],
+        "sha256": "5789f530eb1cd4082f5fd1d8a021e5f935b71df486a31450d2ab522ce37ebd80"
+      },
+      {
+        "rows": 3279,
+        "timed": true,
+        "episode_id": "can-a60-mobile-localmidpoint-physics-v1-ff1",
+        "schema": "reachy-retarget-agent-archive-v1",
+        "missing_fields": [],
+        "sha256": "f9595d711714ed18738ce73e379d4756e2e169211d7c50b78966a6c2e53e8419"
+      }
+    ],
+    "original_bytes_unchanged": true
+  },
+  "cross_pod_proof": {
+    "pod": "reachy-retarget-worker-7d46748688-47rp8",
+    "receipt": "/mnt/reachy-retarget/node-local-exports/a60-qualified-mobile-v1/receipt.json",
+    "receipt_sha256": "2708e93086221522ca8486b3d95089037d4aea650cdb72843bbc9440a5ea672d",
+    "verified_files": [
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/metadata.json",
+        "sha256": "fd7feaaf7aed2c4ed222373a3955f6de617fac147f24e2997110a8e4572b4c2c"
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff0.hdf5",
+        "sha256": "5789f530eb1cd4082f5fd1d8a021e5f935b71df486a31450d2ab522ce37ebd80",
+        "inspection": {
+          "schema": "reachy-retarget-agent-archive-v1",
+          "episode_id": "can-a60-mobile-localmidpoint-physics-v1-ff0",
+          "rows": 3279,
+          "missing_fields": [],
+          "timed": true
+        }
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff0.json",
+        "sha256": "367b108a433eacab5b48c6b42b281ff87d0abde774f2ee772d28670611460fc3"
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff1.hdf5",
+        "sha256": "f9595d711714ed18738ce73e379d4756e2e169211d7c50b78966a6c2e53e8419",
+        "inspection": {
+          "schema": "reachy-retarget-agent-archive-v1",
+          "episode_id": "can-a60-mobile-localmidpoint-physics-v1-ff1",
+          "rows": 3279,
+          "missing_fields": [],
+          "timed": true
+        }
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a60-mobile-localmidpoint-physics-v1-ff1.json",
+        "sha256": "bf718f5f994afe84c84e192fdef3d9129eb94fc021edc60a030895d26256d86c"
+      }
+    ],
+    "passed": true
+  },
+  "scope": "Two explicit original-model controller counterfactuals for the same source. Both fail the unchanged measured base-speed gate; they are not counted as independent demonstrations or full physical successes. All source, planning failures, controls and independent audit outputs are preserved."
+}

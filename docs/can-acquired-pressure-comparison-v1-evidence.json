@@ -1,0 +1,388 @@
+{
+  "recorded_unix": 1791380501.352582,
+  "scope": "Two original-model development successes on one previously failing unique source. Fixedpatch acquisition,0.20rad calibrated closureoffset; same object/materials/physics/gates and complete original source reference coverage. Sourceazimuth and nearestfacet/dominantplane attachment both pass. No frozen heldout policy retuning.",
+  "rows": [
+    {
+      "job": "can-acquired-pressure-comparison-v1-facetplanes",
+      "source_episode": "fe117e32c6f13e7ae68c4be4",
+      "status": "physical_pass",
+      "physics_validated": true,
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "measured_acquisition_before_carry": true,
+        "placement_opened_after_measured_support": true
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.001911943602289263,
+        "max_grasp_drift_deg": 0.9054281385279782,
+        "max_hand_object_penetration_m": 0.0008017950972299528,
+        "final_stable_s": 5.809999999999921,
+        "simulated_s": 21.98999999999869
+      },
+      "acquisition_execution": {
+        "phase": "carry",
+        "failure": null,
+        "inserted_steps": 48,
+        "inserted_duration_s": 0.47999999999998977,
+        "wait_limit_per_phase_s": 2.0,
+        "stable_guard_s": 0.1,
+        "events": [
+          {
+            "event": "settle_started",
+            "hold_step": 0
+          },
+          {
+            "event": "settle_guard_passed",
+            "hold_step": 20,
+            "elapsed_phase_s": 0.19999999999999574
+          },
+          {
+            "event": "close_guard_passed",
+            "hold_step": 48,
+            "elapsed_phase_s": 0.27999999999999403
+          }
+        ],
+        "phase_codes": {
+          "approach": 0,
+          "settle": 1,
+          "close": 2,
+          "carry": 3,
+          "failed": 4
+        },
+        "source_clock_semantics": "Pause command progression during settle/close; never alter the integration clock or source samples",
+        "complete_source_progression": true,
+        "original_reference_rows": 2141,
+        "first_close_index": 272,
+        "acquisition_index": 300,
+        "entry_rows": 11,
+        "exit_source_indices": [
+          301,
+          302,
+          303,
+          304,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310
+        ],
+        "clock_scope": "Source rows are retained; entry and measured waits repeat the acquisition index. Physical time must advance at every frame.",
+        "total_repeated_reference_frames": 58,
+        "total_inserted_duration_s": 0.58
+      },
+      "actuator_audit": {
+        "attempt": "/tmp/reachy-retarget-pool/can-acquired-pressure-comparison-v1/can-acquired-pressure-comparison-v1-facetplanes/artifact/workspaces/can-acquired-pressure-comparison-v1-facetplanes/runs/dynamics/can-acquired-pressure-comparison-v1-facetplanes/fe117e32c6f13e7ae68c4be4",
+        "scene_sha256": "ed85e5af0bbc41ece120c5963298993c6ae3e886ddd71ca555d5259c79484542",
+        "frames": 2199,
+        "scene_asset_hashes": {
+          "meshes": {
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/meshes/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8"
+          },
+          "textures": {
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d"
+          },
+          "hfields": {}
+        },
+        "final_recorded_time_s": 21.98999999999869,
+        "reported_duration_checked": true,
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "object_welds_actuators": false,
+        "object_state_assignments": "initial reset only",
+        "meaning": "Control replay equivalence; task and contact success remain separate recorded gates",
+        "acquisition_guard_audit": {
+          "passed": true,
+          "source_coverage_complete": true,
+          "measured_guards_recomputed": true,
+          "source_rows": 2141,
+          "scope": "Every executed original reference index/intent/clock verified, pauses replayed from measured guards, and guards independently recomputed in actuator-only physics"
+        },
+        "placement_opening_guard_audit": {
+          "applicable": true,
+          "passed": true,
+          "checks": {
+            "measured_position": true,
+            "intact_grasp": true,
+            "grasp_history": true,
+            "opening_authorized": true
+          },
+          "opening_events": [
+            {
+              "frame": 1371,
+              "authorized": true,
+              "object_position": [
+                1.0284507453312535,
+                -0.3237698797783985,
+                0.8660045516251396
+              ]
+            }
+          ],
+          "scope": "Recorded previous-interval object position, bilateral contact and acquired grasp anchor; contact-force values are not independently recomputed here"
+        },
+        "independent_validation_pass": true
+      },
+      "state_assessment": {
+        "state_contract": "reachy-retarget-state-observations-v1",
+        "rows": 2199,
+        "state_observations_complete": true,
+        "table_fields_complete": true,
+        "rgb_required": false,
+        "missing_fields": [],
+        "undefined_task_roles": [],
+        "errors": [],
+        "recorded_command_fields": [
+          "command/joint_position"
+        ],
+        "command_fields_without_semantics": [],
+        "issued_control_modes": [
+          "joint_position"
+        ],
+        "command_profile": "position-servos-with-recorded-feedback-memory-v1",
+        "required_issued_command_fields": [
+          "command/joint_position"
+        ],
+        "issued_command_fields_without_semantics": [],
+        "missing_control_fields": [],
+        "control_errors": [],
+        "complete_recorded_command_profile": true,
+        "actual_controls_complete": true,
+        "control_recording_complete": true,
+        "all_control_modes_available": false,
+        "alternative_control_fields_missing": [
+          "command/joint_velocity",
+          "command/left_tcp_pose",
+          "command/right_tcp_pose",
+          "command/head_pose",
+          "command/base_twist"
+        ],
+        "physics_validated": false,
+        "policy_ready": false,
+        "native_v5_compatibility_assessed": false
+      },
+      "archive_sha256": "9475e7a123c60e8e6d792e8a07958d996f1b148ce12088de3cb92922cb5cf22d"
+    },
+    {
+      "job": "can-acquired-pressure-comparison-v1-source",
+      "source_episode": "fe117e32c6f13e7ae68c4be4",
+      "status": "physical_pass",
+      "physics_validated": true,
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "measured_acquisition_before_carry": true,
+        "placement_opened_after_measured_support": true
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.0016587683939230065,
+        "max_grasp_drift_deg": 0.8960396562420266,
+        "max_hand_object_penetration_m": 0.0008038468086739871,
+        "final_stable_s": 5.779999999999921,
+        "simulated_s": 21.969999999998702
+      },
+      "acquisition_execution": {
+        "phase": "carry",
+        "failure": null,
+        "inserted_steps": 48,
+        "inserted_duration_s": 0.47999999999998977,
+        "wait_limit_per_phase_s": 2.0,
+        "stable_guard_s": 0.1,
+        "events": [
+          {
+            "event": "settle_started",
+            "hold_step": 0
+          },
+          {
+            "event": "settle_guard_passed",
+            "hold_step": 20,
+            "elapsed_phase_s": 0.19999999999999574
+          },
+          {
+            "event": "close_guard_passed",
+            "hold_step": 48,
+            "elapsed_phase_s": 0.27999999999999403
+          }
+        ],
+        "phase_codes": {
+          "approach": 0,
+          "settle": 1,
+          "close": 2,
+          "carry": 3,
+          "failed": 4
+        },
+        "source_clock_semantics": "Pause command progression during settle/close; never alter the integration clock or source samples",
+        "complete_source_progression": true,
+        "original_reference_rows": 2139,
+        "first_close_index": 272,
+        "acquisition_index": 300,
+        "entry_rows": 11,
+        "exit_source_indices": [
+          301,
+          302,
+          303,
+          304,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310
+        ],
+        "clock_scope": "Source rows are retained; entry and measured waits repeat the acquisition index. Physical time must advance at every frame.",
+        "total_repeated_reference_frames": 58,
+        "total_inserted_duration_s": 0.58
+      },
+      "actuator_audit": {
+        "attempt": "/tmp/reachy-retarget-pool/can-acquired-pressure-comparison-v1/can-acquired-pressure-comparison-v1-source/artifact/workspaces/can-acquired-pressure-comparison-v1-source/runs/dynamics/can-acquired-pressure-comparison-v1-source/fe117e32c6f13e7ae68c4be4",
+        "scene_sha256": "ed85e5af0bbc41ece120c5963298993c6ae3e886ddd71ca555d5259c79484542",
+        "frames": 2197,
+        "scene_asset_hashes": {
+          "meshes": {
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+            "/mnt/reachy-retarget/workspaces/additional-independent-v1-fe117e32c6f13e7ae68c4be4/data/assets/reachy_mujoco_state/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/meshes/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8"
+          },
+          "textures": {
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_assets/v1.5.1/textures/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+            "/mnt/reachy-retarget/imports/legacy-all-v1/data/raw/robosuite_can_assets/textures/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d"
+          },
+          "hfields": {}
+        },
+        "final_recorded_time_s": 21.969999999998702,
+        "reported_duration_checked": true,
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "object_welds_actuators": false,
+        "object_state_assignments": "initial reset only",
+        "meaning": "Control replay equivalence; task and contact success remain separate recorded gates",
+        "acquisition_guard_audit": {
+          "passed": true,
+          "source_coverage_complete": true,
+          "measured_guards_recomputed": true,
+          "source_rows": 2139,
+          "scope": "Every executed original reference index/intent/clock verified, pauses replayed from measured guards, and guards independently recomputed in actuator-only physics"
+        },
+        "placement_opening_guard_audit": {
+          "applicable": true,
+          "passed": true,
+          "checks": {
+            "measured_position": true,
+            "intact_grasp": true,
+            "grasp_history": true,
+            "opening_authorized": true
+          },
+          "opening_events": [
+            {
+              "frame": 1368,
+              "authorized": true,
+              "object_position": [
+                1.0288141799139372,
+                -0.32379657902529924,
+                0.8660041810763756
+              ]
+            }
+          ],
+          "scope": "Recorded previous-interval object position, bilateral contact and acquired grasp anchor; contact-force values are not independently recomputed here"
+        },
+        "independent_validation_pass": true
+      },
+      "state_assessment": {
+        "state_contract": "reachy-retarget-state-observations-v1",
+        "rows": 2197,
+        "state_observations_complete": true,
+        "table_fields_complete": true,
+        "rgb_required": false,
+        "missing_fields": [],
+        "undefined_task_roles": [],
+        "errors": [],
+        "recorded_command_fields": [
+          "command/joint_position"
+        ],
+        "command_fields_without_semantics": [],
+        "issued_control_modes": [
+          "joint_position"
+        ],
+        "command_profile": "position-servos-with-recorded-feedback-memory-v1",
+        "required_issued_command_fields": [
+          "command/joint_position"
+        ],
+        "issued_command_fields_without_semantics": [],
+        "missing_control_fields": [],
+        "control_errors": [],
+        "complete_recorded_command_profile": true,
+        "actual_controls_complete": true,
+        "control_recording_complete": true,
+        "all_control_modes_available": false,
+        "alternative_control_fields_missing": [
+          "command/joint_velocity",
+          "command/left_tcp_pose",
+          "command/right_tcp_pose",
+          "command/head_pose",
+          "command/base_twist"
+        ],
+        "physics_validated": false,
+        "policy_ready": false,
+        "native_v5_compatibility_assessed": false
+      },
+      "archive_sha256": "abb2c4101e8a09927fbcbcf4f65b798ef63a57a8e2c7c252d74ce82ce6d38bc8"
+    }
+  ],
+  "additional_can": {
+    "passed_unique_sources": 10,
+    "fully_admitted_sources": 10,
+    "total_sources": 22
+  },
+  "all_can_cohorts_unique_original_model_successes": 15
+}

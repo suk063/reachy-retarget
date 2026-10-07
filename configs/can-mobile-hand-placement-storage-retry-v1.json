@@ -1,0 +1,62 @@
+{
+  "label": "can-mobile-hand-placement-storage-retry-v1",
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-mobile-hand-placement-storage-retry-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-mobile-hand-placement-storage-retry-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "runtime_source_sha256": "b61f016b89fa0d49c512d2567f21c3c61f891843b371c13dad40590018c4c55c",
+      "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+        "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+        "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "placement_search": {
+        "bank": "hand_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "spool_storage": "shared_pvc",
+      "infrastructure_retry": {
+        "original_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+        "reason": "Worker local disk dropped below50decimalGBafterinitialruntimebootstrap. No experiment began. Retry exact physics/runtime/source/geometry parameters in exclusive shared-spool output; preserve original launcher failure."
+      }
+    }
+  ]
+}

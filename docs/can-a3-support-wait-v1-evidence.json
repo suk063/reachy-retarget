@@ -1,0 +1,96 @@
+{
+  "scope": "MatchedsamepodFF0originalmodel: addonly200msrobotcommandholdbeforeguardedopening. Allsourceposes/contactmodel/physicalgatesunchanged. Baseline35fails latecontact;wait55passesallgates.",
+  "unique_sources": 1,
+  "passed_sources": 1,
+  "trials": 2,
+  "passed_trials": 1,
+  "publication_summary_sha256": "ce20ed8b949146c6b9f7dedc02dbeb20e9d5a78b539db4969746c70986e9c8aa",
+  "rows": [
+    {
+      "job": "can-a3-support-wait-v1-wait55",
+      "source_episode": "a3e36b51e26c9ddf834c9948",
+      "status": "physical_pass",
+      "physics_validated": true,
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": true
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.0020325997339848603,
+        "max_grasp_drift_deg": 2.1983368737888216,
+        "max_hand_object_penetration_m": 0.00018870717868557803,
+        "final_stable_s": 12.549999999999777,
+        "recorded_frames": 3670,
+        "simulated_s": 36.69999999999889
+      },
+      "independent_actuator_replay": {
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "independent_validation_pass": true
+      },
+      "source_coverage": true,
+      "state_observations_complete": true,
+      "control_recording_complete": true,
+      "archive_sha256": "6e35ba74a245bfabc7ce27cda21e81ff2ee237a83212d9787b50e30c6000d5c1"
+    },
+    {
+      "job": "can-a3-support-wait-v1-wait35",
+      "source_episode": "a3e36b51e26c9ddf834c9948",
+      "status": "physical_fail",
+      "physics_validated": false,
+      "gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": false
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.0024741004936024726,
+        "max_grasp_drift_deg": 2.1111048635279737,
+        "max_hand_object_penetration_m": 0.00018870717868557803,
+        "final_stable_s": 0.0,
+        "recorded_frames": 3650,
+        "simulated_s": 36.49999999999864
+      },
+      "independent_actuator_replay": {
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "independent_validation_pass": true
+      },
+      "source_coverage": true,
+      "state_observations_complete": true,
+      "control_recording_complete": true,
+      "archive_sha256": "3172abbea59ac0afce5207cc56038037325ba227a1177ac405ba8120fe81d204"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# Derived interpolation and admission repairs
+
+These optional planning controls preserve the original source clock mapping, object and hand targets, source gripper intent, and original robot knots. They never assign a moving object's physical state. Every resulting control row still receives the existing pose, fixture, joint, self-clearance, and speed checks before physics.
+
+- `approach_reuse_admitted_reference` retains a checksum-bound, completely admitted mobile IK reference during the independent approach check. Previously, a redundant fixed-base IK solve could erase its fixture clearance. Reuse requires both the matching pre-admission approach proposal and complete mobile admission; stale references, scenes, or reports are rejected. Existing open-object/aperture checks still run.
+- `midpoint_quarter_probes` checks one-quarter, one-half, and three-quarter points on inserted placement intervals. It repairs only failing samples. This addresses narrow defects that pass an interval's midpoint. It does not replace the final check of every control row or certify a continuous path between those rows.
+- `retimed_source_clearance` repairs only newly interpolated robot samples whose original neighboring knots pass fixture clearance. Corrections stay within 2 mm in base XY and 10 mrad in base yaw/right-arm coordinates, with neighboring speed bounds. The original left arm, clock, gripper intent, and hand/object targets remain exact.
+- `retimed_source_clearance.enforce_planar_neighbor_speed` adds the actual XY norm constraint to those neighboring bounds. Independent per-axis boxes alone allowed a repaired diagonal motion to exceed its declared planar norm. The optional solver constraints use the intersection of speed discs centered at both neighbors, followed by an independent complete-path check.
+
+All defaults remain unchanged. Failed attempts and intermediate numerical artifacts are retained. Runtime v51 passed 805 unit tests; v52 passed 808. The tests include a curve whose quarter points fail while its midpoint passes, stale admitted-reference rejection, and a diagonal speed violation that satisfies both axis limits.
+
+The first repaired source cohort contains four unique demonstrations. After complete geometry admission, eight physical attempts produced three passing trials from two unique sources (`ba76`, `e92`). The other five attempts remain failures. A subsequent time-only correction recovered `fd3`: its contact, grasp, and final task gates already passed, but actual source-prefix speeds did not. This is adaptive development, not a frozen-policy success-rate estimate.
+
+Evidence: [four-source physical cohort](can-retimed-source-physics-v1-evidence.json), [source repair diagnosis](can-retimed-source-clearance-v1.md), [measured speed failure locations](can-recovered-speed-failure-diagnosis-v1.json), and [steeper placement failure locations](can-steeper-wall-failure-diagnosis-v1.json).

@@ -1,0 +1,5013 @@
+{
+  "input": {
+    "id": "60f8d5d2c2ec17c0c57b4e5a-yaw-90",
+    "source": "60f8d5d2c2ec17c0c57b4e5a",
+    "job": {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "parent_workspace": "workspaces/additional-independent-v1-60f8d5d2c2ec17c0c57b4e5a",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/60f8d5d2c2ec17c0c57b4e5a.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "materialized-geometry-parents/can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "evaluation_split": "additional22_development_after_frozen_evaluation",
+      "id": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "operation": "feasible_placement_search",
+      "variant": "contact_0035",
+      "workspace": "workspaces/can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+      "runtime_source_sha256": "cb0216b45691a24f4dece385ae85d0abd505f4fde0314855c02aed32e99f9335",
+      "source_normalized_sha256": "aa05d59e88b5f48e33d5d56413e83f7c8f0835519e458e767c22aab8b47c73f2",
+      "parent_attempt_files_sha256": {
+        "scene.xml": "2d608d80c872d77f1f6243dcee978b7f3f3d055f1d502d710d2ea8154ba535f0",
+        "plan.h5": "21fea169f4b010131ce3320b399df4ce6dd814439fa7e63eaee6c049926428ff",
+        "result.json": "3b84e397977bc7d3fbeb42ed00ed7c8e4773b1f73d7b2bdc6799312b62f17826"
+      },
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": -90
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "parent_geometry_job": "can-additional-mobile-development-v2-60f8d5d2c2ec17c0c57b4e5a-m90",
+      "placement_search": {
+        "bank": "wall_mobile",
+        "chunk_index": 0,
+        "chunk_count": 3,
+        "wall_settings": {
+          "pitch_angles_deg": [
+            60.0,
+            70.0,
+            80.0
+          ]
+        },
+        "adaptive_midpoints": 3,
+        "refinement_options": {
+          "midpoint_minimum_motion": true,
+          "interval_knot_timing": true,
+          "midpoint_position_reserve_m": 0.0001,
+          "midpoint_fixture_reserve_m": 0.0001
+        }
+      },
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "comparison_parent_job": "can-mobile-hand-placement-v1-60f8d5d2c2ec17c0c57b4e5a-chunk0"
+    },
+    "failed_report": {
+      "admitted": false,
+      "exception": "ValueError: Mobile placement knot failed before interpolation: lower at weight 0.3448275862068966",
+      "physics_validated": false,
+      "completed_frames": 0,
+      "total_frames": null,
+      "complete": false,
+      "completed_knot_count": 134,
+      "original_source_rows": 1614,
+      "failed_knot": {
+        "phase": "lower",
+        "weight": 0.3448275862068966,
+        "base": [
+          1.8264418368691535,
+          -0.09645959057075247,
+          -1.3831121842254974
+        ],
+        "q": [
+          1.8264418368691535,
+          -0.09645959057075247,
+          0.1865842087611613,
+          -0.9824389716623477,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.08686446848376546,
+          -1.0436670483421289,
+          0.47251002547773924,
+          0.06899999999999337,
+          -0.49259999999999965,
+          0.49259999999999987,
+          -1.5390000000000001
+        ],
+        "ik_errors": [
+          0.004050621072495837,
+          0.020146565888746786
+        ],
+        "fixture": {
+          "admitted": true,
+          "minimum_required_m": 0.003,
+          "minimum_signed_distance_or_lower_bound_m": 0.003001,
+          "distance_is_lower_bound": true,
+          "closest_geom_pair": null,
+          "closest_segment_world": null,
+          "inspected_pairs": 374,
+          "exact_distance_queries": 46,
+          "certified_far_pairs": 328
+        },
+        "optimizer_trace": [
+          {
+            "iteration": 0,
+            "success": false,
+            "message": "Iteration limit reached",
+            "added_pairs": 0
+          }
+        ],
+        "orientation_transport": {
+          "delta_yaw_rad": -5.9533956348209054e-05,
+          "original_base": [
+            1.8264593073100108,
+            -0.09634594676971908,
+            -1.382592991371131
+          ],
+          "transported_base": [
+            1.826473007676622,
+            -0.09639331784752436,
+            -1.3826525253274793
+          ]
+        },
+        "position_interior_reserve_m": 0.0,
+        "solve_position_tolerance_m": 0.002,
+        "fixture_interior_reserve_m": 0.0,
+        "solve_minimum_fixture_gap_m": 0.003
+      },
+      "numeric_knots_sha256": "4b21f084d176109b7722cbefc680405f951448801c977313ed0d0135b1b71899",
+      "original_proposal_sha256": "24ba6d917fa35dccb00b66bb3f47a400e29a103aafde29c187d96e4dc04e545a",
+      "mobile_ik": {
+        "base_bounds_xyyaw": [
+          [
+            -0.11422329902369677,
+            2.183260302568139
+          ],
+          [
+            -1.145,
+            1.421117384258948
+          ],
+          [
+            -4.635681105125708,
+            3.3004053812156386
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "max_iterations": 160,
+        "max_active_set_updates": 4,
+        "support_pairs": [
+          [
+            "drivewhl1_link_collision_0",
+            "floor"
+          ],
+          [
+            "drivewhl2_link_collision_0",
+            "floor"
+          ],
+          [
+            "drivewhl3_link_collision_0",
+            "floor"
+          ]
+        ],
+        "displacement_regularizer": 1e-08,
+        "orientation_transport": true,
+        "pose_tolerance_constraints": true,
+        "minimum_motion": false,
+        "motion_speed_caps": [
+          0.3,
+          0.3,
+          0.8,
+          0.65,
+          0.65,
+          0.65,
+          0.65,
+          0.65,
+          0.65,
+          0.65
+        ],
+        "motion_anchor": "Previous physical reference knot before optional orientation seed transport",
+        "initial_base_yaw": -0.9508557741164899,
+        "base_yaw_representation": "Continuous scalar through optimization and interpolation, anchored to the original release row",
+        "pose_tolerances_m_rad": [
+          0.002,
+          0.02
+        ],
+        "pose_constraint_numerical_margin_fraction": 1e-05,
+        "scope": "Inserted robot placement only; original source prefix/suffix and object states unchanged"
+      },
+      "scope": "Retained original arrays, complete proposed waypoints and partial numeric knots; no interpolated-path admission or physics",
+      "rejection_kind": "mobile_knot_admission"
+    },
+    "goal": [
+      [
+        0.3844506229291161,
+        -0.0665465775039363,
+        0.9207438685931758,
+        1.0306356732740385
+      ],
+      [
+        -0.25949841949801544,
+        -0.9649714678742847,
+        0.03860876152611864,
+        -0.3263773604468687
+      ],
+      [
+        0.8859222814713753,
+        -0.2537747410816555,
+        -0.388252613618366,
+        1.0603475493561318
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "seed": [
+      1.8264418368691535,
+      -0.09645959057075247,
+      0.1865842087611613,
+      -0.9824389716623477,
+      0.0,
+      0.15,
+      0.0,
+      -0.2,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.08686446848376546,
+      -1.0436670483421289,
+      0.47251002547773924,
+      0.06899999999999337,
+      -0.49259999999999965,
+      0.49259999999999987,
+      -1.5390000000000001
+    ],
+    "yaw_offset_deg": -90.0,
+    "comparison_parent_job": "can-steeper-wall-placement-v1-wall_mobile-60f8d5d2c2ec17c0c57b4e5a-chunk0",
+    "comparison_candidate": 0,
+    "comparison_backup_sha256": "57e5abd21fc6c7cf9a794713c15db4272d42f2f3c9d7e1d46f6536f0d70a8e9d",
+    "qualified_seed": [
+      1.7484060728767334,
+      -0.5715017686713905,
+      -0.8194243719120659,
+      -0.5731873155579391,
+      0.0,
+      0.15,
+      0.0,
+      -0.2,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5789014101154284,
+      -0.8159708682060174,
+      0.17111848860431766,
+      -0.4671917834410171,
+      -0.4883549390847903,
+      -0.26390388765723416,
+      -0.8106241117276877
+    ],
+    "qualified_base_yaw": -2.531202365210346,
+    "waypoints": [
+      [
+        [
+          -0.53572513048526,
+          0.48660015189604733,
+          0.6900861371896231,
+          0.8899865527641067
+        ],
+        [
+          0.027594699942795592,
+          -0.8067320059577138,
+          0.5902728209044619,
+          -0.2704065388052521
+        ],
+        [
+          0.8439414180508139,
+          0.3352667038913758,
+          0.41875902397464154,
+          1.1191367312193778
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      [
+        [
+          0.38445062292911625,
+          -0.06654657750393633,
+          0.9207438685931761,
+          1.0306356732740385
+        ],
+        [
+          -0.2594984194980155,
+          -0.9649714678742849,
+          0.03860876152611868,
+          -0.3263773604468687
+        ],
+        [
+          0.8859222814713755,
+          -0.25377474108165554,
+          -0.38825261361836594,
+          1.1191367312193778
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      [
+        [
+          0.38445062292911625,
+          -0.06654657750393633,
+          0.9207438685931761,
+          1.0306356732740385
+        ],
+        [
+          -0.2594984194980155,
+          -0.9649714678742849,
+          0.03860876152611868,
+          -0.3263773604468687
+        ],
+        [
+          0.8859222814713755,
+          -0.25377474108165554,
+          -0.38825261361836594,
+          0.8603741413513232
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      [
+        [
+          0.38445062292911625,
+          -0.06654657750393633,
+          0.9207438685931761,
+          1.0306356732740385
+        ],
+        [
+          -0.2594984194980155,
+          -0.9649714678742849,
+          0.03860876152611868,
+          -0.3263773604468687
+        ],
+        [
+          0.8859222814713755,
+          -0.25377474108165554,
+          -0.38825261361836594,
+          0.8603741413513232
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      [
+        [
+          0.38445062292911625,
+          -0.06654657750393633,
+          0.9207438685931761,
+          1.0306356732740385
+        ],
+        [
+          -0.2594984194980155,
+          -0.9649714678742849,
+          0.03860876152611868,
+          -0.3263773604468687
+        ],
+        [
+          0.8859222814713755,
+          -0.25377474108165554,
+          -0.38825261361836594,
+          0.8603741413513232
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      [
+        [
+          0.38445062292911625,
+          -0.06654657750393633,
+          0.9207438685931761,
+          1.0306356732740385
+        ],
+        [
+          -0.2594984194980155,
+          -0.9649714678742849,
+          0.03860876152611868,
+          -0.3263773604468687
+        ],
+        [
+          0.8859222814713755,
+          -0.25377474108165554,
+          -0.38825261361836594,
+          1.1191367312193778
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      [
+        [
+          -0.53572513048526,
+          0.48660015189604733,
+          0.6900861371896231,
+          0.8899865527641067
+        ],
+        [
+          0.027594699942795592,
+          -0.8067320059577138,
+          0.5902728209044619,
+          -0.2704065388052521
+        ],
+        [
+          0.8439414180508139,
+          0.3352667038913758,
+          0.41875902397464154,
+          1.1191367312193778
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "rows": [
+    {
+      "direction": "to_lower_entry",
+      "sampled_branch_admitted": true,
+      "checked_rows": 36,
+      "expected_rows": 36,
+      "checks": [
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.3448275862068966,
+          "base": [
+            1.748406393709873,
+            -0.5715017384749492,
+            -2.5312022294653382
+          ],
+          "q": [
+            1.748406393709873,
+            -0.5715017384749492,
+            -0.8194242941047417,
+            -0.5731874267907014,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5789014101154284,
+            -0.8159708682060174,
+            0.17111848860431766,
+            -0.4671917834410171,
+            -0.4883549390847903,
+            -0.26390388765723416,
+            -0.8106241117276877
+          ],
+          "ik_errors": [
+            3.6779018453003687e-07,
+            1.6308056302623718e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 46,
+            "certified_far_pairs": 328
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.3574500784918592e-07,
+            "original_base": [
+              1.7484060728767334,
+              -0.5715017686713905,
+              -2.531202365210346
+            ],
+            "transported_base": [
+              1.748406393709873,
+              -0.5715017384749492,
+              -2.5312022294653382
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.03524506091520968
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.3349753694581281,
+          "base": [
+            1.7493966998408523,
+            -0.572274327100306,
+            -2.5304484676837204
+          ],
+          "q": [
+            1.7493966998408523,
+            -0.572274327100306,
+            -0.8189920145888938,
+            -0.5738049146178735,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5824868567420052,
+            -0.8226803503306748,
+            0.17143572928693035,
+            -0.4681094201223754,
+            -0.48136756857755214,
+            -0.26083735254553847,
+            -0.8103837011367451
+          ],
+          "ik_errors": [
+            2.438908793102761e-07,
+            1.8098081493986919e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 46,
+            "certified_far_pairs": 328
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 2.445822376416206e-16,
+            "original_base": [
+              1.748406393709873,
+              -0.5715017384749492,
+              -2.5312022294653382
+            ],
+            "transported_base": [
+              1.7484063937098733,
+              -0.5715017384749493,
+              -2.531202229465338
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827758,
+          "joint_margin_rad": 0.042232431422447814
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.32512315270935965,
+          "base": [
+            1.7503294046936362,
+            -0.5730236164586883,
+            -2.5297081110667174
+          ],
+          "q": [
+            1.7503294046936362,
+            -0.5730236164586883,
+            -0.8185669699061123,
+            -0.5744111034605145,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5859622496014352,
+            -0.8291931752299173,
+            0.17173945529248236,
+            -0.46901009870419597,
+            -0.4745881771208441,
+            -0.25786656029117305,
+            -0.8101598369328866
+          ],
+          "ik_errors": [
+            2.4589795095503486e-07,
+            1.7687959472911247e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 45,
+            "certified_far_pairs": 329
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.8093711199204145e-06,
+            "original_base": [
+              1.7493966998408523,
+              -0.572274327100306,
+              -2.5304484676837204
+            ],
+            "transported_base": [
+              1.7493961958538007,
+              -0.5722758563531749,
+              -2.5304502770548405
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.04901182287915584
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.31527093596059114,
+          "base": [
+            1.75120627944457,
+            -0.5737472193532538,
+            -2.5289813153297906
+          ],
+          "q": [
+            1.75120627944457,
+            -0.5737472193532538,
+            -0.8181492742049862,
+            -0.5750058826810857,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5893235039993706,
+            -0.8355005444891987,
+            0.17202918129188163,
+            -0.46989199549717675,
+            -0.46802652522026217,
+            -0.25499541516315344,
+            -0.8099519571281495
+          ],
+          "ik_errors": [
+            2.4457293757349884e-07,
+            1.722358431452019e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 44,
+            "certified_far_pairs": 330
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.768029917193805e-06,
+            "original_base": [
+              1.7503294046936362,
+              -0.5730236164586883,
+              -2.5297081110667174
+            ],
+            "transported_base": [
+              1.7503289013129768,
+              -0.5730251160752781,
+              -2.5297098790966346
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827771,
+          "joint_margin_rad": 0.055573474779737786
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.3054187192118227,
+          "base": [
+            1.752028923227612,
+            -0.5744445478762807,
+            -2.5282698303573596
+          ],
+          "q": [
+            1.752028923227612,
+            -0.5744445478762807,
+            -0.8177399591168973,
+            -0.5755878380086701,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.592567179465136,
+            -0.8415953919637902,
+            0.1723048947490822,
+            -0.4707532193402988,
+            -0.4616895775077565,
+            -0.2522265764684921,
+            -0.8097593434921468
+          ],
+          "ik_errors": [
+            2.397460503195796e-07,
+            1.671453418589427e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 44,
+            "certified_far_pairs": 330
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.7212959367399364e-06,
+            "original_base": [
+              1.75120627944457,
+              -0.5737472193532538,
+              -2.5289813153297906
+            ],
+            "transported_base": [
+              1.7512057796789122,
+              -0.5737486821636357,
+              -2.5289830366257275
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.06191042249224343
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.2955665024630542,
+          "base": [
+            1.7527990250057721,
+            -0.5751150660161898,
+            -2.5275753648583974
+          ],
+          "q": [
+            1.7527990250057721,
+            -0.5751150660161898,
+            -0.81734003606315,
+            -0.5761555913538361,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5956901143697639,
+            -0.8474711275481563,
+            0.17256663246802145,
+            -0.4715919299871148,
+            -0.4555838026331482,
+            -0.24956247633598894,
+            -0.809581272791785
+          ],
+          "ik_errors": [
+            2.3181659889379683e-07,
+            1.6164635003671253e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 44,
+            "certified_far_pairs": 330
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.6702066033765267e-06,
+            "original_base": [
+              1.752028923227612,
+              -0.5744445478762807,
+              -2.5282698303573596
+            ],
+            "transported_base": [
+              1.7520284303400002,
+              -0.5744459677229901,
+              -2.528271500563963
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.06801619736685177
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.28571428571428575,
+          "base": [
+            1.7535183478418581,
+            -0.5757582917614567,
+            -2.5268995747207015
+          ],
+          "q": [
+            1.7535183478418581,
+            -0.5757582917614567,
+            -0.8169504891899235,
+            -0.5767078100844003,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.598689438669345,
+            -0.8531216681968592,
+            0.17281447744560974,
+            -0.4724063500825688,
+            -0.44971514341920776,
+            -0.24700531066306514,
+            -0.8094170208167725
+          ],
+          "ik_errors": [
+            2.2144741016711355e-07,
+            1.557795539201296e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 43,
+            "certified_far_pairs": 331
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.615168088126187e-06,
+            "original_base": [
+              1.7527990250057721,
+              -0.5751150660161898,
+              -2.5275753648583974
+            ],
+            "transported_base": [
+              1.7527985422372094,
+              -0.5751164376901479,
+              -2.5275769800264856
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827788,
+          "joint_margin_rad": 0.07388485658079219
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.27586206896551724,
+          "base": [
+            1.7541887135546113,
+            -0.5763737996358762,
+            -2.5262440515333773
+          ],
+          "q": [
+            1.7541887135546113,
+            -0.5763737996358762,
+            -0.816572268349021,
+            -0.577243216125867,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6015625874065774,
+            -0.8585414704155925,
+            0.17304855668953534,
+            -0.4731947764646245,
+            -0.44408898601631713,
+            -0.24455702940551505,
+            -0.809265867006898
+          ],
+          "ik_errors": [
+            2.0939352376275957e-07,
+            1.4958929007025626e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 43,
+            "certified_far_pairs": 331
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.5565688520349782e-06,
+            "original_base": [
+              1.7535183478418581,
+              -0.5757582917614567,
+              -2.5268995747207015
+            ],
+            "transported_base": [
+              1.7535178781783824,
+              -0.5757596110843453,
+              -2.5269011312895535
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827796,
+          "joint_margin_rad": 0.07951101398368282
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.2660098522167488,
+          "base": [
+            1.7548119877378705,
+            -0.5769612234019289,
+            -2.525610311624096
+          ],
+          "q": [
+            1.7548119877378705,
+            -0.5769612234019289,
+            -0.8162062823316548,
+            -0.5777605946084753,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6043073144700387,
+            -0.8637255632862252,
+            0.17326903793065732,
+            -0.4739555924656561,
+            -0.4387101273484839,
+            -0.24221932640697472,
+            -0.8091270976895759
+          ],
+          "ik_errors": [
+            1.9639202083421395e-07,
+            1.431280918980728e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 42,
+            "certified_far_pairs": 332
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.4948096118262123e-06,
+            "original_base": [
+              1.7541887135546113,
+              -0.5763737996358762,
+              -2.5262440515333773
+            ],
+            "transported_base": [
+              1.7541882596042404,
+              -0.5763750634210172,
+              -2.526245546342989
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827788,
+          "joint_margin_rad": 0.08488987265151604
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.2561576354679803,
+          "base": [
+            1.7553900655454526,
+            -0.5775202588103862,
+            -2.5249997846044776
+          ],
+          "q": [
+            1.7553900655454526,
+            -0.5775202588103862,
+            -0.8158533917820059,
+            -0.5782588028882888,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6069217063857867,
+            -0.8686695828929424,
+            0.17347612700321613,
+            -0.4746872800223319,
+            -0.43358274209530695,
+            -0.23999362821790673,
+            -0.809000010165185
+          ],
+          "ik_errors": [
+            1.831017014524243e-07,
+            1.364614915411215e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 41,
+            "certified_far_pairs": 333
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.4303680615450237e-06,
+            "original_base": [
+              1.7548119877378705,
+              -0.5769612234019289,
+              -2.525610311624096
+            ],
+            "transported_base": [
+              1.7548115516642877,
+              -0.5769624293944152,
+              -2.5256117419921575
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827769,
+          "joint_margin_rad": 0.090017257904693
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.24630541871921185,
+          "base": [
+            1.755924858123413,
+            -0.5780506667761317,
+            -2.524413802411902
+          ],
+          "q": [
+            1.755924858123413,
+            -0.5780506667761317,
+            -0.815514402368327,
+            -0.5787367791404228,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.609404195998102,
+            -0.8733698073229729,
+            0.17367006376379862,
+            -0.47538843205808434,
+            -0.42871034807067415,
+            -0.2378810830687993,
+            -0.8088839155798372
+          ],
+          "ik_errors": [
+            1.7007013727009925e-07,
+            1.296716952197323e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 41,
+            "certified_far_pairs": 333
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.3638599000883375e-06,
+            "original_base": [
+              1.7553900655454526,
+              -0.5775202588103862,
+              -2.5249997846044776
+            ],
+            "transported_base": [
+              1.7553896490124075,
+              -0.5775214056496785,
+              -2.5250011484643777
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.0948896519293258
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.23645320197044337,
+          "base": [
+            1.756418280017908,
+            -0.5785522764889879,
+            -2.5238535883956446
+          ],
+          "q": [
+            1.756418280017908,
+            -0.5785522764889879,
+            -0.8151900579594753,
+            -0.5791935508998933,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6117535772222243,
+            -0.8778231923196579,
+            0.17385111955227944,
+            -0.4760577641872967,
+            -0.42409577150684197,
+            -0.23588254883208587,
+            -0.8087781422616926
+          ],
+          "ik_errors": [
+            1.5770448826762246e-07,
+            1.2285200535764891e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 39,
+            "certified_far_pairs": 335
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.2960808318207154e-06,
+            "original_base": [
+              1.755924858123413,
+              -0.5780506667761317,
+              -2.524413802411902
+            ],
+            "transported_base": [
+              1.7559244622310455,
+              -0.5780517539885872,
+              -2.524415098492734
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827791,
+          "joint_margin_rad": 0.09950422849315799
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.2266009852216749,
+          "base": [
+            1.7568722374607884,
+            -0.5790249888095665,
+            -2.5233202468002767
+          ],
+          "q": [
+            1.7568722374607884,
+            -0.5790249888095665,
+            -0.8148810340199256,
+            -0.5796282432685771,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6139690189890754,
+            -0.8820274074385983,
+            0.17401959342294657,
+            -0.47669412725047106,
+            -0.4197411115036326,
+            -0.2339985804523814,
+            -0.8086820381526852
+          ],
+          "ik_errors": [
+            1.4624647680449808e-07,
+            1.160924699421116e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 39,
+            "certified_far_pairs": 335
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.2279499631510173e-06,
+            "original_base": [
+              1.756418280017908,
+              -0.5785522764889879,
+              -2.5238535883956446
+            ],
+            "transported_base": [
+              1.7564179052643025,
+              -0.5785533044422697,
+              -2.5238548163456076
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.10385888849636737
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.21674876847290642,
+          "base": [
+            1.7572886179857221,
+            -0.5794687796329134,
+            -2.522814752173781
+          ],
+          "q": [
+            1.7572886179857221,
+            -0.5794687796329134,
+            -0.8145879309589048,
+            -0.580040087180266,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6160500802966266,
+            -0.8859808725597096,
+            0.1741758092970618,
+            -0.4772965181014016,
+            -0.41564770439425774,
+            -0.23222941731773952,
+            -0.8085949732960377
+          ],
+          "ik_errors": [
+            1.3576315036676642e-07,
+            1.0945785835348193e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 39,
+            "certified_far_pairs": 335
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.160362855147664e-06,
+            "original_base": [
+              1.7568722374607884,
+              -0.5790249888095665,
+              -2.5233202468002767
+            ],
+            "transported_base": [
+              1.756871883781335,
+              -0.5790259585688129,
+              -2.523321407163132
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827777,
+          "joint_margin_rad": 0.10795229560574221
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.20689655172413796,
+          "base": [
+            1.7576692812578176,
+            -0.5798837032874298,
+            -2.522337939336998
+          ],
+          "q": [
+            1.7576692812578176,
+            -0.5798837032874298,
+            -0.8143112678114909,
+            -0.5804284272115232,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6179967248605936,
+            -0.8896827943811688,
+            0.17432011242280945,
+            -0.47786409106541206,
+            -0.4118160876696006,
+            -0.23057496994774784,
+            -0.8085163412949394
+          ],
+          "ik_errors": [
+            1.261642437279262e-07,
+            1.0296994233780185e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 39,
+            "certified_far_pairs": 335
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.0939667215848825e-06,
+            "original_base": [
+              1.7572886179857221,
+              -0.5794687796329134,
+              -2.522814752173781
+            ],
+            "transported_base": [
+              1.757288284903289,
+              -0.5794696926701735,
+              -2.5228158461405026
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827777,
+          "joint_margin_rad": 0.11178391233039936
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.19704433497536947,
+          "base": [
+            1.7580160514437877,
+            -0.5802698960071657,
+            -2.5218904935508757
+          ],
+          "q": [
+            1.7580160514437877,
+            -0.5802698960071657,
+            -0.8140514760505511,
+            -0.5807927292416109,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6198093360963929,
+            -0.8931332033095046,
+            0.17445286681873076,
+            -0.47839616826457343,
+            -0.40824596399786545,
+            -0.22903480644249197,
+            -0.8084455613437174
+          ],
+          "ik_errors": [
+            1.1724956910489412e-07,
+            9.660417882592587e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 38,
+            "certified_far_pairs": 336
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.0289790375082565e-06,
+            "original_base": [
+              1.7576692812578176,
+              -0.5798837032874298,
+              -2.522337939336998
+            ],
+            "transported_base": [
+              1.7576689681235473,
+              -0.5798845610889188,
+              -2.5223389683160353
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827766,
+          "joint_margin_rad": 0.11535403600213451
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.187192118226601,
+          "base": [
+            1.758330711170651,
+            -0.5806275792808527,
+            -2.5214729412386183
+          ],
+          "q": [
+            1.758330711170651,
+            -0.5806275792808527,
+            -0.8138088937456517,
+            -0.5811325876772689,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6214887325089105,
+            -0.8963329899580147,
+            0.17457445258354415,
+            -0.4788922496033578,
+            -0.4049361648468419,
+            -0.22760813853643885,
+            -0.8083820791330265
+          ],
+          "ik_errors": [
+            1.0876987404461691e-07,
+            9.030057691354494e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 38,
+            "certified_far_pairs": 336
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -9.651525583582834e-07,
+            "original_base": [
+              1.7580160514437877,
+              -0.5802698960071657,
+              -2.5218904935508757
+            ],
+            "transported_base": [
+              1.7580157576972666,
+              -0.5802706997005529,
+              -2.521891458703434
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.11866383515315804
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.17733990147783255,
+          "base": [
+            1.7586149971644582,
+            -0.5809570634554523,
+            -2.52108564129994
+          ],
+          "q": [
+            1.7586149971644582,
+            -0.5809570634554523,
+            -0.8135837600995353,
+            -0.5814477322187281,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6230361832546583,
+            -0.8992839417307514,
+            0.17468526380653743,
+            -0.4793520215877697,
+            -0.40188461396004965,
+            -0.22629380771461838,
+            -0.8083253679439704
+          ],
+          "ik_errors": [
+            1.0048842406980624e-07,
+            8.398734059857483e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 37,
+            "certified_far_pairs": 337
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -9.018880918787159e-07,
+            "original_base": [
+              1.758330711170651,
+              -0.5806275792808527,
+              -2.5214729412386183
+            ],
+            "transported_base": [
+              1.7583304365469599,
+              -0.580628329396422,
+              -2.52147384312671
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827777,
+          "joint_margin_rad": 0.1217153860399503
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.16748768472906406,
+          "base": [
+            1.758870597495339,
+            -0.5812587513786573,
+            -2.5207287776135225
+          ],
+          "q": [
+            1.758870597495339,
+            -0.5812587513786573,
+            -0.8133762107171277,
+            -0.5817380336882286,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6244534239405878,
+            -0.9019887786945721,
+            0.17478570685875022,
+            -0.47977536635192775,
+            -0.39908829078979985,
+            -0.22509027054797087,
+            -0.8082749287898606
+          ],
+          "ik_errors": [
+            9.22287164778106e-08,
+            7.760547140505766e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 37,
+            "certified_far_pairs": 337
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -8.384805671376704e-07,
+            "original_base": [
+              1.7586149971644582,
+              -0.5809570634554523,
+              -2.52108564129994
+            ],
+            "transported_base": [
+              1.758614741780954,
+              -0.5809577599109699,
+              -2.5210864797805073
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827791,
+          "joint_margin_rad": 0.1245117092102001
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.1576354679802956,
+          "base": [
+            1.7590991505178792,
+            -0.5815331425725728,
+            -2.5204023524773143
+          ],
+          "q": [
+            1.7590991505178792,
+            -0.5815331425725728,
+            -0.8131862734696281,
+            -0.5820035091308119,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6257426723337238,
+            -0.904451189416566,
+            0.1748761992261116,
+            -0.4801623693626391,
+            -0.3965431941104156,
+            -0.2239955844323922,
+            -0.8082302908690271
+          ],
+          "ik_errors": [
+            8.389836937459466e-08,
+            7.112692712258414e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 36,
+            "certified_far_pairs": 338
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -7.74370843779131e-07,
+            "original_base": [
+              1.758870597495339,
+              -0.5812587513786573,
+              -2.5207287776135225
+            ],
+            "transported_base": [
+              1.7588703617960066,
+              -0.5812593936641385,
+              -2.5207295519843664
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.12705680588958435
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.1477832512315271,
+          "base": [
+            1.759302245640341,
+            -0.5817808371836831,
+            -2.5201061808565535
+          ],
+          "q": [
+            1.759302245640341,
+            -0.5817808371836831,
+            -0.8130138648841748,
+            -0.5822443262979011,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6269066449944853,
+            -0.9066758657777938,
+            0.1749571688511657,
+            -0.480513326259519,
+            -0.3942443060473282,
+            -0.22300739290263827,
+            -0.8081910107243042
+          ],
+          "ik_errors": [
+            7.548996762179889e-08,
+            6.456137283737026e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 36,
+            "certified_far_pairs": 338
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -7.093207441618693e-07,
+            "original_base": [
+              1.7590991505178792,
+              -0.5815331425725728,
+              -2.5204023524773143
+            ],
+            "transported_base": [
+              1.7590989351070598,
+              -0.5815337300472618,
+              -2.5204030617980586
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.12935569395267177
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.13793103448275865,
+          "base": [
+            1.7594817777464835,
+            -0.582002405234637,
+            -2.519839765255234
+          ],
+          "q": [
+            1.7594817777464835,
+            -0.582002405234637,
+            -0.8128587170609511,
+            -0.582460905209976,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6279482014593081,
+            -0.9086684919413603,
+            0.1750295436117211,
+            -0.48082890744854556,
+            -0.3921855117912358,
+            -0.22212332992470735,
+            -0.8081563539485065
+          ],
+          "ik_errors": [
+            4.316173903144947e-07,
+            1.6272439063248332e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 36,
+            "certified_far_pairs": 338
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -6.434651769755263e-07,
+            "original_base": [
+              1.759302245640341,
+              -0.5817808371836831,
+              -2.5201061808565535
+            ],
+            "transported_base": [
+              1.7593020510746236,
+              -0.5817813693783078,
+              -2.5201068243217306
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827766,
+          "joint_margin_rad": 0.13141448820876417
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.12807881773399016,
+          "base": [
+            1.759638366339844,
+            -0.5821991755753422,
+            -2.5196032632614167
+          ],
+          "q": [
+            1.759638366339844,
+            -0.5821991755753422,
+            -0.8127209411639408,
+            -0.5826531316260115,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6288719165808007,
+            -0.910435889477434,
+            0.1750927921835067,
+            -0.4811096936066316,
+            -0.3903596262466635,
+            -0.22133946949369426,
+            -0.8081266894660963
+          ],
+          "ik_errors": [
+            3.707963272138889e-07,
+            1.41516864322654e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 36,
+            "certified_far_pairs": 338
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.1403622099149435e-06,
+            "original_base": [
+              1.7594817777464835,
+              -0.582002405234637,
+              -2.519839765255234
+            ],
+            "transported_base": [
+              1.7594811090400522,
+              -0.5820032452951145,
+              -2.519840905617444
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827785,
+          "joint_margin_rad": 0.13324037375333647
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.1182266009852217,
+          "base": [
+            1.759774026386996,
+            -0.5823716620165701,
+            -2.5193952283534102
+          ],
+          "q": [
+            1.759774026386996,
+            -0.5823716620165701,
+            -0.8125997113874968,
+            -0.5828221933428385,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6296816601547411,
+            -0.9119860016989039,
+            0.17514786156071085,
+            -0.4813566186789005,
+            -0.38875845239597173,
+            -0.22065238002665835,
+            -0.8081011939022149
+          ],
+          "ik_errors": [
+            3.138378286430736e-07,
+            1.2189372043040786e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 36,
+            "certified_far_pairs": 338
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.0054440611756827e-06,
+            "original_base": [
+              1.759638366339844,
+              -0.5821991755753422,
+              -2.5196032632614167
+            ],
+            "transported_base": [
+              1.7596377900857072,
+              -0.582199913045317,
+              -2.519604268705478
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827777,
+          "joint_margin_rad": 0.13484154760402822
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.10837438423645324,
+          "base": [
+            1.7598901918930958,
+            -0.5825209190254615,
+            -2.51921469818689
+          ],
+          "q": [
+            1.7598901918930958,
+            -0.5825209190254615,
+            -0.8124944811586765,
+            -0.5829688826058327,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6303823088553897,
+            -0.9133278722453294,
+            0.17519522649456315,
+            -0.48157087319788483,
+            -0.38737255527033,
+            -0.22005790146772056,
+            -0.8080795189147145
+          ],
+          "ik_errors": [
+            2.615953624351496e-07,
+            1.0354182968573682e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -8.823961503964274e-07,
+            "original_base": [
+              1.759774026386996,
+              -0.5823716620165701,
+              -2.5193952283534102
+            ],
+            "transported_base": [
+              1.7597735349682386,
+              -0.5823723079148133,
+              -2.5193961107495606
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827771,
+          "joint_margin_rad": 0.13622744472966997
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.09852216748768475,
+          "base": [
+            1.7599882803344933,
+            -0.5826481149033045,
+            -2.519060497812791
+          ],
+          "q": [
+            1.7599882803344933,
+            -0.5826481149033045,
+            -0.8124045774795995,
+            -0.5830941626274383,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6309793239051679,
+            -0.9144717135402249,
+            0.17523537491482707,
+            -0.4817538804327986,
+            -0.3861913104006782,
+            -0.21955138355445034,
+            -0.8080613353606838
+          ],
+          "ik_errors": [
+            2.1443736627932638e-07,
+            8.657832900485033e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -7.627087992402578e-07,
+            "original_base": [
+              1.7598901918930958,
+              -0.5825209190254615,
+              -2.51921469818689
+            ],
+            "transported_base": [
+              1.759889779174618,
+              -0.5825214767955629,
+              -2.519215460895689
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.13740868959932173
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.08866995073891626,
+          "base": [
+            1.7600697013238205,
+            -0.5827545437878657,
+            -2.51893124813089
+          ],
+          "q": [
+            1.7600697013238205,
+            -0.5827545437878657,
+            -0.812329205958967,
+            -0.5831991607899263,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6314787678915357,
+            -0.9154289384261824,
+            0.17526881149080065,
+            -0.4819072980273342,
+            -0.38520286979339424,
+            -0.21912767026263308,
+            -0.8080463294489123
+          ],
+          "ik_errors": [
+            1.7246415207892205e-07,
+            7.105823534048717e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -6.475878700873967e-07,
+            "original_base": [
+              1.7599882803344933,
+              -0.5826481149033045,
+              -2.519060497812791
+            ],
+            "transported_base": [
+              1.7599879395451223,
+              -0.5826485883475716,
+              -2.519061145400661
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.1383971302066057
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.0788177339901478,
+          "base": [
+            1.7601358690593123,
+            -0.5828416298342944,
+            -2.518825365477537
+          ],
+          "q": [
+            1.7601358690593123,
+            -0.5828416298342944,
+            -0.8122674507309381,
+            -0.5832851690923258,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.631887322482511,
+            -0.9162121909332237,
+            0.17529606050745694,
+            -0.48203301947064797,
+            -0.38439412872014445,
+            -0.2187810839350294,
+            -0.8080341989200032
+          ],
+          "ik_errors": [
+            1.3556082886401754e-07,
+            5.699458257817921e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -5.38202984728745e-07,
+            "original_base": [
+              1.7600697013238205,
+              -0.5827545437878657,
+              -2.51893124813089
+            ],
+            "transported_base": [
+              1.760069425391053,
+              -0.5827549372061906,
+              -2.5189317863338747
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827785,
+          "joint_margin_rad": 0.1392058712798555
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.06896551724137934,
+          "base": [
+            1.7601882159273425,
+            -0.5829109313694363,
+            -2.5187410615923684
+          ],
+          "q": [
+            1.7601882159273425,
+            -0.5829109313694363,
+            -0.8122182746386293,
+            -0.5833536443213913,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6322123062909012,
+            -0.9168353766106021,
+            0.1753176692336038,
+            -0.4821331748413005,
+            -0.3837506928987943,
+            -0.21850540937277996,
+            -0.8080246490568439
+          ],
+          "ik_errors": [
+            1.0347135049870792e-07,
+            4.4380653338403926e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -4.3564378339872394e-07,
+            "original_base": [
+              1.7601358690593123,
+              -0.5828416298342944,
+              -2.518825365477537
+            ],
+            "transported_base": [
+              1.7601356508920003,
+              -0.5828419481199564,
+              -2.5188258011213205
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.13984930710120563
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.059113300492610876,
+          "base": [
+            1.7602282069222608,
+            -0.5829641450802446,
+            -2.518676344013229
+          ],
+          "q": [
+            1.7602282069222608,
+            -0.5829641450802446,
+            -0.8121805197020797,
+            -0.5834062079001728,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6324616927424352,
+            -0.9173136924294766,
+            0.17533421141919756,
+            -0.482210131158716,
+            -0.3832568459187788,
+            -0.21829387796751976,
+            -0.8080173884425457
+          ],
+          "ik_errors": [
+            7.587992034509085e-08,
+            3.320859880257712e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -3.409170274237982e-07,
+            "original_base": [
+              1.7601882159273425,
+              -0.5829109313694363,
+              -2.5187410615923684
+            ],
+            "transported_base": [
+              1.760188048613831,
+              -0.5829111800731686,
+              -2.518741402509396
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827769,
+          "joint_margin_rad": 0.14034315408122117
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.04926108374384236,
+          "base": [
+            1.7602573545586337,
+            -0.5830031101181903,
+            -2.518629016784182
+          ],
+          "q": [
+            1.7602573545586337,
+            -0.5830031101181903,
+            -0.8121529077932731,
+            -0.5834446455002662,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6326441282627512,
+            -0.9176636562124952,
+            0.17534629122101936,
+            -0.48226649238292457,
+            -0.382895517020863,
+            -0.21813915179622714,
+            -0.808012124588653
+          ],
+          "ik_errors": [
+            5.2486392505894316e-08,
+            2.3483686234786434e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -2.549611697873594e-07,
+            "original_base": [
+              1.7602282069222608,
+              -0.5829641450802446,
+              -2.518676344013229
+            ],
+            "transported_base": [
+              1.7602280838284643,
+              -0.5829643304462526,
+              -2.518676598974399
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.14070448297913696
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.0394088669950739,
+          "base": [
+            1.760277323811684,
+            -0.5830299313990659,
+            -2.518596605512537
+          ],
+          "q": [
+            1.760277323811684,
+            -0.5830299313990659,
+            -0.812133997183802,
+            -0.5834709681023216,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6327687254878193,
+            -0.9179035223327804,
+            0.17535499009160987,
+            -0.4823051773329459,
+            -0.38264831514811515,
+            -0.21803351913137262,
+            -0.8080080350676718
+          ],
+          "ik_errors": [
+            1.5159156687595853e-07,
+            1.3842137347134564e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.7867429777097084e-07,
+            "original_base": [
+              1.7602573545586337,
+              -0.5830031101181903,
+              -2.518629016784182
+            ],
+            "transported_base": [
+              1.760257269332619,
+              -0.5830032391038544,
+              -2.5186291954584794
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827771,
+          "joint_margin_rad": 0.1409516848518848
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.029556650246305438,
+          "base": [
+            1.760289573763197,
+            -0.583046420298428,
+            -2.5185766021280918
+          ],
+          "q": [
+            1.760289573763197,
+            -0.583046420298428,
+            -0.8121223256272333,
+            -0.5834872134141535,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6328460722927773,
+            -0.9180516244636713,
+            0.1753599156309227,
+            -0.48232904412107086,
+            -0.3824952469178414,
+            -0.21796788856119945,
+            -0.8080060279961466
+          ],
+          "ik_errors": [
+            9.250369459372419e-08,
+            8.536853328431735e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -3.1186848474416534e-08,
+            "original_base": [
+              1.760277323811684,
+              -0.5830299313990659,
+              -2.518596605512537
+            ],
+            "transported_base": [
+              1.7602771955149374,
+              -0.5830298709382131,
+              -2.5185966366993857
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.14110475308215853
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.019704433497536977,
+          "base": [
+            1.76029586266892,
+            -0.5830552049143877,
+            -2.5185660784802404
+          ],
+          "q": [
+            1.76029586266892,
+            -0.5830552049143877,
+            -0.8121161851683035,
+            -0.5834957598712108,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6328865784022761,
+            -0.9181298136275832,
+            0.1753628032474089,
+            -0.4823416264805664,
+            -0.3824148194787212,
+            -0.21793350855785437,
+            -0.8080046050559352
+          ],
+          "ik_errors": [
+            2.699118359467335e-07,
+            1.5037418491202443e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 2.4720161968839962e-08,
+            "original_base": [
+              1.760289573763197,
+              -0.583046420298428,
+              -2.5185766021280918
+            ],
+            "transported_base": [
+              1.7602895107787293,
+              -0.5830463478195627,
+              -2.51857657740793
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827785,
+          "joint_margin_rad": 0.14118518052127876
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.009852216748768516,
+          "base": [
+            1.7602983383027855,
+            -0.5830583205506477,
+            -2.518562130826932
+          ],
+          "q": [
+            1.7602983383027855,
+            -0.5830583205506477,
+            -0.8121138817230088,
+            -0.5834989658198092,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6329018308876934,
+            -0.918158487880435,
+            0.17536343747001484,
+            -0.48234621938710065,
+            -0.38238490311528694,
+            -0.2179205105144474,
+            -0.8080045850903393
+          ],
+          "ik_errors": [
+            9.5596708688182e-08,
+            5.011689027916294e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 2.338565340954753e-07,
+            "original_base": [
+              1.76029586266892,
+              -0.5830552049143877,
+              -2.5185660784802404
+            ],
+            "transported_base": [
+              1.7602960094620475,
+              -0.5830549719269229,
+              -2.5185658446237063
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.141215096884713
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.0,
+          "base": [
+            1.7602984304133298,
+            -0.5830586490126751,
+            -2.5185616252171803
+          ],
+          "q": [
+            1.7602984304133298,
+            -0.5830586490126751,
+            -0.8121135867001377,
+            -0.5834993764324329,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6329034769848029,
+            -0.9181604529708989,
+            0.17536292048984,
+            -0.4823470982705479,
+            -0.3823846450592237,
+            -0.2179204622334773,
+            -0.808004642852026
+          ],
+          "ik_errors": [
+            8.307038466351151e-07,
+            2.9770544097064695e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 35,
+            "certified_far_pairs": 339
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.6371441374138443e-07,
+            "original_base": [
+              1.7602983383027855,
+              -0.5830583205506477,
+              -2.518562130826932
+            ],
+            "transported_base": [
+              1.7602984179722672,
+              -0.5830581749091879,
+              -2.5185619671125186
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.14121535494077625
+        }
+      ],
+      "physics_validated": false,
+      "whole_trajectory_admitted": false,
+      "numeric_sha256": "140722a82e3e8190306ec2b24ac0bb0d2a8085c1c473990df3943d2dfc58e233",
+      "scope": "Continue the one independently admitted alternate seed along unchanged lower Cartesian waypoints, forward or backward. Point checks do not certify interpolation, timing, connection to source release, or physical stability. Original model and pose/fixture/joint/self gates unchanged.",
+      "pod": "reachy-retarget-worker-7d46748688-74vxp"
+    },
+    {
+      "direction": "to_lower_bottom",
+      "sampled_branch_admitted": false,
+      "checked_rows": 23,
+      "expected_rows": 67,
+      "checks": [
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.3448275862068966,
+          "base": [
+            1.748406393709873,
+            -0.5715017384749492,
+            -2.5312022294653382
+          ],
+          "q": [
+            1.748406393709873,
+            -0.5715017384749492,
+            -0.8194242941047417,
+            -0.5731874267907014,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5789014101154284,
+            -0.8159708682060174,
+            0.17111848860431766,
+            -0.4671917834410171,
+            -0.4883549390847903,
+            -0.26390388765723416,
+            -0.8106241117276877
+          ],
+          "ik_errors": [
+            3.6779018453003687e-07,
+            1.6308056302623716e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 46,
+            "certified_far_pairs": 328
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.3574500784918592e-07,
+            "original_base": [
+              1.7484060728767334,
+              -0.5715017686713905,
+              -2.531202365210346
+            ],
+            "transported_base": [
+              1.748406393709873,
+              -0.5715017384749492,
+              -2.5312022294653382
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.03524506091520968
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.3547544409613375,
+          "base": [
+            1.7465730036480822,
+            -0.5725918001319019,
+            -2.5351524872372315
+          ],
+          "q": [
+            1.7465730036480822,
+            -0.5725918001319019,
+            -0.821682132943622,
+            -0.5699460258666779,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5752019189278808,
+            -0.8081048622088414,
+            0.1673785049607682,
+            -0.46621500691469464,
+            -0.4925986184088556,
+            -0.27121334598764923,
+            -0.8085224609244458
+          ],
+          "ik_errors": [
+            2.9831533530279697e-07,
+            1.1427465702685844e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 46,
+            "certified_far_pairs": 328
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 2.445822376416206e-16,
+            "original_base": [
+              1.748406393709873,
+              -0.5715017384749492,
+              -2.5312022294653382
+            ],
+            "transported_base": [
+              1.7484063937098733,
+              -0.5715017384749493,
+              -2.531202229465338
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.03100138159114435
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.3646812957157785,
+          "base": [
+            1.74354717870537,
+            -0.5763522278215236,
+            -2.543673871962512
+          ],
+          "q": [
+            1.74354717870537,
+            -0.5763522278215236,
+            -0.8265089708934276,
+            -0.5629235481241545,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5714111945543066,
+            -0.7987508602915472,
+            0.15870880065819132,
+            -0.4652246960584223,
+            -0.4925996228126445,
+            -0.284541336745756,
+            -0.8029636108221626
+          ],
+          "ik_errors": [
+            4.8462908953396204e-08,
+            2.3340319262220277e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 46,
+            "certified_far_pairs": 328
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.6371148118957397e-07,
+            "original_base": [
+              1.7465730036480822,
+              -0.5725918001319019,
+              -2.5351524872372315
+            ],
+            "transported_base": [
+              1.7465729890089365,
+              -0.5725921884788682,
+              -2.535152650948713
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.031000377187355432
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.37460815047021945,
+          "base": [
+            1.7404396375773745,
+            -0.5800379054152176,
+            -2.552186550931094
+          ],
+          "q": [
+            1.7404396375773745,
+            -0.5800379054152176,
+            -0.831270953870828,
+            -0.5558674313635255,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.567518796008212,
+            -0.7892081781609415,
+            0.149971615037047,
+            -0.4642819975052479,
+            -0.49259961845902084,
+            -0.2979784099062246,
+            -0.7972684007761175
+          ],
+          "ik_errors": [
+            4.007402248582042e-08,
+            1.9443241764091392e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 46,
+            "certified_far_pairs": 328
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 5.801841837999642e-08,
+            "original_base": [
+              1.74354717870537,
+              -0.5763522278215236,
+              -2.543673871962512
+            ],
+            "transported_base": [
+              1.7435471780539733,
+              -0.5763521545238898,
+              -2.5436738139440935
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827755,
+          "joint_margin_rad": 0.031000381540979116
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.38453500522466044,
+          "base": [
+            1.7372542773964328,
+            -0.5836416145825756,
+            -2.5606736667574044
+          ],
+          "q": [
+            1.7372542773964328,
+            -0.5836416145825756,
+            -0.8359586699926107,
+            -0.5487924034315576,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5635272267805633,
+            -0.779493208884017,
+            0.14118673882183547,
+            -0.46338744845619745,
+            -0.4925996198834494,
+            -0.3115049944343767,
+            -0.7914511180967492
+          ],
+          "ik_errors": [
+            3.322799866776611e-08,
+            1.639326357764591e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 47,
+            "certified_far_pairs": 327
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 5.740469056964643e-08,
+            "original_base": [
+              1.7404396375773745,
+              -0.5800379054152176,
+              -2.552186550931094
+            ],
+            "transported_base": [
+              1.7404396379834732,
+              -0.5800378375461801,
+              -2.552186493526403
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.03100038011655054
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.3944618599791014,
+          "base": [
+            1.7339949038931448,
+            -0.5871569432244039,
+            -2.5691199837766825
+          ],
+          "q": [
+            1.7339949038931448,
+            -0.5871569432244039,
+            -0.8405640709144994,
+            -0.5417121400593166,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5594393428541414,
+            -0.769621842284917,
+            0.1323721517810817,
+            -0.4625410710150104,
+            -0.4925996254617458,
+            -0.32510318524502124,
+            -0.7855257131592648
+          ],
+          "ik_errors": [
+            2.8313521763333735e-08,
+            1.4295020324481607e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 48,
+            "certified_far_pairs": 326
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 5.6642111344136964e-08,
+            "original_base": [
+              1.7372542773964328,
+              -0.5836416145825756,
+              -2.5606736667574044
+            ],
+            "transported_base": [
+              1.7372542792289183,
+              -0.5836415516583863,
+              -2.560673610115293
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827763,
+          "joint_margin_rad": 0.03100037453825416
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.4043887147335423,
+          "base": [
+            1.73066518050214,
+            -0.5905792102764486,
+            -2.57751239222933
+          ],
+          "q": [
+            1.73066518050214,
+            -0.5905792102764486,
+            -0.8450806857413133,
+            -0.5346387888911461,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5552595483713814,
+            -0.7596104050073561,
+            0.12354690511200868,
+            -0.4617402251043482,
+            -0.49259960945942605,
+            -0.33875752678892396,
+            -0.7795079104700344
+          ],
+          "ik_errors": [
+            2.4804247219297387e-08,
+            2.2110139111096405e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 48,
+            "certified_far_pairs": 326
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 5.536164842412673e-08,
+            "original_base": [
+              1.7339949038931448,
+              -0.5871569432244039,
+              -2.5691199837766825
+            ],
+            "transported_base": [
+              1.7339949069094822,
+              -0.5871568848157762,
+              -2.569119928415034
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.031000390540573908
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.4143155694879833,
+          "base": [
+            1.7272694050572612,
+            -0.5939022335436338,
+            -2.585836315136275
+          ],
+          "q": [
+            1.7272694050572612,
+            -0.5939022335436338,
+            -0.849501649735211,
+            -0.5275859618082676,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5509902639701827,
+            -0.749474068471056,
+            0.11472543790209663,
+            -0.460987154533371,
+            -0.492599598189821,
+            -0.3524495556635806,
+            -0.7734087730195452
+          ],
+          "ik_errors": [
+            2.2626244256298884e-08,
+            2.2975749578087844e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 49,
+            "certified_far_pairs": 325
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.453605066520895e-07,
+            "original_base": [
+              1.73066518050214,
+              -0.5905792102764486,
+              -2.57751239222933
+            ],
+            "transported_base": [
+              1.73066524273101,
+              -0.5905791016585479,
+              -2.577512246868823
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.1245641237282778,
+          "joint_margin_rad": 0.031000401810178935
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.42424242424242425,
+          "base": [
+            1.7238116955896001,
+            -0.5971215692507162,
+            -2.59407907468348
+          ],
+          "q": [
+            1.7238116955896001,
+            -0.5971215692507162,
+            -0.8538215059963206,
+            -0.5205658804591164,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5466354029412914,
+            -0.7392284634099652,
+            0.10592310001523793,
+            -0.4602809306200376,
+            -0.49259961582410244,
+            -0.36616350876689585,
+            -0.7672410695472679
+          ],
+          "ik_errors": [
+            2.5620544315391264e-08,
+            1.9535809528994197e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 50,
+            "certified_far_pairs": 324
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.3499920475867545e-07,
+            "original_base": [
+              1.7272694050572612,
+              -0.5939022335436338,
+              -2.585836315136275
+            ],
+            "transported_base": [
+              1.7272694558582722,
+              -0.5939021278642445,
+              -2.58583618013707
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827771,
+          "joint_margin_rad": 0.03100038417589751
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.43416927899686525,
+          "base": [
+            1.720296338075458,
+            -0.6002333565395668,
+            -2.6022288042527584
+          ],
+          "q": [
+            1.720296338075458,
+            -0.6002333565395668,
+            -0.8580355757416521,
+            -0.5135902557113906,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5421994653934803,
+            -0.7288890828128376,
+            0.09715447813260861,
+            -0.4596202383795979,
+            -0.49259961899012883,
+            -0.3798842221308391,
+            -0.7610171405977121
+          ],
+          "ik_errors": [
+            2.4502941338004407e-08,
+            1.3950960105175895e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 51,
+            "certified_far_pairs": 323
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 9.579578654073702e-08,
+            "original_base": [
+              1.7238116955896001,
+              -0.5971215692507162,
+              -2.59407907468348
+            ],
+            "transported_base": [
+              1.7238117209910047,
+              -0.5971214893200085,
+              -2.5940789788876937
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827791,
+          "joint_margin_rad": 0.031000381009871125
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.4440961337513062,
+          "base": [
+            1.7167283263310755,
+            -0.6032339438335762,
+            -2.6102738334747544
+          ],
+          "q": [
+            1.7167283263310755,
+            -0.6032339438335762,
+            -0.8621396128345887,
+            -0.5066707885613946,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5376881632917232,
+            -0.7184723694313488,
+            0.08843567101397025,
+            -0.45900321251035897,
+            -0.49259935132197646,
+            -0.3935951126805499,
+            -0.7547500566939577
+          ],
+          "ik_errors": [
+            3.8460148300702425e-07,
+            1.017646798756924e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 51,
+            "certified_far_pairs": 323
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 5.84677486519191e-08,
+            "original_base": [
+              1.720296338075458,
+              -0.6002333565395668,
+              -2.6022288042527584
+            ],
+            "transported_base": [
+              1.7202963444427253,
+              -0.60023330513509,
+              -2.6022287457850095
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827763,
+          "joint_margin_rad": 0.03100064867802349
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.4540229885057472,
+          "base": [
+            1.713109992094593,
+            -0.6061228383751049,
+            -2.6182091154269145
+          ],
+          "q": [
+            1.713109992094593,
+            -0.6061228383751049,
+            -0.8661330024410718,
+            -0.4998135873327316,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5331080758139393,
+            -0.7079900621226717,
+            0.07977795935709743,
+            -0.45842675988683645,
+            -0.4925993434411643,
+            -0.4072885606173793,
+            -0.7484506151754154
+          ],
+          "ik_errors": [
+            1.1451519796698733e-07,
+            3.285070862161455e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 51,
+            "certified_far_pairs": 323
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -7.201477268274304e-08,
+            "original_base": [
+              1.7167283263310755,
+              -0.6032339438335762,
+              -2.6102738334747544
+            ],
+            "transported_base": [
+              1.716728073721057,
+              -0.6032340501239619,
+              -2.610273905489527
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.03100065655883566
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.4639498432601881,
+          "base": [
+            1.7094474765130865,
+            -0.6088968075906931,
+            -2.626023419180104
+          ],
+          "q": [
+            1.7094474765130865,
+            -0.6088968075906931,
+            -0.8700122135296441,
+            -0.4930301697758961,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5284667501796214,
+            -0.6974599052662575,
+            0.07119953358738242,
+            -0.45788796247166524,
+            -0.4925991115190817,
+            -0.4209466157322532,
+            -0.7421330772242123
+          ],
+          "ik_errors": [
+            2.5584180501636995e-07,
+            7.374503687288527e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 52,
+            "certified_far_pairs": 322
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 8.203225168652779e-08,
+            "original_base": [
+              1.713109992094593,
+              -0.6061228383751049,
+              -2.6182091154269145
+            ],
+            "transported_base": [
+              1.7131099294662226,
+              -0.6061227631751183,
+              -2.618209033394663
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827785,
+          "joint_margin_rad": 0.031000888480918254
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.47387669801462906,
+          "base": [
+            1.7057447208311007,
+            -0.6115542878333098,
+            -2.633708743140987
+          ],
+          "q": [
+            1.7057447208311007,
+            -0.6115542878333098,
+            -0.8737755796438398,
+            -0.48632934973952757,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5237656309444436,
+            -0.6868951200235773,
+            0.06270563525583392,
+            -0.4573897074102294,
+            -0.49259941954149594,
+            -0.434556392529062,
+            -0.735804254073818
+          ],
+          "ik_errors": [
+            6.481572114466765e-07,
+            8.214351321482669e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 53,
+            "certified_far_pairs": 321
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -6.082031786643421e-07,
+            "original_base": [
+              1.7094474765130865,
+              -0.6088968075906931,
+              -2.626023419180104
+            ],
+            "transported_base": [
+              1.7094471439519436,
+              -0.608897021510421,
+              -2.6260240273832824
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827777,
+          "joint_margin_rad": 0.031000580458504012
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.48380355276907006,
+          "base": [
+            1.702006561024775,
+            -0.6140959808786707,
+            -2.641256788982697
+          ],
+          "q": [
+            1.702006561024775,
+            -0.6140959808786707,
+            -0.8774214903253797,
+            -0.47972026048019856,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5190139627188686,
+            -0.6763166860123645,
+            0.054316201283444956,
+            -0.4569243819507225,
+            -0.49259907747858317,
+            -0.44810168786292637,
+            -0.7294843582913481
+          ],
+          "ik_errors": [
+            3.492932556159306e-07,
+            5.483531522176787e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 54,
+            "certified_far_pairs": 320
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -4.081304102699472e-07,
+            "original_base": [
+              1.7057447208311007,
+              -0.6115542878333098,
+              -2.633708743140987
+            ],
+            "transported_base": [
+              1.70574410052322,
+              -0.6115544260400954,
+              -2.6337091512713973
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827783,
+          "joint_margin_rad": 0.031000922521416785
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.493730407523511,
+          "base": [
+            1.6982363738235595,
+            -0.6165219855739382,
+            -2.6486656797782775
+          ],
+          "q": [
+            1.6982363738235595,
+            -0.6165219855739382,
+            -0.8809515713797054,
+            -0.4732064336879074,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5142180647602981,
+            -0.6657332179115891,
+            0.046038081983657435,
+            -0.45649239690249743,
+            -0.49259907311671913,
+            -0.46157664454405495,
+            -0.7231790581640296
+          ],
+          "ik_errors": [
+            1.9029817652744824e-07,
+            5.350922374582879e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 54,
+            "certified_far_pairs": 320
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.9978550572702028e-07,
+            "original_base": [
+              1.702006561024775,
+              -0.6140959808786707,
+              -2.641256788982697
+            ],
+            "transported_base": [
+              1.7020062861752683,
+              -0.6140958450554128,
+              -2.641256589197191
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827774,
+          "joint_margin_rad": 0.03100092688328082
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.5036572622779519,
+          "base": [
+            1.6944401869765138,
+            -0.6188316379757073,
+            -2.6559266339589036
+          ],
+          "q": [
+            1.6944401869765138,
+            -0.6188316379757073,
+            -0.8843642489990061,
+            -0.46679746688732565,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5093839686051586,
+            -0.655161726858881,
+            0.037881292880573604,
+            -0.45609145679987595,
+            -0.4925989740465333,
+            -0.474965163776452,
+            -0.7168989806701594
+          ],
+          "ik_errors": [
+            2.664330229316862e-07,
+            8.510694568430157e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 54,
+            "certified_far_pairs": 320
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.2075217624838007e-08,
+            "original_base": [
+              1.6982363738235595,
+              -0.6165219855739382,
+              -2.6486656797782775
+            ],
+            "transported_base": [
+              1.6982362540097726,
+              -0.6165219271633627,
+              -2.64866566770306
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827783,
+          "joint_margin_rad": 0.031001025953466654
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.5135841170323929,
+          "base": [
+            1.6906228264954968,
+            -0.6210250309867004,
+            -2.663033568671536
+          ],
+          "q": [
+            1.6906228264954968,
+            -0.6210250309867004,
+            -0.8876593863221506,
+            -0.46050061224083416,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.504518238181327,
+            -0.6446163255490602,
+            0.02985381340579202,
+            -0.4557196695268098,
+            -0.4925989633605879,
+            -0.48825501321440473,
+            -0.7106532183658032
+          ],
+          "ik_errors": [
+            2.8661048153655233e-07,
+            1.1302396012652128e-06
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 54,
+            "certified_far_pairs": 320
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -2.6393326421101233e-08,
+            "original_base": [
+              1.6944401869765138,
+              -0.6188316379757073,
+              -2.6559266339589036
+            ],
+            "transported_base": [
+              1.6944400334925787,
+              -0.6188315908160456,
+              -2.6559266603522302
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827766,
+          "joint_margin_rad": 0.03100103663941206
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.5235109717868339,
+          "base": [
+            1.6867804706675384,
+            -0.6191206426854632,
+            -2.6702629868994445
+          ],
+          "q": [
+            1.6867804706675384,
+            -0.6191206426854632,
+            -0.8909653124123186,
+            -0.45407137333025027,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.49837134300951835,
+            -0.6287908648343802,
+            0.020703171469062035,
+            -0.4680730921667944,
+            -0.4925998751433192,
+            -0.4925999999999999,
+            -0.6952844210290504
+          ],
+          "ik_errors": [
+            5.734624533070092e-08,
+            7.070913157348493e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 55,
+            "certified_far_pairs": 319
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 3.814859620585616e-08,
+            "original_base": [
+              1.6906228264954968,
+              -0.6210250309867004,
+              -2.663033568671536
+            ],
+            "transported_base": [
+              1.690622695838314,
+              -0.6210249559189894,
+              -2.66303353052294
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827771,
+          "joint_margin_rad": 0.031000000000000028
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.5334378265412748,
+          "base": [
+            1.6827611367233988,
+            -0.6152309982856091,
+            -2.6776504025448116
+          ],
+          "q": [
+            1.6827611367233988,
+            -0.6152309982856091,
+            -0.8942953842494898,
+            -0.44747711193988154,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.49119490055044046,
+            -0.6101581162805557,
+            0.0110973543809873,
+            -0.487179355568009,
+            -0.49252764728424286,
+            -0.4925999999999999,
+            -0.675355562551395
+          ],
+          "ik_errors": [
+            1.5699701607087124e-07,
+            4.704622240793877e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 55,
+            "certified_far_pairs": 319
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": -1.1459374533658443e-07,
+            "original_base": [
+              1.6867804706675384,
+              -0.6191206426854632,
+              -2.6702629868994445
+            ],
+            "transported_base": [
+              1.6867804278644598,
+              -0.6191206998722776,
+              -2.6702631014931897
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827771,
+          "joint_margin_rad": 0.031000000000000028
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.5433646812957158,
+          "base": [
+            1.6785684102853795,
+            -0.6113553727348366,
+            -2.6849436289475155
+          ],
+          "q": [
+            1.6785684102853795,
+            -0.6113553727348366,
+            -0.8975351230098121,
+            -0.44094297019428874,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.4834738833038751,
+            -0.5914723057486727,
+            0.0018341032225282394,
+            -0.5067100276768203,
+            -0.49255334605470175,
+            -0.4925999999999999,
+            -0.6557106315184186
+          ],
+          "ik_errors": [
+            1.7744913630045014e-07,
+            4.965834701364281e-07
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 55,
+            "certified_far_pairs": 319
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 8.443972186371596e-08,
+            "original_base": [
+              1.6827611367233988,
+              -0.6152309982856091,
+              -2.6776504025448116
+            ],
+            "transported_base": [
+              1.6827612476153848,
+              -0.6152310739721929,
+              -2.6776503181050897
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827788,
+          "joint_margin_rad": 0.031000000000000028
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.5532915360501568,
+          "base": [
+            1.6928392808808332,
+            -0.5703696716839066,
+            -2.651778019236505
+          ],
+          "q": [
+            1.6928392808808332,
+            -0.5703696716839066,
+            -0.882420081323077,
+            -0.4704623258856911,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5384059574700216,
+            -0.5453683615909808,
+            -0.02372903960374249,
+            -0.47086091099400373,
+            -0.4925999999999999,
+            -0.4925999999999999,
+            -0.5767193253338451
+          ],
+          "ik_errors": [
+            0.0011946960964962408,
+            0.0011548574085463162
+          ],
+          "fixture": {
+            "admitted": true,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.003001,
+            "distance_is_lower_bound": true,
+            "closest_geom_pair": null,
+            "closest_segment_world": null,
+            "inspected_pairs": 374,
+            "exact_distance_queries": 55,
+            "certified_far_pairs": 319
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 1
+            },
+            {
+              "iteration": 1,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 1
+            },
+            {
+              "iteration": 2,
+              "success": true,
+              "message": "Optimization terminated successfully",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 1.1430396293650312e-07,
+            "original_base": [
+              1.6785684102853795,
+              -0.6113553727348366,
+              -2.6849436289475155
+            ],
+            "transported_base": [
+              1.678568539699837,
+              -0.6113554469820692,
+              -2.6849435146435527
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": true,
+          "self_gap_m": 0.12456412372827769,
+          "joint_margin_rad": 0.031000000000000028
+        },
+        {
+          "phase": "lower_branch_probe",
+          "weight": 0.5632183908045978,
+          "base": [
+            1.7068101755787257,
+            -0.5522004915577938,
+            -2.6007264711941267
+          ],
+          "q": [
+            1.7068101755787257,
+            -0.5522004915577938,
+            -0.8572630241172037,
+            -0.5148787308497281,
+            0.0,
+            0.15,
+            0.0,
+            -0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5621843562548142,
+            -0.5578604514235239,
+            -0.033179770244128166,
+            -0.4048621178977158,
+            -0.4925999999999495,
+            -0.4925999999999999,
+            -0.5739831963805239
+          ],
+          "ik_errors": [
+            0.003926696278156744,
+            0.021838122900493574
+          ],
+          "fixture": {
+            "admitted": false,
+            "minimum_required_m": 0.003,
+            "minimum_signed_distance_or_lower_bound_m": 0.0027633239961835404,
+            "distance_is_lower_bound": false,
+            "closest_geom_pair": [
+              "r_elbow_forearm_link_collision_0",
+              "source_scene_geom_23"
+            ],
+            "closest_segment_world": [
+              1.1411057831535185,
+              -0.3137307959273264,
+              0.9025324302804378,
+              1.14,
+              -0.31373079592732633,
+              0.9000000000000001
+            ],
+            "inspected_pairs": 374,
+            "exact_distance_queries": 55,
+            "certified_far_pairs": 319
+          },
+          "optimizer_trace": [
+            {
+              "iteration": 0,
+              "success": false,
+              "message": "Iteration limit reached",
+              "added_pairs": 0
+            }
+          ],
+          "orientation_transport": {
+            "delta_yaw_rad": 7.412721952060498e-06,
+            "original_base": [
+              1.6928392808808332,
+              -0.5703696716839066,
+              -2.651778019236505
+            ],
+            "transported_base": [
+              1.6925309319494901,
+              -0.570365309519311,
+              -2.6517706065145528
+            ]
+          },
+          "position_interior_reserve_m": 0.0,
+          "solve_position_tolerance_m": 0.002,
+          "fixture_interior_reserve_m": 0.0,
+          "solve_minimum_fixture_gap_m": 0.003,
+          "planar_neighbor_discs": null,
+          "admitted": false,
+          "self_gap_m": 0.12456412372827783,
+          "joint_margin_rad": 0.031000000000000028
+        }
+      ],
+      "physics_validated": false,
+      "whole_trajectory_admitted": false,
+      "numeric_sha256": "9cb993f1b1a7affb23b3f4bb31c4f34939928bb647b850d2e5c380babec3a2e3",
+      "scope": "Continue the one independently admitted alternate seed along unchanged lower Cartesian waypoints, forward or backward. Point checks do not certify interpolation, timing, connection to source release, or physical stability. Original model and pose/fixture/joint/self gates unchanged.",
+      "pod": "reachy-retarget-worker-7d46748688-7btrt"
+    }
+  ]
+}

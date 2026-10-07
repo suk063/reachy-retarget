@@ -1,0 +1,2366 @@
+{
+  "label": "additional-box-center-base-bank-v1",
+  "scope": "43 bounded center/face and backward-base candidates across nine remaining box sources, plus three matched original-contact-model validations. Full original intervals, unchanged objects and physical gates. No raised approach or grasp roll.",
+  "policy": {
+    "base_offsets_x_m": [
+      0,
+      -0.025,
+      -0.05,
+      -0.075,
+      -0.1
+    ],
+    "previous_f7_endpoints_excluded": true,
+    "geometry_evidence": "docs/lift-axis-base-gradient-v1.json",
+    "source_model_comparison": "docs/additional-lift-center-clearance-v1-evidence.json"
+  },
+  "jobs": [
+    {
+      "id": "additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back000",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "parent_workspace": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back000",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/1e4657fe4ba06369b80a5084.h5",
+      "source_episode_id": "1e4657fe4ba06369b80a5084",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084/runs/dynamics/additional-independent-v1-1e4657fe4ba06369b80a5084-aligned/1e4657fe4ba06369b80a5084",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back025",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "parent_workspace": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back025",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/1e4657fe4ba06369b80a5084.h5",
+      "source_episode_id": "1e4657fe4ba06369b80a5084",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084/runs/dynamics/additional-independent-v1-1e4657fe4ba06369b80a5084-aligned/1e4657fe4ba06369b80a5084",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.025,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back050",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "parent_workspace": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back050",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/1e4657fe4ba06369b80a5084.h5",
+      "source_episode_id": "1e4657fe4ba06369b80a5084",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084/runs/dynamics/additional-independent-v1-1e4657fe4ba06369b80a5084-aligned/1e4657fe4ba06369b80a5084",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back075",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "parent_workspace": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back075",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/1e4657fe4ba06369b80a5084.h5",
+      "source_episode_id": "1e4657fe4ba06369b80a5084",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084/runs/dynamics/additional-independent-v1-1e4657fe4ba06369b80a5084-aligned/1e4657fe4ba06369b80a5084",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.075,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back100",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "parent_workspace": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-1e4657fe4ba06369b80a5084-back100",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/1e4657fe4ba06369b80a5084.h5",
+      "source_episode_id": "1e4657fe4ba06369b80a5084",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-1e4657fe4ba06369b80a5084/runs/dynamics/additional-independent-v1-1e4657fe4ba06369b80a5084-aligned/1e4657fe4ba06369b80a5084",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-f7a0da6cfd445c85197fc0fd-back025",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "parent_workspace": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-f7a0da6cfd445c85197fc0fd-back025",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f7a0da6cfd445c85197fc0fd.h5",
+      "source_episode_id": "f7a0da6cfd445c85197fc0fd",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd/runs/dynamics/additional-independent-v1-f7a0da6cfd445c85197fc0fd-aligned/f7a0da6cfd445c85197fc0fd",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.025,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-f7a0da6cfd445c85197fc0fd-back050",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "parent_workspace": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-f7a0da6cfd445c85197fc0fd-back050",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f7a0da6cfd445c85197fc0fd.h5",
+      "source_episode_id": "f7a0da6cfd445c85197fc0fd",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd/runs/dynamics/additional-independent-v1-f7a0da6cfd445c85197fc0fd-aligned/f7a0da6cfd445c85197fc0fd",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-f7a0da6cfd445c85197fc0fd-back075",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "parent_workspace": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-f7a0da6cfd445c85197fc0fd-back075",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f7a0da6cfd445c85197fc0fd.h5",
+      "source_episode_id": "f7a0da6cfd445c85197fc0fd",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-f7a0da6cfd445c85197fc0fd/runs/dynamics/additional-independent-v1-f7a0da6cfd445c85197fc0fd-aligned/f7a0da6cfd445c85197fc0fd",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.075,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back000",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "parent_workspace": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back000",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/ab4336bad6ed07404a4ea8a1.h5",
+      "source_episode_id": "ab4336bad6ed07404a4ea8a1",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_7",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1/runs/dynamics/additional-independent-v1-ab4336bad6ed07404a4ea8a1-aligned/ab4336bad6ed07404a4ea8a1",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back025",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "parent_workspace": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back025",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/ab4336bad6ed07404a4ea8a1.h5",
+      "source_episode_id": "ab4336bad6ed07404a4ea8a1",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_7",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1/runs/dynamics/additional-independent-v1-ab4336bad6ed07404a4ea8a1-aligned/ab4336bad6ed07404a4ea8a1",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.025,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back050",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "parent_workspace": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back050",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/ab4336bad6ed07404a4ea8a1.h5",
+      "source_episode_id": "ab4336bad6ed07404a4ea8a1",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_7",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1/runs/dynamics/additional-independent-v1-ab4336bad6ed07404a4ea8a1-aligned/ab4336bad6ed07404a4ea8a1",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back075",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "parent_workspace": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back075",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/ab4336bad6ed07404a4ea8a1.h5",
+      "source_episode_id": "ab4336bad6ed07404a4ea8a1",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_7",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1/runs/dynamics/additional-independent-v1-ab4336bad6ed07404a4ea8a1-aligned/ab4336bad6ed07404a4ea8a1",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.075,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back100",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "parent_workspace": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-ab4336bad6ed07404a4ea8a1-back100",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/ab4336bad6ed07404a4ea8a1.h5",
+      "source_episode_id": "ab4336bad6ed07404a4ea8a1",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_7",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-ab4336bad6ed07404a4ea8a1/runs/dynamics/additional-independent-v1-ab4336bad6ed07404a4ea8a1-aligned/ab4336bad6ed07404a4ea8a1",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back000",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "parent_workspace": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back000",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/40cc7efd3c3649b2480cd4f4.h5",
+      "source_episode_id": "40cc7efd3c3649b2480cd4f4",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_3",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4/runs/dynamics/additional-independent-v1-40cc7efd3c3649b2480cd4f4-aligned/40cc7efd3c3649b2480cd4f4",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back025",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "parent_workspace": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back025",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/40cc7efd3c3649b2480cd4f4.h5",
+      "source_episode_id": "40cc7efd3c3649b2480cd4f4",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_3",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4/runs/dynamics/additional-independent-v1-40cc7efd3c3649b2480cd4f4-aligned/40cc7efd3c3649b2480cd4f4",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.025,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back050",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "parent_workspace": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back050",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/40cc7efd3c3649b2480cd4f4.h5",
+      "source_episode_id": "40cc7efd3c3649b2480cd4f4",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_3",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4/runs/dynamics/additional-independent-v1-40cc7efd3c3649b2480cd4f4-aligned/40cc7efd3c3649b2480cd4f4",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back075",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "parent_workspace": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back075",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/40cc7efd3c3649b2480cd4f4.h5",
+      "source_episode_id": "40cc7efd3c3649b2480cd4f4",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_3",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4/runs/dynamics/additional-independent-v1-40cc7efd3c3649b2480cd4f4-aligned/40cc7efd3c3649b2480cd4f4",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.075,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back100",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "parent_workspace": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-40cc7efd3c3649b2480cd4f4-back100",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/40cc7efd3c3649b2480cd4f4.h5",
+      "source_episode_id": "40cc7efd3c3649b2480cd4f4",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_3",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-40cc7efd3c3649b2480cd4f4/runs/dynamics/additional-independent-v1-40cc7efd3c3649b2480cd4f4-aligned/40cc7efd3c3649b2480cd4f4",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back000",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "parent_workspace": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back000",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+      "source_episode_id": "b0f44ee456375ef2a8a33b5b",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/runs/dynamics/additional-independent-v1-b0f44ee456375ef2a8a33b5b-aligned/b0f44ee456375ef2a8a33b5b",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back025",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "parent_workspace": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back025",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+      "source_episode_id": "b0f44ee456375ef2a8a33b5b",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/runs/dynamics/additional-independent-v1-b0f44ee456375ef2a8a33b5b-aligned/b0f44ee456375ef2a8a33b5b",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.025,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back050",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "parent_workspace": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back050",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+      "source_episode_id": "b0f44ee456375ef2a8a33b5b",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/runs/dynamics/additional-independent-v1-b0f44ee456375ef2a8a33b5b-aligned/b0f44ee456375ef2a8a33b5b",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back075",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "parent_workspace": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back075",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+      "source_episode_id": "b0f44ee456375ef2a8a33b5b",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/runs/dynamics/additional-independent-v1-b0f44ee456375ef2a8a33b5b-aligned/b0f44ee456375ef2a8a33b5b",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.075,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back100",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "parent_workspace": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b0f44ee456375ef2a8a33b5b-back100",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+      "source_episode_id": "b0f44ee456375ef2a8a33b5b",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/runs/dynamics/additional-independent-v1-b0f44ee456375ef2a8a33b5b-aligned/b0f44ee456375ef2a8a33b5b",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back000",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "parent_workspace": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back000",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/bb0db74183abea8eac14cfc0.h5",
+      "source_episode_id": "bb0db74183abea8eac14cfc0",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0/runs/dynamics/additional-independent-v1-bb0db74183abea8eac14cfc0-aligned/bb0db74183abea8eac14cfc0",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back025",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "parent_workspace": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back025",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/bb0db74183abea8eac14cfc0.h5",
+      "source_episode_id": "bb0db74183abea8eac14cfc0",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0/runs/dynamics/additional-independent-v1-bb0db74183abea8eac14cfc0-aligned/bb0db74183abea8eac14cfc0",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.025,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back050",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "parent_workspace": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back050",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/bb0db74183abea8eac14cfc0.h5",
+      "source_episode_id": "bb0db74183abea8eac14cfc0",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0/runs/dynamics/additional-independent-v1-bb0db74183abea8eac14cfc0-aligned/bb0db74183abea8eac14cfc0",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back075",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "parent_workspace": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back075",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/bb0db74183abea8eac14cfc0.h5",
+      "source_episode_id": "bb0db74183abea8eac14cfc0",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0/runs/dynamics/additional-independent-v1-bb0db74183abea8eac14cfc0-aligned/bb0db74183abea8eac14cfc0",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.075,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back100",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "parent_workspace": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-bb0db74183abea8eac14cfc0-back100",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/bb0db74183abea8eac14cfc0.h5",
+      "source_episode_id": "bb0db74183abea8eac14cfc0",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-bb0db74183abea8eac14cfc0/runs/dynamics/additional-independent-v1-bb0db74183abea8eac14cfc0-aligned/bb0db74183abea8eac14cfc0",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back000",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back000",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back025",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back025",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.025,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back050",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back050",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back075",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back075",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.075,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back100",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-b1d985821e4c4a4563c2e318-back100",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back000",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "parent_workspace": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back000",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/528b8e2bd8cba0cf922c2cc6.h5",
+      "source_episode_id": "528b8e2bd8cba0cf922c2cc6",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6/runs/dynamics/additional-independent-v1-528b8e2bd8cba0cf922c2cc6-aligned/528b8e2bd8cba0cf922c2cc6",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back025",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "parent_workspace": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back025",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/528b8e2bd8cba0cf922c2cc6.h5",
+      "source_episode_id": "528b8e2bd8cba0cf922c2cc6",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6/runs/dynamics/additional-independent-v1-528b8e2bd8cba0cf922c2cc6-aligned/528b8e2bd8cba0cf922c2cc6",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.025,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back050",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "parent_workspace": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back050",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/528b8e2bd8cba0cf922c2cc6.h5",
+      "source_episode_id": "528b8e2bd8cba0cf922c2cc6",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6/runs/dynamics/additional-independent-v1-528b8e2bd8cba0cf922c2cc6-aligned/528b8e2bd8cba0cf922c2cc6",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back075",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "parent_workspace": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back075",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/528b8e2bd8cba0cf922c2cc6.h5",
+      "source_episode_id": "528b8e2bd8cba0cf922c2cc6",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6/runs/dynamics/additional-independent-v1-528b8e2bd8cba0cf922c2cc6-aligned/528b8e2bd8cba0cf922c2cc6",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.075,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back100",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "parent_workspace": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-528b8e2bd8cba0cf922c2cc6-back100",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/528b8e2bd8cba0cf922c2cc6.h5",
+      "source_episode_id": "528b8e2bd8cba0cf922c2cc6",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_8",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-528b8e2bd8cba0cf922c2cc6/runs/dynamics/additional-independent-v1-528b8e2bd8cba0cf922c2cc6-aligned/528b8e2bd8cba0cf922c2cc6",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back000",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back000",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back025",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back025",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.025,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back050",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back050",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back075",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back075",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.075,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back100",
+      "operation": "feasible_experiment",
+      "dataset": "mimicgen",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-9295ddc7f5668cb10cae9f98-back100",
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "adaptive_bounded_center_and_backward_base_geometry",
+      "task": "Stack_D0",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-700a59388f33b29472d59243-source-model",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-700a59388f33b29472d59243",
+      "parent_workspace": "workspaces/additional-independent-v1-700a59388f33b29472d59243",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-700a59388f33b29472d59243-source-model",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/700a59388f33b29472d59243.h5",
+      "source_episode_id": "700a59388f33b29472d59243",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_15",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-700a59388f33b29472d59243/runs/dynamics/additional-independent-v1-700a59388f33b29472d59243-aligned/700a59388f33b29472d59243",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "matched_original_model_validation_after_alternative_model_geometry_pass",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.1,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-700a59388f33b29472d59243",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      },
+      "counterfactual_geometry_job": "additional-lift-center-clearance-v1-700a59388f33b29472d59243-basem100"
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-8d2d7f3d29228ccaf19c5ae9-source-model",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8d2d7f3d29228ccaf19c5ae9",
+      "parent_workspace": "workspaces/additional-independent-v1-8d2d7f3d29228ccaf19c5ae9",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-8d2d7f3d29228ccaf19c5ae9-source-model",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8d2d7f3d29228ccaf19c5ae9.h5",
+      "source_episode_id": "8d2d7f3d29228ccaf19c5ae9",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_16",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-8d2d7f3d29228ccaf19c5ae9/runs/dynamics/additional-independent-v1-8d2d7f3d29228ccaf19c5ae9-aligned/8d2d7f3d29228ccaf19c5ae9",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "matched_original_model_validation_after_alternative_model_geometry_pass",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-8d2d7f3d29228ccaf19c5ae9",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      },
+      "counterfactual_geometry_job": "additional-lift-center-clearance-v1-8d2d7f3d29228ccaf19c5ae9-base000"
+    },
+    {
+      "id": "additional-box-center-base-bank-v1-247ce7204e1b7227dfa0ec2d-source-model",
+      "operation": "feasible_experiment",
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-247ce7204e1b7227dfa0ec2d",
+      "parent_workspace": "workspaces/additional-independent-v1-247ce7204e1b7227dfa0ec2d",
+      "workspace": "workspaces/additional-box-center-base-bank-v1-247ce7204e1b7227dfa0ec2d-source-model",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/247ce7204e1b7227dfa0ec2d.h5",
+      "source_episode_id": "247ce7204e1b7227dfa0ec2d",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_23",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/additional-independent-v1-247ce7204e1b7227dfa0ec2d/runs/dynamics/additional-independent-v1-247ce7204e1b7227dfa0ec2d-aligned/247ce7204e1b7227dfa0ec2d",
+      "variant": "contact005_velocity",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "runtime_source_sha256": "ba890c565dc55336c668710e7a42c8f6ffeecc916c480d82394b3183e8ffe780",
+      "evaluation_split": "matched_original_model_validation_after_alternative_model_geometry_pass",
+      "task": "Lift",
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "base_offset_xyyaw": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "counterfactual_parent_task": "additional-box-policy-v1-247ce7204e1b7227dfa0ec2d",
+      "counterfactual_parent_runtime_source_sha256": "06930d7049d00981d9f130c655b32aa58854b021088febf6dc3aedef4b718b73",
+      "comparison_role": "rotation_only_failure",
+      "prior_base_and_seed_verification": {
+        "prior_explicit_base_correction": null,
+        "prior_explicit_right_arm_seed": null,
+        "prior_robot_initialization_admission": null,
+        "prior_trajectory_seed": "existing kinematic retarget; no approach, release, base or timing replanning",
+        "retained_base": "complete original frozen reference plus exactly zero offset",
+        "fresh_ik_seed": "original frozen first right-arm configuration; no alternate branch seed supplied"
+      },
+      "geometry_cause": {
+        "evidence": "docs/lift-axis-base-gradient-v1.json",
+        "source_grasp_center": "Three failed sources grasp4.36\u20139.21mm below the unchanged box center, with palm/table interference; use the actual boxcenter. Fourthcenterisalreadywithin1mm andchecksforearmclearance.",
+        "base_rule": "Comparezerooffsetwith100mm backwardshift; single-worst-framefinite-differencesshowbackwardmotionimprovesforearm/right-barclearance. FullpathIK/collisionandphysicsremainmandatory.",
+        "reference_source_object_preserved": true
+      },
+      "counterfactual_geometry_job": "additional-lift-center-clearance-v1-247ce7204e1b7227dfa0ec2d-base000"
+    }
+  ]
+}

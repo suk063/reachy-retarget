@@ -1,0 +1,187 @@
+{
+  "label": "intent-approach-fresh-source-pilot-v1",
+  "jobs": [
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_correct_phase_aperture_admission",
+      "id": "additional-stack-intent-approach-v1-9295ddc7f5668cb10cae9f98-source",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-intent-approach-v1-9295ddc7f5668cb10cae9f98-source",
+      "adaptive_parent_task": "additional-box-policy-v1-9295ddc7f5668cb10cae9f98",
+      "grasp_region": {
+        "face_axis": 0
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5,
+        "gripper_admission": "intent_envelope"
+      },
+      "counterfactual_parent_task": "additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-forecast-source",
+      "planning_fixtures": {
+        "fixture_ids": [
+          "cubeB"
+        ]
+      },
+      "causal_comparison": {
+        "group": "9295ddc7f5668cb10cae9f98",
+        "fixture_assumption": "forecast",
+        "physical_model": "source",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-forecast-source",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts.",
+        "aperture_correction": "Only the approach admission changes: use the already-declared command-to-contact gripper envelope on closed rows and five sampled angles over opening/closing transitions; inactive left hand stays open. Robot targets, source objects, model, base, full clock and physical gates unchanged."
+      },
+      "runtime_source_sha256": "a704f4b41fbb9671f746eb18032b709045d2782c7e289307d9130af053472004"
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_correct_phase_aperture_admission",
+      "id": "additional-stack-intent-approach-v1-9295ddc7f5668cb10cae9f98-contact4ms",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-intent-approach-v1-9295ddc7f5668cb10cae9f98-contact4ms",
+      "adaptive_parent_task": "additional-box-policy-v1-9295ddc7f5668cb10cae9f98",
+      "grasp_region": {
+        "face_axis": 0
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5,
+        "gripper_admission": "intent_envelope"
+      },
+      "counterfactual_parent_task": "additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-forecast-contact4ms",
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "planning_fixtures": {
+        "fixture_ids": [
+          "cubeB"
+        ]
+      },
+      "causal_comparison": {
+        "group": "9295ddc7f5668cb10cae9f98",
+        "fixture_assumption": "forecast",
+        "physical_model": "contact4ms",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-forecast-contact4ms",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts.",
+        "aperture_correction": "Only the approach admission changes: use the already-declared command-to-contact gripper envelope on closed rows and five sampled angles over opening/closing transitions; inactive left hand stays open. Robot targets, source objects, model, base, full clock and physical gates unchanged."
+      },
+      "runtime_source_sha256": "a704f4b41fbb9671f746eb18032b709045d2782c7e289307d9130af053472004"
+    },
+    {
+      "id": "can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "operation": "legacy_pipeline",
+      "dataset": "robomimic",
+      "parent_workspace": "imports/can-heldout-cohort-v2",
+      "workspace": "workspaces/can-heldout-cohort-v2-baseline-f418d7840c743cd217dec0df",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/f418d7840c743cd217dec0df.h5",
+      "source_normalized_sha256": "c8e2c3c18555e4ed39854fda97f8a8e14ef297715012aff96e48d4c05e55bd1a",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "frozen_policy_heldout_v2",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/can/ph/demo_25",
+      "source_episode_id": "f418d7840c743cd217dec0df",
+      "runtime_source_sha256": "a704f4b41fbb9671f746eb18032b709045d2782c7e289307d9130af053472004",
+      "scope": "Full-source diagnostic baseline and fresh frozen numeric parent; not the held-out corrected-policy outcome"
+    }
+  ],
+  "scope": "Two Stack intent-envelope trials plus one untouched-source baseline pipeline integration smoke. Full corrected-policy held-out evaluation remains separate."
+}

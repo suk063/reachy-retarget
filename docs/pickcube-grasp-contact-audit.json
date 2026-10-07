@@ -1,0 +1,1399 @@
+{
+  "attempt": "/mnt/reachy-retarget/workspaces/feasible-timing-v1-8a7847a26e8fbb00783e4114-base30-preforce2_velocity/runs/dynamics/feasible-timing-v1-8a7847a26e8fbb00783e4114-base30-preforce2_velocity/8a7847a26e8fbb00783e4114",
+  "report_sha256": "ceae3724575c25b6cd55ef3ac260bdd6f9b5e3632222c57da3c376c6c1c0bd20",
+  "replay_sha256": "0ad8217dc81be22a8c79e683a509743d3505f68ba60dd54ac56071937c2f9135",
+  "scene_sha256": "60b1b94c0057e6e029bcbff530090ea283f33e4c06142f7e53d5da2322410242",
+  "source_hdf5_sha256": "5483e8d57a6c09f80b29b3b24651a61f86db4c9deb08b00cb3bb5e1ad59c08c6",
+  "source_sequence": "demos/PickCube-v1/teleop/traj_0",
+  "runtime_mujoco_version": "3.15.0",
+  "recorded_runtime": {
+    "mujoco": "3.15.0",
+    "numpy": "2.5.3",
+    "pin": "4.1.0"
+  },
+  "source_window": 0.0,
+  "candidate": {
+    "depth": 0.025,
+    "height": 0.0,
+    "tilt": 15.0,
+    "yaw": 0.0,
+    "time_scale": 3.0,
+    "close_duration": 0.5,
+    "close_hold": 0,
+    "grasp_force": 2.0,
+    "force_feedback": true,
+    "placement_x": 0.5,
+    "placement_y": -0.1,
+    "geometry_center": true,
+    "controller": "joint_reference",
+    "object_relative": false,
+    "mobile_base": false,
+    "align_object_axes": true,
+    "scene_heading": 0.0,
+    "base_x_max": 100.0,
+    "base_y_min": -100.0,
+    "balanced_force": true,
+    "calibrate_attachment": false,
+    "grasp_local_x": 0.0,
+    "grasp_local_y": 0.0,
+    "soft_force_feedback": true,
+    "controlled_place": false,
+    "source_start_s": 0.0,
+    "place_clearance": 0.04,
+    "automatic_grasp": false,
+    "grasp_region_rank": 0,
+    "force_scale": 1.0,
+    "contact_release": false,
+    "integral_compensation": true,
+    "gripper_closed_target": -0.06,
+    "force_preclose_target": 0.9782705861641195,
+    "arm_velocity_feedforward": 1.0
+  },
+  "plan_summary": {
+    "alignment_variant": "pad_translation",
+    "source_time_scale": 1.0,
+    "velocity_dilation": 1.0,
+    "trajectory_seed": "Existing hand/object targets and source clock; right-arm IK at an explicit collision-checked stationary base",
+    "frozen_motion_sha256": "9c45c1264392a919e178425a5aca8ef8b0c268dcc53a4d09c19362f8e7f4fa41"
+  },
+  "initial": {
+    "qvel_max_abs": 0.0,
+    "joint_velocity": {},
+    "actuator_position_errors": {
+      "base_x": 0.0,
+      "base_y": 0.0,
+      "base_yaw": 0.0,
+      "neck_roll": 0.0,
+      "neck_pitch": 0.0,
+      "neck_yaw": 0.0,
+      "r_shoulder_pitch": 0.0,
+      "r_shoulder_roll": 0.0,
+      "r_elbow_yaw": 0.0,
+      "r_elbow_pitch": 0.0,
+      "r_wrist_roll": 0.0,
+      "r_wrist_pitch": 0.0,
+      "r_wrist_yaw": 0.0,
+      "r_hand_finger": 0.0,
+      "l_shoulder_pitch": 0.0,
+      "l_shoulder_roll": 0.0,
+      "l_elbow_yaw": 0.0,
+      "l_elbow_pitch": 0.0,
+      "l_wrist_roll": 0.0,
+      "l_wrist_pitch": 0.0,
+      "l_wrist_yaw": 0.0,
+      "l_hand_finger": 0.0
+    },
+    "first_control_position_errors": {
+      "base_x": 0.0,
+      "base_y": 0.0,
+      "base_yaw": 0.0,
+      "neck_roll": 0.0,
+      "neck_pitch": 0.0,
+      "neck_yaw": 0.0,
+      "r_shoulder_pitch": 0.0,
+      "r_shoulder_roll": 0.0,
+      "r_elbow_yaw": 0.0,
+      "r_elbow_pitch": 0.0,
+      "r_wrist_roll": 0.0,
+      "r_wrist_pitch": 0.0,
+      "r_wrist_yaw": 0.0,
+      "r_hand_finger": 0.0,
+      "l_shoulder_pitch": 0.0,
+      "l_shoulder_roll": 0.0,
+      "l_elbow_yaw": 0.0,
+      "l_elbow_pitch": 0.0,
+      "l_wrist_roll": 0.0,
+      "l_wrist_pitch": 0.0,
+      "l_wrist_yaw": 0.0,
+      "l_hand_finger": 0.0
+    }
+  },
+  "initial_contacts": [
+    {
+      "category": "object_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "cube_collision",
+        "ms_table_3_collision_0"
+      ],
+      "bodies": [
+        "cube_main",
+        "table-workspace"
+      ],
+      "depth_m": 2.986324484366421e-07,
+      "normal_force_n": 0.15272942850386928,
+      "position_world_m": [
+        0.6278716346548718,
+        -0.0875994417086699,
+        0.8000001488692241
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    },
+    {
+      "category": "object_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "cube_collision",
+        "ms_table_3_collision_0"
+      ],
+      "bodies": [
+        "cube_main",
+        "table-workspace"
+      ],
+      "depth_m": 2.986324484366421e-07,
+      "normal_force_n": 0.15272942850386909,
+      "position_world_m": [
+        0.66529624581143,
+        -0.07347858905097181,
+        0.8000001488692241
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    },
+    {
+      "category": "object_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "cube_collision",
+        "ms_table_3_collision_0"
+      ],
+      "bodies": [
+        "cube_main",
+        "table-workspace"
+      ],
+      "depth_m": 2.986324484366421e-07,
+      "normal_force_n": 0.15272942850386956,
+      "position_world_m": [
+        0.6794170984691281,
+        -0.11090320020753003,
+        0.8000001488692241
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    },
+    {
+      "category": "object_environment",
+      "time_s": 0.0,
+      "geoms": [
+        "cube_collision",
+        "ms_table_3_collision_0"
+      ],
+      "bodies": [
+        "cube_main",
+        "table-workspace"
+      ],
+      "depth_m": 2.986324484366421e-07,
+      "normal_force_n": 0.15272942850386972,
+      "position_world_m": [
+        0.64199248731257,
+        -0.12502405286522816,
+        0.8000001488692241
+      ],
+      "gripper_target_rad": 2.0,
+      "gripper_position_rad": 2.0
+    }
+  ],
+  "contacts": {
+    "object_environment": {
+      "first": {
+        "time_s": 0.002,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "bodies": [
+          "cube_main",
+          "table-workspace"
+        ],
+        "depth_m": 2.986324484366421e-07,
+        "normal_force_n": 0.15272942850386928,
+        "position_world_m": [
+          0.6278716346548718,
+          -0.0875994417086699,
+          0.8000001488692241
+        ],
+        "gripper_target_rad": 2.0,
+        "gripper_position_rad": 2.0
+      },
+      "maximum_depth": {
+        "time_s": 3.0079999999998903,
+        "geoms": [
+          "cube_collision",
+          "ms_table_3_collision_0"
+        ],
+        "bodies": [
+          "cube_main",
+          "table-workspace"
+        ],
+        "depth_m": 0.00030166234532640084,
+        "normal_force_n": 0.0,
+        "position_world_m": [
+          0.6413295660784445,
+          -0.11589557942473144,
+          0.7998494670127851
+        ],
+        "gripper_target_rad": 0.8282705861641194,
+        "gripper_position_rad": 1.2862855778801237
+      },
+      "contact_samples": 6840
+    },
+    "hand_object": {
+      "first": {
+        "time_s": 2.9439999999998974,
+        "geoms": [
+          "cube_collision",
+          "r_hand_distal_link_collision_0"
+        ],
+        "bodies": [
+          "cube_main",
+          "r_hand_distal_link"
+        ],
+        "depth_m": 0.00020475141479410922,
+        "normal_force_n": 0.8741603931033293,
+        "position_world_m": [
+          0.641969567446026,
+          -0.12492427617066365,
+          0.8169832868128857
+        ],
+        "gripper_target_rad": 0.8882705861641195,
+        "gripper_position_rad": 1.712686611690933
+      },
+      "maximum_depth": {
+        "time_s": 6.537999999999502,
+        "geoms": [
+          "cube_collision",
+          "r_hand_distal_link_collision_0"
+        ],
+        "bodies": [
+          "cube_main",
+          "r_hand_distal_link"
+        ],
+        "depth_m": 0.0009415934906030293,
+        "normal_force_n": 1.5738119671033817,
+        "position_world_m": [
+          0.5993666978557766,
+          -0.13451107078876173,
+          1.1076338224856421
+        ],
+        "gripper_target_rad": 0.9025441321895534,
+        "gripper_position_rad": 0.9319689478727146
+      },
+      "contact_samples": 19311
+    }
+  },
+  "finger_force_peaks": {
+    "r_hand_distal_link": {
+      "normal_force_sum_n": 22.53627114875053,
+      "time_s": 3.1539999999998742
+    },
+    "r_hand_distal_mimic_link": {
+      "normal_force_sum_n": 22.35366969046296,
+      "time_s": 3.1539999999998742
+    }
+  },
+  "peak_gripper_actuator_force": 2.0,
+  "peak_scalar_joint_speed": {},
+  "recorded_contact_metrics": {
+    "first_full_bilateral_interval_end_s": 3.129999999999877,
+    "full_bilateral_intervals": 540,
+    "intervals": 855,
+    "first_recorded_drift_anchor_interval_end_s": 3.8499999999997976,
+    "grasp_drift_available": true,
+    "issued_gripper_range_rad": [
+      0.7732705861641194,
+      2.0
+    ],
+    "first_requested_closure_plan_time_s": 2.89
+  },
+  "replay": {
+    "max_qpos_error": 0.0,
+    "max_qvel_error": 0.0,
+    "exact_within_1e7": true
+  },
+  "reported_gates": {
+    "task_stable_final_1s": true,
+    "bilateral_lifted_grasp": true,
+    "carry_contact_95pct": true,
+    "grasp_translation_3mm": false,
+    "grasp_rotation_3deg": false,
+    "hand_object_penetration_1mm": true,
+    "robot_environment_penetration_2mm": true,
+    "object_environment_penetration_2mm": true,
+    "no_nonhand_object_robot_contact": true,
+    "robot_self_penetration_2mm": true,
+    "actual_arm_speed_1rad_s": true,
+    "actual_base_speed_limits": true,
+    "joint_margin_25mrad": true,
+    "self_clearance_9mm": true,
+    "rollout_complete": true
+  },
+  "reported_failures": [
+    "grasp_translation_3mm",
+    "grasp_rotation_3deg"
+  ],
+  "reported_physics_validated": false,
+  "semantics": "Independent actuator-only replay diagnosis; original gates/results unchanged; zero drift without an acquired anchor is unavailable, not success",
+  "contact_geometry_samples": {
+    "384": {
+      "time_s": 3.8499999999997976,
+      "drift_m_rad": [
+        7.757919228897728e-18,
+        1.0326171354792746e-18
+      ],
+      "contacts": [
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.00818325079376253,
+            -0.019827718196772624,
+            0.019366684485164196
+          ],
+          "normal_object": [
+            -0.00596219947563634,
+            -0.9999819419326733,
+            0.0007536484390375049
+          ],
+          "normal_force_n": 1.977983206695554
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.008277032034920086,
+            -0.01983334467182264,
+            0.005177740598024926
+          ],
+          "normal_object": [
+            -0.005962199475501777,
+            -0.9999819419326744,
+            0.0007536484387658577
+          ],
+          "normal_force_n": 1.8760171743268157
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010403109226170203,
+            -0.019838227192362622,
+            0.009040448636705917
+          ],
+          "normal_object": [
+            -0.005962199475735696,
+            -0.9999819419326731,
+            0.0007536484388576343
+          ],
+          "normal_force_n": 1.8102577688515695
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.007526648394164337,
+            0.019824603445721983,
+            0.004393439609566037
+          ],
+          "normal_object": [
+            0.0026524697772416675,
+            0.9999963210347745,
+            -0.0005677332070460204
+          ],
+          "normal_force_n": 1.9201232305770513
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.00920890338814118,
+            0.019826371898628046,
+            0.018482617786128894
+          ],
+          "normal_object": [
+            0.00265246977701985,
+            0.9999963210347753,
+            -0.0005677332069960074
+          ],
+          "normal_force_n": 1.87607323832791
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.010889008769891113,
+            0.01982298643187204,
+            0.014406104138358808
+          ],
+          "normal_object": [
+            0.0026524697772676883,
+            0.9999963210347745,
+            -0.0005677332070997585
+          ],
+          "normal_force_n": 1.9316300979210383
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.008188930339606179,
+            -0.019807345245270152,
+            0.019263925566465685
+          ],
+          "normal_object": [
+            -0.00546738725607551,
+            -0.9999834831568024,
+            0.0017723120998237756
+          ],
+          "normal_force_n": 2.106799302531942
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.008258685861588216,
+            -0.019820109951996186,
+            0.005074843224233256
+          ],
+          "normal_object": [
+            -0.005467387255945709,
+            -0.9999834831568029,
+            0.0017723120998950198
+          ],
+          "normal_force_n": 1.885256815730618
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010391300577743129,
+            -0.01982252008619478,
+            0.008933945721941857
+          ],
+          "normal_object": [
+            -0.005467387255830777,
+            -0.9999834831568037,
+            0.0017723120998243448
+          ],
+          "normal_force_n": 1.857488866372658
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.007486664035764482,
+            0.019837321762602885,
+            0.00425186096918928
+          ],
+          "normal_object": [
+            0.002158823020669583,
+            0.9999964201990663,
+            -0.0015808454116402338
+          ],
+          "normal_force_n": 1.9449775240388176
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.009192797445731662,
+            0.01984661437687902,
+            0.01833816752344794
+          ],
+          "normal_object": [
+            0.0021588230205707745,
+            0.9999964201990664,
+            -0.0015808454117348814
+          ],
+          "normal_force_n": 1.7948831653204689
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.010865990817332768,
+            0.019841583825604817,
+            0.014258811991624444
+          ],
+          "normal_object": [
+            0.0021588230206293613,
+            0.9999964201990662,
+            -0.0015808454117912992
+          ],
+          "normal_force_n": 1.8657313407990972
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.008191630279822233,
+            -0.01979420881149202,
+            0.019184694566131578
+          ],
+          "normal_object": [
+            -0.005066572550584251,
+            -0.9999839279720014,
+            0.002544334937669053
+          ],
+          "normal_force_n": 2.1403595537687594
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.008241802323237466,
+            -0.019812387262565578,
+            0.004995529463599122
+          ],
+          "normal_object": [
+            -0.005066572550388635,
+            -0.999983927972003,
+            0.0025443349375209316
+          ],
+          "normal_force_n": 1.8180445061383377
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010379741243771156,
+            -0.019812897552740644,
+            0.00885168490486743
+          ],
+          "normal_object": [
+            -0.005066572550344675,
+            -0.9999839279720026,
+            0.002544334937693081
+          ],
+          "normal_force_n": 1.813162814114917
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.0074530858771350685,
+            0.01984456143219432,
+            0.0041432832392169884
+          ],
+          "normal_object": [
+            0.0017607307868168704,
+            0.9999956922975904,
+            -0.0023484491387870724
+          ],
+          "normal_force_n": 1.9821653761890083
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.009178677566359742,
+            0.019859580114028896,
+            0.01822721936774408
+          ],
+          "normal_object": [
+            0.001760730787024988,
+            0.9999956922975902,
+            -0.0023484491387146
+          ],
+          "normal_force_n": 1.7624982986541222
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.010846233805855027,
+            0.019853319185293844,
+            0.014145556250645156
+          ],
+          "normal_object": [
+            0.0017607307869417527,
+            0.9999956922975904,
+            -0.0023484491386533256
+          ],
+          "normal_force_n": 1.8506281924793937
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.008192634046109428,
+            -0.019788208573661942,
+            0.019135757028359193
+          ],
+          "normal_object": [
+            -0.0048012632803370835,
+            -0.9999837418188514,
+            0.0030763564292050102
+          ],
+          "normal_force_n": 2.159184489655286
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.008228641616583059,
+            -0.01981012096614581,
+            0.004946548911280393
+          ],
+          "normal_object": [
+            -0.004801263280501081,
+            -0.9999837418188509,
+            0.0030763564292128095
+          ],
+          "normal_force_n": 1.76954931942461
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010370428909996501,
+            -0.01980933437332256,
+            0.008800568216452252
+          ],
+          "normal_object": [
+            -0.0048012632804201386,
+            -0.9999837418188513,
+            0.0030763564291764983
+          ],
+          "normal_force_n": 1.7845166703533852
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.007428955430913592,
+            0.019846515937505544,
+            0.004074174933713862
+          ],
+          "normal_object": [
+            0.0014970748060439177,
+            0.9999947400599162,
+            -0.002877259029718407
+          ],
+          "normal_force_n": 2.0222139205230896
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.009168618279475446,
+            0.01986547297471472,
+            0.01815637990029613
+          ],
+          "normal_object": [
+            0.0014970748060219804,
+            0.9999947400599171,
+            -0.0028772590294060298
+          ],
+          "normal_force_n": 1.7531391761617237
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.010832095476711387,
+            0.019858353313456298,
+            0.014073052675193739
+          ],
+          "normal_object": [
+            0.001497074806009014,
+            0.9999947400599166,
+            -0.002877259029565377
+          ],
+          "normal_force_n": 1.8505236625278196
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.008193171855133312,
+            -0.01978650317426695,
+            0.019107267748210897
+          ],
+          "normal_object": [
+            -0.004629263854271402,
+            -0.9999833499330636,
+            0.0034452536646355793
+          ],
+          "normal_force_n": 2.173160166961016
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.008218659670415148,
+            -0.01981100539154823,
+            0.004918036835256754
+          ],
+          "normal_object": [
+            -0.00462926385432761,
+            -0.9999833499330628,
+            0.0034452536647744665
+          ],
+          "normal_force_n": 1.7407901150683907
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.01036330370882871,
+            -0.019809333071541937,
+            0.008770467180259475
+          ],
+          "normal_object": [
+            -0.004629263854264377,
+            -0.9999833499330633,
+            0.003445253664764569
+          ],
+          "normal_force_n": 1.77001953927771
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.0074117822188886585,
+            0.019845465019957927,
+            0.004031756618591402
+          ],
+          "normal_object": [
+            0.0013252707529493517,
+            0.9999938609833986,
+            -0.0032437097504052614
+          ],
+          "normal_force_n": 2.0532340034575256
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.009161893742172631,
+            0.019867142724658764,
+            0.018112666859086506
+          ],
+          "normal_object": [
+            0.001325270753185812,
+            0.999993860983399,
+            -0.0032437097501821642
+          ],
+          "normal_force_n": 1.7482262000544102
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.01082234060699124,
+            0.01985941778832849,
+            0.014028106439436545
+          ],
+          "normal_object": [
+            0.0013252707529918947,
+            0.9999938609833985,
+            -0.0032437097503756687
+          ],
+          "normal_force_n": 1.852030101731156
+        }
+      ]
+    },
+    "854": {
+      "time_s": 8.549999999999525,
+      "drift_m_rad": [
+        0.008548980568917761,
+        0.38077540718173497
+      ],
+      "contacts": [
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.009477222497987799,
+            -0.019835929153378964,
+            0.011996416000824548
+          ],
+          "normal_object": [
+            0.004526010547528175,
+            -0.9999870475121403,
+            0.0023280971791137897
+          ],
+          "normal_force_n": 1.801499357017673
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010883948856594107,
+            -0.019823428514920912,
+            0.020000411070251845
+          ],
+          "normal_object": [
+            0.00452601054741968,
+            -0.9999870475121411,
+            0.002328097179008018
+          ],
+          "normal_force_n": 1.9974203278238454
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010349909007903758,
+            -0.019824637078123486,
+            0.020000408256635738
+          ],
+          "normal_object": [
+            0.004526010547283316,
+            -0.9999870475121422,
+            0.0023280971787932397
+          ],
+          "normal_force_n": 1.9780405776027843
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.006054083028100249,
+            -0.01984691082165256,
+            0.009217417299986156
+          ],
+          "normal_object": [
+            0.0045260105474960715,
+            -0.9999870475121402,
+            0.0023280971792330905
+          ],
+          "normal_force_n": 1.6411604672603652
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.011555372903983476,
+            0.01983956315089157,
+            0.016810955291567245
+          ],
+          "normal_object": [
+            -0.007822043460324515,
+            0.9999691117231673,
+            -0.0007689185157821161
+          ],
+          "normal_force_n": 1.734131998584277
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.004672922423775242,
+            0.019809564545076895,
+            0.008799039566039005
+          ],
+          "normal_object": [
+            -0.007822043460328172,
+            0.9999691117231676,
+            -0.000768918515426644
+          ],
+          "normal_force_n": 2.2122030087584155
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.010858607802840417,
+            0.019838064098536664,
+            0.019999875488332874
+          ],
+          "normal_object": [
+            -0.00782204346044274,
+            0.9999691117231664,
+            -0.0007689185157753376
+          ],
+          "normal_force_n": 1.7541091050846431
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.011538798446439126,
+            0.019840724413318387,
+            0.019999877533835163
+          ],
+          "normal_object": [
+            -0.007822043460238915,
+            0.9999691117231684,
+            -0.0007689185153112477
+          ],
+          "normal_force_n": 1.715629564634587
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.009477431742825884,
+            -0.01983590703905221,
+            0.011997525657343579
+          ],
+          "normal_object": [
+            0.004529292839731984,
+            -0.9999870279139207,
+            0.0023301309524742927
+          ],
+          "normal_force_n": 1.800518523380357
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010884543915649348,
+            -0.019823396371003877,
+            0.020000411504244243
+          ],
+          "normal_object": [
+            0.004529292839853154,
+            -0.9999870279139196,
+            0.0023301309526243866
+          ],
+          "normal_force_n": 1.9966362831902542
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.01035026417493596,
+            -0.01982460635397029,
+            0.02000040868486209
+          ],
+          "normal_object": [
+            0.004529292839720464,
+            -0.9999870279139205,
+            0.002330130952586429
+          ],
+          "normal_force_n": 1.9772426403350964
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.006054096656736742,
+            -0.01984689731370151,
+            0.009218767931685806
+          ],
+          "normal_object": [
+            0.004529292839853283,
+            -0.9999870279139202,
+            0.002330130952426506
+          ],
+          "normal_force_n": 1.6400991801585323
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.011555815420655726,
+            0.01983956952143487,
+            0.016811816874949287
+          ],
+          "normal_object": [
+            -0.007824621658292856,
+            0.9999690899486479,
+            -0.0007710014121069138
+          ],
+          "normal_force_n": 1.7332205189405991
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.004672800924294691,
+            0.019809551678401,
+            0.008800385688933886
+          ],
+          "normal_object": [
+            -0.007824621658416376,
+            0.999969089948647,
+            -0.0007710014121895375
+          ],
+          "normal_force_n": 2.21161125475883
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.010858771656321672,
+            0.019838071469483756,
+            0.01999987515673331
+          ],
+          "normal_object": [
+            -0.007824621658202099,
+            0.9999690899486486,
+            -0.000771001412084805
+          ],
+          "normal_force_n": 1.753212516729896
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.011539469886062172,
+            0.019840734647078997,
+            0.019999877209983568
+          ],
+          "normal_object": [
+            -0.007824621658108882,
+            0.9999690899486494,
+            -0.0007710014120361797
+          ],
+          "normal_force_n": 1.7146866574662922
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.009477701459702283,
+            -0.01983588293144404,
+            0.0119986784790345
+          ],
+          "normal_object": [
+            0.004534930748800637,
+            -0.9999869920604988,
+            0.002334547686351009
+          ],
+          "normal_force_n": 1.7998439889580868
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010885182660357935,
+            -0.019823351130647586,
+            0.020000412389844947
+          ],
+          "normal_object": [
+            0.004534930748407939,
+            -0.9999869920605013,
+            0.0023345476859777314
+          ],
+          "normal_force_n": 1.9963068662684496
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010350653391656554,
+            -0.019824563185613042,
+            0.020000409560281682
+          ],
+          "normal_object": [
+            0.0045349307484864225,
+            -0.9999869920605007,
+            0.002334547686116904
+          ],
+          "normal_force_n": 1.9768833454488022
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.006054173848359442,
+            -0.019846889153102235,
+            0.009220157954743674
+          ],
+          "normal_object": [
+            0.004534930748554122,
+            -0.9999869920605012,
+            0.0023345476857541737
+          ],
+          "normal_force_n": 1.6392283746624785
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.011556217060394858,
+            0.01983958108848785,
+            0.016812630759550834
+          ],
+          "normal_object": [
+            -0.00782951049780557,
+            0.9999690482089298,
+            -0.0007754930636930628
+          ],
+          "normal_force_n": 1.7325897300736386
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.00467264739933679,
+            0.019809526437428962,
+            0.008801676576276533
+          ],
+          "normal_object": [
+            -0.007829510497684872,
+            0.9999690482089308,
+            -0.0007754930635872752
+          ],
+          "normal_force_n": 2.2115800335165643
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.010858917532215191,
+            0.01983808717544252,
+            0.019999874441614024
+          ],
+          "normal_object": [
+            -0.00782951049778094,
+            0.9999690482089304,
+            -0.0007754930633673702
+          ],
+          "normal_force_n": 1.7525536009179234
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.011540096579770662,
+            0.019840753899459797,
+            0.01999987650957584
+          ],
+          "normal_object": [
+            -0.007829510497876497,
+            0.9999690482089294,
+            -0.0007754930634537029
+          ],
+          "normal_force_n": 1.7139734832267395
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.00947801128185192,
+            -0.01983586026787594,
+            0.011999859088215863
+          ],
+          "normal_object": [
+            0.004542066468001014,
+            -0.9999869456674668,
+            0.002340539863099288
+          ],
+          "normal_force_n": 1.799404688878188
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010885849741027055,
+            -0.019823300039436557,
+            0.02000041356790231
+          ],
+          "normal_object": [
+            0.004542066467900711,
+            -0.9999869456674673,
+            0.00234053986309246
+          ],
+          "normal_force_n": 1.9963129555640098
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010351064725098575,
+            -0.019824514582454704,
+            0.020000410725253055
+          ],
+          "normal_object": [
+            0.004542066467703691,
+            -0.9999869456674686,
+            0.0023405398629617333
+          ],
+          "normal_force_n": 1.97685010830431
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.006054293445550373,
+            -0.019846887187370026,
+            0.009221572964200652
+          ],
+          "normal_object": [
+            0.004542066467687588,
+            -0.9999869456674687,
+            0.0023405398629449915
+          ],
+          "normal_force_n": 1.6385212594652445
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.01155659194316329,
+            0.019839597056971237,
+            0.016813413382593317
+          ],
+          "normal_object": [
+            -0.007835983123449639,
+            0.9999689928145354,
+            -0.0007815228545411243
+          ],
+          "normal_force_n": 1.7321833995309286
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.004672473704226559,
+            0.019809494008057437,
+            0.00880293060830211
+          ],
+          "normal_object": [
+            -0.007835983123431093,
+            0.9999689928145356,
+            -0.0007815228547200087
+          ],
+          "normal_force_n": 2.2119495774054885
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.010859051353199587,
+            0.019838109245883615,
+            0.01999987348259856
+          ],
+          "normal_object": [
+            -0.007835983123319271,
+            0.9999689928145368,
+            -0.0007815228542563713
+          ],
+          "normal_force_n": 1.7520857290650114
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.011540693641634427,
+            0.019840779989664072,
+            0.0199998755697815
+          ],
+          "normal_object": [
+            -0.007835983123221564,
+            0.9999689928145372,
+            -0.0007815228545133343
+          ],
+          "normal_force_n": 1.7134477305823645
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.009477031624975367,
+            -0.019835840517533593,
+            0.012001289091538792
+          ],
+          "normal_object": [
+            -0.0034665625183695997,
+            -0.9999869272686578,
+            0.003758754593426648
+          ],
+          "normal_force_n": 1.767328740518451
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.01219419232118703,
+            -0.01982726075617462,
+            0.019072266419549223
+          ],
+          "normal_object": [
+            -0.0034665625184788136,
+            -0.9999869272686579,
+            0.003758754593313843
+          ],
+          "normal_force_n": 1.8568061202291017
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.011947239238146619,
+            -0.019825087949518174,
+            0.02000065744287884
+          ],
+          "normal_object": [
+            -0.0034665625184828247,
+            -0.999986927268657,
+            0.00375875459358176
+          ],
+          "normal_force_n": 1.887825029674785
+        },
+        {
+          "body": "r_hand_distal_link",
+          "position_object_m": [
+            0.010885118101752926,
+            -0.019823247110181266,
+            0.020000664362051404
+          ],
+          "normal_object": [
+            -0.003466562518524708,
+            -0.9999869272686579,
+            0.003758754593327917
+          ],
+          "normal_force_n": 1.9213475181477588
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.011556949354096268,
+            0.019839616335327145,
+            0.01681417572867663
+          ],
+          "normal_object": [
+            -0.007843539224391294,
+            0.999968928078634,
+            -0.0007885237488981736
+          ],
+          "normal_force_n": 1.7511328722109787
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.004672287445520169,
+            0.01980945728598242,
+            0.008804160210018615
+          ],
+          "normal_object": [
+            -0.007843539224013958,
+            0.9999689280786372,
+            -0.000788523748450044
+          ],
+          "normal_force_n": 2.1602793616065443
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.010859176981310826,
+            0.019838135833056075,
+            0.01999987237022617
+          ],
+          "normal_object": [
+            -0.007843539224147133,
+            0.9999689280786364,
+            -0.0007885237483428209
+          ],
+          "normal_force_n": 1.7821401663547358
+        },
+        {
+          "body": "r_hand_distal_mimic_link",
+          "position_object_m": [
+            0.011541271085869168,
+            0.019840810924353042,
+            0.019999874479533556
+          ],
+          "normal_object": [
+            -0.007843539224336827,
+            0.9999689280786345,
+            -0.0007885237488319366
+          ],
+          "normal_force_n": 1.74646886081925
+        }
+      ]
+    }
+  },
+  "original_pad_alignment": {
+    "source_anchor_frame": 59,
+    "retarget_anchor_frame": 295,
+    "source_grasp_point_object_m": [
+      -0.00045073383461025074,
+      -0.014754596490334879,
+      0.010554782204052635
+    ],
+    "section": {
+      "width_m": 0.040931211842185275,
+      "center_object": [
+        0.00274992679672102,
+        1.734723475976807e-18,
+        0.01065433672961054
+      ],
+      "collision_regions": [
+        "cube_collision"
+      ],
+      "line_bounds_m": [
+        -0.0053675180562961404,
+        0.03556369378588913
+      ]
+    },
+    "inferred_contact_angle_rad": 0.9582705861641195,
+    "pad": {
+      "points_tcp": [
+        [
+          -0.010191952520149724,
+          -0.02046560552085793,
+          -0.04795890259288577
+        ],
+        [
+          -0.010200047479850325,
+          0.020465605520857955,
+          -0.04795890259288593
+        ]
+      ],
+      "midpoint_tcp": [
+        -0.010196000000000024,
+        1.214306433183765e-17,
+        -0.04795890259288585
+      ],
+      "gap_m": 0.04093121184218539,
+      "area_m2": [
+        0.0007191648182220733,
+        0.0007191648182220709
+      ],
+      "distal_reach_m": 0.07468658297675158
+    },
+    "translation_object_m": [
+      -0.04349192883038222,
+      0.02479637776868849,
+      0.01096836970641557
+    ],
+    "translation_norm_m": 0.05125147176278117,
+    "alignment_ready_time_s": 0.71,
+    "precontact_envelope_m": 0.1061909697849335,
+    "max_ik_position_error_m": 0.000999984118036751,
+    "max_ik_rotation_error_rad": 0.00993533887169649,
+    "pad_definition": "area-weighted inward distal collision faces, proxy checked against source visual insert",
+    "gripper_policy": "source commands unchanged; inferred aperture is calibration only"
+  }
+}

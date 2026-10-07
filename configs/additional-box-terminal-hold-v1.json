@@ -1,0 +1,117 @@
+{
+  "label": "additional-box-terminal-hold-v1",
+  "jobs": [
+    {
+      "contact_profile": "global-contact-4ms",
+      "dataset": "robomimic",
+      "evaluation_split": "adaptive_terminal_hold_after_full_physics_failure",
+      "id": "additional-box-terminal-hold-v1-eb3acf60aa9a88472de18fc5",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-eb3acf60aa9a88472de18fc5/runs/dynamics/additional-independent-v1-eb3acf60aa9a88472de18fc5-aligned/eb3acf60aa9a88472de18fc5",
+      "parent_task": "additional-independent-v1-eb3acf60aa9a88472de18fc5",
+      "parent_workspace": "workspaces/additional-independent-v1-eb3acf60aa9a88472de18fc5",
+      "physics_timestep_s": 0.001,
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/eb3acf60aa9a88472de18fc5.h5",
+      "source_episode_id": "eb3acf60aa9a88472de18fc5",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_3",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "task": "Lift",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-box-terminal-hold-v1-eb3acf60aa9a88472de18fc5",
+      "terminal_hold": {
+        "duration_s": 0.2
+      },
+      "runtime_source_sha256": "15e1b9f6e63fad28f2d10e12f953aa542307d5dff658953db96ef121501f6000"
+    },
+    {
+      "contact_profile": "global-contact-4ms",
+      "dataset": "robomimic",
+      "evaluation_split": "adaptive_terminal_hold_after_full_physics_failure",
+      "id": "additional-box-terminal-hold-v1-c4ae3baf6a03958bc67de6ec",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-c4ae3baf6a03958bc67de6ec/runs/dynamics/additional-independent-v1-c4ae3baf6a03958bc67de6ec-aligned/c4ae3baf6a03958bc67de6ec",
+      "parent_task": "additional-independent-v1-c4ae3baf6a03958bc67de6ec",
+      "parent_workspace": "workspaces/additional-independent-v1-c4ae3baf6a03958bc67de6ec",
+      "physics_timestep_s": 0.001,
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/c4ae3baf6a03958bc67de6ec.h5",
+      "source_episode_id": "c4ae3baf6a03958bc67de6ec",
+      "source_group": "hf__robomimic__robomimic_datasets/v1.5/lift/ph/demo_21",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 21084088,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5",
+            "sha256": "2067777cb8b532e9263dd09fd6448c41cc31224bb27be4a3b734010ae13eb540",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/lift/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "task": "Lift",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-box-terminal-hold-v1-c4ae3baf6a03958bc67de6ec",
+      "adaptive_parent_task": "additional-box-policy-v1-c4ae3baf6a03958bc67de6ec",
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "grasp_attachment": {
+        "align_box_axis": true,
+        "center_box": true
+      },
+      "terminal_hold": {
+        "duration_s": 0.2
+      },
+      "runtime_source_sha256": "15e1b9f6e63fad28f2d10e12f953aa542307d5dff658953db96ef121501f6000"
+    }
+  ],
+  "status": "proposal_pending_v21_runtime_binding_and_root_enqueue",
+  "original_source_denominator": 28,
+  "prior_adaptive_union_passes": 14,
+  "independent_selected_sources": 2,
+  "attempt_count": 2,
+  "scope": "Two source trajectories miss only final one-second stability (0.95s/0.91s). Add a declared0.2s final robot hold with endpoint source-map saturation; do not alter gates, source objects or any existing target row. Existing original baseline plans replay complete recipes; no double-retiming.",
+  "diagnosis": [
+    "docs/additional-box-terminal-hold-diagnosis.json",
+    "docs/additional-box-centered-v1-audit.json"
+  ]
+}

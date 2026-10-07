@@ -1,0 +1,568 @@
+{
+  "label": "can-heldout-cohort-v2-physics",
+  "jobs": [
+    {
+      "id": "can-heldout-cohort-v2-physics-6de99732f28d23128d8ea274-primary",
+      "workspace": "workspaces/can-heldout-cohort-v2-physics-6de99732f28d23128d8ea274-primary",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-6de99732f28d23128d8ea274",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-6de99732f28d23128d8ea274-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-6de99732f28d23128d8ea274-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-6de99732f28d23128d8ea274-aligned/6de99732f28d23128d8ea274",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/6de99732f28d23128d8ea274.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "source_normalized_sha256": "6ef96f26861e413773984b16852aecd51a079500e027285998b7440c377efcf1",
+      "evaluation_split": "frozen_policy_heldout_v2",
+      "runtime_source_sha256": "4c7a76bbfee4180589dd0af116286c1dc2c866c9aaeb55d8725a1462829f04a9",
+      "variant": "contact_0035",
+      "source_prefix_velocity_feedforward": 1.0,
+      "frozen_physical_policy": "primary",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.2617993877991494
+      ],
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          1.0275,
+          -0.3225
+        ],
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0
+      },
+      "geometry_selection": {
+        "selection_rank": [
+          0.07853981633974481,
+          1,
+          11,
+          0.2550067500321178,
+          26
+        ],
+        "base_candidate": {
+          "id": 11,
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.2617993877991494
+          ],
+          "seed": "seed9",
+          "rank": [
+            0.07853981633974481,
+            1,
+            11
+          ]
+        },
+        "placement_parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "admitted_base_plan": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/artifact/workspaces/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/geometry-search/base-11/admitted-base",
+        "admitted_plan": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/artifact/workspaces/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/geometry-search/base-11/admitted-complete",
+        "full_geometric_admission_artifact": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/artifact/workspaces/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/geometry-search/base-11",
+        "source_episode": "6de99732f28d23128d8ea274",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "grasp_roll": null,
+        "cylindrical_grasp": {
+          "azimuth_policy": "source",
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level"
+        },
+        "geometry_clearance": null,
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "physics_validated": false
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "right_arm_seed": [
+        -0.07174286951069012,
+        -0.902745775685186,
+        0.18542113837357807,
+        -1.361150358195674,
+        -0.20982220218473058,
+        0.03744438167939799,
+        -1.1980294239033369
+      ]
+    },
+    {
+      "id": "can-heldout-cohort-v2-physics-6de99732f28d23128d8ea274-feedforward_ablation",
+      "workspace": "workspaces/can-heldout-cohort-v2-physics-6de99732f28d23128d8ea274-feedforward_ablation",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-6de99732f28d23128d8ea274",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-6de99732f28d23128d8ea274-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-6de99732f28d23128d8ea274-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-6de99732f28d23128d8ea274-aligned/6de99732f28d23128d8ea274",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/6de99732f28d23128d8ea274.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "source_normalized_sha256": "6ef96f26861e413773984b16852aecd51a079500e027285998b7440c377efcf1",
+      "evaluation_split": "frozen_policy_heldout_v2",
+      "runtime_source_sha256": "4c7a76bbfee4180589dd0af116286c1dc2c866c9aaeb55d8725a1462829f04a9",
+      "variant": "contact_0035",
+      "source_prefix_velocity_feedforward": 0.0,
+      "frozen_physical_policy": "feedforward_ablation",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.2617993877991494
+      ],
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          1.0275,
+          -0.3225
+        ],
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0
+      },
+      "geometry_selection": {
+        "selection_rank": [
+          0.07853981633974481,
+          1,
+          11,
+          0.2550067500321178,
+          26
+        ],
+        "base_candidate": {
+          "id": 11,
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.2617993877991494
+          ],
+          "seed": "seed9",
+          "rank": [
+            0.07853981633974481,
+            1,
+            11
+          ]
+        },
+        "placement_parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "admitted_base_plan": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/artifact/workspaces/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/geometry-search/base-11/admitted-base",
+        "admitted_plan": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/artifact/workspaces/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/geometry-search/base-11/admitted-complete",
+        "full_geometric_admission_artifact": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/artifact/workspaces/can-heldout-cohort-v2-geometry-6de99732f28d23128d8ea274-chunk2/geometry-search/base-11",
+        "source_episode": "6de99732f28d23128d8ea274",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "grasp_roll": null,
+        "cylindrical_grasp": {
+          "azimuth_policy": "source",
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level"
+        },
+        "geometry_clearance": null,
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "physics_validated": false
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "right_arm_seed": [
+        -0.07174286951069012,
+        -0.902745775685186,
+        0.18542113837357807,
+        -1.361150358195674,
+        -0.20982220218473058,
+        0.03744438167939799,
+        -1.1980294239033369
+      ]
+    },
+    {
+      "id": "can-heldout-cohort-v2-physics-d93ada736f2b8ff8518a82b0-primary",
+      "workspace": "workspaces/can-heldout-cohort-v2-physics-d93ada736f2b8ff8518a82b0-primary",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d93ada736f2b8ff8518a82b0",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d93ada736f2b8ff8518a82b0-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d93ada736f2b8ff8518a82b0-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d93ada736f2b8ff8518a82b0-aligned/d93ada736f2b8ff8518a82b0",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d93ada736f2b8ff8518a82b0.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "source_normalized_sha256": "8501a03e8e1f7fd6b587f2a42a34df2e27afbcb2a385ce49d340f175d88418f9",
+      "evaluation_split": "frozen_policy_heldout_v2",
+      "runtime_source_sha256": "4c7a76bbfee4180589dd0af116286c1dc2c866c9aaeb55d8725a1462829f04a9",
+      "variant": "contact_0035",
+      "source_prefix_velocity_feedforward": 1.0,
+      "frozen_physical_policy": "primary",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          1.0275,
+          -0.3225
+        ],
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0
+      },
+      "geometry_selection": {
+        "selection_rank": [
+          0.0,
+          1,
+          9,
+          0.2215087980428401,
+          26
+        ],
+        "base_candidate": {
+          "id": 9,
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "seed": "seed9",
+          "rank": [
+            0.0,
+            1,
+            9
+          ]
+        },
+        "placement_parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "admitted_base_plan": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/artifact/workspaces/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/geometry-search/base-09/admitted-base",
+        "admitted_plan": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/artifact/workspaces/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/geometry-search/base-09/admitted-complete",
+        "full_geometric_admission_artifact": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/artifact/workspaces/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/geometry-search/base-09",
+        "source_episode": "d93ada736f2b8ff8518a82b0",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "grasp_roll": null,
+        "cylindrical_grasp": {
+          "azimuth_policy": "source",
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level"
+        },
+        "geometry_clearance": null,
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "physics_validated": false
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "right_arm_seed": [
+        -0.07174286951069012,
+        -0.902745775685186,
+        0.18542113837357807,
+        -1.361150358195674,
+        -0.20982220218473058,
+        0.03744438167939799,
+        -1.1980294239033369
+      ]
+    },
+    {
+      "id": "can-heldout-cohort-v2-physics-d93ada736f2b8ff8518a82b0-feedforward_ablation",
+      "workspace": "workspaces/can-heldout-cohort-v2-physics-d93ada736f2b8ff8518a82b0-feedforward_ablation",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d93ada736f2b8ff8518a82b0",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d93ada736f2b8ff8518a82b0-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d93ada736f2b8ff8518a82b0-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d93ada736f2b8ff8518a82b0-aligned/d93ada736f2b8ff8518a82b0",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d93ada736f2b8ff8518a82b0.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "source_normalized_sha256": "8501a03e8e1f7fd6b587f2a42a34df2e27afbcb2a385ce49d340f175d88418f9",
+      "evaluation_split": "frozen_policy_heldout_v2",
+      "runtime_source_sha256": "4c7a76bbfee4180589dd0af116286c1dc2c866c9aaeb55d8725a1462829f04a9",
+      "variant": "contact_0035",
+      "source_prefix_velocity_feedforward": 0.0,
+      "frozen_physical_policy": "feedforward_ablation",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          1.0275,
+          -0.3225
+        ],
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0
+      },
+      "geometry_selection": {
+        "selection_rank": [
+          0.0,
+          1,
+          9,
+          0.2215087980428401,
+          26
+        ],
+        "base_candidate": {
+          "id": 9,
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "seed": "seed9",
+          "rank": [
+            0.0,
+            1,
+            9
+          ]
+        },
+        "placement_parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            50.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "admitted_base_plan": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/artifact/workspaces/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/geometry-search/base-09/admitted-base",
+        "admitted_plan": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/artifact/workspaces/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/geometry-search/base-09/admitted-complete",
+        "full_geometric_admission_artifact": "/tmp/reachy-retarget-pool/can-heldout-cohort-v2-geometry/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/artifact/workspaces/can-heldout-cohort-v2-geometry-d93ada736f2b8ff8518a82b0-chunk0/geometry-search/base-09",
+        "source_episode": "d93ada736f2b8ff8518a82b0",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "grasp_roll": null,
+        "cylindrical_grasp": {
+          "azimuth_policy": "source",
+          "end_margin_m": 0.001,
+          "orientation_policy": "jaw_level"
+        },
+        "geometry_clearance": null,
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "physics_validated": false
+      },
+      "frozen_policy_sha256": "68ff2647563e52087e651dfd22e570dfa73e1f4f6254d9496f7df8fd86d4b640",
+      "right_arm_seed": [
+        -0.07174286951069012,
+        -0.902745775685186,
+        0.18542113837357807,
+        -1.361150358195674,
+        -0.20982220218473058,
+        0.03744438167939799,
+        -1.1980294239033369
+      ]
+    }
+  ],
+  "unique_sources": 24,
+  "geometry_admitted_sources": 2,
+  "scope": "Both predeclared policies, originalmodel only. Full24source denominator and separate geometryadmitted denominator. No physical outcome tuning. Fresh complete closure admission required."
+}

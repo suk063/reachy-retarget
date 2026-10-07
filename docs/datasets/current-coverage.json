@@ -1,0 +1,5492 @@
+{
+  "catalog_profiles": 333,
+  "execution_evidence_utc": "2026-10-07T07:50:37.592755+00:00",
+  "families": {
+    "aloha": {
+      "catalog_profiles": [
+        "aloha",
+        "hf__lerobot__aloha_sim_transfer_cube_human",
+        "hf__lerobot__aloha_sim_insertion_scripted",
+        "hf__lerobot__aloha_sim_transfer_cube_scripted",
+        "hf__lerobot__aloha_sim_insertion_human",
+        "hf__lerobot__aloha_static_candy",
+        "hf__lerobot__aloha_static_tape",
+        "hf__lerobot__aloha_static_screw_driver",
+        "hf__lerobot__aloha_static_towel",
+        "hf__lerobot__aloha_static_coffee",
+        "hf__lerobot__aloha_static_battery",
+        "hf__lerobot__aloha_static_thread_velcro",
+        "hf__lerobot__aloha_static_vinh_cup_left",
+        "hf__lerobot__aloha_static_vinh_cup",
+        "hf__lerobot__aloha_static_coffee_new",
+        "hf__lerobot__aloha_static_ziploc_slide",
+        "hf__lerobot__aloha_static_pingpong_test",
+        "hf__lerobot__aloha_static_cups_open",
+        "hf__lerobot__aloha_static_fork_pick_up",
+        "hf__lerobot__aloha_static_pro_pencil",
+        "hf__lerobot__aloha_sim_insertion_scripted_image",
+        "hf__lerobot__aloha_sim_transfer_cube_human_image",
+        "hf__lerobot__aloha_sim_transfer_cube_scripted_image",
+        "hf__lerobot__aloha_sim_insertion_human_image"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "amass": {
+      "catalog_profiles": [
+        "amass"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "arctic": {
+      "catalog_profiles": [
+        "arctic"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "behave": {
+      "catalog_profiles": [
+        "behave"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "behavior": {
+      "catalog_profiles": [],
+      "present": [
+        {
+          "bytes": 667513,
+          "files": 2,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/data/raw/behavior",
+          "source": "behavior"
+        }
+      ],
+      "status_counts": {
+        "blocked_prerequisites": 2
+      },
+      "tasks": [
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "blocked_prerequisites",
+          "task": "behavior-episode-00021890"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "blocked_prerequisites",
+          "task": "behavior-episode-00021890-v2"
+        }
+      ]
+    },
+    "bigym": {
+      "catalog_profiles": [],
+      "present": [
+        {
+          "bytes": 275826,
+          "files": 1,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "bigym_native_pilot",
+          "store": "runs/native-mobile-pilot"
+        },
+        {
+          "bytes": 275826,
+          "files": 1,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/native/bigym/data/raw/bigym_native_pilot",
+          "source": "bigym_native_pilot"
+        }
+      ],
+      "status_counts": {
+        "blocked_native_replay": 1,
+        "blocked_prerequisites": 1,
+        "kinematic_failed": 1
+      },
+      "tasks": [
+        {
+          "attempts": 2,
+          "operation": "normalize_mobile",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "blocked_prerequisites",
+          "task": "bigym-common-v1"
+        },
+        {
+          "attempts": 1,
+          "operation": "mobile_pilot",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "blocked_native_replay",
+          "task": "bigym-mobile-pilot"
+        },
+        {
+          "attempts": 1,
+          "operation": "source_pose_ik",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "bigym-pose-ik-v1"
+        }
+      ]
+    },
+    "bridge": {
+      "catalog_profiles": [
+        "bridge",
+        "oxe__bridge",
+        "hf__IPEC-COMMUNITY__bridge_orig_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "calvin": {
+      "catalog_profiles": [
+        "calvin"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "chairs": {
+      "catalog_profiles": [
+        "chairs"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "cmu": {
+      "catalog_profiles": [
+        "cmu"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "d4rl_kitchen": {
+      "catalog_profiles": [
+        "d4rl_kitchen"
+      ],
+      "present": [
+        {
+          "bytes": 39675763,
+          "files": 3,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/native/d4rl_kitchen/raw",
+          "source": "d4rl_kitchen"
+        }
+      ],
+      "status_counts": {
+        "kinematic_failed": 3
+      },
+      "tasks": [
+        {
+          "attempts": 1,
+          "operation": "source_pose_ik",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "d4rl-complete-pose-ik-v1"
+        },
+        {
+          "attempts": 1,
+          "operation": "source_pose_ik",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "d4rl-mixed-pose-ik-v1"
+        },
+        {
+          "attempts": 1,
+          "operation": "source_pose_ik",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "d4rl-partial-pose-ik-v1"
+        }
+      ]
+    },
+    "dexycb": {
+      "catalog_profiles": [
+        "dexycb",
+        "hf__QFun__MANUS-DexYCB"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "droid": {
+      "catalog_profiles": [
+        "droid",
+        "hf__lerobot__droid_100",
+        "hf__lerobot__droid_1.0.1",
+        "hf__IPEC-COMMUNITY__droid_lerobot",
+        "oxe__droid"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "fastumi": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__FastUMI-Data",
+        "hf__IPEC-COMMUNITY__FastUMI_100k_lerobot",
+        "fastumi"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "furniturebench": {
+      "catalog_profiles": [
+        "furniturebench",
+        "hf__IPEC-COMMUNITY__furniture_bench_dataset_lerobot",
+        "oxe__furniture_bench_dataset_converted_externally_to_rlds"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "grab": {
+      "catalog_profiles": [
+        "grab"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "h2o": {
+      "catalog_profiles": [
+        "h2o",
+        "hf__MIT-Media-Lab__h2o-annotations-v1"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__CompeteSAI__reachy2-kitchen-multimodal": {
+      "catalog_profiles": [
+        "hf__CompeteSAI__reachy2-kitchen-multimodal"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__HTurlet15__reachy-alive": {
+      "catalog_profiles": [
+        "hf__HTurlet15__reachy-alive"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__austin_buds_dataset_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__austin_buds_dataset_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__austin_sailor_dataset_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__austin_sailor_dataset_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__austin_sirius_dataset_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__austin_sirius_dataset_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__bc_z_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__bc_z_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__berkeley_autolab_ur5_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__berkeley_autolab_ur5_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__berkeley_cable_routing_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__berkeley_cable_routing_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__berkeley_fanuc_manipulation_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__berkeley_fanuc_manipulation_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__berkeley_mvp_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__berkeley_mvp_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__berkeley_rpt_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__berkeley_rpt_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__cmu_play_fusion_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__cmu_play_fusion_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__cmu_stretch_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__cmu_stretch_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__dlr_edan_shared_control_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__dlr_edan_shared_control_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__dobbe_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__dobbe_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__fractal20220817_data_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__fractal20220817_data_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__iamlab_cmu_pickup_insert_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__iamlab_cmu_pickup_insert_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__jaco_play_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__jaco_play_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__kuka_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__kuka_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__nyu_door_opening_surprising_effectiveness_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__nyu_door_opening_surprising_effectiveness_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__nyu_franka_play_dataset_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__nyu_franka_play_dataset_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__stanford_hydra_dataset_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__stanford_hydra_dataset_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__taco_play_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__taco_play_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__toto_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__toto_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__ucsd_kitchen_dataset_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__ucsd_kitchen_dataset_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__utaustin_mutex_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__utaustin_mutex_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__IPEC-COMMUNITY__viola_lerobot": {
+      "catalog_profiles": [
+        "hf__IPEC-COMMUNITY__viola_lerobot"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__THULab__reachy_wave": {
+      "catalog_profiles": [
+        "hf__THULab__reachy_wave"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__Voxel51__tavis-head-reachy2-800ep": {
+      "catalog_profiles": [
+        "hf__Voxel51__tavis-head-reachy2-800ep"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__aliberts__eval_reachy_test": {
+      "catalog_profiles": [
+        "hf__aliberts__eval_reachy_test"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__aliberts__reachy_wave": {
+      "catalog_profiles": [
+        "hf__aliberts__reachy_wave"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__aliberts__reachy_wave_2": {
+      "catalog_profiles": [
+        "hf__aliberts__reachy_wave_2"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__cadene__reachy2_mobile_base": {
+      "catalog_profiles": [
+        "hf__cadene__reachy2_mobile_base"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__cadene__reachy2_mobile_base_2": {
+      "catalog_profiles": [
+        "hf__cadene__reachy2_mobile_base_2"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__cadene__reachy2_mobile_grasp_test": {
+      "catalog_profiles": [
+        "hf__cadene__reachy2_mobile_grasp_test"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__cadene__reachy2_mobile_grasp_test2": {
+      "catalog_profiles": [
+        "hf__cadene__reachy2_mobile_grasp_test2"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__cadene__reachy2_mobile_grasp_test3": {
+      "catalog_profiles": [
+        "hf__cadene__reachy2_mobile_grasp_test3"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__cdeplanne__reachy-arcade-scores": {
+      "catalog_profiles": [
+        "hf__cdeplanne__reachy-arcade-scores"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__erl-hub__eval_reachy-pick-and-place": {
+      "catalog_profiles": [
+        "hf__erl-hub__eval_reachy-pick-and-place"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__erl-hub__reachy-cleaning": {
+      "catalog_profiles": [
+        "hf__erl-hub__reachy-cleaning"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__erl-hub__reachy-cleaning-10Hz": {
+      "catalog_profiles": [
+        "hf__erl-hub__reachy-cleaning-10Hz"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__erl-hub__reachy-pick-and-place": {
+      "catalog_profiles": [
+        "hf__erl-hub__reachy-pick-and-place"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__erl-hub__reachy-pick-and-place-images": {
+      "catalog_profiles": [
+        "hf__erl-hub__reachy-pick-and-place-images"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__erl-hub__reachy-pick-and-place-large": {
+      "catalog_profiles": [
+        "hf__erl-hub__reachy-pick-and-place-large"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__erl-hub__reachy-pick-and-place-right-arm": {
+      "catalog_profiles": [
+        "hf__erl-hub__reachy-pick-and-place-right-arm"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__glannuzel__eval_grab_cube_reachy": {
+      "catalog_profiles": [
+        "hf__glannuzel__eval_grab_cube_reachy"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__apple_storage": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__apple_storage"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__apple_storage_2": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__apple_storage_2"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__apple_storage_2_modified": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__apple_storage_2_modified"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__eval_pick_and_place_bottle": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__eval_pick_and_place_bottle"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__grasp_apple": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__grasp_apple"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__grasp_mug": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__grasp_mug"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__pick_and_place_bottle": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__pick_and_place_bottle"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__reachy-doing-things": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__reachy-doing-things"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__reachy2_mobile_household_apple": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__reachy2_mobile_household_apple"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__pollen-robotics__reachy2_static_cup": {
+      "catalog_profiles": [
+        "hf__pollen-robotics__reachy2_static_cup"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__simheo__eval_act_reachy2_torso_cleaned": {
+      "catalog_profiles": [
+        "hf__simheo__eval_act_reachy2_torso_cleaned"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__simheo__reachy2_pick_place_cleaned": {
+      "catalog_profiles": [
+        "hf__simheo__reachy2_pick_place_cleaned"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hf__simheo__reachy2_pick_place_larger": {
+      "catalog_profiles": [
+        "hf__simheo__reachy2_pick_place_larger"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "ho3d": {
+      "catalog_profiles": [
+        "ho3d",
+        "hf__Ronaldo-GOAT__ho3d_transfer"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hodome": {
+      "catalog_profiles": [
+        "hf__JuzeZhang__HOI-M3",
+        "hodome"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hoi4d": {
+      "catalog_profiles": [
+        "hoi4d",
+        "hf__JingkunAn__lerobot_hoi4d_dataset"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hoi_retarget": {
+      "catalog_profiles": [
+        "hoi_retarget",
+        "hf__leggedrobotics__hoi-retarget"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hoim3": {
+      "catalog_profiles": [
+        "hoim3"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "hot3d": {
+      "catalog_profiles": [
+        "hot3d",
+        "hf__MIT-Media-Lab__hot3d-annotations-v1",
+        "hf__bop-benchmark__hot3d"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "humoto": {
+      "catalog_profiles": [
+        "humoto"
+      ],
+      "present": [
+        {
+          "bytes": 4681626,
+          "files": 5,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "humoto",
+          "store": "runs/object-matrix"
+        }
+      ],
+      "status_counts": {
+        "archived": 3,
+        "retargeted_physics_blocked": 3
+      },
+      "tasks": [
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-09dfff574d299e002589eaa0"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-31f3c10709eeaf6d4c22dafd"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "legacy-all-v1-09dfff574d299e002589eaa0"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "legacy-all-v1-31f3c10709eeaf6d4c22dafd"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "legacy-all-v1-fdcc13ded9df56303c811a24"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-fdcc13ded9df56303c811a24"
+        }
+      ]
+    },
+    "interact": {
+      "catalog_profiles": [
+        "interact"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "intercap": {
+      "catalog_profiles": [
+        "intercap"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "intermimic": {
+      "catalog_profiles": [
+        "intermimic"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "lafan1": {
+      "catalog_profiles": [
+        "lafan1"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "libero": {
+      "catalog_profiles": [
+        "libero",
+        "hf__lerobot__libero",
+        "hf__lerobot__libero_spatial_image",
+        "hf__lerobot__libero_goal_image",
+        "hf__lerobot__libero_10_image",
+        "hf__lerobot__libero-assets",
+        "hf__lerobot__libero_object_image",
+        "hf__lerobot__libero_10",
+        "hf__lerobot__libero_plus",
+        "hf__lerobot__libero_10_image_subtask",
+        "hf__lerobot__libero_10_subtask"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "m3bench": {
+      "catalog_profiles": [],
+      "present": [
+        {
+          "bytes": 94572,
+          "files": 10,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/data/raw/m3bench",
+          "source": "m3bench"
+        }
+      ],
+      "status_counts": {
+        "blocked_prerequisites": 1
+      },
+      "tasks": [
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "blocked_prerequisites",
+          "task": "m3bench-pick-book-28-23"
+        }
+      ]
+    },
+    "maniskill": {
+      "catalog_profiles": [
+        "maniskill",
+        "hf__haosulab__ManiSkill_Demonstrations"
+      ],
+      "present": [
+        {
+          "bytes": 386323,
+          "files": 2,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "hf__haosulab__ManiSkill_Demonstrations",
+          "store": "runs/object-matrix"
+        }
+      ],
+      "status_counts": {
+        "archived": 5,
+        "retargeted_physics_incomplete": 5
+      },
+      "tasks": [
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-12e2ae6265014dfd0fec63c2"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-26bc046d91c0174be7312e5d"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-8a7847a26e8fbb00783e4114"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-970dc25cbc48adcabbbe06cf"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-a630ebea03b2f07fdda1b7d3"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_incomplete",
+          "task": "legacy-all-v1-12e2ae6265014dfd0fec63c2"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_incomplete",
+          "task": "legacy-all-v1-26bc046d91c0174be7312e5d"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_incomplete",
+          "task": "legacy-all-v1-8a7847a26e8fbb00783e4114"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_incomplete",
+          "task": "legacy-all-v1-970dc25cbc48adcabbbe06cf"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_incomplete",
+          "task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3"
+        }
+      ]
+    },
+    "maniskill_panda_assets": {
+      "catalog_profiles": [],
+      "present": [
+        {
+          "bytes": 25368,
+          "files": 2,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "maniskill_panda_assets",
+          "store": "runs/object-matrix"
+        }
+      ],
+      "status_counts": {},
+      "tasks": []
+    },
+    "maniskill_scene_evidence": {
+      "catalog_profiles": [],
+      "present": [
+        {
+          "bytes": 4066534,
+          "files": 17,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "maniskill_scene_evidence",
+          "store": "runs/object-matrix"
+        }
+      ],
+      "status_counts": {},
+      "tasks": []
+    },
+    "mello": {
+      "catalog_profiles": [],
+      "present": [
+        {
+          "bytes": 507117,
+          "files": 2,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/data/raw/mello",
+          "source": "mello"
+        }
+      ],
+      "status_counts": {
+        "blocked_prerequisites": 1
+      },
+      "tasks": [
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "blocked_prerequisites",
+          "task": "mello-subject1-box-walk1"
+        }
+      ]
+    },
+    "mimicgen": {
+      "catalog_profiles": [
+        "mimicgen",
+        "hf__amandlek__mimicgen_datasets"
+      ],
+      "present": [
+        {
+          "bytes": 30306750,
+          "files": 2,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "hf__amandlek__mimicgen_datasets",
+          "store": "runs/object-matrix"
+        }
+      ],
+      "status_counts": {
+        "archived": 6,
+        "physical_rollout_recorded": 6
+      },
+      "tasks": [
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-47e8070939d3458ac7e7b09b"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-a3cc117492cbe040d6a22525"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-47e8070939d3458ac7e7b09b"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-a3cc117492cbe040d6a22525"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-b6c2b8facf7aa4c978b6bd6d"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-b728fefc8a22104c63e1e4bd"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-c1f6fdd7b4fa919be783b8a6"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-f099a0bb20161c285250f38b"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-b6c2b8facf7aa4c978b6bd6d"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-b728fefc8a22104c63e1e4bd"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-c1f6fdd7b4fa919be783b8a6"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-f099a0bb20161c285250f38b"
+        }
+      ]
+    },
+    "mobile_aloha": {
+      "catalog_profiles": [
+        "mobile_aloha",
+        "hf__lerobot__aloha_mobile_wipe_wine",
+        "hf__lerobot__aloha_mobile_shrimp",
+        "hf__lerobot__aloha_mobile_wash_pan",
+        "hf__lerobot__aloha_mobile_cabinet",
+        "hf__lerobot__aloha_mobile_chair",
+        "hf__lerobot__aloha_mobile_elevator",
+        "hf__lerobot__aloha_mobile_shrimp_image",
+        "oxe__aloha_mobile"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "momagen": {
+      "catalog_profiles": [],
+      "present": [
+        {
+          "bytes": 269083964,
+          "files": 12,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/data/raw/momagen",
+          "source": "momagen"
+        }
+      ],
+      "status_counts": {
+        "failed": 12,
+        "kinematic_failed": 6
+      },
+      "tasks": [
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_bringing_water"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_bringing_water-v2"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "momagen-r1_bringing_water-v3"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_clean_pan"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_clean_pan-v2"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "momagen-r1_clean_pan-v3"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_dishes_away"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_dishes_away-v2"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "momagen-r1_dishes_away-v3"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_pick_cup"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_pick_cup-v2"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "momagen-r1_pick_cup-v3"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_picking_up_trash"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_picking_up_trash-v2"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "momagen-r1_picking_up_trash-v3"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_tidy_table"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "momagen-r1_tidy_table-v2"
+        },
+        {
+          "attempts": 2,
+          "operation": "native_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "momagen-r1_tidy_table-v3"
+        }
+      ]
+    },
+    "oakink": {
+      "catalog_profiles": [
+        "oakink",
+        "hf__oakink__OakInk-v1"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "oakink2": {
+      "catalog_profiles": [
+        "oakink2",
+        "hf__kelvin34501__OakInk-v2"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "omomo": {
+      "catalog_profiles": [
+        "omomo"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "oxe": {
+      "catalog_profiles": [
+        "oxe",
+        "oxe__columbia_cairlab_pusht_real",
+        "oxe__stanford_kuka_multimodal_dataset_converted_externally_to_rlds",
+        "oxe__nyu_rot_dataset_converted_externally_to_rlds",
+        "oxe__cmu_franka_exploration_dataset_converted_externally_to_rlds",
+        "oxe__ucsd_pick_and_place_dataset_converted_externally_to_rlds",
+        "oxe__usc_cloth_sim_converted_externally_to_rlds",
+        "oxe__utokyo_pr2_opening_fridge_converted_externally_to_rlds",
+        "oxe__utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds",
+        "oxe__utokyo_saytap_converted_externally_to_rlds",
+        "oxe__utokyo_xarm_pick_and_place_converted_externally_to_rlds",
+        "oxe__utokyo_xarm_bimanual_converted_externally_to_rlds",
+        "oxe__kaist_nonprehensile_converted_externally_to_rlds",
+        "oxe__tokyo_u_lsmo_converted_externally_to_rlds",
+        "oxe__dlr_sara_pour_converted_externally_to_rlds",
+        "oxe__dlr_sara_grid_clamp_converted_externally_to_rlds",
+        "oxe__asu_table_top_converted_externally_to_rlds",
+        "oxe__stanford_robocook_converted_externally_to_rlds",
+        "oxe__imperialcollege_sawyer_wrist_cam",
+        "oxe__uiuc_d3field",
+        "oxe__berkeley_gnm_recon",
+        "oxe__berkeley_gnm_cory_hall",
+        "oxe__berkeley_gnm_sac_son",
+        "oxe__conq_hose_manipulation",
+        "oxe__fmb",
+        "hf__lerobot__jaco_play",
+        "hf__lerobot__taco_play",
+        "hf__lerobot__nyu_door_opening_surprising_effectiveness",
+        "hf__lerobot__toto",
+        "hf__lerobot__berkeley_autolab_ur5",
+        "hf__lerobot__columbia_cairlab_pusht_real",
+        "hf__lerobot__stanford_kuka_multimodal_dataset",
+        "hf__lerobot__stanford_hydra_dataset",
+        "hf__lerobot__nyu_rot_dataset",
+        "hf__lerobot__austin_buds_dataset",
+        "hf__lerobot__berkeley_cable_routing",
+        "hf__lerobot__nyu_franka_play_dataset",
+        "hf__lerobot__cmu_franka_exploration_dataset",
+        "hf__lerobot__ucsd_kitchen_dataset",
+        "hf__lerobot__ucsd_pick_and_place_dataset",
+        "hf__lerobot__austin_sailor_dataset",
+        "hf__lerobot__austin_sirius_dataset",
+        "hf__lerobot__usc_cloth_sim",
+        "hf__lerobot__utokyo_pr2_opening_fridge",
+        "hf__lerobot__utokyo_pr2_tabletop_manipulation",
+        "hf__lerobot__utokyo_saytap",
+        "hf__lerobot__utokyo_xarm_pick_and_place",
+        "hf__lerobot__utokyo_xarm_bimanual",
+        "hf__lerobot__berkeley_mvp",
+        "hf__lerobot__berkeley_rpt",
+        "hf__lerobot__tokyo_u_lsmo",
+        "hf__lerobot__dlr_sara_pour",
+        "hf__lerobot__kaist_nonprehensile",
+        "hf__lerobot__dlr_sara_grid_clamp",
+        "hf__lerobot__dlr_edan_shared_control",
+        "hf__lerobot__asu_table_top",
+        "hf__lerobot__stanford_robocook",
+        "hf__lerobot__iamlab_cmu_pickup_insert",
+        "hf__lerobot__utaustin_mutex",
+        "hf__lerobot__berkeley_fanuc_manipulation",
+        "hf__lerobot__imperialcollege_sawyer_wrist_cam",
+        "hf__lerobot__uiuc_d3field",
+        "hf__lerobot__cmu_stretch",
+        "hf__lerobot__cmu_play_fusion",
+        "hf__lerobot__berkeley_gnm_cory_hall",
+        "hf__lerobot__berkeley_gnm_sac_son",
+        "hf__lerobot__conq_hose_manipulation",
+        "hf__lerobot__fmb",
+        "hf__lerobot__berkeley_gnm_recon",
+        "hf__lerobot__metaworld_mt50_push_v2_image",
+        "hf__lerobot__metaworld_mt50",
+        "oxe__cmu_playing_with_food",
+        "oxe__eth_agent_affordances",
+        "oxe__fractal20220817_data",
+        "oxe__io_ai_tech",
+        "oxe__maniskill_dataset_converted_externally_to_rlds",
+        "oxe__mimic_play",
+        "oxe__plex_robosuite",
+        "oxe__robo_net",
+        "oxe__robo_set",
+        "oxe__robot_vqa",
+        "oxe__spoc",
+        "oxe__stanford_mask_vit_converted_externally_to_rlds",
+        "oxe__tidybot",
+        "oxe__vima_converted_externally_to_rlds",
+        "oxe__kuka",
+        "oxe__taco_play",
+        "oxe__jaco_play",
+        "oxe__berkeley_cable_routing",
+        "oxe__nyu_door_opening_surprising_effectiveness",
+        "oxe__viola",
+        "oxe__berkeley_autolab_ur5",
+        "oxe__toto",
+        "oxe__stanford_hydra_dataset_converted_externally_to_rlds",
+        "oxe__austin_buds_dataset_converted_externally_to_rlds",
+        "oxe__nyu_franka_play_dataset_converted_externally_to_rlds",
+        "oxe__ucsd_kitchen_dataset_converted_externally_to_rlds",
+        "oxe__austin_sailor_dataset_converted_externally_to_rlds",
+        "oxe__austin_sirius_dataset_converted_externally_to_rlds",
+        "oxe__bc_z",
+        "oxe__berkeley_mvp_converted_externally_to_rlds",
+        "oxe__berkeley_rpt_converted_externally_to_rlds",
+        "oxe__dlr_edan_shared_control_converted_externally_to_rlds",
+        "oxe__iamlab_cmu_pickup_insert_converted_externally_to_rlds",
+        "oxe__utaustin_mutex",
+        "oxe__berkeley_fanuc_manipulation",
+        "oxe__cmu_play_fusion",
+        "oxe__cmu_stretch",
+        "oxe__dobbe",
+        "oxe__qut_dexterous_manipulation",
+        "oxe__language_table"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "parahome": {
+      "catalog_profiles": [
+        "parahome"
+      ],
+      "present": [
+        {
+          "bytes": 85696621,
+          "files": 3,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/native/parahome/workspaces/s1/data/raw/parahome",
+          "source": "parahome"
+        },
+        {
+          "bytes": 62372236,
+          "files": 3,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/native/parahome/workspaces/s3/data/raw/parahome",
+          "source": "parahome"
+        },
+        {
+          "bytes": 125903096,
+          "files": 3,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/native/parahome/workspaces/s2/data/raw/parahome",
+          "source": "parahome"
+        }
+      ],
+      "status_counts": {
+        "retargeted_physics_blocked": 3
+      },
+      "tasks": [
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "parahome-s1-legacy-v1"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "parahome-s2-legacy-v1"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "parahome-s3-legacy-v1"
+        }
+      ]
+    },
+    "robocasa": {
+      "catalog_profiles": [
+        "robocasa",
+        "hf__lerobot__robocasa_target_human_unified"
+      ],
+      "present": [
+        {
+          "bytes": 722617,
+          "files": 12,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "robocasa_native_pilot",
+          "store": "runs/native-mobile-pilot"
+        },
+        {
+          "bytes": 722617,
+          "files": 12,
+          "location": "cluster",
+          "path": "/mnt/reachy-retarget/native/robocasa/data/raw/robocasa_native_pilot",
+          "source": "robocasa_native_pilot"
+        }
+      ],
+      "status_counts": {
+        "blocked_native_replay": 1,
+        "blocked_prerequisites": 1,
+        "kinematic_failed": 1,
+        "source_fk_verified_actions_preserved": 1
+      },
+      "tasks": [
+        {
+          "attempts": 2,
+          "operation": "normalize_mobile",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "blocked_prerequisites",
+          "task": "robocasa-common-v1"
+        },
+        {
+          "attempts": 1,
+          "operation": "reconstruct_robocasa",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "source_fk_verified_actions_preserved",
+          "task": "robocasa-fk-v1"
+        },
+        {
+          "attempts": 1,
+          "operation": "mobile_pilot",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "blocked_native_replay",
+          "task": "robocasa-mobile-pilot"
+        },
+        {
+          "attempts": 1,
+          "operation": "source_pose_ik",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "kinematic_failed",
+          "task": "robocasa-pose-ik-v1"
+        }
+      ]
+    },
+    "robomimic": {
+      "catalog_profiles": [
+        "robomimic",
+        "hf__robomimic__robomimic_datasets"
+      ],
+      "present": [
+        {
+          "bytes": 46889752,
+          "files": 1,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "hf__robomimic__robomimic_datasets",
+          "store": "runs/local-preview"
+        },
+        {
+          "bytes": 46889752,
+          "files": 1,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "hf__robomimic__robomimic_datasets",
+          "store": "runs/local-preview-v2"
+        },
+        {
+          "bytes": 620908176,
+          "files": 5,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "hf__robomimic__robomimic_datasets",
+          "store": "runs/object-matrix"
+        }
+      ],
+      "status_counts": {
+        "archived": 15,
+        "failed": 1,
+        "physical_rollout_recorded": 11,
+        "retargeted_physics_blocked": 6
+      },
+      "tasks": [
+        {
+          "attempts": 1,
+          "operation": "full_state_rollout",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "failed",
+          "task": "full-state-can-v1"
+        },
+        {
+          "attempts": 1,
+          "operation": "full_state_rollout",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "physical_rollout_recorded",
+          "task": "full-state-can-v2"
+        },
+        {
+          "attempts": 1,
+          "operation": "full_state_rollout",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "physical_rollout_recorded",
+          "task": "full-state-can-v3"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-0a48c1797996e272fbaf4b34"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-0cacb4e6f5eb9ea88fc84d7c"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-1d0214a54bfcfdfd95faa196"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-2aef318f4c607ad8ed448123"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-2dbc8c98b3dfab7ffa338c58"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-31bb4a33156a48823d3f6daf"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-42167b7a2d3c457df216569e"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-58e7f4f3c4178bc2c5f3f2c7"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-6ad5cc23ec6d1c207da3e4b2"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-9a079f1846e9651807ad34af"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "legacy-all-v1-0a48c1797996e272fbaf4b34"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-0cacb4e6f5eb9ea88fc84d7c"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-1d0214a54bfcfdfd95faa196"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-2aef318f4c607ad8ed448123"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-2dbc8c98b3dfab7ffa338c58"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-31bb4a33156a48823d3f6daf"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "legacy-all-v1-42167b7a2d3c457df216569e"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-58e7f4f3c4178bc2c5f3f2c7"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-6ad5cc23ec6d1c207da3e4b2"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "legacy-all-v1-9a079f1846e9651807ad34af"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "legacy-all-v1-cc7c88ab58f653206c25e1c4"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-d1c98eab070e1de3803eb075"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": true,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "physical_rollout_recorded",
+          "task": "legacy-all-v1-e876dc89127d7d36642c3439"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "legacy-all-v1-ee5f39c5402082e4c032924e"
+        },
+        {
+          "attempts": 1,
+          "operation": "legacy_pipeline",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": true,
+          "status": "retargeted_physics_blocked",
+          "task": "legacy-all-v1-f6db26119aee4bc30e6a9231"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-cc7c88ab58f653206c25e1c4"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-d1c98eab070e1de3803eb075"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-e876dc89127d7d36642c3439"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-ee5f39c5402082e4c032924e"
+        },
+        {
+          "attempts": 1,
+          "operation": "export_normalized",
+          "physics_tested": false,
+          "physics_validated": false,
+          "retargeted": false,
+          "status": "archived",
+          "task": "legacy-f6db26119aee4bc30e6a9231"
+        }
+      ]
+    },
+    "robosuite_assets": {
+      "catalog_profiles": [],
+      "present": [
+        {
+          "bytes": 11169253,
+          "files": 14,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "robosuite_assets",
+          "store": "runs/object-matrix"
+        }
+      ],
+      "status_counts": {},
+      "tasks": []
+    },
+    "robosuite_can_assets": {
+      "catalog_profiles": [
+        "robosuite_can_assets"
+      ],
+      "present": [
+        {
+          "bytes": 2095309,
+          "files": 7,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "robosuite_can_assets",
+          "store": "runs/local-preview"
+        },
+        {
+          "bytes": 2095309,
+          "files": 7,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "robosuite_can_assets",
+          "store": "runs/local-preview-v2"
+        },
+        {
+          "bytes": 2095309,
+          "files": 7,
+          "location": "local",
+          "recorded_bytes_match": true,
+          "source": "robosuite_can_assets",
+          "store": "runs/object-matrix"
+        }
+      ],
+      "status_counts": {},
+      "tasks": []
+    },
+    "roboturk": {
+      "catalog_profiles": [
+        "roboturk",
+        "hf__lerobot__roboturk",
+        "hf__IPEC-COMMUNITY__roboturk_lerobot",
+        "oxe__roboturk"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "taco": {
+      "catalog_profiles": [
+        "taco"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    },
+    "umi": {
+      "catalog_profiles": [
+        "umi",
+        "hf__lerobot__umi_cup_in_the_wild"
+      ],
+      "present": [],
+      "status_counts": {},
+      "tasks": []
+    }
+  },
+  "historical_seed_families": 39,
+  "limitations": [
+    "Catalog entries include versions, mirrors, assets and exclusions; profile count is not a dataset or demo count.",
+    "Historical acquired flags do not establish current file presence.",
+    "Present file counts can overlap across stores and raw views; do not sum them as independent demonstrations.",
+    "This inventory checks presence/size, not every payload hash; acquisition receipts retain pinned hashes.",
+    "Direct agent workspaces and transfers in progress may precede queue/common-archive registration.",
+    "A family-level pipeline does not imply every release or episode in that family was processed.",
+    "Not present in the checked stores is not evidence that upstream access is unavailable."
+  ],
+  "profile_status_counts": {
+    "excluded": 59,
+    "not_present_in_checked_stores": 262,
+    "pipeline_tasks_recorded": 11,
+    "present_not_queued": 1
+  },
+  "profiles": [
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__alekgomez__reachy_mini_info_benchmark",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__alekgomez__reachy_mini_info_benchmark",
+      "url": "https://huggingface.co/datasets/alekgomez/reachy_mini_info_benchmark"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__binhpham__reachy-mini-massive-motion-library",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__binhpham__reachy-mini-massive-motion-library",
+      "url": "https://huggingface.co/datasets/binhpham/reachy-mini-massive-motion-library"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__test_gripette_050526",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__test_gripette_050526",
+      "url": "https://huggingface.co/datasets/pollen-robotics/test_gripette_050526"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__binhpham__reachy-mini-motion-synth",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__binhpham__reachy-mini-motion-synth",
+      "url": "https://huggingface.co/datasets/binhpham/reachy-mini-motion-synth"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tfrere__reachy-mini-app-moderation",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tfrere__reachy-mini-app-moderation",
+      "url": "https://huggingface.co/datasets/tfrere/reachy-mini-app-moderation"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tfrere__reachy-mini-onboarding-moves",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tfrere__reachy-mini-onboarding-moves",
+      "url": "https://huggingface.co/datasets/tfrere/reachy-mini-onboarding-moves"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__RemiFabre__reachy-mini-emotions-library-50hz-opus",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__RemiFabre__reachy-mini-emotions-library-50hz-opus",
+      "url": "https://huggingface.co/datasets/RemiFabre/reachy-mini-emotions-library-50hz-opus"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tavis-benchmark__tavis-hands-reachy2",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tavis-benchmark__tavis-hands-reachy2",
+      "url": "https://huggingface.co/datasets/tavis-benchmark/tavis-hands-reachy2"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tfrere__reachy-personalities",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tfrere__reachy-personalities",
+      "url": "https://huggingface.co/datasets/tfrere/reachy-personalities"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__BastienATOS__mini-reachy-animation",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__BastienATOS__mini-reachy-animation",
+      "url": "https://huggingface.co/datasets/BastienATOS/mini-reachy-animation"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tfrere__reachy-mini-moves",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tfrere__reachy-mini-moves",
+      "url": "https://huggingface.co/datasets/tfrere/reachy-mini-moves"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__grabette-community-open-a-door",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__grabette-community-open-a-door",
+      "url": "https://huggingface.co/datasets/pollen-robotics/grabette-community-open-a-door"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__apirrone__reachy-mini-simon-scores",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__apirrone__reachy-mini-simon-scores",
+      "url": "https://huggingface.co/datasets/apirrone/reachy-mini-simon-scores"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__fridaf__Reachy-state",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__fridaf__Reachy-state",
+      "url": "https://huggingface.co/datasets/fridaf/Reachy-state"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__yourbench__reachy_mini_info_benchmark",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__yourbench__reachy_mini_info_benchmark",
+      "url": "https://huggingface.co/datasets/yourbench/reachy_mini_info_benchmark"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__pollen_robotic_fleet_usage",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__pollen_robotic_fleet_usage",
+      "url": "https://huggingface.co/datasets/pollen-robotics/pollen_robotic_fleet_usage"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__grabette-community-tasks",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__grabette-community-tasks",
+      "url": "https://huggingface.co/datasets/pollen-robotics/grabette-community-tasks"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tfrere__reachy-mini-app-categories",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tfrere__reachy-mini-app-categories",
+      "url": "https://huggingface.co/datasets/tfrere/reachy-mini-app-categories"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__reachy-mini-emotions-library",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__reachy-mini-emotions-library",
+      "url": "https://huggingface.co/datasets/pollen-robotics/reachy-mini-emotions-library"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tfrere__reachy-sticker-gallery",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tfrere__reachy-sticker-gallery",
+      "url": "https://huggingface.co/datasets/tfrere/reachy-sticker-gallery"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tavis-benchmark__tavis-head-reachy2",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tavis-benchmark__tavis-head-reachy2",
+      "url": "https://huggingface.co/datasets/tavis-benchmark/tavis-head-reachy2"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tommulder__Reachy_RENS",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tommulder__Reachy_RENS",
+      "url": "https://huggingface.co/datasets/tommulder/Reachy_RENS"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tfrere__reachy-mini-generated-moves",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tfrere__reachy-mini-generated-moves",
+      "url": "https://huggingface.co/datasets/tfrere/reachy-mini-generated-moves"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__reachy2_emotions_library",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__reachy2_emotions_library",
+      "url": "https://huggingface.co/datasets/pollen-robotics/reachy2_emotions_library"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__reachy_mini_store_data",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__reachy_mini_store_data",
+      "url": "https://huggingface.co/datasets/pollen-robotics/reachy_mini_store_data"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tfrere__reachy-mini-trailer-video",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tfrere__reachy-mini-trailer-video",
+      "url": "https://huggingface.co/datasets/tfrere/reachy-mini-trailer-video"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__reachy-mini-wall-data",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__reachy-mini-wall-data",
+      "url": "https://huggingface.co/datasets/pollen-robotics/reachy-mini-wall-data"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tfrere__reachy-mini-move-previews",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tfrere__reachy-mini-move-previews",
+      "url": "https://huggingface.co/datasets/tfrere/reachy-mini-move-previews"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__clem__opus4.7_reachy_mini_app_building",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__clem__opus4.7_reachy_mini_app_building",
+      "url": "https://huggingface.co/datasets/clem/opus4.7_reachy_mini_app_building"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__FabienDanieau__reachy-mini-detection-dataset-v2",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__FabienDanieau__reachy-mini-detection-dataset-v2",
+      "url": "https://huggingface.co/datasets/FabienDanieau/reachy-mini-detection-dataset-v2"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__anyskin_slip_detection",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__anyskin_slip_detection",
+      "url": "https://huggingface.co/datasets/pollen-robotics/anyskin_slip_detection"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__FabienDanieau__reachy-mini-detection-dataset",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__FabienDanieau__reachy-mini-detection-dataset",
+      "url": "https://huggingface.co/datasets/FabienDanieau/reachy-mini-detection-dataset"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__tavis-benchmark__tavis-head-sample-reachy2",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__tavis-benchmark__tavis-head-sample-reachy2",
+      "url": "https://huggingface.co/datasets/tavis-benchmark/tavis-head-sample-reachy2"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__haixuantao__reachy-mini-official-app-store",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__haixuantao__reachy-mini-official-app-store",
+      "url": "https://huggingface.co/datasets/haixuantao/reachy-mini-official-app-store"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__Anne-Charlotte__reachy-mini-arcade-leaderboard",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__Anne-Charlotte__reachy-mini-arcade-leaderboard",
+      "url": "https://huggingface.co/datasets/Anne-Charlotte/reachy-mini-arcade-leaderboard"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__squaredcuber__animacy-reachy-mini-lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__squaredcuber__animacy-reachy-mini-lerobot",
+      "url": "https://huggingface.co/datasets/squaredcuber/animacy-reachy-mini-lerobot"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__jyvet__reachy-mini-emotions-library-noaudio",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__jyvet__reachy-mini-emotions-library-noaudio",
+      "url": "https://huggingface.co/datasets/jyvet/reachy-mini-emotions-library-noaudio"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__soichgroups__reachytodo",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__soichgroups__reachytodo",
+      "url": "https://huggingface.co/datasets/soichgroups/reachytodo"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__grabette-community-open-a-drawer",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__grabette-community-open-a-drawer",
+      "url": "https://huggingface.co/datasets/pollen-robotics/grabette-community-open-a-drawer"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__dibsit__reachy-mini-emotions-library-silent",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__dibsit__reachy-mini-emotions-library-silent",
+      "url": "https://huggingface.co/datasets/dibsit/reachy-mini-emotions-library-silent"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__TwinPeaksTownie__Reachy_RENS",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__TwinPeaksTownie__Reachy_RENS",
+      "url": "https://huggingface.co/datasets/TwinPeaksTownie/Reachy_RENS"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__microduck-emotions",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__microduck-emotions",
+      "url": "https://huggingface.co/datasets/pollen-robotics/microduck-emotions"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__reachy-mini-official-app-store",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__reachy-mini-official-app-store",
+      "url": "https://huggingface.co/datasets/pollen-robotics/reachy-mini-official-app-store"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__Anne-Charlotte__reachy-songs",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__Anne-Charlotte__reachy-songs",
+      "url": "https://huggingface.co/datasets/Anne-Charlotte/reachy-songs"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__reachy-mini-dances-library",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__reachy-mini-dances-library",
+      "url": "https://huggingface.co/datasets/pollen-robotics/reachy-mini-dances-library"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__cdeplanne__reachy-mini-arcade-leaderboard",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__cdeplanne__reachy-mini-arcade-leaderboard",
+      "url": "https://huggingface.co/datasets/cdeplanne/reachy-mini-arcade-leaderboard"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__speech-commands-v0.02",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__speech-commands-v0.02",
+      "url": "https://huggingface.co/datasets/pollen-robotics/speech-commands-v0.02"
+    },
+    {
+      "category": "search_exclusion",
+      "current_status": "excluded",
+      "exclusion_reason": "Reachy Mini, non-motion content, or unrelated device/benchmark",
+      "family": "hf__pollen-robotics__grabette-community-grasp-a-spoon",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__pollen-robotics__grabette-community-grasp-a-spoon",
+      "url": "https://huggingface.co/datasets/pollen-robotics/grabette-community-grasp-a-spoon"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__HTurlet15__reachy-alive",
+      "historical_catalog_bytes": 1036894,
+      "historical_catalog_status": "metadata_only",
+      "source": "hf__HTurlet15__reachy-alive",
+      "url": "https://huggingface.co/datasets/HTurlet15/reachy-alive"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__Voxel51__tavis-head-reachy2-800ep",
+      "historical_catalog_bytes": 66836256,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__Voxel51__tavis-head-reachy2-800ep",
+      "url": "https://huggingface.co/datasets/Voxel51/tavis-head-reachy2-800ep"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__THULab__reachy_wave",
+      "historical_catalog_bytes": 17569,
+      "historical_catalog_status": "metadata_only",
+      "source": "hf__THULab__reachy_wave",
+      "url": "https://huggingface.co/datasets/THULab/reachy_wave"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__aliberts__eval_reachy_test",
+      "historical_catalog_bytes": 87448,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__aliberts__eval_reachy_test",
+      "url": "https://huggingface.co/datasets/aliberts/eval_reachy_test"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__aliberts__reachy_wave",
+      "historical_catalog_bytes": 333439,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__aliberts__reachy_wave",
+      "url": "https://huggingface.co/datasets/aliberts/reachy_wave"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__aliberts__reachy_wave_2",
+      "historical_catalog_bytes": 3447608,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__aliberts__reachy_wave_2",
+      "url": "https://huggingface.co/datasets/aliberts/reachy_wave_2"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__CompeteSAI__reachy2-kitchen-multimodal",
+      "historical_catalog_bytes": 8976174,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__CompeteSAI__reachy2-kitchen-multimodal",
+      "url": "https://huggingface.co/datasets/CompeteSAI/reachy2-kitchen-multimodal"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__cadene__reachy2_mobile_base",
+      "historical_catalog_bytes": 3074026,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__cadene__reachy2_mobile_base",
+      "url": "https://huggingface.co/datasets/cadene/reachy2_mobile_base"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__cadene__reachy2_mobile_base_2",
+      "historical_catalog_bytes": 5696389,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__cadene__reachy2_mobile_base_2",
+      "url": "https://huggingface.co/datasets/cadene/reachy2_mobile_base_2"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__cadene__reachy2_mobile_grasp_test",
+      "historical_catalog_bytes": 346232,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__cadene__reachy2_mobile_grasp_test",
+      "url": "https://huggingface.co/datasets/cadene/reachy2_mobile_grasp_test"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oakink",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oakink",
+      "url": "https://oakink.net/"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__cadene__reachy2_mobile_grasp_test3",
+      "historical_catalog_bytes": 83024,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__cadene__reachy2_mobile_grasp_test3",
+      "url": "https://huggingface.co/datasets/cadene/reachy2_mobile_grasp_test3"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__cadene__reachy2_mobile_grasp_test2",
+      "historical_catalog_bytes": 86086,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__cadene__reachy2_mobile_grasp_test2",
+      "url": "https://huggingface.co/datasets/cadene/reachy2_mobile_grasp_test2"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oakink2",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oakink2",
+      "url": "https://github.com/oakink/OakInk2"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hot3d",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hot3d",
+      "url": "https://facebookresearch.github.io/hot3d/"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__cdeplanne__reachy-arcade-scores",
+      "historical_catalog_bytes": 4562,
+      "historical_catalog_status": "metadata_only",
+      "source": "hf__cdeplanne__reachy-arcade-scores",
+      "url": "https://huggingface.co/datasets/cdeplanne/reachy-arcade-scores"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__erl-hub__eval_reachy-pick-and-place",
+      "historical_catalog_bytes": 223667,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__erl-hub__eval_reachy-pick-and-place",
+      "url": "https://huggingface.co/datasets/erl-hub/eval_reachy-pick-and-place"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__erl-hub__reachy-cleaning",
+      "historical_catalog_bytes": 99616,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__erl-hub__reachy-cleaning",
+      "url": "https://huggingface.co/datasets/erl-hub/reachy-cleaning"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hoi4d",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hoi4d",
+      "url": "https://github.com/leolyliu/HOI4D-Instructions"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__erl-hub__reachy-cleaning-10Hz",
+      "historical_catalog_bytes": 2469154,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__erl-hub__reachy-cleaning-10Hz",
+      "url": "https://huggingface.co/datasets/erl-hub/reachy-cleaning-10Hz"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "ho3d",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "ho3d",
+      "url": "https://github.com/shreyashampali/ho3d"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__erl-hub__reachy-pick-and-place",
+      "historical_catalog_bytes": 1091323,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__erl-hub__reachy-pick-and-place",
+      "url": "https://huggingface.co/datasets/erl-hub/reachy-pick-and-place"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__erl-hub__reachy-pick-and-place-images",
+      "historical_catalog_bytes": 2550539,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__erl-hub__reachy-pick-and-place-images",
+      "url": "https://huggingface.co/datasets/erl-hub/reachy-pick-and-place-images"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__erl-hub__reachy-pick-and-place-large",
+      "historical_catalog_bytes": 24,
+      "historical_catalog_status": "metadata_only",
+      "source": "hf__erl-hub__reachy-pick-and-place-large",
+      "url": "https://huggingface.co/datasets/erl-hub/reachy-pick-and-place-large"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "grab",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "access_required",
+      "source": "grab",
+      "url": "https://grab.is.tue.mpg.de/"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__erl-hub__reachy-pick-and-place-right-arm",
+      "historical_catalog_bytes": 2442422,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__erl-hub__reachy-pick-and-place-right-arm",
+      "url": "https://huggingface.co/datasets/erl-hub/reachy-pick-and-place-right-arm"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__glannuzel__eval_grab_cube_reachy",
+      "historical_catalog_bytes": 106331,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__glannuzel__eval_grab_cube_reachy",
+      "url": "https://huggingface.co/datasets/glannuzel/eval_grab_cube_reachy"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "behave",
+      "historical_catalog_bytes": 355479187,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "behave",
+      "url": "https://virtualhumans.mpi-inf.mpg.de/behave/"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "intercap",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "access_required",
+      "source": "intercap",
+      "url": "https://intercap.is.tue.mpg.de/"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "h2o",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "h2o",
+      "url": "https://h2odataset.ethz.ch/"
+    },
+    {
+      "category": "reachy",
+      "current_status": "excluded",
+      "exclusion_reason": "state-and-metadata subset; videos excluded; episode/object usability not yet verified",
+      "family": "hf__glannuzel__reachy2_pick_place",
+      "historical_catalog_bytes": 2487689,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__glannuzel__reachy2_pick_place",
+      "url": "https://huggingface.co/datasets/glannuzel/reachy2_pick_place"
+    },
+    {
+      "category": "reachy",
+      "current_status": "excluded",
+      "exclusion_reason": "No eligible state payload selected from this release.",
+      "family": "hf__haixuantao__reachy2_teleop_remi_eval",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__haixuantao__reachy2_teleop_remi_eval",
+      "url": "https://huggingface.co/datasets/haixuantao/reachy2_teleop_remi_eval"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "droid",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "droid",
+      "url": "https://droid-dataset.github.io/droid/the-droid-dataset"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "arctic",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "access_required",
+      "source": "arctic",
+      "url": "https://arctic.is.tue.mpg.de/"
+    },
+    {
+      "category": "reachy",
+      "current_status": "excluded",
+      "exclusion_reason": "No eligible state payload selected from this release.",
+      "family": "hf__haixuantao__reachy2_teleop_remi_eval_2_raw",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__haixuantao__reachy2_teleop_remi_eval_2_raw",
+      "url": "https://huggingface.co/datasets/haixuantao/reachy2_teleop_remi_eval_2_raw"
+    },
+    {
+      "category": "reachy",
+      "current_status": "excluded",
+      "exclusion_reason": "No eligible state payload selected from this release.",
+      "family": "hf__haixuantao__reachy2_teleop_remi_eval_3_raw",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__haixuantao__reachy2_teleop_remi_eval_3_raw",
+      "url": "https://huggingface.co/datasets/haixuantao/reachy2_teleop_remi_eval_3_raw"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hoi_retarget",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hoi_retarget",
+      "url": "https://github.com/leggedrobotics/hoi-retarget"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "bridge",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "bridge",
+      "url": "https://rail-berkeley.github.io/bridgedata/"
+    },
+    {
+      "category": "reachy",
+      "current_status": "excluded",
+      "exclusion_reason": "No eligible state payload selected from this release.",
+      "family": "hf__haixuantao__reachy2_teleop_remi_eval_4_raw",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__haixuantao__reachy2_teleop_remi_eval_4_raw",
+      "url": "https://huggingface.co/datasets/haixuantao/reachy2_teleop_remi_eval_4_raw"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "roboturk",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "roboturk",
+      "url": "https://roboturk.stanford.edu/dataset_real.html"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "aloha",
+      "url": "https://github.com/tonyzhaozh/act"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "mobile_aloha",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "mobile_aloha",
+      "url": "https://github.com/MarkFzp/mobile-aloha"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__apple_storage",
+      "historical_catalog_bytes": 3391678,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__pollen-robotics__apple_storage",
+      "url": "https://huggingface.co/datasets/pollen-robotics/apple_storage"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "umi",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "umi",
+      "url": "https://github.com/real-stanford/universal_manipulation_interface"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__apple_storage_2_modified",
+      "historical_catalog_bytes": 2897310,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__pollen-robotics__apple_storage_2_modified",
+      "url": "https://huggingface.co/datasets/pollen-robotics/apple_storage_2_modified"
+    },
+    {
+      "category": "simulation",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "maniskill",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "maniskill",
+      "url": "https://maniskill.readthedocs.io/en/latest/user_guide/datasets/demos.html"
+    },
+    {
+      "category": "simulation",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "robomimic",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "robomimic",
+      "url": "https://github.com/ARISE-Initiative/robomimic"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__apple_storage_2",
+      "historical_catalog_bytes": 2988597,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__pollen-robotics__apple_storage_2",
+      "url": "https://huggingface.co/datasets/pollen-robotics/apple_storage_2"
+    },
+    {
+      "category": "simulation",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "mimicgen",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "mimicgen",
+      "url": "https://github.com/NVlabs/mimicgen"
+    },
+    {
+      "category": "simulation",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "robocasa",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "robocasa",
+      "url": "https://github.com/robocasa/robocasa"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__eval_pick_and_place_bottle",
+      "historical_catalog_bytes": 433428,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__pollen-robotics__eval_pick_and_place_bottle",
+      "url": "https://huggingface.co/datasets/pollen-robotics/eval_pick_and_place_bottle"
+    },
+    {
+      "category": "simulation",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "libero",
+      "url": "https://github.com/Lifelong-Robot-Learning/LIBERO"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__grasp_apple",
+      "historical_catalog_bytes": 925833,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__pollen-robotics__grasp_apple",
+      "url": "https://huggingface.co/datasets/pollen-robotics/grasp_apple"
+    },
+    {
+      "category": "simulation",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "calvin",
+      "historical_catalog_bytes": 4181759,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "calvin",
+      "url": "https://github.com/mees/calvin"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__grasp_mug",
+      "historical_catalog_bytes": 925495,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__pollen-robotics__grasp_mug",
+      "url": "https://huggingface.co/datasets/pollen-robotics/grasp_mug"
+    },
+    {
+      "category": "simulation",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "d4rl_kitchen",
+      "historical_catalog_bytes": 39675763,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "d4rl_kitchen",
+      "url": "https://github.com/Farama-Foundation/D4RL"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__reachy-doing-things",
+      "historical_catalog_bytes": 2432,
+      "historical_catalog_status": "metadata_only",
+      "source": "hf__pollen-robotics__reachy-doing-things",
+      "url": "https://huggingface.co/datasets/pollen-robotics/reachy-doing-things"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "furniturebench",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "furniturebench",
+      "url": "https://github.com/clvrai/furniture-bench"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__pick_and_place_bottle",
+      "historical_catalog_bytes": 1646877,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__pollen-robotics__pick_and_place_bottle",
+      "url": "https://huggingface.co/datasets/pollen-robotics/pick_and_place_bottle"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__reachy2_static_cup",
+      "historical_catalog_bytes": 2492403,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__pollen-robotics__reachy2_static_cup",
+      "url": "https://huggingface.co/datasets/pollen-robotics/reachy2_static_cup"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__pollen-robotics__reachy2_mobile_household_apple",
+      "historical_catalog_bytes": 7234539,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__pollen-robotics__reachy2_mobile_household_apple",
+      "url": "https://huggingface.co/datasets/pollen-robotics/reachy2_mobile_household_apple"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__simheo__eval_act_reachy2_torso_cleaned",
+      "historical_catalog_bytes": 158967,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__simheo__eval_act_reachy2_torso_cleaned",
+      "url": "https://huggingface.co/datasets/simheo/eval_act_reachy2_torso_cleaned"
+    },
+    {
+      "category": "motion",
+      "current_status": "excluded",
+      "exclusion_reason": "No manual applications or new accounts; inspect official public release routes.",
+      "family": "amass",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "access_required",
+      "source": "amass",
+      "url": "https://amass.is.tue.mpg.de/"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__simheo__reachy2_pick_place_larger",
+      "historical_catalog_bytes": 3658937,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__simheo__reachy2_pick_place_larger",
+      "url": "https://huggingface.co/datasets/simheo/reachy2_pick_place_larger"
+    },
+    {
+      "category": "reachy",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__simheo__reachy2_pick_place_cleaned",
+      "historical_catalog_bytes": 3663330,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__simheo__reachy2_pick_place_cleaned",
+      "url": "https://huggingface.co/datasets/simheo/reachy2_pick_place_cleaned"
+    },
+    {
+      "category": "simulation",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "robomimic",
+      "historical_catalog_bytes": 6557021689,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__robomimic__robomimic_datasets",
+      "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oakink2",
+      "historical_catalog_bytes": 36991775607,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__kelvin34501__OakInk-v2",
+      "url": "https://huggingface.co/datasets/kelvin34501/OakInk-v2"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hoi_retarget",
+      "historical_catalog_bytes": 234569767,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__leggedrobotics__hoi-retarget",
+      "url": "https://huggingface.co/datasets/leggedrobotics/hoi-retarget"
+    },
+    {
+      "category": "motion",
+      "current_status": "excluded",
+      "exclusion_reason": "Selected 3D state/geometry files acquired; raw corpus completeness is not implied.",
+      "family": "cmu",
+      "historical_catalog_bytes": 1083549385,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "cmu",
+      "url": "https://mocap.cs.cmu.edu/"
+    },
+    {
+      "category": "human_object",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "humoto",
+      "historical_catalog_bytes": 442028012,
+      "historical_catalog_status": "partial_acquired",
+      "source": "humoto",
+      "url": "https://github.com/adobe-research/humoto"
+    },
+    {
+      "category": "human_object",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "parahome",
+      "historical_catalog_bytes": 2368662821,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "parahome",
+      "url": "https://github.com/snuvclab/ParaHome"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__columbia_cairlab_pusht_real",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__stanford_kuka_multimodal_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__nyu_rot_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__cmu_franka_exploration_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__ucsd_pick_and_place_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__usc_cloth_sim_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__utokyo_pr2_opening_fridge_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__utokyo_pr2_tabletop_manipulation_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__utokyo_saytap_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__utokyo_xarm_pick_and_place_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__utokyo_xarm_bimanual_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__kaist_nonprehensile_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__tokyo_u_lsmo_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__dlr_sara_pour_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__dlr_sara_grid_clamp_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__asu_table_top_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__stanford_robocook_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__imperialcollege_sawyer_wrist_cam",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__uiuc_d3field",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__berkeley_gnm_recon",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__berkeley_gnm_cory_hall",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__berkeley_gnm_sac_son",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__conq_hose_manipulation",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__fmb",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 4369168,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__jaco_play",
+      "url": "https://huggingface.co/datasets/lerobot/jaco_play"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "roboturk",
+      "historical_catalog_bytes": 8560679,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__roboturk",
+      "url": "https://huggingface.co/datasets/lerobot/roboturk"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 17157466,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__taco_play",
+      "url": "https://huggingface.co/datasets/lerobot/taco_play"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 1133360,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__nyu_door_opening_surprising_effectiveness",
+      "url": "https://huggingface.co/datasets/lerobot/nyu_door_opening_surprising_effectiveness"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 21660019,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__toto",
+      "url": "https://huggingface.co/datasets/lerobot/toto"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 5542047,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__berkeley_autolab_ur5",
+      "url": "https://huggingface.co/datasets/lerobot/berkeley_autolab_ur5"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 1114953,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__columbia_cairlab_pusht_real",
+      "url": "https://huggingface.co/datasets/lerobot/columbia_cairlab_pusht_real"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 10185461,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__stanford_kuka_multimodal_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/stanford_kuka_multimodal_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 22592173,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__stanford_hydra_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/stanford_hydra_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 70987,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__nyu_rot_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/nyu_rot_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 4081097,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__austin_buds_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/austin_buds_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 11733364,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__berkeley_cable_routing",
+      "url": "https://huggingface.co/datasets/lerobot/berkeley_cable_routing"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 6793839,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__nyu_franka_play_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/nyu_franka_play_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 237196,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__cmu_franka_exploration_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/cmu_franka_exploration_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 736119,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__ucsd_kitchen_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/ucsd_kitchen_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 4265966,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__ucsd_pick_and_place_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/ucsd_pick_and_place_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 17132877,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__austin_sailor_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/austin_sailor_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 16186800,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__austin_sirius_dataset",
+      "url": "https://huggingface.co/datasets/lerobot/austin_sirius_dataset"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 1309011,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__usc_cloth_sim",
+      "url": "https://huggingface.co/datasets/lerobot/usc_cloth_sim"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 1087027,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__utokyo_pr2_opening_fridge",
+      "url": "https://huggingface.co/datasets/lerobot/utokyo_pr2_opening_fridge"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 1797972,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__utokyo_pr2_tabletop_manipulation",
+      "url": "https://huggingface.co/datasets/lerobot/utokyo_pr2_tabletop_manipulation"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 4864044,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__utokyo_saytap",
+      "url": "https://huggingface.co/datasets/lerobot/utokyo_saytap"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 691446,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__utokyo_xarm_pick_and_place",
+      "url": "https://huggingface.co/datasets/lerobot/utokyo_xarm_pick_and_place"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 218895,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__utokyo_xarm_bimanual",
+      "url": "https://huggingface.co/datasets/lerobot/utokyo_xarm_bimanual"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 4244774,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__berkeley_mvp",
+      "url": "https://huggingface.co/datasets/lerobot/berkeley_mvp"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 25815114,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__berkeley_rpt",
+      "url": "https://huggingface.co/datasets/lerobot/berkeley_rpt"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 1555179,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__tokyo_u_lsmo",
+      "url": "https://huggingface.co/datasets/lerobot/tokyo_u_lsmo"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 1165778,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__dlr_sara_pour",
+      "url": "https://huggingface.co/datasets/lerobot/dlr_sara_pour"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 2824578,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__kaist_nonprehensile",
+      "url": "https://huggingface.co/datasets/lerobot/kaist_nonprehensile"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 1017686,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__dlr_sara_grid_clamp",
+      "url": "https://huggingface.co/datasets/lerobot/dlr_sara_grid_clamp"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 857106,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__dlr_edan_shared_control",
+      "url": "https://huggingface.co/datasets/lerobot/dlr_edan_shared_control"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 2544621,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__asu_table_top",
+      "url": "https://huggingface.co/datasets/lerobot/asu_table_top"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 9689394,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__stanford_robocook",
+      "url": "https://huggingface.co/datasets/lerobot/stanford_robocook"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 10659338,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__iamlab_cmu_pickup_insert",
+      "url": "https://huggingface.co/datasets/lerobot/iamlab_cmu_pickup_insert"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 17958404,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__utaustin_mutex",
+      "url": "https://huggingface.co/datasets/lerobot/utaustin_mutex"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 2960436,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__berkeley_fanuc_manipulation",
+      "url": "https://huggingface.co/datasets/lerobot/berkeley_fanuc_manipulation"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 532445,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__imperialcollege_sawyer_wrist_cam",
+      "url": "https://huggingface.co/datasets/lerobot/imperialcollege_sawyer_wrist_cam"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 564632,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__uiuc_d3field",
+      "url": "https://huggingface.co/datasets/lerobot/uiuc_d3field"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 753160,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__cmu_stretch",
+      "url": "https://huggingface.co/datasets/lerobot/cmu_stretch"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 15020699,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__cmu_play_fusion",
+      "url": "https://huggingface.co/datasets/lerobot/cmu_play_fusion"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 13857193,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__berkeley_gnm_cory_hall",
+      "url": "https://huggingface.co/datasets/lerobot/berkeley_gnm_cory_hall"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 11916752,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__berkeley_gnm_sac_son",
+      "url": "https://huggingface.co/datasets/lerobot/berkeley_gnm_sac_son"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 3613306,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__conq_hose_manipulation",
+      "url": "https://huggingface.co/datasets/lerobot/conq_hose_manipulation"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 20041896,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__fmb",
+      "url": "https://huggingface.co/datasets/lerobot/fmb"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 41572667,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__berkeley_gnm_recon",
+      "url": "https://huggingface.co/datasets/lerobot/berkeley_gnm_recon"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 2365352,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_sim_transfer_cube_human",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_sim_transfer_cube_human"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 3504835,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_sim_insertion_scripted",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_sim_insertion_scripted"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "umi",
+      "historical_catalog_bytes": 30129933,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__umi_cup_in_the_wild",
+      "url": "https://huggingface.co/datasets/lerobot/umi_cup_in_the_wild"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 2718636,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_sim_transfer_cube_scripted",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_sim_transfer_cube_scripted"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 20375465,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__libero",
+      "url": "https://huggingface.co/datasets/lerobot/libero"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 2956484,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_sim_insertion_human",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_sim_insertion_human"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 1703764,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_candy",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_candy"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 1762109,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_tape",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_tape"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 1442561,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_screw_driver",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_screw_driver"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "mobile_aloha",
+      "historical_catalog_bytes": 4054087,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_mobile_wipe_wine",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_mobile_wipe_wine"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 1956130,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_towel",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_towel"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 3485701,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_coffee",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_coffee"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 1285710,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_battery",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_battery"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 1718508,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_thread_velcro",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_thread_velcro"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 3390844,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_vinh_cup_left",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_vinh_cup_left"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 3122523,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_vinh_cup",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_vinh_cup"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 5093115,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_coffee_new",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_coffee_new"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 949949,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_ziploc_slide",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_ziploc_slide"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 513928,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_pingpong_test",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_pingpong_test"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 1068944,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_cups_open",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_cups_open"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 4013640,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_fork_pick_up",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_fork_pick_up"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 675064,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_static_pro_pencil",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_static_pro_pencil"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "mobile_aloha",
+      "historical_catalog_bytes": 4458733,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_mobile_shrimp",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_mobile_shrimp"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "mobile_aloha",
+      "historical_catalog_bytes": 3388135,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_mobile_wash_pan",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_mobile_wash_pan"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "mobile_aloha",
+      "historical_catalog_bytes": 9229134,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_mobile_cabinet",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_mobile_cabinet"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "mobile_aloha",
+      "historical_catalog_bytes": 7636729,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_mobile_chair",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_mobile_chair"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__aloha_sim_insertion_scripted_image",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_sim_insertion_scripted_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "mobile_aloha",
+      "historical_catalog_bytes": 2517818,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__aloha_mobile_elevator",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_mobile_elevator"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__aloha_sim_transfer_cube_human_image",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_sim_transfer_cube_human_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__aloha_sim_transfer_cube_scripted_image",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_sim_transfer_cube_scripted_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "aloha",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__aloha_sim_insertion_human_image",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_sim_insertion_human_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "droid",
+      "historical_catalog_bytes": 2856273,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__droid_100",
+      "url": "https://huggingface.co/datasets/lerobot/droid_100"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__metaworld_mt50_push_v2_image",
+      "url": "https://huggingface.co/datasets/lerobot/metaworld_mt50_push_v2_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 15835344,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__metaworld_mt50",
+      "url": "https://huggingface.co/datasets/lerobot/metaworld_mt50"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__libero_spatial_image",
+      "url": "https://huggingface.co/datasets/lerobot/libero_spatial_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__libero_goal_image",
+      "url": "https://huggingface.co/datasets/lerobot/libero_goal_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__libero_10_image",
+      "url": "https://huggingface.co/datasets/lerobot/libero_10_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "mobile_aloha",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__aloha_mobile_shrimp_image",
+      "url": "https://huggingface.co/datasets/lerobot/aloha_mobile_shrimp_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "droid",
+      "historical_catalog_bytes": 12644613640,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__droid_1.0.1",
+      "url": "https://huggingface.co/datasets/lerobot/droid_1.0.1"
+    },
+    {
+      "category": "robot",
+      "current_status": "excluded",
+      "exclusion_reason": "No eligible state payload selected from this release.",
+      "family": "libero",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__lerobot__libero-assets",
+      "url": "https://huggingface.co/datasets/lerobot/libero-assets"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__libero_object_image",
+      "url": "https://huggingface.co/datasets/lerobot/libero_object_image"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 7808223,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__libero_10",
+      "url": "https://huggingface.co/datasets/lerobot/libero_10"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 121269476,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__libero_plus",
+      "url": "https://huggingface.co/datasets/lerobot/libero_plus"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__libero_10_image_subtask",
+      "url": "https://huggingface.co/datasets/lerobot/libero_10_image_subtask"
+    },
+    {
+      "category": "robot",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "robocasa",
+      "historical_catalog_bytes": 1076136590,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__lerobot__robocasa_target_human_unified",
+      "url": "https://huggingface.co/datasets/lerobot/robocasa_target_human_unified"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "libero",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__lerobot__libero_10_subtask",
+      "url": "https://huggingface.co/datasets/lerobot/libero_10_subtask"
+    },
+    {
+      "category": "simulation",
+      "current_status": "present_not_queued",
+      "exclusion_reason": null,
+      "family": "robosuite_can_assets",
+      "historical_catalog_bytes": 151925,
+      "historical_catalog_status": "metadata_only",
+      "source": "robosuite_can_assets",
+      "url": "https://github.com/ARISE-Initiative/robosuite/tree/v1.5.1"
+    },
+    {
+      "category": "motion",
+      "current_status": "excluded",
+      "exclusion_reason": "Selected 3D state/geometry files acquired; raw corpus completeness is not implied.",
+      "family": "lafan1",
+      "historical_catalog_bytes": 501461962,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "lafan1",
+      "url": "https://github.com/ubisoft/ubisoft-laforge-animation-dataset"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oakink",
+      "historical_catalog_bytes": 6435921021,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__oakink__OakInk-v1",
+      "url": "https://huggingface.co/datasets/oakink/OakInk-v1"
+    },
+    {
+      "category": "human_object",
+      "current_status": "excluded",
+      "exclusion_reason": "No eligible state payload selected from this release.",
+      "family": "hodome",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__JuzeZhang__HOI-M3",
+      "url": "https://huggingface.co/datasets/JuzeZhang/HOI-M3"
+    },
+    {
+      "category": "simulation",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "maniskill",
+      "historical_catalog_bytes": 4667274889,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "hf__haosulab__ManiSkill_Demonstrations",
+      "url": "https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations"
+    },
+    {
+      "category": "simulation",
+      "current_status": "pipeline_tasks_recorded",
+      "exclusion_reason": null,
+      "family": "mimicgen",
+      "historical_catalog_bytes": 1265589333,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__amandlek__mimicgen_datasets",
+      "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "h2o",
+      "historical_catalog_bytes": 431890819,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "hf__MIT-Media-Lab__h2o-annotations-v1",
+      "url": "https://huggingface.co/datasets/MIT-Media-Lab/h2o-annotations-v1"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "fastumi",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__FastUMI-Data",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/FastUMI-Data"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "intermimic",
+      "historical_catalog_bytes": 1682281679,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "intermimic",
+      "url": "https://github.com/Sirui-Xu/InterMimic"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hot3d",
+      "historical_catalog_bytes": 1629203868,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__MIT-Media-Lab__hot3d-annotations-v1",
+      "url": "https://huggingface.co/datasets/MIT-Media-Lab/hot3d-annotations-v1"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hoi4d",
+      "historical_catalog_bytes": 1024080666,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__JingkunAn__lerobot_hoi4d_dataset",
+      "url": "https://huggingface.co/datasets/JingkunAn/lerobot_hoi4d_dataset"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "ho3d",
+      "historical_catalog_bytes": 1287669364,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__Ronaldo-GOAT__ho3d_transfer",
+      "url": "https://huggingface.co/datasets/Ronaldo-GOAT/ho3d_transfer"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "furniturebench",
+      "historical_catalog_bytes": 335561169,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__IPEC-COMMUNITY__furniture_bench_dataset_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/furniture_bench_dataset_lerobot"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hot3d",
+      "historical_catalog_bytes": 413142827,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "hf__bop-benchmark__hot3d",
+      "url": "https://huggingface.co/datasets/bop-benchmark/hot3d"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "fastumi",
+      "historical_catalog_bytes": 1361605715,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__IPEC-COMMUNITY__FastUMI_100k_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/FastUMI_100k_lerobot"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "taco",
+      "historical_catalog_bytes": 15716991730,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "taco",
+      "url": "https://github.com/leolyliu/TACO-Instructions"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "interact",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "access_required",
+      "source": "interact",
+      "url": "https://github.com/wzyabcas/InterAct"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "chairs",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "access_required",
+      "source": "chairs",
+      "url": "https://jnnan.github.io/chairs/"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "fastumi",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "fastumi",
+      "url": "https://github.com/YdingTeam/FastUMI"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hoim3",
+      "historical_catalog_bytes": 7592395525,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hoim3",
+      "url": "https://drive.google.com/drive/folders/1pXUHX0Y9Q6IVKNxjzz7iuRoFPCGociOF"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hodome",
+      "historical_catalog_bytes": 1583258368,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hodome",
+      "url": "https://github.com/Juzezhang/NeuralDome_Toolbox"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__fractal20220817_data_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__fractal20220817_data_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/fractal20220817_data_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "mobile_aloha",
+      "historical_catalog_bytes": 335992,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__aloha_mobile",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "bridge",
+      "historical_catalog_bytes": 397693,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__bridge",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 394490,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__cmu_playing_with_food",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 810795,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__eth_agent_affordances",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 9311892,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__fractal20220817_data",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 602873,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__io_ai_tech",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 3904949,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__maniskill_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 2753651,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__mimic_play",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 3290617,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__plex_robosuite",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 3055322,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__robo_net",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 500207,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__robo_set",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 4333268,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__robot_vqa",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 18996777,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__spoc",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 518536,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__stanford_mask_vit_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 786448,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__tidybot",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 19659233,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__vima_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__jaco_play_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__jaco_play_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/jaco_play_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "roboturk",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__roboturk_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/roboturk_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__nyu_door_opening_surprising_effectiveness_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__nyu_door_opening_surprising_effectiveness_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/nyu_door_opening_surprising_effectiveness_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__toto_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__toto_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/toto_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__berkeley_autolab_ur5_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__berkeley_autolab_ur5_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/berkeley_autolab_ur5_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__berkeley_cable_routing_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__berkeley_cable_routing_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/berkeley_cable_routing_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__austin_buds_dataset_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__austin_buds_dataset_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/austin_buds_dataset_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__stanford_hydra_dataset_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__stanford_hydra_dataset_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/stanford_hydra_dataset_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__ucsd_kitchen_dataset_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__ucsd_kitchen_dataset_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/ucsd_kitchen_dataset_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__taco_play_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__taco_play_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/taco_play_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__nyu_franka_play_dataset_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__nyu_franka_play_dataset_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/nyu_franka_play_dataset_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__austin_sailor_dataset_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__austin_sailor_dataset_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/austin_sailor_dataset_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__berkeley_mvp_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__berkeley_mvp_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/berkeley_mvp_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__dlr_edan_shared_control_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__dlr_edan_shared_control_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/dlr_edan_shared_control_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__austin_sirius_dataset_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__austin_sirius_dataset_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/austin_sirius_dataset_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__berkeley_rpt_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__berkeley_rpt_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/berkeley_rpt_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__iamlab_cmu_pickup_insert_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__iamlab_cmu_pickup_insert_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/iamlab_cmu_pickup_insert_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__berkeley_fanuc_manipulation_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__berkeley_fanuc_manipulation_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/berkeley_fanuc_manipulation_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__cmu_stretch_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__cmu_stretch_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/cmu_stretch_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__cmu_play_fusion_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__cmu_play_fusion_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/cmu_play_fusion_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__utaustin_mutex_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__utaustin_mutex_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/utaustin_mutex_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__dobbe_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__dobbe_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/dobbe_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__viola_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__viola_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/viola_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__bc_z_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__bc_z_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/bc_z_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "hf__IPEC-COMMUNITY__kuka_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__kuka_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/kuka_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 24205442,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__kuka",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__taco_play",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__jaco_play",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__berkeley_cable_routing",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "roboturk",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__roboturk",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__nyu_door_opening_surprising_effectiveness",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 478205,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__viola",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__berkeley_autolab_ur5",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__toto",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "droid",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "hf__IPEC-COMMUNITY__droid_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/droid_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__stanford_hydra_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__austin_buds_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__nyu_franka_play_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "furniturebench",
+      "historical_catalog_bytes": 1056701,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__furniture_bench_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__ucsd_kitchen_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__austin_sailor_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__austin_sirius_dataset_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 3479298,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__bc_z",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__berkeley_mvp_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__berkeley_rpt_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__dlr_edan_shared_control_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__iamlab_cmu_pickup_insert_converted_externally_to_rlds",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__utaustin_mutex",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__berkeley_fanuc_manipulation",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__cmu_play_fusion",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "not_acquired",
+      "source": "oxe__cmu_stretch",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "droid",
+      "historical_catalog_bytes": 6214876,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__droid",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 3468038,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__dobbe",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 362456,
+      "historical_catalog_status": "partial_acquired",
+      "source": "oxe__qut_dexterous_manipulation",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "oxe",
+      "historical_catalog_bytes": 15500,
+      "historical_catalog_status": "metadata_only",
+      "source": "oxe__language_table",
+      "url": "https://github.com/google-deepmind/open_x_embodiment"
+    },
+    {
+      "category": "robot",
+      "current_status": "excluded",
+      "exclusion_reason": "Public payloads queued; acquisition not completed.",
+      "family": "hf__IPEC-COMMUNITY__language_table_lerobot",
+      "historical_catalog_bytes": 0,
+      "historical_catalog_status": "unsuitable",
+      "source": "hf__IPEC-COMMUNITY__language_table_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/language_table_lerobot"
+    },
+    {
+      "category": "robot",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "bridge",
+      "historical_catalog_bytes": 13364671,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__IPEC-COMMUNITY__bridge_orig_lerobot",
+      "url": "https://huggingface.co/datasets/IPEC-COMMUNITY/bridge_orig_lerobot"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "dexycb",
+      "historical_catalog_bytes": 2706181714,
+      "historical_catalog_status": "partial_acquired",
+      "source": "dexycb",
+      "url": "https://dex-ycb.github.io/"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "dexycb",
+      "historical_catalog_bytes": 342557403,
+      "historical_catalog_status": "partial_acquired",
+      "source": "hf__QFun__MANUS-DexYCB",
+      "url": "https://huggingface.co/datasets/QFun/MANUS-DexYCB"
+    },
+    {
+      "category": "human_object",
+      "current_status": "not_present_in_checked_stores",
+      "exclusion_reason": null,
+      "family": "omomo",
+      "historical_catalog_bytes": 22177103436,
+      "historical_catalog_status": "acquired_selected_scope",
+      "source": "omomo",
+      "url": "https://github.com/lijiaman/omomo_release"
+    }
+  ],
+  "verified_utc": "2026-10-07T07:51:02.439992+00:00"
+}

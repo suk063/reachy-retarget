@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 from scipy.spatial.transform import Rotation
 import trimesh
-from .robot import CONTROL, ARMS
+from .robot import CONTROL, ARMS, NECK
 from .store import sha256, json_write
 from .episodes import matrices_to_pose
 
@@ -39,8 +39,9 @@ def attrs(T):
     return dict(pos=numbers(p[:3]), quat=numbers(p[3:]))
 
 
-def prepare_robot(root):
-    folder = Path(root) / "data/assets/reachy_mujoco"
+def prepare_robot(root, *, include_neck=False, state_profile=False):
+    include_neck = include_neck or state_profile
+    folder = Path(root) / "data/assets" / ("reachy_mujoco_state" if state_profile else "reachy_mujoco")
     folder.mkdir(parents=True, exist_ok=True)
     u = ET.parse(CONTROL / "asset/reachy.urdf").getroot()
     links = {e.get("name"): e for e in u.findall("link")}
@@ -59,6 +60,8 @@ def prepare_robot(root):
         )
 
     dynamic = set(ARMS) | {n for n in joints if "hand_finger" in n}
+    if include_neck:
+        dynamic.update(NECK)
     mj = ET.Element("mujoco", model="reachy_state_replay")
     ET.SubElement(
         mj,
@@ -248,6 +251,17 @@ def prepare_robot(root):
             visit(b, child.find("child").get("link"), child)
 
     visit(world, "base_link")
+    camera_frames = {}
+    if state_profile:
+        body_elements = {b.get("name"): b for b in world.iter("body")}
+        for name, frame in (("torso", "depth_cam_rgb_optical"),
+                            ("left_head", "left_camera_optical"),
+                            ("right_head", "right_camera_optical")):
+            optical_to_mujoco = np.eye(4)
+            optical_to_mujoco[:3, :3] = np.diag([1., -1., -1.])
+            ET.SubElement(body_elements[frame], "camera", name=name, **attrs(optical_to_mujoco))
+            camera_frames[name] = {"frame": frame, "pose_source": "URDF optical frame", "rgb_recorded": False,
+                                   "calibration": "URDF nominal extrinsics; no fitted lens/mount calibration asserted"}
     exclusions = {
         tuple(sorted((j.find("parent").get("link"), j.find("child").get("link"))))
         for j in joints.values()
@@ -276,6 +290,9 @@ def prepare_robot(root):
     for a, b in sorted(exclusions):
         ET.SubElement(contact, "exclude", body1=a, body2=b)
     manifest = {
+        "recording_profile": "complete-state-no-rgb-v1" if state_profile else "legacy",
+        "cameras": camera_frames,
+        "neck_joints_enabled": include_neck,
         "source_urdf": str(CONTROL / "asset/reachy.urdf"),
         "source_urdf_sha256": sha256(CONTROL / "asset/reachy.urdf"),
         "meshes": source_hashes,
@@ -341,10 +358,16 @@ def scene(root, source_xml, placement, initial_object):
 
 def initialize(model, data, robot, q, mimics, grip=2.0):
     import mujoco
+    from collections.abc import Mapping
 
     values = dict(zip(ARMS, q[robot.arm_ids]))
     values.update(zip(BASE, robot.base(q)))
-    values.update({g: grip for g in GRIPPERS})
+    grippers = dict(grip) if isinstance(grip, Mapping) else {g: grip for g in GRIPPERS}
+    if set(grippers) != set(GRIPPERS) or not all(np.isfinite(v) for v in grippers.values()):
+        raise ValueError('Explicit gripper positions must give both finite gripper joint values')
+    values.update(grippers)
+    neck_names = [n for n in NECK if mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, n) >= 0]
+    values.update({n: q[robot.r.q_indices[n]] for n in neck_names})
 
     def value(n):
         if n not in values:
@@ -354,13 +377,17 @@ def initialize(model, data, robot, q, mimics, grip=2.0):
 
     for n in list(values) + list(mimics):
         data.qpos[model.joint(n).qposadr] = value(n)
-    for n in (*BASE, *ARMS, *GRIPPERS):
+    for n in (*BASE, *ARMS, *GRIPPERS, *neck_names):
         data.ctrl[model.actuator(n).id] = values[n]
     mujoco.mj_forward(model, data)
 
 
 def measured(model, data, robot):
+    import mujoco
+    neck = np.array([data.qpos[model.joint(n).qposadr[0]] if mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, n) >= 0 else 0.
+                     for n in NECK])
     return robot.pack(
         np.array([data.qpos[model.joint(n).qposadr[0]] for n in ARMS]),
         np.array([data.qpos[model.joint(n).qposadr[0]] for n in BASE]),
+        neck=neck,
     )

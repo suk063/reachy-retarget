@@ -1,0 +1,401 @@
+{
+  "source_group": "c795f62efb4f4d20ab899af96d766a2f",
+  "independent_demonstrations": 1,
+  "experiments": [
+    {
+      "pod": "frs8d",
+      "margin_rad": 0.02,
+      "contact_profile": "source",
+      "durable_workspace": "/mnt/reachy-retarget/workspaces/bigym-policy-recovery-frs8d-20261007-01",
+      "archive": {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-side-baseplan-margin-020-source.hdf5",
+        "sha256": "be8b874e50a72e552109a22435e3554569dc84acaebfc080517726cb9d797b79",
+        "bytes": 76852591
+      },
+      "cross_pod_hash_verification": "/mnt/reachy-retarget/workspaces/bigym-policy-recovery-frs8d-20261007-01/cross-pod-verification.json",
+      "common_archive_sidecar_verified": true,
+      "status": "diagnostic_failed",
+      "physics_validated": false,
+      "native_scene_task_pass": false,
+      "physical_steps": 8753,
+      "common_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": false,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "robot_self_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "finite_integration": true,
+        "actuator_replay": true
+      },
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg",
+        "object_environment_penetration_2mm"
+      ],
+      "grasp_hands": {
+        "left": {
+          "acquired": false,
+          "bilateral_carry_fraction": null,
+          "grasp_translation_m": null,
+          "grasp_rotation_rad": null,
+          "measured_carry_duration_s": 0.0,
+          "phases": 1
+        }
+      },
+      "max_lift_m": 0.0,
+      "max_contact_depths_m": {
+        "hand_object": 0.0003643220930147362,
+        "robot_environment": 1.3877787807814457e-17,
+        "object_environment": 0.004143205756627262,
+        "robot_self": 0.0
+      },
+      "inactive_hand_guard": {
+        "passed": true,
+        "complete": true,
+        "measured_steps": 8753,
+        "expected_steps": 8753,
+        "inactive_hands": [
+          "right"
+        ],
+        "positive_contact_force_threshold_n": 1e-06,
+        "positive_force_contacts": 0,
+        "events": [],
+        "timing": "Solved contacts immediately after each mj_step, before cache synchronization",
+        "scope": "Measured additional guard; source intent unchanged, no inactive hand excluded from collision checks"
+      },
+      "replay_errors": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "clock": 0.0
+      },
+      "complete_actual_states_controls_and_terminal": true,
+      "clearance_completed_frames": 2256,
+      "clearance_checks": {
+        "fixture_gap_3mm": true,
+        "full_2256_source_rows": true,
+        "recomputed_both_hand_ik": true,
+        "robot_mesh_self_penetration_2mm": true,
+        "robot_sphere_self_gap_9mm": true
+      },
+      "memory_peak_bytes": 3465134080,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "verified_files": 115,
+      "verified_bytes": 314857700
+    },
+    {
+      "pod": "k8znf",
+      "margin_rad": 0.05,
+      "contact_profile": "source",
+      "durable_workspace": "/mnt/reachy-retarget/workspaces/bigym-policy-recovery-k8znf-20261007-01",
+      "archive": {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-side-baseplan-margin-050-source.hdf5",
+        "sha256": "62579af56c928ee03ace42f044c20d0e59270e2230fb10f40b8188d95ad1a61e",
+        "bytes": 76780357
+      },
+      "cross_pod_hash_verification": "/mnt/reachy-retarget/workspaces/bigym-policy-recovery-k8znf-20261007-01/cross-pod-and-sidecars-verification.json",
+      "common_archive_sidecar_verified": true,
+      "status": "diagnostic_failed",
+      "physics_validated": false,
+      "native_scene_task_pass": false,
+      "physical_steps": 8753,
+      "common_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": false,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": false,
+        "robot_self_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "finite_integration": true,
+        "actuator_replay": true
+      },
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg",
+        "object_environment_penetration_2mm"
+      ],
+      "grasp_hands": {
+        "left": {
+          "acquired": false,
+          "bilateral_carry_fraction": null,
+          "grasp_translation_m": null,
+          "grasp_rotation_rad": null,
+          "measured_carry_duration_s": 0.0,
+          "phases": 1
+        }
+      },
+      "max_lift_m": 0.0,
+      "max_contact_depths_m": {
+        "hand_object": 0.0003577178225415566,
+        "robot_environment": 1.3877787807814457e-17,
+        "object_environment": 0.004143205756627262,
+        "robot_self": 0.0
+      },
+      "inactive_hand_guard": {
+        "passed": true,
+        "complete": true,
+        "measured_steps": 8753,
+        "expected_steps": 8753,
+        "inactive_hands": [
+          "right"
+        ],
+        "positive_contact_force_threshold_n": 1e-06,
+        "positive_force_contacts": 0,
+        "events": [],
+        "timing": "Solved contacts immediately after each mj_step, before cache synchronization",
+        "scope": "Measured additional guard; source intent unchanged, no inactive hand excluded from collision checks"
+      },
+      "replay_errors": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "clock": 0.0
+      },
+      "complete_actual_states_controls_and_terminal": true,
+      "clearance_completed_frames": 2256,
+      "clearance_checks": {
+        "fixture_gap_3mm": true,
+        "full_2256_source_rows": true,
+        "recomputed_both_hand_ik": true,
+        "robot_mesh_self_penetration_2mm": true,
+        "robot_sphere_self_gap_9mm": true
+      },
+      "memory_peak_bytes": 3415146496,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "verified_files": 115,
+      "verified_bytes": 314841587
+    },
+    {
+      "pod": "nl77d",
+      "margin_rad": 0.05,
+      "contact_profile": "global-contact-4ms",
+      "durable_workspace": "/mnt/reachy-retarget/workspaces/bigym-policy-recovery-nl77d-20261007-01",
+      "archive": {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-side-baseplan-margin-050-global-contact-4ms.hdf5",
+        "sha256": "e7584cafc159d7a1d1e85b6519e05be1595eb25eccb1f9f855f9cf365e02291f",
+        "bytes": 158007258
+      },
+      "cross_pod_hash_verification": "/mnt/reachy-retarget/workspaces/bigym-policy-recovery-nl77d-20261007-01/cross-pod-and-sidecars-verification.json",
+      "common_archive_sidecar_verified": true,
+      "status": "diagnostic_failed",
+      "physics_validated": false,
+      "native_scene_task_pass": false,
+      "physical_steps": 17506,
+      "common_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": false,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "robot_self_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "finite_integration": true,
+        "actuator_replay": true
+      },
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg"
+      ],
+      "grasp_hands": {
+        "left": {
+          "acquired": false,
+          "bilateral_carry_fraction": null,
+          "grasp_translation_m": null,
+          "grasp_rotation_rad": null,
+          "measured_carry_duration_s": 0.0,
+          "phases": 1
+        }
+      },
+      "max_lift_m": 0.0,
+      "max_contact_depths_m": {
+        "hand_object": 0.0003140906153255878,
+        "robot_environment": 1.3877787807814457e-17,
+        "object_environment": 0.0017905449846892458,
+        "robot_self": 0.0
+      },
+      "inactive_hand_guard": {
+        "passed": true,
+        "complete": true,
+        "measured_steps": 17506,
+        "expected_steps": 17506,
+        "inactive_hands": [
+          "right"
+        ],
+        "positive_contact_force_threshold_n": 1e-06,
+        "positive_force_contacts": 0,
+        "events": [],
+        "timing": "Solved contacts immediately after each mj_step, before cache synchronization",
+        "scope": "Measured additional guard; source intent unchanged, no inactive hand excluded from collision checks"
+      },
+      "replay_errors": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "clock": 0.0
+      },
+      "complete_actual_states_controls_and_terminal": true,
+      "clearance_completed_frames": 2256,
+      "clearance_checks": {
+        "fixture_gap_3mm": true,
+        "full_2256_source_rows": true,
+        "recomputed_both_hand_ik": true,
+        "robot_mesh_self_penetration_2mm": true,
+        "robot_sphere_self_gap_9mm": true
+      },
+      "memory_peak_bytes": 3845627904,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "verified_files": 118,
+      "verified_bytes": 485847629
+    },
+    {
+      "pod": "525jz",
+      "margin_rad": 0.02,
+      "contact_profile": "global-contact-4ms",
+      "durable_workspace": "/mnt/reachy-retarget/workspaces/bigym-policy-recovery-525jz-20261007-01",
+      "archive": {
+        "path": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-side-baseplan-margin-020-global-contact-4ms.hdf5",
+        "sha256": "cd70d922053b8eb202b4796801b1fd0bd20244b01fe208a0c806930dc03cea3e",
+        "bytes": 157957514
+      },
+      "cross_pod_hash_verification": "/mnt/reachy-retarget/workspaces/bigym-policy-recovery-525jz-20261007-01/cross-pod-and-sidecars-verification.json",
+      "common_archive_sidecar_verified": true,
+      "status": "diagnostic_failed",
+      "physics_validated": false,
+      "native_scene_task_pass": false,
+      "physical_steps": 17506,
+      "common_gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": false,
+        "carry_contact_95pct": false,
+        "grasp_translation_3mm": false,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "robot_self_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "finite_integration": true,
+        "actuator_replay": true
+      },
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "bilateral_lifted_grasp",
+        "carry_contact_95pct",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg"
+      ],
+      "grasp_hands": {
+        "left": {
+          "acquired": false,
+          "bilateral_carry_fraction": null,
+          "grasp_translation_m": null,
+          "grasp_rotation_rad": null,
+          "measured_carry_duration_s": 0.0,
+          "phases": 1
+        }
+      },
+      "max_lift_m": 0.0,
+      "max_contact_depths_m": {
+        "hand_object": 0.00030832063533372823,
+        "robot_environment": 1.3877787807814457e-17,
+        "object_environment": 0.0017905449846892458,
+        "robot_self": 0.0
+      },
+      "inactive_hand_guard": {
+        "passed": true,
+        "complete": true,
+        "measured_steps": 17506,
+        "expected_steps": 17506,
+        "inactive_hands": [
+          "right"
+        ],
+        "positive_contact_force_threshold_n": 1e-06,
+        "positive_force_contacts": 0,
+        "events": [],
+        "timing": "Solved contacts immediately after each mj_step, before cache synchronization",
+        "scope": "Measured additional guard; source intent unchanged, no inactive hand excluded from collision checks"
+      },
+      "replay_errors": {
+        "qpos": 0.0,
+        "qvel": 0.0,
+        "object_pose": 1.2212453270876722e-15,
+        "clock": 0.0
+      },
+      "complete_actual_states_controls_and_terminal": true,
+      "clearance_completed_frames": 2256,
+      "clearance_checks": {
+        "fixture_gap_3mm": true,
+        "full_2256_source_rows": true,
+        "recomputed_both_hand_ik": true,
+        "robot_mesh_self_penetration_2mm": true,
+        "robot_sphere_self_gap_9mm": true
+      },
+      "memory_peak_bytes": 4289355776,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+      "verified_files": 118,
+      "verified_bytes": 485717345
+    }
+  ],
+  "successful_physical_experiments": 0,
+  "attempt_source": "v23 plus explicit module overlay",
+  "producer_overlay_sha256": "2511b26774b7fe4ea2feb2ac250d1c459230e65ee765c7881bc6044a912e1043",
+  "available_source_pose_interval_s": [
+    0.002,
+    4.512
+  ],
+  "source_frames": 2256,
+  "physical_duration_s": 17.506,
+  "source_first_preaction_2ms_not_reconstructed": true,
+  "scope": "Development variants, not independent demonstrations. Every run remains diagnostic and failed acquisition; shared archive complete is not physics success.",
+  "bigym-policy-acquisition-audit-20261007-01": {
+    "path": "/mnt/reachy-retarget/workspaces/bigym-policy-acquisition-audit-20261007-01/result.json",
+    "sha256": "532a3accbc08358f4247cd1c71e2b2ba457ae33fc83f58cd3e9b0f03320ca30b"
+  },
+  "bigym-servo-lag-decomposition-20261007-01": {
+    "path": "/mnt/reachy-retarget/workspaces/bigym-servo-lag-decomposition-20261007-01/result.json",
+    "sha256": "255ac860053c3fabf0b97b41df70c369f8f59fececad6a77831160153301ae90"
+  },
+  "oom_failure_record": "/mnt/reachy-retarget/workspaces/bigym-side-baseplan-oom-recovery-20261007-01/oom-interruptions.json",
+  "disk_admission_rejection": "/mnt/reachy-retarget/workspaces/bigym-side-baseplan-oom-recovery-20261007-01/ccchs-disk-admission-rejection.json"
+}

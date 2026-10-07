@@ -1,0 +1,3048 @@
+{
+  "schema": "can-phase-diagnosis-v1",
+  "date": "2026-10-07",
+  "independent_source_denominator": 22,
+  "source_provenance": {
+    "provenance": [
+      {
+        "bytes": 46889752,
+        "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+        "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+        "source_id": "hf__robomimic__robomimic_datasets",
+        "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+      }
+    ],
+    "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+    "source_urls": [
+      "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+    ]
+  },
+  "model_constraints": [
+    "Original source object geometry, mass, friction and contact model retained",
+    "Physical validation only writes robot actuator commands after initial reset",
+    "All failed attempts remain stored",
+    "Infrastructure failures are not physical measurements"
+  ],
+  "diagnostic_inputs": [
+    {
+      "path": "/tmp/can-selected-physics-phases-v1.json",
+      "sha256": "e548d60f697d25515f2dfd71528d54e8511f6340c616aace979522cb5f6ee5cc"
+    },
+    {
+      "path": "/tmp/can-aec-support-gap-v1.json",
+      "sha256": "9e588a8e759b1405a115340da5387bed38ca6d63a55028aa39b9484799574f44"
+    }
+  ],
+  "selected_failed_source_phases": [
+    {
+      "source": "47cc92a1a140ab580b44c6c1",
+      "job": "additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_002",
+      "attempt": "/mnt/reachy-retarget/workspaces/additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_002/runs/dynamics/additional-can-selected-physics-v1-47cc92a1a140ab580b44c6c1-contact_002/47cc92a1a140ab580b44c6c1",
+      "failed": [
+        "grasp_rotation_3deg"
+      ],
+      "metrics": {
+        "max_grasp_drift_m": 0.0023112574956796507,
+        "max_grasp_drift_deg": 4.73156405073127,
+        "bilateral_carry_fraction": 1.0,
+        "max_object_environment_penetration_m": 0.0007572014825847349,
+        "max_environment_penetration_m": 1.3877787807814457e-17,
+        "max_hand_object_penetration_m": 0.00027765591348672585,
+        "max_lift_m": 0.19434852054146623,
+        "final_stable_s": 5.569999999999926
+      },
+      "phase_summary": {
+        "original_preclose": {
+          "time_range_s": [
+            0.01,
+            2.2799999999999705
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.025204757945587384,
+          "max_hand_error_deg": 1.375407839414482,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.1731412208893455,
+          "object_z_range": [
+            0.8600860475775653,
+            0.8602823124797884
+          ]
+        },
+        "original_carry": {
+          "time_range_s": [
+            2.2899999999999694,
+            4.82999999999969
+          ],
+          "max_drift_m": 0.0011588644646823403,
+          "max_drift_deg": 1.378583280705726,
+          "max_hand_error_m": 0.03929272599344333,
+          "max_hand_error_deg": 3.782913231657043,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 10.047060121947506,
+          "object_z_range": [
+            0.8598249981599129,
+            1.049851699261059
+          ]
+        },
+        "traverse": {
+          "time_range_s": [
+            4.839999999999689,
+            7.479999999999398
+          ],
+          "max_drift_m": 0.0016242425738080633,
+          "max_drift_deg": 3.329680958961497,
+          "max_hand_error_m": 0.018407898136597788,
+          "max_hand_error_deg": 4.404332510240209,
+          "min_bilateral_fraction": 1.0,
+          "max_support_N": 0.0,
+          "object_z_range": [
+            1.0177156772753024,
+            1.0543485205414662
+          ]
+        },
+        "lower": {
+          "time_range_s": [
+            7.489999999999397,
+            11.89000000000064
+          ],
+          "max_drift_m": 0.0023112574956796507,
+          "max_drift_deg": 4.73156405073127,
+          "max_hand_error_m": 0.008454101219355166,
+          "max_hand_error_deg": 0.7150227435781787,
+          "min_bilateral_fraction": 1.0,
+          "max_support_N": 4.138654627988378,
+          "object_z_range": [
+            0.8657395936272614,
+            1.0177032974366147
+          ]
+        },
+        "hold": {
+          "time_range_s": [
+            11.900000000000643,
+            12.240000000000757
+          ],
+          "max_drift_m": 0.0022367160816639748,
+          "max_drift_deg": 4.644836290707928,
+          "max_hand_error_m": 0.0036099396763438546,
+          "max_hand_error_deg": 0.3947941873933917,
+          "min_bilateral_fraction": 1.0,
+          "max_support_N": 2.123042100533782,
+          "object_z_range": [
+            0.8658583446968692,
+            0.8659039183015386
+          ]
+        },
+        "open": {
+          "time_range_s": [
+            12.25000000000076,
+            13.040000000001024
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.0035353209523600626,
+          "max_hand_error_deg": 0.38765029089345154,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 1.8971274667627758,
+          "object_z_range": [
+            0.8634188940707694,
+            0.8661198560256662
+          ]
+        },
+        "retreat": {
+          "time_range_s": [
+            13.050000000001027,
+            17.450000000001207
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.0071457934812747615,
+          "max_hand_error_deg": 0.5451798070534493,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.18660304022610996,
+          "object_z_range": [
+            0.8602374846322425,
+            0.8634188309686394
+          ]
+        },
+        "return": {
+          "time_range_s": [
+            17.4600000000012,
+            20.09999999999974
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.01099986667787107,
+          "max_hand_error_deg": 4.4304935366154,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.1569228489032049,
+          "object_z_range": [
+            0.8602823124797689,
+            0.8602823124797698
+          ]
+        },
+        "original_suffix": {
+          "time_range_s": [
+            20.109999999999733,
+            23.08999999999808
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.02180768856489369,
+          "max_hand_error_deg": 2.583249875443077,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.1569228489033216,
+          "object_z_range": [
+            0.860282312479769,
+            0.8602823124797704
+          ]
+        }
+      },
+      "events": [
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 0,
+            "time_s": 0.01,
+            "phase": "original_preclose",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.0,
+            "normal_force": 2.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 1.0151852640356177e-05,
+            "hand_error_deg": 0.0008850075156552148,
+            "object_position": [
+              0.5104088604209949,
+              -0.09164139224056428,
+              0.8600860475775653
+            ],
+            "hand_position": [
+              0.5129817552114839,
+              -0.06984230808721589,
+              1.024076906957795
+            ],
+            "target_position": [
+              0.5129719027953896,
+              -0.0698399844617727,
+              1.0240776755759942
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.15692284890310296,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 228,
+            "time_s": 2.2899999999999694,
+            "phase": "original_carry",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310296,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1278925290636415,
+            "hand_error_m": 0.005100973906603508,
+            "hand_error_deg": 0.1272611329819464,
+            "object_position": [
+              0.5104111822382055,
+              -0.09163972689378116,
+              0.8602823124797695
+            ],
+            "hand_position": [
+              0.4627163508410383,
+              -0.09706667557981813,
+              0.9091409873997337
+            ],
+            "target_position": [
+              0.46216541740513595,
+              -0.09717176462125922,
+              0.9040709416959531
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "traverse",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 483,
+            "time_s": 4.839999999999689,
+            "phase": "traverse",
+            "drift_m": 0.0008751764808126625,
+            "drift_deg": 1.346352135259756,
+            "bilateral_fraction": 1.0,
+            "support_N": 0.0,
+            "normal_force": 6.141013097253658,
+            "gripper_target_rad": 1.1278925290636415,
+            "hand_error_m": 0.018407898136597788,
+            "hand_error_deg": 3.7353671540589257,
+            "object_position": [
+              0.8638291692705474,
+              -0.24016478487871445,
+              1.0504459954034446
+            ],
+            "hand_position": [
+              0.8056923855285345,
+              -0.22015650366542422,
+              1.0669782170723887
+            ],
+            "target_position": [
+              0.8211423192120115,
+              -0.2291426678886566,
+              1.0713826597768203
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 748,
+            "time_s": 7.489999999999397,
+            "phase": "lower",
+            "drift_m": 0.001626977994372849,
+            "drift_deg": 3.3329168600408434,
+            "bilateral_fraction": 1.0,
+            "support_N": 0.0,
+            "normal_force": 3.977574497774383,
+            "gripper_target_rad": 1.1278925290636415,
+            "hand_error_m": 0.0011532221414195416,
+            "hand_error_deg": 0.7150227435781787,
+            "object_position": [
+              0.9784427961412002,
+              -0.3179662165205868,
+              1.0177032974366147
+            ],
+            "hand_position": [
+              0.9525448561847224,
+              -0.29530211427795566,
+              1.071479499287837
+            ],
+            "target_position": [
+              0.952288266717129,
+              -0.2964222505472044,
+              1.0713826597768203
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1102,
+            "support_force_N": 3.123198521593809,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1114,
+            "time_s": 11.150000000000393,
+            "phase": "lower",
+            "drift_m": 0.0022807631051338646,
+            "drift_deg": 4.623512670643156,
+            "bilateral_fraction": 1.0,
+            "support_N": 3.123198521593809,
+            "normal_force": 1.6486839828121305,
+            "gripper_target_rad": 1.1278925290636415,
+            "hand_error_m": 0.003558475571867581,
+            "hand_error_deg": 0.1829231132439475,
+            "object_position": [
+              0.9784842832554905,
+              -0.3193432762850145,
+              0.8657764169040133
+            ],
+            "hand_position": [
+              0.9526573142115548,
+              -0.29681387257254555,
+              0.9195145260051818
+            ],
+            "target_position": [
+              0.952288266717129,
+              -0.2964222505472044,
+              0.9159969722342063
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "hold",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1102,
+            "support_force_N": 1.8805925728039714,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1189,
+            "time_s": 11.900000000000643,
+            "phase": "hold",
+            "drift_m": 0.0022367160816639748,
+            "drift_deg": 4.644836290707928,
+            "bilateral_fraction": 1.0,
+            "support_N": 1.8805925728039714,
+            "normal_force": 1.586632059785278,
+            "gripper_target_rad": 1.1278925290636415,
+            "hand_error_m": 0.0035797391287841975,
+            "hand_error_deg": 0.38854157864988714,
+            "object_position": [
+              0.9790020043415363,
+              -0.31974488044545674,
+              0.8658731948599873
+            ],
+            "hand_position": [
+              0.9532059760056264,
+              -0.29724926741821767,
+              0.9193567914238374
+            ],
+            "target_position": [
+              0.952288266717129,
+              -0.2964222505472044,
+              0.9159969722342063
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "open",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1102,
+            "support_force_N": 1.8971274667627758,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1224,
+            "time_s": 12.25000000000076,
+            "phase": "open",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.4,
+            "support_N": 1.8971274667627758,
+            "normal_force": 1.9029030969995733,
+            "gripper_target_rad": 1.4,
+            "hand_error_m": 0.0035353209523600626,
+            "hand_error_deg": 0.38765029089345154,
+            "object_position": [
+              0.9790295424335266,
+              -0.3197791522273508,
+              0.8659641858305887
+            ],
+            "hand_position": [
+              0.9532259430851973,
+              -0.29725429025539757,
+              0.9193025685781285
+            ],
+            "target_position": [
+              0.952288266717129,
+              -0.2964222505472044,
+              0.9159969722342063
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "retreat",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1102,
+            "support_force_N": 0.17758823026522433,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1304,
+            "time_s": 13.050000000001027,
+            "phase": "retreat",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.17758823026522433,
+            "normal_force": 0.025563385923479648,
+            "gripper_target_rad": 1.4,
+            "hand_error_m": 8.59832732023327e-05,
+            "hand_error_deg": 0.009342170462428181,
+            "object_position": [
+              0.9676137927256019,
+              -0.3171782273513184,
+              0.8634188309686394
+            ],
+            "hand_position": [
+              0.9522761606539424,
+              -0.2964692108966645,
+              0.9160679742911011
+            ],
+            "target_position": [
+              0.952288266717129,
+              -0.2964222505472044,
+              0.9159969722342063
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "return",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1102,
+            "support_force_N": 0.15692284890310537,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1745,
+            "time_s": 17.4600000000012,
+            "phase": "return",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310537,
+            "normal_force": 0.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 0.0009352496398005475,
+            "hand_error_deg": 0.5470283328661799,
+            "object_position": [
+              0.9608246072005764,
+              -0.3167422897986078,
+              0.8602823124797694
+            ],
+            "hand_position": [
+              0.9528425516168838,
+              -0.2957032643753941,
+              1.071607424149879
+            ],
+            "target_position": [
+              0.952288266717129,
+              -0.2964222505472044,
+              1.0713826597768203
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "source",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1102,
+            "support_force_N": 0.15692284890309632,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 2010,
+            "time_s": 20.109999999999733,
+            "phase": "original_suffix",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890309632,
+            "normal_force": 0.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 0.000973763862780191,
+            "hand_error_deg": 0.6215693057154361,
+            "object_position": [
+              0.9608246161884288,
+              -0.3167422899190358,
+              0.8602823124797695
+            ],
+            "hand_position": [
+              0.8219124215267802,
+              -0.2289985064610578,
+              1.070804407264472
+            ],
+            "target_position": [
+              0.8211423192120115,
+              -0.2291426678886566,
+              1.0713826597768203
+            ]
+          }
+        }
+      ],
+      "first_rotation_failure": {
+        "frame": 681,
+        "time_s": 6.819999999999471,
+        "phase": "traverse",
+        "drift_m": 0.0013100786022149237,
+        "drift_deg": 3.014133339460704,
+        "bilateral_fraction": 1.0,
+        "support_N": 0.0,
+        "normal_force": 4.278580692128329,
+        "gripper_target_rad": 1.1278925290636415,
+        "hand_error_m": 0.006443072922376575,
+        "hand_error_deg": 3.2210438174066627,
+        "object_position": [
+          0.9662503259151364,
+          -0.307669968045203,
+          1.020846247436614
+        ],
+        "hand_position": [
+          0.933625941800504,
+          -0.2848160710773186,
+          1.071025208846871
+        ],
+        "target_position": [
+          0.9382937744676856,
+          -0.28924289338083753,
+          1.0713826597768203
+        ]
+      },
+      "peak_rotation": {
+        "frame": 1127,
+        "time_s": 11.280000000000436,
+        "phase": "lower",
+        "drift_m": 0.00227567598501755,
+        "drift_deg": 4.73156405073127,
+        "bilateral_fraction": 1.0,
+        "support_N": 3.207532030811792,
+        "normal_force": 1.888896178568628,
+        "gripper_target_rad": 1.1278925290636415,
+        "hand_error_m": 0.0034946604652244277,
+        "hand_error_deg": 0.2913274318915981,
+        "object_position": [
+          0.9787386491633239,
+          -0.31949980461710137,
+          0.8657408763780986
+        ],
+        "hand_position": [
+          0.9529288077838638,
+          -0.29703364066133936,
+          0.9193775877162401
+        ],
+        "target_position": [
+          0.952288266717129,
+          -0.2964222505472044,
+          0.9159969722342063
+        ]
+      },
+      "peak_translation": {
+        "frame": 1058,
+        "time_s": 10.590000000000206,
+        "phase": "lower",
+        "drift_m": 0.0023112574956796507,
+        "drift_deg": 4.498387669231854,
+        "bilateral_fraction": 1.0,
+        "support_N": 0.0,
+        "normal_force": 2.348737656232811,
+        "gripper_target_rad": 1.1278925290636415,
+        "hand_error_m": 0.006382773931663708,
+        "hand_error_deg": 0.05945774925397671,
+        "object_position": [
+          0.9779407789324324,
+          -0.31899189828363195,
+          0.8855581616829327
+        ],
+        "hand_position": [
+          0.9521821550043983,
+          -0.29640943290016547,
+          0.9393857947982022
+        ],
+        "target_position": [
+          0.952288266717129,
+          -0.2964222505472044,
+          0.9330039158370285
+        ]
+      },
+      "first_contact_loss_after_anchor": null,
+      "first_tracking_error_10mm": {
+        "frame": 77,
+        "time_s": 0.7800000000000006,
+        "phase": "original_preclose",
+        "drift_m": null,
+        "drift_deg": null,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.15692284890307168,
+        "normal_force": 0.0,
+        "gripper_target_rad": 2.0,
+        "hand_error_m": 0.010238586832810507,
+        "hand_error_deg": 1.2788047305354098,
+        "object_position": [
+          0.5104111780772858,
+          -0.09163972988061843,
+          0.8602823124797693
+        ],
+        "hand_position": [
+          0.4873295991245525,
+          -0.08748201826793697,
+          1.0236124042366457
+        ],
+        "target_position": [
+          0.4772589829996874,
+          -0.08920743052026946,
+          1.0242714215035733
+        ]
+      }
+    },
+    {
+      "source": "6e13ca00e7023c648b2d22f8",
+      "job": "additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_002",
+      "attempt": "/mnt/reachy-retarget/workspaces/additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_002/runs/dynamics/additional-can-selected-physics-v1-6e13ca00e7023c648b2d22f8-contact_002/6e13ca00e7023c648b2d22f8",
+      "failed": [
+        "grasp_rotation_3deg"
+      ],
+      "metrics": {
+        "max_grasp_drift_m": 0.001978258257706709,
+        "max_grasp_drift_deg": 4.151300338706313,
+        "bilateral_carry_fraction": 1.0,
+        "max_object_environment_penetration_m": 0.0006098906287353988,
+        "max_environment_penetration_m": 1.3877787807814457e-17,
+        "max_hand_object_penetration_m": 0.0002438654804059261,
+        "max_lift_m": 0.28088010388295015,
+        "final_stable_s": 5.7199999999999225
+      },
+      "phase_summary": {
+        "original_preclose": {
+          "time_range_s": [
+            0.01,
+            2.8799999999999044
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.031605084623458755,
+          "max_hand_error_deg": 3.1668860180726113,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.17314122088934494,
+          "object_z_range": [
+            0.8600860475775653,
+            0.8602823124797886
+          ]
+        },
+        "original_carry": {
+          "time_range_s": [
+            2.8899999999999033,
+            5.709999999999593
+          ],
+          "max_drift_m": 0.0014445347254778875,
+          "max_drift_deg": 2.8968704997183723,
+          "max_hand_error_m": 0.042464735073515364,
+          "max_hand_error_deg": 5.091208178603132,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 5.88750443718445,
+          "object_z_range": [
+            0.860161424537718,
+            1.1408801038829501
+          ]
+        },
+        "traverse": {
+          "time_range_s": [
+            5.719999999999592,
+            8.649999999999558
+          ],
+          "max_drift_m": 0.001881670388502852,
+          "max_drift_deg": 4.012947169131696,
+          "max_hand_error_m": 0.021995130881034036,
+          "max_hand_error_deg": 4.27025190557849,
+          "min_bilateral_fraction": 1.0,
+          "max_support_N": 0.0,
+          "object_z_range": [
+            1.0635662332457223,
+            1.1147704650818775
+          ]
+        },
+        "lower": {
+          "time_range_s": [
+            8.659999999999561,
+            14.200000000001411
+          ],
+          "max_drift_m": 0.001978258257706709,
+          "max_drift_deg": 4.151300338706313,
+          "max_hand_error_m": 0.008489818851932318,
+          "max_hand_error_deg": 0.31111508933251253,
+          "min_bilateral_fraction": 1.0,
+          "max_support_N": 2.632809013938301,
+          "object_z_range": [
+            0.8652812210953674,
+            1.0635543289685252
+          ]
+        },
+        "hold": {
+          "time_range_s": [
+            14.210000000001415,
+            14.550000000001528
+          ],
+          "max_drift_m": 0.0018994977610500535,
+          "max_drift_deg": 4.143999419319221,
+          "max_hand_error_m": 0.002627059021638049,
+          "max_hand_error_deg": 0.25665852117298454,
+          "min_bilateral_fraction": 1.0,
+          "max_support_N": 1.1129579755801577,
+          "object_z_range": [
+            0.8654002822738731,
+            0.8654238838567968
+          ]
+        },
+        "open": {
+          "time_range_s": [
+            14.560000000001532,
+            15.350000000001796
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.0026011328971453605,
+          "max_hand_error_deg": 0.2528697575187543,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.997384362525239,
+          "object_z_range": [
+            0.8633366897277791,
+            0.8655882593210141
+          ]
+        },
+        "retreat": {
+          "time_range_s": [
+            15.360000000001799,
+            20.899999999999295
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.007518125461349913,
+          "max_hand_error_deg": 0.09225199755761374,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.2238648803926392,
+          "object_z_range": [
+            0.8602620774667575,
+            0.8633376911871039
+          ]
+        },
+        "return": {
+          "time_range_s": [
+            20.90999999999929,
+            23.839999999997666
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.01388007454923223,
+          "max_hand_error_deg": 4.285292770768051,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890324176,
+          "object_z_range": [
+            0.8602823124797688,
+            0.8602823124797696
+          ]
+        },
+        "original_suffix": {
+          "time_range_s": [
+            23.84999999999766,
+            26.689999999996086
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.031269605825501035,
+          "max_hand_error_deg": 2.6701764670405037,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890321223,
+          "object_z_range": [
+            0.8602823124797686,
+            0.8602823124797696
+          ]
+        }
+      },
+      "events": [
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 0,
+            "time_s": 0.01,
+            "phase": "original_preclose",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.0,
+            "normal_force": 2.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 1.4857561190030474e-05,
+            "hand_error_deg": 0.0007835665745652017,
+            "object_position": [
+              0.34256441770148816,
+              -0.23509213228545,
+              0.8600860475775653
+            ],
+            "hand_position": [
+              0.459863438446003,
+              -0.048153001117899503,
+              0.988291881894114
+            ],
+            "target_position": [
+              0.4598765318813166,
+              -0.04815805543273982,
+              0.9882870071656396
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.15692284890321923,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 288,
+            "time_s": 2.8899999999999033,
+            "phase": "original_carry",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890321923,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1246716250772741,
+            "hand_error_m": 0.004458022634388275,
+            "hand_error_deg": 0.07687236080728015,
+            "object_position": [
+              0.342562424185938,
+              -0.2350900824700739,
+              0.8602823124797696
+            ],
+            "hand_position": [
+              0.3036586541742774,
+              -0.2598219685718335,
+              0.9080912204941836
+            ],
+            "target_position": [
+              0.3034123703005805,
+              -0.25949275233278896,
+              0.9036521973212068
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "traverse",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 571,
+            "time_s": 5.719999999999592,
+            "phase": "traverse",
+            "drift_m": 0.0014448638040722261,
+            "drift_deg": 2.9057003021665704,
+            "bilateral_fraction": 1.0,
+            "support_N": 0.0,
+            "normal_force": 5.002490816706747,
+            "gripper_target_rad": 1.1246716250772741,
+            "hand_error_m": 0.021995130881034036,
+            "hand_error_deg": 2.3953476186283575,
+            "object_position": [
+              0.8306791634099296,
+              -0.28996620197789613,
+              1.1147704650818775
+            ],
+            "hand_position": [
+              0.7739536471328192,
+              -0.2707336923010525,
+              1.1282669777929533
+            ],
+            "target_position": [
+              0.7911966416658641,
+              -0.27512885534674114,
+              1.115338425522532
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 865,
+            "time_s": 8.659999999999561,
+            "phase": "lower",
+            "drift_m": 0.001883321854837698,
+            "drift_deg": 4.015439968175053,
+            "bilateral_fraction": 1.0,
+            "support_N": 0.0,
+            "normal_force": 3.870463377476457,
+            "gripper_target_rad": 1.1246716250772741,
+            "hand_error_m": 0.0006591704432822965,
+            "hand_error_deg": 0.31111508933251253,
+            "object_position": [
+              0.9993370345635084,
+              -0.2995301731793419,
+              1.0635543289685252
+            ],
+            "hand_position": [
+              0.9675374315519089,
+              -0.28768872087059816,
+              1.1150891517481236
+            ],
+            "target_position": [
+              0.9681462751904693,
+              -0.28772968039297936,
+              1.115338425522532
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1334,
+            "support_force_N": 2.196925504555784,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1346,
+            "time_s": 13.470000000001168,
+            "phase": "lower",
+            "drift_m": 0.0018897763474377434,
+            "drift_deg": 4.074062857917554,
+            "bilateral_fraction": 1.0,
+            "support_N": 2.196925504555784,
+            "normal_force": 3.5925675366395677,
+            "gripper_target_rad": 1.1246716250772741,
+            "hand_error_m": 0.002587701537183553,
+            "hand_error_deg": 0.10371878978488182,
+            "object_position": [
+              0.9999650310108261,
+              -0.2997164197078141,
+              0.8653103005960491
+            ],
+            "hand_position": [
+              0.9683238137481203,
+              -0.28787150011891266,
+              0.9168502643003374
+            ],
+            "target_position": [
+              0.9681462751904693,
+              -0.28772968039297936,
+              0.9142725586399826
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "hold",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1334,
+            "support_force_N": 1.1129579755801577,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1420,
+            "time_s": 14.210000000001415,
+            "phase": "hold",
+            "drift_m": 0.0018967724570095332,
+            "drift_deg": 4.143366923642218,
+            "bilateral_fraction": 1.0,
+            "support_N": 1.1129579755801577,
+            "normal_force": 3.310945209494423,
+            "gripper_target_rad": 1.1246716250772741,
+            "hand_error_m": 0.0026140678345428284,
+            "hand_error_deg": 0.25221383277304743,
+            "object_position": [
+              1.000440405587962,
+              -0.29982191365541716,
+              0.8654002822738731
+            ],
+            "hand_position": [
+              0.9688718940288875,
+              -0.2879307508469056,
+              0.9167758362149794
+            ],
+            "target_position": [
+              0.9681462751904693,
+              -0.28772968039297936,
+              0.9142725586399826
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "open",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1334,
+            "support_force_N": 0.997384362525239,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1455,
+            "time_s": 14.560000000001532,
+            "phase": "open",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.4,
+            "support_N": 0.997384362525239,
+            "normal_force": 3.293247773571385,
+            "gripper_target_rad": 1.4,
+            "hand_error_m": 0.0026011328971453605,
+            "hand_error_deg": 0.2528697575187543,
+            "object_position": [
+              1.0004489731804116,
+              -0.29979810483581787,
+              0.8654797378712727
+            ],
+            "hand_position": [
+              0.9689066116917194,
+              -0.28790641573965914,
+              0.9167537973166746
+            ],
+            "target_position": [
+              0.9681462751904693,
+              -0.28772968039297936,
+              0.9142725586399826
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "retreat",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1334,
+            "support_force_N": 0.1740126749046104,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1535,
+            "time_s": 15.360000000001799,
+            "phase": "retreat",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.1740126749046104,
+            "normal_force": 0.010617810617389683,
+            "gripper_target_rad": 1.4,
+            "hand_error_m": 0.0005009778757104149,
+            "hand_error_deg": 0.006992801193942646,
+            "object_position": [
+              0.9910982388622365,
+              -0.30207906568399234,
+              0.8633376911871039
+            ],
+            "hand_position": [
+              0.968147262155607,
+              -0.28775154061465863,
+              0.914773058378803
+            ],
+            "target_position": [
+              0.9681462751904693,
+              -0.28772968039297936,
+              0.9142725586399826
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "return",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1334,
+            "support_force_N": 0.15692284890309752,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 2090,
+            "time_s": 20.90999999999929,
+            "phase": "return",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890309752,
+            "normal_force": 0.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 6.1001902964645256e-05,
+            "hand_error_deg": 0.09220826211041748,
+            "object_position": [
+              0.9848596532346267,
+              -0.30481558288333177,
+              0.8602823124797695
+            ],
+            "hand_position": [
+              0.9680910008735846,
+              -0.2877096026866405,
+              1.1153222123252406
+            ],
+            "target_position": [
+              0.9681462751904693,
+              -0.28772968039297936,
+              1.115338425522532
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "source",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1334,
+            "support_force_N": 0.1569228489030991,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 2384,
+            "time_s": 23.84999999999766,
+            "phase": "original_suffix",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.1569228489030991,
+            "normal_force": 0.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 0.0011160167801214308,
+            "hand_error_deg": 0.6077779997124503,
+            "object_position": [
+              0.984859651036297,
+              -0.30481557315897867,
+              0.8602823124797694
+            ],
+            "hand_position": [
+              0.7920733638929116,
+              -0.27468244132034186,
+              1.1148115800924983
+            ],
+            "target_position": [
+              0.7911966416658641,
+              -0.27512885534674114,
+              1.115338425522532
+            ]
+          }
+        }
+      ],
+      "first_rotation_failure": {
+        "frame": 672,
+        "time_s": 6.729999999999481,
+        "phase": "traverse",
+        "drift_m": 0.0014765789778333573,
+        "drift_deg": 3.0007610220386325,
+        "bilateral_fraction": 1.0,
+        "support_N": 0.0,
+        "normal_force": 4.766573930271967,
+        "gripper_target_rad": 1.1246716250772741,
+        "hand_error_m": 0.008441944614892461,
+        "hand_error_deg": 2.9801253282698,
+        "object_position": [
+          0.877359071518722,
+          -0.29602630360240484,
+          1.0929795161995204
+        ],
+        "hand_position": [
+          0.8226583962651103,
+          -0.27732620637829575,
+          1.114715417010751
+        ],
+        "target_position": [
+          0.831052893193272,
+          -0.2779670734458247,
+          1.115338425522532
+        ]
+      },
+      "peak_rotation": {
+        "frame": 1396,
+        "time_s": 13.970000000001335,
+        "phase": "lower",
+        "drift_m": 0.0019230926353894597,
+        "drift_deg": 4.151300338706313,
+        "bilateral_fraction": 1.0,
+        "support_N": 1.224146788750154,
+        "normal_force": 3.9149877601400003,
+        "gripper_target_rad": 1.1246716250772741,
+        "hand_error_m": 0.002590793023492456,
+        "hand_error_deg": 0.24516533598316437,
+        "object_position": [
+          1.000387939850775,
+          -0.2998173823405454,
+          0.8653799060705767
+        ],
+        "hand_position": [
+          0.9688179240508723,
+          -0.2879042045382264,
+          0.9167686831604387
+        ],
+        "target_position": [
+          0.9681462751904693,
+          -0.28772968039297936,
+          0.9142725586399826
+        ]
+      },
+      "peak_translation": {
+        "frame": 1093,
+        "time_s": 10.940000000000323,
+        "phase": "lower",
+        "drift_m": 0.001978258257706709,
+        "drift_deg": 4.12654162262871,
+        "bilateral_fraction": 1.0,
+        "support_N": 0.0,
+        "normal_force": 3.0942444574909334,
+        "gripper_target_rad": 1.1246716250772741,
+        "hand_error_m": 0.007659976050534303,
+        "hand_error_deg": 0.04677063222187354,
+        "object_position": [
+          0.9998329402045881,
+          -0.29968285130696615,
+          1.0018120439280942
+        ],
+        "hand_position": [
+          0.968112424366639,
+          -0.2878170949194474,
+          1.053352713827078
+        ],
+        "target_position": [
+          0.9681462751904693,
+          -0.28772968039297936,
+          1.045693311375382
+        ]
+      },
+      "first_contact_loss_after_anchor": null,
+      "first_tracking_error_10mm": {
+        "frame": 51,
+        "time_s": 0.5200000000000004,
+        "phase": "original_preclose",
+        "drift_m": null,
+        "drift_deg": null,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.15692284890310354,
+        "normal_force": 0.0,
+        "gripper_target_rad": 2.0,
+        "hand_error_m": 0.010272876691973522,
+        "hand_error_deg": 1.035229621906481,
+        "object_position": [
+          0.34256242979155577,
+          -0.23509008823168326,
+          0.8602823124797693
+        ],
+        "hand_position": [
+          0.44552448801787836,
+          -0.06754149406686252,
+          0.9914884169551834
+        ],
+        "target_position": [
+          0.4394733633663576,
+          -0.07572178831634355,
+          0.992902160910841
+        ]
+      }
+    },
+    {
+      "source": "fe117e32c6f13e7ae68c4be4",
+      "job": "additional-can-selected-physics-v1-fe117e32c6f13e7ae68c4be4-contact_002",
+      "attempt": "/mnt/reachy-retarget/workspaces/additional-can-selected-physics-v1-fe117e32c6f13e7ae68c4be4-contact_002/runs/dynamics/additional-can-selected-physics-v1-fe117e32c6f13e7ae68c4be4-contact_002/fe117e32c6f13e7ae68c4be4",
+      "failed": [
+        "carry_contact_95pct",
+        "grasp_rotation_3deg",
+        "grasp_translation_3mm",
+        "object_environment_penetration_2mm",
+        "task_stable_final_1s"
+      ],
+      "metrics": {
+        "max_grasp_drift_m": 0.5014748524970413,
+        "max_grasp_drift_deg": 43.2565425898482,
+        "bilateral_carry_fraction": 0.02871900826446281,
+        "max_object_environment_penetration_m": 0.0028557478860370407,
+        "max_environment_penetration_m": 1.3877787807814457e-17,
+        "max_hand_object_penetration_m": 0.00047230078683802647,
+        "max_lift_m": 0.07310144381729056,
+        "final_stable_s": 0.0
+      },
+      "phase_summary": {
+        "original_preclose": {
+          "time_range_s": [
+            0.01,
+            2.729999999999921
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.03164244976238979,
+          "max_hand_error_deg": 0.8485427949888434,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.1731412208893437,
+          "object_z_range": [
+            0.8600860475775653,
+            0.8602823124798249
+          ]
+        },
+        "original_carry": {
+          "time_range_s": [
+            2.73999999999992,
+            5.339999999999634
+          ],
+          "max_drift_m": 0.36756893135214336,
+          "max_drift_deg": 40.89814790339151,
+          "max_hand_error_m": 0.046758258912769746,
+          "max_hand_error_deg": 3.9822299373343277,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 6.743993608977423,
+          "object_z_range": [
+            0.8584771779860793,
+            0.9331014438172905
+          ]
+        },
+        "traverse": {
+          "time_range_s": [
+            5.349999999999633,
+            8.059999999999361
+          ],
+          "max_drift_m": 0.5014457593297611,
+          "max_drift_deg": 43.2565425898482,
+          "max_hand_error_m": 0.013592405545683958,
+          "max_hand_error_deg": 4.676077341656925,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890319436,
+          "object_z_range": [
+            0.8602823124797693,
+            0.8602823124797698
+          ]
+        },
+        "lower": {
+          "time_range_s": [
+            8.069999999999364,
+            12.76000000000093
+          ],
+          "max_drift_m": 0.5014748524970413,
+          "max_drift_deg": 33.18595709131433,
+          "max_hand_error_m": 0.0004135701577713575,
+          "max_hand_error_deg": 0.5493272063709981,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890323505,
+          "object_z_range": [
+            0.860282312479769,
+            0.8602823124797703
+          ]
+        },
+        "hold": {
+          "time_range_s": [
+            12.770000000000934,
+            13.110000000001047
+          ],
+          "max_drift_m": 0.5014541115862804,
+          "max_drift_deg": 33.185955864763066,
+          "max_hand_error_m": 0.00018848166765374108,
+          "max_hand_error_deg": 0.3219935037140838,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890313518,
+          "object_z_range": [
+            0.8602823124797697,
+            0.8602823124797698
+          ]
+        },
+        "open": {
+          "time_range_s": [
+            13.12000000000105,
+            13.910000000001315
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.00018857453111076192,
+          "max_hand_error_deg": 0.3220158515864136,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.1569228489032041,
+          "object_z_range": [
+            0.8602823124797693,
+            0.8602823124797697
+          ]
+        },
+        "retreat": {
+          "time_range_s": [
+            13.920000000001318,
+            18.610000000000564
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.00018848209921223046,
+          "max_hand_error_deg": 0.3219942908634306,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890321873,
+          "object_z_range": [
+            0.8602823124797688,
+            0.8602823124797699
+          ]
+        },
+        "return": {
+          "time_range_s": [
+            18.62000000000056,
+            21.329999999999057
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.015095432797788948,
+          "max_hand_error_deg": 4.6222840954099365,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890318692,
+          "object_z_range": [
+            0.8602823124797689,
+            0.8602823124797697
+          ]
+        },
+        "original_suffix": {
+          "time_range_s": [
+            21.33999999999905,
+            24.469999999997317
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.020754513857753103,
+          "max_hand_error_deg": 2.7661941070881855,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890328906,
+          "object_z_range": [
+            0.8602823124797688,
+            0.8602823124797696
+          ]
+        }
+      },
+      "events": [
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 0,
+            "time_s": 0.01,
+            "phase": "original_preclose",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.0,
+            "normal_force": 2.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 1.015328815256286e-05,
+            "hand_error_deg": 0.0009184918735200801,
+            "object_position": [
+              0.5128690059700799,
+              -0.23630342859458636,
+              0.8600860475775653
+            ],
+            "hand_position": [
+              0.5052630550004634,
+              -0.05608925200638817,
+              1.000744791714448
+            ],
+            "target_position": [
+              0.505253238170826,
+              -0.056086939961278434,
+              1.0007459637057405
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.15692284890310454,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 273,
+            "time_s": 2.73999999999992,
+            "phase": "original_carry",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310454,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1242127187089916,
+            "hand_error_m": 0.0037553791574468894,
+            "hand_error_deg": 0.12732707612707395,
+            "object_position": [
+              0.51286898855265,
+              -0.23630628737633455,
+              0.860282312479769
+            ],
+            "hand_position": [
+              0.46075312195968854,
+              -0.241866818199725,
+              0.9001728441665406
+            ],
+            "target_position": [
+              0.4606779292919941,
+              -0.24186443120257356,
+              0.8964182186218084
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "traverse",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.1569228489031051,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 534,
+            "time_s": 5.349999999999633,
+            "phase": "traverse",
+            "drift_m": 0.36857230006229846,
+            "drift_deg": 41.07199174877577,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.1569228489031051,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1242127187089916,
+            "hand_error_m": 0.013592405545683958,
+            "hand_error_deg": 3.0480386720591466,
+            "object_position": [
+              0.559803189455874,
+              -0.2463260594406865,
+              0.8602823124797694
+            ],
+            "hand_position": [
+              0.8098097920977889,
+              -0.31851758913203176,
+              1.0683520773613595
+            ],
+            "target_position": [
+              0.8225647144036587,
+              -0.3218994572160298,
+              1.0716122021675594
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.01,
+            "support_confirmed": false,
+            "support_contact_frame": 806,
+            "support_force_N": 0.15692284890310332,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 806,
+            "time_s": 8.069999999999364,
+            "phase": "lower",
+            "drift_m": 0.501448577594963,
+            "drift_deg": 33.049492279625454,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310332,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1242127187089916,
+            "hand_error_m": 0.0004135701577713575,
+            "hand_error_deg": 0.5493272063709981,
+            "object_position": [
+              0.5598031892320299,
+              -0.24632606866407222,
+              0.8602823124797695
+            ],
+            "hand_position": [
+              0.9951239848140516,
+              -0.30330995019518564,
+              1.0717471704200934
+            ],
+            "target_position": [
+              0.9954951615757003,
+              -0.3031872649971422,
+              1.0716122021675594
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 806,
+            "support_force_N": 0.15692284890316577,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 817,
+            "time_s": 8.179999999999401,
+            "phase": "lower",
+            "drift_m": 0.5014732641952044,
+            "drift_deg": 33.12525778394724,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890316577,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1242127187089916,
+            "hand_error_m": 0.0002690119429079921,
+            "hand_error_deg": 0.4224076291420625,
+            "object_position": [
+              0.5598031892230427,
+              -0.24632606903710716,
+              0.8602823124797695
+            ],
+            "hand_position": [
+              0.9952653116707364,
+              -0.3033058650402351,
+              1.0716861648364782
+            ],
+            "target_position": [
+              0.9954951615757003,
+              -0.3031872649971422,
+              1.0716122021675594
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "hold",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 806,
+            "support_force_N": 0.15692284890311295,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1276,
+            "time_s": 12.770000000000934,
+            "phase": "hold",
+            "drift_m": 0.5014541115862804,
+            "drift_deg": 33.185955864763066,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890311295,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1242127187089916,
+            "hand_error_m": 0.00018848166693215647,
+            "hand_error_deg": 0.32199350365342005,
+            "object_position": [
+              0.5598031888474468,
+              -0.2463260846023454,
+              0.8602823124797698
+            ],
+            "hand_position": [
+              0.9953459315813444,
+              -0.30330239809354864,
+              1.0716118591428576
+            ],
+            "target_position": [
+              0.9954951615757003,
+              -0.3031872649971422,
+              1.0716122021675594
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "open",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 806,
+            "support_force_N": 0.15692284890310135,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1311,
+            "time_s": 13.12000000000105,
+            "phase": "open",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310135,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.4,
+            "hand_error_m": 0.0001882740650794337,
+            "hand_error_deg": 0.3219796975988551,
+            "object_position": [
+              0.5598031888187908,
+              -0.24632608578922793,
+              0.8602823124797697
+            ],
+            "hand_position": [
+              0.9953460481384243,
+              -0.30330220860998025,
+              1.0716116803696873
+            ],
+            "target_position": [
+              0.9954951615757003,
+              -0.3031872649971422,
+              1.0716122021675594
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "retreat",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 806,
+            "support_force_N": 0.15692284890310357,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1391,
+            "time_s": 13.920000000001318,
+            "phase": "retreat",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310357,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.4,
+            "hand_error_m": 0.00018848209921223046,
+            "hand_error_deg": 0.3219942908634306,
+            "object_position": [
+              0.5598031887532599,
+              -0.2463260885020927,
+              0.8602823124797694
+            ],
+            "hand_position": [
+              0.9953459306940714,
+              -0.30330239768328,
+              1.0716118700916397
+            ],
+            "target_position": [
+              0.9954951615757003,
+              -0.3031872649971422,
+              1.0716122021675594
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "return",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 806,
+            "support_force_N": 0.15692284890310326,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1861,
+            "time_s": 18.62000000000056,
+            "phase": "return",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310326,
+            "normal_force": 0.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 0.00018806980246982138,
+            "hand_error_deg": 0.3219242189213897,
+            "object_position": [
+              0.5598031883687047,
+              -0.24632610444036546,
+              0.8602823124797694
+            ],
+            "hand_position": [
+              0.995346300398315,
+              -0.30330219561107286,
+              1.0716109553917106
+            ],
+            "target_position": [
+              0.9954951615757003,
+              -0.3031872649971422,
+              1.0716122021675594
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "source",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 806,
+            "support_force_N": 0.1569228489030154,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 2133,
+            "time_s": 21.33999999999905,
+            "phase": "original_suffix",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.1569228489030154,
+            "normal_force": 0.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 0.0012978670867974627,
+            "hand_error_deg": 0.6705478506990579,
+            "object_position": [
+              0.559803188144612,
+              -0.2463261136636794,
+              0.8602823124797689
+            ],
+            "hand_position": [
+              0.8236263650850729,
+              -0.32140008930353525,
+              1.0710572350571683
+            ],
+            "target_position": [
+              0.8225647144036587,
+              -0.3218994572160298,
+              1.0716122021675594
+            ]
+          }
+        }
+      ],
+      "first_rotation_failure": {
+        "frame": 373,
+        "time_s": 3.7399999999998097,
+        "phase": "original_carry",
+        "drift_m": 0.010420123396267682,
+        "drift_deg": 4.742904474437439,
+        "bilateral_fraction": 0.4,
+        "support_N": 0.0,
+        "normal_force": 14.279862694595286,
+        "gripper_target_rad": 1.1242127187089916,
+        "hand_error_m": 0.04410448390395065,
+        "hand_error_deg": 2.705916851177361,
+        "object_position": [
+          0.5657030783733118,
+          -0.2478787371310186,
+          0.9300952721730313
+        ],
+        "hand_position": [
+          0.5280155518426166,
+          -0.24879381406831858,
+          0.9588336712699225
+        ],
+        "target_position": [
+          0.5557766729469885,
+          -0.25078223604381167,
+          0.9930472918545612
+        ]
+      },
+      "peak_rotation": {
+        "frame": 568,
+        "time_s": 5.689999999999595,
+        "phase": "traverse",
+        "drift_m": 0.3823931995215725,
+        "drift_deg": 43.2565425898482,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.15692284890310415,
+        "normal_force": 0.0,
+        "gripper_target_rad": 1.1242127187089916,
+        "hand_error_m": 0.001422699621258378,
+        "hand_error_deg": 0.5361786049673036,
+        "object_position": [
+          0.5598031894279578,
+          -0.2463260605936315,
+          0.8602823124797697
+        ],
+        "hand_position": [
+          0.8242514542158003,
+          -0.3209205796661426,
+          1.07103764100123
+        ],
+        "target_position": [
+          0.8253636396258853,
+          -0.32159659541453056,
+          1.0716122021675596
+        ]
+      },
+      "peak_translation": {
+        "frame": 813,
+        "time_s": 8.139999999999388,
+        "phase": "lower",
+        "drift_m": 0.5014748524970413,
+        "drift_deg": 33.10438699235024,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.15692284890311786,
+        "normal_force": 0.0,
+        "gripper_target_rad": 1.1242127187089916,
+        "hand_error_m": 0.0003018325658481568,
+        "hand_error_deg": 0.45726490355096117,
+        "object_position": [
+          0.5598031892262775,
+          -0.24632606890143902,
+          0.8602823124797693
+        ],
+        "hand_position": [
+          0.9952344563757144,
+          -0.30330739040314164,
+          1.0717055058831353
+        ],
+        "target_position": [
+          0.9954951615757003,
+          -0.3031872649971422,
+          1.0716122021675594
+        ]
+      },
+      "first_contact_loss_after_anchor": {
+        "frame": 370,
+        "time_s": 3.709999999999813,
+        "phase": "original_carry",
+        "drift_m": 0.004464050070761827,
+        "drift_deg": 0.5995379356746334,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.0,
+        "normal_force": 20.325189139964966,
+        "gripper_target_rad": 1.1242127187089916,
+        "hand_error_m": 0.042118987109692724,
+        "hand_error_deg": 2.4747900075388216,
+        "object_position": [
+          0.5642987154693023,
+          -0.24627660671291907,
+          0.927244064397176
+        ],
+        "hand_position": [
+          0.5209865669484873,
+          -0.24766478156999272,
+          0.9534620211114778
+        ],
+        "target_position": [
+          0.5478262107749119,
+          -0.2502509026022388,
+          0.9858186985123437
+        ]
+      },
+      "first_tracking_error_10mm": {
+        "frame": 37,
+        "time_s": 0.3800000000000003,
+        "phase": "original_preclose",
+        "drift_m": null,
+        "drift_deg": null,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.15692284890203478,
+        "normal_force": 0.0,
+        "gripper_target_rad": 2.0,
+        "hand_error_m": 0.01056450880474025,
+        "hand_error_deg": 0.18807552071520173,
+        "object_position": [
+          0.5128689885990548,
+          -0.2363062793715159,
+          0.8602823124797894
+        ],
+        "hand_position": [
+          0.5034544685138033,
+          -0.06346420043458238,
+          1.0013164159411898
+        ],
+        "target_position": [
+          0.5010272852974694,
+          -0.0737029751698976,
+          1.002257224018989
+        ]
+      }
+    },
+    {
+      "source": "8ee64ec58eb602a29bbc0827",
+      "job": "additional-can-selected-physics-v1-8ee64ec58eb602a29bbc0827-contact_002",
+      "attempt": "/mnt/reachy-retarget/workspaces/additional-can-selected-physics-v1-8ee64ec58eb602a29bbc0827-contact_002/runs/dynamics/additional-can-selected-physics-v1-8ee64ec58eb602a29bbc0827-contact_002/8ee64ec58eb602a29bbc0827",
+      "failed": [
+        "carry_contact_95pct",
+        "grasp_rotation_3deg",
+        "grasp_translation_3mm",
+        "object_environment_penetration_2mm",
+        "task_stable_final_1s"
+      ],
+      "metrics": {
+        "max_grasp_drift_m": 0.4827297159018618,
+        "max_grasp_drift_deg": 62.82422490927987,
+        "bilateral_carry_fraction": 0.021348314606741574,
+        "max_object_environment_penetration_m": 0.002768425853930889,
+        "max_environment_penetration_m": 1.3877787807814457e-17,
+        "max_hand_object_penetration_m": 0.0008683307611102094,
+        "max_lift_m": 0.07012476611962137,
+        "final_stable_s": 0.0
+      },
+      "phase_summary": {
+        "original_preclose": {
+          "time_range_s": [
+            0.01,
+            4.049999999999776
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.026222683473592044,
+          "max_hand_error_deg": 1.0604055616947274,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.17314122088934342,
+          "object_z_range": [
+            0.8600860475775653,
+            0.8602823124797844
+          ]
+        },
+        "original_carry": {
+          "time_range_s": [
+            4.059999999999775,
+            6.5699999999994985
+          ],
+          "max_drift_m": 0.3746255661971548,
+          "max_drift_deg": 60.61451396930018,
+          "max_hand_error_m": 0.03863768425934599,
+          "max_hand_error_deg": 5.893257531841408,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 1.4417042744906186,
+          "object_z_range": [
+            0.8602050136702066,
+            0.9301247661196214
+          ]
+        },
+        "traverse": {
+          "time_range_s": [
+            6.579999999999497,
+            18.13000000000083
+          ],
+          "max_drift_m": 0.48272483435739144,
+          "max_drift_deg": 62.82422490927987,
+          "max_hand_error_m": 0.01396028548536641,
+          "max_hand_error_deg": 2.578764809346809,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.1569228489032838,
+          "object_z_range": [
+            0.8602823124797686,
+            0.8602823124797704
+          ]
+        },
+        "lower": {
+          "time_range_s": [
+            18.140000000000825,
+            22.059999999998652
+          ],
+          "max_drift_m": 0.4827297159018618,
+          "max_drift_deg": 62.07389444942457,
+          "max_hand_error_m": 0.0009720623806647443,
+          "max_hand_error_deg": 0.5662545880905642,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890329872,
+          "object_z_range": [
+            0.8602823124797686,
+            0.8602823124797698
+          ]
+        },
+        "hold": {
+          "time_range_s": [
+            22.069999999998647,
+            22.40999999999846
+          ],
+          "max_drift_m": 0.4827296518779026,
+          "max_drift_deg": 62.073894716418906,
+          "max_hand_error_m": 0.0009688837834200806,
+          "max_hand_error_deg": 0.5656496974951588,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890314886,
+          "object_z_range": [
+            0.8602823124797688,
+            0.8602823124797692
+          ]
+        },
+        "open": {
+          "time_range_s": [
+            22.419999999998453,
+            23.209999999998015
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.000968921231149216,
+          "max_hand_error_deg": 0.5656600845291192,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890321434,
+          "object_z_range": [
+            0.8602823124797688,
+            0.8602823124797694
+          ]
+        },
+        "retreat": {
+          "time_range_s": [
+            23.21999999999801,
+            27.139999999995837
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.0009688860663458211,
+          "max_hand_error_deg": 0.5656502585406222,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890322797,
+          "object_z_range": [
+            0.8602823124797688,
+            0.8602823124797698
+          ]
+        },
+        "return": {
+          "time_range_s": [
+            27.14999999999583,
+            38.70000000000133
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.0034250419629860028,
+          "max_hand_error_deg": 1.0384647685944015,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.156922848903219,
+          "object_z_range": [
+            0.8602823124797686,
+            0.8602823124797696
+          ]
+        },
+        "original_suffix": {
+          "time_range_s": [
+            38.710000000001344,
+            41.690000000004986
+          ],
+          "max_drift_m": null,
+          "max_drift_deg": null,
+          "max_hand_error_m": 0.024643398616200324,
+          "max_hand_error_deg": 2.6205441064849184,
+          "min_bilateral_fraction": 0.0,
+          "max_support_N": 0.15692284890316638,
+          "object_z_range": [
+            0.8602823124797687,
+            0.8602823124797695
+          ]
+        }
+      },
+      "events": [
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.0,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 0,
+            "time_s": 0.01,
+            "phase": "original_preclose",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.0,
+            "normal_force": 2.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 9.88993479921523e-06,
+            "hand_error_deg": 0.0009170657607841961,
+            "object_position": [
+              0.4886228519764481,
+              -0.27321470651924856,
+              0.8600860475775653
+            ],
+            "hand_position": [
+              0.5246735805947954,
+              -0.0704349588085645,
+              1.0199279130021865
+            ],
+            "target_position": [
+              0.52466421018358,
+              -0.07043204002927458,
+              1.0199291324001707
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "source",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.15692284890310562,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 405,
+            "time_s": 4.059999999999775,
+            "phase": "original_carry",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310562,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1256830195584206,
+            "hand_error_m": 0.002581826193983034,
+            "hand_error_deg": 0.05261751656109834,
+            "object_position": [
+              0.48862355079363184,
+              -0.2732119297918353,
+              0.8602823124797695
+            ],
+            "hand_position": [
+              0.4433941915006486,
+              -0.28556949487175937,
+              0.8943214985180084
+            ],
+            "target_position": [
+              0.4429472189666614,
+              -0.28553823302019815,
+              0.8917788493588763
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "traverse",
+            "stable_support_s": 0.0,
+            "support_confirmed": false,
+            "support_contact_frame": null,
+            "support_force_N": 0.1569228489031014,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 657,
+            "time_s": 6.579999999999497,
+            "phase": "traverse",
+            "drift_m": 0.3753561603190881,
+            "drift_deg": 60.759123242563085,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.1569228489031014,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1256830195584206,
+            "hand_error_m": 0.01396028548536641,
+            "hand_error_deg": 2.578764809346809,
+            "object_position": [
+              0.5311120415689995,
+              -0.25076799457111604,
+              0.8602823124797696
+            ],
+            "hand_position": [
+              0.803577739214716,
+              -0.2905776496886117,
+              1.059656744311941
+            ],
+            "target_position": [
+              0.8148618521108213,
+              -0.2917396588084171,
+              1.0515199082077558
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.01,
+            "support_confirmed": false,
+            "support_contact_frame": 1813,
+            "support_force_N": 0.1569228489031013,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1813,
+            "time_s": 18.140000000000825,
+            "phase": "lower",
+            "drift_m": 0.4827253267621942,
+            "drift_deg": 62.07305305260316,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.1569228489031013,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1256830195584206,
+            "hand_error_m": 0.0009720623806647443,
+            "hand_error_deg": 0.5662545880905642,
+            "object_position": [
+              0.5311120452587264,
+              -0.25076795554508596,
+              0.860282312479769
+            ],
+            "hand_position": [
+              0.9611167779550318,
+              -0.3067022638065964,
+              1.0521350576596455
+            ],
+            "target_position": [
+              0.9614982270017293,
+              -0.30605342403553043,
+              1.0515199082077558
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "lower",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1813,
+            "support_force_N": 0.1569228489031115,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 1824,
+            "time_s": 18.250000000000764,
+            "phase": "lower",
+            "drift_m": 0.48272828620230535,
+            "drift_deg": 62.07348469361468,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.1569228489031115,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1256830195584206,
+            "hand_error_m": 0.0009700961385384054,
+            "hand_error_deg": 0.5658932885806156,
+            "object_position": [
+              0.5311120452938547,
+              -0.2507679551737414,
+              0.8602823124797689
+            ],
+            "hand_position": [
+              0.9611211902094036,
+              -0.3067030008878622,
+              1.0521338949243504
+            ],
+            "target_position": [
+              0.9614982270017293,
+              -0.30605342403553043,
+              1.0515199082077558
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": false,
+            "phase": "hold",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1813,
+            "support_force_N": 0.15692284890310024,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 2206,
+            "time_s": 22.069999999998647,
+            "phase": "hold",
+            "drift_m": 0.4827296517802628,
+            "drift_deg": 62.07389444997239,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310024,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.1256830195584206,
+            "hand_error_m": 0.0009688837815897679,
+            "hand_error_deg": 0.5656496972514506,
+            "object_position": [
+              0.5311120465141346,
+              -0.2507679422780469,
+              0.8602823124797692
+            ],
+            "hand_position": [
+              0.9611237560381974,
+              -0.3067039396014872,
+              1.0521325555599472
+            ],
+            "target_position": [
+              0.9614982270017293,
+              -0.30605342403553043,
+              1.0515199082077558
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "open",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1813,
+            "support_force_N": 0.15692284890311076,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 2241,
+            "time_s": 22.419999999998453,
+            "phase": "open",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890311076,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.4,
+            "hand_error_m": 0.000968547355979646,
+            "hand_error_deg": 0.5656054213545154,
+            "object_position": [
+              0.5311120466259401,
+              -0.2507679410965052,
+              0.8602823124797688
+            ],
+            "hand_position": [
+              0.961123973577016,
+              -0.3067037337542536,
+              1.0521323750432658
+            ],
+            "target_position": [
+              0.9614982270017293,
+              -0.30605342403553043,
+              1.0515199082077558
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "retreat",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1813,
+            "support_force_N": 0.1569228489031027,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 2321,
+            "time_s": 23.21999999999801,
+            "phase": "retreat",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.1569228489031027,
+            "normal_force": 0.0,
+            "gripper_target_rad": 1.4,
+            "hand_error_m": 0.0009688860663458211,
+            "hand_error_deg": 0.5656502585406222,
+            "object_position": [
+              0.5311120468814655,
+              -0.25076793839583045,
+              0.8602823124797696
+            ],
+            "hand_position": [
+              0.9611237564659183,
+              -0.3067039361641129,
+              1.0521325630844487
+            ],
+            "target_position": [
+              0.9614982270017293,
+              -0.30605342403553043,
+              1.0515199082077558
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "return",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1813,
+            "support_force_N": 0.15692284890310415,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 2714,
+            "time_s": 27.14999999999583,
+            "phase": "return",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.15692284890310415,
+            "normal_force": 0.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 0.0009680421007662935,
+            "hand_error_deg": 0.5655027127158743,
+            "object_position": [
+              0.5311120481368022,
+              -0.25076792512876594,
+              0.860282312479769
+            ],
+            "hand_position": [
+              0.961124304408184,
+              -0.3067038092198935,
+              1.0521316978079072
+            ],
+            "target_position": [
+              0.9614982270017293,
+              -0.30605342403553043,
+              1.0515199082077558
+            ]
+          }
+        },
+        {
+          "controller": {
+            "failed": false,
+            "failure_reason": null,
+            "opened": true,
+            "phase": "source",
+            "stable_support_s": 0.11999999999999998,
+            "support_confirmed": true,
+            "support_contact_frame": 1813,
+            "support_force_N": 0.1569228489031029,
+            "support_threshold_N": 0.078461425246671
+          },
+          "measurement": {
+            "frame": 3870,
+            "time_s": 38.710000000001344,
+            "phase": "original_suffix",
+            "drift_m": null,
+            "drift_deg": null,
+            "bilateral_fraction": 0.0,
+            "support_N": 0.1569228489031029,
+            "normal_force": 0.0,
+            "gripper_target_rad": 2.0,
+            "hand_error_m": 0.00092019211548964,
+            "hand_error_deg": 0.5275637564982407,
+            "object_position": [
+              0.5311120518263195,
+              -0.2507678861026765,
+              0.8602823124797695
+            ],
+            "hand_position": [
+              0.8155405490275034,
+              -0.2911843035828645,
+              1.0512411527627024
+            ],
+            "target_position": [
+              0.8148618521108213,
+              -0.2917396588084171,
+              1.0515199082077558
+            ]
+          }
+        }
+      ],
+      "first_rotation_failure": {
+        "frame": 499,
+        "time_s": 4.999999999999671,
+        "phase": "original_carry",
+        "drift_m": 0.003828819743651103,
+        "drift_deg": 6.213158123216145,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.0,
+        "normal_force": 17.518289674501844,
+        "gripper_target_rad": 1.1256830195584206,
+        "hand_error_m": 0.02356597148181041,
+        "hand_error_deg": 4.217011414687213,
+        "object_position": [
+          0.562393716256164,
+          -0.25048478986355366,
+          0.9292475457533149
+        ],
+        "hand_position": [
+          0.5194218721363313,
+          -0.253817044658864,
+          0.9549586808062255
+        ],
+        "target_position": [
+          0.5379998193196454,
+          -0.2543836001339301,
+          0.9694463964725811
+        ]
+      },
+      "peak_rotation": {
+        "frame": 816,
+        "time_s": 8.169999999999398,
+        "phase": "traverse",
+        "drift_m": 0.3832184570752543,
+        "drift_deg": 62.82422490927987,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.1569228489031025,
+        "normal_force": 0.0,
+        "gripper_target_rad": 1.1256830195584206,
+        "hand_error_m": 0.0004891264409991724,
+        "hand_error_deg": 0.5203280316241117,
+        "object_position": [
+          0.5311120420767309,
+          -0.2507679892034592,
+          0.8602823124797692
+        ],
+        "hand_position": [
+          0.8178615190275426,
+          -0.29158035331708515,
+          1.051369327282128
+        ],
+        "target_position": [
+          0.8179359484136713,
+          -0.29203973368954583,
+          1.0515199082077558
+        ]
+      },
+      "peak_translation": {
+        "frame": 1863,
+        "time_s": 18.640000000000548,
+        "phase": "lower",
+        "drift_m": 0.4827297159018618,
+        "drift_deg": 62.073863984036194,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.1569228489031036,
+        "normal_force": 0.0,
+        "gripper_target_rad": 1.1256830195584206,
+        "hand_error_m": 0.0009688894133594473,
+        "hand_error_deg": 0.5656589756427661,
+        "object_position": [
+          0.5311120454184406,
+          -0.25076795385717454,
+          0.8602823124797692
+        ],
+        "hand_position": [
+          0.9611237589125673,
+          -0.30670385403720835,
+          1.0521326570620482
+        ],
+        "target_position": [
+          0.9614982270017293,
+          -0.30605342403553043,
+          1.0515199082077558
+        ]
+      },
+      "first_contact_loss_after_anchor": {
+        "frame": 498,
+        "time_s": 4.9899999999996725,
+        "phase": "original_carry",
+        "drift_m": 0.0015215173969518,
+        "drift_deg": 2.4800306447102543,
+        "bilateral_fraction": 0.2,
+        "support_N": 0.0,
+        "normal_force": 11.419783803614441,
+        "gripper_target_rad": 1.1256830195584206,
+        "hand_error_m": 0.023033504734432098,
+        "hand_error_deg": 4.1534744049659205,
+        "object_position": [
+          0.5634019648073801,
+          -0.2499850251670505,
+          0.9292161643340737
+        ],
+        "hand_position": [
+          0.5181493415583334,
+          -0.2534353564060338,
+          0.9546500539067236
+        ],
+        "target_position": [
+          0.536505526428118,
+          -0.25402249798781074,
+          0.968551423700393
+        ]
+      },
+      "first_tracking_error_10mm": {
+        "frame": 114,
+        "time_s": 1.1500000000000008,
+        "phase": "original_preclose",
+        "drift_m": null,
+        "drift_deg": null,
+        "bilateral_fraction": 0.0,
+        "support_N": 0.15692284890310393,
+        "normal_force": 0.0,
+        "gripper_target_rad": 2.0,
+        "hand_error_m": 0.010323262285288851,
+        "hand_error_deg": 0.1970444285818597,
+        "object_position": [
+          0.488623548387858,
+          -0.2732119393648218,
+          0.8602823124797694
+        ],
+        "hand_position": [
+          0.5134512234774764,
+          -0.0983306364430994,
+          1.0199244135240977
+        ],
+        "target_position": [
+          0.510348259026831,
+          -0.10817651545724064,
+          1.0199291324001707
+        ]
+      }
+    }
+  ],
+  "aec_recorded_collision_surface_gaps": [
+    {
+      "job": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_002",
+      "frame": 2182,
+      "time_s": 21.82999999999878,
+      "observed_bottom_z": 0.81979105980267,
+      "support_surface_z": 0.8200000000000001,
+      "observed_gap_m": -0.0002089401973300875,
+      "support_geom": "source_scene_geom_21",
+      "scope": "Read-only geometry extraction from recorded physical state; no simulation steps",
+      "support": {
+        "failed": false,
+        "failure_reason": null,
+        "opened": true,
+        "phase": "source",
+        "stable_support_s": 0.11999999999999998,
+        "support_confirmed": true,
+        "support_contact_frame": 2139,
+        "support_force_N": 0.15692284890310532,
+        "support_threshold_N": 0.078461425246671
+      },
+      "grasp_rotation_deg": 3.259753580797907,
+      "translation_m": 0.0011889231444300837,
+      "closed_target_rad": 1.1245032779524402
+    },
+    {
+      "job": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_005",
+      "frame": 2182,
+      "time_s": 21.82999999999878,
+      "observed_bottom_z": 0.8208986696146507,
+      "support_surface_z": 0.8200000000000001,
+      "observed_gap_m": 0.0008986696146506823,
+      "support_geom": "source_scene_geom_21",
+      "scope": "Read-only geometry extraction from recorded physical state; no simulation steps",
+      "support": {
+        "failed": true,
+        "failure_reason": "No stable measured support before opening deadline",
+        "opened": false,
+        "phase": "source",
+        "stable_support_s": 0.0,
+        "support_confirmed": false,
+        "support_contact_frame": null,
+        "support_force_N": 0.0,
+        "support_threshold_N": 0.078461425246671
+      },
+      "grasp_rotation_deg": 2.1400190030110244,
+      "translation_m": 0.0011014044337040215,
+      "closed_target_rad": 1.0945032779524402
+    },
+    {
+      "job": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_010",
+      "frame": 2182,
+      "time_s": 21.82999999999878,
+      "observed_bottom_z": 0.8226225197609232,
+      "support_surface_z": 0.8200000000000001,
+      "observed_gap_m": 0.002622519760923092,
+      "support_geom": "source_scene_geom_21",
+      "scope": "Read-only geometry extraction from recorded physical state; no simulation steps",
+      "support": {
+        "failed": true,
+        "failure_reason": "No stable measured support before opening deadline",
+        "opened": false,
+        "phase": "source",
+        "stable_support_s": 0.0,
+        "support_confirmed": false,
+        "support_contact_frame": null,
+        "support_force_N": 0.0,
+        "support_threshold_N": 0.078461425246671
+      },
+      "grasp_rotation_deg": 2.0150694578854944,
+      "translation_m": 0.0010488191317748756,
+      "closed_target_rad": 1.0445032779524401
+    },
+    {
+      "job": "additional-can-roll-physics-v1-aec964373b1b75854938d701-contact_020",
+      "frame": 2182,
+      "time_s": 21.82999999999878,
+      "observed_bottom_z": 0.8236856796415355,
+      "support_surface_z": 0.8200000000000001,
+      "observed_gap_m": 0.003685679641535433,
+      "support_geom": "source_scene_geom_21",
+      "scope": "Read-only geometry extraction from recorded physical state; no simulation steps",
+      "support": {
+        "failed": true,
+        "failure_reason": "No stable measured support before opening deadline",
+        "opened": false,
+        "phase": "source",
+        "stable_support_s": 0.0,
+        "support_confirmed": false,
+        "support_contact_frame": null,
+        "support_force_N": 0.0,
+        "support_threshold_N": 0.078461425246671
+      },
+      "grasp_rotation_deg": 1.711201218622419,
+      "translation_m": 0.0011128557365751622,
+      "closed_target_rad": 0.9445032779524403
+    }
+  ],
+  "matched_prefix_feedforward_observations": {
+    "runtime_source_sha256": "15e1b9f6e63fad28f2d10e12f953aa542307d5dff658953db96ef121501f6000",
+    "snapshot_completed_physical_attempts": 5,
+    "snapshot_infrastructure_failed_attempts": 19,
+    "remote_evidence": "/mnt/reachy-retarget/diagnostics/can-prefix-tracking-status-v1.json",
+    "physical_cases": [
+      {
+        "source": "fe117e32c6f13e7ae68c4be4",
+        "variant": "contact_002",
+        "gain": 0,
+        "physical_pass": false,
+        "peak_original_carry_tcp_error_m": 0.04566343747692134,
+        "max_grasp_drift_m": 0.4990640242628456,
+        "max_grasp_rotation_deg": 43.17770324293543,
+        "opening_guard_prevented_wrong_support": true,
+        "independent_audit_pass": true
+      },
+      {
+        "source": "fe117e32c6f13e7ae68c4be4",
+        "variant": "contact_002",
+        "gain": 1,
+        "physical_pass": false,
+        "peak_original_carry_tcp_error_m": 0.025416858895014743,
+        "max_grasp_drift_m": 0.0196648481022719,
+        "max_grasp_rotation_deg": 3.5658675682459937,
+        "carry_contact_fraction": 0.966734693877551,
+        "final_stable_s": 5.789999999999921,
+        "first_remaining_contact_loss_s": 4.12,
+        "first_rotation_failure_s": 4.42,
+        "independent_audit_pass": true
+      },
+      {
+        "source": "3765ca9e1d531ec9a819410e",
+        "variant": "contact_002",
+        "gains": [
+          0,
+          0.5,
+          1
+        ],
+        "physical_pass": [
+          true,
+          true,
+          true
+        ],
+        "max_grasp_rotation_deg": [
+          1.4244134541855666,
+          1.2158146606084321,
+          0.860097729684701
+        ],
+        "independent_audit_pass": [
+          true,
+          true,
+          true
+        ]
+      }
+    ],
+    "remaining_slip_exact_replay": {
+      "remote_evidence": "/mnt/reachy-retarget/diagnostics/can-prefix-fe117e-contacts-v1/fe117e32c6f13e7ae68c4be4.json",
+      "window_s": [
+        3.9,
+        4.7
+      ],
+      "qpos_error": 0,
+      "qvel_error": 0,
+      "contacts": [
+        "r_hand_distal_link_collision_0 / Can_g0",
+        "r_hand_distal_mimic_link_collision_0 / Can_g0"
+      ],
+      "object_environment_contacts": 0,
+      "interpretation": "Remaining measured contact loss is free-carry grasp slip, not the earlier Can/bin wall collision"
+    }
+  },
+  "proposed_followups": [
+    {
+      "policy": "loaded_rotation_speed_rad_s",
+      "bank": [
+        0.8,
+        0.6,
+        0.4
+      ],
+      "scope": "Inserted loaded traverse only; geometric IK knots, original prefix/suffix and unloaded return identical",
+      "status": "Offline invariance and complete synthetic admission tests passed; real physical comparisons pending"
+    },
+    {
+      "policy": "extra_descent_m",
+      "bank": [
+        0.002,
+        0.004,
+        0.006
+      ],
+      "scope": "Robot-only maximum descent, stops on measured support; all-frame admission required",
+      "status": "Proposed from measured aec collision-surface gaps, not yet a demonstrated pass"
+    }
+  ]
+}

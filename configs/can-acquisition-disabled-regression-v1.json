@@ -1,0 +1,318 @@
+{
+  "label": "can-acquisition-disabled-regression-v1",
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-8ee64ec58eb602a29bbc0827",
+      "parent_workspace": "workspaces/additional-independent-v1-8ee64ec58eb602a29bbc0827",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/8ee64ec58eb602a29bbc0827.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "default_controller_unchanged_physics_regression",
+      "runtime_source_sha256": "dcd00c6d47e4be8ee7df1a21f952fdc66c0bf1deb5e094cf3196ead161edeeae",
+      "id": "can-acquisition-disabled-regression-v1-8ee64ec58eb602a29bbc0827",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-8ee64ec58eb602a29bbc0827/runs/dynamics/additional-independent-v1-8ee64ec58eb602a29bbc0827-aligned/8ee64ec58eb602a29bbc0827",
+      "variant": "contact_0035",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 3.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          0.0
+        ]
+      },
+      "geometry_selection": {
+        "status": "prior_admission_invalidated",
+        "previous_selection": {
+          "policy": "can-geometry-bank-v1",
+          "source_episode": "8ee64ec58eb602a29bbc0827",
+          "selection_rank": [
+            0.0,
+            1,
+            9,
+            0.20669760422656014,
+            16
+          ],
+          "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+          "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-8ee64ec58eb602a29bbc0827-chunk0/geometry-search/base-09"
+        },
+        "comparison": "Paired original/finite-pad attachment with actual prior selected base/seed/placement and identical original gates; fresh full admission in both arms",
+        "known_prior_physical_outcome": "physical_fail_development"
+      },
+      "workspace": "workspaces/can-acquisition-disabled-regression-v1-8ee64ec58eb602a29bbc0827",
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "right_arm_seed": [
+        -0.07174286951069012,
+        -0.902745775685186,
+        0.18542113837357807,
+        -1.361150358195674,
+        -0.20982220218473058,
+        0.03744438167939799,
+        -1.1980294239033369
+      ],
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "comparison_correction": {
+        "prior_attempt": "can-finite-pad-anchor-v1-8ee64ec58eb602a29bbc0827-contact_005",
+        "prior_v1_base_candidate_id": 9,
+        "correct_matched_base_candidate_id": 9,
+        "original_geometric_and_physical_gates_unchanged": true,
+        "planning_margin_comparison": "V1 added a3mmpositivefixtureheuristic absent from original selected plans. This matched comparison uses original full-path admission and all original physical gates in both arms. V1marginrejectionsremainretained.",
+        "arm": "finitepad",
+        "object_physics_changed": false,
+        "complete_source_interval": true
+      },
+      "source_prefix_velocity_feedforward": 1.0,
+      "geometry_evidence": "docs/cylindrical-grasp-dominant-planes-v1.json"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "parent_workspace": "workspaces/additional-independent-v1-47cc92a1a140ab580b44c6c1",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/47cc92a1a140ab580b44c6c1.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "default_controller_unchanged_physics_regression",
+      "runtime_source_sha256": "dcd00c6d47e4be8ee7df1a21f952fdc66c0bf1deb5e094cf3196ead161edeeae",
+      "id": "can-acquisition-disabled-regression-v1-47cc92a1a140ab580b44c6c1",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-47cc92a1a140ab580b44c6c1/runs/dynamics/additional-independent-v1-47cc92a1a140ab580b44c6c1-aligned/47cc92a1a140ab580b44c6c1",
+      "variant": "contact_0035",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          0.9775,
+          -0.3225
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 3.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          0.0
+        ]
+      },
+      "geometry_selection": {
+        "status": "prior_admission_invalidated",
+        "previous_selection": {
+          "policy": "can-geometry-bank-v1",
+          "source_episode": "47cc92a1a140ab580b44c6c1",
+          "selection_rank": [
+            0.0,
+            1,
+            9,
+            0.2106394046116487,
+            16
+          ],
+          "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+          "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-47cc92a1a140ab580b44c6c1-chunk0/geometry-search/base-09"
+        },
+        "comparison": "Paired original/finite-pad attachment with actual prior selected base/seed/placement and identical original gates; fresh full admission in both arms",
+        "known_prior_physical_outcome": "physical_fail_development"
+      },
+      "workspace": "workspaces/can-acquisition-disabled-regression-v1-47cc92a1a140ab580b44c6c1",
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "right_arm_seed": [
+        -0.07174286951069012,
+        -0.902745775685186,
+        0.18542113837357807,
+        -1.361150358195674,
+        -0.20982220218473058,
+        0.03744438167939799,
+        -1.1980294239033369
+      ],
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "comparison_correction": {
+        "prior_attempt": "can-finite-pad-anchor-v1-47cc92a1a140ab580b44c6c1-contact_005",
+        "prior_v1_base_candidate_id": 9,
+        "correct_matched_base_candidate_id": 9,
+        "original_geometric_and_physical_gates_unchanged": true,
+        "planning_margin_comparison": "V1 added a3mmpositivefixtureheuristic absent from original selected plans. This matched comparison uses original full-path admission and all original physical gates in both arms. V1marginrejectionsremainretained.",
+        "arm": "finitepad",
+        "object_physics_changed": false,
+        "complete_source_interval": true
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_evidence": "docs/cylindrical-grasp-dominant-planes-v1.json"
+    },
+    {
+      "dataset": "robomimic",
+      "parent_task": "additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "parent_workspace": "workspaces/additional-independent-v1-6e13ca00e7023c648b2d22f8",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/6e13ca00e7023c648b2d22f8.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "default_controller_unchanged_physics_regression",
+      "runtime_source_sha256": "dcd00c6d47e4be8ee7df1a21f952fdc66c0bf1deb5e094cf3196ead161edeeae",
+      "id": "can-acquisition-disabled-regression-v1-6e13ca00e7023c648b2d22f8",
+      "operation": "feasible_geometry_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-6e13ca00e7023c648b2d22f8/runs/dynamics/additional-independent-v1-6e13ca00e7023c648b2d22f8-aligned/6e13ca00e7023c648b2d22f8",
+      "variant": "contact_0035",
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "extra_descent_m": 0.002,
+        "placement_xy_world": [
+          1.0025,
+          -0.2975
+        ],
+        "release_aperture_rad": 1.4,
+        "retreat_speed_factor": 3.0,
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          20.0
+        ]
+      },
+      "geometry_selection": {
+        "status": "prior_admission_invalidated",
+        "previous_selection": {
+          "policy": "can-geometry-bank-v1",
+          "source_episode": "6e13ca00e7023c648b2d22f8",
+          "selection_rank": [
+            0.07853981633974481,
+            1,
+            11,
+            0.24912622683094177,
+            8
+          ],
+          "evidence": "experiments/additional-can-geometry-search-v1/manifest.json",
+          "full_admission": "/mnt/reachy-retarget/workspaces/additional-can-geometry-search-v1-6e13ca00e7023c648b2d22f8-chunk2/geometry-search/base-11"
+        },
+        "comparison": "Paired original/finite-pad attachment with actual prior selected base/seed/placement and identical original gates; fresh full admission in both arms",
+        "known_prior_physical_outcome": "physical_fail_development"
+      },
+      "workspace": "workspaces/can-acquisition-disabled-regression-v1-6e13ca00e7023c648b2d22f8",
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.2617993877991494
+      ],
+      "right_arm_seed": [
+        -0.07174286951069012,
+        -0.902745775685186,
+        0.18542113837357807,
+        -1.361150358195674,
+        -0.20982220218473058,
+        0.03744438167939799,
+        -1.1980294239033369
+      ],
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "source"
+      },
+      "comparison_correction": {
+        "prior_attempt": "can-finite-pad-anchor-v1-6e13ca00e7023c648b2d22f8-contact_005",
+        "prior_v1_base_candidate_id": 9,
+        "correct_matched_base_candidate_id": 11,
+        "original_geometric_and_physical_gates_unchanged": true,
+        "planning_margin_comparison": "V1 added a3mmpositivefixtureheuristic absent from original selected plans. This matched comparison uses original full-path admission and all original physical gates in both arms. V1marginrejectionsremainretained.",
+        "arm": "finitepad",
+        "object_physics_changed": false,
+        "complete_source_interval": true
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_evidence": "docs/cylindrical-grasp-dominant-planes-v1.json"
+    }
+  ],
+  "scope": "Three existing passing sources with acquisition disabled; exact measured physical-state/control comparison with priorv30baseline verifies unchanged default behavior."
+}

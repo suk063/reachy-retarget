@@ -1,0 +1,4765 @@
+{
+  "physics_validated": false,
+  "admitted": true,
+  "fixed_patch_ik_refinement": {
+    "method": "fixed_base_right_arm_explicit_guard_constraints_minimax",
+    "normalized_error_names": [
+      "tcp_position",
+      "tcp_rotation",
+      "patch_axial",
+      "patch_radial"
+    ],
+    "normalized_errors_before": [
+      1.1523153607673347,
+      1.1688403754268308,
+      1.0056379346366975,
+      0.6848122998119067
+    ],
+    "normalized_errors_after": [
+      0.7148660255353072,
+      0.7148660255245336,
+      0.1236198485350823,
+      0.20725681403171337
+    ],
+    "maximum_normalized_error": 0.7148660255353072,
+    "joint_margin_rad": 0.031,
+    "base_and_inactive_arm_unchanged": true,
+    "within_guard_bounds": true,
+    "stages": [
+      {
+        "success": true,
+        "message": "Optimization terminated successfully",
+        "iterations": 17
+      },
+      {
+        "success": false,
+        "message": "Positive directional derivative for linesearch",
+        "iterations": 80
+      }
+    ]
+  },
+  "schema": "box-acquisition-v1",
+  "source_id": null,
+  "input_binding": {
+    "scene_sha256": "4deea6e9679782d89f87c764a1387588deadbe0c73a6951aea96df62639e8ce5",
+    "arrays": {
+      "time_s": "6472b295a0091f115dc69ebd8f018680fc1f142f240a7437854157b573d17550",
+      "reference": "e6c88991425ab5a2cd45e66842d5a432d03cc495dea501f675cef5735fe7f13b",
+      "intent": "db84f3baf92ba78493206f75717c2484d8a4763752c92f2eae3ff389503f7f25",
+      "hand_goals": "3caddc6cebc78bf211b234e64560ca6b36f69a866a01b15a876340c1f6ad426d",
+      "object_goals": "058718470b9731092291492768ee6a3f8b30236a2a36ce363ff0fabde17ea9a7"
+    }
+  },
+  "object_body": "needle_obj_root",
+  "object_joint": "needle_obj_joint0",
+  "first_close_index": 262,
+  "acquisition_index": 278,
+  "exit_source_indices": [
+    279,
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    288
+  ],
+  "unchanged_suffix_start_index": 289,
+  "control_time_s": 2.7800000000000002,
+  "source_reference_time_s": 2.7800000000000002,
+  "timestep_s": 0.009999999999999787,
+  "ramp_duration_s": 0.09999999999999787,
+  "stable_s": 0.1,
+  "timeout_s": 2.0,
+  "fixed_hand_goal": [
+    [
+      0.017577610441194887,
+      -0.9398194236653474,
+      -0.3412191063122221,
+      0.773280256835693
+    ],
+    [
+      0.0477591198475632,
+      0.34167149435118177,
+      -0.9386051653486762,
+      -0.11807949971994638
+    ],
+    [
+      0.9987042075021829,
+      0.00020211176194849528,
+      0.05089071691646715,
+      0.8326208495775731
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "fixed_object_relative_tcp": [
+    [
+      -0.00020237399251108446,
+      0.9999999795223833,
+      1.6289960842299045e-15,
+      -2.0634052273482695e-06
+    ],
+    [
+      -0.050890715874346515,
+      -1.0298957565741533e-05,
+      0.9987042279532652,
+      0.10732682477685195
+    ],
+    [
+      0.998704207502183,
+      0.0002021117619484953,
+      0.050890716916467155,
+      0.012620849577573146
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "object_reset_pose": [
+    [
+      -0.93982296167129,
+      -0.34166182215080004,
+      0.0,
+      0.809947796119
+    ],
+    [
+      0.34166182215080004,
+      -0.93982296167129,
+      0.0,
+      -0.0172105804046
+    ],
+    [
+      0.0,
+      0.0,
+      0.9999999999999999,
+      0.82
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "calibrated_midpoint_tcp_m": [
+    -0.010196000000000104,
+    3.469446951953614e-18,
+    -0.047907784083342994
+  ],
+  "patch_object_m": [
+    0.0,
+    0.06,
+    0.0
+  ],
+  "component": {
+    "object_body": "needle_obj_root",
+    "object_joint": "needle_obj_joint0",
+    "object_body_id": 102,
+    "component_geom_id": 44,
+    "component_geom": "needle_obj_handle",
+    "center_object_m": [
+      0.0,
+      0.06,
+      0.0
+    ],
+    "axes_object": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "half_size_m": [
+      0.02,
+      0.02,
+      0.02
+    ],
+    "source_grasp_point_object_m": [
+      0.0002484588205004523,
+      0.05894863643387635,
+      -0.0074373020269310475
+    ],
+    "selection": "Smallest original collision box containing the native grasp point",
+    "other_collision_components_preserved": true
+  },
+  "face_axis": 0,
+  "axis_object": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "calibrated_points_tcp_m": [
+    [
+      -0.010191952520149877,
+      -0.01999999959044775,
+      -0.04790778408334304
+    ],
+    [
+      -0.01020004747985033,
+      0.019999999590447758,
+      -0.04790778408334294
+    ]
+  ],
+  "minimum_supported_fraction": 0.99,
+  "minimum_center_edge_margin_m": 0.01,
+  "relative_rotation_tolerance_rad": 0.01,
+  "contact_angle_rad": 0.9382904848842996,
+  "radial_tolerance_m": 0.002,
+  "axial_tolerance_m": 0.001,
+  "tcp_position_tolerance_m": 0.001,
+  "tcp_rotation_tolerance_rad": 0.01,
+  "non_distal_clearance_m": 0.003,
+  "minimum_pad_force_N": 0.1,
+  "correction_translation_m": 0.002703436921338345,
+  "correction_rotation_rad": 0.022285230275945967,
+  "robot_only_target_correction": true,
+  "original_arrays_unchanged": true,
+  "clock_policy": "Repeat acquisition index during entry/settle/close; consume every exit_source_indices row exactly once, then the unchanged original suffix",
+  "ff_policy": "Zero velocity feedforward during entry/settle/close/exit; original controller elsewhere",
+  "guard_scope": "Saved calibrated-aperture CAD at measured TCP forecasts closing patch; current-aperture midpoint is additionally checked near contact; actual object pose is read only",
+  "admission_checks": {
+    "complete": true,
+    "ik": true,
+    "fixtures": true,
+    "non_distal_object": true,
+    "open_object": true,
+    "self_collision": true,
+    "self_clearance": true,
+    "joint_margin": true,
+    "fixed_patch_finite_support": true
+  },
+  "completed_geometry_samples": 95,
+  "fixed_patch_guard": {
+    "alignment": true,
+    "checks": {
+      "tcp_position": true,
+      "tcp_rotation": true,
+      "relative_rotation": true,
+      "calibrated_contact_radial": true,
+      "calibrated_contact_axial": true,
+      "finite_projected_support": true,
+      "contact_center_edge_margin": true,
+      "non_distal_object_clearance": true,
+      "actual_contact_midpoint": true
+    },
+    "geometry_safe": true,
+    "target_alignment": true,
+    "patch_alignment": true,
+    "failed_checks": [],
+    "tcp_position_error_m": 0.0007148660254121136,
+    "tcp_rotation_error_rad": 0.007148660255575336,
+    "object_relative_tcp_rotation_error_rad": 0.0071486602555753,
+    "calibrated_contact_midpoint_actual_object_m": [
+      -0.0001236198482316625,
+      0.05962385310036798,
+      0.0001741696233272111
+    ],
+    "calibrated_contact_radial_error_m": 0.00041451362799396616,
+    "calibrated_contact_axial_error_m": -0.0001236198482316625,
+    "finite_projected_support": {
+      "pads": [
+        {
+          "projected_area_m2": 0.00071890856776947,
+          "supported_area_m2": 0.00071890856776947,
+          "supported_fraction": 1.0
+        },
+        {
+          "projected_area_m2": 0.0007189995737025128,
+          "supported_area_m2": 0.0007189995737025128,
+          "supported_fraction": 1.0
+        }
+      ],
+      "contact_center_edge_margin_m": 0.019546875868009055,
+      "contact_centers_component_m": [
+        [
+          -0.020123471278769667,
+          -0.00045312413199094514,
+          0.00017001485392447932
+        ],
+        [
+          0.019876231582306343,
+          -0.000299169667273079,
+          0.00017832439272994632
+        ]
+      ],
+      "scope": "Exact projected CAD triangle overlap; not a measured contact-pressure area"
+    },
+    "actual_aperture_pad_midpoint_object_m": [
+      -0.00012361984823166275,
+      0.05962385310036803,
+      0.000174169623327277
+    ],
+    "actual_aperture_rad": 0.9382904848842996,
+    "actual_midpoint_guard_applicable": true,
+    "pad_normal_force_N": {
+      "r_hand_distal_link": 0.4584066467793386,
+      "r_hand_distal_mimic_link": 0.5133570767567284
+    },
+    "bilateral_force": true,
+    "whole_robot_object_gap_m": -0.0003484246334343319,
+    "non_distal_object_gap_m": 0.009231426734639636,
+    "closest_non_distal_object_pair": [
+      "r_hand_proximal_mimic_link_collision_0",
+      "needle_obj_handle"
+    ]
+  },
+  "object_state_unchanged": true,
+  "peak_ramp_reference_speed_xyyaw_and_arms": [
+    0.020442621776096008,
+    0.015899860486818025,
+    0.02811246088598789,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.31790752961280544,
+    0.14604261113709027,
+    0.3403719930795985,
+    0.21659178019422426,
+    0.11021856263379272,
+    0.09644810355119643,
+    0.5756808056036412
+  ],
+  "artifact": "/tmp/threading-box-acquisition-qualification-v2/acquisition-plan.npz",
+  "artifact_sha256": "80fd187670d170ed36b59d1386b1119698f46a1eb784dd308bcad013779e6b8d",
+  "exception": null,
+  "plan_array_hashes": {
+    "entry_reference": "d43751b205597a95e08486e5e09e072786bfdda6a957058518cafbea8a1dd7ae",
+    "entry_hand_goals": "99affa25f2f763d3b43d1e8d9a419128d3dabf8ca7becf643b3e5bd042e5e9e1",
+    "exit_reference": "0d5f1cd86a6f8b5e5bc3e39bb2d78d1916f9d57be15fc748c49c3f1d42dd5df0",
+    "exit_hand_goals": "d4b61b26870376b78c93e8ff6feb6bc6a7caa253e86b09a4e1e165f5bd9a3eda",
+    "exit_source_indices": "bf14d0f1e29582b8e34b1d47b2f3d5d942a5442bb2b967938c25bd3c79d06112",
+    "original_time_s": "6472b295a0091f115dc69ebd8f018680fc1f142f240a7437854157b573d17550",
+    "original_source_reference_time_s": "6472b295a0091f115dc69ebd8f018680fc1f142f240a7437854157b573d17550",
+    "original_reference": "e6c88991425ab5a2cd45e66842d5a432d03cc495dea501f675cef5735fe7f13b",
+    "original_hand_goals": "3caddc6cebc78bf211b234e64560ca6b36f69a866a01b15a876340c1f6ad426d",
+    "original_object_goals": "058718470b9731092291492768ee6a3f8b30236a2a36ce363ff0fabde17ea9a7",
+    "original_gripper_intent": "db84f3baf92ba78493206f75717c2484d8a4763752c92f2eae3ff389503f7f25",
+    "calibrated_pad0_triangles_tcp": "3b11201da83a1fa70542aaaecd391e74d54bebc1b59c21d785dab58ff445066c",
+    "calibrated_pad1_triangles_tcp": "7600508ab2fe2f925feec0d27ac2a0d47d7bc0ccb9e9295d197122a33e856760",
+    "selection_radial_error_m": "4208bb47c00d57ae9b9ddf23e51d836459ffd13811a5d5009ed9af9c6fc83025",
+    "selection_axial_error_m": "7ca8a60ad1270ac9863092e6705158ebc567c6262ab117985048652abcfb5c95",
+    "selection_source_object_lift_m": "3c7b19fecbfe701e7ceaa565175b3bce294d1858229eae9eaaef85618f336703"
+  },
+  "implementation_sha256": "1fe9e6226048ee9a2e06fb2d515f6a86b7cb7ccebcd9891a578cf1752371bc3c",
+  "samples": [
+    {
+      "source_index": 262,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        1.548042738900505e-08,
+        2.3244813783573304e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 1.3877787807814457e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827788,
+      "joint_margin_rad": 0.04180735665003904,
+      "whole_robot_object_gap_m": 0.022368186552420042,
+      "non_distal_object_gap_m": 0.030517772875824602,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 263,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        1.5420867701861403e-08,
+        2.3711277182556564e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.041465369369508176,
+      "whole_robot_object_gap_m": 0.022347851515987834,
+      "non_distal_object_gap_m": 0.03042084449190477,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 264,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        1.5420580500990846e-08,
+        2.4237125111219423e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827794,
+      "joint_margin_rad": 0.041123917359143836,
+      "whole_robot_object_gap_m": 0.022328813131069443,
+      "non_distal_object_gap_m": 0.030324522096254254,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 265,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        1.5574126546864854e-08,
+        2.4859555592666157e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827799,
+      "joint_margin_rad": 0.04078300026618803,
+      "whole_robot_object_gap_m": 0.022311066636553117,
+      "non_distal_object_gap_m": 0.030229046909130336,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 266,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        5.643912023315594e-07,
+        7.861076188439144e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827794,
+      "joint_margin_rad": 0.04044297869929009,
+      "whole_robot_object_gap_m": 0.022293655458420422,
+      "non_distal_object_gap_m": 0.030134148978937514,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 267,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        2.874371108775263e-07,
+        4.775188188430398e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827791,
+      "joint_margin_rad": 0.04012315721068177,
+      "whole_robot_object_gap_m": 0.022298641402757297,
+      "non_distal_object_gap_m": 0.030077007828574413,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 268,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        2.9208456039913747e-07,
+        4.851730161432515e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827799,
+      "joint_margin_rad": 0.03985100267159719,
+      "whole_robot_object_gap_m": 0.02236640236726711,
+      "non_distal_object_gap_m": 0.0301052110209187,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 269,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        2.966114839194129e-07,
+        4.928689871450247e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.1245641237282776,
+      "joint_margin_rad": 0.03957915247297911,
+      "whole_robot_object_gap_m": 0.022434320536194305,
+      "non_distal_object_gap_m": 0.030133974802186873,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 270,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        3.007240847212504e-07,
+        5.002507584433049e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03930760627653396,
+      "whole_robot_object_gap_m": 0.022502395799429153,
+      "non_distal_object_gap_m": 0.030163298797224833,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 271,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        3.0833047497023196e-07,
+        6.063084538500082e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827791,
+      "joint_margin_rad": 0.039036325502610436,
+      "whole_robot_object_gap_m": 0.02257064073821071,
+      "non_distal_object_gap_m": 0.030193190350842107,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 272,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        2.306702926870706e-08,
+        1.1745119785810655e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827774,
+      "joint_margin_rad": 0.038731081541591106,
+      "whole_robot_object_gap_m": 0.02263990036776871,
+      "non_distal_object_gap_m": 0.030225040331103317,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 273,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        2.244490480361743e-08,
+        1.1367596058947608e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827788,
+      "joint_margin_rad": 0.03832127524908929,
+      "whole_robot_object_gap_m": 0.02272166532806997,
+      "non_distal_object_gap_m": 0.03027554682845053,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 274,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        2.18534328385238e-08,
+        1.099336613714779e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.03791182984828073,
+      "whole_robot_object_gap_m": 0.02280356601574039,
+      "non_distal_object_gap_m": 0.03032650249863771,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 275,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        2.1290761933147682e-08,
+        1.0624326977273531e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.037502745943492566,
+      "whole_robot_object_gap_m": 0.022885602395245105,
+      "non_distal_object_gap_m": 0.030377906199446327,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 276,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        2.0789664850020236e-08,
+        1.041278265697207e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827791,
+      "joint_margin_rad": 0.0370940234093764,
+      "whole_robot_object_gap_m": 0.022967774477918975,
+      "non_distal_object_gap_m": 0.030429756855605596,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 277,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        1.360608278779249e-07,
+        1.9854573554653634e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.036685760237527065,
+      "whole_robot_object_gap_m": 0.0230500688506977,
+      "non_distal_object_gap_m": 0.03048206816860238,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "delayed_open",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        1.48234235387359e-07,
+        2.247012093727714e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03628309068532143,
+      "whole_robot_object_gap_m": 0.023139516198546255,
+      "non_distal_object_gap_m": 0.030546235474067814,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        1.48234235387359e-07,
+        2.247012093727714e-07
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03628309068532143,
+      "whole_robot_object_gap_m": 0.023139516198546255,
+      "non_distal_object_gap_m": 0.030546235474067814,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.036237867429055104,
+      "whole_robot_object_gap_m": 0.023147821704350834,
+      "non_distal_object_gap_m": 0.030551225629856748,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03597709407282773,
+      "whole_robot_object_gap_m": 0.023195830062162987,
+      "non_distal_object_gap_m": 0.030580237684009023,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03542152425635953,
+      "whole_robot_object_gap_m": 0.023298770099042507,
+      "non_distal_object_gap_m": 0.030643392470365783,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.034606026378173615,
+      "whole_robot_object_gap_m": 0.023451503123121373,
+      "non_distal_object_gap_m": 0.030739403115522625,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03364154534266167,
+      "whole_robot_object_gap_m": 0.02361624668637047,
+      "non_distal_object_gap_m": 0.03085801400992191,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03267706430714973,
+      "whole_robot_object_gap_m": 0.023775199686412736,
+      "non_distal_object_gap_m": 0.030982082556729334,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03186156642896382,
+      "whole_robot_object_gap_m": 0.023911802052782996,
+      "non_distal_object_gap_m": 0.03109122345300666,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03130599661249561,
+      "whole_robot_object_gap_m": 0.02400602553892907,
+      "non_distal_object_gap_m": 0.031167791102595696,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03104522325626824,
+      "whole_robot_object_gap_m": 0.024043340981837292,
+      "non_distal_object_gap_m": 0.031204347194246834,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "entry",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.024048925809345503,
+      "non_distal_object_gap_m": 0.031210726768785037,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": -0.001511878824980383,
+      "non_distal_object_gap_m": 0.008287197864465265,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 0.9577723295790308,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.00010575338350931772,
+      "non_distal_object_gap_m": 0.009596753020260062,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.0272541742737622,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.0017287384894047375,
+      "non_distal_object_gap_m": 0.010934646506497349,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.0967360189684934,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.0033553539132461286,
+      "non_distal_object_gap_m": 0.012389949072050712,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.1662178636632246,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.004983873222481838,
+      "non_distal_object_gap_m": 0.0139024058065194,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.235699708357956,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.006612567963843004,
+      "non_distal_object_gap_m": 0.015405828736302658,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.3051815530526873,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.008239709497863377,
+      "non_distal_object_gap_m": 0.01695791686202748,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.3746633977474185,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.009863570833596165,
+      "non_distal_object_gap_m": 0.01851262731190853,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.4441452424421497,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.011482428461582239,
+      "non_distal_object_gap_m": 0.020032818475883556,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.513627087136881,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.01309456418312246,
+      "non_distal_object_gap_m": 0.021517045669129393,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.5831089318316125,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.01469826693391308,
+      "non_distal_object_gap_m": 0.022963886965026412,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.6525907765263437,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.016291834600109866,
+      "non_distal_object_gap_m": 0.024371944096616402,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.7220726212210749,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.017873575824891793,
+      "non_distal_object_gap_m": 0.02573984337006685,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.7915544659158062,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.01944181180360802,
+      "non_distal_object_gap_m": 0.027077803931013725,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.8610363106105376,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.020994878065602116,
+      "non_distal_object_gap_m": 0.02843561740660672,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 1.9305181553052688,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.022531126240822517,
+      "non_distal_object_gap_m": 0.02981508683601151,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 278,
+      "phase": "closure_sweep",
+      "aperture_rad": 2.0,
+      "ik_errors": [
+        0.0007148660255353072,
+        0.007148660255245336
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.03100000000000025,
+      "whole_robot_object_gap_m": 0.024048925809345503,
+      "non_distal_object_gap_m": 0.031210726768785037,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 279,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030643809190151305,
+      "whole_robot_object_gap_m": -0.0014673989970988934,
+      "non_distal_object_gap_m": 0.008342402745259625,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 279,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030643809190151305,
+      "whole_robot_object_gap_m": -0.0011771494865325243,
+      "non_distal_object_gap_m": 0.008576301134813946,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 279,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030643809190151305,
+      "whole_robot_object_gap_m": -0.0008866683054196724,
+      "non_distal_object_gap_m": 0.00881476978742493,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 279,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030643809190151305,
+      "whole_robot_object_gap_m": -0.000595965432995351,
+      "non_distal_object_gap_m": 0.009052203513806924,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 279,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 2.7755575615628914e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030643809190151305,
+      "whole_robot_object_gap_m": -0.0003050508561107408,
+      "non_distal_object_gap_m": 0.009288130251995697,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 280,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 1.3877787807814457e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.030503419390874198,
+      "whole_robot_object_gap_m": -0.0015226951284376977,
+      "non_distal_object_gap_m": 0.008367453463979048,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 280,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 1.3877787807814457e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.030503419390874198,
+      "whole_robot_object_gap_m": -0.001232452107870034,
+      "non_distal_object_gap_m": 0.00860177528729768,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 280,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 1.3877787807814457e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.030503419390874198,
+      "whole_robot_object_gap_m": -0.0009419771586759341,
+      "non_distal_object_gap_m": 0.008840291026530292,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 280,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 1.3877787807814457e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.030503419390874198,
+      "whole_robot_object_gap_m": -0.0006512802598762252,
+      "non_distal_object_gap_m": 0.009077607830129616,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 280,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 1.3877787807814457e-17,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": [
+          "floor",
+          "drivewhl1_link_collision_0"
+        ],
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.030503419390874198,
+      "whole_robot_object_gap_m": -0.0003603713981166135,
+      "non_distal_object_gap_m": 0.009313416774068434,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 281,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030658073772882433,
+      "whole_robot_object_gap_m": -0.0015470722110304575,
+      "non_distal_object_gap_m": 0.008351790646870591,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 281,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030658073772882433,
+      "whole_robot_object_gap_m": -0.0012568555814453704,
+      "non_distal_object_gap_m": 0.00858477218015336,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 281,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030658073772882433,
+      "whole_robot_object_gap_m": -0.0009664059870071274,
+      "non_distal_object_gap_m": 0.008822965736010057,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 281,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030658073772882433,
+      "whole_robot_object_gap_m": -0.000675733405865733,
+      "non_distal_object_gap_m": 0.009060566999438295,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 281,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827771,
+      "joint_margin_rad": 0.030658073772882433,
+      "whole_robot_object_gap_m": -0.00038484782383155534,
+      "non_distal_object_gap_m": 0.00929666103997474,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 282,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.0310730004177327,
+      "whole_robot_object_gap_m": -0.0015451203044664168,
+      "non_distal_object_gap_m": 0.008303310004115144,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 282,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.0310730004177327,
+      "whole_robot_object_gap_m": -0.0012549498185340075,
+      "non_distal_object_gap_m": 0.008533333741961274,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 282,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.0310730004177327,
+      "whole_robot_object_gap_m": -0.0009645446407340493,
+      "non_distal_object_gap_m": 0.00876970643113522,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 282,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.0310730004177327,
+      "whole_robot_object_gap_m": -0.0006739147476902093,
+      "non_distal_object_gap_m": 0.009007945440351805,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 282,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.0310730004177327,
+      "whole_robot_object_gap_m": -0.00038307012374649363,
+      "non_distal_object_gap_m": 0.00924467915036059,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 283,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.031653033859833146,
+      "whole_robot_object_gap_m": -0.001553251908487273,
+      "non_distal_object_gap_m": 0.008159140585601025,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 283,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.031653033859833146,
+      "whole_robot_object_gap_m": -0.0012626113113260713,
+      "non_distal_object_gap_m": 0.008385258922101312,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 283,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.031653033859833146,
+      "whole_robot_object_gap_m": -0.0009717568661152933,
+      "non_distal_object_gap_m": 0.008618058240846604,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 283,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.031653033859833146,
+      "whole_robot_object_gap_m": -0.0006806985649129385,
+      "non_distal_object_gap_m": 0.008856125787248053,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 283,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827777,
+      "joint_margin_rad": 0.031653033859833146,
+      "whole_robot_object_gap_m": -0.0003894464067806202,
+      "non_distal_object_gap_m": 0.009093663003205835,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 284,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.032243621443636294,
+      "whole_robot_object_gap_m": -0.0017211982558810388,
+      "non_distal_object_gap_m": 0.007969828001756551,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 284,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.032243621443636294,
+      "whole_robot_object_gap_m": -0.0014305176754566965,
+      "non_distal_object_gap_m": 0.008191850937972624,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 284,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.032243621443636294,
+      "whole_robot_object_gap_m": -0.001139625625392403,
+      "non_distal_object_gap_m": 0.008420923940502194,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 284,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.032243621443636294,
+      "whole_robot_object_gap_m": -0.0008485320990382911,
+      "non_distal_object_gap_m": 0.00865647975023899,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 284,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.032243621443636294,
+      "whole_robot_object_gap_m": -0.000557247096665988,
+      "non_distal_object_gap_m": 0.008894783342065022,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 285,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.032685083846877405,
+      "whole_robot_object_gap_m": -0.0018833365446872267,
+      "non_distal_object_gap_m": 0.007803962552151256,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 285,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.032685083846877405,
+      "whole_robot_object_gap_m": -0.0015926255599510502,
+      "non_distal_object_gap_m": 0.008022680745407138,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 285,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.032685083846877405,
+      "whole_robot_object_gap_m": -0.0013017051001919103,
+      "non_distal_object_gap_m": 0.008248764640690564,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 285,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.032685083846877405,
+      "whole_robot_object_gap_m": -0.0010105851597356271,
+      "non_distal_object_gap_m": 0.008481617721925058,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 285,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.032685083846877405,
+      "whole_robot_object_gap_m": -0.0007192757397613118,
+      "non_distal_object_gap_m": 0.008719666843144595,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 286,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.032866537232302595,
+      "whole_robot_object_gap_m": -0.0019970240942034255,
+      "non_distal_object_gap_m": 0.0076691758607755015,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 286,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.032866537232302595,
+      "whole_robot_object_gap_m": -0.0017062950940435978,
+      "non_distal_object_gap_m": 0.00788633100398614,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 286,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.032866537232302595,
+      "whole_robot_object_gap_m": -0.0014153579248331201,
+      "non_distal_object_gap_m": 0.008111047212929707,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 286,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.032866537232302595,
+      "whole_robot_object_gap_m": -0.0011242225814722753,
+      "non_distal_object_gap_m": 0.008342706025529497,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 286,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827763,
+      "joint_margin_rad": 0.032866537232302595,
+      "whole_robot_object_gap_m": -0.0008328990656692352,
+      "non_distal_object_gap_m": 0.00858025577201534,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 287,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.03275271080788811,
+      "whole_robot_object_gap_m": -0.0020582076116947754,
+      "non_distal_object_gap_m": 0.007565203504952576,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 287,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.03275271080788811,
+      "whole_robot_object_gap_m": -0.0017674726034738013,
+      "non_distal_object_gap_m": 0.007782950148881319,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 287,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.03275271080788811,
+      "whole_robot_object_gap_m": -0.0014765299415543122,
+      "non_distal_object_gap_m": 0.008008302245041371,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 287,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.03275271080788811,
+      "whole_robot_object_gap_m": -0.0011853896210249017,
+      "non_distal_object_gap_m": 0.008240628344140325,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 287,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        0.0,
+        0.0
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827785,
+      "joint_margin_rad": 0.03275271080788811,
+      "whole_robot_object_gap_m": -0.0008940616437648512,
+      "non_distal_object_gap_m": 0.008478500392269578,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 288,
+      "phase": "exit",
+      "aperture_rad": 0.8882904848842995,
+      "ik_errors": [
+        4.600207944803242e-07,
+        1.3825846397912334e-06
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.03245627610582297,
+      "whole_robot_object_gap_m": -0.0020842575344689,
+      "non_distal_object_gap_m": 0.0075077905028559195,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 288,
+      "phase": "exit",
+      "aperture_rad": 0.9007904848842996,
+      "ik_errors": [
+        4.600207944803242e-07,
+        1.3825846397912334e-06
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.03245627610582297,
+      "whole_robot_object_gap_m": -0.0017935249281003684,
+      "non_distal_object_gap_m": 0.007726638204312806,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 288,
+      "phase": "exit",
+      "aperture_rad": 0.9132904848842995,
+      "ik_errors": [
+        4.600207944803242e-07,
+        1.3825846397912334e-06
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.03245627610582297,
+      "whole_robot_object_gap_m": -0.0015025845834140293,
+      "non_distal_object_gap_m": 0.007953068267688662,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 288,
+      "phase": "exit",
+      "aperture_rad": 0.9257904848842995,
+      "ik_errors": [
+        4.600207944803242e-07,
+        1.3825846397912334e-06
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.03245627610582297,
+      "whole_robot_object_gap_m": -0.001211446495419126,
+      "non_distal_object_gap_m": 0.00818644399228297,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    },
+    {
+      "source_index": 288,
+      "phase": "exit",
+      "aperture_rad": 0.9382904848842996,
+      "ik_errors": [
+        4.600207944803242e-07,
+        1.3825846397912334e-06
+      ],
+      "checks": {
+        "ik": true,
+        "fixtures": true,
+        "non_distal_object": true,
+        "open_object": true,
+        "self_collision": true,
+        "self_clearance": true,
+        "joint_margin": true
+      },
+      "fixture": {
+        "admitted": true,
+        "minimum_required_m": 0.003,
+        "minimum_signed_distance_or_lower_bound_m": 0.003001,
+        "distance_is_lower_bound": true,
+        "closest_geom_pair": null,
+        "closest_segment_world": null,
+        "inspected_pairs": 780,
+        "exact_distance_queries": 40,
+        "certified_far_pairs": 740
+      },
+      "collision_depths": {
+        "environment": 0.0,
+        "self": 0.0
+      },
+      "collision_pairs": {
+        "environment": null,
+        "self": null
+      },
+      "self_clearance_m": 0.12456412372827766,
+      "joint_margin_rad": 0.03245627610582297,
+      "whole_robot_object_gap_m": -0.0009201206659181008,
+      "non_distal_object_gap_m": 0.008424631572452846,
+      "closest_non_distal_object_pair": [
+        "r_hand_proximal_mimic_link_collision_0",
+        "needle_obj_handle"
+      ]
+    }
+  ]
+}

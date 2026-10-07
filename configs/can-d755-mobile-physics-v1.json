@@ -1,0 +1,465 @@
+{
+  "label": "can-d755-mobile-physics-v1",
+  "jobs": [
+    {
+      "id": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+      "workspace": "workspaces/can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff1",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 315,
+        "anchor_reference": [
+          0.3206327829655337,
+          -0.6812572509576387,
+          2.1759655994033142,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -1.4312572509576387,
+            1.1176219941877514
+          ],
+          [
+            -1.559756350188001,
+            3.746761926198211
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "d755b0622b3466a973309e93",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+        "anchor_index": 315,
+        "anchor_reference": [
+          -0.25039035828788,
+          0.050752817051653125,
+          0.08150715594213703,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.24641886209559916,
+          -0.15042409097967058,
+          0.8922883798681707,
+          0.26666476890317,
+          -0.005435270308612645,
+          0.0058577809288764306,
+          0.9637562167192907
+        ],
+        "hand_anchor_pose": [
+          0.20961613486167327,
+          -0.18169046816100876,
+          0.9123827463301141,
+          0.6658810588494276,
+          0.24724725984328244,
+          -0.6609631043112673,
+          0.24207226752514724
+        ],
+        "frames": 831,
+        "duration_s": 8.3,
+        "parent_files": {
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        },
+        "requested_grasp_rotation_deg": 120,
+        "planar_yaw_transport_rad": 2.094458443461177,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "retimed_source_clearance": {
+        "minimum_m": 0.003,
+        "enforce_planar_neighbor_speed": true
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.32625
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          110.01740134501671
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.5076939291365619,
+              1.875
+            ],
+            [
+              -1.6524287111913125,
+              0.55
+            ],
+            [
+              -1.5790655169428482,
+              5.466462594286932
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true,
+        "midpoint_quarter_probes": true,
+        "midpoint_position_reserve_m": 0.0001,
+        "midpoint_fixture_reserve_m": 0.0001
+      },
+      "source_prefix_velocity_feedforward": 1.0,
+      "geometry_selection_rank": [
+        2.0485368235269217,
+        0.05762215285808054,
+        16
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-untried-mobile-placement-v1/can-untried-mobile-placement-v1-d755b0622b3466a973309e93-hand_mobile-chunk0/backup.json",
+          "sha256": "8c4ccd8ea84836552ee350b0d810832beaa461b26691cbab405aa50c5cc6784b"
+        },
+        {
+          "path": "runs/local-spool-pool/can-untried-mobile-placement-v1/can-untried-mobile-placement-v1-d755b0622b3466a973309e93-hand_mobile-chunk1/backup.json",
+          "sha256": "6b64d60cbe31e7238cb347482a82709ba4dc389a595d3c56a24ab473eb25a55d"
+        },
+        {
+          "path": "runs/local-spool-pool/can-untried-mobile-placement-v1/can-untried-mobile-placement-v1-d755b0622b3466a973309e93-hand_mobile-chunk2/backup.json",
+          "sha256": "8ee52bb61059084f89c0cad50d018881910c56dcd17e8449d4a1e9878ee5dc58"
+        }
+      ],
+      "comparison_scope": "Minimum original hand-bank geometry rank selected onlyafterall3chunkscompleted; all3originaland3wallbankchunks also completedwithoutadmission. Fresh complete-source reconstruction retains exact source-retiming/repair and selectedplacementparameters. Originalsource/model/physicalgates unchanged; adaptive development."
+    },
+    {
+      "id": "can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff0",
+      "workspace": "workspaces/can-d755-mobile-physics-v1-d755b0622b3466a973309e93-ff0",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/d755b0622b3466a973309e93.h5",
+      "source_normalized_sha256": "d72f699a1fe5dd22834874def23798018f70b9a402e257a9f0b4ba37e9c561c2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "a7f2a4493d9b4456e0cc6d55144264f7ab83b9cf8d804f416d801f79dbdc6317",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 120
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/materialization.json",
+        "sha256": "e8c1cd28fdf840dc30db5a8dca2e28c56f3ff2a0a2589e9248e2fb740750fd38",
+        "original_archive_sha256": "3ffc5782244a0a6a4ce7dbb5f128b3e90efb06c5cd68ee44240dcbb7f4b8105b"
+      },
+      "parent_attempt_files_sha256": {
+        "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+        "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+        "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "approach_reuse_admitted_reference": true,
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 1,
+      "mobile_fixture_ik": {
+        "anchor_index": 315,
+        "anchor_reference": [
+          0.3206327829655337,
+          -0.6812572509576387,
+          2.1759655994033142,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -1.049171167445846,
+            1.213422520610987
+          ],
+          [
+            -1.4312572509576387,
+            1.1176219941877514
+          ],
+          [
+            -1.559756350188001,
+            3.746761926198211
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "pose_tolerance_constraints": true,
+        "stop_on_first_invalid": true
+      },
+      "diagnostic_seed": {
+        "source": "d755b0622b3466a973309e93",
+        "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-d755b0622b3466a973309e93-aligned/d755b0622b3466a973309e93",
+        "anchor_index": 315,
+        "anchor_reference": [
+          -0.25039035828788,
+          0.050752817051653125,
+          0.08150715594213703,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -0.24867110357255942,
+          -0.35352621601417267,
+          0.06372153817705652,
+          -1.1791232225135475,
+          0.42118859555046884,
+          -0.3983813821079859,
+          -0.5115852713168814
+        ],
+        "reference_base_min": [
+          -0.2991711674458459,
+          0.04011868239601569,
+          0.011039976606895655
+        ],
+        "reference_base_max": [
+          0.463422520610987,
+          0.3676219941877513,
+          0.11088998648165876
+        ],
+        "object_anchor_pose": [
+          0.24641886209559916,
+          -0.15042409097967058,
+          0.8922883798681707,
+          0.26666476890317,
+          -0.005435270308612645,
+          0.0058577809288764306,
+          0.9637562167192907
+        ],
+        "hand_anchor_pose": [
+          0.20961613486167327,
+          -0.18169046816100876,
+          0.9123827463301141,
+          0.6658810588494276,
+          0.24724725984328244,
+          -0.6609631043112673,
+          0.24207226752514724
+        ],
+        "frames": 831,
+        "duration_s": 8.3,
+        "parent_files": {
+          "plan.h5": "26e5d5aee547829b1c048501253845dce42a61c434944ccdf94aa679de38705a",
+          "scene.xml": "3c176d16b8a98fe0f16a19d4f0bdacc0e0791565ed7e73702e8d6d9a9b929974",
+          "result.json": "b20984bb279ba1c3e48ff96a79b3cb9b4860adc0b9b568960f27c34dccfaf4e2"
+        },
+        "requested_grasp_rotation_deg": 120,
+        "planar_yaw_transport_rad": 2.094458443461177,
+        "scope": "Native object-axis rotation transports an INITIAL planar IK seed only; every resulting original-clock target and aperture still requires fresh admission. No source/object state is changed."
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8,
+        "planar_speed_m_s": 0.4
+      },
+      "retimed_source_clearance": {
+        "minimum_m": 0.003,
+        "enforce_planar_neighbor_speed": true
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.92,
+          -0.32625
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          110.01740134501671
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.5076939291365619,
+              1.875
+            ],
+            [
+              -1.6524287111913125,
+              0.55
+            ],
+            [
+              -1.5790655169428482,
+              5.466462594286932
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        },
+        "adaptive_midpoints": 3,
+        "midpoint_minimum_motion": true,
+        "interval_knot_timing": true,
+        "midpoint_quarter_probes": true,
+        "midpoint_position_reserve_m": 0.0001,
+        "midpoint_fixture_reserve_m": 0.0001
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        2.0485368235269217,
+        0.05762215285808054,
+        16
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-untried-mobile-placement-v1/can-untried-mobile-placement-v1-d755b0622b3466a973309e93-hand_mobile-chunk0/backup.json",
+          "sha256": "8c4ccd8ea84836552ee350b0d810832beaa461b26691cbab405aa50c5cc6784b"
+        },
+        {
+          "path": "runs/local-spool-pool/can-untried-mobile-placement-v1/can-untried-mobile-placement-v1-d755b0622b3466a973309e93-hand_mobile-chunk1/backup.json",
+          "sha256": "6b64d60cbe31e7238cb347482a82709ba4dc389a595d3c56a24ab473eb25a55d"
+        },
+        {
+          "path": "runs/local-spool-pool/can-untried-mobile-placement-v1/can-untried-mobile-placement-v1-d755b0622b3466a973309e93-hand_mobile-chunk2/backup.json",
+          "sha256": "8ee52bb61059084f89c0cad50d018881910c56dcd17e8449d4a1e9878ee5dc58"
+        }
+      ],
+      "comparison_scope": "Minimum original hand-bank geometry rank selected onlyafterall3chunkscompleted; all3originaland3wallbankchunks also completedwithoutadmission. Fresh complete-source reconstruction retains exact source-retiming/repair and selectedplacementparameters. Originalsource/model/physicalgates unchanged; adaptive development."
+    }
+  ]
+}

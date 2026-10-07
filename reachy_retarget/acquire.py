@@ -75,6 +75,11 @@ def file_lock(store, item):
 
 
 def download(store, item, attempts=3, reserve=RESERVE):
+    from .scope import exclusion_reason
+    reason = exclusion_reason(store, item["source_id"])
+    if reason:
+        store.update_file(item["source_id"], item["path"], status="excluded_objectless", error=reason)
+        return "excluded_objectless"
     lock = file_lock(store, item)
     if lock is None:
         return "in_progress"

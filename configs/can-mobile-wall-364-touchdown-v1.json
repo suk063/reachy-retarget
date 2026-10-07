@@ -1,0 +1,394 @@
+{
+  "label": "can-mobile-wall-364-touchdown-v1",
+  "jobs": [
+    {
+      "id": "can-mobile-wall-364-touchdown-v1-ff1",
+      "workspace": "workspaces/can-mobile-wall-364-touchdown-v1-ff1",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785-aligned/3641974ddfbb197d490d6785",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/3641974ddfbb197d490d6785.h5",
+      "source_normalized_sha256": "ae6b4e42845ebbd363a2a09bca121f522c61c3276264a1d572ab9ee78074e9d2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "046ea1f4d93f88d9cbef837d26aba02810828433c1d7511fe2392af1288495ce",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785-v1/materialization.json",
+        "sha256": "2dbb443e6c9ca05038c76d53c3f33bd188e27096e6e2d731122c2518571d4dd3",
+        "original_archive_sha256": "748d7a7a9d39933b5a5c81ec9337f196e25e3adfa0d2f0841a4ce996188e1fca"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 240,
+        "anchor_reference": [
+          0.220137183674834,
+          -0.8200022109905987,
+          1.9725568536475488,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -1.0546249907188303,
+          -0.22700724915515874,
+          0.32873692516890823,
+          0.069,
+          0.020812252699026947,
+          -0.4925999999999999,
+          -0.6051402089417492
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.5852710665747125,
+            0.8324019830144366
+          ],
+          [
+            -1.1700022109905985,
+            0.714759383198389
+          ],
+          [
+            -0.48134888838429457,
+            2.472556853647549
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "stop_on_first_invalid": true
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 3,
+      "diagnostic_seed": {
+        "source_mobile_archive": "runs/local-spool-pool/can-forearm-mobile-development-v1/can-forearm-mobile-development-v1-3641974ddfbb197d490d6785-seed0/artifact.tar.gz",
+        "archive_sha256": "70d594bce937954d6297c3d24cd48e604de3962ea7f87b6aed135fce253a2173",
+        "source_numeric_sha256": "299130f74fbc8d95f57cce12301140e52c557e65baff5fc88a5dfc442b18dbe6",
+        "original_anchor": [
+          -0.44579121033780816,
+          -0.08696892674111643,
+          0.4037847433918509,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -1.0546249907188303,
+          -0.22700724915515874,
+          0.32873692516890823,
+          0.069,
+          0.020812252699026947,
+          -0.4925999999999999,
+          -0.6051402089417492
+        ],
+        "transport_pivot_world": [
+          0.2544322897490141,
+          -0.11984669715077265,
+          0.8586570926619177
+        ],
+        "cylinder_axis_world": [
+          -0.04494095657735903,
+          0.02194672977022956,
+          0.998748542664421
+        ],
+        "requested_axis_rotation_deg": 90,
+        "planar_seed_yaw_rad": 1.568772110255698,
+        "scope": "Physical axial grasp redundancy of the same unchanged Can. Planar base seed follows the new grasp azimuth around original cylinder axis origin; arm seed stays fixed. Full fresh geometric admission required. Explicit bounds contain original and transported source-base extents plus0.35m/0.5rad. Facet snapping may add a small angular correction; seed is never accepted by construction."
+      },
+      "parent_geometry_job": "can-forearm-mobile-development-v1-3641974ddfbb197d490d6785-seed0",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.9775,
+          -0.27249999999999996
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          103.67164306086346
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.006,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.6583997486110803,
+              1.875
+            ],
+            [
+              -1.7060625839840786,
+              0.55
+            ],
+            [
+              -2.114878408805688,
+              5.094671201305979
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        }
+      },
+      "source_prefix_velocity_feedforward": 1.0,
+      "geometry_selection_rank": [
+        0.267961069020352,
+        8
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-geometry-refinement-v2/can-mobile-geometry-refinement-v2-wall_mobile-3641974ddfbb197d490d6785-chunk2/backup.json",
+          "sha256": "bc6b1cb2efea8061aa5e0d4a5001db022dd7af81b74409c29cb4e079f507ce07"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-geometry-refinement-v2/can-mobile-geometry-refinement-v2-wall_mobile-3641974ddfbb197d490d6785-chunk0/backup.json",
+          "sha256": "553aad23c59a4086c36639a67226bce99755f44f1e6f962c0843a9de7154e51c"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-geometry-refinement-v2/can-mobile-geometry-refinement-v2-wall_mobile-3641974ddfbb197d490d6785-chunk1/backup.json",
+          "sha256": "da5b607b706cd20f9eee6a37f303e0e805ee1a77571ccc52906853dff9d21ca3"
+        }
+      ],
+      "support_gap_correction": {
+        "parent_job": "can-mobile-wall-364-physics-v1-ff1",
+        "evidence": "docs/can-mobile-wall-364-support-gap-v2.json",
+        "evidence_sha256": "a74c53919b4bc2dd158625a137d4a2ab14a07debabe13dfc4fca189baedf8999",
+        "old_extra_descent_m": 0.002,
+        "new_extra_descent_m": 0.006,
+        "scope": "OriginalmodelrecordedlowestCanmeshbottom0.82263m; originalbinbottomtop0.82m. Fouradditionalmillimetersofrobotdescentcover2.63mmgapand1.37mmreserve. Existing20mmproposalcap, allgeometric/physicalthresholdsandmeasuredsupportbeforeopeningunchanged. Nomovingobjectstateassignments."
+      }
+    },
+    {
+      "id": "can-mobile-wall-364-touchdown-v1-ff0",
+      "workspace": "workspaces/can-mobile-wall-364-touchdown-v1-ff0",
+      "operation": "feasible_geometry_experiment",
+      "dataset": "robomimic",
+      "parent_task": "can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785",
+      "parent_workspace": "materialized-parents/can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785-v1/workspace",
+      "parent_attempt": "materialized-parents/can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785-v1/workspace/runs/dynamics/can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785-aligned/3641974ddfbb197d490d6785",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/3641974ddfbb197d490d6785.h5",
+      "source_normalized_sha256": "ae6b4e42845ebbd363a2a09bca121f522c61c3276264a1d572ab9ee78074e9d2",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "evaluation_split": "development_after_frozen_heldout_evaluation",
+      "runtime_source_sha256": "046ea1f4d93f88d9cbef837d26aba02810828433c1d7511fe2392af1288495ce",
+      "variant": "contact_0035",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001,
+        "orientation_policy": "jaw_level",
+        "azimuth_policy": "nearest_opposed_facets",
+        "azimuth_offset_deg": 90
+      },
+      "source_parent_materialization": {
+        "manifest": "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-3641974ddfbb197d490d6785-v1/materialization.json",
+        "sha256": "2dbb443e6c9ca05038c76d53c3f33bd188e27096e6e2d731122c2518571d4dd3",
+        "original_archive_sha256": "748d7a7a9d39933b5a5c81ec9337f196e25e3adfa0d2f0841a4ce996188e1fca"
+      },
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "approach_before_base_admission": true,
+      "mobile_fixture_ik": {
+        "anchor_index": 240,
+        "anchor_reference": [
+          0.220137183674834,
+          -0.8200022109905987,
+          1.9725568536475488,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -1.0546249907188303,
+          -0.22700724915515874,
+          0.32873692516890823,
+          0.069,
+          0.020812252699026947,
+          -0.4925999999999999,
+          -0.6051402089417492
+        ],
+        "base_bounds_xyyaw": [
+          [
+            -0.5852710665747125,
+            0.8324019830144366
+          ],
+          [
+            -1.1700022109905985,
+            0.714759383198389
+          ],
+          [
+            -0.48134888838429457,
+            2.472556853647549
+          ]
+        ],
+        "minimum_fixture_gap_m": 0.003,
+        "stop_on_first_invalid": true
+      },
+      "geometry_clearance": {
+        "minimum_m": 0.003
+      },
+      "geometry_seed_rank": 3,
+      "diagnostic_seed": {
+        "source_mobile_archive": "runs/local-spool-pool/can-forearm-mobile-development-v1/can-forearm-mobile-development-v1-3641974ddfbb197d490d6785-seed0/artifact.tar.gz",
+        "archive_sha256": "70d594bce937954d6297c3d24cd48e604de3962ea7f87b6aed135fce253a2173",
+        "source_numeric_sha256": "299130f74fbc8d95f57cce12301140e52c557e65baff5fc88a5dfc442b18dbe6",
+        "original_anchor": [
+          -0.44579121033780816,
+          -0.08696892674111643,
+          0.4037847433918509,
+          0.0,
+          0.15,
+          0.0,
+          -0.2,
+          0.0,
+          0.0,
+          0.0,
+          -1.0546249907188303,
+          -0.22700724915515874,
+          0.32873692516890823,
+          0.069,
+          0.020812252699026947,
+          -0.4925999999999999,
+          -0.6051402089417492
+        ],
+        "transport_pivot_world": [
+          0.2544322897490141,
+          -0.11984669715077265,
+          0.8586570926619177
+        ],
+        "cylinder_axis_world": [
+          -0.04494095657735903,
+          0.02194672977022956,
+          0.998748542664421
+        ],
+        "requested_axis_rotation_deg": 90,
+        "planar_seed_yaw_rad": 1.568772110255698,
+        "scope": "Physical axial grasp redundancy of the same unchanged Can. Planar base seed follows the new grasp azimuth around original cylinder axis origin; arm seed stays fixed. Full fresh geometric admission required. Explicit bounds contain original and transported source-base extents plus0.35m/0.5rad. Facet snapping may add a small angular correction; seed is never accepted by construction."
+      },
+      "parent_geometry_job": "can-forearm-mobile-development-v1-3641974ddfbb197d490d6785-seed0",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          0.9775,
+          -0.27249999999999996
+        ],
+        "base_offset_xyyaw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          50.0,
+          103.67164306086346
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.006,
+        "retreat_speed_factor": 1.0,
+        "mobile_ik": {
+          "base_bounds_xyyaw": [
+            [
+              -0.6583997486110803,
+              1.875
+            ],
+            [
+              -1.7060625839840786,
+              0.55
+            ],
+            [
+              -2.114878408805688,
+              5.094671201305979
+            ]
+          ],
+          "minimum_fixture_gap_m": 0.003,
+          "orientation_transport": true,
+          "pose_tolerance_constraints": true
+        }
+      },
+      "source_prefix_velocity_feedforward": 0.0,
+      "geometry_selection_rank": [
+        0.267961069020352,
+        8
+      ],
+      "geometry_selection_evidence": [
+        {
+          "path": "runs/local-spool-pool/can-mobile-geometry-refinement-v2/can-mobile-geometry-refinement-v2-wall_mobile-3641974ddfbb197d490d6785-chunk2/backup.json",
+          "sha256": "bc6b1cb2efea8061aa5e0d4a5001db022dd7af81b74409c29cb4e079f507ce07"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-geometry-refinement-v2/can-mobile-geometry-refinement-v2-wall_mobile-3641974ddfbb197d490d6785-chunk0/backup.json",
+          "sha256": "553aad23c59a4086c36639a67226bce99755f44f1e6f962c0843a9de7154e51c"
+        },
+        {
+          "path": "runs/local-spool-pool/can-mobile-geometry-refinement-v2/can-mobile-geometry-refinement-v2-wall_mobile-3641974ddfbb197d490d6785-chunk1/backup.json",
+          "sha256": "da5b607b706cd20f9eee6a37f303e0e805ee1a77571ccc52906853dff9d21ca3"
+        }
+      ],
+      "support_gap_correction": {
+        "parent_job": "can-mobile-wall-364-physics-v1-ff0",
+        "evidence": "docs/can-mobile-wall-364-support-gap-v2.json",
+        "evidence_sha256": "a74c53919b4bc2dd158625a137d4a2ab14a07debabe13dfc4fca189baedf8999",
+        "old_extra_descent_m": 0.002,
+        "new_extra_descent_m": 0.006,
+        "scope": "OriginalmodelrecordedlowestCanmeshbottom0.82263m; originalbinbottomtop0.82m. Fouradditionalmillimetersofrobotdescentcover2.63mmgapand1.37mmreserve. Existing20mmproposalcap, allgeometric/physicalthresholdsandmeasuredsupportbeforeopeningunchanged. Nomovingobjectstateassignments."
+      }
+    }
+  ],
+  "scope": "Matchedoriginalruntime/source/armfeedforwardcomparisons: changeonlyboundedrobotdescentfrom2to6mm, re-admitfullgeometrybeforephysics. Originalfailedattemptsandexactreplaysretained."
+}

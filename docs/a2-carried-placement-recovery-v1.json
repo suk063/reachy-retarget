@@ -1,0 +1,475 @@
+{
+  "schema": "a2-carried-placement-recovery-evidence-v1",
+  "source_episode": "a2e2fc296eb53e00fdc56596",
+  "source_sequence": "v1.5/can/ph/demo_47",
+  "independent_source_count": 1,
+  "evaluation_split": "development_after_frozen_heldout_evaluation",
+  "source_normalized_sha256": "701f3e7982590f572633e169b2bc9845d0fc04cfbfd2947989c93b34cac566b6",
+  "source_provenance": {
+    "provenance": [
+      {
+        "bytes": 46889752,
+        "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+        "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+        "source_id": "hf__robomimic__robomimic_datasets",
+        "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+      }
+    ],
+    "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+    "source_urls": [
+      "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+    ]
+  },
+  "runtime_sha256": "42423340d9429494cab1aa2f493e61782cce15c9d1524ebb41e63442f9282dae",
+  "causal_diagnosis": {
+    "document": "docs/can-carried-contact-drift-diagnosis-v1.json",
+    "ff1": {
+      "partition_contact_frame": 1400,
+      "rotation_failure_frame": 1411,
+      "translation_failure_frame": 1459,
+      "first_floor_contact_frame": 1591
+    },
+    "ff0": {
+      "partition_contact_frame": 1417,
+      "rotation_failure_frame": 1429,
+      "translation_failure_frame": 1495,
+      "first_floor_contact_frame": 1570
+    },
+    "interpretation": "Partition contact occurs before grasp drift thresholds and before floor support; earlier free-carry phase stays inside grasp thresholds."
+  },
+  "robot_only_correction": {
+    "placement_x_before_m": 0.92,
+    "placement_x_after_m": 0.927,
+    "shift_x_m": 0.007,
+    "derivation_document": "docs/a2-carried-mesh-screen-v1.json",
+    "required_shift_for_observed_3mm_wall_gap_m": 0.006239573323978287,
+    "scope": "Within unchanged native target bin; orientation, aperture, source rows and object/model/mass/friction unchanged. Empirical observed attachments are diagnostic counterfactuals, not future guarantees."
+  },
+  "admission": {
+    "document": "docs/a2-carried-xy-admission-v1.json",
+    "complete_geometry_admitted": true,
+    "matched_original_input_arrays": {
+      "original_time_s": true,
+      "original_reference": true,
+      "original_gripper_intent": true,
+      "original_hand_targets": true,
+      "original_object_targets": true,
+      "waypoints": false
+    },
+    "source_arrays_exact": true,
+    "cache": "/tmp/a2-carried-xy-admission-v2/workspace/plans/can-a2-carried-xy-admission-v2/admitted-plan",
+    "cache_files": {
+      "binding.json": "e6e144263cf0d643fe41320faeb875b00c0ce039af6680dc9ea7f67595cc6ec1",
+      "scene.xml": "95ff5235f70347e25511e5d67f4fc697be91e1bf53612137a68b6fb0fa9d5a9c",
+      "plan.h5": "e287db8f954ad41b89b2c12250dd62250b4a9961beaceb23e6358464100861a6",
+      "result.json": "d95a04da752c224574662adc97d97c7332482b84cf0471ecaa0b54e7bf9537ed"
+    },
+    "scope": "Full source/approach/retiming/placement robot checks, positive fixture clearance and every inserted loaded carried-mesh row completed before physical validation."
+  },
+  "physical_attempts": [
+    {
+      "id": "can-a2-carried-xy-physics-v1-ff1",
+      "status": "physical_fail",
+      "physics_validated": false,
+      "simulation_profile": "source-fidelity",
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": false,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": true
+      },
+      "failure_reasons": [
+        "grasp_rotation_3deg"
+      ],
+      "max_grasp_drift_m": 0.0018070806667148532,
+      "max_grasp_drift_deg": 3.7470761662425045,
+      "final_stable_s": 8.869999999999855,
+      "peak_base_velocity": [
+        0.576736900911822,
+        0.5179163206348328,
+        0.6333758894942614
+      ],
+      "max_hand_object_penetration_m": 0.00037196973258732434,
+      "max_object_environment_penetration_m": 0.0014953665234704188,
+      "actuator_audit": {
+        "attempt": "/tmp/a2-carried-xy-physics-v1/workspaces/can-a2-carried-xy-physics-v1-ff1/runs/dynamics/can-a2-carried-xy-physics-v1-ff1/a2e2fc296eb53e00fdc56596",
+        "scene_sha256": "95ff5235f70347e25511e5d67f4fc697be91e1bf53612137a68b6fb0fa9d5a9c",
+        "frames": 3002,
+        "scene_asset_hashes": {
+          "meshes": {
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8"
+          },
+          "textures": {
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d"
+          },
+          "hfields": {}
+        },
+        "final_recorded_time_s": 30.01999999999424,
+        "reported_duration_checked": true,
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "object_welds_actuators": false,
+        "object_state_assignments": "initial reset only",
+        "meaning": "Control replay equivalence; task and contact success remain separate recorded gates",
+        "placement_opening_guard_audit": {
+          "applicable": true,
+          "passed": true,
+          "checks": {
+            "measured_position": true,
+            "intact_grasp": true,
+            "grasp_history": true,
+            "opening_authorized": true
+          },
+          "opening_events": [
+            {
+              "frame": 1655,
+              "authorized": true,
+              "object_position": [
+                0.9226276360034197,
+                -0.3022659836195851,
+                0.8656984036872819
+              ]
+            }
+          ],
+          "scope": "Recorded previous-interval object position, bilateral contact and acquired grasp anchor; contact-force values are not independently recomputed here"
+        },
+        "independent_validation_pass": true
+      },
+      "state_assessment": {
+        "state_contract": "reachy-retarget-state-observations-v1",
+        "rows": 3002,
+        "state_observations_complete": true,
+        "table_fields_complete": true,
+        "rgb_required": false,
+        "missing_fields": [],
+        "undefined_task_roles": [],
+        "errors": [],
+        "recorded_command_fields": [
+          "command/joint_position"
+        ],
+        "command_fields_without_semantics": [],
+        "issued_control_modes": [
+          "joint_position"
+        ],
+        "command_profile": "position-servos-with-recorded-feedback-memory-v1",
+        "required_issued_command_fields": [
+          "command/joint_position"
+        ],
+        "issued_command_fields_without_semantics": [],
+        "missing_control_fields": [],
+        "control_errors": [],
+        "complete_recorded_command_profile": true,
+        "actual_controls_complete": true,
+        "control_recording_complete": true,
+        "all_control_modes_available": false,
+        "alternative_control_fields_missing": [
+          "command/joint_velocity",
+          "command/left_tcp_pose",
+          "command/right_tcp_pose",
+          "command/head_pose",
+          "command/base_twist"
+        ],
+        "physics_validated": false,
+        "policy_ready": false,
+        "native_v5_compatibility_assessed": false
+      },
+      "canonical_archive": {
+        "source": "/tmp/a2-carried-xy-physics-v1/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff1.hdf5",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff1.hdf5",
+        "sha256": "e71896e3984b8f160df9166f7bbaeded9aa7a4d609e4b01dbccfc49df31a6cbc",
+        "bytes": 43277591
+      },
+      "common_archive_inspection": {
+        "schema": "reachy-retarget-agent-archive-v1",
+        "rows": 3002,
+        "timed": true,
+        "missing_fields": [],
+        "rgb_required": false,
+        "sha256": "e71896e3984b8f160df9166f7bbaeded9aa7a4d609e4b01dbccfc49df31a6cbc"
+      },
+      "source_prefix_velocity_feedforward": 1.0
+    },
+    {
+      "id": "can-a2-carried-xy-physics-v1-ff0",
+      "status": "physical_pass",
+      "physics_validated": true,
+      "simulation_profile": "source-fidelity",
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": true
+      },
+      "failure_reasons": [],
+      "max_grasp_drift_m": 0.0012757863728312217,
+      "max_grasp_drift_deg": 1.686110856341443,
+      "final_stable_s": 8.869999999999855,
+      "peak_base_velocity": [
+        0.5580469759599727,
+        0.48791209968617083,
+        0.5857175940473414
+      ],
+      "max_hand_object_penetration_m": 0.00018666087520203926,
+      "max_object_environment_penetration_m": 0.0004987714912412232,
+      "actuator_audit": {
+        "attempt": "/tmp/a2-carried-xy-physics-v1/workspaces/can-a2-carried-xy-physics-v1-ff0/runs/dynamics/can-a2-carried-xy-physics-v1-ff0/a2e2fc296eb53e00fdc56596",
+        "scene_sha256": "95ff5235f70347e25511e5d67f4fc697be91e1bf53612137a68b6fb0fa9d5a9c",
+        "frames": 3002,
+        "scene_asset_hashes": {
+          "meshes": {
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae/mesh_597fdf91878589_0.stl": "a651af9089de730a1182e065ab92a0fc277930426363c191786967d974581fae",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f/mesh_dffaaad236b7d0_1.stl": "e4e57a53fa831811d9679e2a4fd4afc18854f2de7390fb4bd279d9c9171c3f0f",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b/mesh_c8f0b665870b60_2.stl": "6485ed1ff3959dea3d1ff730a50d1c73f682afa7338cd4ab8d8e6eaf8841589b",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82/mesh_f67a41d2e176b8_3.stl": "718b5968e8852c634331bb46fcb8a03ada8edd604cce7776a6b007cec5c4aa82",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36/mesh_b401f412d5da03_4.stl": "2bbdcc8c61f57d537c6d5a951b848a9a07d8e431d09a3442bc2ce94a489d3c36",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef/mesh_26f93a69116ace_5.stl": "b2f77420ae632d2f7d227406775aed64b6b024a68b9fe58f440a06358ec549ef",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0/mesh_3c05adbfb9c82d_6.stl": "3d8f462334bf59c068cb79f3e173dd41858738f38ebc6b63ae4be9057e9371d0",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8/can.msh": "3a0e736201604130d47abe6f93e9173b11b1d49df6e2f7093537a435c061cbb8"
+          },
+          "textures": {
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5/light-gray-floor-tile.png": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5/steel-brushed.png": "43f30e7a2d0e8085aa15f58623b1753a003f93e5fe336eeaf65c146f955a81d5",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191/light-gray-plaster.png": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1/light-wood.png": "967be64bdb170d36283bc43c2ae5d525ec88f78bc837dc7d0efc9a28d68caad1",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3/dark-wood.png": "5da8dbf7af06ecd251840aceec25fedcfa98267041cea289b2829c982e008dc3",
+            "/mnt/reachy-retarget/materialized-parents/can-heldout-cohort-v2-baseline-a2e2fc296eb53e00fdc56596-v1/assets/2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d/soda.png": "2774d29c6c16e1a3b3156e6679897a1695127ec59463d2de1a7ffd7f11b41b4d"
+          },
+          "hfields": {}
+        },
+        "final_recorded_time_s": 30.01999999999424,
+        "reported_duration_checked": true,
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "object_welds_actuators": false,
+        "object_state_assignments": "initial reset only",
+        "meaning": "Control replay equivalence; task and contact success remain separate recorded gates",
+        "placement_opening_guard_audit": {
+          "applicable": true,
+          "passed": true,
+          "checks": {
+            "measured_position": true,
+            "intact_grasp": true,
+            "grasp_history": true,
+            "opening_authorized": true
+          },
+          "opening_events": [
+            {
+              "frame": 1655,
+              "authorized": true,
+              "object_position": [
+                0.9210968445706285,
+                -0.3001482090526655,
+                0.8656682211075246
+              ]
+            }
+          ],
+          "scope": "Recorded previous-interval object position, bilateral contact and acquired grasp anchor; contact-force values are not independently recomputed here"
+        },
+        "independent_validation_pass": true
+      },
+      "state_assessment": {
+        "state_contract": "reachy-retarget-state-observations-v1",
+        "rows": 3002,
+        "state_observations_complete": true,
+        "table_fields_complete": true,
+        "rgb_required": false,
+        "missing_fields": [],
+        "undefined_task_roles": [],
+        "errors": [],
+        "recorded_command_fields": [
+          "command/joint_position"
+        ],
+        "command_fields_without_semantics": [],
+        "issued_control_modes": [
+          "joint_position"
+        ],
+        "command_profile": "position-servos-with-recorded-feedback-memory-v1",
+        "required_issued_command_fields": [
+          "command/joint_position"
+        ],
+        "issued_command_fields_without_semantics": [],
+        "missing_control_fields": [],
+        "control_errors": [],
+        "complete_recorded_command_profile": true,
+        "actual_controls_complete": true,
+        "control_recording_complete": true,
+        "all_control_modes_available": false,
+        "alternative_control_fields_missing": [
+          "command/joint_velocity",
+          "command/left_tcp_pose",
+          "command/right_tcp_pose",
+          "command/head_pose",
+          "command/base_twist"
+        ],
+        "physics_validated": false,
+        "policy_ready": false,
+        "native_v5_compatibility_assessed": false
+      },
+      "canonical_archive": {
+        "source": "/tmp/a2-carried-xy-physics-v1/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff0.hdf5",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff0.hdf5",
+        "sha256": "bc183b0ba77864d7679f148097485963d5c876a911878b95c8b24459e512572f",
+        "bytes": 43101818
+      },
+      "common_archive_inspection": {
+        "schema": "reachy-retarget-agent-archive-v1",
+        "rows": 3002,
+        "timed": true,
+        "missing_fields": [],
+        "rgb_required": false,
+        "sha256": "bc183b0ba77864d7679f148097485963d5c876a911878b95c8b24459e512572f"
+      },
+      "source_prefix_velocity_feedforward": 0.0
+    }
+  ],
+  "publication": {
+    "schema": "immutable-a2-node-local-export-v1",
+    "archive": "/mnt/reachy-retarget/node-local-exports/a2-carried-placement-recovery-v1/artifact.tar.gz",
+    "archive_sha256": "842c8e28826fb1ffee2ff716ebce083a2d48f2544626b7e406f190445f0bdef5",
+    "archive_bytes": 185215429,
+    "original_node": "reachy-retarget-worker-7d46748688-4tn7w",
+    "original_prefix": "/tmp",
+    "folders": [
+      "can-carry-drift-diagnosis-v1",
+      "a2-carried-mesh-screen-v1",
+      "a2-carried-mesh-screen-v2",
+      "a2-carried-xy-admission-v1",
+      "a2-carried-xy-admission-v2",
+      "a2-carried-xy-physics-v1",
+      "a2-carried-recovery-drivers-v1"
+    ],
+    "canonical_files": [
+      {
+        "source": "/tmp/a2-carried-xy-physics-v1/datasets/robomimic/metadata.json",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/metadata.json",
+        "sha256": "fd7feaaf7aed2c4ed222373a3955f6de617fac147f24e2997110a8e4572b4c2c",
+        "bytes": 422
+      },
+      {
+        "source": "/tmp/a2-carried-xy-physics-v1/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff0.hdf5",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff0.hdf5",
+        "sha256": "bc183b0ba77864d7679f148097485963d5c876a911878b95c8b24459e512572f",
+        "bytes": 43101818
+      },
+      {
+        "source": "/tmp/a2-carried-xy-physics-v1/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff0.json",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff0.json",
+        "sha256": "793f926e8043936464a83680559e452544705107f0c3d72123c83230b24ccde6",
+        "bytes": 334335
+      },
+      {
+        "source": "/tmp/a2-carried-xy-physics-v1/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff1.hdf5",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff1.hdf5",
+        "sha256": "e71896e3984b8f160df9166f7bbaeded9aa7a4d609e4b01dbccfc49df31a6cbc",
+        "bytes": 43277591
+      },
+      {
+        "source": "/tmp/a2-carried-xy-physics-v1/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff1.json",
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff1.json",
+        "sha256": "28661daafd2f1991b7ee47b41b2e29d2aef23e48d1343ef411444c307c2d8233",
+        "bytes": 334668
+      }
+    ],
+    "canonical_inspections": [
+      {
+        "rows": 3002,
+        "timed": true,
+        "episode_id": "can-a2-carried-xy-physics-v1-ff0",
+        "schema": "reachy-retarget-agent-archive-v1",
+        "missing_fields": [],
+        "sha256": "bc183b0ba77864d7679f148097485963d5c876a911878b95c8b24459e512572f"
+      },
+      {
+        "rows": 3002,
+        "timed": true,
+        "episode_id": "can-a2-carried-xy-physics-v1-ff1",
+        "schema": "reachy-retarget-agent-archive-v1",
+        "missing_fields": [],
+        "sha256": "e71896e3984b8f160df9166f7bbaeded9aa7a4d609e4b01dbccfc49df31a6cbc"
+      }
+    ],
+    "original_bytes_unchanged": true
+  },
+  "cross_pod_verification": {
+    "node": "reachy-retarget-worker-7d46748688-47rp8",
+    "all_expected_bytes_verified": true,
+    "files": [
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/metadata.json",
+        "sha256": "fd7feaaf7aed2c4ed222373a3955f6de617fac147f24e2997110a8e4572b4c2c",
+        "bytes": 422
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff0.hdf5",
+        "sha256": "bc183b0ba77864d7679f148097485963d5c876a911878b95c8b24459e512572f",
+        "bytes": 43101818
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff0.json",
+        "sha256": "793f926e8043936464a83680559e452544705107f0c3d72123c83230b24ccde6",
+        "bytes": 334335
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff1.hdf5",
+        "sha256": "e71896e3984b8f160df9166f7bbaeded9aa7a4d609e4b01dbccfc49df31a6cbc",
+        "bytes": 43277591
+      },
+      {
+        "path": "/mnt/reachy-retarget/datasets/robomimic/episodes/can-a2-carried-xy-physics-v1-ff1.json",
+        "sha256": "28661daafd2f1991b7ee47b41b2e29d2aef23e48d1343ef411444c307c2d8233",
+        "bytes": 334668
+      },
+      {
+        "path": "/mnt/reachy-retarget/node-local-exports/a2-carried-placement-recovery-v1/artifact.tar.gz",
+        "sha256": "842c8e28826fb1ffee2ff716ebce083a2d48f2544626b7e406f190445f0bdef5",
+        "bytes": 185215429
+      }
+    ]
+  },
+  "limitations": [
+    "FF1 remains a recorded rotation-gate failure; only FF0 is an original-model all-gates success.",
+    "Two control variants represent one independent demonstration.",
+    "Common state/control archive completeness does not assert native reachy-agent RGB policy-loader compatibility.",
+    "The original frozen-policy held-out evaluation is unchanged; this is subsequent adaptive development."
+  ]
+}

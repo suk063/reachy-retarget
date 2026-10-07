@@ -94,6 +94,45 @@ def derived_gripper(a):
     }
 
 
+def gripper_trajectories(arrays, metadata, source_times, target_times):
+    """Derive finger targets without treating source commands as observed motion."""
+    values = {
+        side: np.interp(target_times, source_times, aperture)
+        for side, aperture in derived_gripper(arrays).items()
+    }
+    mapping = {side: {"method": "thumb-index aperture heuristic", "resampling": "linear interpolation",
+                      "observed_reachy_joint": False} for side in values}
+    env = metadata.get("env_args", {})
+    if metadata.get("source_format") == "robomimic-hdf5":
+        from .simstate import ACTIVE_OBJECTS
+        config = env.get("env_kwargs", {}).get("controller_configs", {})
+        controller = config.get("body_parts", {}).get("right", {}) if env.get("env_version") == "1.5.1" else config
+        action = np.asarray(arrays.get("source/action"))
+        arms = 2 if env.get("env_name") == "TwoArmTransport" else 1
+        if (metadata.get("robot_type") != "Panda" or env.get("env_version") not in ("1.5.1", "1.4.1")
+                or env.get("env_name") not in ACTIVE_OBJECTS
+                or controller.get("type") != "OSC_POSE"
+                or (env.get("env_version") == "1.5.1" and controller.get("gripper", {}).get("type") != "GRIP")
+                or action.shape != (len(source_times), 7*arms)
+                or not np.isin(action[:, 6::7], [-1., 1.]).all()):
+            raise ValueError("Unverified robomimic gripper action schema")
+        # Use the dilated source clock and zero-order hold: interpolation would
+        # start closing before the recorded grasp command.
+        indices = np.clip(np.searchsorted(source_times, target_times, side="right") - 1, 0, len(source_times)-1)
+        for arm, side in enumerate(("right", "left")[:arms]):
+            column = arm*7+6
+            values[side] = np.where(action[indices, column] > 0, -0.06, 2.0)
+            mapping[side] = {
+            "method": "source binary OSC gripper command mapped to Reachy finger targets",
+            "source_channel": f"source/action[:, {column}]", "source_open": -1., "source_close": 1.,
+            "open_position_rad": 2., "closed_position_rad": -0.06,
+            "resampling": "zero-order hold on globally dilated source timestamps",
+            "reference": "reachy_retarget/contact.py:convert_grasp",
+            "observed_reachy_joint": False, "contact_validated": False,
+            }
+    return values, mapping
+
+
 def aligned_goals(arrays, metadata, robot):
     n = len(arrays["time_s"])
     home = robot.fk(robot.q)
@@ -113,6 +152,10 @@ def aligned_goals(arrays, metadata, robot):
     if metadata.get("robot_type") == "Panda":
         T[:3, :3] = Rotation.from_euler("z", -90, degrees=True).as_matrix()
         T[:3, 3] = [0.60, -0.1, 0]
+        if metadata.get("source_format") == "ManiSkill-HDF5":
+            # PickCube's source tabletop is at world z=0. Move the entire scene,
+            # including objects, into a Reachy-height workspace without scaling.
+            T[2, 3] = .8
     else:
         root = pose_to_matrices(arrays["human/root_pose"])[0]
         # Face the robot's +X using the human's initial shoulder axis when known.
@@ -150,8 +193,37 @@ def aligned_goals(arrays, metadata, robot):
     return goals, T, present, attachments
 
 
+def resample_object_track(times, poses, target_times, placement, source_valid=None):
+    """Transform/resample measured poses without bridging invalid observations."""
+    poses = np.asarray(poses)
+    available = np.isfinite(poses).all(axis=1) & (np.abs(np.linalg.norm(poses[:, 3:], axis=1)-1.) < 1e-3)
+    if source_valid is not None:
+        if np.shape(source_valid) != (len(times),):
+            raise ValueError("Object validity mask does not match source timestamps")
+        available &= np.asarray(source_valid, dtype=bool)
+    output = np.full((len(target_times), 7), np.nan)
+    valid = np.zeros(len(target_times), dtype=bool)
+    if not available.any():
+        return output, valid
+    transformed = matrices_to_pose(placement @ pose_to_matrices(poses[available]))
+    left = np.clip(np.searchsorted(times, target_times, side="right")-1, 0, len(times)-2)
+    valid = available[left] & available[left+1] & (target_times >= times[0]) & (target_times <= times[-1])
+    if available.sum() >= 2:
+        output[valid] = interpolate_pose(times[available], transformed, target_times[valid])
+    # An exact valid sample remains valid even if its neighbor is missing.
+    nearest = np.clip(np.searchsorted(times, target_times), 0, len(times)-1)
+    exact = np.isclose(target_times, times[nearest], rtol=0, atol=1e-10) & available[nearest]
+    if exact.any():
+        source_to_available = np.cumsum(available)-1
+        output[exact] = transformed[source_to_available[nearest[exact]]]
+        valid[exact] = True
+    return output, valid
+
+
 def one(store, row):
     a, m = read_episode(store.root / row["path"])
+    from .scope import require_objects
+    require_objects(a)
     r = Robot(store.root)
     t = a["time_s"]
     native = "robot/joint_position" in a
@@ -273,6 +345,7 @@ def one(store, row):
     )
     out = store.root / "data/retargeted" / row["source_id"] / row["id"]
     out.mkdir(parents=True, exist_ok=True)
+    grippers, gripper_mapping = gripper_trajectories(a, m, t, target_t)
     with h5py.File(out / "motion.h5", "w") as f:
         f["time_s"] = target_t
         f["robot/joint_position"] = arms
@@ -281,42 +354,23 @@ def one(store, row):
         f["robot/joint_names"] = np.asarray(ARMS, dtype=h5py.string_dtype())
         f["robot/neck_names"] = np.asarray(NECK, dtype=h5py.string_dtype())
         f.attrs["units"] = "m, rad, s; poses xyz+wxyz; right-handed world"
-        for side, gripper in derived_gripper(a).items():
-            f["derived/gripper/" + side + "_position"] = np.interp(target_t, t, gripper)
-        f.attrs["derived_gripper_semantics"] = (
-            "thumb-index distance mapped through URDF endpoint aperture; heuristic, not observed actuator command or contact truth"
-        )
+        for side, gripper in grippers.items():
+            f["derived/gripper/" + side + "_position"] = gripper
+        f.attrs["derived_gripper_semantics"] = json.dumps(gripper_mapping)
         f["target/hand_pose_world"] = target_pose
         f["robot/hand_pose_world"] = matrices_to_pose(actual)
-        for oid in m.get("objects", {}):
+        object_names = {key.split("/")[1] for key in a if key.startswith("objects/") and key.endswith("/pose")}
+        for oid in sorted(object_names):
             key = f"objects/{oid}/pose"
-            if key in a:
-                available = np.all(np.isfinite(a[key]), axis=1)
-                transformed = placement @ pose_to_matrices(a[key][available])
-                if not available.all():
-                    # Do not bridge missing object tracks with invented labels.
-                    ix = np.clip(
-                        np.searchsorted(t, target_t, side="right") - 1, 0, len(t) - 2
-                    )
-                    valid_object = available[ix] & available[ix + 1]
-                    values = np.full((len(target_t), 7), np.nan)
-                    if available.sum() >= 2:
-                        values[valid_object] = interpolate_pose(
-                            t[available],
-                            matrices_to_pose(transformed),
-                            target_t[valid_object],
-                        )
-                    f[key] = values
-                    f[f"objects/{oid}/valid"] = valid_object
-                else:
-                    f[key] = interpolate_pose(
-                        t, matrices_to_pose(transformed), target_t
-                    )
+            values, valid_object = resample_object_track(t, a[key], target_t, placement, a.get(f"objects/{oid}/valid"))
+            f[key] = values
+            f[f"objects/{oid}/valid"] = valid_object
         f.attrs["metadata_json"] = json.dumps(
             {
                 "source_episode": row["id"],
                 "split": row["split"],
                 "physics_validated": False,
+                "controller_backend": r.backend,
             }
         )
     report = {
@@ -346,6 +400,8 @@ def one(store, row):
         "status": "kinematic_pass" if valid else "kinematic_fail",
         "physics_validated": False,
         "controller_identity": r.identity,
+        "controller_backend": r.backend,
+        "gripper_mapping": gripper_mapping,
         "source_hdf5_sha256": sha256(store.root / row["path"]),
         "missing_gripper_policy": "No invented command; source gripper channels retained in normalized episode",
     }

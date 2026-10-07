@@ -1,0 +1,870 @@
+{
+  "label": "additional-stack-fixture-forecast-v1",
+  "status": "pending_runtime_binding",
+  "jobs": [
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-b0f44ee456375ef2a8a33b5b-reset-source",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/runs/dynamics/additional-independent-v1-b0f44ee456375ef2a8a33b5b-aligned/b0f44ee456375ef2a8a33b5b",
+      "parent_task": "additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "parent_workspace": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+      "source_episode_id": "b0f44ee456375ef2a8a33b5b",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-b0f44ee456375ef2a8a33b5b-reset-source",
+      "adaptive_parent_task": "additional-box-policy-v1-b0f44ee456375ef2a8a33b5b",
+      "grasp_region": {
+        "face_axis": 1
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-b0f44ee456375ef2a8a33b5b-f1-r15",
+      "causal_comparison": {
+        "group": "b0f44ee456375ef2a8a33b5b",
+        "fixture_assumption": "reset",
+        "physical_model": "source",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-b0f44ee456375ef2a8a33b5b-f1-r15",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-b0f44ee456375ef2a8a33b5b-reset-contact4ms",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/runs/dynamics/additional-independent-v1-b0f44ee456375ef2a8a33b5b-aligned/b0f44ee456375ef2a8a33b5b",
+      "parent_task": "additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "parent_workspace": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+      "source_episode_id": "b0f44ee456375ef2a8a33b5b",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-b0f44ee456375ef2a8a33b5b-reset-contact4ms",
+      "adaptive_parent_task": "additional-box-policy-v1-b0f44ee456375ef2a8a33b5b",
+      "grasp_region": {
+        "face_axis": 1
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-b0f44ee456375ef2a8a33b5b-f1-r15",
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "causal_comparison": {
+        "group": "b0f44ee456375ef2a8a33b5b",
+        "fixture_assumption": "reset",
+        "physical_model": "contact4ms",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-b0f44ee456375ef2a8a33b5b-f1-r15",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-b0f44ee456375ef2a8a33b5b-forecast-source",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/runs/dynamics/additional-independent-v1-b0f44ee456375ef2a8a33b5b-aligned/b0f44ee456375ef2a8a33b5b",
+      "parent_task": "additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "parent_workspace": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+      "source_episode_id": "b0f44ee456375ef2a8a33b5b",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-b0f44ee456375ef2a8a33b5b-forecast-source",
+      "adaptive_parent_task": "additional-box-policy-v1-b0f44ee456375ef2a8a33b5b",
+      "grasp_region": {
+        "face_axis": 1
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-b0f44ee456375ef2a8a33b5b-f1-r15",
+      "planning_fixtures": {
+        "fixture_ids": [
+          "cubeB"
+        ]
+      },
+      "causal_comparison": {
+        "group": "b0f44ee456375ef2a8a33b5b",
+        "fixture_assumption": "forecast",
+        "physical_model": "source",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-b0f44ee456375ef2a8a33b5b-f1-r15",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-b0f44ee456375ef2a8a33b5b-forecast-contact4ms",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b/runs/dynamics/additional-independent-v1-b0f44ee456375ef2a8a33b5b-aligned/b0f44ee456375ef2a8a33b5b",
+      "parent_task": "additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "parent_workspace": "workspaces/additional-independent-v1-b0f44ee456375ef2a8a33b5b",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b0f44ee456375ef2a8a33b5b.h5",
+      "source_episode_id": "b0f44ee456375ef2a8a33b5b",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_4",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-b0f44ee456375ef2a8a33b5b-forecast-contact4ms",
+      "adaptive_parent_task": "additional-box-policy-v1-b0f44ee456375ef2a8a33b5b",
+      "grasp_region": {
+        "face_axis": 1
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-b0f44ee456375ef2a8a33b5b-f1-r15",
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "planning_fixtures": {
+        "fixture_ids": [
+          "cubeB"
+        ]
+      },
+      "causal_comparison": {
+        "group": "b0f44ee456375ef2a8a33b5b",
+        "fixture_assumption": "forecast",
+        "physical_model": "contact4ms",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-b0f44ee456375ef2a8a33b5b-f1-r15",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-b1d985821e4c4a4563c2e318-reset-source",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-b1d985821e4c4a4563c2e318-reset-source",
+      "adaptive_parent_task": "additional-box-policy-v1-b1d985821e4c4a4563c2e318",
+      "grasp_region": {
+        "face_axis": 1
+      },
+      "grasp_roll": {
+        "angle_rad": 0.5235987755982988
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.05,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-b1d985821e4c4a4563c2e318-f1-r30",
+      "causal_comparison": {
+        "group": "b1d985821e4c4a4563c2e318",
+        "fixture_assumption": "reset",
+        "physical_model": "source",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-b1d985821e4c4a4563c2e318-f1-r30",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-b1d985821e4c4a4563c2e318-reset-contact4ms",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-b1d985821e4c4a4563c2e318-reset-contact4ms",
+      "adaptive_parent_task": "additional-box-policy-v1-b1d985821e4c4a4563c2e318",
+      "grasp_region": {
+        "face_axis": 1
+      },
+      "grasp_roll": {
+        "angle_rad": 0.5235987755982988
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.05,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-b1d985821e4c4a4563c2e318-f1-r30",
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "causal_comparison": {
+        "group": "b1d985821e4c4a4563c2e318",
+        "fixture_assumption": "reset",
+        "physical_model": "contact4ms",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-b1d985821e4c4a4563c2e318-f1-r30",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-b1d985821e4c4a4563c2e318-forecast-source",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-b1d985821e4c4a4563c2e318-forecast-source",
+      "adaptive_parent_task": "additional-box-policy-v1-b1d985821e4c4a4563c2e318",
+      "grasp_region": {
+        "face_axis": 1
+      },
+      "grasp_roll": {
+        "angle_rad": 0.5235987755982988
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.05,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-b1d985821e4c4a4563c2e318-f1-r30",
+      "planning_fixtures": {
+        "fixture_ids": [
+          "cubeB"
+        ]
+      },
+      "causal_comparison": {
+        "group": "b1d985821e4c4a4563c2e318",
+        "fixture_assumption": "forecast",
+        "physical_model": "source",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-b1d985821e4c4a4563c2e318-f1-r30",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-b1d985821e4c4a4563c2e318-forecast-contact4ms",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318/runs/dynamics/additional-independent-v1-b1d985821e4c4a4563c2e318-aligned/b1d985821e4c4a4563c2e318",
+      "parent_task": "additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "parent_workspace": "workspaces/additional-independent-v1-b1d985821e4c4a4563c2e318",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/b1d985821e4c4a4563c2e318.h5",
+      "source_episode_id": "b1d985821e4c4a4563c2e318",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_6",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-b1d985821e4c4a4563c2e318-forecast-contact4ms",
+      "adaptive_parent_task": "additional-box-policy-v1-b1d985821e4c4a4563c2e318",
+      "grasp_region": {
+        "face_axis": 1
+      },
+      "grasp_roll": {
+        "angle_rad": 0.5235987755982988
+      },
+      "base_offset_xyyaw": [
+        -0.05,
+        0.05,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-b1d985821e4c4a4563c2e318-f1-r30",
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "planning_fixtures": {
+        "fixture_ids": [
+          "cubeB"
+        ]
+      },
+      "causal_comparison": {
+        "group": "b1d985821e4c4a4563c2e318",
+        "fixture_assumption": "forecast",
+        "physical_model": "contact4ms",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-b1d985821e4c4a4563c2e318-f1-r30",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-reset-source",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-reset-source",
+      "adaptive_parent_task": "additional-box-policy-v1-9295ddc7f5668cb10cae9f98",
+      "grasp_region": {
+        "face_axis": 0
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-9295ddc7f5668cb10cae9f98-f0-r15",
+      "causal_comparison": {
+        "group": "9295ddc7f5668cb10cae9f98",
+        "fixture_assumption": "reset",
+        "physical_model": "source",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-9295ddc7f5668cb10cae9f98-f0-r15",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-reset-contact4ms",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-reset-contact4ms",
+      "adaptive_parent_task": "additional-box-policy-v1-9295ddc7f5668cb10cae9f98",
+      "grasp_region": {
+        "face_axis": 0
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-9295ddc7f5668cb10cae9f98-f0-r15",
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "causal_comparison": {
+        "group": "9295ddc7f5668cb10cae9f98",
+        "fixture_assumption": "reset",
+        "physical_model": "contact4ms",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-9295ddc7f5668cb10cae9f98-f0-r15",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-forecast-source",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-forecast-source",
+      "adaptive_parent_task": "additional-box-policy-v1-9295ddc7f5668cb10cae9f98",
+      "grasp_region": {
+        "face_axis": 0
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-9295ddc7f5668cb10cae9f98-f0-r15",
+      "planning_fixtures": {
+        "fixture_ids": [
+          "cubeB"
+        ]
+      },
+      "causal_comparison": {
+        "group": "9295ddc7f5668cb10cae9f98",
+        "fixture_assumption": "forecast",
+        "physical_model": "source",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-9295ddc7f5668cb10cae9f98-f0-r15",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    },
+    {
+      "dataset": "mimicgen",
+      "evaluation_split": "adaptive_causal_fixture_planning_comparison",
+      "id": "additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-forecast-contact4ms",
+      "operation": "feasible_experiment",
+      "parent_attempt": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98/runs/dynamics/additional-independent-v1-9295ddc7f5668cb10cae9f98-aligned/9295ddc7f5668cb10cae9f98",
+      "parent_task": "additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "parent_workspace": "workspaces/additional-independent-v1-9295ddc7f5668cb10cae9f98",
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.7
+      },
+      "servo_joint_margin_rad": 0.03,
+      "source": "data/normalized/hf__amandlek__mimicgen_datasets/9295ddc7f5668cb10cae9f98.h5",
+      "source_episode_id": "9295ddc7f5668cb10cae9f98",
+      "source_group": "hf__amandlek__mimicgen_datasets/source/stack/demo_9",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 11753280,
+            "path": "data/raw/hf__amandlek__mimicgen_datasets/source/stack.hdf5",
+            "sha256": "00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418",
+            "source_id": "hf__amandlek__mimicgen_datasets",
+            "url": "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+          }
+        ],
+        "source_revision": "33016f8a62c02334f929f2913af8fdd2a8a129e1",
+        "source_urls": [
+          "https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5"
+        ]
+      },
+      "task": "Stack_D0",
+      "variant": "contact005_velocity",
+      "workspace": "workspaces/additional-stack-fixture-forecast-v1-9295ddc7f5668cb10cae9f98-forecast-contact4ms",
+      "adaptive_parent_task": "additional-box-policy-v1-9295ddc7f5668cb10cae9f98",
+      "grasp_region": {
+        "face_axis": 0
+      },
+      "grasp_roll": {
+        "angle_rad": 0.2617993877991494
+      },
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "open_prefix_correction": {
+        "complete_fraction": 0.8
+      },
+      "approach_before_base_admission": true,
+      "grasp_approach": {
+        "lift_m": 0.06,
+        "traverse_fraction": 0.5
+      },
+      "counterfactual_parent_task": "additional-stack-face-search-v1-9295ddc7f5668cb10cae9f98-f0-r15",
+      "contact_profile": "global-contact-4ms",
+      "physics_timestep_s": 0.001,
+      "planning_fixtures": {
+        "fixture_ids": [
+          "cubeB"
+        ]
+      },
+      "causal_comparison": {
+        "group": "9295ddc7f5668cb10cae9f98",
+        "fixture_assumption": "forecast",
+        "physical_model": "contact4ms",
+        "matched_robot_policy": "contact005_velocity, speed cap 0.7 rad/s, servo margin 0.03 rad, identical face/roll/base/open-prefix/approach settings",
+        "geometry_policy": "Complete existing IK/self/environment admission; 2 mm penetration threshold. The earlier separate 3 mm positive-gap heuristic is absent from BOTH arms and is not claimed passed. All physical gates unchanged.",
+        "source_data_policy": "Complete original source clock and objects; forecast affects isolated kinematic queries only. Physical objects remain fully dynamic from original reset.",
+        "causal_scope": "Compare reset versus forecast within each physical profile. Original-source and global4ms profiles remain separately counted.",
+        "prior_rejection_retained": "additional-stack-face-search-v1-9295ddc7f5668cb10cae9f98-f0-r15",
+        "denominator_policy": "Three existing independent sources, twelve attempts; no new demonstration counts."
+      }
+    }
+  ],
+  "inputs": {
+    "original_manifest": "configs/local-feasible-expansion-v1.json",
+    "original_manifest_sha256": "8ceb5b62d16654871dcb8058410778b25760e7735bc278ef26f4bc53fec423b8",
+    "source_diagnosis": "docs/stack-source-fixture-planning-diagnosis-v1.json"
+  },
+  "design": {
+    "sources": 3,
+    "attempts": 12,
+    "factorial": [
+      "reset-static vs source-forecast planning",
+      "original-source vs explicit global-contact-4ms physical model"
+    ],
+    "primary_question": "Does an unchanged recorded inactive-object trajectory remove an incorrect reset-static planning rejection? Physical success requires complete independent gates and replay.",
+    "no_new_geometry_correction": true,
+    "robot_base_seed_and_attachment": "Exact prior explicit face/roll/base/proposal per source",
+    "positive_3mm_clearance": "Not certified and not a gate in either matched arm; historical rejection artifacts preserved.",
+    "physical_timestep": "Original-source profile retains compiled 0.002 s; explicit global-contact-4ms profile uses 0.001 s. Only within-profile planning comparisons are causal."
+  }
+}

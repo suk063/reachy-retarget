@@ -1,0 +1,182 @@
+{
+  "scope": "Developmentoriginal50bd4comparisons. SourceXYnormreferencecap.45onlyretimesfastsegments; boundedrobotdescent2to9mmreachesoriginalfloor. CombinedFF1passes,otherthree retainedfailures. Single-factorFF0comparisonsindependentlypreserveunchangedobjects/models/thresholds. Variantunionisoneuniquesource.",
+  "unique_sources": 1,
+  "passed_sources": 1,
+  "trials": 4,
+  "passed_trials": 1,
+  "publication_summary_sha256": "578387326c27e7960a663e40a548f3d1300bdbc654163458464a42ec20bfed75",
+  "rows": [
+    {
+      "job": "can-50bd-speed-support-v1-speed_only",
+      "source_episode": "50bd9eab2e7820f44d10f555",
+      "status": "physical_fail",
+      "physics_validated": false,
+      "gates": {
+        "task_stable_final_1s": false,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": false
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.0011689169591716985,
+        "max_grasp_drift_deg": 2.0482344982463774,
+        "max_hand_object_penetration_m": 0.00021878133098825672,
+        "final_stable_s": 0.0,
+        "recorded_frames": 3068,
+        "simulated_s": 30.679999999993875
+      },
+      "independent_actuator_replay": {
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "independent_validation_pass": true
+      },
+      "source_coverage": true,
+      "state_observations_complete": true,
+      "control_recording_complete": true,
+      "archive_sha256": "89e4af947829956c63ca23718c836f5bba8636cb8de11e2ae4295a0d87847473"
+    },
+    {
+      "job": "can-50bd-speed-support-v1-combined_ff0",
+      "source_episode": "50bd9eab2e7820f44d10f555",
+      "status": "physical_fail",
+      "physics_validated": false,
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": false,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": true
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.0011769198547703257,
+        "max_grasp_drift_deg": 2.2622330662475654,
+        "max_hand_object_penetration_m": 0.00024013753149387793,
+        "final_stable_s": 8.739999999999858,
+        "recorded_frames": 3114,
+        "simulated_s": 31.13999999999362
+      },
+      "independent_actuator_replay": {
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "independent_validation_pass": true
+      },
+      "source_coverage": true,
+      "state_observations_complete": true,
+      "control_recording_complete": true,
+      "archive_sha256": "899e5e281e94cfcf5a897707bb57da8927b925ca7c56ec10a5b5adf71cfc5238"
+    },
+    {
+      "job": "can-50bd-speed-support-v1-combined_ff1",
+      "source_episode": "50bd9eab2e7820f44d10f555",
+      "status": "physical_pass",
+      "physics_validated": true,
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": true,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": true
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.002530690049042505,
+        "max_grasp_drift_deg": 1.8108650975530387,
+        "max_hand_object_penetration_m": 0.0004199656495711558,
+        "final_stable_s": 8.739999999999858,
+        "recorded_frames": 3114,
+        "simulated_s": 31.13999999999362
+      },
+      "independent_actuator_replay": {
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "independent_validation_pass": true
+      },
+      "source_coverage": true,
+      "state_observations_complete": true,
+      "control_recording_complete": true,
+      "archive_sha256": "78d83fb666351a1db2bdfe83f7b3ae3b33c8be2bf5d77cf4bda09b93441c4380"
+    },
+    {
+      "job": "can-50bd-speed-support-v1-descent_only",
+      "source_episode": "50bd9eab2e7820f44d10f555",
+      "status": "physical_fail",
+      "physics_validated": false,
+      "gates": {
+        "task_stable_final_1s": true,
+        "bilateral_lifted_grasp": true,
+        "carry_contact_95pct": true,
+        "grasp_translation_3mm": true,
+        "grasp_rotation_3deg": true,
+        "hand_object_penetration_1mm": true,
+        "robot_environment_penetration_2mm": true,
+        "object_environment_penetration_2mm": true,
+        "no_nonhand_object_robot_contact": true,
+        "robot_self_penetration_2mm": true,
+        "actual_arm_speed_1rad_s": true,
+        "actual_base_speed_limits": false,
+        "joint_margin_25mrad": true,
+        "self_clearance_9mm": true,
+        "rollout_complete": true,
+        "placement_opened_after_measured_support": true
+      },
+      "metrics": {
+        "max_grasp_drift_m": 0.0011582192218636694,
+        "max_grasp_drift_deg": 2.1505311225582266,
+        "max_hand_object_penetration_m": 0.0002587133823822185,
+        "final_stable_s": 8.719999999999859,
+        "recorded_frames": 3093,
+        "simulated_s": 30.929999999993736
+      },
+      "independent_actuator_replay": {
+        "max_qpos_error": 0.0,
+        "max_qvel_error": 0.0,
+        "max_object_pose_error": 0.0,
+        "actuator_replay_pass": true,
+        "independent_validation_pass": true
+      },
+      "source_coverage": true,
+      "state_observations_complete": true,
+      "control_recording_complete": true,
+      "archive_sha256": "56554b68a0c81a78e35432bca7fac3dcf04c4408b96fae8ea72e510bfb10b157"
+    }
+  ]
+}

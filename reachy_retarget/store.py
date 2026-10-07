@@ -3,6 +3,7 @@
 from pathlib import Path
 import hashlib
 import json
+import os
 import sqlite3
 from datetime import datetime, timezone
 
@@ -25,7 +26,10 @@ def json_write(path, value):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_suffix(path.suffix + ".tmp")
-    temp.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+    with temp.open('w') as handle:
+        handle.write(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
     temp.replace(path)
 
 

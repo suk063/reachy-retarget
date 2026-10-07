@@ -3,6 +3,9 @@
 import argparse
 import json
 import os
+import platform
+import shutil
+import importlib.metadata
 from pathlib import Path
 
 os.environ.setdefault("MUJOCO_GL", "glfw")
@@ -15,8 +18,46 @@ from .physics import scene, initialize, measured, BASE, GRIPPERS, prepare_robot
 from .store import Store, json_write, sha256
 
 
+def ramp_closure(times, commands, duration):
+    """Preserve source event times and opening; soften only each closing edge."""
+    if duration < 0 or not np.isfinite(duration):
+        raise ValueError("Closing duration must be finite and nonnegative")
+    result = np.array(commands, dtype=float, copy=True)
+    if not duration:
+        return result
+    closed = np.asarray(commands) < 0
+    for start in np.flatnonzero(closed & ~np.r_[False, closed[:-1]]):
+        index = np.flatnonzero((times >= times[start]) & (times < times[start]+duration) & closed)
+        x = np.clip((times[index]-times[start])/duration, 0, 1)
+        result[index] = 2. + (-.06-2.) * x**3 * (10-15*x+6*x*x)
+    return result
+
+
+def grasp_drift(hand_poses, object_poses, commands, bilateral):
+    """Measure object motion relative to the TCP from first lifted pinch to release."""
+    hand = pose_to_matrices(np.asarray(hand_poses)[:, 1])
+    obj = pose_to_matrices(np.asarray(object_poses))
+    relative = np.linalg.inv(hand) @ obj
+    eligible = (np.asarray(commands) < 0) & (obj[:, 2, 3] > obj[0, 2, 3] + .03)
+    anchors = np.flatnonzero(eligible & np.asarray(bilateral))
+    if not len(anchors):
+        return {"available": False}, np.full((len(obj), 2), np.nan)
+    start = anchors[0]
+    releases = np.flatnonzero(np.asarray(commands)[start:] >= 0)
+    end = start + releases[0] if len(releases) else len(obj)
+    delta = np.linalg.inv(relative[start]) @ relative[start:end]
+    drift = np.full((len(obj), 2), np.nan)
+    drift[start:end, 0] = np.linalg.norm(delta[:, :3, 3], axis=1)
+    drift[start:end, 1] = Rotation.from_matrix(delta[:, :3, :3]).magnitude()
+    return {"available": True, "release_observed": bool(len(releases)), "anchor_frame": int(start), "end_frame_exclusive": int(end),
+            "max_translation_m": float(np.nanmax(drift[:, 0])),
+            "max_rotation_deg": float(np.rad2deg(np.nanmax(drift[:, 1]))),
+            "bilateral_contact_fraction": float(np.mean(bilateral[start:end])),
+            "definition": "TCP-relative drift from first bilateral contact above 3 cm lift until release command"}, drift
+
+
 def convert_grasp(
-    a, source_xml, root, robot, heading=0.0, time_scale=6.0, depth=0.02, tilt=0.0
+    a, source_xml, root, robot, heading=0.0, time_scale=6.0, depth=0.02, tilt=0.0, grasp_height=0.0
 ):
     """Keep source EEF motion with a constant source/Reachy grasp attachment.
 
@@ -54,7 +95,10 @@ def convert_grasp(
     )
     offset = R.T @ (fingertips.mean(0) - p)
     offset[2] += depth
-    # Keep source object heading at the anchor, while making tool -Z downward.
+    # At the nominal grasp orientation TCP +X points upward. A positive
+    # offset lowers the hand on the unchanged can toward its center.
+    offset[0] += grasp_height
+    # Keep source object heading; positive tilt raises the wrist behind the TCP.
     tool_anchor = np.eye(4)
     tool_anchor[:3, :3] = Rotation.from_euler(
         "ZY", [heading, tilt - 90], degrees=True
@@ -62,6 +106,21 @@ def convert_grasp(
     tool_anchor[:3, 3] = (T @ O[anchor])[:3, 3] - tool_anchor[:3, :3] @ offset
     attachment = np.linalg.inv(T @ E[anchor]) @ tool_anchor
     targets = T @ E @ attachment
+    if grasp_height or tilt:
+        # Refine the grasp near closure, preserving the already feasible
+        # approach and its initial IK branch. Only robot targets are changed.
+        nominal_tool = np.eye(4)
+        nominal_tool[:3, :3] = Rotation.from_euler("ZY", [heading, -90], degrees=True).as_matrix()
+        nominal_offset = offset - np.array([grasp_height, 0., depth-.035])
+        nominal_tool[:3, 3] = (T @ O[anchor])[:3, 3] - nominal_tool[:3, :3] @ nominal_offset
+        nominal_attachment = np.linalg.inv(T @ E[anchor]) @ nominal_tool
+        nominal_targets = T @ E @ nominal_attachment
+        close = np.flatnonzero(command > 0)[0]
+        weight = np.clip((a["time_s"] - (a["time_s"][close] - .5)) / .5, 0, 1)
+        weight = weight**3 * (10 - 15*weight + 6*weight**2)
+        delta = np.linalg.inv(nominal_tool) @ tool_anchor
+        targets[:, :3, 3] = nominal_targets[:, :3, 3] + np.einsum("nij,nj->ni", nominal_targets[:, :3, :3], weight[:, None]*delta[:3, 3])
+        targets[:, :3, :3] = nominal_targets[:, :3, :3] @ Rotation.from_rotvec(weight[:, None]*Rotation.from_matrix(delta[:3, :3]).as_rotvec()).as_matrix()
     # Park the inactive arm in the current base frame; convert its target back
     # to world explicitly during replay. Only the demonstrated arm is tracked.
     goals = np.tile(robot.fk(robot.q), (len(E), 1, 1, 1))
@@ -76,6 +135,9 @@ def convert_grasp(
         "grasp_tilt_degrees": tilt,
         "world_placement": T.tolist(),
         "time_dilation": time_scale,
+        "grasp_height_offset_m": grasp_height,
+        "grasp_height_policy": "constant object-center offset in TCP +X; changes hand attachment only",
+        "grasp_transition": "quintic attachment blend during 0.5 source seconds before closure" if grasp_height or tilt else "constant attachment",
         "gripper_conversion": "source OSC -1=open -> 2.0rad, +1=close -> -0.06rad; derived Reachy finger command",
         "source_gripper_timing": "zero-order hold at source action timestamps",
         "extension": "hold final source hand target with open gripper for 3 seconds",
@@ -87,20 +149,24 @@ def convert_grasp(
 
 
 def trial(
-    store, row, label="baseline", render=True, time_scale=6.0, heading=0.0, depth=0.02
+    store, row, label="baseline", render=True, time_scale=6.0, heading=0.0, depth=0.02, grasp_height=0.0, tilt=0.0, close_duration=0.0
 ):
     import mujoco
 
     a, m = read_episode(store.root / row["path"])
     robot = Robot(store.root)
     t, g, grip, T, xml, manifest, conversion = convert_grasp(
-        a, m["model_xml"], store.root, robot, heading, time_scale, depth
+        a, m["model_xml"], store.root, robot, heading, time_scale, depth, tilt=tilt, grasp_height=grasp_height
     )
     out = (
         store.root / "runs/contact" / label / row["source_sequence"].rsplit("/", 1)[-1]
     )
+    if (out / "result.json").exists() or (out / "replay.h5").exists():
+        raise FileExistsError(f"Preserve previous trial; choose a new label: {out}")
     out.mkdir(parents=True, exist_ok=True)
     (out / "scene.xml").write_text(xml)
+    for source_name in ("contact.py", "robot.py", "physics.py"):
+        shutil.copy2(Path(__file__).with_name(source_name), out / source_name)
     model = mujoco.MjModel.from_xml_string(xml)
     data = mujoco.MjData(model)
     # Initialization is the only state assignment, before the simulation starts.
@@ -125,8 +191,8 @@ def trial(
         )
         if p_err < 0.001 and r_err < 0.01 and gap > 0.015:
             break
-    robot.active = original_active
     _, q, pe, re = min(candidates, key=lambda x: x[0])
+    robot.active = original_active
     g[:, 0] = robot.fk(q)[0]
     initialize(model, data, robot, q, manifest["mimics"], 2.0)
     initial_can = data.xpos[model.body("Can_main").id].copy()
@@ -148,9 +214,18 @@ def trial(
         ],
         axis=1,
     )
+    target_velocity = np.zeros((len(seconds), 2, 6))
+    target_velocity[:-1, 1, :3] = np.diff(goals[:, 1, :3, 3], axis=0) / .01
+    target_velocity[:-1, 1, 3:] = Rotation.from_matrix(
+        goals[1:, 1, :3, :3] @ goals[:-1, 1, :3, :3].transpose(0, 2, 1)).as_rotvec() / .01
+    conversion["target_motion_contract"] = ("left hand body-attached; right world trajectory with explicit velocity"
+                                             if hasattr(robot.r, "camera") else "historical base-frame API")
     indices = np.clip(np.searchsorted(t, seconds, side="right") - 1, 0, len(t) - 1)
     commands = np.where(grip[indices] > 0, -0.06, 2.0)
     commands[seconds > t[-1]] = 2.0
+    commands = ramp_closure(seconds, commands, close_duration)
+    conversion["closing_ramp_s"] = close_duration
+    conversion["closing_ramp_policy"] = "quintic command transition after source close event; opening event unchanged"
     canbody = model.body("Can_main").id
     canjoint = model.joint("Can_joint0")
     canids = set(np.where(model.geom_bodyid == canbody)[0])
@@ -190,6 +265,9 @@ def trial(
     margins = []
     forbidden = []
     qpos = []
+    qvel_records = []
+    full_controls = []
+    hand_poses = []
     stable = 0.0
     maxstable = 0.0
     maxlift = 0.0
@@ -200,6 +278,12 @@ def trial(
     physics_min_gap = float("inf")
     physics_min_margin = float("inf")
     self_penetration_count = 0
+    hand_can_depths = []
+    bilateral_contacts = []
+    max_hand_can_penetration = 0.0
+    forbidden_can_penetrations = 0
+    bilateral_grasp_observed = False
+    fingertip_bodies = {"r_hand_distal_link", "r_hand_distal_mimic_link"}
     arm_dofs = np.array([model.joint(n).dofadr[0] for n in ARMS])
     base_dofs = np.array([model.joint(n).dofadr[0] for n in BASE])
     commanded = q.copy()
@@ -213,7 +297,8 @@ def trial(
             base_T[:3, :3] = Rotation.from_euler("z", base[2]).as_matrix()
             base_T[:2, 3] = base[:2]
             goals[step, 0] = base_T @ g[0, 0]
-            velocity, info = robot.control(measured_q, goals[step])
+            motion = dict(body_attached_hands=(0,), world_goal_velocity=target_velocity[step]) if hasattr(robot.r, "camera") else {}
+            velocity, info = robot.control(measured_q, goals[step], **motion)
             # Servo targets integrate the controller's commanded velocity. Actual
             # state is never replaced by those targets or by a source trajectory.
             next_measured = robot.integrate(measured_q, velocity, 0.01)
@@ -245,8 +330,11 @@ def trial(
             hand_contact = False
             bad = 0
             maxforce = 0.0
+            interval_depth = 0.0
+            bilateral_contact = False
             for _ in range(5):
                 mujoco.mj_step(model, data)
+                touching_fingers = set()
                 peak_arm_velocity = np.maximum(
                     peak_arm_velocity, np.abs(data.qvel[arm_dofs])
                 )
@@ -270,6 +358,12 @@ def trial(
                         maxforce = max(maxforce, float(np.linalg.norm(force[:3])))
                     b1 = model.body(model.geom_bodyid[c.geom1]).name
                     b2 = model.body(model.geom_bodyid[c.geom2]).name
+                    if pair & canids and pair & handids:
+                        interval_depth = max(interval_depth, max(0., -float(c.dist)))
+                        if np.linalg.norm(force[:3]) > 1e-6:
+                            touching_fingers.update({b1, b2} & fingertip_bodies)
+                        if c.dist < -0.001 and not ({b1, b2} & fingertip_bodies):
+                            forbidden_can_penetrations += 1
                     if c.dist < -0.002 and b1 in robot_bodies and b2 in robot_bodies:
                         self_penetration_count += 1
                     if c.dist < -0.002 and (
@@ -277,6 +371,10 @@ def trial(
                         or (b2 in robot_bodies and b1 in ("bin1", "bin2"))
                     ):
                         bad += 1
+                bilateral_contact |= touching_fingers == fingertip_bodies
+            # mj_step integrates qpos last; refresh derived body poses at the
+            # saved interval-end timestamp before recording or rendering them.
+            mujoco.mj_forward(model, data)
             qm = measured(model, data, robot)
             fk = robot.fk(qm)
             obj = data.xpos[canbody].copy()
@@ -286,6 +384,10 @@ def trial(
             lift = obj[2] - initial_can[2]
             maxlift = max(maxlift, lift)
             grasp_contact |= hand_contact and commands[step] < 0
+            bilateral_grasp_observed |= bilateral_contact and commands[step] < 0 and lift >= 0.03
+            max_hand_can_penetration = max(max_hand_can_penetration, interval_depth)
+            hand_can_depths.append(interval_depth)
+            bilateral_contacts.append(bilateral_contact)
             opened = float(data.qpos[model.joint("r_hand_finger").qposadr[0]]) > 1.7
             inside = (
                 abs(local[0] - 0.1) < 0.175
@@ -313,6 +415,9 @@ def trial(
             margins.append(info["joint_margin"])
             forbidden.append(bad)
             qpos.append(data.qpos.copy())
+            qvel_records.append(data.qvel.copy())
+            full_controls.append(data.ctrl.copy())
+            hand_poses.append(matrices_to_pose(fk))
             if renderer is not None and step % 5 == 0:
                 renderer.update_scene(data, camera=camera)
                 writer.append_data(renderer.render())
@@ -336,6 +441,11 @@ def trial(
         np.all(peak_arm_velocity <= 1.0 + 1e-3)
         and np.all(peak_base_velocity <= np.array([0.61, 0.61, np.deg2rad(114)]) + 1e-3)
     )
+    drift_report, drift_series = grasp_drift(hand_poses, poses, commands[:len(records)], bilateral_contacts) if records else ({"available": False}, [])
+    stable_grasp = bool(drift_report["available"] and drift_report["release_observed"]
+                        and drift_report["max_translation_m"] <= .003
+                        and drift_report["max_rotation_deg"] <= 3.
+                        and drift_report["bilateral_contact_fraction"] >= .95)
     task_success = bool(
         maxlift >= 0.08 and stable >= 1.0 and grasp_contact and not reason
     )
@@ -346,6 +456,10 @@ def trial(
         and self_penetration_count == 0
         and physics_min_gap >= 0.009
         and physics_min_margin >= 0.025
+        and max_hand_can_penetration <= 0.001
+        and forbidden_can_penetrations == 0
+        and bilateral_grasp_observed
+        and stable_grasp
     )
     reasons = []
     if reason:
@@ -366,16 +480,30 @@ def trial(
         reasons.append("self_clearance_below_9mm")
     if physics_min_margin < 0.025:
         reasons.append("joint_margin_below_25mrad")
+    if max_hand_can_penetration > 0.001:
+        reasons.append("hand_can_penetration_above_1mm")
+    if forbidden_can_penetrations:
+        reasons.append("non_fingertip_can_penetration_above_1mm")
+    if not bilateral_grasp_observed:
+        reasons.append("no_bilateral_finger_contact_during_lift")
+    if not stable_grasp:
+        reasons.append("grasp_stability_criteria_not_met")
     report = {
         "source_episode": row["id"],
+        "source_id": row["source_id"],
         "source_sequence": row["source_sequence"],
         "split": row["split"],
         "status": "physical_pass" if success else "physical_fail",
         "success": success,
         "failure_reasons": reasons,
+        "grasp_drift": drift_report,
+        "grasp_stability_pass": stable_grasp,
         "max_lift_m": maxlift,
         "max_stable_placement_s": maxstable,
         "grasp_contact_observed": bool(grasp_contact),
+        "bilateral_grasp_contact_observed": bool(bilateral_grasp_observed),
+        "max_hand_can_penetration_m": max_hand_can_penetration,
+        "non_fingertip_can_penetration_contacts": forbidden_can_penetrations,
         "contact_task_success": task_success,
         "final_stable_placement_s": stable,
         "physics_peak_arm_velocity_rad_s": peak_arm_velocity.tolist(),
@@ -396,6 +524,12 @@ def trial(
         "conversion": conversion,
         "physics": manifest,
         "controller_identity": robot.identity,
+        "controller_backend": robot.backend,
+        "controller_target_frame": robot.target_frame,
+        "runtime": {"platform": platform.platform(), "packages": {name: importlib.metadata.version(name)
+                    for name in ("mujoco", "numpy", "pin", "osqp")}},
+        "implementation_sha256": {name: sha256(out / name) for name in ("contact.py", "robot.py", "physics.py")},
+        "scene_sha256": sha256(out / "scene.xml"),
         "source_hdf5_sha256": sha256(store.root / row["path"]),
         "physics_hz": 500,
         "control_hz": 100,
@@ -406,6 +540,12 @@ def trial(
             "translation_speed_max_m_s": 0.02,
             "angular_speed_max_rad_s": 0.2,
             "gripper_open_min_rad": 1.7,
+            "hand_can_penetration_max_m": 0.001,
+            "bilateral_finger_contact_required_during_lift": True,
+            "grasp_translation_drift_max_m": .003,
+            "grasp_rotation_drift_max_deg": 3.,
+            "grasp_bilateral_contact_fraction_min": .95,
+            "grasp_release_observed_required": True,
         },
     }
     with h5py.File(out / "replay.h5", "w") as f:
@@ -419,9 +559,15 @@ def trial(
             "simulation/Can_pose": poses,
             "simulation/contacts_hand_force_open": contacts,
             "simulation/qpos": qpos,
+            "simulation/qvel": qvel_records,
+            "simulation/actuator_control": full_controls,
+            "simulation/hand_pose_world": hand_poses,
             "metrics/hand_position_error": errors,
             "metrics/self_clearance": clearances,
             "metrics/environment_contacts": forbidden,
+            "metrics/hand_can_penetration_m": hand_can_depths,
+            "metrics/bilateral_finger_contact": bilateral_contacts,
+            "metrics/grasp_drift_m_rad": drift_series,
         }.items():
             f.create_dataset(k, data=v, compression="gzip")
         f["command/time_s"] = seconds[: len(records)]
@@ -432,6 +578,8 @@ def trial(
         f["goal/Can_final_source_pose_world"] = object_reference[-1]
         f["goal/container_center_world"] = bin_world
         f["simulation/joint_names"] = np.asarray(ARMS, dtype=h5py.string_dtype())
+        f["simulation/model_joint_names"] = np.asarray([model.joint(i).name for i in range(model.njnt)], dtype=h5py.string_dtype())
+        f["simulation/model_jnt_qposadr"] = model.jnt_qposadr
         f.attrs["object_reference_role"] = (
             "reference and goal only; never applied as a simulator state or force"
         )
@@ -460,6 +608,9 @@ def run(
     time_scale=6.0,
     heading=0.0,
     depth=0.02,
+    grasp_height=0.0,
+    tilt=0.0,
+    close_duration=0.0,
 ):
     if not in_runtime():
         args = [
@@ -475,6 +626,12 @@ def run(
             str(heading),
             "--depth",
             str(depth),
+            "--grasp-height",
+            str(grasp_height),
+            "--tilt",
+            str(tilt),
+            "--close-duration",
+            str(close_duration),
         ]
         if not render:
             args += ["--no-render"]
@@ -488,7 +645,7 @@ def run(
     rows.sort(key=lambda r: int(r["source_sequence"].rsplit("_", 1)[-1]))
     reports = []
     for row in rows[:limit]:
-        reports.append(trial(store, row, label, render, time_scale, heading, depth))
+        reports.append(trial(store, row, label, render, time_scale, heading, depth, grasp_height, tilt, close_duration))
         json_write(store.root / "runs/contact" / label / "summary.json", reports)
     return reports
 
@@ -502,13 +659,19 @@ if __name__ == "__main__":
     p.add_argument("--time-scale", type=float, default=6.0)
     p.add_argument("--heading", type=float, default=0.0)
     p.add_argument("--depth", type=float, default=0.02)
+    p.add_argument("--grasp-height", type=float, default=0.0)
+    p.add_argument("--tilt", type=float, default=0.0)
+    p.add_argument("--close-duration", type=float, default=0.0)
     a = p.parse_args()
     run(
-        Store(a.root),
+        Store(Path(a.root).resolve()),
         limit=a.limit,
         label=a.label,
         render=not a.no_render,
         time_scale=a.time_scale,
         heading=a.heading,
         depth=a.depth,
+        grasp_height=a.grasp_height,
+        tilt=a.tilt,
+        close_duration=a.close_duration,
     )

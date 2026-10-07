@@ -1,0 +1,44 @@
+[
+  {
+    "id": "robocasa-pose-ik-v1",
+    "operation": "source_pose_ik",
+    "dataset": "robocasa",
+    "source_task": "robocasa-fk-v1",
+    "review": "Verified source FK; diagnostic Reachy IK with original clock and chassis XY/yaw. No source/object optimization or physical-success claim. Gripper calibration remains missing."
+  },
+  {
+    "id": "bigym-pose-ik-v1",
+    "operation": "source_pose_ik",
+    "dataset": "bigym",
+    "source_replay": "workspaces/bigym-native-20261007-01/attempt-01",
+    "source_archive": "datasets/bigym/episodes/bigym-native-replay-v1.hdf5",
+    "review": "Native source replay matches uninstrumented baseline but source task fails and source-version gap remains. Full 2253-frame diagnostic Reachy IK with verified binary gripper mapping; preserve geometric infeasibility."
+  },
+  {
+    "id": "d4rl-complete-pose-ik-v1",
+    "operation": "source_pose_ik",
+    "dataset": "d4rl_kitchen",
+    "variant": "complete",
+    "episode": 0,
+    "nominal_timing": true,
+    "review": "Explicit derived 80 ms timing and noisy-configuration FK. Fixed mount is not a mobile ground frame. No vertical workspace shift; keep unreachable references and no physical-success claim."
+  },
+  {
+    "id": "d4rl-partial-pose-ik-v1",
+    "operation": "source_pose_ik",
+    "dataset": "d4rl_kitchen",
+    "variant": "partial",
+    "episode": 0,
+    "nominal_timing": true,
+    "review": "Explicit derived 80 ms timing and noisy-configuration FK. Fixed mount is not a mobile ground frame. No vertical workspace shift; keep unreachable references and no physical-success claim."
+  },
+  {
+    "id": "d4rl-mixed-pose-ik-v1",
+    "operation": "source_pose_ik",
+    "dataset": "d4rl_kitchen",
+    "variant": "mixed",
+    "episode": 0,
+    "nominal_timing": true,
+    "review": "Explicit derived 80 ms timing and noisy-configuration FK. Fixed mount is not a mobile ground frame. No vertical workspace shift; keep unreachable references and no physical-success claim."
+  }
+]

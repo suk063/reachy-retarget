@@ -1,0 +1,136 @@
+{
+  "batch": "can-friction-regularization-diagnosis-v1",
+  "counts": {
+    "alternate_model_pass": 5,
+    "physical_fail": 2
+  },
+  "trials": [
+    {
+      "job": "can-friction-regularization-diagnosis-v1-47cc92a1a140ab580b44c6c1-impratio100-regression",
+      "status": "alternate_model_pass",
+      "drift_mm": 1.0305946942739026,
+      "drift_deg": 0.7015105921321874,
+      "failures": [],
+      "replay": true,
+      "states": true,
+      "controls": true,
+      "solver": {
+        "impratio": 100.0,
+        "noslip_iterations": 0,
+        "tolerance": 1e-10,
+        "solver": "Newton"
+      },
+      "operator_archive_sha256": "2ea3ad3d9566868ff69f7f53cdef547d70428acde622960fb6d6376d487751db"
+    },
+    {
+      "job": "can-friction-regularization-diagnosis-v1-6e13ca00e7023c648b2d22f8-impratio100-regression",
+      "status": "alternate_model_pass",
+      "drift_mm": 0.7966333282227239,
+      "drift_deg": 1.0267706621133583,
+      "failures": [],
+      "replay": true,
+      "states": true,
+      "controls": true,
+      "solver": {
+        "impratio": 100.0,
+        "noslip_iterations": 0,
+        "tolerance": 1e-10,
+        "solver": "Newton"
+      },
+      "operator_archive_sha256": "6185a3073297017d8863cc2a61c5a5ffd77b58e64ca35c2c249456b3212aa928"
+    },
+    {
+      "job": "can-friction-regularization-diagnosis-v1-792e9d23dcbe6e986bc8ac50-impratio100-regression",
+      "status": "alternate_model_pass",
+      "drift_mm": 0.7020181665216082,
+      "drift_deg": 0.7486108110913241,
+      "failures": [],
+      "replay": true,
+      "states": true,
+      "controls": true,
+      "solver": {
+        "impratio": 100.0,
+        "noslip_iterations": 0,
+        "tolerance": 1e-10,
+        "solver": "Newton"
+      },
+      "operator_archive_sha256": "2ba36653a5bebfd7f27c24e358e29ea5d0940ee1c65a7d63b5de584157e6e7fc"
+    },
+    {
+      "job": "can-friction-regularization-diagnosis-v1-8ee64ec58eb602a29bbc0827-impratio100",
+      "status": "alternate_model_pass",
+      "drift_mm": 1.9606436476423441,
+      "drift_deg": 1.2093909129306764,
+      "failures": [],
+      "replay": true,
+      "states": true,
+      "controls": true,
+      "solver": {
+        "impratio": 100.0,
+        "noslip_iterations": 0,
+        "tolerance": 1e-10,
+        "solver": "Newton"
+      },
+      "operator_archive_sha256": "c954b0aae4652499edcccc08c25fc28deebe587dac40b47d478465c3ce0ae1b6"
+    },
+    {
+      "job": "can-friction-regularization-diagnosis-v1-8ee64ec58eb602a29bbc0827-noslip3",
+      "status": "alternate_model_pass",
+      "drift_mm": 1.541336443177776,
+      "drift_deg": 1.0853367340452862,
+      "failures": [],
+      "replay": true,
+      "states": true,
+      "controls": true,
+      "solver": {
+        "impratio": 1.0,
+        "noslip_iterations": 3,
+        "tolerance": 1e-10,
+        "solver": "Newton"
+      },
+      "operator_archive_sha256": "680fcfa856628f41301d8e82af1f81f024b2eeb7e13b0bd6976eca9ebf1bbacf"
+    },
+    {
+      "job": "can-friction-regularization-diagnosis-v1-fe117e32c6f13e7ae68c4be4-impratio100",
+      "status": "physical_fail",
+      "drift_mm": 10.363680906785108,
+      "drift_deg": 1.33800896487258,
+      "failures": [
+        "grasp_translation_3mm"
+      ],
+      "replay": true,
+      "states": true,
+      "controls": true,
+      "solver": {
+        "impratio": 100.0,
+        "noslip_iterations": 0,
+        "tolerance": 1e-10,
+        "solver": "Newton"
+      },
+      "operator_archive_sha256": "a0d30253b887da57703a9c4632c9ae37003e55e4e1a3cb0c45e9695f0eacb59c"
+    },
+    {
+      "job": "can-friction-regularization-diagnosis-v1-fe117e32c6f13e7ae68c4be4-noslip3",
+      "status": "physical_fail",
+      "drift_mm": 14.805365467114743,
+      "drift_deg": 2.3037368356243624,
+      "failures": [
+        "grasp_translation_3mm",
+        "object_environment_penetration_2mm"
+      ],
+      "replay": true,
+      "states": true,
+      "controls": true,
+      "solver": {
+        "impratio": 1.0,
+        "noslip_iterations": 3,
+        "tolerance": 1e-10,
+        "solver": "Newton"
+      },
+      "operator_archive_sha256": "7a883b127ff47fddfca87f801af99fb85be1c8e5ff7efc63675e5bd657a68eab"
+    }
+  ],
+  "unique_new_alternative_model_passes": 1,
+  "unique_new_original_model_passes": 0,
+  "default_changed": false
+}

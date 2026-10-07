@@ -1,0 +1,1302 @@
+{
+  "schema": "710-physical-cause-diagnosis-v1",
+  "reports": [
+    {
+      "job": {
+        "id": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff1",
+        "tar": "/mnt/reachy-retarget/node-local-exports/can-710-quarter-physics-v1/can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff1/artifact.tar.gz",
+        "sha256": "08cc6a7f85be6b0a2e1f984f20cc2713ecc1a8dbedbe01d32be95bcf9e05c9d8",
+        "canonical": "/mnt/reachy-retarget/node-local-exports/can-710-quarter-physics-v1/can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff1/datasets/robomimic/episodes/can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff1.hdf5"
+      },
+      "source_sequence": "v1.5/can/ph/demo_5",
+      "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+      "scene_sha256": "a846644f533bcb8f53b6b7b5e0c83ffd58c430f57ce761d7bfbc1d81643debc3",
+      "replay_sha256": "8818b028d1b1dfa82d1f46fa4ac66a97aa151bbd656ba5f13e2a27c58b75b420",
+      "source_clock_artifact_sha256": "09de4b2bb0fb375fc26d541d82f8c9fe90168b46f3a5b7707e6a9e138fc905c5",
+      "source_clock_note": "Original frozen-retarget reference clock at each commanded control row, from hash-bound placement-admission artifact; pauses during inserted placement. Actual MuJoCo after-control time is separate.",
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "grasp_translation_3mm",
+        "grasp_rotation_3deg",
+        "joint_margin_25mrad",
+        "placement_opened_after_measured_support"
+      ],
+      "crossings": {
+        "translation_3mm": {
+          "frame": 363,
+          "actual_after_control_time_s": 3.6399999999998207,
+          "source_reference_time_at_command_s": 3.63,
+          "phase": "source_or_terminal"
+        },
+        "rotation_3deg": {
+          "frame": 363,
+          "actual_after_control_time_s": 3.6399999999998207,
+          "source_reference_time_at_command_s": 3.63,
+          "phase": "source_or_terminal"
+        },
+        "first_acquired_grasp": {
+          "frame": 332,
+          "actual_after_control_time_s": 3.329999999999855,
+          "source_reference_time_at_command_s": 3.3200000000000003,
+          "phase": "source_or_terminal"
+        }
+      },
+      "phase_statistics": {
+        "source_prefix": {
+          "frames": [
+            0,
+            600
+          ],
+          "max_drift_m_rad": [
+            0.003664739260492377,
+            0.058242495293428474
+          ],
+          "max_tcp_error_m": 0.02563675818864497,
+          "contact_frames": 307
+        },
+        "traverse": {
+          "frames": [
+            600,
+            1163
+          ],
+          "max_drift_m_rad": [
+            0.00362262775044335,
+            0.048733561731071406
+          ],
+          "max_tcp_error_m": 0.02302121486766978,
+          "contact_frames": 0
+        },
+        "lower": {
+          "frames": [
+            1163,
+            1632
+          ],
+          "max_drift_m_rad": [
+            0.011647387140970142,
+            0.07782654841721297
+          ],
+          "max_tcp_error_m": 0.025461191354322073,
+          "contact_frames": 122
+        },
+        "hold": {
+          "frames": [
+            1632,
+            1667
+          ],
+          "max_drift_m_rad": [
+            0.011689870559045797,
+            0.0816430145134235
+          ],
+          "max_tcp_error_m": 0.02507389493150565,
+          "contact_frames": 0
+        },
+        "open": {
+          "frames": [
+            1667,
+            1747
+          ],
+          "max_drift_m_rad": [
+            0.01168052626669805,
+            0.08114187745916993
+          ],
+          "max_tcp_error_m": 0.0252451534101559,
+          "contact_frames": 0
+        },
+        "retreat": {
+          "frames": [
+            1747,
+            2216
+          ],
+          "max_drift_m_rad": [
+            0.011776028654467302,
+            0.07971823861164545
+          ],
+          "max_tcp_error_m": 0.026129241032321063,
+          "contact_frames": 295
+        },
+        "return": {
+          "frames": [
+            2216,
+            2779
+          ],
+          "max_drift_m_rad": [
+            0.011885155818595883,
+            0.06271581638115964
+          ],
+          "max_tcp_error_m": 0.026545295959968723,
+          "contact_frames": 330
+        }
+      },
+      "contact_pairs": {
+        "Can_g0 / source_scene_geom_7": {
+          "first": {
+            "frame": 0,
+            "actual_after_control_time_s": 0.01,
+            "source_reference_time_at_command_s": 0.0,
+            "phase": "source_or_terminal"
+          },
+          "last": {
+            "frame": 308,
+            "actual_after_control_time_s": 3.0899999999998813,
+            "source_reference_time_at_command_s": 3.08,
+            "phase": "source_or_terminal"
+          },
+          "max_depth_m": 0.00021145318765192206,
+          "phase_unique_frame_counts": {
+            "traverse": 0,
+            "lower": 0,
+            "hold": 0,
+            "open": 0,
+            "retreat": 0,
+            "return": 0
+          },
+          "geom_size": [
+            0.2,
+            0.25,
+            0.02
+          ],
+          "body_name": "bin1",
+          "geom_xpos": [
+            0.35,
+            -0.2,
+            0.8
+          ],
+          "geom_xmat": [
+            [
+              0.0,
+              0.9999999999999998,
+              0.0
+            ],
+            [
+              -0.9999999999999998,
+              0.0,
+              -0.0
+            ],
+            [
+              -0.0,
+              0.0,
+              0.9999999999999998
+            ]
+          ]
+        },
+        "Can_g0 / source_scene_geom_25": {
+          "first": {
+            "frame": 1443,
+            "actual_after_control_time_s": 14.440000000001492,
+            "source_reference_time_at_command_s": 6.0,
+            "phase": "lower"
+          },
+          "last": {
+            "frame": 2545,
+            "actual_after_control_time_s": 25.459999999996768,
+            "source_reference_time_at_command_s": 6.0,
+            "phase": "return"
+          },
+          "max_depth_m": 0.0015356104892993699,
+          "phase_unique_frame_counts": {
+            "traverse": 0,
+            "lower": 122,
+            "hold": 0,
+            "open": 0,
+            "retreat": 295,
+            "return": 330
+          },
+          "geom_size": [
+            0.2,
+            0.01,
+            0.05
+          ],
+          "body_name": "bin2",
+          "geom_xpos": [
+            0.88,
+            -0.2,
+            0.8500000000000001
+          ],
+          "geom_xmat": [
+            [
+              0.0,
+              0.9999999999999998,
+              0.0
+            ],
+            [
+              -0.9999999999999998,
+              0.0,
+              -0.0
+            ],
+            [
+              -0.0,
+              0.0,
+              0.9999999999999998
+            ]
+          ]
+        }
+      },
+      "event_rows": [
+        {
+          "frame": 332,
+          "actual_after_control_time_s": 3.329999999999855,
+          "source_reference_time_at_command_s": 3.3200000000000003,
+          "phase": "source_or_terminal",
+          "drift_m_rad": [
+            6.938893903907228e-18,
+            2.6350160950316353e-17
+          ],
+          "tcp_error_m": 0.009974008948572505,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.21564933964081165,
+            -0.07821212962084713,
+            0.8757772022146926,
+            0.7615409815379875,
+            -0.052031885804799186,
+            -0.00821576806102065,
+            -0.6459725361444731
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 363,
+          "actual_after_control_time_s": 3.6399999999998207,
+          "source_reference_time_at_command_s": 3.63,
+          "phase": "source_or_terminal",
+          "drift_m_rad": [
+            0.003316195355286764,
+            0.05823126851315562
+          ],
+          "tcp_error_m": 0.016817167892650607,
+          "bilateral": 0.4,
+          "object_pose": [
+            0.291774472598949,
+            -0.09323533691995478,
+            0.8925384092805807,
+            0.7416509264204196,
+            -0.019675789581391528,
+            -0.01040409452101213,
+            -0.6704166774933924
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 600,
+          "actual_after_control_time_s": 6.00999999999956,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "traverse",
+          "drift_m_rad": [
+            0.0033112808180907724,
+            0.04684300442057503
+          ],
+          "tcp_error_m": 0.010049656969898868,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.904125784747652,
+            -0.25215529268353,
+            1.0335023095080784,
+            0.15840667934213926,
+            0.23413114111477032,
+            -0.10236112714284891,
+            -0.9537358818615025
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1163,
+          "actual_after_control_time_s": 11.640000000000557,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "drift_m_rad": [
+            0.003418756753323082,
+            0.04780317603156681
+          ],
+          "tcp_error_m": 0.0006650945250208796,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9152996660541862,
+            -0.2980145782229519,
+            1.0159171366920172,
+            0.8575247835782019,
+            -0.09645823280057107,
+            -0.1680332904743234,
+            -0.4765625543058548
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1442,
+          "actual_after_control_time_s": 14.430000000001488,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "drift_m_rad": [
+            0.003302243037209124,
+            0.047689780372248324
+          ],
+          "tcp_error_m": 0.0074824276993527145,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9152193130315232,
+            -0.29685094716660737,
+            0.9020424065002547,
+            0.8578964408807782,
+            -0.09805486497398061,
+            -0.16735566747415057,
+            -0.4758056543834979
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1443,
+          "actual_after_control_time_s": 14.440000000001492,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "drift_m_rad": [
+            0.003277155821563042,
+            0.047734739892116775
+          ],
+          "tcp_error_m": 0.007452041034505644,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.91520799041573,
+            -0.29686033832268294,
+            0.9014581364735622,
+            0.8579170881112936,
+            -0.09809695766971695,
+            -0.16727441610534424,
+            -0.47578832114628467
+          ],
+          "contacts": [
+            {
+              "pair": "Can_g0 / source_scene_geom_25",
+              "depth_m": 3.429164525740186e-05
+            },
+            {
+              "pair": "Can_g0 / source_scene_geom_25",
+              "depth_m": 3.429164525739839e-05
+            }
+          ]
+        },
+        {
+          "frame": 1576,
+          "actual_after_control_time_s": 15.770000000001936,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "drift_m_rad": [
+            0.011623904688708627,
+            0.0667799563894731
+          ],
+          "tcp_error_m": 0.024401415558798583,
+          "bilateral": 0.4,
+          "object_pose": [
+            0.917432384331121,
+            -0.29497071537379427,
+            0.8874762130593888,
+            0.8706606674668559,
+            -0.09854086824778283,
+            -0.13967969984179418,
+            -0.46122584583178683
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1632,
+          "actual_after_control_time_s": 16.330000000001828,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "hold",
+          "drift_m_rad": [
+            0.01166563697555556,
+            0.07944881395963743
+          ],
+          "tcp_error_m": 0.024919593110588077,
+          "bilateral": 0.4,
+          "object_pose": [
+            0.917902503284201,
+            -0.29488527033400214,
+            0.8833062630125761,
+            0.8703871172578195,
+            -0.1003497672599367,
+            -0.13356776934254602,
+            -0.463158548787946
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1639,
+          "actual_after_control_time_s": 16.40000000000179,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "hold",
+          "drift_m_rad": [
+            0.011689870559045797,
+            0.0816430145134235
+          ],
+          "tcp_error_m": 0.024968240197286905,
+          "bilateral": 0.8,
+          "object_pose": [
+            0.9178679974157371,
+            -0.29493400983772605,
+            0.8830958993496906,
+            0.8707627922035712,
+            -0.09873915519081164,
+            -0.1328944581051717,
+            -0.46299222666366374
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1656,
+          "actual_after_control_time_s": 16.570000000001695,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "hold",
+          "drift_m_rad": [
+            0.011681663261342328,
+            0.08130636597293993
+          ],
+          "tcp_error_m": 0.02504617168694878,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9178246615697586,
+            -0.29494893816353684,
+            0.8831428831109934,
+            0.8710647569006925,
+            -0.09829838058605674,
+            -0.13296613014081857,
+            -0.46249716312110706
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1667,
+          "actual_after_control_time_s": 16.680000000001634,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "open",
+          "drift_m_rad": [
+            0.01168052626669805,
+            0.08114187745916993
+          ],
+          "tcp_error_m": 0.025076193569870092,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9178118599858505,
+            -0.2949216571976942,
+            0.8831609424577125,
+            0.871098765493585,
+            -0.09823933165846804,
+            -0.13299499348453464,
+            -0.4624373537884867
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1747,
+          "actual_after_control_time_s": 17.48000000000119,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "retreat",
+          "drift_m_rad": [
+            0.01167732529428686,
+            0.07971823861164545
+          ],
+          "tcp_error_m": 0.025247146817827068,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9177584770968673,
+            -0.2946840283121958,
+            0.8832786509679047,
+            0.8708224039148063,
+            -0.09852953885183052,
+            -0.1332030254106484,
+            -0.46283606691261064
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 2216,
+          "actual_after_control_time_s": 22.16999999999859,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "return",
+          "drift_m_rad": [
+            0.011776469048377033,
+            0.06271581638115964
+          ],
+          "tcp_error_m": 0.026130787014994994,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9175145834184325,
+            -0.29374724215543774,
+            0.8839494404131926,
+            0.8682165214300435,
+            -0.10518947298231776,
+            -0.13607940570578525,
+            -0.46542200424171737
+          ],
+          "contacts": [
+            {
+              "pair": "Can_g0 / source_scene_geom_25",
+              "depth_m": 8.598242335918719e-05
+            },
+            {
+              "pair": "Can_g0 / source_scene_geom_25",
+              "depth_m": 8.598242335919153e-05
+            }
+          ]
+        },
+        {
+          "frame": 2779,
+          "actual_after_control_time_s": 27.79999999999547,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "source_or_terminal",
+          "drift_m_rad": [
+            0.011883970124957583,
+            0.05309374918937605
+          ],
+          "tcp_error_m": 0.026545516174102893,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.917637552945378,
+            -0.2929071086827511,
+            0.8841830873256465,
+            0.866521159950745,
+            -0.10885837596259913,
+            -0.13802955445401782,
+            -0.46716033161819875
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 3044,
+          "actual_after_control_time_s": 30.449999999994002,
+          "source_reference_time_at_command_s": 8.65,
+          "phase": "source_or_terminal",
+          "drift_m_rad": [
+            0.011886079853503696,
+            0.05309027812158157
+          ],
+          "tcp_error_m": 0.026566969307571544,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9177850441222439,
+            -0.2925097206304459,
+            0.8841357718082509,
+            0.8663081209485235,
+            -0.10848273091543965,
+            -0.138053385302181,
+            -0.4676355412908381
+          ],
+          "contacts": []
+        }
+      ],
+      "joint_margin": {
+        "first_failure": {
+          "frame": 1576,
+          "actual_after_control_time_s": 15.770000000001936,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "substep": 3,
+          "actual_substep_time_s": 15.768000000001935,
+          "joint": "r_wrist_pitch",
+          "margin_rad": 0.024908825082298358,
+          "qpos": -0.4986911749177016,
+          "reference_joint_position": -0.4925999999999999,
+          "reference_joint_margin_rad": 0.031000000000000028,
+          "limits": [
+            -0.5236,
+            0.5236
+          ]
+        },
+        "worst": {
+          "frame": 1656,
+          "actual_after_control_time_s": 16.570000000001695,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "hold",
+          "substep": 4,
+          "actual_substep_time_s": 16.570000000001695,
+          "joint": "r_wrist_pitch",
+          "margin_rad": 0.014823900820352676,
+          "qpos": -0.5087760991796473,
+          "reference_joint_position": -0.4923919488647608,
+          "reference_joint_margin_rad": 0.031208051135239168,
+          "limits": [
+            -0.5236,
+            0.5236
+          ]
+        }
+      },
+      "independent_replay_max_error": {
+        "qpos": 0.0,
+        "qvel": 0.0
+      },
+      "supported_placement": {
+        "phase": "source",
+        "support_force_N": 0.0,
+        "support_threshold_N": 0.078461425246671,
+        "support_contact_frame": null,
+        "stable_support_s": 0.0,
+        "support_confirmed": false,
+        "opened": false,
+        "failed": true,
+        "support_guard_version": 1,
+        "measured_object_position_world": [
+          0.9177844050400857,
+          -0.2925110805120982,
+          0.8841360171062838
+        ],
+        "placement_position_world": [
+          0.92,
+          -0.2975,
+          0.861460073337855
+        ],
+        "object_position_error_m": 0.02332373478823892,
+        "object_near_placement": true,
+        "grasp_intact": true,
+        "last_intact_grasp_step": 3044,
+        "grasp_age_s": 0.0,
+        "support_grasp_verified": false,
+        "opening_guard_verified": false,
+        "failure_reason": "No stable measured support with object near placement and recent intact grasp before opening deadline"
+      },
+      "series_sha256": "4a2ab5943ee055fb12c4e58f90060e12f37aa25f9ae0f9efcefdbb49f11c7e44"
+    },
+    {
+      "job": {
+        "id": "can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0",
+        "tar": "/mnt/reachy-retarget/node-local-exports/can-710-quarter-physics-v1/can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0/artifact.tar.gz",
+        "sha256": "b6759adc1673637aeffab3007aa9477cf3a7cbf16c58d589404073a1b98111ae",
+        "canonical": "/mnt/reachy-retarget/node-local-exports/can-710-quarter-physics-v1/can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0/datasets/robomimic/episodes/can-710-quarter-physics-v1-710ae7b398370cea3bf672b0-ff0.hdf5"
+      },
+      "source_sequence": "v1.5/can/ph/demo_5",
+      "source_hdf5_sha256": "2854e122ab0eb76322641c4c1b0848c5d91f8b19ef82012b3b8b8bae134dbd15",
+      "scene_sha256": "a846644f533bcb8f53b6b7b5e0c83ffd58c430f57ce761d7bfbc1d81643debc3",
+      "replay_sha256": "41a68896287993af08d667b931863ef8aa4e231e02914ff6ba100db469b8f07c",
+      "source_clock_artifact_sha256": "4cbeb5447ef1196e7fc75a8265cfa5ab461421e4ef24bdad6b92ed27225317ba",
+      "source_clock_note": "Original frozen-retarget reference clock at each commanded control row, from hash-bound placement-admission artifact; pauses during inserted placement. Actual MuJoCo after-control time is separate.",
+      "failure_reasons": [
+        "task_stable_final_1s",
+        "grasp_translation_3mm",
+        "joint_margin_25mrad",
+        "placement_opened_after_measured_support"
+      ],
+      "crossings": {
+        "translation_3mm": {
+          "frame": 1489,
+          "actual_after_control_time_s": 14.900000000001645,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower"
+        },
+        "rotation_3deg": null,
+        "first_acquired_grasp": {
+          "frame": 340,
+          "actual_after_control_time_s": 3.409999999999846,
+          "source_reference_time_at_command_s": 3.4,
+          "phase": "source_or_terminal"
+        }
+      },
+      "phase_statistics": {
+        "source_prefix": {
+          "frames": [
+            0,
+            600
+          ],
+          "max_drift_m_rad": [
+            0.00047923409857104855,
+            0.0069618987957453995
+          ],
+          "max_tcp_error_m": 0.03979109256005101,
+          "contact_frames": 308
+        },
+        "traverse": {
+          "frames": [
+            600,
+            1163
+          ],
+          "max_drift_m_rad": [
+            0.001153500197420285,
+            0.005415009997450072
+          ],
+          "max_tcp_error_m": 0.021126083383791457,
+          "contact_frames": 0
+        },
+        "lower": {
+          "frames": [
+            1163,
+            1632
+          ],
+          "max_drift_m_rad": [
+            0.013447331959214905,
+            0.040498714253735225
+          ],
+          "max_tcp_error_m": 0.025120585682281295,
+          "contact_frames": 100
+        },
+        "hold": {
+          "frames": [
+            1632,
+            1667
+          ],
+          "max_drift_m_rad": [
+            0.013501584658212704,
+            0.04258580690350397
+          ],
+          "max_tcp_error_m": 0.024316246272349077,
+          "contact_frames": 0
+        },
+        "open": {
+          "frames": [
+            1667,
+            1747
+          ],
+          "max_drift_m_rad": [
+            0.013492871466397171,
+            0.04205167465859265
+          ],
+          "max_tcp_error_m": 0.024534134215949438,
+          "contact_frames": 0
+        },
+        "retreat": {
+          "frames": [
+            1747,
+            2216
+          ],
+          "max_drift_m_rad": [
+            0.013520278639284585,
+            0.04104473116944699
+          ],
+          "max_tcp_error_m": 0.025415662297245588,
+          "contact_frames": 0
+        },
+        "return": {
+          "frames": [
+            2216,
+            2779
+          ],
+          "max_drift_m_rad": [
+            0.013553925522918352,
+            0.028363214202106482
+          ],
+          "max_tcp_error_m": 0.025823562060484685,
+          "contact_frames": 0
+        }
+      },
+      "contact_pairs": {
+        "Can_g0 / source_scene_geom_7": {
+          "first": {
+            "frame": 0,
+            "actual_after_control_time_s": 0.01,
+            "source_reference_time_at_command_s": 0.0,
+            "phase": "source_or_terminal"
+          },
+          "last": {
+            "frame": 312,
+            "actual_after_control_time_s": 3.129999999999877,
+            "source_reference_time_at_command_s": 3.12,
+            "phase": "source_or_terminal"
+          },
+          "max_depth_m": 0.00024569148621234044,
+          "phase_unique_frame_counts": {
+            "traverse": 0,
+            "lower": 0,
+            "hold": 0,
+            "open": 0,
+            "retreat": 0,
+            "return": 0
+          },
+          "geom_size": [
+            0.2,
+            0.25,
+            0.02
+          ],
+          "body_name": "bin1",
+          "geom_xpos": [
+            0.35,
+            -0.2,
+            0.8
+          ],
+          "geom_xmat": [
+            [
+              0.0,
+              0.9999999999999998,
+              0.0
+            ],
+            [
+              -0.9999999999999998,
+              0.0,
+              -0.0
+            ],
+            [
+              -0.0,
+              0.0,
+              0.9999999999999998
+            ]
+          ]
+        },
+        "Can_g0 / source_scene_geom_25": {
+          "first": {
+            "frame": 1450,
+            "actual_after_control_time_s": 14.510000000001515,
+            "source_reference_time_at_command_s": 6.0,
+            "phase": "lower"
+          },
+          "last": {
+            "frame": 1586,
+            "actual_after_control_time_s": 15.87000000000197,
+            "source_reference_time_at_command_s": 6.0,
+            "phase": "lower"
+          },
+          "max_depth_m": 0.0013931170669531116,
+          "phase_unique_frame_counts": {
+            "traverse": 0,
+            "lower": 100,
+            "hold": 0,
+            "open": 0,
+            "retreat": 0,
+            "return": 0
+          },
+          "geom_size": [
+            0.2,
+            0.01,
+            0.05
+          ],
+          "body_name": "bin2",
+          "geom_xpos": [
+            0.88,
+            -0.2,
+            0.8500000000000001
+          ],
+          "geom_xmat": [
+            [
+              0.0,
+              0.9999999999999998,
+              0.0
+            ],
+            [
+              -0.9999999999999998,
+              0.0,
+              -0.0
+            ],
+            [
+              -0.0,
+              0.0,
+              0.9999999999999998
+            ]
+          ]
+        }
+      },
+      "event_rows": [
+        {
+          "frame": 340,
+          "actual_after_control_time_s": 3.409999999999846,
+          "source_reference_time_at_command_s": 3.4,
+          "phase": "source_or_terminal",
+          "drift_m_rad": [
+            9.813077866773595e-18,
+            8.366684598513569e-18
+          ],
+          "tcp_error_m": 0.01652390235300404,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.2266642244216774,
+            -0.08556007159296178,
+            0.875261203562478,
+            0.764953693577433,
+            -0.029458670704749668,
+            -0.002482045318751601,
+            -0.6434064600651652
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 600,
+          "actual_after_control_time_s": 6.00999999999956,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "traverse",
+          "drift_m_rad": [
+            0.0004822697783498696,
+            0.005415009997450072
+          ],
+          "tcp_error_m": 0.020820722556717196,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.8936642788557876,
+            -0.24865207235150644,
+            1.048679919337474,
+            0.1782791899779928,
+            0.23241097705603925,
+            -0.09863818502144289,
+            -0.9510374212513001
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1163,
+          "actual_after_control_time_s": 11.640000000000557,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "drift_m_rad": [
+            0.0011217374405300003,
+            0.004269578660415163
+          ],
+          "tcp_error_m": 0.0005442215288199989,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9156165990637215,
+            -0.2965505339707383,
+            1.0199035280205686,
+            0.860784215982083,
+            -0.0956600516579777,
+            -0.17134531581300894,
+            -0.46961736635461504
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1449,
+          "actual_after_control_time_s": 14.500000000001512,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "drift_m_rad": [
+            0.0012066154853975285,
+            0.005360957278919857
+          ],
+          "tcp_error_m": 0.007195837667506608,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9153894181837159,
+            -0.29552125990438544,
+            0.9016925271655878,
+            0.8607612316421807,
+            -0.09712860457248537,
+            -0.17080380081625507,
+            -0.46955531932069466
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1450,
+          "actual_after_control_time_s": 14.510000000001515,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "drift_m_rad": [
+            0.0012064878902088298,
+            0.005329387313939304
+          ],
+          "tcp_error_m": 0.007129312694197999,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.915323911363003,
+            -0.2954732705222508,
+            0.9010455461316895,
+            0.8607553829789868,
+            -0.09710881462607107,
+            -0.17085473861361433,
+            -0.4695516021566648
+          ],
+          "contacts": [
+            {
+              "pair": "Can_g0 / source_scene_geom_25",
+              "depth_m": 1.725809049004951e-05
+            },
+            {
+              "pair": "Can_g0 / source_scene_geom_25",
+              "depth_m": 1.7258090490052114e-05
+            }
+          ]
+        },
+        {
+          "frame": 1489,
+          "actual_after_control_time_s": 14.900000000001645,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "drift_m_rad": [
+            0.0031154413559969204,
+            0.009896492913048149
+          ],
+          "tcp_error_m": 0.01684890772723578,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.914598684654763,
+            -0.2941763237758071,
+            0.897636966155633,
+            0.8647605134215389,
+            -0.10356048705736823,
+            -0.15715531796750973,
+            -0.46558209370839093
+          ],
+          "contacts": [
+            {
+              "pair": "Can_g0 / source_scene_geom_25",
+              "depth_m": 0.0012291869839878176
+            },
+            {
+              "pair": "Can_g0 / source_scene_geom_25",
+              "depth_m": 0.0009669356674990555
+            }
+          ]
+        },
+        {
+          "frame": 1575,
+          "actual_after_control_time_s": 15.760000000001932,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "drift_m_rad": [
+            0.011439633941207578,
+            0.019553835862037777
+          ],
+          "tcp_error_m": 0.024058820900587478,
+          "bilateral": 0.0,
+          "object_pose": [
+            0.9168282739780507,
+            -0.2944711299694474,
+            0.8914946763044141,
+            0.8730410885167876,
+            -0.0975049045464122,
+            -0.14375074999540607,
+            -0.4556619067099819
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1632,
+          "actual_after_control_time_s": 16.330000000001828,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "hold",
+          "drift_m_rad": [
+            0.013472891411795274,
+            0.04150017069232045
+          ],
+          "tcp_error_m": 0.02414431067655482,
+          "bilateral": 0.8,
+          "object_pose": [
+            0.919311651446228,
+            -0.2959398786272408,
+            0.8784861326254633,
+            0.8723903518846337,
+            -0.09609010652067332,
+            -0.13241638989149154,
+            -0.46061661395954395
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1634,
+          "actual_after_control_time_s": 16.350000000001817,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "hold",
+          "drift_m_rad": [
+            0.013500863521625927,
+            0.04258580690350397
+          ],
+          "tcp_error_m": 0.02416588457592452,
+          "bilateral": 0.8,
+          "object_pose": [
+            0.9192965610889623,
+            -0.29598401342966024,
+            0.8784444260291036,
+            0.872552433391066,
+            -0.09535994407617455,
+            -0.1322386500769471,
+            -0.4605124010001745
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1656,
+          "actual_after_control_time_s": 16.570000000001695,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "hold",
+          "drift_m_rad": [
+            0.013489966007662073,
+            0.04220412301397518
+          ],
+          "tcp_error_m": 0.02428241499794225,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9192166089862974,
+            -0.29600952807325337,
+            0.8785042861732585,
+            0.8730263188960575,
+            -0.0946133176260168,
+            -0.13231297308719017,
+            -0.45974628198107903
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1667,
+          "actual_after_control_time_s": 16.680000000001634,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "open",
+          "drift_m_rad": [
+            0.013488888484547025,
+            0.04205167465859265
+          ],
+          "tcp_error_m": 0.024318931732736727,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.919199103980494,
+            -0.2959779679933614,
+            0.878526429551957,
+            0.8730547084617977,
+            -0.09453940385527547,
+            -0.132341335374102,
+            -0.4596994105965055
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 1747,
+          "actual_after_control_time_s": 17.48000000000119,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "retreat",
+          "drift_m_rad": [
+            0.01349289675013182,
+            0.04104473116944699
+          ],
+          "tcp_error_m": 0.024536760710002433,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9191158145570726,
+            -0.2957209386509029,
+            0.8786813662429749,
+            0.8726988922987298,
+            -0.09499802922575301,
+            -0.13201009391367102,
+            -0.4603752305768584
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 2216,
+          "actual_after_control_time_s": 22.16999999999859,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "return",
+          "drift_m_rad": [
+            0.013520340415513414,
+            0.028363214202106482
+          ],
+          "tcp_error_m": 0.02541695138136985,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.918853178660377,
+            -0.29465964239567055,
+            0.8793190314715692,
+            0.8701015886932643,
+            -0.10226915780623687,
+            -0.1328741440027836,
+            -0.46347460186140566
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 2779,
+          "actual_after_control_time_s": 27.79999999999547,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "source_or_terminal",
+          "drift_m_rad": [
+            0.01355207645760511,
+            0.020343294165327788
+          ],
+          "tcp_error_m": 0.025823659345645355,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9189586758039228,
+            -0.2938463854830662,
+            0.8795709731390075,
+            0.8677183437369254,
+            -0.10982419208365737,
+            -0.13623488460287783,
+            -0.46523497180764306
+          ],
+          "contacts": []
+        },
+        {
+          "frame": 3044,
+          "actual_after_control_time_s": 30.449999999994002,
+          "source_reference_time_at_command_s": 8.65,
+          "phase": "source_or_terminal",
+          "drift_m_rad": [
+            0.0135605500418014,
+            0.020333849215408532
+          ],
+          "tcp_error_m": 0.02585187088928359,
+          "bilateral": 1.0,
+          "object_pose": [
+            0.9191445714430228,
+            -0.29333105841585555,
+            0.8794952451790918,
+            0.8673923418185483,
+            -0.1094414390110594,
+            -0.13635392138725458,
+            -0.4658977408230705
+          ],
+          "contacts": []
+        }
+      ],
+      "joint_margin": {
+        "first_failure": {
+          "frame": 1575,
+          "actual_after_control_time_s": 15.760000000001932,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "lower",
+          "substep": 0,
+          "actual_substep_time_s": 15.75200000000193,
+          "joint": "r_wrist_pitch",
+          "margin_rad": 0.024846484013981263,
+          "qpos": -0.4987535159860187,
+          "reference_joint_position": -0.4925999999999999,
+          "reference_joint_margin_rad": 0.031000000000000028,
+          "limits": [
+            -0.5236,
+            0.5236
+          ]
+        },
+        "worst": {
+          "frame": 1656,
+          "actual_after_control_time_s": 16.570000000001695,
+          "source_reference_time_at_command_s": 6.0,
+          "phase": "hold",
+          "substep": 0,
+          "actual_substep_time_s": 16.5620000000017,
+          "joint": "r_wrist_pitch",
+          "margin_rad": 0.013714781228843398,
+          "qpos": -0.5098852187711566,
+          "reference_joint_position": -0.4923787759344362,
+          "reference_joint_margin_rad": 0.03122122406556377,
+          "limits": [
+            -0.5236,
+            0.5236
+          ]
+        }
+      },
+      "independent_replay_max_error": {
+        "qpos": 0.0,
+        "qvel": 0.0
+      },
+      "supported_placement": {
+        "phase": "source",
+        "support_force_N": 0.0,
+        "support_threshold_N": 0.078461425246671,
+        "support_contact_frame": null,
+        "stable_support_s": 0.0,
+        "support_confirmed": false,
+        "opened": false,
+        "failed": true,
+        "support_guard_version": 1,
+        "measured_object_position_world": [
+          0.9191437950246555,
+          -0.29333287955979237,
+          0.8794956549974396
+        ],
+        "placement_position_world": [
+          0.92,
+          -0.2975,
+          0.861460073337855
+        ],
+        "object_position_error_m": 0.018530520379162224,
+        "object_near_placement": true,
+        "grasp_intact": true,
+        "last_intact_grasp_step": 3044,
+        "grasp_age_s": 0.0,
+        "support_grasp_verified": false,
+        "opening_guard_verified": false,
+        "failure_reason": "No stable measured support with object near placement and recent intact grasp before opening deadline"
+      },
+      "series_sha256": "57b440b5cb8f7fff920e7c42f33b9ebe1d3fe7eea8d82e9857cef37a1828fc3d"
+    }
+  ],
+  "scope": "Offline isolated recorded-qpos geometry plus independent exact robot-actuator replay. Moving object initialized once; no integrated object overwrite, new policy or gate changes. Physical outcome remains failure."
+}

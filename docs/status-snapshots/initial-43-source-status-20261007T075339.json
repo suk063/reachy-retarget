@@ -1,0 +1,866 @@
+{
+  "verified_utc": "2026-10-07T07:53:39.205130+00:00",
+  "cluster_snapshot_utc": "2026-10-07T07:52:24.761603+00:00",
+  "scope": "Selected source-input trajectories, excluding earlier retries. Dataset variants may overlap; counts are not independent-demonstration counts.",
+  "workers_ready": 50,
+  "workers_live": 50,
+  "working_tasks": [],
+  "retarget_inputs": 43,
+  "kinematic_pass": 25,
+  "physics_tested": 20,
+  "physics_pass": 0,
+  "sha256_all_match": true,
+  "all_joint_positions_finite": true,
+  "by_dataset": [
+    {
+      "dataset": "bigym",
+      "retarget_inputs": 1,
+      "kinematic_pass": 0,
+      "physics_tested": 0,
+      "physics_pass": 0
+    },
+    {
+      "dataset": "d4rl_kitchen",
+      "retarget_inputs": 3,
+      "kinematic_pass": 0,
+      "physics_tested": 0,
+      "physics_pass": 0
+    },
+    {
+      "dataset": "humoto",
+      "retarget_inputs": 3,
+      "kinematic_pass": 2,
+      "physics_tested": 0,
+      "physics_pass": 0
+    },
+    {
+      "dataset": "maniskill",
+      "retarget_inputs": 5,
+      "kinematic_pass": 5,
+      "physics_tested": 5,
+      "physics_pass": 0
+    },
+    {
+      "dataset": "mimicgen",
+      "retarget_inputs": 6,
+      "kinematic_pass": 6,
+      "physics_tested": 6,
+      "physics_pass": 0
+    },
+    {
+      "dataset": "momagen",
+      "retarget_inputs": 6,
+      "kinematic_pass": 0,
+      "physics_tested": 0,
+      "physics_pass": 0
+    },
+    {
+      "dataset": "parahome",
+      "retarget_inputs": 3,
+      "kinematic_pass": 0,
+      "physics_tested": 0,
+      "physics_pass": 0
+    },
+    {
+      "dataset": "robocasa",
+      "retarget_inputs": 1,
+      "kinematic_pass": 0,
+      "physics_tested": 0,
+      "physics_pass": 0
+    },
+    {
+      "dataset": "robomimic",
+      "retarget_inputs": 15,
+      "kinematic_pass": 12,
+      "physics_tested": 9,
+      "physics_pass": 0
+    }
+  ],
+  "not_yet_retargeted": [
+    "behavior",
+    "m3bench",
+    "mello"
+  ],
+  "artifacts": [
+    {
+      "dataset": "bigym",
+      "task": "bigym-pose-ik-v1",
+      "archive": "/mnt/reachy-retarget/datasets/bigym/episodes/bigym-pose-ik-v1-ik.hdf5",
+      "bytes": 1074737,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        2253,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 2253,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "d4rl_kitchen",
+      "task": "d4rl-complete-pose-ik-v1",
+      "archive": "/mnt/reachy-retarget/datasets/d4rl_kitchen/episodes/d4rl-complete-pose-ik-v1-ik.hdf5",
+      "bytes": 348426,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        184,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 184,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "d4rl_kitchen",
+      "task": "d4rl-mixed-pose-ik-v1",
+      "archive": "/mnt/reachy-retarget/datasets/d4rl_kitchen/episodes/d4rl-mixed-pose-ik-v1-ik.hdf5",
+      "bytes": 372266,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        228,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 228,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "d4rl_kitchen",
+      "task": "d4rl-partial-pose-ik-v1",
+      "archive": "/mnt/reachy-retarget/datasets/d4rl_kitchen/episodes/d4rl-partial-pose-ik-v1-ik.hdf5",
+      "bytes": 376836,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        255,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 255,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "humoto",
+      "task": "legacy-all-v1-09dfff574d299e002589eaa0",
+      "archive": "/mnt/reachy-retarget/datasets/humoto/episodes/legacy-all-v1-09dfff574d299e002589eaa0-ik.hdf5",
+      "bytes": 1241881,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        2836,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 2836,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-0a48c1797996e272fbaf4b34",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-0a48c1797996e272fbaf4b34-ik.hdf5",
+      "bytes": 1362822,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        3681,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 3681,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-0cacb4e6f5eb9ea88fc84d7c",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-0cacb4e6f5eb9ea88fc84d7c-ik.hdf5",
+      "bytes": 173972,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        286,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 286,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "maniskill",
+      "task": "legacy-all-v1-12e2ae6265014dfd0fec63c2",
+      "archive": "/mnt/reachy-retarget/datasets/maniskill/episodes/legacy-all-v1-12e2ae6265014dfd0fec63c2-ik.hdf5",
+      "bytes": 200063,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        561,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 561,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-1d0214a54bfcfdfd95faa196",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-1d0214a54bfcfdfd95faa196-ik.hdf5",
+      "bytes": 283045,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        561,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 561,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "maniskill",
+      "task": "legacy-all-v1-26bc046d91c0174be7312e5d",
+      "archive": "/mnt/reachy-retarget/datasets/maniskill/episodes/legacy-all-v1-26bc046d91c0174be7312e5d-ik.hdf5",
+      "bytes": 151299,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        411,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 411,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-2aef318f4c607ad8ed448123",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-2aef318f4c607ad8ed448123-ik.hdf5",
+      "bytes": 289150,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        616,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 616,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-2dbc8c98b3dfab7ffa338c58",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-2dbc8c98b3dfab7ffa338c58-ik.hdf5",
+      "bytes": 172528,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        281,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 281,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-31bb4a33156a48823d3f6daf",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-31bb4a33156a48823d3f6daf-ik.hdf5",
+      "bytes": 309514,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        687,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 687,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "humoto",
+      "task": "legacy-all-v1-31f3c10709eeaf6d4c22dafd",
+      "archive": "/mnt/reachy-retarget/datasets/humoto/episodes/legacy-all-v1-31f3c10709eeaf6d4c22dafd-ik.hdf5",
+      "bytes": 556775,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        1432,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 1432,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-42167b7a2d3c457df216569e",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-42167b7a2d3c457df216569e-ik.hdf5",
+      "bytes": 1179152,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        3061,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 3061,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "mimicgen",
+      "task": "legacy-all-v1-47e8070939d3458ac7e7b09b",
+      "archive": "/mnt/reachy-retarget/datasets/mimicgen/episodes/legacy-all-v1-47e8070939d3458ac7e7b09b-ik.hdf5",
+      "bytes": 413616,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        906,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 906,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-58e7f4f3c4178bc2c5f3f2c7",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-58e7f4f3c4178bc2c5f3f2c7-ik.hdf5",
+      "bytes": 180589,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        291,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 291,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-6ad5cc23ec6d1c207da3e4b2",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-6ad5cc23ec6d1c207da3e4b2-ik.hdf5",
+      "bytes": 291690,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        586,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 586,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "maniskill",
+      "task": "legacy-all-v1-8a7847a26e8fbb00783e4114",
+      "archive": "/mnt/reachy-retarget/datasets/maniskill/episodes/legacy-all-v1-8a7847a26e8fbb00783e4114-ik.hdf5",
+      "bytes": 188724,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        526,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 526,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "maniskill",
+      "task": "legacy-all-v1-970dc25cbc48adcabbbe06cf",
+      "archive": "/mnt/reachy-retarget/datasets/maniskill/episodes/legacy-all-v1-970dc25cbc48adcabbbe06cf-ik.hdf5",
+      "bytes": 225583,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        661,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 661,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-9a079f1846e9651807ad34af",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-9a079f1846e9651807ad34af-ik.hdf5",
+      "bytes": 1268180,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        3401,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 3401,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "mimicgen",
+      "task": "legacy-all-v1-a3cc117492cbe040d6a22525",
+      "archive": "/mnt/reachy-retarget/datasets/mimicgen/episodes/legacy-all-v1-a3cc117492cbe040d6a22525-ik.hdf5",
+      "bytes": 239101,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        426,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 426,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "maniskill",
+      "task": "legacy-all-v1-a630ebea03b2f07fdda1b7d3",
+      "archive": "/mnt/reachy-retarget/datasets/maniskill/episodes/legacy-all-v1-a630ebea03b2f07fdda1b7d3-ik.hdf5",
+      "bytes": 193623,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        526,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 526,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "mimicgen",
+      "task": "legacy-all-v1-b6c2b8facf7aa4c978b6bd6d",
+      "archive": "/mnt/reachy-retarget/datasets/mimicgen/episodes/legacy-all-v1-b6c2b8facf7aa4c978b6bd6d-ik.hdf5",
+      "bytes": 244418,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        431,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 431,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "mimicgen",
+      "task": "legacy-all-v1-b728fefc8a22104c63e1e4bd",
+      "archive": "/mnt/reachy-retarget/datasets/mimicgen/episodes/legacy-all-v1-b728fefc8a22104c63e1e4bd-ik.hdf5",
+      "bytes": 500602,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        1241,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 1241,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "mimicgen",
+      "task": "legacy-all-v1-c1f6fdd7b4fa919be783b8a6",
+      "archive": "/mnt/reachy-retarget/datasets/mimicgen/episodes/legacy-all-v1-c1f6fdd7b4fa919be783b8a6-ik.hdf5",
+      "bytes": 457824,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        1057,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 1057,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-cc7c88ab58f653206c25e1c4",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-cc7c88ab58f653206c25e1c4-ik.hdf5",
+      "bytes": 2926251,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        6248,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 6248,
+      "clock_increasing": true,
+      "status": "kinematic_fail",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-d1c98eab070e1de3803eb075",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-d1c98eab070e1de3803eb075-ik.hdf5",
+      "bytes": 293419,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        631,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 631,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-e876dc89127d7d36642c3439",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-e876dc89127d7d36642c3439-ik.hdf5",
+      "bytes": 291101,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        586,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 586,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-ee5f39c5402082e4c032924e",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-ee5f39c5402082e4c032924e-ik.hdf5",
+      "bytes": 4030350,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        7678,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 7678,
+      "clock_increasing": true,
+      "status": "kinematic_fail",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "mimicgen",
+      "task": "legacy-all-v1-f099a0bb20161c285250f38b",
+      "archive": "/mnt/reachy-retarget/datasets/mimicgen/episodes/legacy-all-v1-f099a0bb20161c285250f38b-ik.hdf5",
+      "bytes": 263701,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        511,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 511,
+      "clock_increasing": true,
+      "status": "kinematic_pass",
+      "physics_tested": true,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robomimic",
+      "task": "legacy-all-v1-f6db26119aee4bc30e6a9231",
+      "archive": "/mnt/reachy-retarget/datasets/robomimic/episodes/legacy-all-v1-f6db26119aee4bc30e6a9231-ik.hdf5",
+      "bytes": 2821819,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        5748,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 5748,
+      "clock_increasing": true,
+      "status": "kinematic_fail",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "humoto",
+      "task": "legacy-all-v1-fdcc13ded9df56303c811a24",
+      "archive": "/mnt/reachy-retarget/datasets/humoto/episodes/legacy-all-v1-fdcc13ded9df56303c811a24-ik.hdf5",
+      "bytes": 6363843,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        14369,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 14369,
+      "clock_increasing": true,
+      "status": "kinematic_fail",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "momagen",
+      "task": "momagen-r1_bringing_water-v3",
+      "archive": "/mnt/reachy-retarget/datasets/momagen/episodes/momagen-r1_bringing_water-v3-ik-1791357411884375757.hdf5",
+      "bytes": 1310886,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        3324,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 3324,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "momagen",
+      "task": "momagen-r1_clean_pan-v3",
+      "archive": "/mnt/reachy-retarget/datasets/momagen/episodes/momagen-r1_clean_pan-v3-ik-1791357414586162924.hdf5",
+      "bytes": 1049357,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        1751,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 1751,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "momagen",
+      "task": "momagen-r1_dishes_away-v3",
+      "archive": "/mnt/reachy-retarget/datasets/momagen/episodes/momagen-r1_dishes_away-v3-ik-1791357416410074032.hdf5",
+      "bytes": 1399238,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        2788,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 2788,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "momagen",
+      "task": "momagen-r1_pick_cup-v3",
+      "archive": "/mnt/reachy-retarget/datasets/momagen/episodes/momagen-r1_pick_cup-v3-ik-1791357416700532213.hdf5",
+      "bytes": 342574,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        909,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 909,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "momagen",
+      "task": "momagen-r1_picking_up_trash-v3",
+      "archive": "/mnt/reachy-retarget/datasets/momagen/episodes/momagen-r1_picking_up_trash-v3-ik-1791357417931838689.hdf5",
+      "bytes": 1097841,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        2483,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 2483,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "momagen",
+      "task": "momagen-r1_tidy_table-v3",
+      "archive": "/mnt/reachy-retarget/datasets/momagen/episodes/momagen-r1_tidy_table-v3-ik-1791357420487610340.hdf5",
+      "bytes": 854733,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        1273,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 1273,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "parahome",
+      "task": "parahome-s1-legacy-v1",
+      "archive": "/mnt/reachy-retarget/datasets/parahome/episodes/parahome-s1-legacy-v1-ik.hdf5",
+      "bytes": 8639642,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        15504,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 15504,
+      "clock_increasing": true,
+      "status": "kinematic_fail",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "parahome",
+      "task": "parahome-s2-legacy-v1",
+      "archive": "/mnt/reachy-retarget/datasets/parahome/episodes/parahome-s2-legacy-v1-ik.hdf5",
+      "bytes": 8422180,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        16664,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 16664,
+      "clock_increasing": true,
+      "status": "kinematic_fail",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "parahome",
+      "task": "parahome-s3-legacy-v1",
+      "archive": "/mnt/reachy-retarget/datasets/parahome/episodes/parahome-s3-legacy-v1-ik.hdf5",
+      "bytes": 5147828,
+      "sha256_match": true,
+      "joint_channel": "derived/joint_position",
+      "shape": [
+        11141,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 11141,
+      "clock_increasing": true,
+      "status": "kinematic_fail",
+      "physics_tested": false,
+      "physics_pass": false
+    },
+    {
+      "dataset": "robocasa",
+      "task": "robocasa-pose-ik-v1",
+      "archive": "/mnt/reachy-retarget/datasets/robocasa/episodes/robocasa-pose-ik-v1-ik.hdf5",
+      "bytes": 1005805,
+      "sha256_match": true,
+      "joint_channel": "derived/robot_joint_position",
+      "shape": [
+        232,
+        14
+      ],
+      "finite_joint_positions": true,
+      "frames": 232,
+      "clock_increasing": true,
+      "status": "kinematic_failed",
+      "physics_tested": false,
+      "physics_pass": false
+    }
+  ],
+  "limitations": [
+    "Kinematic pass is the current arm/TCP/limit/clearance test, not physical task success or complete neck/gripper validation.",
+    "Physics-tested includes early-terminated failed rollouts; five ManiSkill attempts preserved one control row and terminal state.",
+    "Counts describe this cluster batch, not older local experiments.",
+    "MoMaGen/source-pose IK uses its documented thresholds; all of those candidates failed."
+  ]
+}

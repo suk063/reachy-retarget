@@ -1,0 +1,138 @@
+{
+  "label": "can-finite-pad-heldout-physics-v1",
+  "scope": "One held-out source, frozencontact002 andgeometryonlyminimumcostselection acrossall3completechunks. Nophysicaloutcomesusedforselection; nofollowupparametersearchonheld-outoutcome. Originalphysicalmodel/gatesandentiresourceinterval.",
+  "jobs": [
+    {
+      "dataset": "robomimic",
+      "parent_task": "legacy-all-v1-e876dc89127d7d36642c3439",
+      "parent_workspace": "workspaces/legacy-all-v1-e876dc89127d7d36642c3439",
+      "source": "data/normalized/hf__robomimic__robomimic_datasets/e876dc89127d7d36642c3439.h5",
+      "source_provenance": {
+        "provenance": [
+          {
+            "bytes": 46889752,
+            "path": "data/raw/hf__robomimic__robomimic_datasets/v1.5/can/ph/low_dim_v15.hdf5",
+            "sha256": "3f2eb92e0a5025d0095e866ac16cc8092d6a762abe27dec90dbaff9027282962",
+            "source_id": "hf__robomimic__robomimic_datasets",
+            "url": "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+          }
+        ],
+        "source_revision": "74fa018461f479cd9fd15b924a16103012096203",
+        "source_urls": [
+          "https://huggingface.co/datasets/robomimic/robomimic_datasets/resolve/74fa018461f479cd9fd15b924a16103012096203/v1.5/can/ph/low_dim_v15.hdf5"
+        ]
+      },
+      "parent_attempt": "workspaces/legacy-all-v1-e876dc89127d7d36642c3439/runs/dynamics/legacy-all-v1-e876dc89127d7d36642c3439-aligned/e876dc89127d7d36642c3439",
+      "evaluation_split": "heldout",
+      "runtime_source_sha256": "7531371d1ef03d9405c81060aea5c236608c09fcfb48078402fe0babb8f5cf92",
+      "cylindrical_grasp": {
+        "end_margin_m": 0.001
+      },
+      "id": "can-finite-pad-heldout-physics-v1-e876dc89127d7d36642c3439-contact002",
+      "operation": "feasible_geometry_experiment",
+      "variant": "contact_002",
+      "base_offset_xyyaw": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "right_arm_seed": [
+        -0.07174286951069012,
+        -0.902745775685186,
+        0.18542113837357807,
+        -1.361150358195674,
+        -0.20982220218473058,
+        0.03744438167939799,
+        -1.1980294239033369
+      ],
+      "grasp_approach": {
+        "lift_m": 0.12,
+        "traverse_fraction": 0.5
+      },
+      "retime": true,
+      "retiming_settings": {
+        "arm_speed_rad_s": 0.8
+      },
+      "supported_placement": {
+        "placement_xy_world": [
+          1.0275,
+          -0.3225
+        ],
+        "base_offset_xyyaw": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "rotation_xyz_deg": [
+          0.0,
+          40.0,
+          20.0
+        ],
+        "release_aperture_rad": 1.4,
+        "extra_descent_m": 0.002,
+        "retreat_speed_factor": 1.0
+      },
+      "geometry_selection": {
+        "selection_rank": [
+          0.0,
+          1,
+          9,
+          0.22511732121323685,
+          23
+        ],
+        "base_candidate": {
+          "id": 9,
+          "base_offset_xyyaw": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "seed": "seed9",
+          "rank": [
+            0.0,
+            1,
+            9
+          ]
+        },
+        "placement_parameters": {
+          "placement_xy_world": [
+            1.0275,
+            -0.3225
+          ],
+          "base_offset_xyyaw": [
+            0.15,
+            0.0,
+            0.0
+          ],
+          "rotation_xyz_deg": [
+            0.0,
+            40.0,
+            20.0
+          ],
+          "release_aperture_rad": 1.4,
+          "extra_descent_m": 0.002,
+          "retreat_speed_factor": 1.0
+        },
+        "admitted_base_plan": "/tmp/reachy-retarget-pool/can-finite-pad-heldout-v1/can-finite-pad-heldout-v1-e876dc89127d7d36642c3439-chunk0/artifact/workspaces/can-finite-pad-heldout-v1-e876dc89127d7d36642c3439-chunk0/geometry-search/base-09/admitted-base",
+        "admitted_plan": "/tmp/reachy-retarget-pool/can-finite-pad-heldout-v1/can-finite-pad-heldout-v1-e876dc89127d7d36642c3439-chunk0/artifact/workspaces/can-finite-pad-heldout-v1-e876dc89127d7d36642c3439-chunk0/geometry-search/base-09/admitted-complete",
+        "full_geometric_admission_artifact": "/tmp/reachy-retarget-pool/can-finite-pad-heldout-v1/can-finite-pad-heldout-v1-e876dc89127d7d36642c3439-chunk0/artifact/workspaces/can-finite-pad-heldout-v1-e876dc89127d7d36642c3439-chunk0/geometry-search/base-09",
+        "source_episode": "e876dc89127d7d36642c3439",
+        "downstream_grasp_approach": {
+          "lift_m": 0.12,
+          "traverse_fraction": 0.5
+        },
+        "downstream_retiming": {
+          "arm_speed_rad_s": 0.8
+        },
+        "grasp_roll": null,
+        "cylindrical_grasp": {
+          "end_margin_m": 0.001
+        },
+        "geometry_clearance": null,
+        "closure_admission": "contact_002 aperture envelope only; each closure requires final full admission",
+        "physics_validated": false
+      },
+      "workspace": "workspaces/can-finite-pad-heldout-physics-v1-e876dc89127d7d36642c3439-contact002"
+    }
+  ]
+}

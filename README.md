@@ -1,32 +1,74 @@
 # Reachy retarget
 
 State-first acquisition and representative Reachy 2 retargeting for manipulation
-and arm/base tracking policies. The project is located at
-`/home/sunghwan/workspace/reachy-retarget`. Sibling robot projects are read-only
-references. No robot SDK, hardware connection, policy training or deployment is
+with time-aligned object state. Sibling robot projects are read-only
+references. No robot SDK, hardware connection, policy training or robot deployment is
 part of this project.
 
-Read [REPORT.md](REPORT.md) for measured results and outstanding source-specific
-limits. A downloaded motion, a kinematically feasible motion, and a successful
-contact simulation are three different outcomes.
+The [persistent cluster pipeline](docs/cluster-retargeting.md) uses 50 existing
+hosts and shared storage at `/mnt/reachy-retarget`. All source families use the
+[same state-only archive](docs/reachy-agent-dataset-format.md), referenced against
+the pinned remote `reachy-agent/main`. Direct object-pose channels include only
+task objects and their relevant supports, receptacles and articulated parts.
+New complete-state MuJoCo rollouts record both arms, neck, grippers, base,
+actual controls and controller history without RGB. Source-only archives remain
+explicitly incomplete; the writer never invents unavailable Reachy observations.
+[Absolute/delta control views](docs/control-views.md) preserve the distinction
+between observed motion and commands actually issued.
+
+Current active work: [maximize full-interval physical success on feasible trajectories](docs/feasible-success-goal.md),
+using all 50 persistent workers and preserving original objects and failed attempts.
+The following paragraphs preserve the earlier experimental milestones.
+
+Earlier direction: [restore a controlled gripper-pad alignment baseline](docs/contact-alignment-reset.md).
+The [translation-only comparison](docs/pad-alignment-validation.md) is implemented:
+two of six examples recover bilateral lifted grasps, but none passes all physical
+gates. Existing exports remain preserved; correction is an explicit experiment.
+The broad common trajectory optimizer remains experimental. Its full-interval
+run passed 1/20; the historical per-task 6/20 below uses different source windows
+and must not be presented as a comparable success-rate improvement or regression.
+
+Read [the executed dynamics validation](docs/dynamics-validation.md) for historical
+physical results and [the expanded mobile dataset survey](docs/datasets/README.md)
+for additional sources. Six of 20 MuJoCo trials pass every physical gate:
+Can 1/3, Lift 3/3, Stack 1/3, PickCube 1/5, Square 0/3, Threading 0/3.
+All 20 saved trajectories reproduce from actuator commands alone. The six
+Lift/Stack trials explicitly start at the stationary source frame at 0.25 s;
+full-interval failures and original source data remain preserved. Four passes
+are development episodes and two are additional episodes with frozen settings.
+This does not establish broad object or mobile-navigation generalization.
+
+The local matrix contains 29 source episodes; nine have no complete dynamics
+adapter. Its [earlier kinematic audit](docs/coverage-audit.md) records 25 kinematic
+passes. [REPORT.md](REPORT.md) preserves a historical acquisition snapshot whose
+payloads are not all present here. Downloaded, kinematically feasible and
+successful contact simulation are separate outcomes.
+
+Objectless selections are excluded from normalization, retargeting and known
+source acquisition. The previously downloaded robot-only Reachy selection,
+including its raw files and generated trajectories, was removed at the user's
+request. Removal manifests preserve URLs, revisions and checksums. A robot
+dataset with object state remains eligible; a family name alone is not grounds
+for deletion. A missing adapter also does not prove that upstream data lack
+objects.
 
 ## Environments
 
 Acquisition and normalization run in this project's `.venv`:
 
 ```bash
-cd /home/sunghwan/workspace/reachy-retarget
+cd /path/to/reachy-retarget
 python -m venv --system-site-packages .venv
 .venv/bin/pip install -e .
 .venv/bin/python -m pytest -q
 ```
 
-Robot conversion and MuJoCo replay dispatch to the existing
+The original pinned Linux setup dispatches robot conversion and MuJoCo replay to
 `/home/sunghwan/workspace/reachy-control/.venv/bin/python`. That environment has
 the Pinocchio ABI expected by the native controller. `robot.py` checks the exact
 SHA256 identities of the controller, native library, URDF and collision model
 against `catalog/controller_identity.json`; it refuses to silently use modified
-files. The current runtime uses Pinocchio 2.7, NumPy 1.26 and MuJoCo 3.8. The
+files. That runtime uses Pinocchio 2.7, NumPy 1.26 and MuJoCo 3.8. The
 workspace's system Pinocchio 4 runtime is not ABI-compatible with this controller.
 The dispatch neither installs into nor edits the sibling projects.
 
@@ -35,6 +77,195 @@ installation may use a different backend. Do not assume this machine's EGL
 installation works without testing it.
 
 ## Commands
+
+### Acquire and normalize the object-inclusive matrix
+
+Use a fresh local root and the read-only sibling reference model. Downloads are
+explicit; the lock records source revisions and acquired checksums. The 50 GB
+free-space reserve applies to every transfer.
+
+```bash
+export REACHY_RETARGET_CONTROL="$(cd ../reachy-control && pwd)"
+export REACHY_RETARGET_BACKEND=reference
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+.venv/bin/reachy-retarget --root runs/object-matrix-reproduction discover --locked configs/object-matrix-lock.jsonl.gz
+.venv/bin/reachy-retarget --root runs/object-matrix-reproduction fetch --transport http
+.venv/bin/reachy-retarget --root runs/object-matrix-reproduction normalize --source hf__robomimic__robomimic_datasets --source hf__amandlek__mimicgen_datasets --source humoto --limit 3
+.venv/bin/reachy-retarget --root runs/object-matrix-reproduction normalize --source hf__haosulab__ManiSkill_Demonstrations --limit 5
+.venv/bin/reachy-retarget --root runs/object-matrix-reproduction retarget --limit 100
+```
+
+The current local reference environment uses Python 3.12, Pinocchio 4.1,
+NumPy 2.5.3 and MuJoCo 3.15. Its identities are distinct from the pinned Linux
+controller. The lock includes Panda FK evidence and Can simulation assets as
+well as four demonstration sources; asset bundles are not extra datasets.
+Normalization limits are per source file for robomimic/MimicGen. Task file names
+participate in episode identity, so Stack and Threading do not overwrite one
+another. Object validity masks survive resampling, with no interpolation across
+missing observations. See the [ManiSkill adapter notes](docs/maniskill-adapter.md)
+for its measured Panda state, independent FK check and scene placement.
+
+### Frozen object dynamics validation
+
+After explicit acquisition and normalization, run the saved per-task settings:
+
+```bash
+.venv/bin/python -m reachy_retarget.dynamics_benchmark --root runs/object-matrix-reproduction --config configs/dynamics-validation-v2.json --label frozen_v2
+.venv/bin/python -m reachy_retarget.dynamics_audit runs/object-matrix-reproduction/runs/dynamics/frozen_v2/6ad5cc23ec6d1c207da3e4b2
+```
+
+Every attempt retains the actual free-object outcome, actuator commands, source
+identity, exact scene/asset hashes, gates, failures and an independent replay
+audit. Use a new label for each run. See [the implemented method](docs/dynamics-method.md)
+and [source scene conversion](docs/object-scenes.md) for force feedback, grasp
+calibration, controlled placement, source windows and simulator assumptions.
+The method performs bounded simulation-guided tuning; it is not MPC.
+
+The viewer accepts these generic multi-object physical recordings directly:
+
+```bash
+.venv/bin/python -m reachy_retarget.viewer runs/object-matrix-reproduction/runs/dynamics/frozen_v2/6ad5cc23ec6d1c207da3e4b2/replay.h5 --port 8082
+```
+
+Reachy's source visual meshes/materials and the tripod display repair are
+retained. The scene's original materials and available textures are preserved;
+primitive texture-projection limitations are reported. Recorded-state playback
+is separate from the actuator-driven validation.
+
+### Local mjviser preview
+
+Install `.[preview]` into this project's virtual environment for browser playback.
+`python -m reachy_retarget.viewer /absolute/path/to/motion.h5 --port 8080`
+serves a looped replay at `http://127.0.0.1:8080`, with play/pause,
+speed, frame, robot-visual and path controls. `--check` verifies every frame and compares
+MuJoCo hand positions against the stored retargeted FK without starting a server.
+The viewer preserves the `reachy-control` URDF visual meshes and their embedded
+materials through GLB rendering, driven by MuJoCo body transforms. Collision
+geometry is hidden by default (group 3). Recorded neck motion is included;
+unavailable gripper channels stay at model defaults. This is kinematic playback,
+not physical validation.
+
+The local `viewer/reachy.visual.urdf` resolves the original ROS mesh paths and
+extends the `back_bar_inner` visual to the torso attachment, matching
+`reachy-control/util/visualization.py`. The left/right inner supports also extend
+along their existing axes to the actual torso visual mesh: all four corners of
+each upper end intersect the shell, with 2 mm minimum display overlap. Their
+lower endpoints stay fixed. The remaining source gap is about 23 mm at each
+front support center. Source URDF, joints, collision geometry,
+inertias and sibling repositories are unchanged. The visual manifest records
+source revision, source/GLB checksums and every display correction. Source DAE
+materials are retained; no replacement robot texture is invented.
+
+For robomimic Can trajectories, the viewer also replays `objects/Can/pose` and
+the source bins, using the retargeted scene's shared rigid placement. Source
+Can, wood and metal textures must already be fetched under
+`data/raw/robosuite_can_assets/`; viewer imports and playback never download.
+Box visuals use face-local UV meshes because mjviser omits 2D textures on
+primitive boxes; this display approximation is recorded separately. Colliders
+remain unchanged. Recorded object poses are assigned only for playback, with
+no physics steps and no inference of grasp/contact success. Unsupported object
+assets and missing Can poses raise errors rather than silently dropping objects
+or filling missing tracks.
+
+For an explicitly separate local conversion when the pinned Linux native runtime
+is unavailable, set `REACHY_RETARGET_CONTROL` to the existing read-only
+`reachy-control` checkout and `REACHY_RETARGET_BACKEND=reference`. This selects
+`control.reachy.Reachy`, the Python reference model, in the current Python
+environment. Use a separate `--root`, such as `runs/local-preview`, to keep its
+outputs apart from the pinned native run. Its model/source hashes are written to
+`catalog/controller_identity.reference.json`; outputs identify their backend.
+The default remains the pinned native runtime and its original identity check.
+A local kinematic pass is not the independent native tracking audit or a contact
+simulation pass.
+
+The object sample uses robomimic revision
+`74fa018461f479cd9fd15b924a16103012096203`, `v1.5/can/ph/demo_0`, and robosuite
+`v1.5.1` assets (all URLs and acquired checksums in the local ledger):
+
+```bash
+.venv/bin/python -m reachy_retarget.viewer runs/local-preview-v2/data/retargeted/hf__robomimic__robomimic_datasets/6ad5cc23ec6d1c207da3e4b2/motion.h5 --port 8081
+```
+
+This local Can sample is 586 frames / 5.85 seconds and passed the reference
+kinematic check. It is separate from the historical native contact benchmark
+in `REPORT.md`. Viewer FK/object pose checks, visual/scene manifests and the
+adapted URDF live beside each motion under `viewer/`.
+
+The corrected Can output is in `runs/local-preview-v2`; the first conversion is
+preserved in `runs/local-preview`. The documented binary robomimic OSC gripper
+action now produces `derived/gripper/right_position`: -1/open maps to 2.0 rad,
+and +1/close maps to -0.06 rad, following the existing contact benchmark's command
+mapping. Resampling uses zero-order hold on the globally dilated source clock,
+so closing never starts before its source command. For this sample the switch
+times are 2.60 s (close) and 5.20 s (open). Finger mimic joints follow the target
+in playback. These are derived Reachy commands, not measured Reachy finger
+positions or evidence of physical grasp success. Unknown action schemas are
+rejected instead of guessed; no inactive-hand command is fabricated.
+
+For contact-aware playback, run the dynamic contact validator and open its
+`replay.h5`. The viewer then uses complete measured MuJoCo positions, velocities
+and actuator controls, including finger mimic deflections under load. It checks
+the recorded model checksum and verifies that display additions preserve the
+physical bodies, joints and inertias. The moving Can remains a free dynamic body
+throughout validation; object assignments occur only in the completed replay.
+
+```bash
+# Keep the environment exports above. Use a fresh label for each attempt.
+.venv/bin/python -m reachy_retarget.contact --root runs/local-preview-v2 --limit 1 --label can_contact_v4 --time-scale 10 --depth 0.035 --no-render
+.venv/bin/python -m reachy_retarget.viewer runs/local-preview-v2/runs/contact/can_contact_v3/demo_0/replay.h5 --port 8081
+```
+
+The existing `can_contact_v3/demo_0` reference-backend trial passed the recorded
+criteria: 0.1198 m lift, 8.97 s final stable placement after release, bilateral
+distal-finger contact during lift, and maximum hand/Can penetration of 0.891 mm
+(limit 1 mm). No self/environment penetration above their configured thresholds
+or actual velocity-limit violation was observed. MuJoCo uses compliant contact;
+this is a bounded-penetration result, not a claim of exactly zero penetration.
+The source clock is slowed by 10 with a final 3 s hold (61.5 s replay). The
+grasp-depth offset is 35 mm; source object dimensions are preserved.
+
+The local controller expects targets in its torso camera frame. The adapter now
+converts world targets to that frame, preserving the base-frame contract for
+older controllers without a camera-frame API. The failed `can_contact_v1` and
+successful `can_contact_v2` remain saved. Version 3 additionally aligns logged
+body poses with interval-end joint states and records complete replay state.
+Each attempt retains code snapshots, model/source hashes, runtime versions,
+failure reasons and contact metrics. This single development sample does not
+replace the historical ten-trial benchmark or establish general success rates.
+
+The improved local grasp is `speed4_grasp15_soft/demo_0`. It uses a 25 mm
+insertion offset, a 15 mm TCP-X grasp-height adjustment toward the Can's center,
+and 15 degrees of wrist tilt. The attachment changes smoothly during the last
+0.5 source seconds before closing, preserving the original approach. Closing
+ramps over 0.3 simulation seconds; source opening time is unchanged. No carry
+height offset is applied. The complete physical scene has the same SHA-256 as
+`can_contact_v3`: robot/object geometry, mass, inertia, friction and contact
+settings are unchanged. Only robot target poses, their timing and gripper
+commands change. The adapter also supplies the camera-frame controller with
+the inactive hand's body-attached target Jacobian and the active hand's world
+trajectory velocity, preventing base motion from being counted again as target
+motion.
+
+```bash
+# Use a fresh label to reproduce; all unsuccessful attempts remain saved.
+.venv/bin/python -m reachy_retarget.contact --root runs/local-preview-v2 --limit 1 --label grasp_reproduction --time-scale 4 --depth 0.025 --grasp-height 0.015 --tilt 15 --close-duration 0.3 --no-render
+.venv/bin/python -m reachy_retarget.viewer runs/local-preview-v2/runs/contact/speed4_grasp15_soft/demo_0/replay.h5 --port 8081
+```
+
+The motion is 2.5 times faster than the previous time-scale-10 run (26.4 seconds
+including the final hold, versus 61.5). This run passes the physical criteria
+and a new grasp-stability gate: TCP-relative object drift below 3 mm / 3 degrees,
+bilateral distal-finger contact in at least 95% of measured carry intervals, and
+an observed release. Drift is measured from the first bilateral grasp above
+3 cm lift until the release command; it is not the Can's world displacement.
+Measured drift fell from 6.67 mm / 10.41 degrees to 0.47 mm / 1.81 degrees, with
+bilateral contact in all measured carry intervals. Maximum hand/Can penetration
+is 0.858 mm; lift is 14.49 cm; final stable placement is 5.15 seconds. The earlier
+baseline did not use the new stability gate. `runs/local-preview-v2/runs/contact/
+grasp-comparison.json` retains comparisons and failure reasons for all local
+attempts; they are variations of one demonstration, not independent examples.
+
+### Collection and validation
 
 ```bash
 # Expand official registries and publicly accessible repositories.
@@ -47,7 +278,7 @@ installation works without testing it.
 .venv/bin/reachy-retarget fetch
 .venv/bin/reachy-retarget fetch --source parahome --transport http
 
-# Five sequences per representative source; Can normalizes fixed demo_0..9.
+# Up to five sequences per selected source file; objectless episodes are rejected.
 .venv/bin/reachy-retarget normalize --limit 5
 .venv/bin/reachy-retarget retarget --limit 5
 
@@ -56,8 +287,8 @@ installation works without testing it.
 .venv/bin/reachy-retarget validate
 
 # Re-run all fixed ten dynamic Can trials, then the normal validation suite.
-# This replaces the files in the configured label; use a new label in a copied
-# config when comparing another controller or grasp/time adjustment.
+# Existing attempts are protected; use a fresh label in a copied config when
+# comparing another controller or grasp/time adjustment.
 .venv/bin/reachy-retarget --config configs/default.json validate --physics
 
 # Refresh measured sequence counts and regenerate English reports.
