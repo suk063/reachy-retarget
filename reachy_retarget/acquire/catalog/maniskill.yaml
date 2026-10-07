@@ -1,0 +1,458 @@
+# Pinned source files. Generated from publisher metadata (HF tree API: LFS oid = sha256
+# for *.h5; *.json are plain git blobs, so their sha256 was computed from the bytes at the
+# pinned revision after checking the git blob sha1). Ids are '<family>/<path>'.
+# kind: low_dim (simulator state + actions, no images), metadata (episode/env JSON),
+# assets (robot description). Task classification and exclusions are in 'tasks' and
+# 'excluded' below (ignored by load_catalog).
+sources:
+- family: maniskill
+  repo: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations
+  revision: d674485bbffdd533914e52d272fdda34c0515608
+  license: Apache-2.0
+  note: 'ManiSkill3 demonstrations: trajectory .h5 (env_states, actions; obs_mode none) and .json (env/episode metadata). Rendered videos (*.mp4), PPO checkpoints (*.pt) and per-task *.zip archives (duplicates
+    of the folders) are not catalogued.'
+  files:
+  - path: demos/LiftPegUpright-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/LiftPegUpright-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    sha256: d439963c553d2e0699c0cb415b76ca37723b2454b794f5bce20c92892e81070e
+    size: 14719462
+    kind: low_dim
+    dataset: maniskill/LiftPegUpright-v1/rl/pd_ee_delta_pose
+  - path: demos/LiftPegUpright-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/LiftPegUpright-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    sha256: a8b33321ae27e4b92434ce45f2124aa96d5e49ab4c4701b16a7dc9f6f70f5f28
+    size: 191843
+    kind: metadata
+    dataset: maniskill/LiftPegUpright-v1/rl/pd_ee_delta_pose
+    note: single_arm; source_type=rl; 1015 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/LiftPegUpright-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/LiftPegUpright-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    sha256: cafa9e507e28e0ed5d30f01ff2d8b2f2d1d109f89cec45b83254cae884c117f8
+    size: 14397077
+    kind: low_dim
+    dataset: maniskill/LiftPegUpright-v1/rl/pd_joint_delta_pos
+  - path: demos/LiftPegUpright-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/LiftPegUpright-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    sha256: 18eb06e3a85677949cc3c69d8254cf91626f91f2132c3012a20aa26be71b93ad
+    size: 189683
+    kind: metadata
+    dataset: maniskill/LiftPegUpright-v1/rl/pd_joint_delta_pos
+    note: single_arm; source_type=rl; 993 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PegInsertionSide-v1/motionplanning/trajectory.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PegInsertionSide-v1/motionplanning/trajectory.h5
+    sha256: 6fa7e4df4cd1980a9cccd23b3ecae11a46a9e068c70b2d96597f4b1656b07b5a
+    size: 50058783
+    kind: low_dim
+    dataset: maniskill/PegInsertionSide-v1/motionplanning
+  - path: demos/PegInsertionSide-v1/motionplanning/trajectory.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PegInsertionSide-v1/motionplanning/trajectory.json
+    sha256: 8f666019744d4a96b846f717ecbdfb4ac5207c742207a10ad87a3559c1859e78
+    size: 229547
+    kind: metadata
+    dataset: maniskill/PegInsertionSide-v1/motionplanning
+    note: single_arm; source_type=motionplanning; 1000 episodes; ManiSkill commit 9d5e0e01c3b13796dd1c9fc83213b315ce8a1946
+  - path: demos/PegInsertionSide-v1/rl/trajectory.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PegInsertionSide-v1/rl/trajectory.h5
+    sha256: 6948b407728f3995db85b526f6f827ef26d16e60cc8a308af45938e4048a9666
+    size: 18741772
+    kind: low_dim
+    dataset: maniskill/PegInsertionSide-v1/rl
+  - path: demos/PegInsertionSide-v1/rl/trajectory.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PegInsertionSide-v1/rl/trajectory.json
+    sha256: 61a9ada0a8518c6a36289c62fcf4130709fd20e48f660b967e31a5276a400d44
+    size: 219643
+    kind: metadata
+    dataset: maniskill/PegInsertionSide-v1/rl
+    note: single_arm; source_type=rl; 1000 episodes; ManiSkill commit None
+  - path: demos/PickCube-v1/motionplanning/trajectory.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/motionplanning/trajectory.h5
+    sha256: 03ca60546541a7f18321d9d32721f0254bc75217828c0cadacd217d0c014576a
+    size: 29349195
+    kind: low_dim
+    dataset: maniskill/PickCube-v1/motionplanning
+  - path: demos/PickCube-v1/motionplanning/trajectory.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/motionplanning/trajectory.json
+    sha256: 16e403cb77bfbdda28c243b96eb90adbae1c0edf42854283be57ee47076a2e90
+    size: 228218
+    kind: metadata
+    dataset: maniskill/PickCube-v1/motionplanning
+    note: single_arm; source_type=motionplanning; 1000 episodes; ManiSkill commit 652ad9353c0223507a938f0e8d990dd6f1c771ad
+  - path: demos/PickCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    sha256: e4c6c9b9a327217c186171060c5495e2a1acac80c2627e7267df1fabb7735b49
+    size: 19287452
+    kind: low_dim
+    dataset: maniskill/PickCube-v1/rl/pd_ee_delta_pos
+  - path: demos/PickCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    sha256: 4665c6a9cdb342f13c348de2315995905109ae41246355bec8cbfbac108d9661
+    size: 192132
+    kind: metadata
+    dataset: maniskill/PickCube-v1/rl/pd_ee_delta_pos
+    note: single_arm; source_type=rl; 1022 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PickCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    sha256: 5a560b8b73d4b2446cbb49f0dcb470b6a00f35236bc660da9a6e519dadbf6530
+    size: 19989526
+    kind: low_dim
+    dataset: maniskill/PickCube-v1/rl/pd_ee_delta_pose
+  - path: demos/PickCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    sha256: 920fe2fc06c0a5efd879e1735e6b5e3710293fd05af9b52f5caa5e4b97226d5a
+    size: 191461
+    kind: metadata
+    dataset: maniskill/PickCube-v1/rl/pd_ee_delta_pose
+    note: single_arm; source_type=rl; 1013 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PickCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    sha256: b05851319021c290ed5e5055c03c776b434af5c9af98e13db2ab9159752b89c8
+    size: 19707932
+    kind: low_dim
+    dataset: maniskill/PickCube-v1/rl/pd_joint_delta_pos
+  - path: demos/PickCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    sha256: f6bb8a6a94ff165fdcb65e6a47cd8c3f6ac8fa01d0ae77bc05613b88e27916d1
+    size: 190445
+    kind: metadata
+    dataset: maniskill/PickCube-v1/rl/pd_joint_delta_pos
+    note: single_arm; source_type=rl; 997 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PickCube-v1/teleop/trajectory.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.h5
+    sha256: 0e6285c5e7a9293fbb1c10590a1be4fc115792cb816e00b37e9914369a0c3c94
+    size: 383621
+    kind: low_dim
+    dataset: maniskill/PickCube-v1/teleop
+  - path: demos/PickCube-v1/teleop/trajectory.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PickCube-v1/teleop/trajectory.json
+    sha256: ed867dd733d307ba2cf50151625060a0728224fcb574713b0298232ac4ea789a
+    size: 2702
+    kind: metadata
+    dataset: maniskill/PickCube-v1/teleop
+    note: single_arm; source_type=teleoperation; 10 episodes; ManiSkill commit ecc579b7567c31bb3d7176539d90e86ae49296be
+  - path: demos/PlugCharger-v1/motionplanning/trajectory.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PlugCharger-v1/motionplanning/trajectory.h5
+    sha256: bb70ac58432709ef2065c8f917c07b150d65609d1163a697c27f625513484f5f
+    size: 63363290
+    kind: low_dim
+    dataset: maniskill/PlugCharger-v1/motionplanning
+  - path: demos/PlugCharger-v1/motionplanning/trajectory.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PlugCharger-v1/motionplanning/trajectory.json
+    sha256: 43c02ca1a3b9c0eced3ed83e4de3215240c81f72e63503e467a4427a72999532
+    size: 230149
+    kind: metadata
+    dataset: maniskill/PlugCharger-v1/motionplanning
+    note: single_arm; source_type=motionplanning; 1000 episodes; ManiSkill commit 652ad9353c0223507a938f0e8d990dd6f1c771ad
+  - path: demos/PokeCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PokeCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    sha256: 4561a6e53f6a8fa312f58c6a1b25e2df3d6883ee54e60bc70e3d730d97a2652b
+    size: 13791472
+    kind: low_dim
+    dataset: maniskill/PokeCube-v1/rl/pd_ee_delta_pos
+  - path: demos/PokeCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PokeCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    sha256: 2d800e6871ef90d61ad21ac7ed9b983366eba4da0876231bd41e13945ddfee10
+    size: 143222
+    kind: metadata
+    dataset: maniskill/PokeCube-v1/rl/pd_ee_delta_pos
+    note: single_arm; source_type=rl; 761 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PokeCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PokeCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    sha256: d1663a4464555d46c6021e0602fda0ca462049de2de58ce8695760a99ecd77f9
+    size: 9982438
+    kind: low_dim
+    dataset: maniskill/PokeCube-v1/rl/pd_ee_delta_pose
+  - path: demos/PokeCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PokeCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    sha256: cbe4b9f6b0c570833f817630008d19f6c6e771a2f08d2b113955327f4833d803
+    size: 109683
+    kind: metadata
+    dataset: maniskill/PokeCube-v1/rl/pd_ee_delta_pose
+    note: single_arm; source_type=rl; 579 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PokeCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PokeCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    sha256: 0fb7b1ff1a463c240e809f107adc27a6d97748cd4c7893907de8ef2e318e2365
+    size: 21281244
+    kind: low_dim
+    dataset: maniskill/PokeCube-v1/rl/pd_joint_delta_pos
+  - path: demos/PokeCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PokeCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    sha256: 82901a1a643a919882187c6bcaf3d5d647747914dc2fd0ab3b07da44ebef89e3
+    size: 183400
+    kind: metadata
+    dataset: maniskill/PokeCube-v1/rl/pd_joint_delta_pos
+    note: single_arm; source_type=rl; 960 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PullCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PullCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    sha256: 9c53063d390b6f465b0111bcaacf620cdb640c406aab18a498b040042384ffe4
+    size: 9097366
+    kind: low_dim
+    dataset: maniskill/PullCube-v1/rl/pd_ee_delta_pos
+  - path: demos/PullCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PullCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    sha256: 56487cf86740dccd6ffcdce084a0049abb847d6f7390e0cf6dd25a1fa77d17fc
+    size: 192342
+    kind: metadata
+    dataset: maniskill/PullCube-v1/rl/pd_ee_delta_pos
+    note: single_arm; source_type=rl; 1024 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PullCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PullCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    sha256: 8e6cfab91bf2a3a8e29a0a5b30c0a3f33bc2ee8081d5f1da4fd260db7df97202
+    size: 7331638
+    kind: low_dim
+    dataset: maniskill/PullCube-v1/rl/pd_ee_delta_pose
+  - path: demos/PullCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PullCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    sha256: 3726932dda702b509259295e219b4bdbd74102258622ed76595d40cbb725b679
+    size: 193062
+    kind: metadata
+    dataset: maniskill/PullCube-v1/rl/pd_ee_delta_pose
+    note: single_arm; source_type=rl; 1024 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PullCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PullCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    sha256: 4cf8d03c1e61427f36d660aa01087effc6aec5b4239559cc2f83d4028076cf5d
+    size: 10868017
+    kind: low_dim
+    dataset: maniskill/PullCube-v1/rl/pd_joint_delta_pos
+  - path: demos/PullCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PullCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    sha256: 99ee6a8058e9e087df6d0763ddfd5efd4bde6f624554af1f761340bdfdc7f3a9
+    size: 195582
+    kind: metadata
+    dataset: maniskill/PullCube-v1/rl/pd_joint_delta_pos
+    note: single_arm; source_type=rl; 1024 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PullCubeTool-v1/motionplanning/trajectory.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PullCubeTool-v1/motionplanning/trajectory.h5
+    sha256: b60f9da299f49773f20e135405853aea19bf27766bcb6a8bd3ce5959944da8ad
+    size: 83428438
+    kind: low_dim
+    dataset: maniskill/PullCubeTool-v1/motionplanning
+  - path: demos/PullCubeTool-v1/motionplanning/trajectory.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PullCubeTool-v1/motionplanning/trajectory.json
+    sha256: 884fa722db79be2a858707673cef17bebf5c55f378dc04f14322a990f4ea04fd
+    size: 229438
+    kind: metadata
+    dataset: maniskill/PullCubeTool-v1/motionplanning
+    note: single_arm; source_type=motionplanning; 1000 episodes; ManiSkill commit 95ea99d4eaad36477823d97077ab935caeb73359
+  - path: demos/PushCube-v1/motionplanning/trajectory.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PushCube-v1/motionplanning/trajectory.h5
+    sha256: d74a4c0efdbf68cb5512dabfc9dfa2759fb53c7f221b15ded92b0d03533f3f2b
+    size: 26480047
+    kind: low_dim
+    dataset: maniskill/PushCube-v1/motionplanning
+  - path: demos/PushCube-v1/motionplanning/trajectory.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PushCube-v1/motionplanning/trajectory.json
+    sha256: b33b5fadbdf5fd9e6c739d414d77a0ba61ae0dc05453e76392c2fd7d48e4522c
+    size: 228243
+    kind: metadata
+    dataset: maniskill/PushCube-v1/motionplanning
+    note: single_arm; source_type=motionplanning; 1000 episodes; ManiSkill commit 652ad9353c0223507a938f0e8d990dd6f1c771ad
+  - path: demos/PushCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PushCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    sha256: 8b1f6f41b2d9a539efd98a1d7daaa9fd5dca322302f04b555ffe0107a752f312
+    size: 10503966
+    kind: low_dim
+    dataset: maniskill/PushCube-v1/rl/pd_ee_delta_pos
+  - path: demos/PushCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PushCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    sha256: 23a3308629477ba86a9c3f29fc8dc47c1ac5d610a8550e046ada50ba17d090e5
+    size: 191646
+    kind: metadata
+    dataset: maniskill/PushCube-v1/rl/pd_ee_delta_pos
+    note: single_arm; source_type=rl; 1021 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PushCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PushCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    sha256: 9975ca1094f9c3ceaf04ac8c7975130cb25bcd5666370355cbf187cd54bae098
+    size: 13888122
+    kind: low_dim
+    dataset: maniskill/PushCube-v1/rl/pd_ee_delta_pose
+  - path: demos/PushCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PushCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    sha256: fc2f096918612188e34720848681dfd50d8fc82b332fb98875d1659d0d17cfe9
+    size: 192310
+    kind: metadata
+    dataset: maniskill/PushCube-v1/rl/pd_ee_delta_pose
+    note: single_arm; source_type=rl; 1018 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/PushCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PushCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    sha256: 10a9c7f311a86f85ff34d507dc3031fc11149ff715b67011cc5b947eecf059b9
+    size: 11880168
+    kind: low_dim
+    dataset: maniskill/PushCube-v1/rl/pd_joint_delta_pos
+  - path: demos/PushCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/PushCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    sha256: 8f7f7918e6e015f590b193ee5502f89a511569df5415e11adaa62dd4cb60ad50
+    size: 195392
+    kind: metadata
+    dataset: maniskill/PushCube-v1/rl/pd_joint_delta_pos
+    note: single_arm; source_type=rl; 1023 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/RollBall-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/RollBall-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    sha256: c97d31a78cb1348302498f585022dc93af9d60be1876e400a3a815311d292754
+    size: 10080078
+    kind: low_dim
+    dataset: maniskill/RollBall-v1/rl/pd_ee_delta_pos
+  - path: demos/RollBall-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/RollBall-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    sha256: 521452817e13610c837075928b1ba34278cd73ed6011f901de04a95608c49f0d
+    size: 129539
+    kind: metadata
+    dataset: maniskill/RollBall-v1/rl/pd_ee_delta_pos
+    note: single_arm; source_type=rl; 688 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/RollBall-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/RollBall-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    sha256: 1d34ce9fad3e6284659498698a70c9731e7c2aecc7b8b096d2f41d75d1d4f839
+    size: 12635077
+    kind: low_dim
+    dataset: maniskill/RollBall-v1/rl/pd_ee_delta_pose
+  - path: demos/RollBall-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/RollBall-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    sha256: 7be240f25eaf090138d971f9fa05b1de306b7cd7dc90390c184ba484d2658b9b
+    size: 161697
+    kind: metadata
+    dataset: maniskill/RollBall-v1/rl/pd_ee_delta_pose
+    note: single_arm; source_type=rl; 855 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/RollBall-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/RollBall-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    sha256: 3e15ffcdbb7e2f35daa689d36295af0b8bdce2d51e20f966aa2291894c0a0470
+    size: 15650395
+    kind: low_dim
+    dataset: maniskill/RollBall-v1/rl/pd_joint_delta_pos
+  - path: demos/RollBall-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/RollBall-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    sha256: dadfd457cb1ece1dca1ece4ed15d8d202e69709c0ca5935edd3a1f8f806fb4c5
+    size: 158665
+    kind: metadata
+    dataset: maniskill/RollBall-v1/rl/pd_joint_delta_pos
+    note: single_arm; source_type=rl; 830 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/StackCube-v1/motionplanning/trajectory.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackCube-v1/motionplanning/trajectory.h5
+    sha256: 61d07df7b52f303d2088e977df5f863be7d2274348ff05791f3a815359815523
+    size: 38745164
+    kind: low_dim
+    dataset: maniskill/StackCube-v1/motionplanning
+  - path: demos/StackCube-v1/motionplanning/trajectory.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackCube-v1/motionplanning/trajectory.json
+    sha256: 48cb1119c9f5a8f0d7187fc83674a2c401b41466cb1930b2a5c26b706ba3bd81
+    size: 229183
+    kind: metadata
+    dataset: maniskill/StackCube-v1/motionplanning
+    note: single_arm; source_type=motionplanning; 1000 episodes; ManiSkill commit e77e4ff3da2ee84216ec06a8b6b4d8b90d2eed79
+  - path: demos/StackCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.h5
+    sha256: 92566bce8046ccb8c602c1d929d61d7a77734fc07d7111c3d01d9ad6b80376df
+    size: 16804514
+    kind: low_dim
+    dataset: maniskill/StackCube-v1/rl/pd_ee_delta_pos
+  - path: demos/StackCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackCube-v1/rl/trajectory.none.pd_ee_delta_pos.physx_cuda.json
+    sha256: 3b1cc7a591f0330d5b32ac319aa002116d043dfa84436e75472a6efdaa2f37bd
+    size: 169636
+    kind: metadata
+    dataset: maniskill/StackCube-v1/rl/pd_ee_delta_pos
+    note: single_arm; source_type=rl; 902 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/StackCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.h5
+    sha256: 6b045c6ef0cbc47fcdd2e9a36dfafbeb187805881f2c4594959e4c0a1054da43
+    size: 16094487
+    kind: low_dim
+    dataset: maniskill/StackCube-v1/rl/pd_ee_delta_pose
+  - path: demos/StackCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackCube-v1/rl/trajectory.none.pd_ee_delta_pose.physx_cuda.json
+    sha256: 88373dce9b6cc914f047b4194f2175b9f8819c6e9ae45972dfd2aaa1616dfe4f
+    size: 188071
+    kind: metadata
+    dataset: maniskill/StackCube-v1/rl/pd_ee_delta_pose
+    note: single_arm; source_type=rl; 995 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/StackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    sha256: 1f21bf527a4036ccc693ff9adc34993029d3570beda57cd693a0d53bf0dfbb03
+    size: 16629431
+    kind: low_dim
+    dataset: maniskill/StackCube-v1/rl/pd_joint_delta_pos
+  - path: demos/StackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    sha256: f2c5418a04ffca6455f6b145190c8f440051d30aeba56ec511e1d8f8f6e06c04
+    size: 178068
+    kind: metadata
+    dataset: maniskill/StackCube-v1/rl/pd_joint_delta_pos
+    note: single_arm; source_type=rl; 932 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/StackPyramid-v1/motionplanning/trajectory.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackPyramid-v1/motionplanning/trajectory.h5
+    sha256: 70549237c02a9a8c76dd9cec6f3e13afff383b4d94d061b48f326d29bf24801d
+    size: 73830873
+    kind: low_dim
+    dataset: maniskill/StackPyramid-v1/motionplanning
+  - path: demos/StackPyramid-v1/motionplanning/trajectory.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/StackPyramid-v1/motionplanning/trajectory.json
+    sha256: 8a8faa4932328a0752660563515c08ed463fb7e2abe34e49f7d70dc5731a0844
+    size: 229837
+    kind: metadata
+    dataset: maniskill/StackPyramid-v1/motionplanning
+    note: single_arm; source_type=motionplanning; 1000 episodes; ManiSkill commit ee5f8826afa693e0b1c602fae759a92fc462e05b
+  - path: demos/TwoRobotPickCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/TwoRobotPickCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    sha256: a3e4c72cba9fe2fc5d0e3c92d04605e5e780ec34fe4a7a6bcfadebabd4e8e1cb
+    size: 50460503
+    kind: low_dim
+    dataset: maniskill/TwoRobotPickCube-v1/rl/pd_joint_delta_pos
+  - path: demos/TwoRobotPickCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/TwoRobotPickCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    sha256: 03a579f5067e5487f3d0bb8d18096e83e7b4f63b815c41fd49ae8cacf1145214
+    size: 275260
+    kind: metadata
+    dataset: maniskill/TwoRobotPickCube-v1/rl/pd_joint_delta_pos
+    note: two_robots; source_type=rl; 983 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  - path: demos/TwoRobotStackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/TwoRobotStackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5
+    sha256: ac4ed3fa214e20672a8559de7f7601f6e4ff3214a57ed4ede5089ebfbe85ca7b
+    size: 51244775
+    kind: low_dim
+    dataset: maniskill/TwoRobotStackCube-v1/rl/pd_joint_delta_pos
+  - path: demos/TwoRobotStackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    url: https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/resolve/d674485bbffdd533914e52d272fdda34c0515608/demos/TwoRobotStackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.json
+    sha256: ad6ec9174ef77b1fde5a052ba8825dab048f839c4dcf5aa9c2c2b14cab8af5f2
+    size: 281507
+    kind: metadata
+    dataset: maniskill/TwoRobotStackCube-v1/rl/pd_joint_delta_pos
+    note: two_robots; source_type=rl; 1007 episodes; ManiSkill commit baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+- family: maniskill
+  repo: https://github.com/haosulab/ManiSkill
+  revision: baab60ede2e89167c1b7aaed41a9aa8e690a9d1e
+  license: Apache-2.0
+  note: Panda URDFs used for FK (meshes are not needed and not catalogued).
+  files:
+  - path: assets/ManiSkill-baab60ed/panda_v2.urdf
+    url: https://raw.githubusercontent.com/haosulab/ManiSkill/baab60ede2e89167c1b7aaed41a9aa8e690a9d1e/mani_skill/assets/robots/panda/panda_v2.urdf
+    sha256: 524c6986dbbabe244e05801f262862205e880834d01459b06ee273016d0579ba
+    size: 12821
+    kind: assets
+    note: robot uid 'panda'; kinematics identical at every ManiSkill commit recorded in the demos (only visual mesh file names differ)
+  - path: assets/ManiSkill-baab60ed/panda_v3.urdf
+    url: https://raw.githubusercontent.com/haosulab/ManiSkill/baab60ede2e89167c1b7aaed41a9aa8e690a9d1e/mani_skill/assets/robots/panda/panda_v3.urdf
+    sha256: d040277352476639950e2ddce1dff8a1c0e95df470e5e9ed186cd01c468fa412
+    size: 13483
+    kind: assets
+    note: robot uid 'panda_wristcam' (adds a camera link, no finger pad links); kinematics identical at every ManiSkill commit recorded in the demos (only visual mesh file names differ)
+tasks:
+  PickCube-v1: single_arm
+  StackCube-v1: single_arm
+  PegInsertionSide-v1: single_arm
+  PlugCharger-v1: single_arm
+  PullCube-v1: single_arm
+  PushCube-v1: single_arm
+  PullCubeTool-v1: single_arm
+  LiftPegUpright-v1: single_arm
+  PokeCube-v1: single_arm
+  RollBall-v1: single_arm
+  StackPyramid-v1: single_arm
+  TwoRobotPickCube-v1: two_robots
+  TwoRobotStackCube-v1: two_robots
+excluded:
+  AnymalC-Reach-v1: quadruped (ANYmal C) reaching a goal; no gripper and no object interaction
+  DrawTriangle-v1: robot panda_stick (stick end effector, no gripper); drawing dots, no grasping. 3.74 GB
+  PushT-v1: robot panda_stick (stick end effector, no gripper); planar pushing only
+  PlaceSphere-v1: no demonstrations at this revision
+  OpenCabinetDrawer-v1: no demonstrations at this revision
+  '*.zip': archives duplicating each task folder (would double-count)
+  '*.mp4': rendered videos (images)
+  '*.pt': PPO policy checkpoints, not demonstrations
