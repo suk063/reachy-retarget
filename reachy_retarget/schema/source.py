@@ -1,6 +1,8 @@
 """Embodiment-independent source demonstrations, as produced by source adapters.
 
-All arrays use the source world frame (metres, z up) and the source clock. Poses are
+All arrays use the source world frame (metres, z up, **the floor the robot stands on at
+z = 0**; adapters whose simulator puts the origin elsewhere, e.g. ManiSkill's table top,
+translate every pose, object track and scene accordingly) and the source clock. Poses are
 ``(T, 4, 4)`` homogeneous matrices; object tracks are ``(T, 7)`` as xyz + wxyz.
 """
 from __future__ import annotations

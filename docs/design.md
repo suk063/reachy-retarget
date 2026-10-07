@@ -55,6 +55,7 @@ left, +z up), TCP = `{l,r}_arm_tip`, head = `head`. Poses are stored as
 Defined in `reachy_retarget/schema/source.py`. Everything is in the source world frame
 (metres, z up) and the source clock.
 
+* World frame: z up with the floor the robot stands on at z = 0 (adapters translate if needed).
 * `effectors`: source end effectors, keyed by a source-specific id. Each has a world
   pose of the **grasp center** (the point between the pads, not the flange), with
   approach axis = +z and closing axis = +y (adapters convert their gripper convention to
