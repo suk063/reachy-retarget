@@ -1241,3 +1241,147 @@ All 40 catalogued episodes (5 task types × 8; 147–242 frames) adapted.
 * The XHand (dexterous hand) half of the release is not used. Prismatic close tasks
   (e.g. Close/partnet/table) are not in the subset; their q0 units (scaled PartNet joints) are
   unverified.
+
+## RoboVerse / MetaSim (family `roboverse`)
+
+* Repository: <https://huggingface.co/datasets/RoboVerseOrg/roboverse_data>, revision
+  `fab63ccaaed54f413901f86edc3fa1ab77a96500` (2026-06-08), dataset card licence Apache-2.0
+  (RSS 2025 paper, arXiv 2504.18904). Code: `github.com/RoboVerseOrg/RoboVerse` @ `5f3ec018`.
+* Upstream licences travel with the migrated content: RLBench trajectories and assets are
+  derived from RLBench (Imperial College licence: non-commercial research use only; the
+  RoboVerse `assets/rlbench/LICENSE` is that licence); CALVIN is MIT; the Franka models are
+  franka_ros / mujoco_menagerie (Apache-2.0) and IsaacSim USD (NVIDIA). Catalog `license`
+  strings carry both.
+* Catalog: `catalog/roboverse.yaml`, 790 files, 387.3 MB, all fetched and verified
+  (no images; the repository has none in `trajs/`). Adapter:
+  `reachy_retarget/sources/roboverse.py` (+ `roboverse_pickle.py`, `roboverse_rlbench.py`).
+
+### Layout (verified)
+
+`trajs/<benchmark>/...` holds MetaSim **v2** trajectories, `{robot: [episode]}`, episode =
+`init_state`, `actions` (`dof_pos_target` per joint) and `states`: per step and per entity
+`pos`, `rot` (wxyz) and, for articulated entities, `dof_pos` (joint name → value). No
+velocities, no end-effector pose, no images, no success flag. Files are pickles: plain
+gzipped pickles (RLBench) or pickles with torch tensors (CALVIN converters).
+`roboverse_pickle.load` refuses every global outside an allow-list and decodes the legacy
+`torch.save` storages with numpy, so torch is not needed and arbitrary pickles cannot run code.
+
+| `trajs/` folder | size | content | status here |
+| --- | ---: | --- | --- |
+| `rlbench` | 37 MB | 80 tasks × `v2/franka_v2.pkl.gz` (10 demos each, `close_box` 100) = **890 demos, 191,649 states**; `close_box` also has `sawyer_v2`/`ur5e_2f85_v2` | catalogued (franka only), adapted |
+| `calvin/calvin_traj_ann/env_{A,B,C,D,D_val}_out` | 1.19 GB | 389 `task_<N>_v2.pkl` per env (299 for D_val), `N` = sentence index in `ann_dict.npy`; one CALVIN language window (≤ 64 states) per episode | A and D_val catalogued, adapted |
+| `calvin/env_*_out/episode_chunk_*` | ~1.9 GB | the unannotated play stream in ≥ 300-step segments | not catalogued (superset of the windows) |
+| `calvin/<task>_a/v2` | ~180 MB | 29 tasks, env A, binary finger states, no frame index, + `franka_with_gripper_extension`/`ur5e_2f85` retargeted variants | not catalogued (overlapping lower-fidelity version) |
+| `libero`, `libero90` | 765 MB | LIBERO-Object (10 tasks), LIBERO-90 subset | not catalogued: overlaps `libero` |
+| `maniskill` | 84 MB | ManiSkill tasks, initial states + actions only | not catalogued: overlaps `maniskill` |
+| `gapartmanip` | 0.2 MB | 2 × 10 demos (GAPartNet box, toilet; Franka with gripper extension) | not catalogued (tiny) |
+| `simpler_env`, `metaworld`, `humanoidbench`, `bidex`, `debug` | 6 MB | Google-robot traces of one task, one Sawyer file, H1 locomotion, initial states only | not catalogued |
+
+`robots/` holds 38 robot descriptions (URDF/MJCF/USD), `assets/<benchmark>/` the converted
+object assets (RLBench: 155 USD files, one URDF/MJCF; CALVIN: URDF + OBJ/STL), `scenes/`
+large USD scenes (not used). The ~28 GB repository size is dominated by assets and scenes;
+`trajs/` is about 4 GB.
+
+New relative to the other families: **RLBench** and **CALVIN** (no other family contains
+either). RoboVerse's LIBERO and ManiSkill folders are migrations of sources read natively
+(`libero`, `maniskill`) and are not counted.
+
+### RLBench migration
+
+* Source: RLBench's own motion planner in CoppeliaSim/PyRep, re-collected by RoboVerse with
+  `github.com/Fisher-Wang/RLBench@070249f4` (`tools/collect_demo.py`). Robot joint positions
+  and object poses were recorded in CoppeliaSim each step, where RLBench grasps by
+  **parenting** the object to the gripper. The v2 states are that recording rewritten
+  (`actions` equal the recorded joint positions), **not re-simulated**: kinematic data.
+* Frame: RoboVerse subtracted 0.75 m (table height) from every z and placed its IsaacSim
+  Franka at the RLBench arm pose minus `(-0.0413, 0.0053, 0.8197)` with a hand-tuned
+  quaternion correction. The adapter adds 0.75 m back (floor z = 0, table top z = 0.75;
+  resting cubes then sit at exactly 0.775). The table is not in the data: a static support
+  box from the floor to 0.75 m is synthesized and cropped to the objects' footprint + 0.10 m.
+* **Calibration (derived).** With the recorded root quaternion and joints, objects held by
+  parenting (exactly rigid in the source) drift by 31 mm in the grasp frame (median over
+  712 holds; p90 69 mm) and cubes sit up to 3 cm off the closing axis. A 7-parameter fit
+  (root pose + one joint offset) on 40 holds of 3 tasks gives `panda_joint4` + 0.0689 rad
+  and a root rotation that cancels the recorded one (0.3° tilt, 0.7° yaw), 0.19 mm rms;
+  on 40 held-out holds of 5 other tasks the spread falls from 14.2 to 1.2 mm (median). The
+  adapter applies the round form `q4 + 0.0698` (the Panda joint-4 limit, i.e. CoppeliaSim's
+  joint-4 zero differs from franka_ros) and an identity root rotation
+  (`rlbench_calibration=False` disables it; both checks are in `provenance.state_checks`).
+* Grasp center: FK of RoboVerse `robots/franka/urdf/franka_panda.urdf` (franka_ros); center
+  = midpoint of the two `fingertip_pad_collision_1` boxes of RoboVerse's
+  `robots/franka/mjcf/panda.xml` (menagerie), 0.1029 m from `panda_hand`;
+  `R = R_hand · diag(-1, -1, 1)`; width = `q_finger1 + q_finger2`.
+* Objects: `roboverse_rlbench.RLBENCH_OBJECTS`, generated from the 79 RoboVerse task configs
+  (`hang_frame_on_hanger` has none: geometry unknown). Primitives (boxes, spheres,
+  cylinders) carry geometry; converted RLBench meshes carry `{"kind": "mesh", "asset":
+  "roboverse_data/assets/rlbench/.../*.usd"}`. Role: `manipulated` if it moves > 1 cm,
+  else `fixture`; static visual-only (`XFORM`) entities are goal markers (provenance).
+  Articulated entities give `articulations[name]` (joint names `name/joint`).
+* Scene: a `primitive_scene` SceneRef only when every object is a primitive
+  (`pick_and_lift`, `reach_target`: 20 of 890 episodes); MetaSim primitive default mass
+  0.1 kg, PhysX default material 0.5/0.5/0 (the CoppeliaSim parameters are unknown).
+  Physics validation of RLBench is of limited meaning anyway: the source grasp is parenting.
+* Time: 0.05 s per state (RLBench scene dt; assumed, not in the file). Success: True (RLBench
+  only keeps demos that met the task condition). Instruction: none (RLBench variation
+  descriptions are not in the v2 files). `base_hint` = Panda base (x, y, yaw).
+
+### CALVIN migration
+
+* Source: CALVIN human VR-teleoperated play data (PyBullet, friction grasps), 30 Hz
+  (`calvin_env conf/env/play_table_env.yaml control_freq 30`). RoboVerse converted
+  `robot_obs`/`scene_obs` into v2 states (`convert_data_batch.py`), **not re-simulated**;
+  finger joints are half the measured opening width; `init_state` is a PyBullet reset state,
+  not a recorded frame (unused).
+* Windows: `task_<N>` groups all windows of sentence `N`; `env_meta.source_dir =
+  env_X/episode_<k>_<ann idx>_<start>_<end>` gives the CALVIN frame range (lineage).
+* **Block colour fix (derived).** RoboVerse maps `scene_obs` blocks in the fixed order red,
+  blue, pink; CALVIN orders them as in each scene config (A: pink, blue, red; B, D: red,
+  blue, pink; C: blue, red, pink). Without the remap the instruction colour matches the
+  most-moved block in scene A for blue only; with it, language and motion agree in 3,710 of
+  3,730 coloured-block windows of env A and 672 of 673 of D_val.
+* Geometry: blocks are boxes from CALVIN's per-scene block URDFs (A: pink small, blue big,
+  red middle; D: red middle, blue small, pink big) × `global_scaling` 0.8 (small 4 cm cube,
+  middle 5.6 × 4 × 4 cm, big 8 × 4 × 4 cm). The desk is an articulated mesh
+  (`base__slide`, `base__drawer`, `base__button`, `base__switch` → `articulations["table"]`),
+  recorded as the AABB of its scaled base mesh (0.88 × 0.36 × 0.65 m) plus the URDF reference;
+  no MuJoCo scene. Light states are dropped by RoboVerse.
+* Grasp center: CALVIN's own robot `robots/franka_calvin/panda_longer_finger.urdf`, link
+  `tcp` (`tcp_link_id: 15`, 0.14 m from `panda_hand`; the DIGIT fingers have no pad
+  primitive). Base fixed at (-0.34, -0.46, 0.24) (CALVIN world, floor plane at z = 0).
+* Success: True (derived: CALVIN labels a window where its task oracle detected the task).
+  Instruction: the sentence. Task: `calvin/<sentence>`.
+* **Overlap.** Windows of one stream overlap heavily: env A has 6,027 windows (357,840
+  states) whose frame ranges form 3,061 disjoint overlap groups covering 224,498 frames;
+  D_val has 1,087 windows in only 65 groups (6,276 frames). Count independent demonstrations
+  by overlap group (or frame union), never by window; `lineage.frames` / `lineage.stream`
+  carry what is needed.
+
+### RoboVerse verification (2026-10-07)
+
+All catalogued trajectories were read (no adapter errors; every episode passes the
+`SourceEpisode` checks):
+
+| subset | files | episodes | states | held-object rigidity (grasp frame, spread max−min) | closing-axis offset of held objects | FK cross-check |
+| --- | ---: | ---: | ---: | --- | --- | --- |
+| RLBench (calibrated) | 80 | 890 | 191,649 | 702 holds: median 2.0 mm, p90 8.8 mm (uncalibrated 30.8 / 69.1 mm); 123 cube holds: 1.25 / 2.6 mm | cubes: median 2.6 mm, p90 3.1 mm | ≤ 1.7e-10 m vs MuJoCo on RoboVerse's MJCF pad geoms |
+| CALVIN env A | 389 | 6,027 | 357,840 | 2,978 holds: median 0.36 mm, p90 2.0 mm | p90 1.7 mm | ≤ 6.5e-16 m vs MuJoCo URDF import |
+| CALVIN env D_val | 299 | 1,087 | 63,706 | 531 holds: median 0.48 mm, p90 2.4 mm | p90 1.0 mm | ≤ 5.6e-16 m |
+
+No recorded end-effector pose exists in RoboVerse v2 files (RLBench's `gripper_pose` and
+CALVIN's `tcp_pos` were dropped by the converters), so the grasp centers are verified by
+(1) an independent FK and (2) the held objects: a held object must stay at a constant pose
+in the grasp frame and centred between the fingers. Held cubes sit 7.6 mm (RLBench) and
+3–9 mm (CALVIN, median) beyond the grasp center along the approach axis. Joint-limit
+excursions: ≤ 0.005 rad (RLBench), ≤ 0.013 rad (CALVIN, against CALVIN's URDF limits).
+
+### Known gaps (RoboVerse)
+
+* RLBench: only RoboVerse's 10-demo "preview" per task; time step assumed; RLBench
+  variation descriptions (language) absent; 30 episodes of `hang_frame_on_hanger` without
+  object geometry; most objects are USD meshes (no tier-P scene); source grasps are
+  kinematic parenting.
+* CALVIN: env B, C, D training windows (~17k more by size) and the play stream are not
+  catalogued; windows overlap (count by group); the desk is approximated by an AABB for the
+  footprint; RoboVerse's binary per-task files and retargeted UR5e/extension variants are
+  excluded.
+* The RLBench calibration is a derived correction (documented above), not a publisher value.
