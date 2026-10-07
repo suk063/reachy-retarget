@@ -21,7 +21,7 @@ import pytest
 
 from reachy_retarget.acquire import load_catalog
 from reachy_retarget.sources import families, iter_episodes
-from reachy_retarget.sources.maniskill import (TASKS, PandaGripper, fk_crosscheck_mujoco,
+from reachy_retarget.sources.maniskill import (TASKS, WORLD_Z_OFFSET, PandaGripper, fk_crosscheck_mujoco,
                                                peg_insertion_geometry, pose_to_matrix)
 
 FIX = Path(__file__).parent / "fixtures" / "maniskill"
@@ -68,7 +68,8 @@ def test_pickcube_episode():
     assert [e.episode_id for e in eps] == ["traj_0", "traj_1"]
     ep = eps[0]
     arts = states("pickcube_mp", "traj_0", "articulations")["panda"]
-    assert ep.task == "PickCube-v1" and ep.length == len(arts) == 75 and ep.scene is None
+    assert ep.task == "PickCube-v1" and ep.length == len(arts) == 75
+    assert ep.scene is not None and ep.objects["cube"].geometry["body"] == "cube"
     np.testing.assert_allclose(ep.time[1], 0.05)
     assert ep.success is True and ep.instruction is None
     assert ep.lineage == {"generated": False, "source_type": "motionplanning", "human": False,
@@ -85,7 +86,11 @@ def test_pickcube_episode():
     checks = ep.provenance["state_checks"]["panda"]
     assert checks["first_action_minus_qpos_max_rad"] == 0.0  # pd_joint_pos confirms joint order
     # While the cube is held, its center sits at the grasp center, on the closing axis.
-    held = (cube.pose[:, 2] > 0.03) & (eff.opening < 0.7)
+    # ManiSkill z is translated so the floor is at z = 0 (table top at the table height).
+    assert ep.provenance["world_z_offset_m"] == WORLD_Z_OFFSET == pytest.approx(0.9196429)
+    np.testing.assert_allclose(cube.pose[0, 2] - WORLD_Z_OFFSET, states("pickcube_mp", "traj_0", "actors")["cube"][0, 2], atol=1e-6)
+    np.testing.assert_allclose(ep.objects["table-workspace"].pose[:, 2], 0.0, atol=1e-6)
+    held = (cube.pose[:, 2] > WORLD_Z_OFFSET + 0.03) & (eff.opening < 0.7)
     assert held.sum() > 10
     rel = np.einsum("tji,tj->ti", eff.pose[held, :3, :3], cube.pose[held, :3] - eff.pose[held, :3, 3])
     assert np.abs(rel).max() < 0.006 and np.abs(rel[:, 1]).max() < 0.001
@@ -96,7 +101,9 @@ def test_effector_axes():
     ep = episodes("pickcube_mp", limit=1)[0]
     s = states("pickcube_mp", "traj_0", "articulations")["panda"]
     g = PandaGripper(URDFS["panda"])
-    out = g.forward(s[:, 13:22], pose_to_matrix(s[:, :7]))
+    root = pose_to_matrix(s[:, :7])
+    root[:, 2, 3] += WORLD_Z_OFFSET
+    out = g.forward(s[:, 13:22], root)
     G = next(iter(ep.effectors.values())).pose
     for t in range(0, len(G), 7):
         local = lambda T: G[t, :3, :3].T @ (T[:3, 3] - G[t, :3, 3])
@@ -122,7 +129,7 @@ def test_peg_insertion_geometry_and_duplicates():
     for e in eps.values():
         peg = e.objects["peg"]
         assert peg.role == "manipulated" and "regenerated" in e.provenance["geometry_status"]["peg"]
-        np.testing.assert_allclose(peg.pose[0, 2], peg.geometry["half_extents"][1], atol=1e-6)
+        np.testing.assert_allclose(peg.pose[0, 2] - WORLD_Z_OFFSET, peg.geometry["half_extents"][1], atol=1e-6)
         assert e.objects["box_with_hole"].role == "receptacle"
         assert np.ptp(e.objects["box_with_hole"].pose, axis=0).max() < 1e-6  # kinematic
     peg, box = peg_insertion_geometry(0)

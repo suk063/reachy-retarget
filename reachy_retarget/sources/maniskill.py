@@ -24,8 +24,15 @@ hand frame. For the Panda this is ``R_contract = R_hand @ diag(-1, -1, 1)`` and 
 center 0.25 mm beyond ``panda_hand_tcp``. Width = pad separation along +y minus the
 closed separation (= ``q_finger1 + q_finger2``, 0-0.08 m); opening = width / 0.08.
 
-There is no ``SceneRef``: tier P for ManiSkill needs a SAPIEN -> MuJoCo scene conversion
-(table, kinematic fixtures, object shapes, friction), which is not built.
+World frame: ManiSkill's origin is on the table top (ground at z = -0.9196429). Following the
+SourceEpisode contract (floor at z = 0), robot roots, actor tracks, goal markers and the scene
+are translated by ``WORLD_Z_OFFSET`` = +0.9196429 m in z (recorded in the provenance).
+
+Scene: SAPIEN scenes of the catalogued tasks are primitives only, so a MuJoCo ``SceneRef`` is
+built with ``primitive_scene`` (floor, table and kinematic fixtures as static bodies, dynamic
+actors as free bodies with their densities, ManiSkill default PhysX material) when every
+actor's geometry is known; otherwise ``scene`` is ``None`` and ``provenance["scene"]`` says
+why. Physical constants and their sources: ``PHYSICAL`` and ``PHYSICAL_SOURCES``.
 """
 from __future__ import annotations
 
@@ -43,6 +50,7 @@ from scipy.spatial.transform import Rotation
 from ..acquire import load_catalog, sha256_file
 from ..robot.urdf import URDF, KinematicTree
 from ..schema.source import Effector, ObjectTrack, SourceEpisode
+from . import primitive_scene
 from .registry import register
 
 MANISKILL_COMMIT = "baab60ede2e89167c1b7aaed41a9aa8e690a9d1e"
@@ -85,7 +93,8 @@ CUBE = _box(0.02, 0.02, 0.02)
 PEG_FIXED = _box(0.12, 0.025, 0.025)
 TABLE = {"kind": "box", "frame": "body", "center": [0.0, 0.0, 0.9196429 / 2],
          "half_extents": [2.418 / 2, 1.209 / 2, 0.9196429 / 2],
-         "note": "TableSceneBuilder collision box; the table top is the world plane z = 0"}
+         "note": "TableSceneBuilder collision box; the table top is the ManiSkill plane z = 0, i.e. "
+                 "z = 0.9196429 after the WORLD_Z_OFFSET translation"}
 
 
 def _charger():
@@ -109,6 +118,91 @@ def _l_tool():
     return _parts(((handle / 2, 0, 0), (handle / 2, width / 2, height / 2)),
                   ((handle - hook / 2, width, 0), (hook / 2, width, height / 2)),
                   note="L-shaped tool: handle along +x, hook toward +y")
+
+
+# ---------------------------------------------------------------- physical parameters
+# Recorded commits of the catalogued JSONs: baab60ed, 652ad935, ecc579b7 (PickCube teleop, older
+# repository layout), e77e4ff3, 9d5e0e01, 95ea99d4, ee5f8826. DefaultMaterialsConfig, SceneConfig
+# and the per-task actor builders were compared at every commit except ecc579b7 (path not
+# present): identical values.
+SAPIEN_TAG = "3.0.0b1"  # setup.py pins sapien==3.0.0.b1 at baab60ed
+SAPIEN = f"https://github.com/haosulab/SAPIEN/blob/{SAPIEN_TAG}/"
+PHYSICAL_SOURCES = {
+    "default_material": SOURCE + "utils/structs/types.py#L63-L67 (DefaultMaterialsConfig: static 0.3, "
+                                 "dynamic 0.3, restitution 0; applied by envs/sapien_env.py "
+                                 "physx.set_default_material)",
+    "density": SAPIEN + "python/py_package/wrapper/actor_builder.py (add_*_collision density=1000, "
+                        "material=None -> physx.get_default_material())",
+    "scene_config": SOURCE + "utils/structs/types.py#L36-L48 (gravity -9.81, contact_offset 0.02, "
+                             "rest_offset 0, solver 15 position / 1 velocity iterations, TGS, PCM)",
+    "sim_freq": SOURCE + "utils/structs/types.py#L80 (sim_freq 100 Hz)",
+    "table": SOURCE + "utils/scene_builder/table/scene_builder.py#L19-L53 (kinematic box, ground plane at "
+                      "altitude -table_height = -0.9196429)",
+    "ground": SOURCE + "utils/building/ground.py#L18-L44 (static plane, default material)",
+    "cube": SOURCE + "utils/building/actors/common.py (build_cube: dynamic, default density and material)",
+    "sphere": SOURCE + "utils/building/actors/common.py (build_sphere: dynamic, default density and material)",
+    "twocolor_peg": SOURCE + "utils/building/actors/common.py (build_twocolor_peg: one box collision)",
+    "l_shape_tool": SOURCE + "envs/tasks/tabletop/pull_cube_tool.py (_build_l_shaped_tool: handle "
+                             "density 500, hook default 1000)",
+    "charger": SOURCE + "envs/tasks/tabletop/plug_charger.py (charger dynamic, receptacle build_kinematic)",
+    "peg_insertion": SOURCE + "envs/tasks/tabletop/peg_insertion_side.py (peg dynamic, box_with_hole "
+                              "build_kinematic)",
+    "actor_damping": "PhysX SDK PxRigidDynamic defaults (linear 0, angular 0.05); not set by SAPIEN 3.0.0b1",
+}
+TABLE_HEIGHT = 0.9196429
+# ManiSkill's origin is on the table top and its ground plane is at z = -TABLE_HEIGHT. The
+# SourceEpisode contract puts the floor at z = 0, so every pose (robot roots -> effectors,
+# actors, goal markers) and the scene are translated by +WORLD_Z_OFFSET in z.
+WORLD_Z_OFFSET = TABLE_HEIGHT
+# The 2.418 x 1.209 m table leaves the objects about 0.5 m from any edge Reachy's base can
+# reach. Per episode it is cropped in its own x/y (never in height or top surface) to the
+# region covering every object's footprint over the whole episode plus this margin
+# (primitive_scene.crop_supports), both for the tier-K footprint and the tier-P scene;
+# provenance["scene_adaptations"] records the original and cropped extents.
+TABLE_CROP_MARGIN = 0.10
+DEFAULT_MATERIAL = {"static_friction": 0.3, "dynamic_friction": 0.3, "restitution": 0.0, "density": 1000.0}
+
+
+def _dyn(src, density=None):
+    return {"body_type": "dynamic", **({"density": density} if density is not None else {}), "source": src}
+
+
+_STATIC_KINEMATIC = {"body_type": "static", "source": "kinematic actor (never moves in the demos)"}
+# Per env: actor -> body type and density (default material everywhere).
+PHYSICAL = {
+    "PickCube-v1": {"cube": _dyn("cube")},
+    "StackCube-v1": {"cubeA": _dyn("cube"), "cubeB": _dyn("cube")},
+    "PegInsertionSide-v1": {"peg": _dyn("peg_insertion"), "box_with_hole": {**_STATIC_KINEMATIC, "source": "peg_insertion"}},
+    "PlugCharger-v1": {"charger": _dyn("charger"), "receptacle": {**_STATIC_KINEMATIC, "source": "charger"}},
+    "PullCube-v1": {"cube": _dyn("cube")},
+    "PushCube-v1": {"cube": _dyn("cube")},
+    "PullCubeTool-v1": {"l_shape_tool": _dyn("l_shape_tool", [500.0, 1000.0]), "cube": _dyn("cube")},
+    "LiftPegUpright-v1": {"peg": _dyn("twocolor_peg")},
+    "PokeCube-v1": {"peg": _dyn("twocolor_peg"), "cube": _dyn("cube")},
+    "RollBall-v1": {"ball": _dyn("sphere")},
+    "StackPyramid-v1": {"cubeA": _dyn("cube"), "cubeB": _dyn("cube"), "cubeC": _dyn("cube")},
+    "TwoRobotPickCube-v1": {"cube": _dyn("cube")},
+    "TwoRobotStackCube-v1": {"cubeA": _dyn("cube"), "cubeB": _dyn("cube")},
+}
+STATIC_PHYSICAL = {"table-workspace": {**_STATIC_KINEMATIC, "source": "table"}}
+
+
+def scene_for(env_id: str, objects: dict) -> tuple:
+    """(SceneRef | None, note) for an episode's objects (ids as produced by the adapter)."""
+    table = {**PHYSICAL.get(env_id, {}), **STATIC_PHYSICAL}
+    missing = sorted(set(objects) - set(table))
+    if env_id not in PHYSICAL or missing:
+        return None, f"none: no physical parameters for {missing or env_id}"
+    try:
+        ref = primitive_scene.build(objects, floor=True, physical={
+            "source": {"maniskill_commit": MANISKILL_COMMIT, "sapien": SAPIEN_TAG, **PHYSICAL_SOURCES},
+            "defaults": DEFAULT_MATERIAL,
+            "floor": {"z": -TABLE_HEIGHT + WORLD_Z_OFFSET, "source": "ground"},
+            "option": {"timestep": 1.0 / DEFAULT_SIM_FREQ, "gravity": [0.0, 0.0, -9.81]},
+            "objects": {k: v for k, v in table.items() if k in objects}})
+    except primitive_scene.UnrepresentableObject as e:
+        return None, f"none: {e}"
+    return ref, "primitive_scene: SAPIEN scene rebuilt from primitives (see provenance['scene_physical'])"
 
 
 # Per env: actor -> (role, geometry). Geometry constants are those of the task source at
@@ -435,6 +529,7 @@ def _episode(g, key, ep, family, dataset, env_id, kwargs, meta, task, grippers, 
         if out_of_limits > 0.02:
             raise ValueError(f"{key}/{a}: qpos leaves the URDF limits by {out_of_limits:.3f}; joint order unverified")
         root = pose_to_matrix(s[:, :7])
+        root[:, 2, 3] += WORLD_Z_OFFSET
         poses = gr.forward(q, root)
         effectors[a] = Effector(pose=poses["grasp"], width=poses["width"],
                                 opening=np.clip(poses["width"] / gr.width_max, 0, 1))
@@ -461,6 +556,7 @@ def _episode(g, key, ep, family, dataset, env_id, kwargs, meta, task, grippers, 
             raise ValueError(f"{key}/{actor}: expected ({T}, 13) actor states, got {s.shape}")
         name = _base_name(actor, {**table, **STATIC_ACTORS, **(task or {}).get("markers", {})})
         pose = s[:, :7].copy()
+        pose[:, 2] += WORLD_Z_OFFSET
         pose[:, 3:] /= np.linalg.norm(pose[:, 3:], axis=1, keepdims=True)
         if name in (task or {}).get("markers", {}):
             markers[name] = {**task["markers"][name], "actor": actor, "pose_t0": pose[0].round(6).tolist(),
@@ -484,8 +580,12 @@ def _episode(g, key, ep, family, dataset, env_id, kwargs, meta, task, grippers, 
         else:
             geometry_status[name] = "task constant" if geom else "unknown"
         objects[name] = ObjectTrack(pose=pose, valid=np.ones(T, bool), role=role,
-                                    geometry={**geom, "actor": actor} if geom else {"actor": actor})
+                                    geometry={**geom, "actor": actor, "body": name} if geom else {"actor": actor})
 
+    adaptations = []
+    if "table-workspace" in objects:   # minimal recorded fixture adaptation (see TABLE_CROP_MARGIN)
+        objects, adaptations = primitive_scene.crop_supports(objects, TABLE_CROP_MARGIN, ids=["table-workspace"])
+    scene, scene_note = (None, f"none: unknown actors {unknown}") if unknown else scene_for(env_id, objects)
     first = arts[0] if arts else None
     succ = np.asarray(g["success"][()], bool) if "success" in g else None
     provenance = {
@@ -505,6 +605,10 @@ def _episode(g, key, ep, family, dataset, env_id, kwargs, meta, task, grippers, 
                          "articulation": "root p(3) q_wxyz(4) v(3) w(3), qpos(9), qvel(9)"},
         "robots": {a: _robot_uid(a) for a in grippers},
         "robot_bases_xy_yaw": bases, "robot_base_z": roots_z,
+        "world_z_offset_m": WORLD_Z_OFFSET,
+        "world_frame": ("ManiSkill world translated by +0.9196429 m in z (TableSceneBuilder table height): "
+                        "floor at z = 0, table top at z = 0.9196429; applied to robot roots (effectors), "
+                        "actors, goal markers and the scene"),
         "effectors": {a: gr.describe() for a, gr in grippers.items()},
         "effector_env_roles": ({arts[0]: "left_agent", arts[1]: "right_agent"} if len(arts) == 2 else None),
         "state_checks": checks,
@@ -513,7 +617,9 @@ def _episode(g, key, ep, family, dataset, env_id, kwargs, meta, task, grippers, 
         "success_source": "JSON episodes[].success",
         "success_at_end": None if succ is None else bool(succ[-1]),
         "success_any": None if succ is None else bool(succ.any()),
-        "scene": "none: physics tier P needs a SAPIEN -> MuJoCo scene conversion",
+        "scene": scene_note,
+        "scene_adaptations": adaptations,
+        "scene_physical": None if scene is None else primitive_scene.scene_provenance(scene),
         "evidence": EVIDENCE,
     }
     lineage = {"generated": False, "source_type": source_type, "human": source_type == "teleoperation",
@@ -521,7 +627,7 @@ def _episode(g, key, ep, family, dataset, env_id, kwargs, meta, task, grippers, 
     return SourceEpisode(
         family=family, dataset=dataset, episode_id=key, task=env_id, time=time, effectors=effectors,
         objects=objects, base_hint=None if first is None else np.array(bases[first]),
-        scene=None, instruction=None, success=bool(ep["success"]) if "success" in ep else None,
+        scene=scene, instruction=None, success=bool(ep["success"]) if "success" in ep else None,
         regime="tabletop", license=entry.license if entry else "unknown",
         provenance=provenance, lineage=lineage)
 
@@ -530,5 +636,5 @@ def _find(g, base: str) -> str:
     return next(a for a in g["env_states/actors"] if a == base or re.fullmatch(rf"{base}_\d+", a))
 
 
-__all__ = ["read_maniskill", "PandaGripper", "fk_crosscheck_mujoco", "peg_insertion_geometry", "TASKS",
+__all__ = ["read_maniskill", "scene_for", "PHYSICAL", "PHYSICAL_SOURCES", "PandaGripper", "fk_crosscheck_mujoco", "peg_insertion_geometry", "TASKS",
            "pose_to_matrix"]
