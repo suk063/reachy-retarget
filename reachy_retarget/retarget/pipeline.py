@@ -1,0 +1,157 @@
+"""SourceEpisode -> ReachyEpisode (docs/design.md, "Retargeting method").
+
+Steps: grasp labels and arm assignment with base placement, TCP targets, whole-body IK
+on the source clock (+ light smoothing), finger commands, gaze, time scaling and 50 Hz
+resampling (+ residual refinement on the output clock), episode assembly and tier K.
+Episodes that fail tier K are still returned (failed retargets are saved too); the status
+is ``failed`` only when no trajectory could be produced.
+"""
+from __future__ import annotations
+
+import math
+import time as _time
+from dataclasses import dataclass, field
+
+import numpy as np
+
+from ..robot import Reachy
+from ..robot.reachy import GRIPPERS, NECK
+from ..schema.episode import DT, SIDES, ReachyEpisode, Reference
+from ..schema.source import Articulation, SourceEpisode
+from ..validate import kinematic
+from . import timing
+from .assign import assign, posture, tuck_posture
+from .config import RetargetConfig
+from .gaze import gaze_error, gaze_points, solve_neck
+from .placement import diagnostics as placement_diagnostics
+from .targets import finger_angles, grasp_labels, gripper_state, manipulated_ids, source_closed, tcp_targets
+from .wbik import ARM_COLUMNS, refine, smooth, solve_trajectory
+
+
+@dataclass
+class RetargetResult:
+    episode: ReachyEpisode | None
+    status: str                   # "ok" (a trajectory exists; see episode.tier) or "failed"
+    reasons: list[str] = field(default_factory=list)
+    diagnostics: dict = field(default_factory=dict)
+
+
+def _jsonable(x):
+    """Recursively convert numpy values to JSON types; non-finite floats become None."""
+    if isinstance(x, dict):
+        return {str(k): _jsonable(v) for k, v in x.items()}
+    if isinstance(x, (list, tuple, np.ndarray)):
+        return [_jsonable(v) for v in x]
+    if isinstance(x, (bool, np.bool_)):
+        return bool(x)
+    if isinstance(x, (int, np.integer)):
+        return int(x)
+    if isinstance(x, (float, np.floating)):
+        return float(x) if math.isfinite(x) else None
+    return x
+
+
+def _notes(src: SourceEpisode, sides):
+    notes = []
+    if src.torso_height is not None:
+        notes.append("source torso_height ignored: Reachy's tripod stays at 0")
+    if len(sides) == 1:
+        hint = next(iter(src.effectors.values())).side_hint
+        if hint is not None and hint != next(iter(sides.values())):
+            notes.append(f"single-arm source side_hint {hint!r} overridden by the reachability score")
+    return notes
+
+
+def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetResult:
+    """Retarget one source episode onto Reachy 2 (default configuration if ``cfg`` is None)
+    and run tier K."""
+    cfg = cfg or RetargetConfig()
+    t_start = _time.perf_counter()
+    robot = Reachy.load()
+    labels_src = {k: grasp_labels(e.pose[:, :3, 3], source_closed(e, cfg), src.objects, cfg)
+                  for k, e in src.effectors.items()}
+    try:
+        tuck = tuck_posture(cfg)
+        assignment = assign(src, cfg, labels_src)
+    except (ValueError, RuntimeError) as err:
+        return RetargetResult(None, "failed", [str(err)], {"stage": "assignment"})
+    sides, place = assignment.sides, assignment.placement
+    t_place = _time.perf_counter()
+
+    # Whole-body IK on the source clock.
+    nominal = posture("ready")
+    targets = tcp_targets(src, sides, place.flips)
+    labels = {side: labels_src[key] for key, side in sides.items()}
+    q0 = tuck.copy()
+    for side in targets:
+        q0[ARM_COLUMNS[side]] = place.seed[ARM_COLUMNS[side]]
+    base_ref = place.base.copy()
+    base_ref[:, 2] = np.unwrap(base_ref[:, 2])
+    q_src, iters = solve_trajectory(cfg, targets, base_ref, place.mobile, q0, nominal)
+    q_src, smoothed = smooth(cfg, q_src, targets, place.mobile)
+    t_ik = _time.perf_counter()
+    if not np.isfinite(q_src).all():
+        return RetargetResult(None, "failed", ["IK produced non-finite joint values"], {"stage": "ik"})
+
+    # Fingers and gaze.
+    for key, side in sides.items():
+        q_src[:, GRIPPERS.start + SIDES.index(side)] = finger_angles(src.effectors[key], labels[side] >= 0, cfg)
+    ids = manipulated_ids(src.objects)
+    fk = robot.fk(q_src)
+    hands = {side: fk[f"{side}_grasp"][:, :3, 3] for side in targets}
+    points, rule = gaze_points(hands, labels, ids, src.objects, q_src[:, :3], cfg, src.time)
+    q_src[:, NECK], head_ref_src = solve_neck(q_src, points, src.time, cfg)
+    gaze_err = gaze_error(q_src, points)
+
+    # Time scaling, resampling and refinement on the output clock.
+    clock = timing.clock(src.time, q_src, cfg)
+    q = timing.linear(clock, q_src)
+    targets_out = {s: timing.poses(clock, X) for s, X in targets.items()}
+    base_out = timing.linear(clock, base_ref)
+    q, refined = refine(cfg, q, targets_out, base_out, place.mobile, nominal, DT)
+    qd = timing.velocity(q)
+    t_time = _time.perf_counter()
+
+    grasp_out = np.full((len(q), 2), -1, dtype=np.int16)
+    for side, lab in labels.items():
+        grasp_out[:, SIDES.index(side)] = timing.labels(clock, lab)
+    base_moves = bool(np.any(np.ptp(q[:, :3], axis=0) > 1e-3))
+    neck_moves = bool(np.any(np.ptp(q[:, NECK], axis=0) > 1e-3))
+    body_parts = (tuple(f"{s}_arm" for s in targets) + (("head",) if neck_moves else ())
+                  + (("base",) if base_moves else ()))
+    fkb = robot.fk_base(q)
+    opening, width = gripper_state(q[:, GRIPPERS])
+    n_src = src.length
+    diag = {
+        "assignment": {"sides": sides, "rule": assignment.rule, "scores": assignment.scores},
+        "placement": placement_diagnostics(place),
+        "timing": clock.diagnostics(src.time),
+        "ik": {"source_frames": n_src, "output_frames": len(q), "mean_iterations": float(iters.mean()),
+               "max_iterations": int(iters.max()), "ms_per_source_frame": (t_ik - t_place) / n_src * 1e3,
+               "smoothing_kept_fraction": smoothed, "refined_output_frames": refined},
+        "gaze": {"rule_counts": {name: int(np.sum(rule == i)) for i, name in
+                                 enumerate(("held", "approached", "hands", "ahead"))},
+                 "max_error": float(gaze_err.max()), "median_error": float(np.median(gaze_err))},
+        "seconds": {"placement": t_place - t_start, "ik": t_ik - t_place, "timing_refine": t_time - t_ik},
+    }
+    episode = ReachyEpisode(
+        family=src.family, dataset=src.dataset, episode_id=src.episode_id, task=src.task,
+        time=clock.time, q=q, qd=qd,
+        tcp_base={s: fkb[f"{s}_tcp"] for s in SIDES}, head_base=fkb["head"],
+        gripper_opening=opening, gripper_width=width, source_time=clock.source_time,
+        tier={"K": {"passed": False, "reasons": ["not validated"]}, "P": None},
+        retarget_config=cfg.digest(), instruction=src.instruction, regime=src.regime, license=src.license,
+        provenance=dict(src.provenance), lineage=dict(src.lineage), body_parts=body_parts,
+        reference=Reference(tcp=targets_out, head=timing.poses(clock, head_ref_src), base=base_out),
+        objects={k: timing.object_track(clock, o) for k, o in src.objects.items()},
+        articulations={k: Articulation(list(a.joint_names), timing.linear(clock, a.qpos))
+                       for k, a in src.articulations.items()},
+        validation={"grasp_object": grasp_out},
+        extra={"retarget": _jsonable(diag), "retarget_config": cfg.to_dict(), "grasp_object_ids": ids,
+               "grasp_flips": _jsonable(place.flips), "notes": _notes(src, sides)})
+    k = kinematic.check(episode, cfg)
+    episode.validation.update(k["frames"])
+    episode.tier = {"K": {"passed": k["passed"], "reasons": k["reasons"]}, "P": None}
+    episode.extra["tier_k_metrics"] = _jsonable(k["metrics"])
+    diag["seconds"]["total"] = _time.perf_counter() - t_start
+    return RetargetResult(episode, "ok", list(k["reasons"]), _jsonable(diag))
