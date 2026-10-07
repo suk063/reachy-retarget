@@ -7,9 +7,14 @@ chosen by the same score on 8-12 keyframes:
 1. candidates: around ``base_hint`` (fixed base), on rings around the keyframe target
    centroid (fixed base), or on a body-frame offset grid (mobile);
 2. a cheap reach proxy (shoulder-to-grasp-center distance, targets in front) ranks them;
-3. the best few are scored by bounded IK on the keyframes (both gripper half-turn
-   symmetries per side, the better one kept): normalized TCP residual (mean and max),
-   joint-limit margin and manipulability; a base footprint overlapping scene geometry
+3. the best few are scored by bounded IK on the keyframes (grasp offset candidates per side,
+   see :mod:`.targets`, the first acceptable or best one kept, tilts penalized by
+   ``cfg.grasp_tilt_cost``; offsets whose fingers would sink into scene boxes along the path
+   (:func:`.targets.finger_penetration`) more than ``cfg.finger_depth_slack`` beyond the best
+   offset are discarded before any IK):
+   normalized TCP residual (mean and max),
+   joint-limit margin, manipulability and self-clearance below the IK margin (the scoring IK has
+   no repulsion term); a base footprint overlapping scene geometry
    (see :mod:`.footprint`) is a hard constraint (large penalty growing with the overlap);
 4. Nelder-Mead refines the best candidate.
 """
@@ -22,11 +27,13 @@ import numpy as np
 from scipy.optimize import minimize
 
 from ..robot import LOWER, UPPER, Reachy
+from ..robot.resources import profile
 from ..schema.rotations import se2_compose
 from . import footprint
 from .config import RetargetConfig
-from .targets import tcp_targets
-from .wbik import ARM_COLUMNS, FrameSolver, normalized_error, tcp_errors
+from .targets import (finger_angles, finger_penetration, grasp_symmetry, held_masks, offset_candidates,
+                      orientation_weight, tcp_targets)
+from .wbik import ARM_COLUMNS, Clearance, FrameSolver, tcp_errors
 
 INFEASIBLE = 100.0      # cost added when the base footprint overlaps scene geometry
 REACH = (0.25, 0.62)    # comfortable shoulder-to-grasp-center distance, m
@@ -67,16 +74,20 @@ class Placement:
     base: np.ndarray              # (T, 3) base reference path (constant rows for a fixed base)
     mobile: bool
     pose: np.ndarray              # (3,) fixed base pose, or the offset from the source base
-    flips: dict[str, bool]        # gripper half-turn per side
+    offsets: dict[str, tuple]     # grasp offset (flip, theta_deg, beta_deg) per side
     cost: float
     seed: np.ndarray              # (22,) IK solution at frame 0 (active arms, base)
     diagnostics: dict = field(default_factory=dict)
+
+    @property
+    def flips(self) -> dict[str, bool]:
+        return {s: bool(o[0]) for s, o in self.offsets.items()}
 
 
 @dataclass
 class Score:
     cost: float
-    flips: dict[str, bool]
+    offsets: dict[str, tuple]
     details: dict
     seed: np.ndarray              # (22,) nominal posture with the scored arms' first-keyframe solution
 
@@ -89,14 +100,31 @@ class PlacementProblem:
         self.nominal = np.asarray(nominal, float)
         self.mobile = src.base is not None
         self.kf = keyframes(src.length, list(labels.values()), cfg.placement_keyframes)
+        self.symmetry = {side: grasp_symmetry(src, key, labels.get(key, np.full(src.length, -1)), cfg)
+                         for key, side in sides.items()}
+        self.options, self.finger_depth, self.rot_weight = {}, {}, {}
+        for key, side in sides.items():
+            lab = labels.get(key, np.full(src.length, -1))
+            self.rot_weight[side] = orientation_weight(src.time, lab, cfg)[self.kf]
+            finger = finger_angles(src.effectors[key], lab >= 0, cfg)
+            opts = offset_candidates(self.symmetry[side], cfg)
+            depth = {o: float(finger_penetration(src, key, side, o, lab, finger, cfg).max()) for o in opts}
+            best = min(depth.values())
+            self.options[side] = [o for o in opts if depth[o] <= best + cfg.finger_depth_slack]
+            self.finger_depth[side] = {f"{int(o[0])}/{o[1]:g}/{o[2]:g}": round(v, 4) for o, v in depth.items()}
         self.targets = {}
-        for flip in (False, True):
-            full = tcp_targets(src, sides, dict.fromkeys(sides.values(), flip))
-            self.targets[flip] = {s: X[self.kf] for s, X in full.items()}
+        for key, side in sides.items():
+            for o in self.options[side]:
+                self.targets[side, o] = tcp_targets(src, {key: side}, {side: o})[side][self.kf]
         points = [src.effectors[k].pose[self.kf, :3, 3] for k in sides]
         self.points = np.concatenate(points) if points else np.zeros((0, 3))
-        self.obstacles = footprint.obstacles(src.objects, cfg, static_only=self.mobile)
+        self.obstacles = footprint.obstacles(src.objects, cfg, static_only=self.mobile,
+                                             held=held_masks(src.objects, labels.values()))
         self.solvers = {s: FrameSolver(cfg, (s,), False, self.nominal, collisions=False) for s in sides.values()}
+        self.clearance = {s: Clearance((s,)) for s in sides.values()}
+        rest = profile()["postures"]["rest"]
+        self.rest = np.zeros(22)
+        self.rest[ARM_COLUMNS["left"]], self.rest[ARM_COLUMNS["right"]] = np.radians(rest["left"]), np.radians(rest["right"])
         self.manip_ref = _reference_manipulability(tuple(self.nominal))
 
     def path(self, pose, rows=None):
@@ -127,42 +155,84 @@ class PlacementProblem:
         clear = self.footprint_clearance(pose)
         return cost + (INFEASIBLE - clear if clear < 0 else 0.0)
 
-    def _side_score(self, side, base, flip, seed):
-        """(cost, details, q at the first keyframe) of one arm along the keyframes.
+    def _side_score(self, side, base, offset, seed, rows=None, iters=None):
+        """(cost, details, q at the first keyframe) of one arm along the keyframes (or the
+        keyframe subset ``rows``).
 
         Without a ``seed`` the first keyframe is a multi-start cold solve; with one (the first
-        keyframe solution of a nearby placement) it is warm started like the later keyframes.
+        keyframe solution of a nearby placement or grasp offset) it is warm started like the
+        later keyframes.
         """
-        solver, X = self.solvers[side], self.targets[flip][side]
+        solver, X = self.solvers[side], self.targets[side, offset]
+        iters = iters or self.cfg.placement_iter
+        rows = np.arange(len(base)) if rows is None else np.asarray(rows)
+        X, base, w = X[rows], base[rows], self.rot_weight[side][rows]
         qs = np.empty((len(base), 22))
         for k in range(len(base)):
             frame = {side: X[k]}
             if k == 0 and seed is None:
-                q = solver.cold_solve(self.nominal, frame, base[k], self.cfg.placement_iter)[0]
+                q = solver.cold_solve(self.nominal, frame, base[k], iters, rot_scale={side: w[k]})[0]
             else:
                 q0 = seed if k == 0 else qs[k - 1]
-                q = solver.solve(q0, frame, q0, base[k], self.cfg.placement_iter * (2 if k == 0 else 1))[0]
+                q = solver.solve(q0, frame, q0, base[k], iters * (2 if k == 0 else 1), rot_scale={side: w[k]})[0]
             qs[k] = q
-        e = normalized_error(tcp_errors(qs, {side: X}), self.cfg)
+        pos, rot = tcp_errors(qs, {side: X})[side]
+        e = np.maximum(pos / self.cfg.tcp_pos_tol, w * rot / self.cfg.tcp_rot_tol)
         cols = ARM_COLUMNS[side]
         margin = np.minimum(qs[:, cols] - LOWER[cols], UPPER[cols] - qs[:, cols]).min(axis=1)
         manip = np.mean([solver.manipulability(qk) for qk in qs]) / self.manip_ref
+        qc = qs.copy()  # other arms hang in the rest posture during the trajectory
+        for other, cols in ARM_COLUMNS.items():
+            if other not in self.sides.values():
+                qc[:, cols] = self.rest[cols]
+        clear = self.clearance[side].minimum(qc)  # the scoring IK has no repulsion term
+        crowd = np.maximum(0.0, self.cfg.self_clearance_margin - clear) / self.cfg.self_clearance_margin
         cost = (np.mean(e) + np.max(e) + 0.5 * np.mean(np.maximum(0, LIMIT_SOFT - margin) / LIMIT_SOFT)
-                - 0.2 * min(manip, 1.0))
+                - 0.2 * min(manip, 1.0) + self.cfg.grasp_tilt_cost * abs(offset[2]) / 30.0
+                + np.mean(crowd) + np.max(crowd))
         return cost, {"max_normalized_residual": float(np.max(e)), "min_limit_margin": float(margin.min()),
-                      "manipulability": float(manip)}, qs[0]
+                      "manipulability": float(manip), "min_self_clearance": float(clear.min())}, qs[0]
 
-    def score(self, pose, flips=None, seed=None) -> Score:
-        """Score a placement parameter; ``flips=None`` tries both half turns per side and
-        ``seed`` (22,) warm starts the first keyframe (see :meth:`_side_score`)."""
+    def _best_offset(self, side, base, seed):
+        """Grasp offset of one side at one placement. The first keyframe is cold-solved once with
+        the source frame (unless ``seed`` is given) and every candidate is warm started from it.
+        Candidates are tried in order of preference (smallest tilt first, see
+        :func:`.targets.offset_candidates`) on ``cfg.placement_quick_keyframes`` keyframes; the
+        first whose quick and full scores keep every keyframe residual below
+        ``cfg.placement_accept`` of the tolerance is taken. Otherwise the
+        ``cfg.placement_offsets_full`` best quick scores are scored on all keyframes."""
+        options = self.options[side]
+        if seed is None:
+            seed = self._side_score(side, base, options[0], None, [0])[2]
+        if len(options) == 1:
+            return self._side_score(side, base, options[0], seed), options[0]
+        rows = np.unique(np.linspace(0, len(base) - 1, min(len(base), self.cfg.placement_quick_keyframes))
+                         .round().astype(int))
+        quick = []
+        for i, o in enumerate(options):
+            c, d, _ = self._side_score(side, base, o, seed, rows, self.cfg.placement_quick_iter)
+            quick.append((c, i))
+            if d["max_normalized_residual"] < self.cfg.placement_accept:
+                full = self._side_score(side, base, o, seed)
+                if full[1]["max_normalized_residual"] < self.cfg.placement_accept:
+                    return full, o
+        full = [(self._side_score(side, base, options[i], seed), options[i])
+                for _, i in sorted(quick)[: self.cfg.placement_offsets_full]]
+        return min(full, key=lambda r: r[0][0])
+
+    def score(self, pose, offsets=None, seed=None) -> Score:
+        """Score a placement parameter; ``offsets=None`` searches the grasp offset candidates
+        per side (:meth:`_best_offset`) and ``seed`` (22,) warm starts the first keyframe (see
+        :meth:`_side_score`)."""
         base = self.path(pose)
         out = Score(0.0, {}, {}, self.nominal.copy())
         for side in self.sides.values():
-            options = [flips[side]] if flips is not None else [False, True]
-            results = [(self._side_score(side, base, f, seed), f) for f in options]
-            (c, d, q), f = min(results, key=lambda r: r[0][0])
+            if offsets is not None:
+                (c, d, q), o = self._side_score(side, base, offsets[side], seed), offsets[side]
+            else:
+                (c, d, q), o = self._best_offset(side, base, seed)
             out.cost += c
-            out.flips[side], out.details[side] = f, d
+            out.offsets[side], out.details[side] = o, d
             out.seed[ARM_COLUMNS[side]] = q[ARM_COLUMNS[side]]
         out.seed[:3] = base[0]
         clear = self.footprint_clearance(pose)
@@ -208,25 +278,26 @@ class PlacementProblem:
             scored = [(Score(float(proxy[i]), {}, {}, self.nominal.copy()), i) for i in order]
         best, i = min(scored, key=lambda s: s[0].cost)
         diag = {"candidates": len(cand), "scored": len(order), "proxy": float(proxy[i]), "details": best.details,
+                "grasp_symmetry": self.symmetry, "finger_depth_by_offset": self.finger_depth,
                 "obstacle_notes": self.obstacles.notes, "keyframes": self.kf.tolist()}
         return self._placement(cand[i], best, diag)
 
     def _placement(self, pose, score: Score, diag):
         return Placement(self.path(pose, np.arange(self.src.length)), self.mobile, np.asarray(pose, float),
-                         score.flips, float(score.cost), score.seed, diag)
+                         score.offsets, float(score.cost), score.seed, diag)
 
     def refine(self, placement: Placement):
-        """Nelder-Mead refinement of ``placement`` (flips fixed, warm started from its seed)."""
+        """Nelder-Mead refinement of ``placement`` (offsets fixed, warm started from its seed)."""
         if not self.sides or self.cfg.placement_refine_evals <= 0:
             return placement
         def fn(p):
-            return self.score(p, placement.flips, placement.seed).cost
+            return self.score(p, placement.offsets, placement.seed).cost
 
         simplex = placement.pose + np.vstack([np.zeros(3), np.diag([0.05, 0.05, 0.1])])
         res = minimize(fn, placement.pose, method="Nelder-Mead",
                        options={"maxfev": self.cfg.placement_refine_evals, "xatol": 0.005, "fatol": 1e-3,
                                 "initial_simplex": simplex})
-        best = self.score(res.x, placement.flips, placement.seed)
+        best = self.score(res.x, placement.offsets, placement.seed)
         if best.cost >= placement.cost:
             return placement
         diag = dict(placement.diagnostics, details=best.details, refined_from=placement.pose.tolist(),
@@ -237,4 +308,6 @@ class PlacementProblem:
 def diagnostics(p: Placement) -> dict:
     """JSON-compatible summary of a placement for ``episode.extra``."""
     key = "offset" if p.mobile else "pose"
-    return {"mobile": p.mobile, key: np.asarray(p.pose).tolist(), "flips": p.flips, "cost": p.cost, **p.diagnostics}
+    return {"mobile": p.mobile, key: np.asarray(p.pose).tolist(), "flips": p.flips,
+            "grasp_offsets": {s: {"flip": bool(o[0]), "theta_deg": o[1], "tilt_deg": o[2]} for s, o in p.offsets.items()},
+            "cost": p.cost, **p.diagnostics}

@@ -121,10 +121,11 @@ def _lookup(name: str, assets: dict, resolver, meshdirs) -> tuple[bytes | None, 
     return None, ""
 
 
-def _strip_robot(root: ET.Element, prefixes: list[str]) -> dict:
-    """Remove the source robot (and mocap bodies) in place; returns what was removed."""
+def _strip_robot(root: ET.Element, prefixes: list[str], drop: set[str] = frozenset()) -> dict:
+    """Remove the source robot (and mocap bodies, and the bodies named in ``drop``) in place;
+    returns what was removed."""
     world = root.find("worldbody")
-    removed_bodies, mocap_bodies, removed_names = [], [], set()
+    removed_bodies, mocap_bodies, dropped_bodies, removed_names, dropped_names = [], [], [], set(), set()
 
     def collect(el):
         for e in el.iter():
@@ -139,9 +140,12 @@ def _strip_robot(root: ET.Element, prefixes: list[str]) -> dict:
                     parent.remove(child)
                 continue
             name = child.get("name", "")
-            if _starts(name, prefixes) or child.get("mocap", "false") == "true":
+            if _starts(name, prefixes) or child.get("mocap", "false") == "true" or name in drop:
                 collect(child)
-                (removed_bodies if _starts(name, prefixes) else mocap_bodies).append(name)
+                if name in drop:
+                    dropped_names.update(e.get("name") for e in child.iter() if e.get("name"))
+                (removed_bodies if _starts(name, prefixes) else mocap_bodies if name not in drop
+                 else dropped_bodies).append(name)
                 parent.remove(child)
             else:
                 visit(child)
@@ -167,7 +171,41 @@ def _strip_robot(root: ET.Element, prefixes: list[str]) -> dict:
     for node in root.findall("keyframe"):  # qpos sizes change: keyframes no longer apply
         removed_elements.setdefault("keyframe", []).extend(k.get("name") or "key" for k in node)
         root.remove(node)
-    return {"bodies": removed_bodies, "mocap_bodies": mocap_bodies, "elements": removed_elements}
+    return {"bodies": removed_bodies, "mocap_bodies": mocap_bodies, "parked_bodies": dropped_bodies,
+            "elements": removed_elements, "parked_names": sorted(dropped_names)}
+
+
+def free_bodies_xml(mjcf: str) -> dict[str, str]:
+    """{free joint name: body name} of the world-child bodies of an MJCF document that carry a
+    free joint (``<freejoint>`` or ``<joint type="free">``)."""
+    root = ET.fromstring(mjcf)
+    out = {}
+    for body in root.find("worldbody").iter("body"):
+        for j in body:
+            if j.tag == "freejoint" or (j.tag == "joint" and j.get("type") == "free"):
+                out[j.get("name") or f"{body.get('name')}_free"] = body.get("name", "")
+    return out
+
+
+def parked_bodies(scene_ref: SceneRef, keep: set[str], workspace, distance: float) -> dict[str, float]:
+    """Free bodies parked outside the workspace: {body: distance to the workspace} for every
+    free body not in ``keep`` whose initial position (``scene_ref.initial_qpos``) lies farther
+    than ``distance`` from every point of ``workspace`` (n, 3).
+
+    Some sources park unused objects out of reach instead of removing them (robosuite
+    single-object PickPlace puts the other three objects at (10, 10, 10), all overlapping);
+    such bodies cannot take part in the task but their mutual contacts would be measured.
+    """
+    workspace = np.atleast_2d(np.asarray(workspace, float))
+    out = {}
+    for joint, body in free_bodies_xml(scene_ref.mjcf).items():
+        v = (scene_ref.initial_qpos or {}).get(joint)
+        if body in keep or v is None or not len(workspace):
+            continue
+        d = float(np.linalg.norm(workspace - np.asarray(v, float)[:3], axis=1).min())
+        if d > distance:
+            out[body] = d
+    return out
 
 
 def _prune_assets(root: ET.Element) -> list[str]:
@@ -261,8 +299,13 @@ def _audit_no_assistance(model, reachy: set[int]) -> None:
 
 def build_scene(scene_ref: SceneRef, *, prefix: str = "reachy/", floor_z: float = 0.0,
                 asset_resolver: Callable[[str], bytes | None] | None = None,
-                meshdir: str | Path | list | None = None, options: dict | None = None) -> Scene:
-    """Compile the source scene with its robot replaced by Reachy (see module docstring)."""
+                meshdir: str | Path | list | None = None, options: dict | None = None,
+                drop_bodies=()) -> Scene:
+    """Compile the source scene with its robot replaced by Reachy (see module docstring).
+
+    ``drop_bodies``: names of world-child bodies removed as well (only bodies that cannot
+    take part in the episode, see :func:`parked_bodies`); their ``initial_qpos`` entries are
+    skipped. Recorded in ``info["removed"]["parked_bodies"]``."""
     root = ET.fromstring(scene_ref.mjcf)
     if root.tag != "mujoco" or root.find("worldbody") is None:
         raise ValueError("SceneRef.mjcf must be a complete MJCF document")
@@ -275,7 +318,11 @@ def build_scene(scene_ref: SceneRef, *, prefix: str = "reachy/", floor_z: float 
         raise ValueError("SceneRef.robot_prefixes is empty: the source robot cannot be identified")
     if any(_starts(prefix, [p]) or _starts(p, [prefix]) for p in prefixes):
         raise ValueError(f"Reachy prefix {prefix!r} collides with source robot prefixes {prefixes}")
-    removed = _strip_robot(root, prefixes)
+    drop = set(drop_bodies)
+    removed = _strip_robot(root, prefixes, drop)
+    if drop - set(removed["parked_bodies"]):
+        raise ValueError(f"drop_bodies not found as world-child bodies: {sorted(drop - set(removed['parked_bodies']))}")
+    dropped_joints = set(removed["parked_names"])
     pruned = _prune_assets(root)
     meshdirs = [] if meshdir is None else [meshdir] if isinstance(meshdir, (str, Path)) else list(meshdir)
     vfs, asset_records, missing_visual = _resolve_assets(root, dict(scene_ref.assets or {}), asset_resolver, meshdirs)
@@ -300,6 +347,8 @@ def build_scene(scene_ref: SceneRef, *, prefix: str = "reachy/", floor_z: float 
                    if model.jnt_type[j] == mujoco.mjtJoint.mjJNT_FREE and model.jnt_bodyid[j] not in reachy}
     initial = {}
     for name, value in (scene_ref.initial_qpos or {}).items():
+        if name in dropped_joints:
+            continue
         if mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, name) < 0:
             raise ValueError(f"initial_qpos joint {name!r} is not in the scene")
         j = model.joint(name)

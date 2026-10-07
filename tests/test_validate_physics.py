@@ -199,8 +199,15 @@ def test_pick_and_place_passes(success):
     assert len(rollout.time) == round((info["settle_s"] + ep.duration + info["hold_s"]) / DT) + 1
     np.testing.assert_allclose(np.diff(rollout.time), DT, atol=1e-9)
     assert rollout.ctrl_names == [f"reachy/{n}" for n in JOINTS]
-    k = round(info["settle_s"] / DT) + len(ep.time) // 2  # mid-episode row commands q at that instant
-    np.testing.assert_allclose(rollout.ctrl[k], ep.q[len(ep.time) // 2], atol=1e-9)
+    k = round(info["settle_s"] / DT) + len(ep.time) // 2  # mid-episode row: reference q at that instant
+    every = round(DT / info["timestep"])
+    ref = physics.control_sequence(ep, info["timestep"], info["settle_s"], info["hold_s"])
+    np.testing.assert_allclose(ref[k * every - 1], ep.q[len(ep.time) // 2], atol=1e-9)
+    # ... and the servos receive it led by kv / kp (velocity reference), fingers only while closing
+    lead = np.asarray(info["ctrl_lead_s"])
+    np.testing.assert_allclose(lead[3:17], 24.0 / 180.0)
+    led = physics.control_sequence(ep, info["timestep"], info["settle_s"], info["hold_s"], lead)
+    np.testing.assert_allclose(rollout.ctrl[k], led[k * every - 1], atol=1e-9)
     # The box starts from the source initial state (not the MJCF body pose) and is never written.
     box = [rollout.qpos_names.index(f"box_joint/{c}") for c in ("x", "y", "z")]
     np.testing.assert_allclose(rollout.qpos[0, box], BOX0)
@@ -229,10 +236,41 @@ def test_actuator_only_replay_is_deterministic(success):
     state = np.empty(mujoco.mj_stateSize(m, mujoco.mjtState.mjSTATE_INTEGRATION))
     mujoco.mj_getState(m, d, state, mujoco.mjtState.mjSTATE_INTEGRATION)
     info = rollout.info
-    ctrl = physics.control_sequence(ep, m.opt.timestep, info["settle_s"], info["hold_s"])
+    ctrl = physics.control_sequence(ep, m.opt.timestep, info["settle_s"], info["hold_s"], info["ctrl_lead_s"])
     act = np.array([m.actuator(f"reachy/{n}").id for n in JOINTS])
     every = round(DT / m.opt.timestep)
     qpos, qvel = physics.replay(m, state, ctrl, act, every)
     np.testing.assert_allclose(qpos, rollout.qpos, rtol=0, atol=1e-7)
     np.testing.assert_allclose(qvel, rollout.qvel, rtol=0, atol=1e-7)
     np.testing.assert_allclose(ctrl[every - 1::every], rollout.ctrl[1:, act], rtol=0, atol=0)
+
+
+def test_parked_free_bodies_are_removed():
+    """Free bodies that no episode object refers to and that start far from the workspace are
+    dropped (robosuite parks unused objects overlapping at (10, 10, 10))."""
+    from reachy_retarget.validate.scene import parked_bodies
+    xml = scene_xml().replace("</worldbody>", "".join(
+        f'<body name="{n}_main" pos="10 10 10"><freejoint name="{n}_joint"/><geom size=".03" mass=".1"/></body>'
+        for n in ("milk", "bread")) + "</worldbody>")
+    ref = SceneRef(mjcf=xml, robot_prefixes=["robot0_", "gripper0_"],
+                   initial_qpos={"box_joint": [*BOX0, 1, 0, 0, 0], "milk_joint": [10, 10, 10, 1, 0, 0, 0],
+                                 "bread_joint": [10, 10, 10, 1, 0, 0, 0]})
+    parked = parked_bodies(ref, {"box_main"}, np.array([[0.6, 0.0, 0.8]]), 2.0)
+    assert set(parked) == {"milk_main", "bread_main"}
+    assert parked_bodies(ref, {"box_main"}, np.array([[9.0, 9.0, 9.0]]), 2.0) == {}
+    scene = build_scene(ref, drop_bodies=sorted(parked))
+    assert set(scene.free_bodies.values()) == {"box_main"}
+    assert scene.info["removed"]["parked_bodies"] == ["milk_main", "bread_main"]
+
+
+def test_finger_commands_lead_only_while_closing():
+    times = np.arange(11) * DT
+    q = np.zeros((11, 22))
+    q[:, 20] = np.r_[np.linspace(2.0, 1.0, 6), np.linspace(1.0, 2.0, 6)[1:]]  # close, then open
+    ep = make_episode(times, q)
+    lead = np.full(22, 0.04)
+    led = physics.control_sequence(ep, 0.002, 0.0, 0.0, lead)
+    now = physics.control_sequence(ep, 0.002, 0.0, 0.0)
+    closing, opening = slice(0, 30), slice(60, 90)
+    assert np.all(led[closing, 20] < now[closing, 20] - 1e-9)    # led while closing
+    np.testing.assert_allclose(led[opening, 20], now[opening, 20])  # never opens early

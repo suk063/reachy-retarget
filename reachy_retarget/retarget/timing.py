@@ -3,7 +3,9 @@
 Each source interval keeps its geometry and is only ever slowed down: its new duration is
 the largest of the source duration and ``|dq_j| / (cfg.velocity_scale * VELOCITY_j)`` over
 all joints (base yaw unwrapped). A sliding maximum over ``cfg.dilation_window_s`` smooths
-the dilation (never below the per-interval requirement). Output rows sit every ``DT`` on
+the dilation (never below the per-interval requirement). The source steps into and out of
+each grasp last at least ``cfg.grasp_dwell_s`` (fingers settle before the arm moves the
+object). Output rows sit every ``DT`` on
 the dilated clock; each row maps to a source time (piecewise linear, so linear joint
 interpolation keeps every interval's speed) and the last row holds the final source frame.
 """
@@ -39,19 +41,43 @@ class Clock:
                 "dilated_intervals": int(np.sum(self.dilation > 1 + 1e-9))}
 
 
-def dilation(times, q, cfg: RetargetConfig):
-    """Per-interval slow-down factor (T-1,) >= 1 so q (T, 22) respects scaled speed limits."""
+def dilation(times, q, cfg: RetargetConfig, grasp_events=None):
+    """Per-interval slow-down factor (T-1,) >= 1 so q (T, 22) respects scaled speed limits.
+
+    ``grasp_events``: source rows where a grasp starts or ends; the interval ending at a grasp
+    start and the one starting at a grasp end last at least ``cfg.grasp_dwell_s`` so the fingers
+    settle on (or off) the object before the arm moves it (the source gripper stalls on the
+    object within one control step, Reachy's position-servoed fingers in about 0.1-0.2 s).
+    The dwell is not spread by the sliding maximum."""
     dt = np.diff(times)
     required = np.max(np.abs(np.diff(q, axis=0)) / (VELOCITY * cfg.velocity_scale), axis=1) / dt
     required = np.maximum(required, 1.0)
     window = max(1, round(cfg.dilation_window_s / np.median(dt)))
-    return np.maximum(maximum_filter1d(required, 2 * window + 1, mode="nearest"), required)
+    out = np.maximum(maximum_filter1d(required, 2 * window + 1, mode="nearest"), required)
+    for kind, row in grasp_events or ():
+        i = row - 1 if kind == "start" else row
+        if 0 <= i < len(dt):
+            out[i] = max(out[i], cfg.grasp_dwell_s / dt[i])
+    return out
 
 
-def clock(times, q, cfg: RetargetConfig) -> Clock:
-    """Output clock for source times (T,) and source-rate joint values q (T, 22)."""
+def grasp_events(labels) -> list[tuple[str, int]]:
+    """[("start" | "end", source row)] of the grasp segments of label arrays {side: (T,)}:
+    the first held row of a segment and the first row after it."""
+    out = []
+    for lab in labels:
+        held = np.asarray(lab) >= 0
+        d = np.diff(np.r_[0, held.astype(int), 0])
+        out += [("start", int(i)) for i in np.flatnonzero(d == 1) if i > 0]
+        out += [("end", int(i)) for i in np.flatnonzero(d == -1) if i < len(held)]
+    return out
+
+
+def clock(times, q, cfg: RetargetConfig, grasp_events=None) -> Clock:
+    """Output clock for source times (T,) and source-rate joint values q (T, 22)
+    (``grasp_events``: see :func:`dilation`)."""
     times = np.asarray(times, float)
-    d = dilation(times, q, cfg)
+    d = dilation(times, q, cfg, grasp_events)
     warped = np.r_[0.0, np.cumsum(np.diff(times) * d)]
     n = int(np.ceil(warped[-1] / DT - 1e-9)) + 1
     t = np.arange(n) * DT

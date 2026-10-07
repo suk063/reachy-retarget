@@ -81,3 +81,25 @@ def angle_to_width(angle):
 def width_to_angle(width):
     """Finger angle (rad) giving a pad separation (m, clipped to [0, MAX_WIDTH]); 0 -> CONTACT_ANGLE."""
     return np.interp(np.clip(width, 0.0, MAX_WIDTH), _TABLE_WIDTH, _TABLE_ANGLE)
+
+
+# Distal finger collider box in the distal frame (pincette_distal_collider hull, see robot.mjcf).
+DISTAL_BOX = ((-0.015, 0.015), (-PAD_INSET, 0.015), (0.0053, 0.0461))
+
+
+def finger_points(angle, side="right", n=(3, 2, 4)):
+    """Sample points (..., 2 * prod(n), 3) on the two distal finger boxes (``DISTAL_BOX``, a grid
+    of ``n`` points per axis) in the grasp-center frame (palm axes, origin at the pad-centre
+    midpoint at STRAIGHT_ANGLE, see ``Reachy.grasp_center``)."""
+    angle = np.asarray(angle, float)
+    grid = np.stack(np.meshgrid(*[np.linspace(a, b, k) for (a, b), k in zip(DISTAL_BOX, n)], indexing="ij"),
+                    axis=-1).reshape(-1, 3)
+    local = np.c_[grid, np.ones(len(grid))]
+    poses = _tree(side).fk(angle[..., None])
+    pts = np.concatenate([np.einsum("...ij,nj->...ni", poses[k], local)[..., :3] for k in _tree(side).targets], axis=-2)
+    return pts - _gc_offset(side)
+
+
+@functools.cache
+def _gc_offset(side):
+    return pad_centers(STRAIGHT_ANGLE, side).mean(axis=0)

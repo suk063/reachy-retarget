@@ -1,7 +1,9 @@
 """Tier P: physics validation of a retargeted episode in the source's MuJoCo scene.
 
 `simulate(ep, scene_ref, cfg)` builds the scene (`validate.scene.build_scene`: source robot
-removed, Reachy attached at the world origin), resets it once and then drives it with actuator
+removed, Reachy attached at the world origin; free bodies that no episode object track refers to
+and whose initial position lies more than `cfg.park_distance_m` from every object position, TCP
+and base position of the episode are removed as parked, see `scene.parked_bodies`), resets it once and then drives it with actuator
 commands only:
 
 1. **Reset.** MJCF defaults, the source's initial object qpos (`SceneRef.initial_qpos`) and
@@ -9,9 +11,15 @@ commands only:
    integration state is saved for the replay check.
 2. **Settle** for `cfg.settle_s` with `ctrl = ep.q[0]` (objects come to rest on their supports).
 3. **Track** the episode: during physics step k the position servos receive the canonical
-   `q` linearly interpolated at the end of the step (episode time `t0 + (k + 1) dt - settle_s`).
-   The finger actuators receive the commanded finger angles `q[:, 20:22]`. Nothing else is
-   written: objects are never welded, teleported or have their state overwritten.
+   `q` linearly interpolated at the end of the step (episode time `t0 + (k + 1) dt - settle_s`)
+   plus the servo's lead `kv / kp` (`cfg.velocity_reference`, `servo_lead`): a position servo
+   `kp (ctrl - q) - kv qd` commanded `q_ref(t + kv/kp) ~ q_ref + (kv/kp) qd_ref` is the PD servo
+   with velocity reference `kp (q_ref - q) + kv (qd_ref - qd)`, so it tracks without the
+   `kv/kp * speed` lag (0.13 s for the arms). The commands are a deterministic function of the
+   retargeted `q` only. The finger actuators receive the commanded finger angles `q[:, 20:22]`
+   (lead only while closing: their command is the more closed of the led and the current
+   reference, so a hand stalled on an object never opens before its reference). Nothing else is written: objects are never welded, teleported or have
+   their state overwritten.
 4. **Hold** the final `q` for `cfg.hold_s` so the final object pose is a resting pose.
 
 `qpos`, `qvel` and the applied `ctrl` are recorded every `1 / 50 s` on the simulator clock
@@ -26,15 +34,15 @@ additions marked new):
 | --- | --- |
 | `rollout_complete` | every planned step ran, the state stayed finite, no MuJoCo BADQACC/BADQPOS/BADQVEL/BADCTRL warning |
 | `robot_environment_penetration` | Reachy vs non-object scene geometry depth <= 2 mm (every step) |
-| `object_environment_penetration` | free object vs scene/other objects depth <= 2 mm |
+| `object_environment_penetration` | free object vs scene/other objects depth <= 2 mm (every step after the settle phase; while settling, objects released from the source's initial state may drop onto their supports, e.g. robosuite cubes start about 1 cm above the table, and the impact depth is reported as `settle_object_environment_depth_m`, not gated) |
 | `hand_object_penetration` | Reachy hand links vs objects depth <= 1 mm |
 | `no_nonhand_object_contact` | no object contact with a Reachy link outside the hands |
 | `robot_self_penetration` | Reachy self contacts depth <= 2 mm (contacts between the finger links of one hand are reported, not gated: closing an empty hand presses its pads together) |
 | `self_clearance` | sphere-model self clearance (robot.collision) of measured q >= 9 mm |
 | `joint_margin` | measured arm and neck joints >= 0.025 rad inside the URDF limits |
 | `arm_speed`, `neck_speed`, `base_speed` | measured arm <= 1.001 rad/s, neck <= 30 deg/s + 0.001 (new), base body-frame vx, vy <= 0.611 m/s, wz <= 114 deg/s + 0.001 |
-| `tcp_tracking` | measured TCP (`{l,r}_arm_tip`) vs FK of the commanded q at the same instant: position <= 3 cm, rotation <= 0.2 rad (new; position servos lag a moving target by about kv/kp * speed) |
-| `grasp_drift` | while a hand is commanded closed (finger command below the 0.5 opening angle) and holds an object lifted by > 15 mm with both pads (positive normal force), the object pose relative to the grasp-center site drifts <= 3 mm / 3 deg from its pose at acquisition |
+| `tcp_tracking` | measured TCP (`{l,r}_arm_tip`) vs FK of the retargeted q at the same instant (the reference, not the lead-shifted ctrl): position <= 3 cm, rotation <= 0.2 rad (new) |
+| `grasp_drift` | while a hand is commanded closed (finger reference below the 0.5 opening angle, or the episode's grasp label `validation["grasp_object"]` set: large objects stall the fingers above the 0.5 opening) and holds an object lifted by > 15 mm with both pads (positive normal force), the object pose relative to the grasp-center site drifts <= 3 mm / 3 deg from its pose at acquisition |
 | `carry_contact` | both pads touch the carried object during >= 95 % of each carry |
 | `task_final_pose` | every `manipulated` object with a scene body ends within `cfg.object_position_tol_m` (default 3 cm, about a can radius; new) of its final pose in `ep.objects` (the source's final object pose); orientation is reported only (symmetric objects) |
 | `objects_at_rest` | at the end of the hold every free object moves < 0.02 m/s and < 0.2 rad/s |
@@ -58,7 +66,7 @@ from ..robot.collision import min_clearance
 from ..robot.mjcf import FINGER_BODIES
 from ..schema.episode import DT, PhysicsRollout, ReachyEpisode
 from ..schema.source import SceneRef
-from .scene import MissingSceneAssets, Scene, build_scene, reset, subtree
+from .scene import MissingSceneAssets, Scene, build_scene, parked_bodies, reset, subtree
 
 THRESHOLDS = dict(  # legacy physical_gates.THRESHOLDS (+ new tier-P entries at the end)
     arm_speed_rad_s=1.001, base_vx_m_s=.611, base_vy_m_s=.611, base_wz_rad_s=float(np.deg2rad(114) + .001),
@@ -87,17 +95,40 @@ class PhysicsConfig:
     object_position_tol_m: float = THRESHOLDS["object_position_m"]
     object_bodies: dict[str, str] | None = None   # object id -> scene body (default: geometry["body"] or id)
     replay: bool = True
+    velocity_reference: bool = True  # lead each servo command by its kv/kp (see servo_lead)
+    park_distance_m: float = 2.0   # untracked free bodies farther than this from the workspace are removed
     thresholds: dict = field(default_factory=lambda: dict(THRESHOLDS))
 
 
-def control_sequence(ep: ReachyEpisode, timestep: float, settle_s: float, hold_s: float) -> np.ndarray:
-    """(n_steps, 22) servo commands: q interpolated at the end of every physics step."""
+def control_sequence(ep: ReachyEpisode, timestep: float, settle_s: float, hold_s: float, lead=None) -> np.ndarray:
+    """(n_steps, 22) servo commands: q interpolated at the end of every physics step, each joint
+    ``lead`` (22,) seconds ahead (default 0; clamped to the episode end). The fingers (columns
+    20, 21) take the more closed of their led and current reference: the lead acts while a hand
+    closes and never opens a hand before its reference does."""
     n_settle, n_track, n_hold = (int(round(x / timestep)) for x in (settle_s, ep.duration, hold_s))
     k = np.arange(n_settle + n_track + n_hold)
-    t = np.clip(ep.time[0] + (k + 1) * timestep - n_settle * timestep, ep.time[0], ep.time[-1])
-    i = np.clip(np.searchsorted(ep.time, t, side="right") - 1, 0, len(ep.time) - 2)
-    w = ((t - ep.time[i]) / (ep.time[i + 1] - ep.time[i]))[:, None]
-    return (1 - w) * ep.q[i] + w * ep.q[i + 1]
+    t0 = ep.time[0] + (k + 1) * timestep - n_settle * timestep
+
+    def at(t):
+        t = np.clip(t, ep.time[0], ep.time[-1])
+        i = np.clip(np.searchsorted(ep.time, t, side="right") - 1, 0, len(ep.time) - 2)
+        w = (t - ep.time[i]) / (ep.time[i + 1] - ep.time[i])
+        cols = np.arange(22)[None]
+        return (1 - w) * ep.q[i, cols] + w * ep.q[i + 1, cols]
+
+    now = at(np.repeat(t0[:, None], 22, axis=1))
+    if lead is None or not np.any(lead):
+        return now
+    ahead = at(t0[:, None] + np.asarray(lead, float)[None])
+    ahead[:, 20:22] = np.minimum(ahead[:, 20:22], now[:, 20:22])
+    return ahead
+
+
+def servo_lead(model, act) -> np.ndarray:
+    """Per-actuator kv / kp (s) of position servos: commanding q(t + kv/kp) equals a PD servo
+    with position and velocity reference, kp (q_ref - q) + kv (qd_ref - qd), to first order."""
+    kp, kv = model.actuator_gainprm[act, 0], -model.actuator_biasprm[act, 2]
+    return np.where(kp > 0, kv / np.maximum(kp, 1e-12), 0.0)
 
 
 def _names(model):
@@ -145,6 +176,8 @@ class _Monitor:
         self.depth = {k: 0.0 for k in ("robot_environment", "object_environment", "hand_object", "robot_self",
                                        "finger_finger")}
         self.depth_event = {k: None for k in self.depth}
+        self.settling = False          # object-environment contacts while settling go to settle_depth
+        self.settle_depth, self.settle_event = 0.0, None
         self.nonhand_object_contacts = 0
         self.nonhand_event = None
         jid = [m.joint(f"{p}{n}").id for n in ARM_NECK]
@@ -181,6 +214,12 @@ class _Monitor:
             for k, mask in kinds.items():
                 if mask.any():
                     i = int(np.argmax(np.where(mask, depth, -1)))
+                    if self.settling and k == "object_environment":
+                        if depth[i] > self.settle_depth:
+                            self.settle_depth = float(depth[i])
+                            self.settle_event = {"depth_m": float(depth[i]), "time_s": float(d.time),
+                                                 "bodies": [self.m.body(int(x)).name for x in b[i]]}
+                        continue
                     if depth[i] > self.depth[k]:
                         self.depth[k] = float(depth[i])
                         self.depth_event[k] = {"depth_m": float(depth[i]), "time_s": float(d.time),
@@ -274,14 +313,27 @@ def _object_bodies(ep: ReachyEpisode, scene: Scene, cfg: PhysicsConfig):
     return out, missing
 
 
+def _parked(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig) -> dict[str, float]:
+    """Untracked free bodies parked far from the workspace (scene.parked_bodies): the workspace is
+    every valid object position of the episode, the robot's TCP path and its base path."""
+    keep = set((cfg.object_bodies or {}).values())
+    pts = [np.c_[ep.q[:, :2], np.zeros(len(ep.q))]]
+    for oid, track in ep.objects.items():
+        keep |= {oid, f"{oid}_main", track.geometry.get("body")}
+        pts.append(track.pose[track.valid, :3])
+    pts += [X[:, :3, 3] for X in ep.tcp_world.values()]
+    return parked_bodies(scene_ref, keep, np.concatenate(pts), cfg.park_distance_m)
+
+
 def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None = None, *,
              asset_resolver=None, meshdir=None):
     """Run tier P; returns ({"passed", "reasons", "metrics"}, PhysicsRollout | None)."""
     cfg = cfg or PhysicsConfig()
     th = cfg.thresholds
+    parked = _parked(ep, scene_ref, cfg)
     try:
         scene = build_scene(scene_ref, prefix=cfg.prefix, floor_z=cfg.floor_z,
-                            asset_resolver=asset_resolver, meshdir=meshdir)
+                            asset_resolver=asset_resolver, meshdir=meshdir, drop_bodies=sorted(parked))
     except (MissingSceneAssets, ValueError) as e:
         return {"passed": False, "reasons": [f"scene: {e}"], "metrics": {}}, None
     m, p = scene.model, cfg.prefix
@@ -290,15 +342,19 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
     if not np.isclose(every * timestep, DT, rtol=0, atol=1e-12):
         raise ValueError(f"physics timestep {timestep} does not divide the {DT} s record period")
     settle_s, hold_s = round(cfg.settle_s / DT) * DT, round(cfg.hold_s / DT) * DT
-    ctrl_steps = control_sequence(ep, timestep, settle_s, hold_s)
-    n_steps = len(ctrl_steps)
     act = np.array([m.actuator(f"{p}{n}").id for n in JOINTS])
+    lead = servo_lead(m, act) if cfg.velocity_reference else np.zeros(len(act))
+    ref_steps = control_sequence(ep, timestep, settle_s, hold_s)
+    ctrl_steps = control_sequence(ep, timestep, settle_s, hold_s, lead)
+    n_steps = len(ctrl_steps)
     objects, unmapped = _object_bodies(ep, scene, cfg)
 
     d = reset(scene, ep.q[0])
     initial_state = np.empty(mujoco.mj_stateSize(m, mujoco.mjtState.mjSTATE_INTEGRATION))
     mujoco.mj_getState(m, d, initial_state, mujoco.mjtState.mjSTATE_INTEGRATION)
     mon = _Monitor(scene, th)
+    n_settle = int(round(settle_s / timestep))
+    mon.settling = n_settle > 0
     mon.step(d)
     sites = {s: m.site(f"{p}{s}_tcp").id for s in ("left", "right")}
     grasp_sites = {s: m.site(f"{p}{s}_grasp").id for s in ("left", "right")}
@@ -307,14 +363,26 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
                           rotation=0.0, phase_bilateral=[]) for s in ("left", "right") for o in objects}
 
     rows = {"time": [0.0], "qpos": [d.qpos.copy()], "qvel": [d.qvel.copy()], "ctrl": [d.ctrl.copy()],
+            "ref": [ep.q[0].copy()],
             "tcp": [[_site_pose(d, sites[s]) for s in ("left", "right")]]}
     obj_rows = {o: [np.r_[d.xpos[b], d.xquat[b]]] for o, b in objects.items()}
     finite, steps_done, warnings = True, 0, {}
 
-    def grasp_update(d, cmd):
+    labels = np.asarray(ep.validation.get("grasp_object", np.full((ep.length, 2), -1)))
+
+    def held_at(k):
+        """Retargeting grasp labels (left, right) at the end of physics step k."""
+        t = ep.time[0] + (k + 1) * timestep - n_settle * timestep
+        if t < ep.time[0] or t > ep.time[-1]:
+            return (False, False)
+        i = min(int(np.searchsorted(ep.time, t, side="right")) - 1, ep.length - 1)
+        return tuple(bool(x) for x in labels[i] >= 0)
+
+    def grasp_update(d, cmd, held):
         holds = mon.pad_contacts(d)
         for (side, o), st in carry.items():
-            closed = cmd[20 if side == "left" else 21] < CLOSED_ANGLE
+            i = 0 if side == "left" else 1
+            closed = cmd[20 + i] < CLOSED_ANGLE or held[i]
             b = objects[o]
             bilateral = b in holds[side]
             lift = float(d.xpos[b][2]) - z0[o]
@@ -336,6 +404,7 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
         d.ctrl[act] = ctrl_steps[k]
         mujoco.mj_step(m, d)
         steps_done += 1
+        mon.settling = k + 1 < n_settle
         mon.step(d)
         if (k + 1) % every == 0:
             if not (np.isfinite(d.qpos).all() and np.isfinite(d.qvel).all()):
@@ -345,10 +414,11 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
             rows["qpos"].append(d.qpos.copy())
             rows["qvel"].append(d.qvel.copy())
             rows["ctrl"].append(d.ctrl.copy())
+            rows["ref"].append(ref_steps[k])
             rows["tcp"].append([_site_pose(d, sites[s]) for s in ("left", "right")])
             for o, b in objects.items():
                 obj_rows[o].append(np.r_[d.xpos[b], d.xquat[b]])
-            grasp_update(d, ctrl_steps[k])
+            grasp_update(d, ref_steps[k], held_at(k))
     for w in BAD_WARNINGS:
         count = int(d.warning[int(getattr(mujoco.mjtWarning, w))].number)
         if count:
@@ -362,7 +432,9 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
         info={"simulator": f"mujoco {mujoco.__version__}", "timestep": timestep, "record_hz": int(round(1 / DT)),
               "settle_s": settle_s, "hold_s": hold_s, "episode_time_offset_s": settle_s - float(ep.time[0]),
               "control": "position servos only; ctrl = canonical q linearly interpolated at the end of each "
-                         "physics step (settle: q[0], hold: q[-1]); fingers follow q[:, 20:22]",
+                         "physics step plus the joint's lead ctrl_lead_s = kv/kp (a PD servo with velocity "
+                         "reference; settle: q[0], hold: q[-1]); fingers follow q[:, 20:22]",
+              "ctrl_lead_s": lead.tolist(),
               "reachy_prefix": p, "object_bodies": {o: m.body(b).name for o, b in objects.items()},
               "scene": scene.info,
               "assumptions": ["ideal planar base servos, wheels not simulated (wheel/floor contact excluded)",
@@ -373,9 +445,9 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
 
     # ------------------------------------------------------------------ metrics
     n_rows = len(rows["time"])
-    ctrl_q = np.array(rows["ctrl"])[:, act]
+    ref_q = np.array(rows["ref"])
     meas_q = np.array([q[[m.jnt_qposadr[m.joint(f'{p}{n}').id] for n in JOINTS]] for q in rows["qpos"]])
-    fk = Reachy.load().fk(ctrl_q)
+    fk = Reachy.load().fk(ref_q)
     tcp_actual = np.array(rows["tcp"])
     pos_err, rot_err = np.zeros((n_rows, 2)), np.zeros((n_rows, 2))
     for i, side in enumerate(("left", "right")):
@@ -470,6 +542,7 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
     metrics = {
         "gates": gates, "thresholds": dict(th), "object_position_tol_m": cfg.object_position_tol_m,
         "max_depth_m": dict(mon.depth), "worst_contacts": dict(mon.depth_event),
+        "settle_object_environment_depth_m": mon.settle_depth, "settle_object_environment_contact": mon.settle_event,
         "nonhand_object_contacts": mon.nonhand_object_contacts,
         "min_self_clearance_m": float(clearance.min()), "min_joint_margin_rad": mon.min_margin,
         "min_joint_margin_joint": mon.margin_joint,

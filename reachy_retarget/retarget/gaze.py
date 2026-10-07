@@ -8,7 +8,8 @@ at 0.6 m height (no active hand). The point path is Gaussian-smoothed in time.
 The head's viewing axis is the optical (+z) axis of the URDF eye cameras expressed in the
 ``head`` frame (it equals head +x); the viewpoint is the midpoint of the two eyes. Neck
 roll is held at 0; pitch and yaw are solved by batched Gauss-Newton, clipped to the neck
-limits minus a margin, and rate limited to the scaled neck speed on the source clock (so
+limits minus a margin, scaled toward 0 where the turned head would come closer to an arm than
+the IK clearance margin, and rate limited to the scaled neck speed on the source clock (so
 gaze never forces time dilation).
 """
 from __future__ import annotations
@@ -113,7 +114,14 @@ def solve_neck(q, points, times, cfg: RetargetConfig, iterations=10):
         step[held] = 0.0
         q[:, [PITCH, YAW]] = np.clip(cur + np.clip(step, -0.5, 0.5), lo, hi)
     vmax = VELOCITY[[PITCH, YAW]] * cfg.velocity_scale
-    neck = q[:, [PITCH, YAW]].copy()
+    dt = np.diff(times)[:, None]
+    cleared = _keep_clear(q, cfg)
+    # Magnitude envelope: where clearance forces the neck toward 0, start returning early
+    # enough for the rate limit (backward pass), then rate limit forward.
+    bound = np.abs(cleared)
+    for t in range(len(bound) - 2, -1, -1):
+        bound[t] = np.minimum(bound[t], bound[t + 1] + vmax * dt[t])
+    neck = np.clip(q[:, [PITCH, YAW]], -bound, bound)
     for t in range(1, len(neck)):
         neck[t] = neck[t - 1] + np.clip(neck[t] - neck[t - 1], -vmax * (times[t] - times[t - 1]),
                                         vmax * (times[t] - times[t - 1]))
@@ -128,6 +136,29 @@ def solve_neck(q, points, times, cfg: RetargetConfig, iterations=10):
     ref = H.copy()
     ref[:, :3, :3] = so3_exp(rotvec) @ H[:, :3, :3]
     return q[:, NECK], W @ ref
+
+
+def _keep_clear(q, cfg: RetargetConfig, steps=8):
+    """Neck (pitch, yaw) (T, 2) scaled toward 0 (the posture the arm IK was solved with) on frames
+    where turning the head would bring the self-clearance below ``cfg.self_clearance_margin``
+    (or below its value with the neck at 0, if that is lower): bisection on the scale."""
+    from ..robot import min_clearance
+    neck = q[:, [PITCH, YAW]].copy()
+    q0 = q.copy()
+    q0[:, [PITCH, YAW]] = 0.0
+    floor = np.minimum(min_clearance(q0), cfg.self_clearance_margin)
+    bad = min_clearance(q) < floor - 1e-9
+    if not bad.any():
+        return neck
+    lo, hi = np.zeros(bad.sum()), np.ones(bad.sum())
+    qb = q[bad].copy()
+    for _ in range(steps):
+        mid = (lo + hi) / 2
+        qb[:, [PITCH, YAW]] = neck[bad] * mid[:, None]
+        ok = min_clearance(qb) >= floor[bad] - 1e-9
+        lo, hi = np.where(ok, mid, lo), np.where(ok, hi, mid)
+    neck[bad] *= lo[:, None]
+    return neck
 
 
 def gaze_error(q, points):

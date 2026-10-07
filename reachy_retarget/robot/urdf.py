@@ -200,6 +200,9 @@ class KinematicTree:
             if kind == 2:
                 J[:3, c] += mult * a
             else:
-                J[:3, c] += mult * np.cross(a, T[:3, 3] - P[i][:3, 3])
+                r = T[:3, 3] - P[i][:3, 3]  # a x r, written out (np.cross dominates IK time)
+                J[0, c] += mult * (a[1] * r[2] - a[2] * r[1])
+                J[1, c] += mult * (a[2] * r[0] - a[0] * r[2])
+                J[2, c] += mult * (a[0] * r[1] - a[1] * r[0])
                 J[3:, c] += mult * a
         return T, J

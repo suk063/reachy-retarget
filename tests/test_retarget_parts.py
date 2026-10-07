@@ -86,8 +86,22 @@ def test_footprint_clearance():
     d = footprint.clearance(np.array([[0.0, 0.0], [1.0, 0.0], [0.0, 1.5]]), obs)
     np.testing.assert_allclose(d[0], 0.8 - BASE_FOOTPRINT_RADIUS)
     assert d[1] < 0
-    np.testing.assert_allclose(d[2], 0.5 - np.hypot(0.05, 0.05) - BASE_FOOTPRINT_RADIUS)
+    # the cube (z 0.75-0.85) is at the height of the tripod column, not of the base disc
+    np.testing.assert_allclose(d[2], 0.5 - np.hypot(0.05, 0.05) - footprint.body_radius(0.75, 0.85))
+    assert footprint.body_radius(0.75, 0.85) < BASE_FOOTPRINT_RADIUS
     assert len(footprint.obstacles({"table": table, "cube": cube}, CFG, static_only=True).points) == 0
+
+
+def test_footprint_table_top_and_aabb():
+    """An elevated table top (no legs) blocks only the column; aabb centers are honoured."""
+    top = ObjectTrack(np.array([[1.0, 0, 0.8, 1, 0, 0, 0]]), np.ones(1, bool), "support",
+                      {"kind": "aabb", "center": [0.0, 0.0, -0.025], "half_extents": [0.2, 0.5, 0.025],
+                       "frame": "body"})
+    obs = footprint.obstacles({"top": top}, CFG)
+    assert obs.heights[0] == pytest.approx((0.75, 0.8))
+    d = footprint.clearance(np.array([[0.5, 0.0]]), obs)
+    np.testing.assert_allclose(d[0], 0.3 - footprint.body_radius(0.75, 0.8))
+    assert footprint.box_geometry({"kind": "aabb", "half_extents": [1, 1, 1], "frame": "world"}) is None
 
 
 def test_frame_solver_respects_margins_and_box():
@@ -103,3 +117,84 @@ def test_frame_solver_respects_margins_and_box():
     box = (q0 - 0.01, q0 + 0.01)
     qb, _ = solver.solve(q0, {"right": target}, q0, np.zeros(3), 50, box)
     assert np.all(np.abs(qb - q0) <= 0.01 + 1e-12)
+
+
+def test_box_lsq_matches_bvls():
+    from scipy.optimize import lsq_linear
+
+    from reachy_retarget.retarget.wbik import box_lsq
+    rng = np.random.default_rng(1)
+    for _ in range(200):
+        n = int(rng.integers(3, 15))
+        A = np.vstack([rng.normal(size=(n + 6, n)), 0.02 * np.eye(n)])
+        b = rng.normal(size=len(A))
+        lo, hi = -rng.uniform(0, 0.3, n), rng.uniform(0, 0.3, n)
+        x, y = box_lsq(A, b, lo, hi), lsq_linear(A, b, bounds=(lo, hi), method="bvls", tol=1e-12).x
+        assert np.all(x >= lo - 1e-12) and np.all(x <= hi + 1e-12)
+        assert np.sum((A @ x - b) ** 2) <= np.sum((A @ y - b) ** 2) * (1 + 1e-9) + 1e-12
+
+
+def test_source_closed_detects_a_grasp_stalled_above_half_opening():
+    from reachy_retarget.retarget.targets import source_closed
+    t = np.arange(40) * 0.05
+    opening = np.r_[np.linspace(0.5, 1.0, 5), np.ones(10), np.linspace(1.0, 0.6, 5), np.full(15, 0.6),
+                    np.linspace(0.6, 1.0, 5)]
+    e = Effector(np.tile(np.eye(4), (40, 1, 1)), opening)
+    closed = source_closed(e, CFG, t)
+    assert not closed[:15].any()          # initial opening from a half-closed state, then open
+    assert closed[21:34].all()            # stalled at 0.6 on an object
+    assert not closed[36:].any()          # released
+    assert not (opening < CFG.closed_opening).any()  # a fixed threshold would miss it
+
+
+def test_grasp_offsets_keep_the_grasp_center_and_pad_planes():
+    from reachy_retarget.retarget.targets import offset_matrix
+    M = offset_matrix((True, 12.0, -30.0))
+    np.testing.assert_allclose(M[:3, 3], 0)
+    tilt = offset_matrix((False, 0.0, 45.0))
+    np.testing.assert_allclose(tilt[:3, 1], [0, 1, 0], atol=1e-12)  # closing axis (pad normal) kept
+    np.testing.assert_allclose(offset_matrix(True), FLIP, atol=1e-12)
+
+
+def test_object_centric_hand_carries_a_slipping_object_rigidly():
+    from reachy_retarget.retarget.targets import object_centric
+    from reachy_retarget.schema.rotations import se3_inv, vec7_to_pose
+    T = 30
+    t = np.arange(T) * 0.1
+    hand = np.tile(np.eye(4), (T, 1, 1))
+    hand[:, 2, 3] = 0.8 + 0.01 * np.arange(T)
+    obj = np.tile([0, 0, 0.8, 1, 0, 0, 0.0], (T, 1))
+    obj[:, 2] = hand[:, 2, 3]
+    obj[15:, 2] -= 0.002 * np.arange(15)  # slides 28 mm down the pads while held
+    labels = np.where((t >= 0.5) & (t < 2.5), 0, -1)
+    src = SourceEpisode("f", "f/d", "0", "t", t, {"h": Effector(hand, np.ones(T))},
+                        objects={"o": ObjectTrack(obj, np.ones(T, bool), "manipulated",
+                                                  {"kind": "box", "half_extents": [0.02] * 3})})
+    path, info = object_centric(src, "h", labels, CFG)
+    held = labels >= 0
+    rel = se3_inv(path[held]) @ vec7_to_pose(obj[held])
+    np.testing.assert_allclose(rel[:, :3, 3], rel[:1, :3, 3].repeat(held.sum(), 0), atol=1e-9)
+    assert max(v[0] for v in info.values()) > 0.015  # the hand shifts with the 18 mm slip
+    np.testing.assert_allclose(path[~held & (t > 2.9)], hand[~held & (t > 2.9)])  # back on the source path
+
+
+def test_free_base_respects_the_footprint_constraint():
+    """A target beyond a table edge pulls a free base toward the table; the linearized footprint
+    constraint keeps the column clearance >= cfg.footprint_margin."""
+    table = ObjectTrack(np.array([[1.0, 0, 0.775, 1, 0, 0, 0]]), np.ones(1, bool), "support",
+                        {"kind": "box", "half_extents": [0.4, 0.6, 0.025]})
+    obs = footprint.obstacles({"table": table}, CFG)
+    q = posture("ready")
+    q[:3] = [0.3, 0.0, 0.0]
+    target = Reachy.load().fk(q)["right_tcp"].copy()
+    target[0, 3] += 0.5  # 0.5 m further over the table than the arm reaches from here
+    solver = FrameSolver(CFG, ("right",), True, posture("ready"), obstacles=obs)
+    out = solver.solve(q, {"right": target}, q, q[:3], 60)[0]
+    assert out[0] > 0.3 + 0.05  # the base did move toward the target
+    assert footprint.clearance(out[None, :2], obs)[0] >= CFG.footprint_margin - 1e-3
+
+
+def test_evaluate_demo_ranges():
+    from reachy_retarget.evaluate import parse_demos
+    assert parse_demos("0-2,5") == ["demo_0", "demo_1", "demo_2", "demo_5"]
+    assert parse_demos(None) is None and parse_demos("all") is None
