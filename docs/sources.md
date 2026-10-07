@@ -1008,3 +1008,32 @@ robosuite replay (`_Model`), sets every `states.npz` row and runs `mj_forward`.
   relative path flattened with `__`, because MuJoCo matches asset base names
   case-insensitively (`Prop.obj` / `prop.obj` of different objects). Missing assets give
   `mjcf_kinematic_only` (exact kinematics, no scene, empty AABBs).
+
+### RoboCasa verification (2026-10-07)
+
+Local samples (2.6 GB under `raw/robocasa`): the non-image members of three pretrain human
+tars and of one MimicGen tar (OpenDrawer, parquet only, no extras), the source zip, the
+robosuite 1.5.2 wheel, `textures`, `fixtures_lightwheel`, `objects_lightwheel` (whole), and
+578 CRC-checked members of `objaverse`/`generative_textures` (252 MB, enough for the first
+~10 episodes per task) in `asset_subset/`. Every episode of each dataset was adapted:
+
+| dataset (pretrain) | eps | T min–max | frames | success | regime | base travel m (med / max) | task object disp. m | task fixture joint motion | full-asset scenes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| OpenDrawer/20250819 | 102 | 135–250 | 20488 | 102 | tabletop 102 | 0.001 / 0.008 | 0.32–0.60 (object in drawer) | drawer 0.33–0.59 m | 15 |
+| PickPlaceCounterToCabinet/20250819 | 108 | 161–309 | 24225 | 108 | tabletop 107, mobile 1 | 0.001 / 0.72 | 0.55–0.93 | door ≤ 0.07 rad | 12 |
+| NavigateKitchen/20250821 | 503 | 66–340 | 79550 | 503 | navigation 456, mobile 47 | 3.14 / 9.33 (yaw ≤ 7.8 rad) | – | ≤ 0.32 (bumped doors) | 210 |
+
+Replayed base position, relative grip-site position and finger qpos match the parquet
+`observation.state` to ≤ 3.7e-15 on all 713 episodes. Torso lift is essentially unused
+(≤ 1.1 cm). Scenes have 48–136 articulated fixture joints; a resolved scene carries
+~90 MB of assets. Episodes without local objaverse/generative-texture members took the
+`mjcf_kinematic_only` route. Time steps are 0.05 s with occasional 0.10 s gaps (recorded
+simulator clock kept).
+
+### Known gaps (RoboCasa)
+
+* MimicGen tars (326.5 GB) lack simulator extras in the inspected sample; a parquet-only
+  route (base + relative end-effector pose, no objects) is not implemented.
+* `fetch_tars` streams whole tars (videos ≈ 80 % of the transfer) because MG tars put videos
+  before data; human tars could stop early but the Box SHA-1 check needs the whole stream.
+* Physics validation of RoboCasa scenes is untested here (scenes compile with full assets).
