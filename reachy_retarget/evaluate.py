@@ -83,6 +83,7 @@ def process_source(src, *, physics: bool = True, write: str | None = None, cfg=N
     rec["retarget"]["placement"] = {k: res.diagnostics.get("placement", {}).get(k)
                                     for k in ("mobile", "pose", "offset", "flips", "cost", "grasp_offsets")}
     rec["body_parts"] = list(ep.body_parts)
+    rec["regime"] = ep.regime
     rec["output_frames"] = ep.length
     rec["P"] = None
     t_phys = 0.0
