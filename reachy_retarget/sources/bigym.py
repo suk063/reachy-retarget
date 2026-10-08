@@ -388,7 +388,7 @@ def read_bigym(path: Path, *, family: str = FAMILY, asset_dir=None, catalog=None
     ``include_failed`` is false. ``with_scene=False`` skips loading mesh assets (about
     10x faster compilation; exact kinematics, no object geometry, no scene).
     """
-    catalog = catalog if catalog is not None else load_catalog()
+    catalog = catalog if catalog is not None else load_catalog(tables=False)
     for rec in _record_paths(Path(path)):
         meta, arrays = read_record(rec)
         if "qpos" not in arrays or len(arrays["qpos"]) < 2 or "_mjcf" not in meta:

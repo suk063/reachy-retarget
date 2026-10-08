@@ -220,7 +220,7 @@ def _find_tar(lerobot: Path, root, tars):
     """The ``tar_stream`` catalog entry the dataset was extracted from, as a flat view
     (catalog fields + family fields + ``box_sha1``), or ``None``."""
     if tars is None:
-        tars = {k: e for k, e in load_catalog().items() if e.family == "robocasa" and e.transport == "tar_stream"}
+        tars = {k: e for k, e in load_catalog(tables=False).items() if e.family == "robocasa" and e.transport == "tar_stream"}
     rel = lerobot.parent.as_posix()
     hit = next((e for e in tars.values() if root is not None
                 and e.output_dir(root).resolve() == lerobot.parent.resolve()), None) \
@@ -276,7 +276,7 @@ def read_robocasa(path: Path, *, family: str = "robocasa", episodes=None, root=N
     path = Path(path)
     lerobot = _lerobot_dir(path)
     root = _data_root(path, root)
-    catalog = catalog if catalog is not None else load_catalog()
+    catalog = catalog if catalog is not None else load_catalog(tables=False)
     tar = _find_tar(lerobot, root, tars)
     manifest = _read_manifest(lerobot.parent)
     member_sha = {m["member"]: m["sha256"] for m in (manifest or {}).get("members", [])}

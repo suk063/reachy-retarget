@@ -37,7 +37,6 @@ import re
 import xml.etree.ElementTree as ET
 import zipfile
 from dataclasses import dataclass, field
-from functools import lru_cache
 from pathlib import Path
 from typing import Callable
 
@@ -199,15 +198,53 @@ def _compile_tolerant(mujoco, xml: str, assets: dict):
             xml = ET.tostring(root, encoding="unicode")
 
 
+def _without_file_textures(xml: str, assets: dict) -> tuple[str, dict]:
+    """``xml`` without file textures (and material references to them) plus the assets it
+    still references. Textures are visual only: kinematics, contacts and geometry do not
+    depend on them, but decoding them dominates compile memory (LIBERO: ~140 MB of texture
+    data, ~0.45 GB of compile peak)."""
+    root = ET.fromstring(xml)
+    asset = root.find("asset")
+    textures = [el for el in (asset if asset is not None else []) if el.tag == "texture" and el.get("file")]
+    if not textures:
+        return xml, assets
+    names = {el.get("name") for el in textures}
+    files = {el.get("file") for el in textures}
+    for el in textures:
+        asset.remove(el)
+    for mat in root.iter("material"):
+        if mat.get("texture") in names:
+            mat.attrib.pop("texture")
+    used = {el.get("file") for el in root.iter() if el.get("file")}
+    return ET.tostring(root, encoding="unicode"), {k: v for k, v in assets.items() if k in used or k not in files}
+
+
+def _set_shell_inertia(xml: str, meshes) -> str:
+    """``xml`` with ``inertia="shell"`` on ``meshes``, serialized as :func:`_compile_tolerant` does."""
+    for name in meshes:
+        root = ET.fromstring(xml)
+        next(el for el in root.iter("mesh") if el.get("name") == name).set("inertia", "shell")
+        xml = ET.tostring(root, encoding="unicode")
+    return xml
+
+
 class _Model:
-    """A compiled recorded model plus the geometry derived from it once."""
+    """A compiled recorded model plus the geometry derived from it once.
+
+    ``xml``/``assets`` are the complete resolved scene (handed on as ``SceneRef``); the
+    kinematic model ``m`` is compiled without file textures (see :func:`_without_file_textures`),
+    which leaves every body, joint, geom and site, and so every kinematic quantity, unchanged.
+    """
 
     def __init__(self, xml: str, archive: AssetArchive | None):
         import mujoco
 
         self.mj = mujoco
         self.xml, self.assets, self.missing = resolve_mjcf(xml, archive)
-        self.m, self.xml, self.shell_meshes = _compile_tolerant(mujoco, self.xml, self.assets)
+        kin_xml, kin_assets = _without_file_textures(self.xml, self.assets)
+        self.m, _, self.shell_meshes = _compile_tolerant(mujoco, kin_xml, kin_assets)
+        del kin_xml, kin_assets
+        self.xml = _set_shell_inertia(self.xml, self.shell_meshes)
         self.d = mujoco.MjData(self.m)
         m = self.m
         name = lambda kind, i: mujoco.mj_id2name(m, kind, i) or ""
@@ -335,10 +372,24 @@ class _Gripper:
 
 
 
-@lru_cache(maxsize=8)
+_LAST_MODEL: list = []  # [((xml, specs), _Model)]: the most recently compiled model
+
+
 def _compile(xml: str, specs: tuple) -> _Model:
-    """``specs``: tuple of ``(path, marker, aliases, prefix)`` archive descriptions."""
-    return _Model(xml, [AssetArchive(p, m, a, x) for p, m, a, x in specs])
+    """The compiled model of ``xml``; ``specs``: tuple of ``(path, marker, aliases, prefix)``
+    archive descriptions.
+
+    Only the most recent model is kept (consecutive demos recorded with the same MJCF share
+    it). A compiled scene with its asset bytes takes 100-500 MB, and robomimic/LIBERO record
+    a different MJCF per demo, so the previous model is released before the next is compiled.
+    """
+    key = (xml, specs)
+    if _LAST_MODEL and _LAST_MODEL[0][0] == key:
+        return _LAST_MODEL[0][1]
+    _LAST_MODEL.clear()
+    model = _Model(xml, [AssetArchive(p, m, a, x) for p, m, a, x in specs])
+    _LAST_MODEL.append((key, model))
+    return model
 
 
 # ---------------------------------------------------------------- family profiles
@@ -489,16 +540,18 @@ def _side_hints(bases: dict[str, list[float]], grippers) -> tuple[dict, str | No
 
 
 def read_robosuite_family(path: Path, *, family: str, profile: Profile = ROBOSUITE, demos=None,
-                          root=None, asset_archive=None, catalog=None, with_scene: bool = True):
+                          root=None, asset_archive=None, catalog=None, with_scene: bool = True, select=None):
     """Yield one :class:`SourceEpisode` per demo of a robosuite-recorded HDF5 file.
 
-    ``demos`` selects demo keys (default: all, in numeric order). ``root`` is the data
+    ``demos`` selects demo keys (default: all, in numeric order). ``select(i)`` (see
+    :mod:`.registry`) filters positions in that order: rejected demos are yielded as ``None``
+    without reading their states or compiling their MJCF. ``root`` is the data
     root holding ``raw/<family>/...`` asset archives (inferred from ``path`` when it
     lies under a ``raw/`` folder); ``asset_archive`` overrides the robosuite asset zip
     explicitly (then no other archive is used).
     """
     path = Path(path)
-    catalog = catalog if catalog is not None else load_catalog()
+    catalog = catalog if catalog is not None else load_catalog(tables=False)
     entry, ident = identify(path, catalog)
     with h5py.File(path, "r") as f:
         env_args = json.loads(f["data"].attrs["env_args"])
@@ -513,23 +566,38 @@ def read_robosuite_family(path: Path, *, family: str, profile: Profile = ROBOSUI
                    entry=entry, ident=ident, path=path, masks=masks, with_scene=with_scene,
                    instruction=profile.instruction(f), lineage=profile.lineage(entry, dataset),
                    success_fn=profile.success, success_rule=profile.success_rule)
-        extra = None
-        for key in keys:
-            g = f["data"][key]
-            xml = g.attrs["model_file"]
-            if isinstance(xml, bytes):
-                xml = xml.decode()
+
+        def model_file(key):
+            xml = f["data"][key].attrs["model_file"]
+            return xml.decode() if isinstance(xml, bytes) else xml
+
+        def archives(xml):
             if asset_archive is not None:
-                found, notes = [((str(asset_archive), ASSET_MARKER, (), ""), None)], {}
-            else:
-                found, notes = _locate_archives(env_version, xml, path, root, catalog, profile)
-            if extra is None:
-                extra = profile.extra_provenance(f, {"archives": found})
-            model = _compile(xml, tuple(spec for spec, _ in found))
-            yield _episode(model, g, key, archives=found, archive_notes=notes, extra=extra, **ctx)
+                return [((str(asset_archive), ASSET_MARKER, (), ""), None)], {}
+            return _locate_archives(env_version, xml, path, root, catalog, profile)
+
+        chosen = [select is None or select(i) for i in range(len(keys))]
+        extra = None
+        for i, key in enumerate(keys):
+            if not chosen[i]:
+                yield None
+                continue
+            g = f["data"][key]
+            xml = model_file(key)
+            found, notes = archives(xml)
+            if extra is None:  # file-level provenance from the archives of the first demo
+                extra = profile.extra_provenance(f, {"archives": found if i == 0 else archives(model_file(keys[0]))[0]})
+            episode = _episode(_compile(xml, tuple(spec for spec, _ in found)), g, key, archives=found,
+                               archive_notes=notes, extra=extra, **ctx)
+            # Keep the compiled model across the yield only when the next demo read reuses it, so
+            # it is not held (with its compile-time memory) while the caller simulates.
+            following = next((j for j in range(i + 1, len(keys)) if chosen[j]), None)
+            if following is None or model_file(keys[following]) != xml:
+                _LAST_MODEL.clear()
+            yield episode
 
 
-@register("robomimic", "mimicgen")
+@register("robomimic", "mimicgen", select=True)
 def read_robosuite_hdf5(path: Path, *, family: str, **kw):
     """robomimic / MimicGen files (see :func:`read_robosuite_family`)."""
     return read_robosuite_family(path, family=family, profile=ROBOSUITE, **kw)

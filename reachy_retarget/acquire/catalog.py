@@ -154,13 +154,14 @@ def make_entry(f: dict, group: dict) -> CatalogEntry:
     return entry
 
 
-def parse_catalog(text: str, base: Path | None = None) -> list[CatalogEntry]:
+def parse_catalog(text: str, base: Path | None = None, *, tables: bool = True) -> list[CatalogEntry]:
+    """Entries of one catalog file; ``tables=False`` skips the rows of gzip TSV tables."""
     doc = yaml.load(text, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))
     out = []
     for group in doc.get("sources", []):
         for f in group.get("files") or []:
             out.append(make_entry(dict(f), group))
-        if group.get("table"):
+        if group.get("table") and tables:
             if base is None:
                 raise ValueError("a catalog with a table needs its directory")
             out.extend(make_entry(row, group) for row in _rows(base / group["table"]))
@@ -176,20 +177,24 @@ def _index(entries) -> dict[str, CatalogEntry]:
     return out
 
 
-@lru_cache(maxsize=1)
-def _packaged() -> dict[str, CatalogEntry]:
+@lru_cache(maxsize=2)
+def _packaged(tables: bool = True) -> dict[str, CatalogEntry]:
     files = sorted(p for p in CATALOG_DIR.iterdir() if p.name.endswith(".yaml"))
-    return _index(e for p in files for e in parse_catalog(p.read_text(), p.parent))
+    return _index(e for p in files for e in parse_catalog(p.read_text(), p.parent, tables=tables))
 
 
-def load_catalog(path=None) -> dict[str, CatalogEntry]:
+def load_catalog(path=None, *, tables: bool = True) -> dict[str, CatalogEntry]:
     """Entries keyed by id, from one catalog file or every packaged ``catalog/*.yaml``.
 
-    The packaged catalog is parsed once per process; callers get their own dict."""
+    ``tables=False`` leaves out the rows of gzip TSV tables (the per-member listings of
+    BEHAVIOR, MobileManiBench, MolmoBot and RoboVerse, about 210k entries and several
+    hundred MB of Python objects); readers whose files and asset archives are all listed
+    inline use it. The packaged catalog is parsed once per process (per ``tables``
+    value); callers get their own dict."""
     if path:
         p = Path(path)
-        return _index(parse_catalog(p.read_text(), p.parent))
-    return dict(_packaged())
+        return _index(parse_catalog(p.read_text(), p.parent, tables=tables))
+    return dict(_packaged(tables))
 
 
 def select(catalog: dict, patterns, *, families=(), match=None) -> list[CatalogEntry]:

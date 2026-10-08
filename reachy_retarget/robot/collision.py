@@ -65,9 +65,18 @@ class SelfCollision:
         k = int(np.argmin(d))
         return float(d[k]), (self.links[self.link_index[self.a[k]]], self.links[self.link_index[self.b[k]]])
 
-    def min_clearance(self, q):
-        """Minimum signed distance (...,) for a batch of configurations (..., 22)."""
-        return self.distances(q).min(axis=-1)
+    def min_clearance(self, q, chunk: int = 64):
+        """Minimum signed distance (...,) for a batch of configurations (..., 22).
+
+        Evaluated ``chunk`` configurations at a time: the pair distances of one configuration
+        take ~0.8 MB, so a whole long episode at once (MimicGen kitchen: 2463 frames) would
+        need ~2 GB of temporaries."""
+        q = np.asarray(q, float)
+        flat = q.reshape(-1, q.shape[-1])
+        out = np.empty(len(flat))
+        for i in range(0, len(flat), chunk):
+            out[i:i + chunk] = self.distances(flat[i:i + chunk]).min(axis=-1)
+        return out[0] if q.ndim == 1 else out.reshape(q.shape[:-1])
 
 
 def sphere_centers(q):

@@ -123,9 +123,15 @@ class Clearance:
         c = self.sc.sphere_centers(q)[0]
         return np.linalg.norm(c[..., self.a, :] - c[..., self.b, :], axis=-1) - self.radii, c
 
-    def minimum(self, q):
-        """Minimum signed distance (...,) over the selected pairs."""
-        return self.distances(q)[0].min(axis=-1)
+    def minimum(self, q, chunk: int = 64):
+        """Minimum signed distance (...,) over the selected pairs, ``chunk`` configurations at a
+        time (see :meth:`SelfCollision.min_clearance`)."""
+        q = np.asarray(q, float)
+        flat = q.reshape(-1, q.shape[-1])
+        out = np.empty(len(flat))
+        for i in range(0, len(flat), chunk):
+            out[i:i + chunk] = self.distances(flat[i:i + chunk])[0].min(axis=-1)
+        return out[0] if q.ndim == 1 else out.reshape(q.shape[:-1])
 
     def gradients(self, q, margin, limit):
         """(distances (k,), gradients (k, 22) w.r.t. q) of the worst pairs below ``margin``.

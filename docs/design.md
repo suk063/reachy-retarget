@@ -29,6 +29,18 @@ source files ──adapter──▶ SourceEpisode ──retarget──▶ Reachy
 * `cluster/`: job pool over the persistent worker pods (two jobs per pod); `cluster/manifests.py`
   writes size-batched fetch manifests.
 
+Build jobs (`reachy_retarget.build`, one source file shard per job) must stay well below half
+of a 4 GiB pod. Rules that keep them there: the shard is passed to the adapter as `select`
+(adapters registered with `select=True` never read, compile or replay other shards'
+episodes; the robosuite family does); a source reader keeps at most one compiled source
+model and drops it before yielding unless the next episode records the same MJCF; the source
+kinematic model is compiled without file textures (visual only); each episode is released and
+the allocator trimmed before the next is read; MuJoCo's compiler asset cache is off
+(`--mujoco-cache-mb`); per-frame checks over a whole episode are chunked (self-collision pair
+distances take ~0.8 MB per frame); readers whose files are listed inline load the catalog
+without its gzip TSV member tables (`load_catalog(tables=False)`, ~0.6 GB otherwise). Every
+build record carries `rss_mb` and `max_rss_mb`.
+
 ## Reachy model
 
 Assets are copied from `reachy-agent@d6d5e9fd` (`robot/assets`, URDF SHA-256

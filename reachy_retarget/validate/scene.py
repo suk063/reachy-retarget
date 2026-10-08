@@ -37,6 +37,7 @@ from __future__ import annotations
 
 import hashlib
 import posixpath
+import re
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -362,6 +363,11 @@ def build_scene(scene_ref: SceneRef, *, prefix: str = "reachy/", floor_z: float 
             v[3:] /= np.linalg.norm(v[3:])
         initial[name] = v
     xml = spec.to_xml()
+    if "content_type" not in scene_ref.mjcf:
+        # MuJoCo's XML writer adds content_type to the assets this compile decoded but not to
+        # those served from its process-wide asset cache; dropping them keeps the scene XML (and
+        # scene_sha256) independent of the cache state. File extensions identify the types.
+        xml = re.sub(r' content_type="[^"]*"', "", xml)
     info = {"source_mjcf_sha256": source_sha, "robot_prefixes": prefixes, "removed": removed,
             "pruned_assets": pruned, "assets": asset_records, "missing_visual_assets": missing_visual,
             "source_option": source_option, "option": {k: (list(v) if isinstance(v, tuple) else v)

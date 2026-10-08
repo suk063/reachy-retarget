@@ -36,7 +36,7 @@ def _task_objects(env_name: str, f):
 DEXMIMICGEN = Profile(task_objects=_task_objects, lineage=_lineage)
 
 
-@register("dexmimicgen")
+@register("dexmimicgen", select=True)
 def read_dexmimicgen_hdf5(path, *, family: str, **kw):
     """DexMimicGen parallel-jaw task files (see :func:`.robosuite.read_robosuite_family`)."""
     return read_robosuite_family(path, family=family, profile=DEXMIMICGEN, **kw)

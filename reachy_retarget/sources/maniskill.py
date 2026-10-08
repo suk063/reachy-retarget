@@ -449,7 +449,7 @@ def read_maniskill(path: Path, *, family: str, demos=None, limit=None, root=None
     ``crosscheck`` adds an independent MuJoCo FK comparison to each episode's provenance.
     """
     path = Path(path)
-    catalog = catalog if catalog is not None else load_catalog()
+    catalog = catalog if catalog is not None else load_catalog(tables=False)
     meta_path = path.with_suffix(".json")
     meta = json.loads(meta_path.read_text())
     digest, meta_digest = sha256_file(path), sha256_file(meta_path)

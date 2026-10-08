@@ -86,8 +86,10 @@ def main(job_dir: str) -> int:
     if free < RESERVE:
         receipt.update(state="refused", error=f"local free space {free / 1e9:.1f} GB below reserve")
     else:
+        # MALLOC_ARENA_MAX: glibc otherwise keeps a heap arena per thread (MuJoCo compiles
+        # meshes on a thread pool), whose freed pages stay resident; jobs share a 4 GiB pod.
         env = {**os.environ, "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1",
-               "REACHY_RETARGET_PVC": str(PVC)}
+               "MALLOC_ARENA_MAX": "2", "REACHY_RETARGET_PVC": str(PVC)}
         argv = [arg.replace("{out}", str(out)).replace("{pvc}", str(PVC)) for arg in spec["argv"]]
         with (job_dir / "log.txt").open("wb") as log:
             proc = subprocess.run([sys.executable, *argv], stdout=log, stderr=subprocess.STDOUT, env=env,

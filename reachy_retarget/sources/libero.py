@@ -103,7 +103,7 @@ LIBERO = Profile(
 )
 
 
-@register("libero")
+@register("libero", select=True)
 def read_libero_hdf5(path, *, family: str, **kw):
     """LIBERO task files (see :func:`.robosuite.read_robosuite_family`)."""
     return read_robosuite_family(path, family=family, profile=LIBERO, **kw)
