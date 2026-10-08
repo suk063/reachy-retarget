@@ -104,6 +104,12 @@ class Pool:
             text = k8s.run(pod, POLL.format(ids=" ".join(ids)), timeout=120)
         except Exception as error:  # noqa: BLE001
             self.log(event="poll_error", pod=pod, error=str(error)[-500:])
+            if "NotFound" in str(error):  # the pod was replaced: its jobs are gone with it
+                with self.lock:
+                    self.free = [(p, s) for p, s in self.free if p != pod]
+                    self.retired.add(pod)
+                for job_id in ids:
+                    self.lost(job_id, pod)
             return
         for line in text.splitlines():
             job_id, _, payload = line.partition("\t")
@@ -132,7 +138,8 @@ class Pool:
         """Requeue a job whose pod lost it; after three losses record it as failed."""
         with self.lock:
             pod_, slot, _ = self.running.pop(job_id)
-            self.free.append((pod_, slot))
+            if pod_ not in self.retired:
+                self.free.append((pod_, slot))
             self.losses[job_id] = self.losses.get(job_id, 0) + 1
             final = self.losses[job_id] >= 3
             if not final:
