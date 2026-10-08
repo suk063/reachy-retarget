@@ -1,5 +1,7 @@
-"""Source adapters: each registers one or more families producing SourceEpisode objects."""
-from . import behavior, bigym, dexmimicgen, libero, maniskill, mobilemanibench, molmobot, robocasa, robosuite, roboverse  # noqa: F401
-from .registry import families, iter_episodes, register
+"""Source adapters: each module registers one or more families producing SourceEpisode objects.
 
-__all__ = ["families", "iter_episodes", "register"]
+Adapter modules are imported lazily by :func:`iter_episodes` (see ``registry.MODULES``).
+"""
+from .registry import adapter, families, iter_episodes, register
+
+__all__ = ["adapter", "families", "iter_episodes", "register"]

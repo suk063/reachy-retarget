@@ -6,6 +6,7 @@ robomimic and MimicGen are both robosuite recordings).
 """
 from __future__ import annotations
 
+import importlib
 from collections.abc import Callable, Iterator
 from pathlib import Path
 
@@ -13,6 +14,14 @@ from ..schema.source import SourceEpisode
 
 Adapter = Callable[..., Iterator[SourceEpisode]]
 _ADAPTERS: dict[str, Adapter] = {}
+
+# family -> adapter module; modules are imported on first use, so one family's
+# dependencies (or a broken adapter) never affect another family.
+MODULES = {
+    "behavior": "behavior", "bigym": "bigym", "dexmimicgen": "dexmimicgen", "libero": "libero",
+    "maniskill": "maniskill", "mimicgen": "robosuite", "mobilemanibench": "mobilemanibench",
+    "molmobot": "molmobot", "robocasa": "robocasa", "robomimic": "robosuite", "roboverse": "roboverse",
+}
 
 
 def register(family: str, *more: str) -> Callable[[Adapter], Adapter]:
@@ -27,11 +36,18 @@ def register(family: str, *more: str) -> Callable[[Adapter], Adapter]:
 
 
 def families() -> list[str]:
-    return sorted(_ADAPTERS)
+    return sorted(set(MODULES) | set(_ADAPTERS))
+
+
+def adapter(family: str) -> Adapter:
+    """The adapter of ``family``, importing its module on first use."""
+    if family not in _ADAPTERS and family in MODULES:
+        importlib.import_module(f"{__package__}.{MODULES[family]}")
+    if family not in _ADAPTERS:
+        raise KeyError(f"unknown source family {family!r}; known: {families()}")
+    return _ADAPTERS[family]
 
 
 def iter_episodes(family: str, path, **kw) -> Iterator[SourceEpisode]:
     """Yield the episodes of one local source file through its family adapter."""
-    if family not in _ADAPTERS:
-        raise KeyError(f"unknown source family {family!r}; known: {families()}")
-    yield from _ADAPTERS[family](Path(path), family=family, **kw)
+    yield from adapter(family)(Path(path), family=family, **kw)
