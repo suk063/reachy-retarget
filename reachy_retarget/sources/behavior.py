@@ -62,7 +62,7 @@ from pathlib import Path
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-from ..acquire import load_catalog, locate_entry, sha256_file
+from ..acquire import load_family_catalog, locate_entry, sha256_file
 from ..schema.source import Effector, ObjectTrack, SourceEpisode
 from .registry import register
 
@@ -301,10 +301,13 @@ def read_behavior(path: Path, *, family: str, root=None, urdf=None, raw=None, ca
     ``omnigibson-robot-assets`` copy under the data root inferred from ``path``); without
     it there is no FK check and no torso height. ``raw`` is the raw HDF5 of the same
     episode (default: the sibling ``2025-challenge-rawdata`` file if present); without
-    it ``success`` is ``None``.
+    it ``success`` is ``None``. ``catalog`` defaults to the BEHAVIOR catalog only
+    (:func:`acquire.load_family_catalog`): every file looked up here (episode parquet, metadata
+    JSON, robot URDF) is a ``behavior`` entry, and the full catalog with every family's tables
+    would add about 400 MB to each build job.
     """
     path = Path(path)
-    catalog = catalog if catalog is not None else load_catalog()
+    catalog = catalog if catalog is not None else load_family_catalog("behavior")
     files = sorted(path.glob("*.parquet")) if path.is_dir() else [path]
     if limit is not None:
         files = files[:limit]

@@ -8,7 +8,8 @@ rounded up (base 0.245 m, column 0.136 m, torso 0.183 m at zero posture). Arms a
 they reach over tables by design and are checked by self-clearance and tier P.
 
 Static obstacles are the ``support`` and ``fixture`` objects with box geometry (see
-:func:`box_geometry`; a cylinder counts as its bounding box; pose = first valid row): their floor projection is the convex hull of
+:func:`box_geometry`; a cylinder counts as its bounding box, a union of ``boxes`` as its
+enclosing box; pose = first valid row): their floor projection is the convex hull of
 the eight projected corners and they occupy the height interval of their corners. Boxes whose
 top lies below ``cfg.floor_support_height`` are the floor itself and are ignored. A body disc
 is tested against an obstacle only when their height intervals overlap, so the base may pass
@@ -36,12 +37,22 @@ BODY_PROFILE = ((-np.inf, 0.30, BASE_FOOTPRINT_RADIUS), (0.30, 0.95, 0.14), (0.9
 
 def box_geometry(geometry: dict):
     """(center (3,), half extents (3,)) in the object frame of a ``box`` or body-frame ``aabb``
-    geometry record, or the bounding box of a body-frame ``cylinder`` (``radius``,
-    ``half_length``, ``axis`` "x"/"y"/"z", default "z"); optional ``center``, default 0. Else None."""
+    geometry record, the bounding box of a body-frame ``cylinder`` (``radius``,
+    ``half_length``, ``axis`` "x"/"y"/"z", default "z"; optional ``center``, default 0) or the
+    enclosing box of a body-frame union of ``boxes`` (each ``{"center", "half_extents"}``, e.g.
+    the ManiSkill PullCubeTool L tool). Else None. Like an ``aabb``, the enclosing box of
+    ``boxes`` is an envelope: :func:`box_parts` gives the exact parts."""
     if geometry.get("frame", "body") != "body":
         return None
-    center = np.asarray(geometry.get("center", (0.0, 0.0, 0.0)), float)
     kind = geometry.get("kind")
+    if kind == "boxes":
+        parts = box_parts(geometry)
+        if not parts:
+            return None
+        lo = np.min([c - h for c, h in parts], axis=0)
+        hi = np.max([c + h for c, h in parts], axis=0)
+        return (lo + hi) / 2, (hi - lo) / 2
+    center = np.asarray(geometry.get("center", (0.0, 0.0, 0.0)), float)
     if kind == "cylinder":
         axis = "xyz".find(str(geometry.get("axis", "z")))
         if axis < 0 or "radius" not in geometry or "half_length" not in geometry:
@@ -55,6 +66,25 @@ def box_geometry(geometry: dict):
     if half.shape != (3,) or center.shape != (3,):
         return None
     return center, half
+
+
+def box_parts(geometry: dict) -> list[tuple[np.ndarray, np.ndarray]]:
+    """Exact solid boxes [(center (3,), half extents (3,)), ...] in the object frame: the parts of
+    a body-frame ``boxes`` union (empty if any part is malformed), else ``[box_geometry]`` (one
+    box, or [] without box geometry)."""
+    if geometry.get("kind") != "boxes":
+        box = box_geometry(geometry)
+        return [] if box is None else [box]
+    if geometry.get("frame", "body") != "body":
+        return []
+    out = []
+    for b in geometry.get("boxes") or []:
+        c = np.asarray(b.get("center", (0.0, 0.0, 0.0)), float)
+        h = np.asarray(b.get("half_extents", ()), float)
+        if c.shape != (3,) or h.shape != (3,):
+            return []
+        out.append((c, h))
+    return out
 
 
 def cylinder_geometry(geometry: dict):
@@ -94,7 +124,7 @@ def obstacles(objects, cfg: RetargetConfig, *, static_only=False, held=None) -> 
             continue
         kind = o.geometry.get("kind")
         box = box_geometry(o.geometry)
-        if kind in ("box", "aabb") and box is None:
+        if kind in ("box", "aabb", "boxes") and box is None:
             out.notes.append(f"object {name}: {kind} without a body-frame center/three half_extents ignored")
         if o.role in STATIC_ROLES:
             if box is None:

@@ -197,6 +197,22 @@ def load_catalog(path=None, *, tables: bool = True) -> dict[str, CatalogEntry]:
     return dict(_packaged(tables))
 
 
+@lru_cache(maxsize=8)
+def _family_file(name: str) -> dict[str, CatalogEntry]:
+    p = CATALOG_DIR / f"{name}.yaml"
+    return _index(parse_catalog(p.read_text(), p.parent))
+
+
+def load_family_catalog(family: str) -> dict[str, CatalogEntry]:
+    """Entries of one packaged ``catalog/<family>.yaml`` only, its tables included (BEHAVIOR:
+    30k entries, about 60 MB, instead of the 210k entries and about 400 MB of
+    :func:`load_catalog`). For readers that look up only their own family's files (provenance by
+    SHA-256 or path). Parsed once per process; callers get their own dict."""
+    if not (CATALOG_DIR / f"{family}.yaml").is_file():
+        raise KeyError(f"no packaged catalog for family {family!r}")
+    return dict(_family_file(family))
+
+
 def select(catalog: dict, patterns, *, families=(), match=None) -> list[CatalogEntry]:
     """Entries for ``patterns``: an exact id, or a prefix ending in ``/`` (every usable entry
     below it), plus every usable entry of ``families`` (optionally containing ``match``)."""
@@ -226,4 +242,4 @@ def select(catalog: dict, patterns, *, families=(), match=None) -> list[CatalogE
     return out
 
 
-__all__ = ["CATALOG_DIR", "KINDS", "CatalogEntry", "load_catalog", "make_entry", "parse_catalog", "select"]
+__all__ = ["CATALOG_DIR", "KINDS", "CatalogEntry", "load_catalog", "load_family_catalog", "make_entry", "parse_catalog", "select"]

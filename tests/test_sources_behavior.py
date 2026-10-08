@@ -16,7 +16,7 @@ import numpy as np
 import pyarrow.parquet as pq
 import pytest
 
-from reachy_retarget.acquire import load_catalog
+from reachy_retarget.acquire import load_catalog, load_family_catalog
 from reachy_retarget.sources import families, iter_episodes
 from reachy_retarget.sources.behavior import EEF_TO_CONTRACT, STATE, R1ProFK, carry_intervals, task_info_layout
 
@@ -49,6 +49,28 @@ def test_registry_and_catalog():
     assert "behavior/omnigibson-robot-assets/models/r1pro/urdf/r1pro.urdf" in cat
     assert len({e.dataset for e in pqs}) == 50 and len({e.meta["episode_index"] for e in pqs}) == 10000
 
+
+
+def test_adapter_reads_only_the_behavior_catalog(monkeypatch):
+    """The adapter's provenance lookups use the BEHAVIOR catalog alone (build jobs stay well
+    below 1 GB RSS); it holds every behavior entry the full catalog has, tables included."""
+    from reachy_retarget.acquire import catalog as catalog_mod
+    from reachy_retarget.sources import behavior
+
+    fam = load_family_catalog("behavior")
+    full = {k: e for k, e in load_catalog().items() if e.family == "behavior"}
+    assert fam == full and len(fam) > 30000
+    with pytest.raises(KeyError):
+        load_family_catalog("nonexistent")
+
+    def refuse(*a, **k):
+        raise AssertionError("full catalog loaded")
+    monkeypatch.setattr(catalog_mod, "load_catalog", refuse)
+    monkeypatch.setattr("reachy_retarget.acquire.load_catalog", refuse)
+    calls = []
+    monkeypatch.setattr(behavior, "load_family_catalog", lambda f: calls.append(f) or load_family_catalog(f))
+    assert episode().provenance["catalog_id"] is None
+    assert calls == ["behavior"]
 
 def test_task_info_layout():
     meta = json.loads((DEMOS / "meta/episodes/task-0000/episode_00000010.json").read_text())

@@ -38,7 +38,10 @@ kinematic model is compiled without file textures (visual only); each episode is
 the allocator trimmed before the next is read; MuJoCo's compiler asset cache is off
 (`--mujoco-cache-mb`); per-frame checks over a whole episode are chunked (self-collision pair
 distances take ~0.8 MB per frame); readers whose files are listed inline load the catalog
-without its gzip TSV member tables (`load_catalog(tables=False)`, ~0.6 GB otherwise). Every
+without its gzip TSV member tables (`load_catalog(tables=False)`, ~0.6 GB otherwise); the
+BEHAVIOR reader, whose files are table rows, loads only `catalog/behavior.yaml` with its table
+(`load_family_catalog("behavior")`, ~60 MB: a `--shard 0/20` build of one local task peaks at
+444 MB RSS instead of 709 MB, episode content identical). Every
 build record carries `rss_mb` and `max_rss_mb`.
 
 ## Reachy model
@@ -106,7 +109,7 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      closing axis holds nothing (fingers closed on nothing push with their outsides or tips:
      ManiSkill PullCube, StackPyramid and TwoRobotPickCube push 40 mm cubes at width 0–15 mm and
      were labelled as grasps; an `aabb` is an envelope, e.g. the Square nut ring, so only its
-     thinnest extent is used); gaps ≤ 0.25 s between two runs on the same object are bridged
+     thinnest extent is used, and a union of `boxes` uses its thinnest part); gaps ≤ 0.25 s between two runs on the same object are bridged
      while the hand stays within contact distance (RL grippers jitter around the stall: the
      LiftPegUpright peg is lifted while the label flickered off for 0.5 s); runs shorter than
      0.2 s are dropped (a closed hand brushing an object).
@@ -171,7 +174,13 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      collision geometry), and a scene box only blocks the discs at its height, so the base may
      stand under a table top whose legs are visual-only (robosuite). Box and body-frame aabb
      geometry (with centre offset) are both used; before, adapter aabbs were ignored and the
-     base was placed inside the table.
+     base was placed inside the table. A union of `boxes` (ManiSkill PullCubeTool L tool,
+     PlugCharger charger and receptacle, PegInsertionSide hole box) is seen by
+     `box_geometry` as its enclosing box (an envelope, like an `aabb`: footprint, grasp
+     symmetry and contact width), while hand–object distances and the finger screen use the
+     exact parts (`footprint.box_parts`): the envelope of an L covers the empty corner beside
+     the handle, where the fingers of a handle grasp are. Teaching `box_geometry` the kind
+     keeps one geometry record per object (adapters need not duplicate it as an `aabb`).
    * Placement candidates include the target centroid itself; the score adds the arm's
      self-clearance below the IK margin at the keyframes (the scoring IK has no repulsion
      term), with the inactive arm in its rest posture. Moving-object samples while a hand
@@ -234,6 +243,19 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
     velocity reference, still a deterministic function of the retargeted trajectory. Fingers
     take the more closed of the led and the current reference (lead while closing, never an
     early release). `tcp_tracking` compares against the reference, not the led command.
+  * *Source end motion.* Sources may end while an object still moves (ManiSkill RollBall
+    stops at the first success with the ball rolling at 0.6–1.0 m/s; a faithful replay can
+    then neither end at the source's final pose after the 1 s hold nor at rest). Per tracked
+    object, the source end speed is the pose change over the last 0.1 s of source time
+    (`physics.source_end_motion`). At rest (< 0.02 m/s and < 0.2 rad/s, the existing rest
+    thresholds) both gates apply as before (`rule = "after_hold"`). Otherwise
+    `task_final_pose` compares the rollout pose at the instant the retargeted trajectory
+    reaches the source's last frame (first row whose `source_time` reaches it) with that
+    frame's pose (`rule = "source_end"`), and the object's final speed is reported, not
+    gated, by `objects_at_rest`. Untracked free bodies and objects whose end speed cannot be
+    measured keep the rest requirement. Rules, end speeds and both errors are stored per
+    object (`metrics.task`, `metrics.objects_at_rest_rule`); robot gates and thresholds are
+    unchanged.
   * Object–environment contacts during the settle phase (objects released from the
     source's initial state; robosuite cubes start ~1 cm above the table) are reported, not
     gated. Grasp gates also count a hand as closed while the episode's grasp label is set
@@ -316,14 +338,31 @@ Remaining failure modes: Reachy's ±30° wrist during carries that rotate the ob
 (PickCube teleop, PullCubeTool, LiftPegUpright, PegInsertionSide: TCP rotation residual 0.1–0.5
 rad while holding); dynamic RL pushes and flicks (PullCube/PushCube RL hit the cube and let it
 slide at 0.5–0.8 m/s; time scaling to Reachy's speed limits makes the hit 2–4× slower, so the
-cube travels less: tier P `task_final_pose`); RollBall tier P cannot pass by construction (every
-source episode ends at first success with the ball still rolling at 0.6–1.0 m/s, so
-`task_final_pose` after the 1 s hold and `objects_at_rest` fail for any faithful replay; the gate
-should compare against the source pose at the source's last time and require rest only when the
-source object rests); the PullCubeTool L tool turns ~1 rad about the pad normal in Reachy's grasp
+cube travels less: tier P `task_final_pose`); RollBall (see the follow-up below); the PullCubeTool L tool turns ~1 rad about the pad normal in Reachy's grasp
 (grasped 12 cm from its centre of mass; the pads resist that torque only through contact
 spread); two facing robots on one Reachy (TwoRobotPickCube, Transport handover: both hands near
 one object from opposite sides, self-clearance and wrist limits).
+
+Follow-up (same dev episodes, robomimic Lift demos 0–9), K / P before → after:
+
+| change | task | before | after |
+| --- | --- | --- | --- |
+| source end motion | RollBall | 6 / 0 | 6 / 0 |
+| | PushCube | 9 / 7 | 9 / 7 |
+| | PokeCube | 9 / 7 | 9 / 7 |
+| | Lift (robomimic) | 10 / 10 | 10 / 10 |
+| `boxes` geometry | PullCubeTool | 0 / 0 | 0 / 0 |
+
+RollBall no longer fails `objects_at_rest` (10 → 0) but still fails `task_final_pose` in all 10:
+the gate is now attainable, the replay is not. Time scaling stretches the strike (traj_0: 2.15 s
+source → 5.4 s), so Reachy's hand rolls the ball at ~0.1 m/s instead of 1 m/s and it stops
+0.5–2.3 m short of the source's end position. Every PushCube, PokeCube and Lift object also ends
+the source moving (PushCube 0.1–0.3 m/s, PokeCube 0.02–0.05 m/s, the Lift cube rises at
+0.1–0.25 m/s at first success), so all use `source_end`; their errors change by ≤ 9 mm and no
+verdict flips (PushCube traj_9, already failing, now also misses the 3 cm tolerance). The L
+tool's geometry changes the grasp offset by 0.4° only: PullCubeTool fails on Reachy's ±30° wrist
+(TCP rotation residual 0.18–0.52 rad, hand–tool relative drift) and in P on the tool turning
+~1 rad in the grasp.
 
 ## Episode storage (`reachy-retarget-episode-v2`)
 

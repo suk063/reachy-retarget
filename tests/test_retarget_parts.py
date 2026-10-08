@@ -5,7 +5,8 @@ import pytest
 from reachy_retarget.retarget import RetargetConfig, footprint
 from reachy_retarget.retarget.assign import bimanual_sides, posture, tuck_posture
 from reachy_retarget.retarget.gaze import eye_axes
-from reachy_retarget.retarget.targets import FLIP, finger_angles, grasp_labels, tcp_targets
+from reachy_retarget.retarget.targets import (FLIP, finger_angles, grasp_labels, object_distance, object_extent,
+                                              tcp_targets)
 from reachy_retarget.retarget.wbik import FrameSolver, tcp_errors
 from reachy_retarget.robot import BASE_FOOTPRINT_RADIUS, Reachy, gripper, min_clearance
 from reachy_retarget.schema import Effector, ObjectTrack, SourceEpisode
@@ -102,6 +103,26 @@ def test_footprint_table_top_and_aabb():
     d = footprint.clearance(np.array([[0.5, 0.0]]), obs)
     np.testing.assert_allclose(d[0], 0.3 - footprint.body_radius(0.75, 0.8))
     assert footprint.box_geometry({"kind": "aabb", "half_extents": [1, 1, 1], "frame": "world"}) is None
+
+
+def test_union_of_boxes_has_an_envelope_and_exact_parts():
+    """ManiSkill's L tool (kind "boxes"): box_geometry gives the enclosing box, distances use
+    the exact parts, the extent a hand can hold is the thinnest part."""
+    geom = {"kind": "boxes", "frame": "body",
+            "boxes": [{"center": [0.1, 0, 0], "half_extents": [0.1, 0.025, 0.025]},
+                      {"center": [0.175, 0.05, 0], "half_extents": [0.025, 0.05, 0.025]}]}
+    c, h = footprint.box_geometry(geom)
+    np.testing.assert_allclose(c, [0.1, 0.0375, 0])
+    np.testing.assert_allclose(h, [0.1, 0.0625, 0.025])
+    assert len(footprint.box_parts(geom)) == 2
+    assert footprint.box_parts({**geom, "boxes": [{"center": [0, 0], "half_extents": [1, 1, 1]}]}) == []
+    assert footprint.box_parts({"kind": "box", "half_extents": [1, 2, 3]})[0][1].tolist() == [1, 2, 3]
+    track = ObjectTrack(np.tile([1.0, 0, 0, 1, 0, 0, 0], (3, 1)), np.ones(3, bool), "manipulated", geom)
+    pts = np.array([[1.05, 0.06, 0.0],    # inside the envelope, outside both parts
+                    [1.1, 0.0, 0.0],      # inside the handle
+                    [1.175, 0.12, 0.0]])  # 2 cm beyond the hook
+    np.testing.assert_allclose(object_distance(pts, track), [0.035, 0.0, 0.02], atol=1e-12)
+    np.testing.assert_allclose(object_extent(track, np.arange(3), np.eye(3)), 0.05)
 
 
 def test_frame_solver_respects_margins_and_box():

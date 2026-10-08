@@ -46,9 +46,23 @@ additions marked new):
 | `tcp_tracking` | measured TCP (`{l,r}_arm_tip`) vs FK of the retargeted q at the same instant (the reference, not the lead-shifted ctrl): position <= 3 cm, rotation <= 0.2 rad (new) |
 | `grasp_drift` | while a hand is commanded closed (finger reference below the 0.5 opening angle, or the episode's grasp label `validation["grasp_object"]` set: large objects stall the fingers above the 0.5 opening) and holds an object lifted by > 15 mm with both pads (positive normal force), the object pose relative to the grasp-center site drifts <= 3 mm / 3 deg from its pose at acquisition |
 | `carry_contact` | both pads touch the carried object during >= 95 % of each carry |
-| `task_final_pose` | every `manipulated` object with a scene body ends within `cfg.object_position_tol_m` (default 3 cm, about a can radius; new) of its final pose in `ep.objects` (the source's final object pose); orientation is reported only (symmetric objects) |
-| `objects_at_rest` | at the end of the hold every free object moves < 0.02 m/s and < 0.2 rad/s |
+| `task_final_pose` | every `manipulated` object with a scene body is within `cfg.object_position_tol_m` (default 3 cm, about a can radius; new) of its final pose in `ep.objects` (the source's final object pose): after the hold when the source object is at rest at its end, else at the instant the retargeted trajectory reaches the source's last frame (see *Source end motion*); orientation is reported only (symmetric objects) |
+| `objects_at_rest` | at the end of the hold every free object moves < 0.02 m/s and < 0.2 rad/s; required for every free body except tracked objects that still move at the end of the source (reported only, see *Source end motion*) |
 | `actuator_replay` | re-running from the saved reset state with only the recorded ctrl sequence reproduces every recorded qpos/qvel within 1e-7 |
+
+*Source end motion.* Some sources end while an object still moves (ManiSkill RollBall stops at
+the first success with the ball rolling at 0.6-1.0 m/s); a faithful replay then cannot leave it
+at the source's final pose after the hold, nor at rest. Per tracked object
+(`source_end_motion`): the source's end is its last valid row ``e`` and the retargeted
+trajectory reaches it at the first row whose ``ep.source_time`` reaches ``source_time[e]``; the
+source speed is the pose change over the last ``cfg.source_rest_window_s`` (0.1 s) of source time
+before it. Below the rest thresholds (0.02 m/s, 0.2 rad/s) the object is *at rest* and both
+gates apply as written (``rule = "after_hold"``, rest required). Otherwise ``task_final_pose``
+compares the rollout pose at that instant (simulator time ``settle_s + time[row] - time[0]``)
+with the source's final pose (``rule = "source_end"``), and its final speed is reported, not
+gated. Free bodies without a track, or whose source speed cannot be measured, keep the rest
+requirement. The rule, the source end speed and both errors are recorded per object
+(``metrics["task"][id]``, ``metrics["objects_at_rest_rule"]``).
 
 Missing measurements fail: e.g. no manipulated object with a scene body fails
 `task_final_pose`. `simulate` returns `({"passed", "reasons", "metrics"}, rollout)`; store
@@ -101,6 +115,7 @@ class PhysicsConfig:
     replay: bool = True
     velocity_reference: bool = True  # lead each servo command by its kv/kp (see servo_lead)
     park_distance_m: float = 2.0   # untracked free bodies farther than this from the workspace are removed
+    source_rest_window_s: float = 0.1  # source time over which the end speed of an object is measured
     thresholds: dict = field(default_factory=lambda: dict(THRESHOLDS))
 
 
@@ -301,6 +316,38 @@ def replay(model, initial_state: np.ndarray, ctrl_steps: np.ndarray, act: np.nda
     return np.array(qpos), np.array(qvel)
 
 
+def source_end_motion(ep: ReachyEpisode, track, window_s: float, linear_m_s: float, angular_rad_s: float):
+    """End of one object's source track (see the module docstring, *Source end motion*):
+    ``{"source_row", "target_row", "window_s", "linear_m_s", "angular_rad_s", "at_rest"}`` or
+    None without valid rows. ``target_row`` is the first episode row whose source time reaches the
+    source time of the last valid row; speeds are None (and ``at_rest`` None) when the window holds
+    no earlier source time."""
+    valid = np.flatnonzero(track.valid)
+    if not len(valid):
+        return None
+    e = int(valid[-1])
+    st = ep.source_time
+    t_end = float(st[e])
+    target = int(np.argmax(st >= t_end - 1e-9))
+    out = {"source_row": e, "target_row": target, "window_s": None, "linear_m_s": None, "angular_rad_s": None,
+           "at_rest": None}
+    early = valid[(st[valid] >= t_end - window_s - 1e-9) & (st[valid] < t_end - 1e-9)]
+    if not len(early):
+        return out
+    i0 = int(early[0])
+    dt = t_end - float(st[i0])
+    a, b = track.pose[i0], track.pose[e]
+    rot = Rotation.from_quat(np.r_[b[4:], b[3]]) * Rotation.from_quat(np.r_[a[4:], a[3]]).inv()
+    lin, ang = float(np.linalg.norm(b[:3] - a[:3]) / dt), float(rot.magnitude() / dt)
+    out.update(window_s=dt, linear_m_s=lin, angular_rad_s=ang, at_rest=bool(lin < linear_m_s and ang < angular_rad_s))
+    return out
+
+
+def _track_body(oid, track, free, cfg):
+    candidates = [(cfg.object_bodies or {}).get(oid), track.geometry.get("body"), oid, f"{oid}_main"]
+    return next((c for c in candidates if c and c in free), None)
+
+
 def _object_bodies(ep: ReachyEpisode, scene: Scene, cfg: PhysicsConfig):
     m = scene.model
     free = set(scene.free_bodies.values())
@@ -308,8 +355,7 @@ def _object_bodies(ep: ReachyEpisode, scene: Scene, cfg: PhysicsConfig):
     for oid, track in ep.objects.items():
         if track.role != "manipulated":
             continue
-        candidates = [(cfg.object_bodies or {}).get(oid), track.geometry.get("body"), oid, f"{oid}_main"]
-        body = next((c for c in candidates if c and c in free), None)
+        body = _track_body(oid, track, free, cfg)
         if body is None:
             missing.append(oid)
         else:
@@ -465,27 +511,64 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
         rot_err[:, i] = Rotation.from_matrix(rel).magnitude()
     clearance = min_clearance(meas_q)
 
+    motion = {o: source_end_motion(ep, t, cfg.source_rest_window_s, th["stable_linear_speed_m_s"],
+                                   th["stable_angular_speed_rad_s"]) for o, t in ep.objects.items()}
+    obj_arr = {o: np.array(r) for o, r in obj_rows.items()}
+
+    def pose_error(final, target):
+        rq = Rotation.from_quat(np.r_[final[4:], final[3]]) * Rotation.from_quat(np.r_[target[4:], target[3]]).inv()
+        return float(np.linalg.norm(final[:3] - target[:3])), float(rq.magnitude())
+
     task, task_ok = {}, bool(objects) and not unmapped
     for o, b in objects.items():
-        track = ep.objects[o]
-        valid = np.flatnonzero(track.valid)
-        if not len(valid):
+        track, mo = ep.objects[o], motion[o]
+        if mo is None:
             task[o] = {"error": "no valid source pose"}
             task_ok = False
             continue
-        target = track.pose[valid[-1]]
-        final = obj_rows[o][-1]
-        err = float(np.linalg.norm(final[:3] - target[:3]))
-        rq = Rotation.from_quat(np.r_[final[4:], final[3]]) * Rotation.from_quat(np.r_[target[4:], target[3]]).inv()
-        task[o] = {"final_pose": final.tolist(), "source_final_pose": target.tolist(), "position_error_m": err,
-                   "rotation_error_rad": float(rq.magnitude()),
-                   "max_lift_m": float(np.max(np.array(obj_rows[o])[:, 2]) - z0[o])}
+        target = track.pose[mo["source_row"]]
+        rows_o = obj_arr[o]
+        final = rows_o[-1]
+        # rollout row at which the retargeted trajectory reaches the source's last frame of this object
+        r_end = min(int(round((settle_s + ep.time[mo["target_row"]] - ep.time[0]) / DT)), len(rows_o) - 1)
+        at_end = rows_o[r_end]
+        err_hold, rot_hold = pose_error(final, target)
+        err_end, rot_end = pose_error(at_end, target)
+        rule = "source_end" if mo["at_rest"] is False else "after_hold"
+        err, rot = (err_end, rot_end) if rule == "source_end" else (err_hold, rot_hold)
+        task[o] = {"rule": rule, "final_pose": final.tolist(), "source_final_pose": target.tolist(),
+                   "position_error_m": err, "rotation_error_rad": rot,
+                   "after_hold_position_error_m": err_hold, "source_end_position_error_m": err_end,
+                   "source_end_pose": at_end.tolist(), "source_end_time_s": float(rollout.time[r_end]),
+                   "source_end_speed": {k: mo[k] for k in ("linear_m_s", "angular_rad_s", "window_s")},
+                   "max_lift_m": float(np.max(rows_o[:, 2]) - z0[o])}
         task_ok &= err <= cfg.object_position_tol_m
-    rest = {}
+    free = set(scene.free_bodies.values())
+    body_track = {}
+    for oid, track in ep.objects.items():
+        body = _track_body(oid, track, free, cfg)
+        if body is not None:
+            body_track.setdefault(body, oid)
+    grasp_ids = list(ep.extra.get("grasp_object_ids", []))
+    held_at_end = {grasp_ids[i] for i in labels[-1] if 0 <= i < len(grasp_ids)}
+    rest, rest_rule = {}, {}
     vel = np.zeros(6)
     for name in scene.free_bodies.values():
         mujoco.mj_objectVelocity(m, d, mujoco.mjtObj.mjOBJ_BODY, m.body(name).id, vel, 0)
         rest[name] = {"linear_m_s": float(np.linalg.norm(vel[3:])), "angular_rad_s": float(np.linalg.norm(vel[:3]))}
+        oid = body_track.get(name)
+        mo = motion.get(oid) if oid else None
+        if oid is None:
+            rest_rule[name] = {"required": True, "object": None, "reason": "no source track"}
+        elif mo is None or mo["at_rest"] is None:
+            rest_rule[name] = {"required": True, "object": oid, "reason": "source end speed unknown"}
+        elif oid in held_at_end:  # still in a Reachy hand after the hold: it must be motionless
+            rest_rule[name] = {"required": True, "object": oid, "reason": "held by a hand at the episode end"}
+        else:
+            rest_rule[name] = {"required": bool(mo["at_rest"]), "object": oid,
+                               "reason": f"source {'at rest' if mo['at_rest'] else 'moving'} at its end: "
+                                         f"{mo['linear_m_s']:.3f} m/s {mo['angular_rad_s']:.3f} rad/s"}
+        rest[name]["required"] = rest_rule[name]["required"]
 
     grasps = {f"{s}/{o}": {k: v for k, v in st.items() if k not in ("anchor", "phase_bilateral")}
               for (s, o), st in carry.items() if st["acquired"] or st["carry_s"]}
@@ -531,7 +614,8 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
                              for g in grasps.values()),
         "task_final_pose": bool(task_ok),
         "objects_at_rest": all(r["linear_m_s"] < th["stable_linear_speed_m_s"]
-                               and r["angular_rad_s"] < th["stable_angular_speed_rad_s"] for r in rest.values()),
+                               and r["angular_rad_s"] < th["stable_angular_speed_rad_s"]
+                               for r in rest.values() if r["required"]),
         "actuator_replay": replay_diff is not None and replay_diff <= th["replay_absolute_tolerance"],
     }
     details = {
@@ -551,10 +635,11 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
                                  for k, g in grasps.items() if g["acquired"]) or "no carry",
         "carry_contact": "; ".join(f"{k}: {g['bilateral_fraction']}" for k, g in grasps.items()) or "no carry",
         "task_final_pose": ("no manipulated object with a scene body" if not objects else
-                            "; ".join(f"{o}: {t.get('position_error_m', float('nan')):.4f} m" for o, t in task.items()))
+                            "; ".join(f"{o}: {t.get('position_error_m', float('nan')):.4f} m ({t.get('rule')})"
+                                      for o, t in task.items()))
                            + (f"; unmapped objects {unmapped}" if unmapped else ""),
         "objects_at_rest": "; ".join(f"{k}: {v['linear_m_s']:.3f} m/s {v['angular_rad_s']:.3f} rad/s"
-                                     for k, v in rest.items()),
+                                     + ("" if v["required"] else " (reported only)") for k, v in rest.items()),
         "actuator_replay": f"max |diff| {replay_diff}",
     }
     reasons = [f"{k}: {details[k]}" for k, ok in gates.items() if not ok]
@@ -576,6 +661,7 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
         "tcp_position_error_max_m": pos_err.max(axis=0).tolist(), "tcp_rotation_error_max_rad": rot_err.max(axis=0).tolist(),
         "tcp_position_error_rms_m": np.sqrt((pos_err ** 2).mean(axis=0)).tolist(),
         "grasps": grasps, "task": task, "unmapped_objects": unmapped, "objects_final_speed": rest,
+        "objects_at_rest_rule": rest_rule,
         "actuator_replay_max_abs_diff": replay_diff, "simulator_warnings": warnings,
         "steps": steps_done, "expected_steps": n_steps,
     }

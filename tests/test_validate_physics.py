@@ -193,6 +193,9 @@ def test_pick_and_place_passes(success):
     assert grasp["acquired"] and grasp["phases"] == 1 and grasp["carry_s"] > 3.0
     task = tier["metrics"]["task"]["box"]
     assert task["max_lift_m"] > 0.06 and task["position_error_m"] < 0.01
+    # the source box rests at its end: final pose after the hold, rest required
+    assert task["rule"] == "after_hold" and task["position_error_m"] == task["after_hold_position_error_m"]
+    assert tier["metrics"]["objects_at_rest_rule"]["box_main"]["required"]
     # The rollout is on the simulator clock at 50 Hz: settle + episode + hold.
     assert isinstance(rollout, PhysicsRollout)
     info = rollout.info
@@ -225,6 +228,45 @@ def test_gripper_never_closing_fails_the_task(trajectory):
     assert tier["metrics"]["grasps"] == {}
     assert not gates["actuator_replay"]  # not run = not passed
     assert rollout is not None  # failed rollouts are returned for saving
+
+
+def test_source_end_motion_uses_the_source_clock():
+    """End speed over the last source window; the target row is where the source clock reaches
+    the last frame (the retargeted episode may hold it longer)."""
+    n = 40
+    times = np.arange(n) * DT
+    ep = make_episode(times, np.zeros((n, 22)))
+    ep.source_time = np.minimum(times, times[29])     # rows 29.. hold the last source frame
+    box = ep.objects["box"]
+    box.pose[:, 0] = BOX0[0] + 0.5 * ep.source_time   # 0.5 m/s along x until the source ends
+    mo = physics.source_end_motion(ep, box, 0.1, 0.02, 0.2)
+    assert mo["source_row"] == n - 1 and mo["target_row"] == 29
+    assert mo["linear_m_s"] == pytest.approx(0.5) and mo["window_s"] == pytest.approx(0.1) and mo["at_rest"] is False
+    box.pose[:, 0] = BOX0[0]
+    assert physics.source_end_motion(ep, box, 0.1, 0.02, 0.2)["at_rest"] is True
+    box.valid[:] = False
+    assert physics.source_end_motion(ep, box, 0.1, 0.02, 0.2) is None
+    box.valid[-1] = True  # one valid row: speed unknown
+    assert physics.source_end_motion(ep, box, 0.1, 0.02, 0.2)["at_rest"] is None
+
+
+def test_object_moving_at_source_end_is_compared_at_the_source_end(trajectory):
+    """A source that ends while the box still moves (RollBall-like): task_final_pose compares
+    the pose when the retargeted trajectory reaches the source's last frame, and rest is only
+    reported for that object."""
+    ep = make_episode(*trajectory)
+    box = ep.objects["box"]
+    box.pose[-6:-1, 0] -= 0.05  # the source's last 0.1 s: the box arrives at 0.5 m/s
+    tier, rollout = physics.simulate(ep, scene_ref(), physics.PhysicsConfig(replay=False))
+    m = tier["metrics"]
+    task = m["task"]["box"]
+    assert task["rule"] == "source_end" and task["source_end_speed"]["linear_m_s"] == pytest.approx(0.5)
+    assert task["position_error_m"] == task["source_end_position_error_m"] < 0.01
+    assert task["source_end_time_s"] == pytest.approx(rollout.info["settle_s"] + ep.duration)
+    assert m["gates"]["task_final_pose"] and m["gates"]["objects_at_rest"]
+    rule = m["objects_at_rest_rule"]["box_main"]
+    assert rule["object"] == "box" and not rule["required"] and not m["objects_final_speed"]["box_main"]["required"]
+    assert "source moving" in rule["reason"]
 
 
 def test_actuator_only_replay_is_deterministic(success):

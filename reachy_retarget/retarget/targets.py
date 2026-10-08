@@ -39,7 +39,7 @@ import numpy as np
 from ..robot import Reachy, angle_to_opening, angle_to_width, gripper
 from ..schema.rotations import quat_to_matrix
 from .config import RetargetConfig
-from .footprint import box_geometry, cylinder_geometry
+from .footprint import box_geometry, box_parts, cylinder_geometry
 
 FLIP = np.diag([-1.0, -1.0, 1.0, 1.0])  # half turn about the grasp-center approach axis
 IDLE_FINGER = gripper.CONTACT_ANGLE     # inactive hands: fingers just touching, no squeeze
@@ -201,8 +201,9 @@ def manipulated_ids(objects):
 
 def object_distance(points, track, valid_rows=None):
     """Distance (T,) from points (T, 3) to an object: to its cylinder or box if ``geometry`` is a
-    body-frame cylinder, box or aabb (:func:`.footprint.box_geometry`), else to its origin. NaN
-    where the object is invalid."""
+    body-frame cylinder, box or aabb (:func:`.footprint.box_geometry`), to the nearest part of a
+    union of ``boxes`` (:func:`.footprint.box_parts`), else to its origin. NaN where the object is
+    invalid."""
     valid = track.valid if valid_rows is None else valid_rows
     out = np.full(len(points), np.nan)
     if not valid.any():
@@ -214,8 +215,9 @@ def object_distance(points, track, valid_rows=None):
         radial, axial = _cylinder_coords(rel, cyl)
         rel = np.stack([np.maximum(radial - cyl[2], 0.0), np.maximum(np.abs(axial) - cyl[3], 0.0)], axis=-1)
     elif box is not None:
-        rel = rel - box[0]
-        rel = rel - np.clip(rel, -box[1], box[1])
+        out[valid] = np.min([np.linalg.norm((rel - c) - np.clip(rel - c, -h, h), axis=-1)
+                             for c, h in box_parts(track.geometry)], axis=0)
+        return out
     out[valid] = np.linalg.norm(rel, axis=-1)
     return out
 
@@ -239,13 +241,16 @@ def object_extent(track, rows, axes):
     """Extent (n,) of a solid object's cylinder or box along world directions ``axes`` (n, 3) at
     track rows ``rows``. An ``aabb`` is an envelope (the robomimic Square nut is a ring with a
     handle), so its thinnest extent is returned instead, a lower bound on any part a hand can
-    hold. NaN without box geometry."""
+    hold. A union of ``boxes`` (ManiSkill L tool) likewise gives the thinnest extent of its parts.
+    NaN without box geometry."""
     box = box_geometry(track.geometry)
     out = np.full(len(rows), np.nan)
     if box is None or not len(rows):
         return out
     if track.geometry.get("kind") == "aabb":
         return np.full(len(rows), 2.0 * float(np.min(box[1])))
+    if track.geometry.get("kind") == "boxes":
+        return np.full(len(rows), 2.0 * float(min(np.min(h) for _, h in box_parts(track.geometry))))
     yo = np.einsum("tji,tj->ti", quat_to_matrix(track.pose[rows, 3:]), axes)
     cyl = cylinder_geometry(track.geometry)
     if cyl is not None:
@@ -439,8 +444,8 @@ def finger_penetration(src, key, side, offset, labels, finger, cfg: RetargetConf
         if cyl is not None:
             radial, axial = _cylinder_coords(rel, cyl)
             inside = np.minimum(cyl[2] - radial, cyl[3] - np.abs(axial))  # > 0 inside the cylinder
-        else:
-            inside = np.min(box[1] - np.abs(rel - box[0]), axis=-1)  # > 0 inside the box
+        else:  # > 0 inside a box (deepest over the parts of a union of boxes)
+            inside = np.max([np.min(h - np.abs(rel - c), axis=-1) for c, h in box_parts(track.geometry)], axis=0)
         depth[rows] = np.maximum(depth[rows], np.maximum(inside, 0.0).max(axis=-1))
     return depth
 
