@@ -369,9 +369,9 @@ def _locate(rel: str, path: Path, root, catalog) -> Path | None:
 
 # ---------------------------------------------------------------- reader
 
-@register("roboverse")
+@register("roboverse", select=True)
 def read_roboverse(path: Path, *, family: str, demos=None, limit=None, root=None, catalog=None,
-                   robot_files=None, crosscheck: bool = False, rlbench_calibration: bool = True):
+                   robot_files=None, crosscheck: bool = False, rlbench_calibration: bool = True, select=None):
     """Yield one :class:`SourceEpisode` per episode of a RoboVerse v2 trajectory file.
 
     ``demos`` selects episode indices, ``limit`` stops after that many. ``robot_files`` maps
@@ -412,14 +412,20 @@ def read_roboverse(path: Path, *, family: str, demos=None, limit=None, root=None
         if robot_key != "franka":
             raise ValueError(f"{rel}: only the franka RLBench demonstrations are supported, got {robot_key!r}")
         gr = _franka(str(need(FRANKA_URDF)), str(need(FRANKA_MJCF)))
-        for i in idx:
+        for pos, i in enumerate(idx):
+            if select is not None and not select(pos):
+                yield None  # another shard's episode: not converted
+                continue
             yield _rlbench_episode(episodes[i], i, m_rl.group(1), gr, family, entry, common, files, crosscheck,
                                   rlbench_calibration)
     elif m_cv:
         scene, val, n = m_cv.group(1), bool(m_cv.group(2)), int(m_cv.group(3))
         gr = _calvin_robot(str(need(CALVIN_URDF)))
         ann = {v: k for k, v in load_npy_object(need(ANN_DICT)).items()}
-        for i in idx:
+        for pos, i in enumerate(idx):
+            if select is not None and not select(pos):
+                yield None  # another shard's episode: not converted
+                continue
             yield _calvin_episode(episodes[i], i, scene, val, n, ann.get(n), gr, family, entry, common, crosscheck)
     else:
         raise ValueError(f"{rel}: not a supported RoboVerse trajectory (RLBench franka_v2.pkl.gz or "

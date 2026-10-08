@@ -7,7 +7,11 @@ the source carries a scene, tier P, and writes:
 * ``DIR/episodes/<dataset>/<episode_id>.h5`` for every produced trajectory (K or P may fail;
   failed retargets are data too), and
 * ``DIR/records/<family>/<path below raw/>.<k>-of-<n>.jsonl`` with one record per source episode,
-  including errors. Each record carries ``rss_mb`` (resident memory right after the episode)
+  including errors.
+
+``--path`` may be repeated: the paths are processed one after the other with the same shard
+(cluster jobs pack several small source files into one job; an unreadable file ends only its
+own record file). Each record carries ``rss_mb`` (resident memory right after the episode)
   and ``max_rss_mb`` (the process peak so far), so memory growth over a shard is visible.
 
 Memory (cluster pods run two jobs in 4 GiB): only this shard's episodes are read (the shard is
@@ -92,8 +96,9 @@ def limit_mujoco_cache(mb: float) -> None:
     mujoco.mj_setCacheCapacity(mujoco.mj_getCache(), int(mb * (1 << 20)))
 
 
-def build(family: str, path: str, shard: tuple[int, int], out: str, *, physics: bool = True,
+def build(family: str, path, shard: tuple[int, int], out: str, *, physics: bool = True,
           mujoco_cache_mb: float = 0, **source_kw) -> dict:
+    """Build one shard of ``path`` (a source path, or a list of them processed in order)."""
     k, n = shard
     if not 0 <= k < n:
         raise ValueError("shard must be k/n with 0 <= k < n")
@@ -101,6 +106,14 @@ def build(family: str, path: str, shard: tuple[int, int], out: str, *, physics: 
     records_dir = Path(out) / "records" / family
     records_dir.mkdir(parents=True, exist_ok=True)
     counts = {"episodes": 0, "errors": 0, "K": 0, "P": 0, "P_tested": 0}
+    for p in [path] if isinstance(path, (str, os.PathLike)) else list(path):
+        _build_path(family, str(p), (k, n), out, records_dir, counts, physics, source_kw)
+    counts["max_rss_mb"] = max_rss_mb()
+    return counts
+
+
+def _build_path(family, path, shard, out, records_dir, counts, physics, source_kw) -> None:
+    k, n = shard
     stream = iter_episodes(family, path, select=lambda i: i % n == k, **source_kw)
     with (records_dir / f"{record_stem(path)}.{k}-of-{n}.jsonl").open("w") as fh:
         index = 0
@@ -134,14 +147,12 @@ def build(family: str, path: str, shard: tuple[int, int], out: str, *, physics: 
             counts["K"] += bool((rec.get("K") or {}).get("passed"))
             counts["P_tested"] += rec.get("P") is not None
             counts["P"] += bool((rec.get("P") or {}).get("passed"))
-    counts["max_rss_mb"] = max_rss_mb()
-    return counts
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--family", required=True)
-    ap.add_argument("--path", required=True)
+    ap.add_argument("--path", required=True, action="append", help="source path (repeatable)")
     ap.add_argument("--shard", default="0/1", help="k/n: take episodes with index %% n == k")
     ap.add_argument("--physics", action="store_true")
     ap.add_argument("--out", required=True)
@@ -149,7 +160,7 @@ def main(argv=None):
                     help="MuJoCo compiler asset cache capacity (default 0: off, lowest memory)")
     a = ap.parse_args(argv)
     k, n = (int(x) for x in a.shard.split("/"))
-    print(json.dumps(build(a.family, a.path, (k, n), a.out, physics=a.physics, mujoco_cache_mb=a.mujoco_cache_mb)))
+    print(json.dumps(build(a.family, a.path if len(a.path) > 1 else a.path[0], (k, n), a.out, physics=a.physics, mujoco_cache_mb=a.mujoco_cache_mb)))
 
 
 if __name__ == "__main__":

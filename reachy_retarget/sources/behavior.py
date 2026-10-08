@@ -291,9 +291,9 @@ def _roles(objects: dict, skills: list[dict], grasped: set, moved: set) -> dict:
 
 # ---------------------------------------------------------------- adapter
 
-@register("behavior")
+@register("behavior", select=True)
 def read_behavior(path: Path, *, family: str, root=None, urdf=None, raw=None, catalog=None, limit=None,
-                  fk_check: bool = True):
+                  fk_check: bool = True, select=None):
     """Yield the :class:`SourceEpisode` of one ``episode_N.parquet`` (or of every parquet in a folder).
 
     Sibling ``meta/episodes``, ``annotations`` and ``meta/tasks.jsonl`` files are found from
@@ -310,7 +310,10 @@ def read_behavior(path: Path, *, family: str, root=None, urdf=None, raw=None, ca
         files = files[:limit]
     if urdf is None:
         urdf = _locate(URDF_PATH, files[0] if files else path, root, catalog)
-    for f in files:
+    for i, f in enumerate(files):
+        if select is not None and not select(i):
+            yield None  # another shard's episode: not read
+            continue
         yield _episode(f, family, root, urdf, raw if len(files) == 1 else None, catalog, fk_check)
 
 

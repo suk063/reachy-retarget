@@ -637,8 +637,9 @@ def _layout(path: Path):
     return None, None, None, path.parent.name
 
 
-@register("molmobot")
-def read_molmobot_h5(path: Path, *, family: str, trajs=None, root=None, robot_assets=None, packages=None):
+@register("molmobot", select=True)
+def read_molmobot_h5(path: Path, *, family: str, trajs=None, root=None, robot_assets=None, packages=None,
+                    select=None):
     """Yield one :class:`SourceEpisode` per ``traj_<k>`` of a MolmoBot trajectory file.
 
     ``robot_assets`` maps a robot name (``rby1m``/``franka_droid``) to an unpacked asset
@@ -657,7 +658,10 @@ def read_molmobot_h5(path: Path, *, family: str, trajs=None, root=None, robot_as
         if trajs is not None:
             keys = [k for k in keys if k in set(trajs)]
         mask = f["valid_traj_mask"][()].tolist() if "valid_traj_mask" in f else None
-        for key in keys:
+        for i, key in enumerate(keys):
+            if select is not None and not select(i):
+                yield None  # another shard's trajectory: not read
+                continue
             yield _episode(f[key], key, path, digest, pkg, member, config, split, part, house, batch, mask,
                            family, root, robot_assets)
 

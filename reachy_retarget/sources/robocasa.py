@@ -263,9 +263,9 @@ def _fixture_role(cls: str | None) -> str:
 
 # ---------------------------------------------------------------- adapter
 
-@register("robocasa")
+@register("robocasa", select=True)
 def read_robocasa(path: Path, *, family: str = "robocasa", episodes=None, root=None, catalog=None, tars=None,
-                  with_scene: bool = True, articulations: str = "all"):
+                  with_scene: bool = True, articulations: str = "all", select=None):
     """Yield one :class:`SourceEpisode` per episode of an extracted RoboCasa dataset.
 
     ``episodes`` selects ``episode_<k>`` names or integer indices (default: all, sorted).
@@ -296,7 +296,10 @@ def read_robocasa(path: Path, *, family: str = "robocasa", episodes=None, root=N
     ctx = dict(family=family, lerobot=lerobot, tar=tar, manifest=manifest, member_sha=member_sha, dmeta=dmeta,
                versions=versions, rc_assets=rc_assets, wheel=wheel, notes=notes, with_scene=with_scene,
                articulations=articulations)
-    for ep in names:
+    for i, ep in enumerate(names):
+        if select is not None and not select(i):
+            yield None  # another shard's episode: its MJCF is never decompressed or compiled
+            continue
         xml = gzip.decompress((lerobot / "extras" / ep / "model.xml.gz").read_bytes()).decode()
         model = _compile(xml, (len(xml), hashlib.sha1(xml.encode()).hexdigest()), ref)
         yield _episode(model, ep, **ctx)

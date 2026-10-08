@@ -295,9 +295,9 @@ def derive_articulation(handle: np.ndarray, joint_type: str) -> dict:
 
 # ---------------------------------------------------------------- adapter
 
-@register("mobilemanibench")
+@register("mobilemanibench", select=True)
 def read_mobilemanibench(path: Path, *, family: str, root=None, urdf=None, catalog=None, limit=None,
-                         fk_check: bool = True):
+                         fk_check: bool = True, select=None):
     """Yield the :class:`SourceEpisode` of one ``state_infos.pkl`` (or of every one below a folder).
 
     ``params/env.yaml`` and ``scene_infos.json`` are found from the extracted tar layout.
@@ -310,7 +310,10 @@ def read_mobilemanibench(path: Path, *, family: str, root=None, urdf=None, catal
     files = sorted(path.rglob("state_infos.pkl")) if path.is_dir() else [path]
     if limit is not None:
         files = files[:limit]
-    for f in files:
+    for i, f in enumerate(files):
+        if select is not None and not select(i):
+            yield None  # another shard's episode: not read
+            continue
         u = urdf if urdf is not None else _local(URDF_PATH, f, root)
         yield _episode(f, family, root, u, catalog, fk_check)
 

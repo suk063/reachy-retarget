@@ -378,9 +378,9 @@ def _asset_dir(record: Path, asset_dir):
     return None
 
 
-@register(FAMILY)
+@register(FAMILY, select=True)
 def read_bigym(path: Path, *, family: str = FAMILY, asset_dir=None, catalog=None, with_scene: bool = True,
-               include_failed: bool = True):
+               include_failed: bool = True, select=None):
     """Yield one :class:`SourceEpisode` per replay record (a file or a folder of them).
 
     Records whose replay raised before any state was saved are skipped (they stay in
@@ -389,11 +389,19 @@ def read_bigym(path: Path, *, family: str = FAMILY, asset_dir=None, catalog=None
     10x faster compilation; exact kinematics, no object geometry, no scene).
     """
     catalog = catalog if catalog is not None else load_catalog(tables=False)
-    for rec in _record_paths(Path(path)):
+    # With ``select`` (positions = record files in path order), unselected records are not
+    # read, and skipped records yield ``None`` so that positions stay aligned.
+    skipped = None if select is None else [None]
+    for i, rec in enumerate(_record_paths(Path(path))):
+        if select is not None and not select(i):
+            yield None
+            continue
         meta, arrays = read_record(rec)
         if "qpos" not in arrays or len(arrays["qpos"]) < 2 or "_mjcf" not in meta:
+            yield from skipped or ()
             continue
         if meta.get("error") and not include_failed:
+            yield from skipped or ()
             continue
         assets = _asset_dir(rec, asset_dir) if with_scene else None
         yield _episode(rec, meta, arrays, assets, catalog, family, with_scene)
