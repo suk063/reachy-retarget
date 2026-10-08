@@ -43,7 +43,8 @@ def test_two_effectors_with_side_hints_and_generated_lineage(tmp_path):
             # Recorded eef_pos agrees with the state replay to < 1 mm (recording jitter).
             assert np.abs(f[f"data/demo_0/obs/robot{i}_eef_pos"][:] - site).max() < 1e-3
             q = f[f"data/demo_0/obs/robot{i}_gripper_qpos"][:]
-            np.testing.assert_allclose(eff.width, q[:, 0] - q[:, 1], atol=1e-9)
+            # width = pad-face gap: finger travel plus the closed-limit gap (the Panda pads overlap 1 mm)
+            np.testing.assert_allclose(eff.width, np.maximum(q[:, 0] - q[:, 1] - 0.001, 0), atol=1e-9)
             np.testing.assert_allclose(np.linalg.det(eff.pose[:, :3, :3]), 1, atol=1e-9)
 
 

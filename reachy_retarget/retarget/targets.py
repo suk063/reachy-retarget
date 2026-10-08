@@ -382,6 +382,181 @@ def finger_angles(effector, grasping, cfg: RetargetConfig, contact_width=None):
     return np.where(grasping, np.maximum(angle - cfg.squeeze_angle, gripper.LOWER), angle)
 
 
+def place_labels(src, key, labels, cfg: RetargetConfig, rest_speed=0.02):
+    """Grasp labels (T,) of effector ``key`` extended over short drops: ``(labels, [(segment end,
+    new end, drop m, turn rad)])``.
+
+    Source operators often open the gripper above the support (MimicGen Stack/StackThree drop the
+    cube 1-3 cm onto the other cube, and the episode ends 1-3 frames after it lands). Reachy's
+    fingers, position-servoed at 3 rad/s, need 0.05 s to open from a 40 mm cube to the tier-P
+    closed point (the 0.5 opening, 46.8 mm), and the object falls 3-5 mm in the hand while they
+    do. When, after a grasp segment ends, the object moves away from the source hand by more than
+    ``cfg.place_min_drop`` and comes to rest (linear speed below ``rest_speed`` over the intervals
+    into and out of the row; the last row needs only the first; landing wobble is allowed) within
+    ``cfg.place_max_s``, having moved at most ``cfg.place_max_drop`` away from the source hand, the
+    segment is extended to the row where it has settled (within ``cfg.place_min_drop`` and
+    ``cfg.place_rest_turn`` of its rest pose), provided it turned at most ``cfg.place_max_turn`` by then, the
+    fingers stay clear of the scene boxes on the way down (:func:`finger_penetration`, at most
+    ``cfg.place_finger_clearance`` deeper than at the release) and nothing stands beside the landed
+    object (:func:`_surrounded`: an insertion into a holder or a bin is kept as a drop). The hand
+    carries the object along its source fall (object-centric, :func:`object_centric`) and sets it
+    down, then opens. Longer drops (bins, the Square peg) are kept as drops. The object path is the
+    source's; only the release instant moves to the end of the fall. When the object lands on the source's
+    last row, the hand still holds it at the episode end."""
+    lab = np.asarray(labels).copy()
+    ids = manipulated_ids(src.objects)
+    t = np.asarray(src.time, float)
+    E = src.effectors[key].pose
+    out = []
+    held = lab >= 0
+    T = len(lab)
+    for a, b in _runs(held):
+        if b >= T:
+            continue
+        track = src.objects[ids[lab[b - 1]]]
+        nxt = np.flatnonzero(held[b:])
+        stop = b + int(nxt[0]) if len(nxt) else T
+        p = track.pose[:, :3]
+        rel0 = np.linalg.inv(E[b - 1, :3, :3]) @ (p[b - 1] - E[b - 1, :3, 3])
+        rest = None
+        for r in range(b, stop):
+            if t[r] - t[b - 1] > cfg.place_max_s + 1e-9 or not track.valid[r]:
+                break
+            rel = np.linalg.inv(E[r, :3, :3]) @ (p[r] - E[r, :3, 3])
+            ok = bool(np.linalg.norm(rel - rel0) > cfg.place_min_drop)  # fallen away from the hand ...
+            for i0, i1 in ((r - 1, r), (r, r + 1)):  # ... and at rest
+                if i1 >= T or not (track.valid[i0] and track.valid[i1]):
+                    continue
+                ok &= bool(np.linalg.norm(p[i1] - p[i0]) / (t[i1] - t[i0]) < rest_speed)
+            if ok:
+                rest = r
+                break
+        if rest is None:
+            continue
+        rel = np.linalg.inv(E[rest, :3, :3]) @ (p[rest] - E[rest, :3, 3])
+        drop = float(np.linalg.norm(rel - rel0))  # how far the object falls away from the source hand
+        # carry it down to where it has settled: within place_min_drop of its rest position and
+        # place_rest_turn of its rest orientation. Not the first touch: a cube landing on a cube
+        # still tilts 0.1-0.2 rad and settles flat in the next frame, and set down tilted it
+        # rotates 5-7 deg between the opening pads.
+        Rr = quat_to_matrix(track.pose[rest, 3:])
+        for r in range(b, rest + 1):
+            Rq = quat_to_matrix(track.pose[r, 3:])
+            if (np.linalg.norm(p[r] - p[rest]) <= cfg.place_min_drop
+                    and np.arccos(np.clip((np.trace(Rq.T @ Rr) - 1) / 2, -1, 1)) <= cfg.place_rest_turn):
+                rest = r
+                break
+        Ra, Rb = quat_to_matrix(track.pose[b - 1, 3:]), quat_to_matrix(track.pose[rest, 3:])
+        turn = float(np.arccos(np.clip((np.trace(Ra.T @ Rb) - 1) / 2, -1, 1)))
+        if drop > cfg.place_max_drop or turn > cfg.place_max_turn:
+            continue
+        # Reachy's fingers must stay clear of the scene while they carry the object down: its pads
+        # reach 19-21 mm past the grasp center along the approach axis (the Panda's 9 mm), so a
+        # cube held at mid height is placed with the fingertips at its bottom face, and a coffee
+        # pod would be pushed into its holder with the fingers.
+        trial = lab.copy()
+        trial[b:rest + 1] = lab[b - 1]
+        rows = np.arange(b - 1, rest + 1)
+        width = np.asarray(src.effectors[key].width if src.effectors[key].width is not None else
+                           np.full(T, gripper.MAX_WIDTH), float)
+        finger = np.full(T, gripper.width_to_angle(width[b - 1]))
+        depth = finger_penetration(src, key, "right", False, trial, finger, cfg, rows=rows)
+        if depth[1:].max() > depth[0] + cfg.place_finger_clearance:
+            continue
+        if _surrounded(src, ids[lab[b - 1]], rest, cfg.place_side_clearance):
+            continue  # an insertion (pod into its holder, objects into bins): the hand would jam it
+        lab = trial
+        out.append((int(b), int(rest + 1), drop, turn))
+    return lab, out
+
+
+def _surrounded(src, oid, row, clearance, floor=0.005, n=5) -> bool:
+    """Whether scene geometry stands beside object ``oid`` at source row ``row``: points on the
+    four vertical faces of its world-frame bounding box, pushed out by ``clearance`` and from
+    ``floor`` above its bottom to its top (the support below is not "beside"), fall inside another
+    object's box parts or cylinder (receptacles count: their aabb envelope is the bin)."""
+    track = src.objects[oid]
+    box = box_geometry(track.geometry)
+    if box is None or not track.valid[row]:
+        return False
+    c, h = box
+    R, pos = quat_to_matrix(track.pose[row, 3:]), track.pose[row, :3]
+    corners = (c + h * np.array([[x, y, z] for x in (-1, 1) for y in (-1, 1) for z in (-1, 1)])) @ R.T + pos
+    lo, hi = corners.min(0), corners.max(0)
+    u = np.linspace(0, 1, n)
+    zs = lo[2] + floor + u * max(hi[2] - lo[2] - floor, 0.0)
+    pts = []
+    for axis in (0, 1):
+        other = 1 - axis
+        for side in (lo[axis] - clearance, hi[axis] + clearance):
+            for a in lo[other] + u * (hi[other] - lo[other]):
+                for z in zs:
+                    p = np.zeros(3)
+                    p[axis], p[other], p[2] = side, a, z
+                    pts.append(p)
+    pts = np.array(pts)
+    for name, other in src.objects.items():
+        if name == oid or not other.valid[row]:
+            continue
+        rel = (pts - other.pose[row, :3]) @ quat_to_matrix(other.pose[row, 3:])
+        cyl = cylinder_geometry(other.geometry)
+        if cyl is not None:
+            radial, axial = _cylinder_coords(rel, cyl)
+            if np.any((radial < cyl[2]) & (np.abs(axial) < cyl[3])):
+                return True
+            continue
+        for pc, ph in box_parts(other.geometry):
+            if np.any(np.all(np.abs(rel - pc) < ph, axis=1)):
+                return True
+    return False
+
+
+def release_starts(angles, labels, start_angle) -> list[int]:
+    """Source rows (one per grasp segment end of ``labels``) of the last post-grasp plateau frame:
+    the row before the source-mapped finger angle (T,) first exceeds its value at the segment end
+    by ``start_angle`` (the source fingers leave the object). Segments after which the hand never
+    opens are skipped."""
+    q = np.asarray(angles, float)
+    held = np.asarray(labels) >= 0
+    out = []
+    for b in np.flatnonzero(held[:-1] & ~held[1:]) + 1:
+        rows = np.flatnonzero(q[b:] > q[b] + start_angle)
+        if len(rows):
+            out.append(int(b + rows[0] - 1))
+    return out
+
+
+def release_ramp(angles, times, starts, labels, rate):
+    """Finger angles (T,) with each release opened at ``rate`` (rad/s), on the output clock.
+
+    The source gripper's measured width is a poor command for a release: a Panda whose finger
+    command ramps out of its squeeze stays at the object's width for 0.2-0.3 s after the open
+    command, then opens (MimicGen Stack: 0.25 s at 39 mm), and the time scaling may stretch the
+    opening further. Reachy's position-servoed fingers, commanded open, move at their own speed.
+    From each row of ``starts`` (the last plateau row, see :func:`release_starts`, so the release
+    instant stays the source's) the angle rises at ``rate`` toward the first local maximum of the
+    given angles before the next grasp of ``labels`` (never wider than the source opens before it
+    closes again), and never below the given angles. Returns (angles, [(start row, peak row)])."""
+    q = np.array(angles, float)
+    t = np.asarray(times, float)
+    held = np.asarray(labels) >= 0
+    out = []
+    for r0 in starts:
+        if r0 + 1 >= len(q) or held[r0 + 1]:
+            continue
+        nxt = np.flatnonzero(held[r0 + 1:])
+        stop = r0 + 1 + int(nxt[0]) if len(nxt) else len(q)
+        p = r0 + 1
+        while p + 1 < stop and q[p + 1] >= q[p] - 1e-9:
+            p += 1
+        if q[p] <= q[r0]:
+            continue
+        ramp = np.minimum(q[r0] + rate * (t[r0 + 1:p + 1] - t[r0]), q[p])
+        q[r0 + 1:p + 1] = np.maximum(q[r0 + 1:p + 1], ramp)
+        out.append((int(r0), int(p)))
+    return q, out
+
+
 def contact_width(src, key, offset, labels) -> np.ndarray:
     """Extent (T,) of the held object's cylinder/box/aabb along the closing axis of effector ``key``'s
     grasp frame composed with ``offset`` (inf where nothing is held or without box geometry)."""
@@ -414,7 +589,7 @@ def gripper_state(angles):
 SOLID_ROLES = ("manipulated", "support", "fixture")
 
 
-def finger_penetration(src, key, side, offset, labels, finger, cfg: RetargetConfig) -> np.ndarray:
+def finger_penetration(src, key, side, offset, labels, finger, cfg: RetargetConfig, rows=None) -> np.ndarray:
     """Per-frame depth (T,) by which Reachy's distal fingers, placed on effector ``key``'s
     grasp-center path composed with grasp ``offset`` and opened to ``finger`` (T,) angles,
     would sink into the box/aabb geometry of scene objects (0 = clear).
@@ -423,23 +598,27 @@ def finger_penetration(src, key, side, offset, labels, finger, cfg: RetargetConf
     the pads into them by design); support and fixture boxes are always checked; receptacles
     (hollow bins whose aabb is an envelope) are not. Object aabbs are envelopes, so concave
     objects (e.g. a nut ring) report false depth; callers compare offsets relative to each other.
+    With ``rows`` (indices) only those frames are evaluated and the result has their length.
     """
-    E = src.effectors[key].pose @ offset_matrix(offset)
-    pts = gripper.finger_points(finger, side)
+    sel = np.arange(len(src.effectors[key].pose)) if rows is None else np.asarray(rows)
+    E = src.effectors[key].pose[sel] @ offset_matrix(offset)
+    pts = gripper.finger_points(np.broadcast_to(np.asarray(finger, float), (len(src.effectors[key].pose),))[sel], side)
     world = np.einsum("tij,tnj->tni", E[:, :3, :3], pts) + E[:, None, :3, 3]
     ids = manipulated_ids(src.objects)
+    lab = np.asarray(labels)[sel]
     depth = np.zeros(len(E))
     for name, track in src.objects.items():
         box = box_geometry(track.geometry)
         if box is None or track.role not in SOLID_ROLES:
             continue
-        rows = track.valid.copy()
+        rows = track.valid[sel].copy()
         if track.role == "manipulated" and name in ids:
-            rows &= np.asarray(labels) != ids.index(name)
+            rows &= lab != ids.index(name)
         if not rows.any():
             continue
-        R = quat_to_matrix(track.pose[rows, 3:])
-        rel = np.einsum("tji,tnj->tni", R, world[rows] - track.pose[rows, None, :3])
+        pose = track.pose[sel][rows]
+        R = quat_to_matrix(pose[:, 3:])
+        rel = np.einsum("tji,tnj->tni", R, world[rows] - pose[:, None, :3])
         cyl = cylinder_geometry(track.geometry)
         if cyl is not None:
             radial, axial = _cylinder_coords(rel, cyl)
@@ -581,7 +760,7 @@ def push_labels(src, key, labels, cfg: RetargetConfig, closed=None) -> np.ndarra
     return out
 
 
-def object_centric(src, key, labels, cfg: RetargetConfig):
+def object_centric(src, key, labels, cfg: RetargetConfig, force_ends=()):
     """Grasp-center path (T, 4, 4) of effector ``key`` that carries each held object rigidly.
 
     During a grasp segment in which the source object moves in its gripper by more than
@@ -592,7 +771,8 @@ def object_centric(src, key, labels, cfg: RetargetConfig):
     rigidly keep the source hand path. Before and after a
     segment the world-frame correction between this path and the source hand path at the segment
     ends decays to identity over ``cfg.approach_window_s`` / ``cfg.retreat_window_s``.
-    Returns (poses, {segment: max correction (m, rad)}).
+    Segments ending at a row of ``force_ends`` (placed drops, :func:`place_labels`) are carried
+    object-centrically whatever their drift. Returns (poses, {segment: max correction (m, rad)}).
     """
     from ..schema.rotations import se3_inv, so3_log, vec7_to_pose
     E = np.array(src.effectors[key].pose, float)
@@ -617,7 +797,7 @@ def object_centric(src, key, labels, cfg: RetargetConfig):
         shift = float(np.linalg.norm(dev[:, :3, 3], axis=1).max())
         turn = float(np.linalg.norm(so3_log(dev[:, :3, :3]), axis=1).max())
         if shift <= cfg.object_centric_fraction * cfg.grasp_rel_pos_tol and \
-                turn <= cfg.object_centric_fraction * cfg.grasp_rel_rot_tol:
+                turn <= cfg.object_centric_fraction * cfg.grasp_rel_rot_tol and b not in force_ends:
             info[f"{ids[k]}@{a}-{b}"] = (0.0, 0.0)  # the source holds it rigidly: keep its hand path
             continue
         info[f"{ids[k]}@{a}-{b}"] = (shift, turn)

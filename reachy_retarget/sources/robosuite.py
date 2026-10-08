@@ -263,10 +263,17 @@ class _Model:
             if m.jnt_type[j] in scalar and not is_robot(b):
                 self.articulations.setdefault(self.body_names[m.body_rootid[b]], []).append(j)
         collides = (m.geom_contype | m.geom_conaffinity) != 0
-        jointed = set(m.body_rootid[m.jnt_bodyid])
+        # Bodies that move: a joint on the body or on an ancestor. A world child without a joint of
+        # its own is a fixture through its static geoms, also when articulated parts hang below it
+        # (MimicGen Kitchen/HammerCleanup: the stove buttons and the cabinet drawer are children of
+        # the table, which was then missing from the scene objects and the base was placed into it).
+        self.moving = np.zeros(m.nbody, bool)
+        for b in range(1, m.nbody):
+            self.moving[b] = m.body_jntnum[b] > 0 or self.moving[m.body_parentid[b]]
+        static_geom = collides & ~self.moving[m.geom_bodyid]
         self.fixtures = [b for b in range(1, m.nbody)
-                         if m.body_parentid[b] == 0 and b not in jointed and not is_robot(b)
-                         and collides[m.body_rootid[m.geom_bodyid] == b].any()]
+                         if m.body_parentid[b] == 0 and not self.moving[b] and not is_robot(b)
+                         and static_geom[m.body_rootid[m.geom_bodyid] == b].any()]
         self.grippers = {}
         for s in range(m.nsite):
             mt = GRIP_SITE.match(name(mujoco.mjtObj.mjOBJ_SITE, s))
@@ -279,27 +286,39 @@ class _Model:
         d.qvel[:] = row[1 + m.nq:1 + m.nq + m.nv]
         self.mj.mj_forward(m, d)
 
-    def body_aabb(self, b: int) -> dict:
+    def body_aabb(self, b: int, parts: bool = False, static: bool = False) -> dict:
         """Collision-geometry AABB of the tree under world-child body ``b``, in ``b``'s frame.
 
-        Empty when assets were missing (placeholder geoms carry no real extent).
+        With ``parts`` and more than one collision geom, the record is a union of ``boxes``: the
+        body-frame AABB of each geom (exact for boxes, the enclosing box of a convex mesh part),
+        with the envelope under ``"aabb"``. An envelope hides the part a gripper holds: the MimicGen
+        mug (32 convex parts) is held by its 9 mm handle and the ThreePieceAssembly pieces (12-22
+        voxel boxes, 34-40 mm thick) are 102-160 mm envelopes, so a pad separation measured
+        against the envelope reads as fingers closed on nothing. With ``static`` only geoms of
+        bodies that cannot move are used (a fixture's articulated parts are left out). Empty when
+        assets were missing (placeholder geoms carry no real extent).
         """
         m, d = self.m, self.d
         if self.missing:
             return {}
-        pts = []
+        boxes = []
         for g in np.flatnonzero((m.body_rootid[m.geom_bodyid] == b)
-                                & ((m.geom_contype | m.geom_conaffinity) != 0)):
+                                & ((m.geom_contype | m.geom_conaffinity) != 0)
+                                & ~(static & self.moving[m.geom_bodyid])):
             c, h = m.geom_aabb[g, :3], m.geom_aabb[g, 3:]
             corners = c + h * np.array([[sx, sy, sz] for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)])
             world = d.geom_xpos[g] + corners @ d.geom_xmat[g].reshape(3, 3).T
-            pts.append((world - d.xpos[b]) @ d.xmat[b].reshape(3, 3))
-        if not pts:
+            local = (world - d.xpos[b]) @ d.xmat[b].reshape(3, 3)
+            boxes.append((local.min(0), local.max(0)))
+        if not boxes:
             return {}
-        pts = np.concatenate(pts)
-        lo, hi = pts.min(0), pts.max(0)
-        return {"kind": "aabb", "center": ((lo + hi) / 2).round(6).tolist(),
-                "half_extents": ((hi - lo) / 2).round(6).tolist(), "frame": "body"}
+        lo, hi = np.min([x for x, _ in boxes], axis=0), np.max([x for _, x in boxes], axis=0)
+        env = {"center": ((lo + hi) / 2).round(6).tolist(), "half_extents": ((hi - lo) / 2).round(6).tolist()}
+        if parts and len(boxes) > 1:
+            return {"kind": "boxes", "frame": "body", "aabb": env,
+                    "boxes": [{"center": ((a + z) / 2).round(6).tolist(), "half_extents": ((z - a) / 2).round(6).tolist()}
+                              for a, z in boxes]}
+        return {"kind": "aabb", **env, "frame": "body"}
 
     def in_subtree(self, b: int, root: int) -> bool:
         while b > 0 and b != root:
@@ -349,7 +368,16 @@ class _Gripper:
         sep_open = (p2 - p1) @ (R @ self.R_fix[:, 1])
         R, _, p1, p2, _ = measure(closed_q)
         self.sep_closed = (p2 - p1) @ (R @ self.R_fix[:, 1])
-        self.width_max = sep_open - self.sep_closed
+        # Pad-face gap at the closed limit: the Panda's pads overlap by 1 mm there, the Rethink
+        # gripper's (MimicGen PickPlace) stay 14 mm apart, so the separation alone misreads its
+        # widths by 14 mm (a 30 mm cereal box held at a 14.5 mm "width").
+        self.gap_closed = float(mj.mj_geomDistance(m, d, self.pads[0], self.pads[1], 0.5, None))
+        self.travel_max = sep_open - self.sep_closed
+        self.width_max = self.travel_max + self.gap_closed
+
+    def opening(self, width):
+        """Normalized opening (0 = closed limit, 1 = open limit) of pad-face gaps ``width``."""
+        return np.clip((np.asarray(width, float) - self.gap_closed) / self.travel_max, 0, 1)
 
     def read(self, d) -> tuple[np.ndarray, float]:
         """Contract pose (4x4) and finger width (m) from the current MjData."""
@@ -358,7 +386,7 @@ class _Gripper:
         T[:3, :3] = Rs @ self.R_fix
         T[:3, 3] = d.site_xpos[self.site] + Rs @ self.offset
         sep = (d.geom_xpos[self.pads[1]] - d.geom_xpos[self.pads[0]]) @ T[:3, 1]
-        return T, max(0.0, sep - self.sep_closed)
+        return T, max(0.0, sep - self.sep_closed + self.gap_closed)
 
     def describe(self, model: _Model) -> dict:
         mj, m = model.mj, model.m
@@ -367,7 +395,8 @@ class _Gripper:
                 "pads": [mj.mj_id2name(m, mj.mjtObj.mjOBJ_GEOM, g) for g in self.pads],
                 "site_to_contract_rotation": self.R_fix.round(6).tolist(),
                 "grasp_center_in_site_frame_m": self.offset.round(6).tolist(),
-                "width_max_m": round(float(self.width_max), 6)}
+                "width_max_m": round(float(self.width_max), 6),
+                "closed_pad_gap_m": round(float(self.gap_closed), 6)}
 
 
 
@@ -650,22 +679,25 @@ def _episode(model, g, key, *, family, dataset, env_name, env_version, control_f
     sides, side_source = _side_hints(bases, model.grippers)
     commands, command_note = gripper_commands(g, model.grippers, T)
     effectors = {k: Effector(pose=poses[k], width=widths[k],
-                             opening=np.clip(widths[k] / model.grippers[k].width_max, 0, 1),
+                             opening=model.grippers[k].opening(widths[k]),
                              side_hint=sides.get(k), command=commands.get(k))
                  for k in model.grippers}
     objects = {}
     for n in obj_names:
-        geometry = model.body_aabb(free_body[n])
         if n in CYLINDER_OBJECTS:
+            geometry = model.body_aabb(free_body[n])
             geometry = cylinder_from_aabb(geometry) or geometry
+        else:
+            geometry = model.body_aabb(free_body[n], parts=True)
         objects[n] = ObjectTrack(pose=obj_pose[n], valid=np.ones(T, bool), role=(roles or {}).get(n, "manipulated"),
                                  geometry={**geometry, "body": model.body_names[free_body[n]]})
     for b in model.fixtures:
         name = model.body_names[b]
         pose = np.r_[d.xpos[b], d.xquat[b]]
-        role = "support" if "table" in name else "receptacle" if "bin" in name else "fixture"
+        role = ("support" if "table" in name else "receptacle" if re.search(r"(^|_)bin\d*(_|$)", name)
+                else "fixture")  # bin1/bin2, not CabinetObject
         objects.setdefault(name, ObjectTrack(pose=np.tile(pose, (T, 1)), valid=np.ones(T, bool),
-                                             role=role, geometry={**model.body_aabb(b), "body": name}))
+                                             role=role, geometry={**model.body_aabb(b, static=True), "body": name}))
 
     initial_qpos = {model.joint_names[j]: d.qpos[m.jnt_qposadr[j]:m.jnt_qposadr[j] + 7].tolist()
                     for j in model.free.values()}
@@ -700,7 +732,8 @@ def _episode(model, g, key, *, family, dataset, env_name, env_version, control_f
         "missing_assets": model.missing,
         "mesh_inertia_shell": model.shell_meshes,
         "effectors": {k: gr.describe(model) for k, gr in model.grippers.items()},
-        "opening": "pad separation along +y minus fully-closed separation, / its open-closed range",
+        "opening": "finger travel (pad separation along +y minus the fully-closed separation) / its range; "
+                   "width = travel + the pad-face gap at the closed limit (the pad-face gap)",
         "side_hint_source": side_source,
         "inactive_free_bodies": inactive,
         "untracked_free_bodies_in_scene": sorted(set(model.free) - set(obj_names) - set(inactive)),

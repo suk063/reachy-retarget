@@ -184,9 +184,12 @@ state row, `mj_forward`, and read:
   origin) → midpoint of the two finger pads, +y = finger-1 pad → finger-2 pad. For the
   Panda gripper this gives `R_contract = R_site · [[0,1,0],[-1,0,0],[0,0,1]]` (site +z is
   already the approach axis; the closing axis is site ±x) and a grasp center 3.6 mm
-  behind the grip site along the approach axis (pad midpoint). Width = pad separation
-  along +y minus the fully closed separation (equals the finger joint separation for the
-  Panda, 0–0.08 m); opening = width / 0.08. `side_hint` comes from the robot base
+  behind the grip site along the approach axis (pad midpoint). Width = pad-face gap: pad
+  separation along +y minus the fully closed separation plus the pad-face gap at the closed
+  limit (`mj_geomDistance`, `closed_pad_gap_m` in the effector provenance: −1 mm for the Panda,
+  whose pads overlap at q = 0, so width = finger joint separation − 1 mm; +14.1 mm for the
+  Rethink gripper of MimicGen PickPlace, whose widths read 14 mm narrow before, e.g. a 30 mm
+  cereal box held at 14.5 mm); opening = finger travel / its range (0 at the closed limit). `side_hint` comes from the robot base
   layout: when all arms face the same way (yaws within 30°), the base furthest along the
   shared left normal is `left` and the other `right` (`provenance["side_hint_source"]`);
   arms facing each other (robomimic Transport) or a single arm get `None`. The Rethink
@@ -200,10 +203,15 @@ state row, `mj_forward`, and read:
   2 m from every robot base and tracked object (robosuite `clear_objects`: Milk, Bread,
   Cereal in PickPlaceCan, RoundNut in NutAssemblySquare, at (10, 10, 10)) are inactive:
   `provenance["inactive_free_bodies"]` and `SceneRef.inactive_bodies`. Unknown envs keep
-  every free body as `manipulated`. Static world-child bodies with collision geometry
-  become constant tracks (`table*` → support, `*bin*` → receptacle, else fixture, e.g.
-  square pegs). Geometry is the collision AABB in the body frame; the Can
-  (`CYLINDER_OBJECTS`) is a `cylinder` (radius, half_length, axis) fitted to it.
+  every free body as `manipulated`. World-child bodies without a joint of their own and
+  with static collision geometry become constant tracks (`table*` → support, `bin<N>` →
+  receptacle, else fixture, e.g. square pegs, the MimicGen drawer and cabinet housings);
+  their geometry is the AABB of their static geoms only (MimicGen Kitchen/HammerCleanup hang
+  stove buttons and a drawer below the table body, which made the table disappear from the
+  objects). Free objects with several collision geoms are a union of `boxes` (the body-frame
+  AABB of each geom, the envelope under `aabb`: the MimicGen mug's 32 convex parts, the
+  ThreePieceAssembly voxel pieces, the Square nut), single-geom ones an `aabb`; the Can
+  (`CYLINDER_OBJECTS`) is a `cylinder` (radius, half_length, axis) fitted to its AABB.
 * **Articulations**: non-robot hinge/slide joints grouped by root body (none in the
   robomimic tasks; MimicGen drawers/lids will appear here).
 * **base_hint**: `robot0_base` x, y, yaw; every arm's base is in
@@ -317,7 +325,7 @@ A low-dimensional-observation route is not implemented: every catalogued file ha
 the original and from the stripped file. The grip-site position reproduces the recorded
 `obs/robot0_eef_pos` exactly for robomimic; the grasp center differs from it by 3.6 mm
 along the approach axis, as designed. Width equals `robot0_gripper_qpos[0] −
-robot0_gripper_qpos[1]`.
+robot0_gripper_qpos[1]` − 1 mm (the Panda pad overlap at the closed limit).
 
 Spot checks without full downloads (demo_0 copied by HTTP range reads into scratch
 files, whole-file digests therefore not verified; nothing stored under `data/`):
@@ -330,14 +338,14 @@ files, whole-file digests therefore not verified; nothing stored under `data/`):
 | mimicgen/large_interpolation/stack_d1 | 187 | mjcf_states | |
 | mimicgen/robot/threading_d0_sawyer | 232 | mjcf_states | |
 | mimicgen/robot/square_d0_iiwa, square_d0_ur5e | — | error | Robotiq 85 linkage gripper unsupported |
-| dexmimicgen/two_arm_threading (2 demos) | 181–196 | mjcf_states | eef residual ≤ 0.57 mm, width exact |
+| dexmimicgen/two_arm_threading (2 demos) | 181–196 | mjcf_states | eef residual ≤ 0.57 mm, width = joint separation − 1 mm |
 | dexmimicgen/two_arm_three_piece_assembly | 229 | mjcf_states | sides right/left |
 | dexmimicgen/two_arm_transport | 375 | mjcf_states | sides right/left |
 
 For DexMimicGen the replayed grip sites match `obs/robot{0,1}_eef_pos` exactly at t = 0
 and within 0.57 mm afterwards (zero-mean, ~0.14 mm std in the site frame: recording
 jitter between the stored states and observations, not a frame offset); widths equal
-the recorded finger joint separation to 1e-15.
+the recorded finger joint separation − 1 mm (the Panda pad overlap) to 1e-15.
 
 ## Known gaps
 

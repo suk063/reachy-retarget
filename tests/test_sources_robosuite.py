@@ -50,9 +50,10 @@ def test_kinematic_fallback_matches_recorded_observations():
     delta = recorded("obs/robot0_eef_pos") - eff.pose[:, :3, 3]
     np.testing.assert_allclose(np.einsum("ti,ti->t", delta, eff.pose[:, :3, 2]), 0.0036, atol=2e-4)
     np.testing.assert_allclose(np.cross(delta, eff.pose[:, :3, 2]), 0, atol=1e-6)
-    # Width equals the finger joint separation (Panda pads touch at q = 0).
+    # Width is the pad-face gap: the finger joint separation minus 1 mm (the Panda pads overlap
+    # by 1 mm at q = 0).
     q = recorded("obs/robot0_gripper_qpos")
-    np.testing.assert_allclose(eff.width, q[:, 0] - q[:, 1], atol=1e-6)
+    np.testing.assert_allclose(eff.width, np.maximum(q[:, 0] - q[:, 1] - 0.001, 0), atol=1e-6)
     assert 0.4 < eff.opening.min() < 0.6 and eff.opening.max() > 0.98
     np.testing.assert_allclose(np.linalg.det(eff.pose[:, :3, :3]), 1, atol=1e-9)
 
@@ -165,3 +166,21 @@ def test_gripper_command_from_actions(tmp_path):
     ep = next(iter_episodes("robomimic", path))
     assert next(iter(ep.effectors.values())).command is None
     assert "not all -1 / +1" in ep.provenance["gripper_command"]["reason"]
+
+
+def test_fixture_with_articulated_children_keeps_its_static_geometry():
+    # MimicGen Kitchen/HammerCleanup hang the stove buttons and a cabinet drawer below the table body:
+    # the table is still a fixture, described by its static geoms only.
+    from reachy_retarget.sources.robosuite import _Model
+    xml = """<mujoco><worldbody>
+    <body name="table" pos="0 0 0.8"><geom name="table_collision" type="box" size="0.4 0.4 0.025"/>
+      <body name="drawer" pos="0 0 0.1"><joint name="drawer_slide" type="slide" axis="1 0 0"/>
+        <geom type="box" size="0.1 0.1 0.05"/></body>
+    </body>
+    <body name="cube_main" pos="0 0 0.9"><freejoint/><geom type="box" size="0.02 0.02 0.02"/></body>
+    </worldbody></mujoco>"""
+    model = _Model(xml, None)
+    model.mj.mj_forward(model.m, model.d)
+    assert [model.body_names[b] for b in model.fixtures] == ["table"]
+    np.testing.assert_allclose(model.body_aabb(model.fixtures[0], static=True)["half_extents"], [0.4, 0.4, 0.025])
+    np.testing.assert_allclose(model.body_aabb(model.fixtures[0])["half_extents"], [0.4, 0.4, 0.0875])

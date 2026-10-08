@@ -174,9 +174,10 @@ def test_kinematic_only_without_assets(tmp_path):
     art = ep.articulations["cab_1"]
     assert art.joint_names == ["cab_1_doorhinge"] and np.isclose(art.qpos[-1, 0], -1.0)
     assert p["task_articulations"] == ["cab_1"] and p["articulation_motion"]["cab_1"] == pytest.approx(1.0)
-    # Gripper: grasp-center frame (+z approach, +y closing), width from the finger joints.
+    # Gripper: grasp-center frame (+z approach, +y closing), width = pad-face gap (finger travel plus
+    # the fixture's 6 mm gap at the closed limit), opening = travel fraction.
     e = ep.effectors["gripper0_right"]
-    assert np.allclose(e.width, 0.08 * (1 - np.linspace(0, 1, 6)), atol=1e-9)
+    assert np.allclose(e.width, 0.08 * (1 - np.linspace(0, 1, 6)) + 0.006, atol=1e-9)
     assert np.isclose(e.opening[0], 1) and np.isclose(e.opening[-1], 0)
     assert np.allclose(np.linalg.det(e.pose[:, :3, :3]), 1)
     # Recorded observations reproduce exactly.

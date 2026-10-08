@@ -5,15 +5,51 @@ reads every ``records/<family>/*.jsonl`` under the given roots. Counts are repor
 separately for every stage; K (kinematic) and P (physics) passes are never merged.
 Independent demonstrations are counted by lineage seed when an episode is a generated
 variant, so generated data never inflates the number of distinct human demonstrations.
+Failure reasons are bucketed by kind (:func:`reason_kind`: the tier-P gate name, or the K reason
+text with sides, object names and numbers stripped), separately for K and P, both for the first
+reason of each episode and for any reason.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter, defaultdict
 from pathlib import Path
 
 STAGES = ("source", "retargeted", "K", "P_tested", "P", "K_and_P", "errors")
+
+
+_GATE = re.compile(r"^([a-z][a-z0-9_]*):")
+_HAND_OBJECT = re.compile(r"\bhand-\S+")
+_SIDE = re.compile(r"\b(left|right)\b\s*")
+_STOP = {"by", "at", "of", "is", "to", "for", "in", "with", "during", "from", "on", "x"}
+
+
+def reason_kind(reason: str) -> str:
+    """Bucket of a K or P failure reason with numbers, sides and object names stripped.
+
+    ``"grasp_drift: right/cubeA: 0.0148 m, 0.0490 rad"`` -> ``"grasp_drift"`` (tier-P gates and other
+    ``identifier: details`` reasons such as ``scene:`` or ``error:`` keep the identifier);
+    ``"left TCP rotation residual 0.115 rad > 0.05 rad at frame 12 (3 frames)"`` -> ``"TCP rotation
+    residual"``; ``"right hand-SquareNut relative pose drifts 18 mm / 0.3 rad during frames 3-9"`` ->
+    ``"hand-object relative pose drifts"``; ``"speed limit exceeded: joint 5 at ..."`` -> ``"speed limit
+    exceeded"``. Free text keeps its words up to the first number or comparison."""
+    text = str(reason).strip()
+    m = _GATE.match(text)
+    if m:
+        return m.group(1)
+    if ":" in text:
+        text = text.split(":", 1)[0]
+    text = _HAND_OBJECT.sub("hand-object", _SIDE.sub("", text))
+    words = []
+    for w in text.split():
+        if any(c.isdigit() for c in w) or w in ("<", ">", "=", "<=", ">=", "/") or w.startswith("("):
+            break
+        words.append(w)
+    while words and words[-1].lower() in _STOP:
+        words.pop()
+    return " ".join(words) or "other"
 
 
 def load_records(roots) -> list[dict]:
@@ -35,7 +71,9 @@ def _stage_flags(rec: dict) -> dict:
 def summarize(records: list[dict]) -> dict:
     by_dataset = defaultdict(Counter)
     by_family = defaultdict(Counter)
-    body_parts, regimes, reasons = Counter(), Counter(), Counter()
+    body_parts, regimes = Counter(), Counter()
+    first = {"K": Counter(), "P": Counter()}
+    any_ = {"K": Counter(), "P": Counter()}
     for rec in records:
         flags = _stage_flags(rec)
         for stage, value in flags.items():
@@ -44,15 +82,19 @@ def summarize(records: list[dict]) -> dict:
         if flags["K"]:
             body_parts[" + ".join(sorted(rec.get("body_parts") or []))] += 1
             regimes[rec.get("regime") or "unknown"] += 1
-        for reason in ((rec.get("K") or {}).get("reasons") or [])[:1] + ((rec.get("P") or {}).get("reasons") or [])[:1]:
-            reasons[reason.split(":")[0].split(" ")[0] if ":" in reason else reason[:40]] += 1
+        for tier in ("K", "P"):
+            kinds = [reason_kind(x) for x in ((rec.get(tier) or {}).get("reasons") or [])]
+            if kinds:
+                first[tier][kinds[0]] += 1
+                any_[tier].update(set(kinds))
     totals = Counter()
     for counts in by_family.values():
         totals.update(counts)
     return {"totals": dict(totals), "families": {k: dict(v) for k, v in sorted(by_family.items())},
             "datasets": {k: dict(v) for k, v in sorted(by_dataset.items())},
             "body_parts_K": dict(body_parts.most_common()), "regimes_K": dict(regimes.most_common()),
-            "top_failure_reasons": dict(reasons.most_common(25))}
+            "top_failure_reasons": {t: dict(c.most_common(25)) for t, c in first.items()},
+            "failure_reasons_any": {t: dict(c.most_common(25)) for t, c in any_.items()}}
 
 
 def markdown(summary: dict) -> str:
@@ -66,8 +108,11 @@ def markdown(summary: dict) -> str:
               "## Datasets", ""] + table(summary["datasets"])
     lines += ["", "## Body parts used (K passes)", ""]
     lines += [f"* {k or 'none'}: {v}" for k, v in summary["body_parts_K"].items()]
-    lines += ["", "## Most common first failure reasons", ""]
-    lines += [f"* {k}: {v}" for k, v in summary["top_failure_reasons"].items()]
+    for tier in ("K", "P"):
+        lines += ["", f"## Tier {tier}: failure reasons by kind (episodes; first reason / any reason)", ""]
+        first, any_ = summary["top_failure_reasons"].get(tier, {}), summary["failure_reasons_any"].get(tier, {})
+        lines += [f"* {k}: {first.get(k, 0)} / {any_.get(k, 0)}" for k in sorted(set(first) | set(any_),
+                                                                               key=lambda k: (-first.get(k, 0), -any_.get(k, 0), k))]
     return "\n".join(lines) + "\n"
 
 

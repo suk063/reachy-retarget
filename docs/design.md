@@ -112,7 +112,13 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      thinnest extent is used, and a union of `boxes` uses its thinnest part); gaps ≤ 0.25 s between two runs on the same object are bridged
      while the hand stays within contact distance (RL grippers jitter around the stall: the
      LiftPegUpright peg is lifted while the label flickered off for 0.5 s); runs shorter than
-     0.2 s are dropped (a closed hand brushing an object).
+     0.2 s are dropped (a closed hand brushing an object). Source widths are pad-face gaps
+     (robosuite: travel plus the gap at the closed limit; the Rethink gripper of MimicGen
+     PickPlace read 14 mm narrow, so its cereal box and bread were "empty" hands), and robosuite
+     objects with several collision geoms are unions of per-geom `boxes` (the mug is held by its
+     9 mm handle, ThreePieceAssembly pieces are 34–40 mm voxel arms of 102–160 mm envelopes):
+     before, 38 of the 105 closed-gripper runs of the MimicGen dev demos had no grasp label (no
+     squeeze, no grasp-phase checks); now all 105 have one.
    * *Closed-hand pushes* (`targets.push_labels`, derived label recorded in
      `extra["retarget"]["push"]`, never a grasp label): frames where a closed but empty hand is
      within contact distance of an object that moves faster than 2 cm/s together with the hand
@@ -181,6 +187,10 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      exact parts (`footprint.box_parts`): the envelope of an L covers the empty corner beside
      the handle, where the fingers of a handle grasp are. Teaching `box_geometry` the kind
      keeps one geometry record per object (adapters need not duplicate it as an `aabb`).
+   * robosuite world-child bodies without a joint of their own are fixtures through their static
+     geoms, also when articulated parts hang below them (MimicGen Kitchen/HammerCleanup tables
+     carry stove buttons and a drawer; the table was missing and the base was placed 6–8 cm into
+     it: 6 of 10 dev episodes failed `robot_environment_penetration`, 1 after).
    * Placement candidates include the target centroid itself; the score adds the arm's
      self-clearance below the IK margin at the keyframes (the scoring IK has no repulsion
      term), with the inactive arm in its rest posture. Moving-object samples while a hand
@@ -207,6 +217,17 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
    curve, continuous and binary. While grasping, the pad separation is at most the held
    object's extent along the (re-selected) closing axis, minus a 0.05 rad squeeze
    (0.4 Nm at kp 8, about 8 N per pad). A 0.15 rad squeeze made the cube creep 4–7° in the hand.
+   *Release* (`targets.release_starts`, `release_ramp`, on the output clock): from the last
+   post-grasp plateau row of the source-mapped angle (the source fingers start to leave the
+   object; a Panda whose command ramps out of its squeeze stays at the object width for 0.2–0.3 s)
+   the fingers open at their 3 rad/s speed limit (× `velocity_scale`) toward the source's next
+   opening peak, never below the source-mapped angle (`extra["retarget"]["release_ramp"]`).
+   *Placed drops* (`targets.place_labels`, derived label, `extra["retarget"]["placed_drops"]`):
+   when the source object falls ≤ 4 cm away from the hand after the release and settles within
+   0.6 s, the grasp label extends to the row where it has settled (≤ 3 mm and 0.05 rad from its
+   rest pose); the hand carries it down object-centrically and opens there. Skipped when Reachy's
+   fingers would sink into scene boxes on the way down or scene geometry stands within 1 cm
+   beside the settled object (insertions: the coffee pod into its holder, objects into bins).
 7. **Timing.** Phase-preserving time scaling so joint and base speed limits hold, then
    resampling at 50 Hz. The source↔target time map is stored. The source step into and out of
    each grasp lasts at least 0.3 s, so Reachy's fingers settle on the object before the arm
@@ -267,7 +288,10 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
 --out runs/eval/<name>.jsonl [--write DIR] [--jobs N]` retargets each demo, runs tier K and
 (with a source scene) tier P, prints per-episode reasons and an aggregate table, writes one
 JSON line per episode, and with `--write` stores every episode (failures included) plus
-`index.parquet`. Results on robomimic v1.5 `ph` (dev = demos 0–19 used while developing,
+`index.parquet`. `python -m reachy_retarget.report` buckets failure reasons by kind
+(`report.reason_kind`: the tier-P gate name, or the K reason with sides, object names and numbers
+stripped, e.g. "TCP rotation residual"), per tier, for the first and for any reason of each
+episode. Results on robomimic v1.5 `ph` (dev = demos 0–19 used while developing,
 held-out = demos 100–119, evaluated at the end and not used for tuning), episodes passing K / P:
 
 | task | baseline dev | v5 dev | final dev | baseline held-out | v5 held-out | final held-out |
@@ -363,6 +387,87 @@ verdict flips (PushCube traj_9, already failing, now also misses the 3 cm tolera
 tool's geometry changes the grasp offset by 0.4° only: PullCubeTool fails on Reachy's ±30° wrist
 (TCP rotation residual 0.18–0.52 rad, hand–tool relative drift) and in P on the tool turning
 ~1 rad in the grasp.
+
+### Tier-P physics loop: in-hand slip (MimicGen sources, 2026-10-08)
+
+Dev = MimicGen source demos 0–4 of the 12 local tasks plus robomimic `ph` Can and Lift demos 0–4;
+held-out = demos 5–9, run once at the end. MimicGen `square` is the robomimic Square `ph` file
+(identical states) and is counted once. Episodes passing K / P (K & P), runs in `runs/eval/pq/`:
+
+| task | baseline dev | final dev | baseline held-out | final held-out |
+| --- | --- | --- | --- | --- |
+| stack | 5 / 0 (0) | 5 / 3 (3) | 1 / 0 (0) | 3 / 2 (2) |
+| stack_three | 4 / 0 (0) | 4 / 3 (3) | 4 / 0 (0) | 5 / 0 (0) |
+| threading | 2 / 5 (2) | 2 / 5 (2) | 2 / 3 (2) | 2 / 5 (2) |
+| coffee | 2 / 1 (0) | 5 / 2 (2) | 4 / 0 (0) | 4 / 2 (2) |
+| square | 2 / 0 (0) | 3 / 0 (0) | 3 / 0 (0) | 2 / 0 (0) |
+| three_piece_assembly | 2 / 0 (0) | 2 / 0 (0) | 1 / 0 (0) | 0 / 0 (0) |
+| mug_cleanup | 5 / 0 (0) | 4 / 0 (0) | 5 / 0 (0) | 4 / 0 (0) |
+| coffee_preparation | 1 / 0 (0) | 1 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) |
+| kitchen | 1 / 0 (0) | 0 / 0 (0) | 1 / 0 (0) | 2 / 0 (0) |
+| hammer_cleanup | 5 / 0 (0) | 5 / 0 (0) | 5 / 0 (0) | 5 / 0 (0) |
+| nut_assembly | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) |
+| pick_place | 4 / 0 (0) | 0 / 0 (0) | 2 / 0 (0) | 0 / 0 (0) |
+| robomimic Can | 5 / 1 (1) | 5 / 2 (2) | 2 / 1 (1) | 2 / 1 (1) |
+| robomimic Lift | 5 / 5 (5) | 5 / 5 (5) | 5 / 5 (5) | 5 / 5 (5) |
+| **total (70)** | 43 / 12 (8) | 41 / 20 (17) | 35 / 9 (8) | 34 / 15 (12) |
+
+Dev P / K & P by step: baseline 12 / 8; release ramp 15 / 11; labels for multi-part objects and
+pad-face widths 16 / 13; placed drops 20 / 17; fixtures with articulated children 20 / 17
+(`robot_environment_penetration` first failures 6 → 1). K drops where grasps are now labelled
+and checked strictly (PickPlace, Kitchen: Reachy's ±30° wrist while holding). ManiSkill dev check
+(100 episodes, same commands): K & P 29 → 28, P 33 → 33 (StackPyramid P 6 → 7 but K 10 → 7: 3–5 mm
+drops are placed and the strict grasp orientation now covers the landing; PushCube traj_5 loses
+P after the release ramp on a brief RL grasp label).
+
+Root causes, measured on every acquired grasp of the dev rollouts (`grasp_drift` anchor, contact
+forces, finger actuator force, hand motion; 75 grasps, 53 over the 3 mm / 3° gate):
+* *Release, 32 of 53*: the gate counts a hand as closed while its finger reference is below the
+  0.5 opening (1.095 rad, a 46.8 mm pad gap), but the reference followed the source width, which
+  stays at the object width for 0.2–0.3 s after the open command (the Panda's command ramping out
+  of its squeeze), then the 0.3 s release dwell; a 40 mm cube needs 0.145 rad more, a 24 mm hammer
+  handle 0.47 rad. 13 had no pad contact at the violation: the object falls in the "closed" hand.
+  MimicGen operators release up to 3 cm above the stack (Stack: 8–21 mm in all 5 dev demos), longer
+  drops go into bins, holders, drawers and onto pegs (Kitchen bread 9–12 cm, hammer 7–13 cm, Square
+  nut 8–11 cm, PickPlace 3–8 cm).
+* *Unlabelled grasps*: 38 of 105 closed-gripper runs had no grasp label (multi-part envelopes:
+  mug, ThreePieceAssembly pieces; the Rethink gripper's widths 14 mm narrow), so no squeeze: 7
+  grasps held with < 0.1 Nm; 8 PickPlace grasps saturated the 2 Nm finger actuator (commanded
+  14 mm inside the object).
+* *Carry, 19–23*: about half follow object–environment contact within 0.3 s (nut on the peg,
+  pieces on the base, objects on bin walls and the coffee machine); the rest are steady soft-contact
+  creep below the friction cone (friction use 0.2–0.6; the 7 g coffee pod lags the hand's turn
+  about the approach axis by 25 %, the mug pivots about the pad normal at ~2°/s under 70–100 N).
+  Solver sensitivity on coffee demo 4 (10.7°): noslip 3 iterations 0.9°, impratio 100 11.1°,
+  impratio 1000 4.3°, 0.5 ms step 8.9°. Hand acceleration at the violation is low (median
+  0.2 m/s², max 4.3), so slower carries were not indicated; lift-off accounts for 2.
+* Contact geometry: both pads touch in every acquired grasp (median 5–6 contacts); normals are
+  more than 25° off the closing axis only on mug handles and the Milk carton's gable top
+  (8 of 79).
+
+Hardware grounding: the finger speed limit is 3 rad/s (`robot.VELOCITY`). Reachy 2's grippers are
+XM-series Dynamixels in current-based position control with a 0.4 A current limit
+(reachy2_core `grippers.yaml`, `gripper_dynamixel_controller`), about 0.5–0.7 Nm at XM430 torque
+constants, below the simulated ±2 Nm force range (reachy-agent `gripper_force`). The finger torque
+at acquisition is 0.70 Nm median after the width correction (0.44 before; ThreadingNeedle 1.9 Nm,
+6 of 172 dev and held-out grasps saturate), so squeeze was not raised; the actuator model was
+left unchanged (with ±0.7 Nm, kv 0.8 would cap the finger speed at 0.9 rad/s).
+
+Rejected: MuJoCo noslip (3 iterations) for all contacts (dev P 16 → 15, threading 5 → 3, more
+`hand_object_penetration`; legacy treated it as a sensitivity only); placing 2 mm above the rest
+pose (stacking P unchanged, 8 → 8); following the fall through the landing bounce (Stack demo 1:
+the hand chases a 6 rad/s tumble, K fails; dev 19 / 16, kept: up to the settled pose, which gave
+the same 20 / 17 as stopping at the first touch); a 5 mm minimum drop (Stack −1, ManiSkill +1);
+placing insertions (coffee P 2 → 0: the pod sits on the holder rim).
+
+Remaining failure modes (final, dev and held-out, 110 of 172 grasps over the gate): drops that are
+not placed (bins, holders, drawers, pegs: 33 of 62 release violations have no pad contact;
+Kitchen, HammerCleanup, PickPlace, NutAssembly, Square cannot pass `grasp_drift` while the closed
+point is the absolute 0.5 opening); placed cubes rocking 3–7° about the pad normal as the pads
+open (soft contact preloaded by 1–3 N); insertion contacts while carrying (26 of 48 carry
+violations); creep of light objects (7–21 g); approach collisions of Reachy's wider fingers with
+neighbouring objects (StackThree demo 0 knocks cubeC, ThreePieceAssembly fingers land on the
+piece); drawer and lid manipulation that blocks the hand (MugCleanup `tcp_tracking` 3–8 cm).
 
 ## Episode storage (`reachy-retarget-episode-v2`)
 

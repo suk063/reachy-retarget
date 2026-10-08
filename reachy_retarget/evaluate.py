@@ -133,7 +133,8 @@ def _demo_keys(family, path, demos):
 
 
 def _reason_key(reason: str) -> str:
-    return reason.split(":")[0] if ":" in reason[:40] else " ".join(reason.split()[:3])
+    from .report import reason_kind
+    return reason_kind(reason)
 
 
 def summarize(records) -> str:

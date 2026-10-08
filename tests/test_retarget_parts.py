@@ -355,3 +355,68 @@ def test_touch_labels_mark_a_closed_hand_on_an_object():
                         objects={"cube": _cube(T)})
     lab = touch_labels(src, "h", np.full(T, -1), CFG, np.ones(T, bool))
     assert lab.tolist() == [0] * 5 + [-1] * 5
+
+
+def test_release_ramp_opens_at_the_finger_speed_from_the_source_opening():
+    from reachy_retarget.retarget.targets import release_ramp, release_starts
+    # source clock: grasp until row 3, plateau (Panda command ramping out of its squeeze), then opening
+    src = np.array([0.80, 0.80, 0.80, 0.85, 0.85, 0.85, 0.86, 1.00, 1.40, 1.80, 1.80])
+    lab = np.array([0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1])
+    assert release_starts(src, lab, 0.005) == [5]  # last plateau row before the fingers leave
+    t = np.arange(len(src)) * 0.1
+    q, events = release_ramp(src, t, [5], lab, rate=3.0)
+    assert events == [(5, 10)]
+    np.testing.assert_allclose(q[:6], src[:6])
+    np.testing.assert_allclose(q[6:8], [1.15, 1.45])           # 3 rad/s from the plateau
+    assert np.all(q >= src) and q[9] == pytest.approx(1.8)     # never below the source, capped at its peak
+    # a release the next grasp interrupts is capped at the angle reached before it
+    lab2 = lab.copy()
+    lab2[8:] = 0
+    q2, _ = release_ramp(src, t, [5], lab2, rate=3.0)
+    np.testing.assert_allclose(q2[6:], [1.0, 1.0, 1.4, 1.8, 1.8])
+
+
+def _drop_source(fall_to, end_rows=4, bin_walls=False):
+    """A cube carried at 5 cm, released at row 6 and falling onto a table box; optional walls."""
+    T = 6 + 3 + end_rows
+    t = np.arange(T) * 0.05
+    z = np.r_[np.full(6, 0.05 + fall_to), [0.05 + fall_to / 2, 0.05, 0.05], np.full(end_rows, 0.05)][:T]
+    pose = np.tile([0.0, 0, 0, 1, 0, 0, 0], (T, 1))
+    pose[:, 2] = z
+    hand = np.tile(np.eye(4), (T, 1, 1))
+    hand[:, 2, 3] = 0.05 + fall_to  # the source hand stays where it released the cube
+    # the hand approaches along -z: the grasp-center frame's +z points down
+    hand[:, :3, :3] = np.diag([1.0, -1.0, -1.0])
+    objects = {"cube": ObjectTrack(pose, np.ones(T, bool), "manipulated", {"kind": "box", "half_extents": [0.02] * 3}),
+               "table": ObjectTrack(np.tile([0, 0, 0.015, 1, 0, 0, 0.0], (T, 1)), np.ones(T, bool), "support",
+                                    {"kind": "box", "half_extents": [0.3, 0.3, 0.015]})}
+    if bin_walls:
+        objects["wall"] = ObjectTrack(np.tile([0.028, 0, 0.05, 1, 0, 0, 0.0], (T, 1)), np.ones(T, bool), "fixture",
+                                      {"kind": "box", "half_extents": [0.005, 0.1, 0.03]})
+    eff = Effector(hand, np.r_[np.zeros(6), np.ones(T - 6)], np.r_[np.full(6, 0.04), np.full(T - 6, 0.08)])
+    src = SourceEpisode("f", "f/d", "0", "t", t, {"h": eff}, objects=objects)
+    lab = np.r_[np.zeros(6, int), np.full(T - 6, -1)]
+    return src, lab
+
+
+def test_short_drops_are_placed_and_long_drops_or_insertions_are_not():
+    from reachy_retarget.retarget.targets import place_labels
+    src, lab = _drop_source(0.02)
+    out, events = place_labels(src, "h", lab, CFG)
+    assert len(events) == 1 and events[0][0] == 6 and events[0][1] == 8  # held until it has settled (row 7)
+    assert events[0][2] == pytest.approx(0.02) and (out[:8] == 0).all() and (out[8:] == -1).all()
+    _, events = place_labels(src, "h", lab, RetargetConfig(place_drops=True, place_max_drop=0.01))
+    assert events == []                       # longer than place_max_drop: kept as a drop
+    src, lab = _drop_source(0.002)
+    assert place_labels(src, "h", lab, CFG)[1] == []   # no drop
+    src, lab = _drop_source(0.02, bin_walls=True)
+    assert place_labels(src, "h", lab, CFG)[1] == []   # a wall beside the landed cube: an insertion
+
+
+def test_object_extent_of_a_union_of_boxes_is_its_thinnest_part():
+    # robosuite multi-geom objects (the MimicGen mug: 32 convex parts, held by its 9 mm handle)
+    track = ObjectTrack(np.tile([0, 0, 0, 1, 0, 0, 0.0], (2, 1)), np.ones(2, bool), "manipulated",
+                        {"kind": "boxes", "frame": "body",
+                         "boxes": [{"center": [0, 0, 0], "half_extents": [0.04, 0.04, 0.045]},
+                                   {"center": [0.05, 0, 0], "half_extents": [0.0045, 0.005, 0.03]}]})
+    assert object_extent(track, np.arange(2), np.tile([0, 1.0, 0], (2, 1))) == pytest.approx([0.009, 0.009])

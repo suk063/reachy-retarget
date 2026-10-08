@@ -39,6 +39,16 @@ class RetargetConfig:
     grasp_min_duration_s: float = 0.2    # shorter grasp runs are dropped (a closed hand brushing an object)
     grasp_gap_s: float = 0.25            # shorter gaps between runs on the same object are bridged
     squeeze_angle: float = 0.05          # finger angle below object contact while grasping (0.4 Nm at kp 8)
+    release_ramp: bool = True            # fingers open at their speed limit once the source fingers leave the object
+    release_start_angle: float = 0.01    # rad of source-mapped opening past the post-grasp plateau that starts it
+    place_drops: bool = True             # a short source drop after a release is placed instead (targets.place_labels)
+    place_max_drop: float = 0.04         # m, largest fall away from the source hand (release to rest) that is followed
+    place_max_turn: float = 0.35         # rad, largest object turn from release to rest that is followed
+    place_max_s: float = 0.6             # s, longest source time from release to rest that is followed
+    place_min_drop: float = 0.003        # m, object travel relative to the hand that counts as a drop
+    place_rest_turn: float = 0.05        # rad, the placed object is released within this of its rest orientation
+    place_finger_clearance: float = 0.001  # m, finger depth into scene boxes a placement may add
+    place_side_clearance: float = 0.01   # m, scene geometry this close beside the resting object = insertion, not placed
     floor_support_height: float = 0.05   # support boxes whose top is lower are the floor
 
     # Grasp re-selection (targets.py): offsets of the source grasp-center frame.

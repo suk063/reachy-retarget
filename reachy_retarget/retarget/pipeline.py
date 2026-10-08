@@ -1,11 +1,12 @@
 """SourceEpisode -> ReachyEpisode (docs/design.md, "Retargeting method").
 
-Steps: grasp labels, object-centric hand paths for grasps the source does not hold rigidly,
-arm assignment with base placement and grasp offsets, TCP targets, two-pass whole-body IK on
-the source clock (free orientation away from grasps, then strict; + light smoothing; base
-assistance when a fixed placement leaves frames out of tolerance), finger commands, gaze,
-time scaling and 50 Hz resampling (+ residual refinement on the output clock), episode
-assembly and tier K.
+Steps: grasp labels (short drops after a release extended to the object's rest: placed drops),
+object-centric hand paths for grasps the source does not hold rigidly, arm assignment with base
+placement and grasp offsets, TCP targets, two-pass whole-body IK on the source clock (free
+orientation away from grasps, then strict; + light smoothing; base assistance when a fixed
+placement leaves frames out of tolerance), finger commands, gaze, time scaling and 50 Hz
+resampling (+ residual refinement on the output clock), releases opened at the finger speed
+limit, episode assembly and tier K.
 Episodes that fail tier K are still returned (failed retargets are saved too); the status
 is ``failed`` only when no trajectory could be produced.
 """
@@ -17,7 +18,7 @@ from dataclasses import dataclass, field, replace
 
 import numpy as np
 
-from ..robot import Reachy, min_clearance
+from ..robot import VELOCITY, Reachy, min_clearance
 from ..robot.reachy import GRIPPERS, NECK
 from ..schema.episode import DT, SIDES, ReachyEpisode, Reference
 from ..schema.rotations import so3_log
@@ -30,7 +31,8 @@ from .gaze import gaze_error, gaze_points, solve_neck
 from .placement import diagnostics as placement_diagnostics
 from .targets import (blend_orientation, contact_width, finger_angles, grasp_labels, gripper_state,
                       hand_object_distance, held_masks, manipulated_ids, object_centric, orientation_weight,
-                      offset_track, push_labels, source_closed, tcp_targets, _runs)
+                      offset_track, place_labels, push_labels, release_ramp, release_starts, source_closed,
+                      tcp_targets, _runs)
 from .wbik import ARM_COLUMNS, refine, smooth, solve_trajectory, tcp_errors
 
 
@@ -112,6 +114,11 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
     closed_src = {k: source_closed(e, cfg, src.time) for k, e in src.effectors.items()}
     labels_src = {k: grasp_labels(e.pose[:, :3, 3], closed_src[k], src.objects, cfg, effector=e, times=src.time)
                   for k, e in src.effectors.items()}
+    place_diag = {}
+    if cfg.place_drops and cfg.object_centric:
+        # short drops after a release are placed: the hand follows the object to rest, then opens
+        for k in src.effectors:
+            labels_src[k], place_diag[k] = place_labels(src, k, labels_src[k], cfg)
     oc_diag, push_diag = {}, {}
     if cfg.object_centric:
         # Hands carry held objects rigidly along the source object path (targets.object_centric).
@@ -124,7 +131,8 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
                 lab = np.where(lab >= 0, lab, push)
                 push_diag[k] = {"push_frames": int(np.sum(push >= 0)),
                                 "segments": [[int(a), int(b)] for a, b in _runs(push >= 0)]}
-            pose, oc_diag[k] = object_centric(src, k, lab, cfg)
+            placed = {e for _, e, _, _ in place_diag.get(k, ())}
+            pose, oc_diag[k] = object_centric(src, k, lab, cfg, force_ends=placed)
             effectors[k] = replace(e, pose=pose)
         src = replace(src, effectors=effectors)
     try:
@@ -197,12 +205,21 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
     assist = base_free and not place.mobile
     q, refined = refine(replace(cfg, w_base=cfg.w_base_assist) if assist else cfg, q, targets_out, base_out,
                         base_free, nominal, DT, obstacles=obs if assist else None)
-    qd = timing.velocity(q)
-    t_time = _time.perf_counter()
-
     grasp_out = np.full((len(q), 2), -1, dtype=np.int16)
     for side, lab in labels.items():
         grasp_out[:, SIDES.index(side)] = timing.labels(clock, lab)
+    release_diag = {}
+    if cfg.release_ramp:
+        # Releases open at the finger speed limit once the source fingers leave the object.
+        for side, lab in labels.items():
+            col = GRIPPERS.start + SIDES.index(side)
+            src_rows = release_starts(q_src[:, col], lab, cfg.release_start_angle)
+            starts = [int(np.searchsorted(clock.source_time, src.time[r], side="right")) - 1 for r in src_rows]
+            q[:, col], events = release_ramp(q[:, col], clock.time, starts, grasp_out[:, SIDES.index(side)],
+                                             VELOCITY[col] * cfg.velocity_scale)
+            release_diag[side] = {"source_rows": src_rows, "output_rows": events}
+    qd = timing.velocity(q)
+    t_time = _time.perf_counter()
     base_moves = bool(np.any(np.ptp(q[:, :3], axis=0) > 1e-3))
     neck_moves = bool(np.any(np.ptp(q[:, NECK], axis=0) > 1e-3))
     body_parts = (tuple(f"{s}_arm" for s in targets) + (("head",) if neck_moves else ())
@@ -216,6 +233,8 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         "free_orientation": orient_diag,
         "base_assist": base_diag,
         "push": push_diag,
+        "release_ramp": release_diag,
+        "placed_drops": place_diag,
         "object_centric": {k: {seg: {"max_hand_shift_m": v[0], "max_hand_turn_rad": v[1]} for seg, v in d.items()}
                            for k, d in oc_diag.items()},
         "timing": clock.diagnostics(src.time),

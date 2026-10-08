@@ -405,7 +405,7 @@ def _episode(model, ep, *, family, lerobot, tar, manifest, member_sha, dmeta, ve
         raise ValueError(f"{ep}: kitchen floor top at z={floor_z:.4f} m; the source contract needs the floor at "
                          "z = 0 and this adapter does not translate scenes")
     effectors = {k: Effector(pose=poses[k], width=widths[k],
-                             opening=np.clip(widths[k] / model.grippers[k].width_max, 0, 1), side_hint=None)
+                             opening=model.grippers[k].opening(widths[k]), side_hint=None)
                  for k in model.grippers}
     objects = {}
     for n in task_objs:
