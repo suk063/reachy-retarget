@@ -56,14 +56,63 @@ def offset_matrix(offset) -> np.ndarray:
     return M
 
 
+def offset_matrices(offset) -> np.ndarray:
+    """4x4 (or per-frame (T, 4, 4), see :func:`offset_track`) grasp-center offset."""
+    if isinstance(offset, np.ndarray) and offset.ndim == 3:
+        return offset
+    return offset_matrix(offset)
+
+
+def offset_track(times, segments, default, cfg: RetargetConfig) -> np.ndarray:
+    """Per-frame grasp offset (T, 4, 4) of a hand with per-segment offsets.
+
+    ``segments`` = [(a, b, offset), ...] (source rows ``a:b`` of each grasp segment, in time
+    order); ``default`` is used where no segment applies. Each offset holds over its segment
+    window (``cfg.approach_window_s`` before to ``cfg.retreat_window_s`` after the segment); in
+    the free time between two windows the offset turns geodesically from one to the next (the
+    hand orientation is mostly free there, see :func:`orientation_weight`), and where two windows
+    overlap the turn spans the time between the two segments.
+    """
+    times = np.asarray(times, float)
+    T = len(times)
+    if not segments:
+        return np.broadcast_to(offset_matrix(default), (T, 4, 4)).copy()
+    mats = [offset_matrix(o) for _, _, o in segments]
+    out = np.broadcast_to(mats[0], (T, 4, 4)).copy()
+    for i in range(1, len(segments)):
+        (_, b0, _), (a1, _, _) = segments[i - 1], segments[i]
+        t0, t1 = times[b0 - 1], times[a1]
+        lo, hi = t0 + cfg.retreat_window_s, t1 - cfg.approach_window_s
+        if hi <= lo:
+            lo, hi = t0, t1
+        s = np.clip((times - lo) / max(hi - lo, 1e-9), 0.0, 1.0)
+        rows = times > lo
+        out[rows] = _blend_pose(np.broadcast_to(mats[i - 1], (int(rows.sum()), 4, 4)),
+                                np.broadcast_to(mats[i], (int(rows.sum()), 4, 4)), s[rows])
+    return out
+
+
+def grasp_segments(labels) -> list[tuple[int, int]]:
+    """(start, stop) rows of each grasp segment of one hand: a run of one object label."""
+    lab = np.asarray(labels)
+    out = []
+    for a, b in _runs(lab >= 0):
+        cut = a + np.flatnonzero(np.diff(lab[a:b]) != 0) + 1
+        edges = [a, *cut.tolist(), b]
+        out += list(zip(edges[:-1], edges[1:]))
+    return out
+
+
 def tcp_targets(src, sides, offsets=None):
     """World TCP targets {side: (T, 4, 4)} for ``sides`` = {effector key: side}.
 
-    ``offsets`` = {side: bool flip or (flip, theta_deg, beta_deg)} applies a grasp offset
-    (module docstring); missing sides use the source frame.
+    ``offsets`` = {side: bool flip or (flip, theta_deg, beta_deg), or a per-frame (T, 4, 4)
+    offset from :func:`offset_track`} applies a grasp offset (module docstring); missing sides use
+    the source frame.
     """
     robot, offsets = Reachy.load(), offsets or {}
-    return {side: robot.tcp_from_grasp_center(src.effectors[key].pose @ offset_matrix(offsets.get(side, False)), side)
+    return {side: robot.tcp_from_grasp_center(src.effectors[key].pose @ offset_matrices(offsets.get(side, False)),
+                                              side)
             for key, side in sides.items()}
 
 
@@ -181,12 +230,45 @@ def _cylinder_coords(rel, cyl):
     return radial, axial
 
 
-def grasp_labels(grasp_points, closed, objects, cfg: RetargetConfig):
+def _runs(mask):
+    d = np.diff(np.r_[0, np.asarray(mask).astype(int), 0])
+    return list(zip(np.flatnonzero(d == 1), np.flatnonzero(d == -1)))
+
+
+def object_extent(track, rows, axes):
+    """Extent (n,) of a solid object's cylinder or box along world directions ``axes`` (n, 3) at
+    track rows ``rows``. An ``aabb`` is an envelope (the robomimic Square nut is a ring with a
+    handle), so its thinnest extent is returned instead, a lower bound on any part a hand can
+    hold. NaN without box geometry."""
+    box = box_geometry(track.geometry)
+    out = np.full(len(rows), np.nan)
+    if box is None or not len(rows):
+        return out
+    if track.geometry.get("kind") == "aabb":
+        return np.full(len(rows), 2.0 * float(np.min(box[1])))
+    yo = np.einsum("tji,tj->ti", quat_to_matrix(track.pose[rows, 3:]), axes)
+    cyl = cylinder_geometry(track.geometry)
+    if cyl is not None:
+        c = np.minimum(np.abs(yo[:, cyl[1]]), 1.0)
+        return 2.0 * (cyl[2] * np.sqrt(1.0 - c ** 2) + cyl[3] * c)
+    return 2.0 * np.abs(yo) @ box[1]
+
+
+def grasp_labels(grasp_points, closed, objects, cfg: RetargetConfig, effector=None, times=None):
     """Index of the grasped manipulated object per frame (-1 = none), for one hand.
 
     grasp_points: (T, 3) grasp-center positions; closed: (T,) bool commanded-closed state.
     A frame is grasping when the hand is closed and the nearest manipulated object lies
     within ``cfg.grasp_contact_distance`` (box surface or centre).
+
+    With ``effector`` (its pose and pad separation ``width``) a closed hand holds the object
+    only if its pads are at least ``cfg.grasp_min_width_fraction`` of the object's extent along
+    the closing axis apart (:func:`object_extent`): fingers closed on nothing push with their outsides or tips (ManiSkill
+    PullCube, StackPyramid, TwoRobotPickCube: width 0-15 mm next to a 40 mm cube). Grasp runs
+    shorter than ``cfg.grasp_min_duration_s`` (with ``times``) are dropped: a closed hand brushing
+    an object for one or two control steps. Before that, gaps of at most ``cfg.grasp_gap_s``
+    between two runs on the same object are bridged when the hand stays within the contact
+    distance of it (the closed state of a jittering RL gripper flickers while it holds).
     """
     ids = manipulated_ids(objects)
     labels = np.full(len(grasp_points), -1)
@@ -196,7 +278,31 @@ def grasp_labels(grasp_points, closed, objects, cfg: RetargetConfig):
     d = np.where(np.isnan(d), np.inf, d)
     nearest = np.argmin(d, axis=0)
     hit = closed & (d[nearest, np.arange(len(nearest))] <= cfg.grasp_contact_distance)
+    if effector is not None and effector.width is not None:
+        width = np.asarray(effector.width, float)
+        for k, oid in enumerate(ids):
+            rows = np.flatnonzero(hit & (nearest == k))
+            ext = object_extent(objects[oid], rows, np.asarray(effector.pose)[rows, :3, 1])
+            empty = np.isfinite(ext) & (width[rows] < cfg.grasp_min_width_fraction * ext)
+            hit[rows[empty]] = False
     labels[hit] = nearest[hit]
+    if times is None:
+        return labels
+    times = np.asarray(times, float)
+    dt = times[-1] - times[-2] if len(times) > 1 else 0.0
+    near = d[nearest, np.arange(len(nearest))] <= cfg.grasp_contact_distance
+    runs = _runs(labels >= 0)
+    for (_, b), (a2, _) in zip(runs[:-1], runs[1:]):
+        # a hand that stays on the same object through a short gap in its closed state keeps
+        # holding it (RL grippers jitter around the stall: ManiSkill LiftPegUpright lifts the peg
+        # while the opening rate flickers above cfg.opening_rate)
+        if (labels[b - 1] == labels[a2] and times[a2] - times[b - 1] <= cfg.grasp_gap_s + 1e-9
+                and np.all(near[b:a2] & (nearest[b:a2] == labels[a2]))):
+            labels[b:a2] = labels[a2]
+    for a, b in _runs(labels >= 0):
+        end = times[b] if b < len(times) else times[-1] + dt
+        if end - times[a] < cfg.grasp_min_duration_s - 1e-9:
+            labels[a:b] = -1
     return labels
 
 
@@ -277,7 +383,7 @@ def contact_width(src, key, offset, labels) -> np.ndarray:
     ids = manipulated_ids(src.objects)
     lab = np.asarray(labels)
     out = np.full(len(lab), np.inf)
-    y = (src.effectors[key].pose @ offset_matrix(offset))[:, :3, 1]
+    y = (src.effectors[key].pose @ offset_matrices(offset))[:, :3, 1]
     for k in np.unique(lab[lab >= 0]):
         track = src.objects[ids[k]]
         box = box_geometry(track.geometry)
@@ -339,25 +445,49 @@ def finger_penetration(src, key, side, offset, labels, finger, cfg: RetargetConf
     return depth
 
 
-def orientation_weight(times, labels, cfg: RetargetConfig) -> np.ndarray:
+def hand_object_distance(src, key) -> np.ndarray:
+    """Distance (T,) from effector ``key``'s grasp center to the nearest manipulated object
+    (box/cylinder surface or centre, :func:`object_distance`); inf without objects."""
+    pts = src.effectors[key].pose[:, :3, 3]
+    d = [object_distance(pts, src.objects[k]) for k in manipulated_ids(src.objects)]
+    if not d:
+        return np.full(len(pts), np.inf)
+    return np.nanmin(np.where(np.isnan(d), np.inf, d), axis=0)
+
+
+def orientation_weight(times, labels, cfg: RetargetConfig, distance=None) -> np.ndarray:
     """Orientation weight (T,) in [cfg.free_rot_weight, 1] of one hand's TCP target.
 
-    1 inside every grasp window (a grasp segment of ``labels`` extended by
-    ``cfg.approach_window_s`` before and ``cfg.retreat_window_s`` after it), decaying linearly
-    to ``cfg.free_rot_weight`` over ``cfg.orientation_blend_s`` away from the windows. A hand
-    without grasps keeps weight 1 (its orientation may matter for non-prehensile contact).
+    1 inside every grasp segment of ``labels``. Around them (``cfg.approach_window_s`` before,
+    ``cfg.retreat_window_s`` after) it is 1 as well, decaying linearly to ``cfg.free_rot_weight``
+    over ``cfg.orientation_blend_s`` away from these windows.
+
+    With ``distance`` (T,), the grasp-center distance to the nearest manipulated object
+    (:func:`hand_object_distance`), the hand orientation is strict only where it can matter for
+    contact: outside grasp segments the weight is further limited to a proximity ramp, 1 within
+    ``cfg.contact_strict_distance`` of an object, ``cfg.free_rot_weight`` beyond
+    ``cfg.contact_free_distance``. A hand without grasps then follows the source orientation
+    only near objects (non-prehensile pushing, poking and pulling with the fingers), and an
+    approach that starts far from the object starts free. Without ``distance`` a hand without
+    grasps keeps weight 1.
     """
     times = np.asarray(times, float)
     lab = np.asarray(labels) >= 0
-    if not lab.any():
-        return np.ones(len(times))
-    d = np.diff(np.r_[0, lab.astype(int), 0])
-    dist = np.full(len(times), np.inf)
-    for a, b in zip(np.flatnonzero(d == 1), np.flatnonzero(d == -1)):
-        lo, hi = times[a] - cfg.approach_window_s, times[b - 1] + cfg.retreat_window_s
-        dist = np.minimum(dist, np.maximum(0.0, np.maximum(lo - times, times - hi)))
-    w = 1.0 - dist / max(cfg.orientation_blend_s, 1e-9)
-    return np.clip(w, cfg.free_rot_weight, 1.0)
+    lo_w = cfg.free_rot_weight
+    if lab.any():
+        d = np.diff(np.r_[0, lab.astype(int), 0])
+        dist = np.full(len(times), np.inf)
+        for a, b in zip(np.flatnonzero(d == 1), np.flatnonzero(d == -1)):
+            lo, hi = times[a] - cfg.approach_window_s, times[b - 1] + cfg.retreat_window_s
+            dist = np.minimum(dist, np.maximum(0.0, np.maximum(lo - times, times - hi)))
+        w = np.clip(1.0 - dist / max(cfg.orientation_blend_s, 1e-9), lo_w, 1.0)
+    else:
+        w = np.ones(len(times))
+    if distance is not None:
+        near = (cfg.contact_free_distance - np.asarray(distance, float)) / max(
+            cfg.contact_free_distance - cfg.contact_strict_distance, 1e-9)
+        w = np.where(lab, 1.0, np.minimum(w, np.clip(near, lo_w, 1.0)))
+    return w
 
 
 def blend_orientation(X_src, X_free, w):
@@ -388,6 +518,61 @@ def _blend_pose(A, B, s):
     rel = so3_log(np.swapaxes(A[:, :3, :3], 1, 2) @ B[:, :3, :3])
     out[:, :3, :3] = A[:, :3, :3] @ so3_exp(np.asarray(s)[:, None] * rel)
     out[:, :3, 3] = A[:, :3, 3] + np.asarray(s)[:, None] * (B[:, :3, 3] - A[:, :3, 3])
+    return out
+
+
+def touch_labels(src, key, labels, cfg: RetargetConfig, closed) -> np.ndarray:
+    """Grasp labels (T,) extended by the frames where the closed but empty hand is within
+    ``cfg.grasp_contact_distance`` of a manipulated object (index of the nearest one): the
+    object the hand touches on purpose (pushes, pre-grasp contact)."""
+    ids = manipulated_ids(src.objects)
+    lab = np.asarray(labels).copy()
+    if not ids:
+        return lab
+    pts = src.effectors[key].pose[:, :3, 3]
+    d = np.stack([object_distance(pts, src.objects[k]) for k in ids])
+    d = np.where(np.isnan(d), np.inf, d)
+    nearest = np.argmin(d, axis=0)
+    hit = (lab < 0) & np.asarray(closed, bool) & (d[nearest, np.arange(len(lab))] <= cfg.grasp_contact_distance)
+    lab[hit] = nearest[hit]
+    return lab
+
+
+def push_labels(src, key, labels, cfg: RetargetConfig, closed=None) -> np.ndarray:
+    """Non-prehensile contact label (T,) of effector ``key``: index of the manipulated object the
+    hand drives without holding it (-1 = none).
+
+    A frame is a push frame when the hand is closed (``closed``, default every frame) but holds
+    nothing (``labels`` = -1), its grasp center is
+    within ``cfg.grasp_contact_distance`` of the object's surface, the object moves faster than
+    ``cfg.push_min_speed`` and the hand moves with it (``|v_object - v_hand| <=
+    cfg.push_speed_ratio * |v_object|``: a released object falling away from a retreating hand, or
+    a ball rolling away after a hit, is not driven). Runs shorter than ``cfg.grasp_min_duration_s``
+    are dropped. ManiSkill PullCube, StackPyramid and TwoRobotPickCube push and pull cubes with
+    closed fingers this way.
+    """
+    ids = manipulated_ids(src.objects)
+    lab = np.asarray(labels)
+    out = np.full(len(lab), -1)
+    times = np.asarray(src.time, float)
+    if not ids or len(times) < 3:
+        return out
+    pts = src.effectors[key].pose[:, :3, 3]
+    v_hand = np.gradient(pts, times, axis=0)
+    best = np.full(len(lab), np.inf)
+    for k, oid in enumerate(ids):
+        track = src.objects[oid]
+        dist = object_distance(pts, track)
+        v_obj = np.gradient(track.pose[:, :3], times, axis=0)
+        speed = np.linalg.norm(v_obj, axis=1)
+        follow = np.linalg.norm(v_obj - v_hand, axis=1) <= cfg.push_speed_ratio * speed
+        hit = (lab < 0) & (True if closed is None else np.asarray(closed, bool)) & track.valid & (np.nan_to_num(dist, nan=np.inf) <= cfg.grasp_contact_distance) \
+            & (speed >= cfg.push_min_speed) & follow & (dist < best)
+        out[hit], best[hit] = k, dist[hit]
+    for a, b in _runs(out >= 0):
+        end = times[b] if b < len(times) else times[-1] + (times[-1] - times[-2])
+        if end - times[a] < cfg.grasp_min_duration_s - 1e-9:
+            out[a:b] = -1
     return out
 
 

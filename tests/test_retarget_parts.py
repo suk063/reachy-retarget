@@ -242,3 +242,95 @@ def test_cylinder_grasped_along_its_axis_is_rotationally_symmetric():
     side[:, :3, :3] = [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]  # approach +x
     src2 = SourceEpisode("f", "f/d", "0", "t", t, {"h": Effector(side, np.full(T, 0.6))}, objects={"Can": can})
     assert not grasp_symmetry(src2, "h", labels, CFG)["rotational"]
+
+
+def _cube(T, xyz=(0.0, 0.0, 0.0)):
+    return ObjectTrack(np.tile([*xyz, 1, 0, 0, 0.0], (T, 1)), np.ones(T, bool), "manipulated",
+                       {"kind": "box", "half_extents": [0.02] * 3})
+
+
+def test_closed_empty_hand_and_brief_contact_are_not_grasps():
+    T = 20
+    t = np.arange(T) * 0.05
+    pose = np.tile(np.eye(4), (T, 1, 1))
+    pose[:, :3, 3] = [0.0, 0.0, 0.03]               # 1 cm above the cube top
+    closed = np.ones(T, bool)
+    objects = {"cube": _cube(T)}
+    fist = Effector(pose, np.zeros(T), width=np.zeros(T))  # fingers closed on nothing: a push
+    assert (grasp_labels(pose[:, :3, 3], closed, objects, CFG, effector=fist, times=t) == -1).all()
+    held = Effector(pose, np.full(T, 0.5), width=np.full(T, 0.037))  # stalled on the 40 mm cube
+    assert (grasp_labels(pose[:, :3, 3], closed, objects, CFG, effector=held, times=t) == 0).all()
+    brief = closed & (np.arange(T) >= 5) & (np.arange(T) < 8)     # 0.15 s < grasp_min_duration_s
+    assert (grasp_labels(pose[:, :3, 3], brief, objects, CFG, effector=held, times=t) == -1).all()
+    flicker = closed.copy()
+    flicker[[3, 6, 7, 12]] = False                                # jittering stall: gaps <= grasp_gap_s
+    assert (grasp_labels(pose[:, :3, 3], flicker, objects, CFG, effector=held, times=t) == 0).all()
+    flicker[8:14] = False                                         # a 0.3 s release is kept
+    lab = grasp_labels(pose[:, :3, 3], flicker, objects, CFG, effector=held, times=t)
+    assert (lab[8:14] == -1).all() and (lab[14:] == 0).all()
+    # an aabb is an envelope (a ring nut): only its thinnest extent bounds the held part
+    ring = ObjectTrack(objects["cube"].pose, np.ones(T, bool), "manipulated",
+                       {"kind": "aabb", "half_extents": [0.06, 0.044, 0.01]})
+    thin = Effector(pose, np.full(T, 0.3), width=np.full(T, 0.02))
+    assert (grasp_labels(pose[:, :3, 3], closed, {"nut": ring}, CFG, effector=thin, times=t) == 0).all()
+
+
+def test_orientation_is_strict_near_objects_and_free_far_from_them():
+    from reachy_retarget.retarget.targets import hand_object_distance, orientation_weight
+    T = 40
+    t = np.arange(T) * 0.05
+    pose = np.tile(np.eye(4), (T, 1, 1))
+    pose[:, 0, 3] = np.linspace(0.4, 0.0, T)        # approaches the cube from 40 cm
+    src = SourceEpisode("f", "f/d", "0", "t", t, {"h": Effector(pose, np.ones(T))}, objects={"cube": _cube(T)})
+    d = hand_object_distance(src, "h")
+    np.testing.assert_allclose(d[[0, -1]], [0.38, 0.0], atol=1e-12)
+    none = np.full(T, -1)
+    assert np.all(orientation_weight(t, none, CFG) == 1)  # without distances: strict everywhere
+    w = orientation_weight(t, none, CFG, d)
+    assert w[0] == CFG.free_rot_weight and np.all(w[d <= CFG.contact_strict_distance] == 1)
+    assert np.all(np.diff(w) >= 0)
+    grasp = np.where(t >= 1.5, 0, -1)
+    wg = orientation_weight(t, grasp, CFG, np.full(T, 1.0))  # far (by distance) but held: strict
+    assert np.all(wg[grasp >= 0] == 1)
+
+
+def test_closed_hand_push_frames():
+    from reachy_retarget.retarget.targets import push_labels
+    T = 30
+    t = np.arange(T) * 0.05
+    pose = np.tile(np.eye(4), (T, 1, 1))
+    x = np.r_[np.full(10, 0.1), np.linspace(0.1, 0.3, 20)]      # moves +x after 0.5 s
+    pose[:, 0, 3] = x - 0.045                                   # 25 mm behind the cube's -x face
+    cube = _cube(T)
+    cube.pose[:, 0] = x
+    src = SourceEpisode("f", "f/d", "0", "t", t, {"h": Effector(pose, np.zeros(T), width=np.zeros(T))},
+                        objects={"cube": cube})
+    push = push_labels(src, "h", np.full(T, -1), CFG, closed=np.ones(T, bool))
+    assert (push[11:29] == 0).all() and (push[:9] == -1).all()
+    assert (push_labels(src, "h", np.full(T, -1), CFG, closed=np.zeros(T, bool)) == -1).all()
+
+
+def test_per_segment_offsets_turn_between_segment_windows():
+    from reachy_retarget.retarget.targets import grasp_segments, offset_matrix, offset_track
+    t = np.arange(100) * 0.05
+    lab = np.full(100, -1)
+    lab[10:30], lab[30:40], lab[70:90] = 0, 1, 1
+    segs = grasp_segments(lab)
+    assert segs == [(10, 30), (30, 40), (70, 90)]
+    a, b = (False, 0.0, 0.0), (True, 0.0, 30.0)
+    M = offset_track(t, [(10, 30, a), (30, 40, a), (70, 90, b)], a, CFG)
+    np.testing.assert_allclose(M[:45], np.broadcast_to(offset_matrix(a), (45, 4, 4)), atol=1e-12)
+    np.testing.assert_allclose(M[60:], np.broadcast_to(offset_matrix(b), (40, 4, 4)), atol=1e-12)
+    turn = np.linalg.norm(np.diff(M[:, :3, :3], axis=0), axis=(1, 2))
+    assert turn[45:60].max() < 0.5  # a gradual turn in the free time between the windows
+
+
+def test_touch_labels_mark_a_closed_hand_on_an_object():
+    from reachy_retarget.retarget.targets import touch_labels
+    T = 10
+    pose = np.tile(np.eye(4), (T, 1, 1))
+    pose[:, 2, 3] = np.r_[np.full(5, 0.03), np.full(5, 0.2)]  # on the cube top, then 18 cm above
+    src = SourceEpisode("f", "f/d", "0", "t", np.arange(T) * 0.05, {"h": Effector(pose, np.zeros(T))},
+                        objects={"cube": _cube(T)})
+    lab = touch_labels(src, "h", np.full(T, -1), CFG, np.ones(T, bool))
+    assert lab.tolist() == [0] * 5 + [-1] * 5

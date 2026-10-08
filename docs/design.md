@@ -101,7 +101,20 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      0.5, or stalled (|rate| ≤ 0.25/s) more than 0.1 below the episode's open level, and not
      opening. A gripper that closes on an object stalls at the object's width (the robomimic
      Panda holds the Lift cube at opening 0.52, the Can at 0.62), so a fixed threshold missed
-     every Lift and Can grasp.
+     every Lift and Can grasp. Three refinements (`targets.grasp_labels`, from the ManiSkill
+     loop): a closed hand whose pad separation is below half the object's extent along the
+     closing axis holds nothing (fingers closed on nothing push with their outsides or tips:
+     ManiSkill PullCube, StackPyramid and TwoRobotPickCube push 40 mm cubes at width 0–15 mm and
+     were labelled as grasps; an `aabb` is an envelope, e.g. the Square nut ring, so only its
+     thinnest extent is used); gaps ≤ 0.25 s between two runs on the same object are bridged
+     while the hand stays within contact distance (RL grippers jitter around the stall: the
+     LiftPegUpright peg is lifted while the label flickered off for 0.5 s); runs shorter than
+     0.2 s are dropped (a closed hand brushing an object).
+   * *Closed-hand pushes* (`targets.push_labels`, derived label recorded in
+     `extra["retarget"]["push"]`, never a grasp label): frames where a closed but empty hand is
+     within contact distance of an object that moves faster than 2 cm/s together with the hand
+     (|v_obj − v_hand| ≤ 0.5 |v_obj|). They get the object-centric carrying rule below, so the
+     hand keeps the contact geometry of the push onset instead of sliding off the object.
    * *Object-centric grasp re-selection* (`targets`, chosen by placement scoring, recorded
      in `extra["grasp_offsets"]`). The task is the object path, not the Panda hand pose, so
      each arm uses the source grasp frame composed with a constant offset
@@ -117,7 +130,17 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      under any turn: `theta` ∈ {0, 45, 90, 135}° (flips add the rest). Offsets whose fingers
      would sink into scene boxes along the path more than 3 mm beyond the best offset are
      discarded before any IK (quarter turns are mostly rejected here: the source approach is
-     off-centre along the other axis and a finger would land on the cube).
+     off-centre along the other axis and a finger would land on the cube). Objects a closed hand
+     touches on purpose (within contact distance, `targets.touch_labels`) are excluded from this
+     screen like held ones: the StackPyramid fingers push cubeA, and counting that contact as
+     depth rejected every tilt, leaving the cubeC carry outside Reachy's wrist range.
+     *Per-segment offsets* (`placement.segment_offsets`, `targets.offset_track`, recorded in
+     `extra["grasp_offset_segments"]`): a hand with several grasp segments (robomimic Transport:
+     one arm lifts the lid, then takes the payload) re-selects the offset of each segment among
+     that segment's own candidates, scored on the keyframes of its window at the chosen base
+     placement; the episode-wide offset is kept unless a candidate scores lower. Each offset holds
+     over its segment window and turns geodesically to the next one in the free time between
+     windows.
    * *Object-centric carrying* (`targets.object_centric`): when the source object moves in its
      gripper by more than half the tier-K grasp tolerance during a grasp (robomimic Square: the
      nut slides 5–44 mm while pushed onto the peg), the hand follows the object pose times the
@@ -125,7 +148,12 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      zero over the approach/retreat windows. Grasps the source holds rigidly keep its hand path.
    * *Free orientation away from grasps* (`targets.orientation_weight`): the TCP orientation is
      strict inside grasp windows (segment − 0.5 s … + 0.3 s) and its weight decays to 0.05 over
-     1 s outside them. A first IK pass with these weights gives the orientation Reachy prefers
+     1 s outside them. Outside grasp segments the weight is further capped by a proximity ramp
+     (`contact_strict_distance` 5 cm → `contact_free_distance` 12 cm, grasp center to the nearest
+     manipulated object): the orientation only matters where the fingers can touch something.
+     Hands that never grasp (pushing, poking with the fingers) were strict on every frame and
+     failed tier K at the first frames, where an RL Panda starts above the table with a wrist
+     pose Reachy's ±30° wrist cannot copy; an approach that starts far away now starts free. A first IK pass with these weights gives the orientation Reachy prefers
      in free space; the reference rotation is that one blended into the source (offset)
      rotation by the weight, and a second pass tracks this reference strictly, so tier K still
      checks every frame against a stored reference (`reference.tcp`).
@@ -243,6 +271,59 @@ Square episodes; the time scaling keeps the speed limits but the interpolated po
 target by 2–5 cm) and, for Transport, the two-robot handover (position residual median
 48 mm, down from 70 mm, but the payload orientations of both hands are not reachable with
 one constant grasp offset per arm).
+
+### ManiSkill loop (2026-10-07)
+
+Per task one file (RL `pd_joint_delta_pos` where there are several; PickCube teleop, StackPyramid
+and PullCubeTool motion planning, PegInsertionSide `rl/trajectory.h5`); dev = the first 10
+`traj_*` keys, held-out = the last 10 (evaluated at the end; PickCube teleop has only 10
+episodes, so its two samples coincide). Episodes passing K / P (runs in `runs/eval/ms/`):
+
+| task | baseline dev | final dev | baseline held-out | final held-out |
+| --- | --- | --- | --- | --- |
+| PickCube (teleop) | 7 / 9 | 7 / 9 | (= dev) | (= dev) |
+| PokeCube | 6 / 8 | 9 / 7 | 6 / 7 | 7 / 8 |
+| PushCube | 8 / 8 | 9 / 7 | 10 / 6 | 10 / 5 |
+| PullCube | 3 / 2 | 6 / 4 | 4 / 0 | 10 / 2 |
+| StackPyramid | 7 / 2 | 10 / 6 | 7 / 1 | 9 / 5 |
+| RollBall | 3 / 0 | 6 / 0 | 5 / 0 | 3 / 0 |
+| LiftPegUpright | 1 / 0 | 0 / 0 | 2 / 0 | 0 / 0 |
+| PegInsertionSide | 2 / 0 | 3 / 0 | 3 / 0 | 4 / 0 |
+| PullCubeTool | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
+| TwoRobotPickCube | 0 / 0 | 0 / 0 | 0 / 0 | 1 / 0 |
+| **total** | 37 / 28 | 50 / 33 | 44 / 23 | 51 / 29 |
+
+Robomimic demos 0–9 before → after: Lift 10/10 → 10/10, Can 7/3 → 7/2 (demo 3 misses the
+source-relative object–environment threshold by 0.4 mm), Square 6/0 → 5/0, Transport 0/0 → 0/0
+(97 s instead of 128 s per episode). The StackPyramid held-out drop to 1 K pass of an
+intermediate version was diagnosed on held-out episodes (the touch exclusion of the finger
+screen); the other changes were developed on dev only.
+
+Root causes found, by gate: (1) *mislabelled pushes*: closed empty fingers next to a cube were
+grasps (PullCube, StackPyramid cubeA, TwoRobotPickCube agent 0), so tier K demanded rigid
+hand–cube poses during pushes; (2) *strict orientation far from objects*: hands without grasps
+and the first frames of RL episodes failed the 0.05 rad gate at frame 0 (PullCube 6/10,
+PokeCube 3/10 dev); (3) *jittering RL stall*: the LiftPegUpright label flickered off while the
+peg was lifted (bridging it makes K stricter there: 1 → 0 dev, but the earlier passes skipped the
+lift); (4) *finger screen* counting pushed objects as obstacles (StackPyramid). Rejected
+experiments: tilts up to ±90° (+8 K, −10 P on dev: horizontal approaches put the forearm into the
+objects, which the finger screen does not model) and ±60° (+1 K, −2 P); flips only for hands
+without grasps (PullCube K 8 → 5, RollBall 6 → 1); open-hand pushes followed object-centrically
+(PushCube P 8 → 5); sampling the offset pre-screen on strict-orientation keyframes only (Square
+K 6 → 1).
+
+Remaining failure modes: Reachy's ±30° wrist during carries that rotate the object
+(PickCube teleop, PullCubeTool, LiftPegUpright, PegInsertionSide: TCP rotation residual 0.1–0.5
+rad while holding); dynamic RL pushes and flicks (PullCube/PushCube RL hit the cube and let it
+slide at 0.5–0.8 m/s; time scaling to Reachy's speed limits makes the hit 2–4× slower, so the
+cube travels less: tier P `task_final_pose`); RollBall tier P cannot pass by construction (every
+source episode ends at first success with the ball still rolling at 0.6–1.0 m/s, so
+`task_final_pose` after the 1 s hold and `objects_at_rest` fail for any faithful replay; the gate
+should compare against the source pose at the source's last time and require rest only when the
+source object rests); the PullCubeTool L tool turns ~1 rad about the pad normal in Reachy's grasp
+(grasped 12 cm from its centre of mass; the pads resist that torque only through contact
+spread); two facing robots on one Reachy (TwoRobotPickCube, Transport handover: both hands near
+one object from opposite sides, self-clearance and wrist limits).
 
 ## Episode storage (`reachy-retarget-episode-v2`)
 

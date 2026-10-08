@@ -31,8 +31,9 @@ from ..robot.resources import profile
 from ..schema.rotations import se2_compose
 from . import footprint
 from .config import RetargetConfig
-from .targets import (finger_angles, finger_penetration, grasp_symmetry, held_masks, offset_candidates,
-                      orientation_weight, tcp_targets)
+from .targets import (finger_angles, finger_penetration, grasp_segments, grasp_symmetry, hand_object_distance,
+                      held_masks, offset_candidates, orientation_weight, source_closed, tcp_targets,
+                      touch_labels)
 from .wbik import ARM_COLUMNS, Clearance, FrameSolver, tcp_errors
 
 INFEASIBLE = 100.0      # cost added when the base footprint overlaps scene geometry
@@ -78,6 +79,7 @@ class Placement:
     cost: float
     seed: np.ndarray              # (22,) IK solution at frame 0 (active arms, base)
     diagnostics: dict = field(default_factory=dict)
+    segments: dict = field(default_factory=dict)  # side -> [(a, b, offset)] per grasp segment
 
     @property
     def flips(self) -> dict[str, bool]:
@@ -103,12 +105,17 @@ class PlacementProblem:
         self.symmetry = {side: grasp_symmetry(src, key, labels.get(key, np.full(src.length, -1)), cfg)
                          for key, side in sides.items()}
         self.options, self.finger_depth, self.rot_weight = {}, {}, {}
+        self.labels = {side: np.asarray(labels.get(key, np.full(src.length, -1))) for key, side in sides.items()}
         for key, side in sides.items():
             lab = labels.get(key, np.full(src.length, -1))
-            self.rot_weight[side] = orientation_weight(src.time, lab, cfg)[self.kf]
+            dist = hand_object_distance(src, key) if cfg.orientation_by_distance else None
+            self.rot_weight[side] = orientation_weight(src.time, lab, cfg, dist)[self.kf]
             finger = finger_angles(src.effectors[key], lab >= 0, cfg)
             opts = offset_candidates(self.symmetry[side], cfg)
-            depth = {o: float(finger_penetration(src, key, side, o, lab, finger, cfg).max()) for o in opts}
+            # objects a closed hand touches are in contact by design, like held ones (StackPyramid:
+            # the closed fingers push cubeA; counting that contact as depth rejected every tilt)
+            touch = touch_labels(src, key, lab, cfg, source_closed(src.effectors[key], cfg, src.time))
+            depth = {o: float(finger_penetration(src, key, side, o, touch, finger, cfg).max()) for o in opts}
             best = min(depth.values())
             self.options[side] = [o for o in opts if depth[o] <= best + cfg.finger_depth_slack]
             self.finger_depth[side] = {f"{int(o[0])}/{o[1]:g}/{o[2]:g}": round(v, 4) for o, v in depth.items()}
@@ -155,6 +162,64 @@ class PlacementProblem:
         clear = self.footprint_clearance(pose)
         return cost + (INFEASIBLE - clear if clear < 0 else 0.0)
 
+    def _target(self, side, offset):
+        if (side, offset) not in self.targets:
+            key = next(k for k, s in self.sides.items() if s == side)
+            self.targets[side, offset] = tcp_targets(self.src, {key: side}, {side: offset})[side][self.kf]
+        return self.targets[side, offset]
+
+    def segment_offsets(self, placement: Placement) -> Placement:
+        """Per-segment grasp offsets for hands with several grasp segments (robomimic Transport:
+        one arm opens the lid, then takes the payload; no single offset suits both objects).
+
+        Every segment re-selects among its own candidates (:func:`.targets.grasp_symmetry` and
+        the finger-depth screen on that segment only), scored on the keyframes of its window
+        (``cfg.approach_window_s`` before to ``cfg.retreat_window_s`` after) at the chosen base
+        placement; the episode-wide offset is kept unless a candidate scores lower there."""
+        cfg = self.cfg
+        if not cfg.segment_offsets:
+            return placement
+        times = np.asarray(self.src.time, float)
+        tk = times[self.kf]
+        base = self.path(placement.pose)
+        segments, diag = {}, {}
+        for key, side in self.sides.items():
+            segs = grasp_segments(self.labels[side])
+            if len(segs) < 2:
+                continue
+            chosen, info = [], []
+            for a, b in segs:
+                rows = np.flatnonzero((tk >= times[a] - cfg.approach_window_s) & (tk <= times[b - 1] + cfg.retreat_window_s))
+                default = placement.offsets[side]
+                if not len(rows):
+                    chosen.append((a, b, default))
+                    continue
+                lab = np.where((np.arange(len(times)) >= a) & (np.arange(len(times)) < b), self.labels[side], -1)
+                sym = grasp_symmetry(self.src, key, lab, cfg)
+                finger = finger_angles(self.src.effectors[key], lab >= 0, cfg)
+                opts = offset_candidates(sym, cfg)
+                depth = {o: float(finger_penetration(self.src, key, side, o, lab, finger, cfg)[a:b].max()) for o in opts}
+                best_depth = min(depth.values())
+                opts = [o for o in opts if depth[o] <= best_depth + cfg.finger_depth_slack]
+                c0, _, q0 = self._side_score(side, base, default, None, rows)
+                best = (c0, default)
+                for o in opts:
+                    if o == default:
+                        continue
+                    self._target(side, o)
+                    c = self._side_score(side, base, o, q0, rows)[0]
+                    if c < best[0]:
+                        best = (c, o)
+                chosen.append((a, b, best[1]))
+                info.append({"rows": [int(a), int(b)], "offset": list(best[1]), "cost": float(best[0]),
+                             "default_cost": float(c0), "candidates": len(opts)})
+            if any(o != placement.offsets[side] for _, _, o in chosen):
+                segments[side] = chosen
+            diag[side] = info
+        placement.segments = segments
+        placement.diagnostics = dict(placement.diagnostics, segment_offsets=diag)
+        return placement
+
     def _side_score(self, side, base, offset, seed, rows=None, iters=None):
         """(cost, details, q at the first keyframe) of one arm along the keyframes (or the
         keyframe subset ``rows``).
@@ -163,7 +228,7 @@ class PlacementProblem:
         keyframe solution of a nearby placement or grasp offset) it is warm started like the
         later keyframes.
         """
-        solver, X = self.solvers[side], self.targets[side, offset]
+        solver, X = self.solvers[side], self._target(side, offset)
         iters = iters or self.cfg.placement_iter
         rows = np.arange(len(base)) if rows is None else np.asarray(rows)
         X, base, w = X[rows], base[rows], self.rot_weight[side][rows]
@@ -310,4 +375,6 @@ def diagnostics(p: Placement) -> dict:
     key = "offset" if p.mobile else "pose"
     return {"mobile": p.mobile, key: np.asarray(p.pose).tolist(), "flips": p.flips,
             "grasp_offsets": {s: {"flip": bool(o[0]), "theta_deg": o[1], "tilt_deg": o[2]} for s, o in p.offsets.items()},
+            "segment_grasp_offsets": {s: [{"rows": [int(a), int(b)], "flip": bool(o[0]), "theta_deg": o[1],
+                                           "tilt_deg": o[2]} for a, b, o in segs] for s, segs in p.segments.items()},
             "cost": p.cost, **p.diagnostics}

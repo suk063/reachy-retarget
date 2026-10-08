@@ -91,7 +91,7 @@ def assign(src, cfg: RetargetConfig, labels) -> Assignment:
     if len(keys) == 2:
         sides, rule = bimanual_sides(src)
         problem = PlacementProblem(src, sides, cfg, nominal, labels)
-        return Assignment(sides, problem.refine(problem.search()), rule, {})
+        return Assignment(sides, problem.segment_offsets(problem.refine(problem.search())), rule, {})
     best, scores = None, {}
     for side in ("right", "left"):
         problem = PlacementProblem(src, {keys[0]: side}, cfg, nominal, labels)
@@ -100,4 +100,5 @@ def assign(src, cfg: RetargetConfig, labels) -> Assignment:
         if best is None or placement.cost < best[1].cost:
             best = (problem, placement)
     problem, placement = best
-    return Assignment(dict(problem.sides), problem.refine(placement), "reachability score", scores)
+    return Assignment(dict(problem.sides), problem.segment_offsets(problem.refine(placement)), "reachability score",
+                      scores)

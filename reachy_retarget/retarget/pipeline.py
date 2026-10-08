@@ -28,8 +28,9 @@ from .assign import assign, posture, tuck_posture
 from .config import RetargetConfig
 from .gaze import gaze_error, gaze_points, solve_neck
 from .placement import diagnostics as placement_diagnostics
-from .targets import (blend_orientation, contact_width, finger_angles, grasp_labels, gripper_state, held_masks,
-                      manipulated_ids, object_centric, orientation_weight, source_closed, tcp_targets)
+from .targets import (blend_orientation, contact_width, finger_angles, grasp_labels, gripper_state,
+                      hand_object_distance, held_masks, manipulated_ids, object_centric, orientation_weight,
+                      offset_track, push_labels, source_closed, tcp_targets, _runs)
 from .wbik import ARM_COLUMNS, refine, smooth, solve_trajectory, tcp_errors
 
 
@@ -108,14 +109,22 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
     cfg = cfg or RetargetConfig()
     t_start = _time.perf_counter()
     robot = Reachy.load()
-    labels_src = {k: grasp_labels(e.pose[:, :3, 3], source_closed(e, cfg, src.time), src.objects, cfg)
+    closed_src = {k: source_closed(e, cfg, src.time) for k, e in src.effectors.items()}
+    labels_src = {k: grasp_labels(e.pose[:, :3, 3], closed_src[k], src.objects, cfg, effector=e, times=src.time)
                   for k, e in src.effectors.items()}
-    oc_diag = {}
+    oc_diag, push_diag = {}, {}
     if cfg.object_centric:
         # Hands carry held objects rigidly along the source object path (targets.object_centric).
         effectors = {}
         for k, e in src.effectors.items():
-            pose, oc_diag[k] = object_centric(src, k, labels_src[k], cfg)
+            lab = labels_src[k]
+            if cfg.push_centric:
+                # closed-hand pushes follow the object like grasps (the relative pose at the push onset is kept)
+                push = push_labels(src, k, lab, cfg, closed_src[k])
+                lab = np.where(lab >= 0, lab, push)
+                push_diag[k] = {"push_frames": int(np.sum(push >= 0)),
+                                "segments": [[int(a), int(b)] for a, b in _runs(push >= 0)]}
+            pose, oc_diag[k] = object_centric(src, k, lab, cfg)
             effectors[k] = replace(e, pose=pose)
         src = replace(src, effectors=effectors)
     try:
@@ -128,14 +137,18 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
 
     # Whole-body IK on the source clock.
     nominal = posture("ready")
-    targets = tcp_targets(src, sides, place.offsets)
+    offsets = {side: offset_track(src.time, place.segments[side], o, cfg) if side in place.segments else o
+               for side, o in place.offsets.items()}
+    targets = tcp_targets(src, sides, offsets)
     labels = {side: labels_src[key] for key, side in sides.items()}
     q0 = tuck.copy()
     for side in targets:
         q0[ARM_COLUMNS[side]] = place.seed[ARM_COLUMNS[side]]
     base_ref = place.base.copy()
     base_ref[:, 2] = np.unwrap(base_ref[:, 2])
-    weights = {side: orientation_weight(src.time, labels[side], cfg) for side in targets}
+    weights = {side: orientation_weight(src.time, labels[side], cfg,
+                                        hand_object_distance(src, key) if cfg.orientation_by_distance else None)
+               for key, side in sides.items()}
     fixed = _ik(cfg, robot, targets, weights, labels, base_ref, place.mobile, q0, nominal)
     best, base_free = fixed, place.mobile
     base_diag = {"assist": "mobile source" if place.mobile else "not needed" if fixed["bad_frames"] == 0
@@ -168,7 +181,7 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
     # Fingers and gaze.
     for key, side in sides.items():
         q_src[:, GRIPPERS.start + SIDES.index(side)] = finger_angles(
-            src.effectors[key], labels[side] >= 0, cfg, contact_width(src, key, place.offsets[side], labels[side]))
+            src.effectors[key], labels[side] >= 0, cfg, contact_width(src, key, offsets[side], labels[side]))
     ids = manipulated_ids(src.objects)
     fk = robot.fk(q_src)
     hands = {side: fk[f"{side}_grasp"][:, :3, 3] for side in targets}
@@ -202,6 +215,7 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         "placement": placement_diagnostics(place),
         "free_orientation": orient_diag,
         "base_assist": base_diag,
+        "push": push_diag,
         "object_centric": {k: {seg: {"max_hand_shift_m": v[0], "max_hand_turn_rad": v[1]} for seg, v in d.items()}
                            for k, d in oc_diag.items()},
         "timing": clock.diagnostics(src.time),
@@ -229,7 +243,9 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         extra={"retarget": _jsonable(diag), "retarget_config": cfg.to_dict(), "grasp_object_ids": ids,
                "grasp_flips": _jsonable(place.flips),
                "grasp_offsets": _jsonable({s: {"flip": bool(o[0]), "theta_deg": o[1], "tilt_deg": o[2]}
-                                           for s, o in place.offsets.items()}), "notes": _notes(src, sides)})
+                                           for s, o in place.offsets.items()}),
+               "grasp_offset_segments": _jsonable(placement_diagnostics(place)["segment_grasp_offsets"]),
+               "notes": _notes(src, sides)})
     k = kinematic.check(episode, cfg)
     episode.validation.update(k["frames"])
     episode.tier = {"K": {"passed": k["passed"], "reasons": k["reasons"]}, "P": None}

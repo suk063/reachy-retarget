@@ -35,6 +35,9 @@ class RetargetConfig:
     closed_drop: float = 0.1             # ... or this far below the episode's open level
     opening_rate: float = 0.25           # unless opening faster than this (1/s), see targets.source_closed
     grasp_contact_distance: float = 0.04  # grasp center to object surface (box) or centre
+    grasp_min_width_fraction: float = 0.5  # closed pads nearer than this x object extent hold nothing (push)
+    grasp_min_duration_s: float = 0.2    # shorter grasp runs are dropped (a closed hand brushing an object)
+    grasp_gap_s: float = 0.25            # shorter gaps between runs on the same object are bridged
     squeeze_angle: float = 0.05          # finger angle below object contact while grasping (0.4 Nm at kp 8)
     floor_support_height: float = 0.05   # support boxes whose top is lower are the floor
 
@@ -46,12 +49,16 @@ class RetargetConfig:
     cylinder_theta_step_deg: float = 45.0  # turns about the approach axis tried for a cylinder grasped along its axis
     align_max_deg: float = 20.0          # largest closing-axis to face-normal alignment applied
     align_agree_deg: float = 5.0         # grasped objects of one hand must agree on it within this
+    segment_offsets: bool = True         # a hand with several grasp segments may re-select per segment
     finger_depth_slack: float = 0.003    # offsets whose finger path sinks deeper into boxes than the best + this are dropped
 
     # Object-centric grasps (targets.object_centric): the hand carries the object rigidly.
     object_centric: bool = True
     grasp_settle_frames: int = 2         # source frames into a grasp where the relative pose is taken
     object_centric_fraction: float = 0.5  # only segments whose source in-hand drift exceeds this x grasp_rel_*_tol
+    push_centric: bool = True            # non-prehensile contact (targets.push_labels) is followed object-centrically
+    push_min_speed: float = 0.02         # m/s, object speed of a push frame
+    push_speed_ratio: float = 0.5        # |v_object - v_hand| <= this x |v_object| (the hand drives the object)
 
     # Orientation outside grasps (targets.orientation_weight): the hand orientation is strict
     # around grasps and free (IK-preferred, then tracked strictly) far from them.
@@ -59,6 +66,9 @@ class RetargetConfig:
     retreat_window_s: float = 0.3
     orientation_blend_s: float = 1.0
     free_rot_weight: float = 0.05
+    contact_strict_distance: float = 0.05  # grasp center to object surface: orientation strict within
+    contact_free_distance: float = 0.12    # ... and free beyond (outside grasp segments)
+    orientation_by_distance: bool = True
 
     # Whole-body IK (bounded damped least squares, warm started).
     joint_limit_margin: float = 0.045    # physics tracking dips ~0.015 rad below it; the tier-P gate needs 0.025
