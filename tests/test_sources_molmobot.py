@@ -22,11 +22,13 @@ import h5py
 import numpy as np
 import pytest
 
-from reachy_retarget.acquire import load_catalog
-from reachy_retarget.acquire.fetch import ChecksumMismatch, InsufficientDisk, read_ledger
+from reachy_retarget.acquire import CatalogEntry, ChecksumMismatch, InsufficientDisk, fetch, load_catalog, read_ledger
 from reachy_retarget.sources import families, iter_episodes
 from reachy_retarget.sources import molmobot as mb
-from reachy_retarget.sources.molmobot_fetch import PackageEntry, fetch_packages, load_packages
+
+
+def load_packages():
+    return {k: e for k, e in load_catalog().items() if e.family == "molmobot" and e.kind == "range_package"}
 
 FIX = Path(__file__).parent / "fixtures"
 DOOR = FIX / "molmobot_rby1_door_sub.hdf5"
@@ -49,17 +51,21 @@ def test_registered():
 
 
 def test_catalog_entries_and_packages():
-    cat = {k: e for k, e in load_catalog().items() if e.family == "molmobot"}
+    cat = {k: e for k, e in load_catalog().items() if e.family == "molmobot" and e.kind == "file"}
     assert {mb.ROBOTS[n]["catalog_id"] for n in mb.ROBOTS} <= set(cat)
     assert all(e.sha256 and len(e.sha256) == 64 and e.size for e in cat.values())
     pk = load_packages()
     assert len(pk) >= 20
-    configs = {p.config for p in pk.values()}
+    configs = {p.meta["config"] for p in pk.values()}
     assert any(c.startswith("RBY1") for c in configs) and any(c.startswith("Franka") for c in configs)
     for p in pk.values():
-        assert p.members and all(m["name"].endswith(".h5") and len(m["sha256"]) == 64 for m in p.members)
-        assert p.shard.startswith(p.config) and p.offset >= 0 and p.size > 0
-        assert p.commercial_valid_episodes  # only commercial-use-listed packages were selected
+        s = p.source
+        assert s["keep"] == [".h5"] and s["compression"] == "zstd" and len(s["archive_sha256"]) == 64
+        assert s["archive"].startswith(p.meta["config"]) and s["offset"] >= 0 and s["stored_size"] > 0
+        assert all(m["name"].endswith(".h5") and len(m["sha256"]) == 64 for m in s.get("members") or [])
+        assert p.meta["commercial_valid_episodes"]  # only commercial-use-listed packages were selected
+        house = "house_" + p.meta["package"].rsplit("_house_", 1)[1].removesuffix(".tar.zst")
+        assert p.path == f"{p.meta['config']}/{p.meta['split']}/part{p.meta['part']}/{house}"
 
 
 def test_config_unpickler_never_runs_code():
@@ -199,11 +205,14 @@ def test_fetch_packages_keeps_only_h5(tmp_path):
     blob = _compress(buf.getvalue())
     shard = b"X" * 100 + blob + b"Y" * 50
     member = {"name": "house_1/trajectories_batch_1_of_1.h5", "sha256": hashlib.sha256(h5).hexdigest(), "size": len(h5)}
-    e = PackageEntry(id="molmobot/Cfg/val/part0/house_1", config="Cfg", split="val", part=0,
-                     package="Cfg_house_1.tar.zst", shard="Cfg/val_shards/00000.tar", url="https://example.invalid/s.tar",
-                     shard_sha256="0" * 64, shard_size=len(shard), offset=100, size=len(blob), inflated_size=0,
-                     range_sha256=hashlib.sha256(blob).hexdigest(), scene_id="part0_house_1", scene_family="test",
-                     commercial_valid_episodes="*", members=(member,), revision="r", license="ODC-BY-1.0")
+    src = {"archive": "Cfg/val_shards/00000.tar", "archive_sha256": "0" * 64, "archive_size": len(shard),
+           "offset": 100, "stored_size": len(blob), "range_sha256": hashlib.sha256(blob).hexdigest(),
+           "compression": "zstd", "keep": [".h5"], "members": [member]}
+    e = CatalogEntry(id="molmobot/Cfg/val/part0/house_1", family="molmobot", path="Cfg/val/part0/house_1",
+                     url="https://example.invalid/s.tar", revision="r", sha256=None, size=None, license="ODC-BY-1.0",
+                     kind="range_package", content="low_dim", dataset="molmobot/Cfg/val", source=src,
+                     meta={"config": "Cfg", "split": "val", "part": 0, "package": "Cfg_house_1.tar.zst",
+                           "scene_family": "test", "commercial_valid_episodes": "*"})
     seen = []
 
     def opener(req):
@@ -211,23 +220,27 @@ def test_fetch_packages_keeps_only_h5(tmp_path):
         seen.append((a, b))
         return _Resp(shard[a:b + 1])
 
-    recs = fetch_packages([e], tmp_path, reserve=0, opener=opener)
+    recs = fetch([e], tmp_path, reserve=0, opener=opener)
     out = tmp_path / "raw/molmobot/Cfg/val/part0/house_1/trajectories_batch_1_of_1.h5"
     assert out.read_bytes() == h5 and seen == [(100, 100 + len(blob) - 1)]
     assert not list(tmp_path.rglob("*.mp4")) and not list(tmp_path.rglob("*.part"))
-    assert recs[0]["sha256_verified"] == member["sha256"]
-    assert "molmobot/Cfg/val/part0/house_1/trajectories_batch_1_of_1.h5" in read_ledger(tmp_path)
+    assert recs[0]["sha256_verified"] == member["sha256"] and recs[0]["sha256_source"] == "catalog"
+    ledger = read_ledger(tmp_path)
+    assert "molmobot/Cfg/val/part0/house_1/trajectories_batch_1_of_1.h5" in ledger and e.id in ledger
+    pkg, m = mb.find_package(out, {e.id: e})
+    assert pkg.id == e.id and pkg.shard == src["archive"] and pkg.range_sha256 == src["range_sha256"]
+    assert m["sha256"] == member["sha256"] and pkg.config == "Cfg"
     # Existing verified member: no transfer.
-    fetch_packages([e], tmp_path, reserve=0, opener=lambda r: pytest.fail("network used"))
+    fetch([e], tmp_path, reserve=0, opener=lambda r: pytest.fail("network used"))
     # Corrupt range digest: nothing is kept.
-    bad = PackageEntry(**{**e.__dict__, "id": "molmobot/Cfg/val/part0/house_2", "range_sha256": "f" * 64,
-                          "members": ({**member, "name": "house_1/trajectories_batch_1_of_1.h5"},)})
+    bad = CatalogEntry(**{**e.__dict__, "id": "molmobot/Cfg/val/part0/house_2", "path": "Cfg/val/part0/house_2",
+                          "source": {**src, "range_sha256": "f" * 64}})
     shutil.rmtree(tmp_path / "raw/molmobot/Cfg")
     with pytest.raises(ChecksumMismatch):
-        fetch_packages([bad], tmp_path, reserve=0, opener=opener)
+        fetch([bad], tmp_path, reserve=0, opener=opener)
     assert not list((tmp_path / "raw/molmobot").rglob("*.h5*"))
     with pytest.raises(InsufficientDisk):
-        fetch_packages([e], tmp_path, reserve=10 ** 18, opener=opener)
+        fetch([e], tmp_path, reserve=10 ** 18, opener=opener)
 
 
 @pytest.mark.skipif(not _zstd_available(), reason="needs zstandard or the zstd CLI")
@@ -237,7 +250,7 @@ def test_fetch_refuses_ignored_range(tmp_path):
 
     e = next(iter(load_packages().values()))
     with pytest.raises(Exception, match="ignored the byte range"):
-        fetch_packages([e], tmp_path, reserve=0, opener=lambda r: Full(b"abc"))
+        fetch([e], tmp_path, reserve=0, opener=lambda r: Full(b"abc"))
     assert not list(tmp_path.rglob("*.h5"))
 
 

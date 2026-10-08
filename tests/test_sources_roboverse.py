@@ -40,10 +40,11 @@ def test_registry_and_catalog():
     cat = {k: e for k, e in load_catalog().items() if e.family == "roboverse"}
     assert all(e.sha256 and len(e.sha256) == 64 and e.size and e.url.startswith(
         "https://huggingface.co/datasets/RoboVerseOrg/roboverse_data/resolve/" + rv.HF_REVISION) for e in cat.values())
-    rl = [e for e in cat.values() if e.path.startswith("trajs/rlbench/") and e.kind == "low_dim"]
+    rl = [e for e in cat.values() if e.path.startswith("trajs/rlbench/") and e.content == "low_dim"]
     assert len(rl) == 80 and all(e.path.endswith("/v2/franka_v2.pkl.gz") for e in rl)
-    cv = [e for e in cat.values() if e.path.startswith("trajs/calvin/") and e.kind == "low_dim"]
-    assert len(cv) == 389 + 299 and {e.dataset for e in cv} == {"roboverse/calvin/env_A", "roboverse/calvin/env_D_val"}
+    cv = [e for e in cat.values() if e.path.startswith("trajs/calvin/") and e.content == "low_dim"]
+    assert len(cv) == 4 * 389 + 299 and {e.dataset for e in cv} == {
+        f"roboverse/calvin/env_{s}" for s in ("A", "B", "C", "D", "D_val")}
     for rel in FILES:   # fixtures are byte copies of catalogued files
         assert any(e.path == rel for e in cat.values())
     # overlapping benchmarks and cross-embodiment variants are not catalogued

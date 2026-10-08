@@ -7,7 +7,7 @@ Skills: open / close articulated PartNet-Mobility and UniDoor objects, pull / pu
 chairs (``open``/``close`` of groups ``cart``/``chair``), pick YCB objects (``Open/ycb``).
 
 Layout (one folder per episode, as extracted from the per-group tars; see
-:mod:`.mobilemanibench_fetch`)::
+``range_member`` catalog entries fetched with :func:`reachy_retarget.acquire.fetch`)::
 
     <robot>/<Open|Close>/<partnet|unidoor|ycb>/<group>/<NNNN>/<object>/train_0/
         params/env.yaml                                  # Isaac Lab env config of the policy
@@ -78,7 +78,7 @@ import numpy as np
 import yaml
 from scipy.spatial.transform import Rotation
 
-from ..acquire import load_catalog, sha256_file
+from ..acquire import load_catalog, locate_entry, sha256_file
 from ..schema.source import Articulation, Effector, ObjectTrack, SourceEpisode
 from .registry import register
 
@@ -461,18 +461,16 @@ def _episode(path: Path, family, root, urdf, catalog, fk_check) -> SourceEpisode
     first = int(np.argmax(s)) if s.any() else None
 
     digest = sha256_file(path)
-    entry = next((e for e in catalog.values() if e.sha256 == digest), None)
-    member = None
-    if entry is None:
-        from .mobilemanibench_fetch import load_members
-        member = next((m for m in load_members().values() if m.sha256 == digest), None)
-    cat_id = (entry.id if entry else member.id if member else None)
+    entry = locate_entry(path, catalog, digest)
+    src = entry.source if entry is not None else {}
+    stored = src.get("stored_size") or (entry.size if entry is not None else None)
     goal = obj[0, 6:9]
     provenance = {
-        "file": str(path), "sha256": digest, "catalog_id": cat_id,
-        "url": (entry.url if entry else member.url if member else None),
-        "archive": member.archive if member else None, "archive_sha256": member.archive_sha256 if member else None,
-        "byte_range": [member.offset, member.offset + member.stored_size] if member else None,
+        "file": str(path), "sha256": digest, "catalog_id": entry.id if entry else None,
+        "sha256_source": None if entry is None else ("catalog" if entry.sha256 else "tofu (see the fetch ledger)"),
+        "url": entry.url if entry else None,
+        "archive": src.get("archive"), "archive_sha256": src.get("archive_sha256"),
+        "byte_range": [src["offset"], src["offset"] + stored] if "offset" in src else None,
         "revision": HF_REVISION, "code_commit": CODE_COMMIT,
         "env_yaml": str(env_path), "env_yaml_sha256": sha256_file(env_path),
         "scene_infos": scene_infos, "room_init": {k: np.asarray(v).tolist() for k, v in init.get("room", {}).items()},

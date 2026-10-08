@@ -20,10 +20,9 @@ import pytest
 from scipy.spatial.transform import Rotation
 
 import reachy_retarget.sources.mobilemanibench as mmb  # noqa: F401  (registers the family)
-from reachy_retarget.acquire import load_catalog
-from reachy_retarget.acquire.fetch import ChecksumMismatch, read_ledger
+from reachy_retarget.acquire import CatalogEntry, ChecksumMismatch, fetch, load_catalog, read_ledger
+from reachy_retarget.acquire.transports import read_range, walk_tar
 from reachy_retarget.sources import families, iter_episodes
-from reachy_retarget.sources.mobilemanibench_fetch import MemberEntry, fetch_members, load_members, walk_tar
 
 FIX = Path(__file__).parent / "fixtures" / "mobilemanibench"
 RAW = FIX / "raw" / "mobilemanibench"
@@ -43,16 +42,19 @@ def test_registry_and_catalog():
     cat = {k: e for k, e in load_catalog().items() if e.family == "mobilemanibench"}
     assert "mobilemanibench/MobileManiDataset/object_manifest.jsonl" in cat
     assert "mobilemanibench/code/unimanip/configs/data/analysis_partnet.yaml" in cat
-    members = load_members()
+    members = {k: e for k, e in cat.items() if e.kind == "range_member"}
     pkls = [m for m in members.values() if m.path.endswith("state_infos.pkl")]
-    assert len(pkls) == 40 and len({m.dataset for m in pkls}) == 5
+    assert len(pkls) >= 40 and len({m.dataset for m in pkls}) >= 5
     assert all(m.path.startswith("G1_Robot/") for m in pkls)  # dexterous-hand tars excluded
-    assert not any(m.path.endswith((".mp4", ".npz")) for m in members.values())
+    assert not any(m.path.endswith((".mp4", ".npz", ".pt", ".onnx")) for m in members.values())
     for m in members.values():
-        assert len(m.sha256) == 64 and len(m.archive_sha256) == 64 and m.size > 0
-        assert f"/resolve/{m.revision}/" in m.url and m.url.endswith(m.archive)
+        assert len(m.source["archive_sha256"]) == 64 and m.size > 0 and m.source["offset"] > 0
+        assert f"/resolve/{m.revision}/" in m.url and m.url.endswith(m.source["archive"])
+    hashed = [m for m in pkls if m.sha256]  # members of the earlier subset keep their digests
+    assert len(hashed) >= 40 and all(len(m.sha256) == 64 for m in hashed)
     urdf = members["mobilemanibench/Assets/g1_robot_rotate/G1_120s.urdf"]
-    assert urdf.compression == "deflate" and urdf.archive == "Assets/Assets.zip" and urdf.crc32
+    assert urdf.source["compression"] == "deflate" and urdf.source["archive"] == "Assets/Assets.zip"
+    assert urdf.source["crc32"]
     for p in pkls:  # every episode has its env.yaml and scene_infos.json catalogued
         train = p.path.split("/trajectories/")[0]
         traj = p.path.rsplit("/", 2)[0]
@@ -204,38 +206,42 @@ def test_walk_tar_and_fetch_members(tmp_path):
     tar_b, zip_b = _archive_bytes()
     blobs = {"https://x.invalid/t.tar": tar_b, "https://x.invalid/a.zip": zip_b}
     seen = []
-    walked = list(walk_tar("https://x.invalid/t.tar", open_url=_opener(blobs, seen)))
-    assert [n.rsplit("/", 1)[1] for _, _, n in walked] == ["rgb_image_head.mp4", "state_infos.pkl"]
-    off, size, name = walked[1]
+    open_url = _opener(blobs, seen)
+    walked = list(walk_tar(lambda o, n: read_range("https://x.invalid/t.tar", o, min(n, len(tar_b) - o), open_url)))
+    assert [n.rsplit("/", 1)[1] for _, _, n, _ in walked] == ["rgb_image_head.mp4", "state_infos.pkl"]
+    off, size, name, _ = walked[1]
     assert tar_b[off:off + size] == b"state" * 100 and max(b - a + 1 for _, a, b in seen) <= 2048
     zinfo = zipfile.ZipFile(io.BytesIO(zip_b)).getinfo("Assets/robot.urdf")
     data_z = b"<robot name='g'/>" * 50
-    common = dict(revision="r", license="MIT", archive_sha256="0" * 64, archive_size=1)
-    m_tar = MemberEntry(id=f"mobilemanibench/{name}", path=name, archive="t.tar", url="https://x.invalid/t.tar",
-                        offset=off, stored_size=size, size=size, sha256=hashlib.sha256(b"state" * 100).hexdigest(),
-                        **common)
-    m_zip = MemberEntry(id="mobilemanibench/Assets/robot.urdf", path="Assets/robot.urdf", archive="a.zip",
-                        url="https://x.invalid/a.zip", offset=zinfo.header_offset, stored_size=zinfo.compress_size,
-                        size=len(data_z), sha256=hashlib.sha256(data_z).hexdigest(), compression="deflate",
-                        crc32=zinfo.CRC, kind="robot_model", **common)
+    common = dict(family="mobilemanibench", revision="r", license="MIT", kind="range_member")
+    m_tar = CatalogEntry(id=f"mobilemanibench/{name}", path=name, url="https://x.invalid/t.tar", size=size,
+                         sha256=hashlib.sha256(b"state" * 100).hexdigest(), content="low_dim",
+                         source={"archive": "t.tar", "archive_format": "tar", "archive_sha256": "0" * 64,
+                                 "member": name, "offset": off}, **common)
+    m_zip = CatalogEntry(id="mobilemanibench/Assets/robot.urdf", path="Assets/robot.urdf", url="https://x.invalid/a.zip",
+                         size=len(data_z), sha256=hashlib.sha256(data_z).hexdigest(), content="robot_model",
+                         source={"archive": "a.zip", "archive_format": "zip", "offset": zinfo.header_offset,
+                                 "stored_size": zinfo.compress_size, "compression": "deflate", "crc32": zinfo.CRC},
+                         **common)
     seen.clear()
-    recs = fetch_members([m_tar, m_zip], tmp_path, reserve=0, opener=_opener(blobs, seen))
+    recs = fetch([m_tar, m_zip], tmp_path, reserve=0, opener=_opener(blobs, seen))
     assert (tmp_path / "raw/mobilemanibench" / name).read_bytes() == b"state" * 100
     assert (tmp_path / "raw/mobilemanibench/Assets/robot.urdf").read_bytes() == data_z
     assert not list(tmp_path.rglob("*.mp4")) and not list(tmp_path.rglob("*.part"))
     assert all(r["sha256_source"] == "catalog" for r in recs) and len(read_ledger(tmp_path)) == 2
+    assert "tar_header" in recs[0]["verified_by"]  # long (GNU) name: truncated header name still matches
     assert sum(b - a + 1 for _, a, b in seen) < len(tar_b) // 2  # only the member ranges were read
     # re-fetch: verified locally, no transfer
     seen.clear()
-    fetch_members([m_tar], tmp_path, reserve=0, opener=_opener(blobs, seen))
+    fetch([m_tar], tmp_path, reserve=0, opener=_opener(blobs, seen))
     assert seen == []
     # corrupted digest and ignored range are refused
-    bad = MemberEntry(**{**m_tar.__dict__, "id": "mobilemanibench/z", "path": "z", "sha256": "1" * 64})
+    bad = CatalogEntry(**{**m_tar.__dict__, "id": "mobilemanibench/z", "path": "z", "sha256": "1" * 64})
     with pytest.raises(ChecksumMismatch):
-        fetch_members([bad], tmp_path, reserve=0, opener=_opener(blobs, []))
-    other = MemberEntry(**{**m_tar.__dict__, "id": "mobilemanibench/y", "path": "y"})
+        fetch([bad], tmp_path, reserve=0, opener=_opener(blobs, []))
+    other = CatalogEntry(**{**m_tar.__dict__, "id": "mobilemanibench/y", "path": "y"})
     with pytest.raises(RuntimeError, match="ignored the byte range"):
-        fetch_members([other], tmp_path, reserve=0, opener=_opener(blobs, [], status=200))
+        fetch([other], tmp_path, reserve=0, opener=_opener(blobs, [], status=200))
     assert not (tmp_path / "raw/mobilemanibench/y").exists()
 
 

@@ -16,14 +16,18 @@ images are stored.
 source files ──adapter──▶ SourceEpisode ──retarget──▶ Reachy trajectory ──validate K/P──▶ ReachyEpisode (HDF5)
 ```
 
-* `reachy_retarget.acquire`: hash-pinned explicit downloads with a 50 GB reserve.
+* `reachy_retarget.acquire`: pinned catalog and one explicit `fetch` for every acquisition kind
+  (whole files, image-stripped HDF5, streamed tars, byte-range members and packages) with a
+  50 GB reserve, digest verification, no image bytes and a per-file ledger; catalog
+  generators in `acquire/generators/` (see docs/sources.md, Acquisition).
 * `reachy_retarget.sources`: one adapter per source family. Adapters only read source
   files and produce `SourceEpisode` objects in the source's own world frame and clock.
 * `reachy_retarget.retarget`: embodiment-independent mapping onto Reachy.
 * `reachy_retarget.validate`: tier K (kinematic) for every episode, tier P (MuJoCo,
   free objects) when the source ships a MuJoCo scene.
 * `reachy_retarget.schema`: data model, HDF5 I/O, control-mode registry.
-* `cluster/`: job pool over the persistent worker pods (two jobs per pod).
+* `cluster/`: job pool over the persistent worker pods (two jobs per pod); `cluster/manifests.py`
+  writes size-batched fetch manifests.
 
 ## Reachy model
 

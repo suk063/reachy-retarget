@@ -62,7 +62,7 @@ from pathlib import Path
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-from ..acquire import load_catalog, sha256_file
+from ..acquire import load_catalog, locate_entry, sha256_file
 from ..schema.source import Effector, ObjectTrack, SourceEpisode
 from .registry import register
 
@@ -469,9 +469,9 @@ def _episode(path: Path, family, root, urdf, raw, catalog, fk_check) -> SourceEp
                         "reward_sum": float(reward.sum()), "raw_steps": n_raw, "parquet_frames": T}
 
     digest = sha256_file(path)
-    entry = next((e for e in catalog.values() if e.sha256 == digest), None)
+    entry = locate_entry(path, catalog, digest)
     meta_digest = sha256_file(meta_path)
-    meta_entry = next((e for e in catalog.values() if e.sha256 == meta_digest), None)
+    meta_entry = locate_entry(meta_path, catalog, meta_digest)  # JSON: git blob sha1 pinned, found by path
     dataset = entry.dataset if entry and entry.dataset else f"behavior/2025-challenge/{task_name}"
     versions = scene_file.get("versions", {})
     scene_args = scene_file.get("init_info", {}).get("args", {})

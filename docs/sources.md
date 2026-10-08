@@ -1,17 +1,60 @@
 # Source families
 
-Every file is pinned in `reachy_retarget/acquire/catalog/<family>.yaml` (URL at an immutable
-revision, publisher SHA-256, size, license, kind). `fetch()` is the only code path that
-uses the network; it writes `data/raw/<family>/<path>` and records each verified file as
-its own JSON record `data/raw/ledger/<family>/<path>.json` (`read_ledger` aggregates
-them). One record per file lets concurrent cluster jobs fetch into private roots that
-are merged into the shared root by plain no-overwrite copies. A legacy single-file
-`raw/ledger.json` is still read (per-file records win) and `migrate_ledger(root)` writes
-per-file records for it. "Catalogued", "fetched", "adapted" (a `SourceEpisode` was
-produced) and "physics-validated" are separate states; nothing here implies the next.
+Every source is pinned in `reachy_retarget/acquire/catalog/<family>.yaml` (URL at an
+immutable revision, publisher digests, size, license, `kind`, `content`); families with
+thousands of entries keep their rows in a gzip TSV next to the yaml (`table:`).
+"Catalogued", "fetched", "adapted" (a `SourceEpisode` was produced) and
+"physics-validated" are separate states; nothing here implies the next.
+
+## Acquisition
+
+One interface for every source: `reachy_retarget.acquire.fetch(ids, root, ...)` and
+`reachy-retarget fetch <ids...> --root <root> [--strip-images] [--workers N]`. `ids` are
+catalog ids or prefixes ending in `/` (every *usable* entry below; entries marked
+`usable: false`, e.g. RoboCasa MimicGen tars, are fetched only by exact id). Nothing
+touches the network on import; catalog generators (`acquire/generators/<family>.py`) read
+publisher metadata only when run explicitly. The entry `kind` says how bytes are acquired:
+
+| kind | bytes | written |
+| --- | --- | --- |
+| `file` | whole file (resumable `*.part`, HTTP Range) | the file |
+| `file_images_embedded` | whole HDF5 that also stores images | only `<stem>.state.hdf5` (needs `--strip-images`) |
+| `tar_stream` | an uncompressed tar streamed once (RoboCasa Box tars) | non-image members + `tar_members.json` |
+| `range_member` | one tar/zip member by byte range (MobileManiBench) | the member |
+| `range_package` | a zstd tar stored as a byte range of a shard (MolmoBot) | members ending in `keep` + `package_members.json` |
+
+Rules shared by all kinds (`acquire/fetch.py`, transports in `acquire/transports.py`):
+
+* **Reserve**: refused before transfer if it would leave < 50 decimal GB free; aborted if
+  free space drops below that while streaming (partial kept for files, removed for members).
+* **Verification**: every publisher digest that exists is checked (SHA-256, Box SHA-1,
+  git blob SHA-1 of plain git files, zip CRC-32) plus sizes; tar members are checked against
+  the tar header preceding their bytes, packages against the publisher's `inflated_size`
+  (the sum of the package's member sizes).
+  Without a publisher SHA-256 the digest is recorded trust-on-first-use
+  (`sha256_source: tofu`); `verified_by` lists the checks that passed.
+* **No images**: image/video members (`videos/`, `images/`, image/video extensions) of tars
+  and packages are discarded in memory; `file`/`range_member` entries with such names are
+  refused; `file_images_embedded` entries need `--strip-images` (below).
+* **Ledger**: one JSON record per verified file, `<root>/raw/ledger/<family>/<path>.json`
+  (`tar_stream`/`range_package` entries also get a record for the manifest, package members
+  one each), so private roots of concurrent jobs merge by no-overwrite copies. Records of
+  earlier versions (content class in `kind`, no `content`) stay readable; `ledger.same_record`
+  and `cluster/job.py` treat records with the same id, local path and digests as the same
+  file. A legacy `raw/ledger.json` is still read and `migrate_ledger(root)` splits it.
+* **Lookup**: `acquire.identify`/`find_entry` (by pinned SHA-256, also for stripped
+  copies) and `acquire.locate_entry` (by place under `raw/<family>/` when the ledger
+  records the same SHA-256; trust-on-first-use entries and package members).
+* **Cluster**: `python -m cluster.manifests <family>` writes
+  `runs/fetch-<wave>-<family>-v1.jsonl` jobs (`{"id", "argv", "publish": "data",
+  "timeout_s"}`) that move ~1–5 GB each (a single larger entry is its own job) and never
+  need more than 40 GB of scratch; selectors are complete directory prefixes or ids.
+* Asset subsets: `acquire.assets.fetch_zip_subset` / `fetch_robocasa_asset_subset` copy
+  single members out of catalogued asset zips (Range reads, CRC-32 checked) when a whole
+  archive does not fit.
 
 ```python
-from reachy_retarget.acquire import fetch, load_catalog
+from reachy_retarget.acquire import fetch
 from reachy_retarget.sources import iter_episodes
 
 fetch(["robomimic/v1.5/can/ph/low_dim_v15.hdf5",
@@ -20,11 +63,16 @@ for ep in iter_episodes("robomimic", "data/raw/robomimic/v1.5/can/ph/low_dim_v15
     ...
 ```
 
-Fetch rules: resumable `*.part` files (HTTP Range; restarts if the server ignores the
-range), size and SHA-256 checked before the file is renamed into place (a mismatch is
-kept as `*.sha256-mismatch`), refusal before transfer if the file would leave less than
-50 decimal GB free, abort (partial kept) if free space drops below that while
-streaming, and refusal of `kind: images_embedded` files unless `strip_images=True`.
+Full-scale catalogs (2026-10-07; non-image GB = bytes stored after fetching; "est." where
+member sizes are not published):
+
+| family | catalogued | transfer | non-image stored | jobs (`runs/fetch-w2-*-v1.jsonl`) |
+| --- | --- | ---: | ---: | ---: |
+| behavior | 10,000 episodes (50 tasks): parquet + episode JSON + annotations | 183.7 GB | 183.7 GB | 55 |
+| mobilemanibench | 137,710 G1 episodes `state_infos.pkl` + run configs (39 tars) | 76.4 GB | 76.3 GB | 21 |
+| robocasa | 350 human tars (pretrain + target, atomic + composite) + assets; 60 MimicGen tars `usable: false` | 186.0 GB | ≈ 46 GB est. | 53 |
+| roboverse | 80 RLBench Franka tasks (890 demos) + CALVIN windows env A–D + D_val (1,855 files) | 1.2 GB | 1.2 GB | 1 |
+| molmobot | 7,333 commercial-use packages, ≈ 20,000 trajectories est. (9 configs, both robots) | 145.8 GB | ≈ 16 GB est. | 50 |
 
 ### Image stripping (`reachy_retarget/acquire/strip.py`)
 
@@ -88,7 +136,7 @@ observations and MimicGen `datagen_info` stay.
   (and the `robot/*_sawyer` files) use a Sawyer with the Rethink gripper; everything else
   in `source/` and `core/` is a Panda.
 * **Every MimicGen file embeds 84×84 RGB observations** (`agentview_image`,
-  `robot0_eye_in_hand_image`), so all are `kind: images_embedded` and must be fetched
+  `robot0_eye_in_hand_image`), so all are `kind: file_images_embedded` and must be fetched
   with `strip_images=True`. The 12 source files were fetched and stripped (56.8 MB kept).
 * Lineage: every non-source demo is MimicGen-generated:
   `lineage = {"generated": True, "seed": "mimicgen/source/<task>", "seed_demo": None,
@@ -143,14 +191,19 @@ state row, `mj_forward`, and read:
   shared left normal is `left` and the other `right` (`provenance["side_hint_source"]`);
   arms facing each other (robomimic Transport) or a single arm get `None`. The Rethink
   (Sawyer) gripper fits the same two-finger model; linkage grippers (Robotiq 85 on
-  IIWA/UR5e) do not and raise.
+  IIWA/UR5e) do not and raise. `command` is the recorded gripper action when the actions
+  are `[arm (6), gripper (1)]` per single-gripper robot and every gripper entry is ±1
+  (robomimic, MimicGen, LIBERO): `(a + 1) / 2`, 1 = close
+  (`provenance["gripper_command"]` names the column or why there is none).
 * **Objects**: free-joint bodies named `<name>_main`/`<name>_root`. Per-task tables
-  (`TASK_OBJECTS`) select task objects and roles; other free bodies (e.g. hidden Milk,
-  Bread, Cereal in PickPlaceCan, RoundNut in NutAssemblySquare) are listed in
-  `provenance["inactive_free_bodies"]`. Unknown envs keep every free body as
-  `manipulated`. Static world-child bodies with collision geometry become constant
-  tracks (`table*` → support, `*bin*` → receptacle, else fixture, e.g. square pegs).
-  Geometry is the collision AABB in the body frame.
+  (`TASK_OBJECTS`) select task objects and roles; untracked free bodies parked more than
+  2 m from every robot base and tracked object (robosuite `clear_objects`: Milk, Bread,
+  Cereal in PickPlaceCan, RoundNut in NutAssemblySquare, at (10, 10, 10)) are inactive:
+  `provenance["inactive_free_bodies"]` and `SceneRef.inactive_bodies`. Unknown envs keep
+  every free body as `manipulated`. Static world-child bodies with collision geometry
+  become constant tracks (`table*` → support, `*bin*` → receptacle, else fixture, e.g.
+  square pegs). Geometry is the collision AABB in the body frame; the Can
+  (`CYLINDER_OBJECTS`) is a `cylinder` (radius, half_length, axis) fitted to it.
 * **Articulations**: non-robot hinge/slide joints grouped by root body (none in the
   robomimic tasks; MimicGen drawers/lids will appear here).
 * **base_hint**: `robot0_base` x, y, yaw; every arm's base is in
@@ -163,8 +216,12 @@ state row, `mj_forward`, and read:
   suggests and are listed in `provenance["mesh_inertia_shell"]` (robot links only; the
   robot is removed for tier P).
 * **Scene**: `SceneRef` with the asset-resolved MJCF, the asset bytes, robot prefixes
-  (`robot<N>_`, `gripper<N>_`, `mount<N>_`, `fixed_mount<N>_`) and initial `qpos` of
-  every free and articulated scene joint.
+  (`robot<N>_`, `gripper<N>_`, `mount<N>_`, `fixed_mount<N>_`), initial `qpos` of
+  every free and articulated scene joint, the inactive bodies and `reference`: the
+  deepest object-environment contact over the recorded states
+  (`sources/contact_reference.py`; also `provenance["scene_reference"]`), which sets the
+  source-relative tier-P object-environment gate. RoboCasa and BiGym fill the same fields
+  (BiGym: disabled props are the inactive bodies).
 
 Routes (`provenance["state_route"]`):
 
@@ -188,7 +245,7 @@ A low-dimensional-observation route is not implemented: every catalogued file ha
   demos each: `libero_spatial` 10 (6.24 GB), `libero_object` 10 (7.44 GB), `libero_goal`
   10 (6.37 GB), `libero_10` 10 (13.73 GB), `libero_90` 90 (66.66 GB). All 130 digests are
   distinct. Every file embeds 128×128 `agentview_rgb`/`eye_in_hand_rgb`
-  (`images_embedded`). Assets: GitHub archive of Lifelong-Robot-Learning/LIBERO at
+  (`file_images_embedded`). Assets: GitHub archive of Lifelong-Robot-Learning/LIBERO at
   `8f1084e3132a39270c3a13ebe37270a43ece2a01` (master, 2025-03-15),
   `libero/code/LIBERO-8f1084e3….zip`, 243.6 MB, MIT, digest computed from two identical
   downloads; only `libero/libero/assets/*` and `libero/libero/bddl_files/*` are read.
@@ -554,7 +611,7 @@ some configs also have `valid_traj_mask` and per-trajectory `stats`.
 
 ### Catalog (`catalog/molmobot.yaml`)
 
-* `sources` (whole files, `acquire.fetch`): README, `commercial_episodes.parquet`,
+* `file` entries: README, `commercial_episodes.parquet`,
   helper scripts, the 17 package tables (all LFS-hashed except the scripts/README, which
   were hashed at catalog time), and the MolmoSpaces robot shards from
   <https://huggingface.co/datasets/allenai/molmospaces> revision
@@ -563,33 +620,33 @@ some configs also have `valid_traj_mask` and per-trajectory `stats`.
   `mujoco/robots/franka_droid/20260127` (42.9 MB; FR3 Apache-2.0 + Robotiq 2F-85
   BSD-3-Clause). These are the robots named in every trajectory's `frozen_config`.
   25 files, 70 MB.
-* `molmobot_packages`: 27 packages (per config 2 train + 1 val; ObjectBackfill 3 train),
-  all listed in `commercial_episodes.parquet`, size between the 15th and 45th percentile,
-  ordered by sha1(part/path). Each records shard path and publisher shard SHA-256, byte
-  offset/size, `range_sha256` of the compressed range and the SHA-256, size and
-  trajectory count of every `.h5` member (both computed by one streaming pass of the
-  generator). 65 trajectories, 11,602 steps, 31 `.h5` files, 46 MB on disk; fetching
-  transfers 378 MB (the MP4s are streamed and discarded).
-* `reachy_retarget/sources/molmobot_fetch.py`: `fetch_packages(ids, root)` streams each
-  range (HTTP Range; refuses a 200 response), decompresses with `zstandard` or the `zstd`
-  CLI, writes only the catalogued `.h5` members to
-  `raw/molmobot/<config>/<split>/part<k>/<house>/` after checking member and range
-  digests, applies the 50 GB reserve and records ledger entries.
-  `unpack_robot_assets(root, entry)` extracts a fetched robot shard into
-  `raw/molmobot/robots/<name>/<version>/` with a `MANIFEST.json` of file digests.
+* `range_package` entries (generator `acquire/generators/molmobot.py`), a bounded diverse
+  subset because objects are only known at t = 0: per generation config (9 configs, both
+  robots, every task type) commercial-use packages of <= 500 MB (a few outlier scenes hold
+  hundreds of episodes) in sha1(part/path) order until 1/9 of a 20,000-trajectory target is
+  met, 10 % from val (empty packages skipped). 7,333 packages, ≈ 20,000 trajectories (exact commercial episode
+  counts where the list names them, else estimated from the inflated size), 145.8 GB
+  transferred, ≈ 16 GB of `.h5` stored (est. from the sample's `.h5` share). Rows
+  (`molmobot.packages.tsv.gz`) carry the shard path and publisher shard SHA-256, offset,
+  compressed and inflated size (package tables); range and member SHA-256 are recorded at
+  fetch time. The earlier 27-package sample (65 trajectories, 46 MB) stays inline with its
+  catalog-time `range_sha256` and member digests.
+* Fetch (`acquire.fetch`, kind `range_package`): one HTTP range per package (a 200 response
+  is refused), zstd decompression (`zstandard` or the `zstd` CLI), member sizes summing to
+  `inflated_size`, only `.h5` members written to `raw/molmobot/<config>/<split>/part<k>/<house>/`
+  with `package_members.json`; MP4s are discarded in memory. `sources.molmobot.unpack_robot_assets(root,
+  entry)` extracts a fetched robot shard into `raw/molmobot/robots/<name>/<version>/` with a
+  `MANIFEST.json` of file digests.
 
 ```python
 from reachy_retarget.acquire import fetch, load_catalog
 from reachy_retarget.sources import iter_episodes, molmobot  # import registers 'molmobot'
-from reachy_retarget.sources.molmobot_fetch import fetch_packages, load_packages, unpack_robot_assets
 
+fetch(["molmobot/"], "data", workers=4)          # files + every usable package
 cat = load_catalog()
-ids = [k for k, e in cat.items() if e.family == "molmobot"]
-fetch(ids, "data")
-for k in ids:
-    if cat[k].kind == "assets":
-        unpack_robot_assets("data", cat[k])
-fetch_packages(list(load_packages()), "data")
+for k, e in cat.items():
+    if e.family == "molmobot" and e.content == "assets":
+        molmobot.unpack_robot_assets("data", e)
 ```
 
 ### Adapter: `reachy_retarget/sources/molmobot.py`
@@ -825,20 +882,24 @@ locomotion); kinematics are recomputed with the project's MuJoCo (body poses equ
   792.6 GB, `videos/` (mp4 RGB/depth/seg, ~1.5 TB total dataset) not catalogued, nor
   `meta/episodes_stats.jsonl` (0.37 GB of feature statistics). The parquet files contain no
   images, so the low-dim release needs no stripping.
-* Catalogued (`catalog/behavior.yaml`): the first 10 episodes by index of 8 tasks —
-  turning_on_radio (0), picking_up_trash (1), cleaning_up_plates_and_food (3),
-  set_up_a_coffee_station_in_your_kitchen (10), putting_shoes_on_rack (22),
-  hanging_pictures (34), attach_a_camera_to_a_tripod (35), make_microwave_popcorn (40):
-  80 episodes, 459,624 frames, parquet 0.655 GB + episode JSON 0.118 GB + annotations
-  0.5 MB (= 0.774 GB non-image demos), plus `meta/{info.json,tasks.jsonl,episodes.jsonl}`
-  and the raw HDF5 of the same 80 episodes (2.503 GB, optional). Fetched locally: all demo
-  files (0.778 GB) and 40 raw files (0.704 GB: all of tasks 0, 34, 35, two each of 1, 3,
-  10, 22, 40). Parquet/HDF5 digests are HF LFS sha256; JSON/URDF/YAML digests were computed
-  after checking the git blob sha1 at the pinned revision.
+* Catalogued (`catalog/behavior.yaml`, rows in `behavior.demos.tsv.gz`, generator
+  `acquire/generators/behavior.py`): all 10,000 episodes of the 50 tasks — 10,000 parquet
+  (164.53 GB, HF LFS SHA-256), 10,000 episode JSON (18.99 GB) and 10,000 annotations
+  (0.13 GB) = 183.66 GB non-image, plus `meta/{info.json,tasks.jsonl,episodes.jsonl}` and the
+  R1 Pro URDF/config. The JSON files are plain git files: pinned by git blob SHA-1 (checked
+  at fetch time; SHA-256 recorded trust-on-first-use, or kept where the earlier 80-episode
+  subset hashed them). The raw HDF5 entries of that subset (80 files, 2.503 GB) stay
+  catalogued as the optional success-flag source but are not part of the full-scale fetch
+  (`runs/fetch-w2-behavior-v1.jsonl`, 55 jobs). Fetched locally: the 80-episode subset
+  (0.778 GB) and 40 raw files (0.704 GB).
 * Overlap: the parquet and raw HDF5 of one episode index are the same demonstration (the
   parquet observations were produced by replaying the raw state); count episodes once.
-  `behavior-1k/2026-challenge-{demos,rawdata}` reuse the same episode numbering (e.g.
-  `task-0002/episode_00021890`); do not count them as independent before checking overlap.
+  `behavior-1k/2026-challenge-demos` (`4f50b444`, LeRobot v3, 100 tasks × 200 = 20,000
+  episodes, ~3 TB with video) re-exports these 10,000 episodes as its tasks 0–49: same task
+  order, 2026 episode k of task t = 2025 episode `t·10000 + 10·(k+1)`, per-task episode
+  lengths identical (checked for tasks 0, 25 and 49 from `meta/episodes/chunk-*/file-000.parquet`).
+  Its tasks 50–99 (10,000 episodes) are new and not catalogued; `2026-challenge-rawdata`
+  likewise. Never count a 2025 episode and its 2026 copy separately.
 
 ### Layout (verified)
 
@@ -942,8 +1003,11 @@ All 80 catalogued episodes (459,624 frames) adapted.
   parquet + videos (no MJCF/states) and are not catalogued; they overlap the target human
   data and must not be counted again.
 * Catalog `catalog/robocasa.yaml`, generated by
-  `sources.robocasa_fetch.generate_catalog(...)`:
-  * `robocasa_tars`: 410 tars, 501.25 GB, 316 tasks. Pinned by Box file id, file version id
+  `acquire/generators/robocasa.py` (`generate_catalog(...)`):
+  * `tar_stream` entries: 410 tars, 501.25 GB, 316 tasks; the 350 human tars (174.7 GB)
+    are the full-scale fetch (`runs/fetch-w2-robocasa-v1.jsonl`, 53 jobs with the asset
+    archives, 186.0 GB transferred, ≈ 35 GB of non-image members + 11.3 GB of assets stored);
+    the 60 MimicGen tars (326.5 GB) stay catalogued with `usable: false`. Pinned by Box file id, file version id
     and SHA-1 (Box publishes no SHA-256) plus size. Totals: pretrain atomic human 65 tars /
     6.1 GB, pretrain composite human 235 / 107.1 GB, target atomic human 18 / 9.2 GB, target
     composite human 32 / 52.4 GB, pretrain atomic MimicGen 60 / 326.5 GB. Each MimicGen tar has
@@ -952,7 +1016,7 @@ All 80 catalogued episodes (459,624 frames) adapted.
     `generated: true`. 35 registry paths (`mg_5x5`/`mg_5x1` variants and one human path) have
     no Box link and are listed under `registry_without_download`. Pretrain and target human
     sets are separate collections; MG demos are not independent demonstrations.
-  * `sources` (whole files for `acquire.fetch`): HF `robocasa/robocasa-assets@1b92c3d`
+  * `file` entries (`content: assets`): HF `robocasa/robocasa-assets@1b92c3d`
     (`textures`, `generative_textures`, `fixtures`, `objaverse`, `aigen_objs` zips; LFS
     SHA-256), Box `fixtures_lightwheel.zip` / `objects_lightwheel.zip` (SHA-256 computed at
     catalog time from a stream whose size and Box SHA-1 matched), the GitHub source zip of the
@@ -969,12 +1033,12 @@ All 80 catalogued episodes (459,624 frames) adapted.
   `mg/demo/2025-08-20-21-55-00`, 9511 episodes) has no `extras/`**: only parquet
   observations/actions, no object or fixture state and no MJCF, so it cannot be adapted.
   Human tars of all four split/type groups were checked to carry extras.
-* Acquisition: `sources.robocasa_fetch.fetch_tars(ids, root)` streams the whole tar once,
+* Acquisition: `acquire.fetch(ids, root)` (kind `tar_stream`) streams the whole tar once,
   verifies size and Box SHA-1, resumes dropped connections with HTTP Range, discards image
   members in memory and writes everything else to
   `raw/robocasa/<tar dir>/lerobot/...` with `tar_members.json` (offset, size, SHA-256 of
   each kept member, dropped counts) and a ledger record. Human tars keep ≈ 20 % of their
-  bytes (extras ≈ 0.18 MB/episode). `fetch_asset_subset(rels, root)` copies single asset
+  bytes (extras ≈ 0.18 MB/episode). `acquire.assets.fetch_robocasa_asset_subset(rels, root)` copies single asset
   members (CRC-checked, read by Range from a zip's central directory) into
   `raw/robocasa/asset_subset/` when the full archives do not fit.
 
@@ -1042,7 +1106,7 @@ simulator clock kept).
 
 * MimicGen tars (326.5 GB) lack simulator extras in the inspected sample; a parquet-only
   route (base + relative end-effector pose, no objects) is not implemented.
-* `fetch_tars` streams whole tars (videos ≈ 80 % of the transfer) because MG tars put videos
+* `tar_stream` fetches stream whole tars (videos ≈ 80 % of the transfer) because MG tars put videos
   before data; human tars could stop early but the Box SHA-1 check needs the whole stream.
 * Physics validation of RoboCasa scenes is untested here (scenes compile with full assets).
 
@@ -1154,22 +1218,25 @@ orthonormal; the grasp center equals the pad midpoint at reset (unit test).
 
 ### Catalog (`catalog/mobilemanibench.yaml`)
 
-`sources` (whole files, `acquire.fetch`): `object_manifest.jsonl`, the card and `unpack.py`
-at the HF revision; from GitHub at the pinned commit the prompt tables
+`file` entries: `object_manifest.jsonl`, the card and `unpack.py` at the HF revision; from
+GitHub at the pinned commit the prompt tables
 `unimanip/configs/data/analysis_{partnet,unidoor,ycb,scene}.yaml`, `env_model.py`,
 `g1_robot_env.py` and the LICENSE (stored under `raw/mobilemanibench/code/`).
-`mobilemanibench_members` (single tar / zip members by HTTP Range,
-`sources.mobilemanibench_fetch.fetch_members`; videos are never requested): the first object
-with trajectories in five G1 tars — Close/partnet/microwave (7119, revolute door, close),
-Open/partnet/table (19179, prismatic drawer, open), Open/unidoor/lever_door (99650019960001,
-revolute door, open), Close/partnet/cart (100491, push), Open/ycb/ycb (021_bleach_cleanser,
-pick; objects 0000–0017 of that tar are test objects without trajectories) — `traj_000`
-episodes 000–004 and `traj_001` episodes 000–002: 40 episodes, plus each run's
-`params/{env,agent}.yaml`, `git/MobileManipVLA.diff`, the two trajectory folders'
-`scene_infos.json`/`log.txt`, and `Assets/g1_robot_rotate/G1_120s.urdf` (deflate member of
-`Assets/Assets.zip`, CRC-32 checked). Member sha256 values were computed at catalog time
-(`generate_members` walks tar headers with 512-byte range reads); the archive digests are the
-publisher's. All 76 members + 10 files fetched: 24.8 MB (`data/raw/mobilemanibench`).
+
+`range_member` entries (generator `acquire/generators/mobilemanibench.py`, rows in
+`mobilemanibench.members.tsv.gz`; videos are never requested): the generator read the tar
+headers of all 39 G1 tars with small HTTP ranges (parallel segments; every segment boundary
+confirmed by the previous segment's walk) and checked the file count of every tar against
+the publisher's `nfiles`. Selected per tar member: every episode's `state_infos.pkl`
+(137,710 episodes), each policy run's `params/{env,agent}.yaml`, `git/*.diff` and
+`log.txt`, each trajectory batch's `scene_infos.json`/`log.txt` — 170,112 members,
+76.3 GB; never `*.mp4`, policy checkpoints (`*.pt`, `*.onnx`) or tensorboard events.
+`Assets/g1_robot_rotate/G1_120s.urdf` is a deflate member of `Assets/Assets.zip` (CRC-32
+checked). The publisher hashes only whole tars (kept as `archive_sha256`): the 76 members of
+the earlier subset keep the SHA-256 computed then; all others are verified at fetch time by
+the tar header preceding their bytes (regular file, size, name, header checksum) and
+recorded trust-on-first-use. Full-scale fetch: `runs/fetch-w2-mobilemanibench-v1.jsonl`
+(21 jobs). Fetched locally: the 76-member subset + 10 files, 24.8 MB.
 
 ### Adapter: `reachy_retarget/sources/mobilemanibench.py`
 
@@ -1252,8 +1319,12 @@ All 40 catalogued episodes (5 task types × 8; 147–242 frames) adapted.
   RoboVerse `assets/rlbench/LICENSE` is that licence); CALVIN is MIT; the Franka models are
   franka_ros / mujoco_menagerie (Apache-2.0) and IsaacSim USD (NVIDIA). Catalog `license`
   strings carry both.
-* Catalog: `catalog/roboverse.yaml`, 790 files, 387.3 MB, all fetched and verified
-  (no images; the repository has none in `trajs/`). Adapter:
+* Catalog: `catalog/roboverse.yaml` (generator `acquire/generators/roboverse.py`; CALVIN
+  rows in `roboverse.calvin.tsv.gz`), 1,957 files, 1.22 GB: every RLBench task's Franka file
+  (80) and every CALVIN annotated-window file of scenes A, B, C, D and D validation (1,855),
+  plus robot/asset files (no images; the repository has none in `trajs/`). The earlier 790
+  files (387.3 MB; CALVIN A and D_val only) are fetched and verified locally; the rest is
+  `runs/fetch-w2-roboverse-v1.jsonl` (one job). Adapter:
   `reachy_retarget/sources/roboverse.py` (+ `roboverse_pickle.py`, `roboverse_rlbench.py`).
 
 ### Layout (verified)
@@ -1269,7 +1340,7 @@ gzipped pickles (RLBench) or pickles with torch tensors (CALVIN converters).
 | `trajs/` folder | size | content | status here |
 | --- | ---: | --- | --- |
 | `rlbench` | 37 MB | 80 tasks × `v2/franka_v2.pkl.gz` (10 demos each, `close_box` 100) = **890 demos, 191,649 states**; `close_box` also has `sawyer_v2`/`ur5e_2f85_v2` | catalogued (franka only), adapted |
-| `calvin/calvin_traj_ann/env_{A,B,C,D,D_val}_out` | 1.19 GB | 389 `task_<N>_v2.pkl` per env (299 for D_val), `N` = sentence index in `ann_dict.npy`; one CALVIN language window (≤ 64 states) per episode | A and D_val catalogued, adapted |
+| `calvin/calvin_traj_ann/env_{A,B,C,D,D_val}_out` | 1.19 GB | 389 `task_<N>_v2.pkl` per env (299 for D_val), `N` = sentence index in `ann_dict.npy`; one CALVIN language window (≤ 64 states) per episode | all catalogued; A and D_val adapted locally |
 | `calvin/env_*_out/episode_chunk_*` | ~1.9 GB | the unannotated play stream in ≥ 300-step segments | not catalogued (superset of the windows) |
 | `calvin/<task>_a/v2` | ~180 MB | 29 tasks, env A, binary finger states, no frame index, + `franka_with_gripper_extension`/`ur5e_2f85` retargeted variants | not catalogued (overlapping lower-fidelity version) |
 | `libero`, `libero90` | 765 MB | LIBERO-Object (10 tasks), LIBERO-90 subset | not catalogued: overlaps `libero` |
@@ -1380,8 +1451,8 @@ excursions: ≤ 0.005 rad (RLBench), ≤ 0.013 rad (CALVIN, against CALVIN's URD
   variation descriptions (language) absent; 30 episodes of `hang_frame_on_hanger` without
   object geometry; most objects are USD meshes (no tier-P scene); source grasps are
   kinematic parenting.
-* CALVIN: env B, C, D training windows (~17k more by size) and the play stream are not
-  catalogued; windows overlap (count by group); the desk is approximated by an AABB for the
+* CALVIN: env B, C, D training windows (~17k more by size) are catalogued but not yet
+  fetched or adapted here; the play stream is not catalogued; windows overlap (count by group); the desk is approximated by an AABB for the
   footprint; RoboVerse's binary per-task files and retargeted UR5e/extension variants are
   excluded.
 * The RLBench calibration is a derived correction (documented above), not a publisher value.

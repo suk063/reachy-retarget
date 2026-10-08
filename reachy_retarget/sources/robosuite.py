@@ -405,7 +405,7 @@ def _locate_archives(env_version: str | None, xml: str, path: Path, root, catalo
     if wheel is not None and root is not None and wheel.local_path(root).exists():
         out.append(((str(wheel.local_path(root)), ASSET_MARKER, (), ""), wheel))
     for e in catalog.values():
-        if e.kind != "assets" or not e.asset_marker or e.asset_marker == ASSET_MARKER:
+        if e.content != "assets" or not e.asset_marker or e.asset_marker == ASSET_MARKER:
             continue
         aliases = tuple(profile.marker_aliases.get(e.asset_marker, ()))
         if not any(m in xml for m in (e.asset_marker, *aliases)):

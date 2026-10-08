@@ -3,39 +3,43 @@
 # DEMO_VERSION of bigym/const.py at the pinned commit) declares no digest; sha256/size were
 # computed on download (TOFU) and are pinned here. The code archive is GitHub's zip of the
 # pinned commit (sha256 computed on download). Ids are '<family>/<path>'.
-# kind: low_dim = lightweight recordings (actions + seed + metadata; no states, no images).
+# content: low_dim = lightweight recordings (actions + seed + metadata; no states, no images).
 # 'tasks' (ignored by load_catalog): per task, unique recording UUIDs vs stored files.
 # Most recordings are stored twice (absolute and delta action modes converted from the
 # same recording, same UUID); they count once. Totals: 40 tasks, 1933 recordings,
 # 3402 files.
+# kind = how bytes are acquired (file | file_images_embedded | tar_stream | range_member | range_package; all
+# through reachy_retarget.acquire.fetch); content = what they are (low_dim | metadata | assets | docs | index ...).
 sources:
 - family: bigym
   repo: https://github.com/chernyadev/bigym_data
   revision: v0.9.0
   license: Apache-2.0
   note: 'BiGym demonstrations release v0.9.0 (published 2024-07-17; recorded with bigym 4.0.0, mujoco 3.1.5). Lightweight
-    safetensors per recording: info_demo_action (T, 15|16) at 500 Hz, termination/truncation flags, metadata (seed,
-    env name, action mode, floating dofs). States require replay (reachy_retarget/sources/bigym_replay.py).'
+    safetensors per recording: info_demo_action (T, 15|16) at 500 Hz, termination/truncation flags, metadata (seed, env name,
+    action mode, floating dofs). States require replay (reachy_retarget/sources/bigym_replay.py).'
   files:
   - path: v0.9.0/demonstrations.zip
     url: https://github.com/chernyadev/bigym_data/releases/download/v0.9.0/demonstrations.zip
     sha256: a7fd1e7f1bd60962ec73dc23a08e6b9b0ffa2711dbbfb8c4de914b819e1186d2
     size: 123362114
-    kind: low_dim
+    kind: file
+    content: low_dim
     dataset: bigym/v0.9.0
 - family: bigym
   repo: https://github.com/chernyadev/bigym
   revision: d98124454dfa3bc697f75536daec5989a47bfa8d
   license: Apache-2.0
-  note: BiGym source at master head 2026-05-06 (version string 4.1.0; 4.0.0 is not in the public history). Installed
-    with --no-deps into the isolated replay interpreter; also the source of the MJCF scene assets (bigym/envs/xmls,
-    whose 3D_MODELS_ATTRIBUTION.md lists per-asset CC0 / CC BY / CC BY-NC licenses). sha256/size computed on download.
+  note: BiGym source at master head 2026-05-06 (version string 4.1.0; 4.0.0 is not in the public history). Installed with
+    --no-deps into the isolated replay interpreter; also the source of the MJCF scene assets (bigym/envs/xmls, whose 3D_MODELS_ATTRIBUTION.md
+    lists per-asset CC0 / CC BY / CC BY-NC licenses). sha256/size computed on download.
   files:
   - path: code/bigym-d98124454dfa3bc697f75536daec5989a47bfa8d.zip
     url: https://github.com/chernyadev/bigym/archive/d98124454dfa3bc697f75536daec5989a47bfa8d.zip
     sha256: 4a48cda1a7e82aae3864d4a5cb8b79fc0eaf0169b5a227b500f4be32cf7da9a5
     size: 59310942
-    kind: assets
+    kind: file
+    content: assets
     asset_marker: bigym/envs/xmls/
 tasks:
   CupboardsCloseAll:

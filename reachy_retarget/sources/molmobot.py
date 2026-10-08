@@ -32,11 +32,15 @@ import io
 import json
 import pickle
 import posixpath
+import os
 import re
+import shutil
+import tarfile
 import xml.etree.ElementTree as ET
 import zipfile
 from functools import lru_cache
 from pathlib import Path
+from types import SimpleNamespace
 
 import h5py
 import numpy as np
@@ -487,7 +491,62 @@ def _locate_robot(name: str, path: Path, root) -> Path:
         if d.exists():
             return d
     raise FileNotFoundError(f"robot assets for {name!r} not found; fetch {spec['catalog_id']} and run "
-                            "molmobot_fetch.unpack_robot_assets, or pass robot_assets={name: dir_or_zip}")
+                            "molmobot.unpack_robot_assets, or pass robot_assets={name: dir_or_zip}")
+
+
+def robot_dir(root, name: str, version: str) -> Path:
+    return Path(root) / "raw" / "molmobot" / "robots" / name / version
+
+
+def unpack_robot_assets(root, entry) -> Path:
+    """Unpack a fetched MolmoSpaces robot shard into ``raw/molmobot/robots/<name>/<version>/``.
+
+    The shard (a catalog ``file`` entry) is a plain tar holding ``<name>.tar.zst``; the inner
+    tar is extracted (regular files only, no absolute or parent paths) and ``MANIFEST.json``
+    records the shard digest and every extracted file's SHA-256. Local operation, no network.
+    """
+    from ..acquire.transports import CHUNK, zstd_stream
+
+    shard = entry.local_path(root)
+    if not shard.exists():
+        raise FileNotFoundError(f"{shard} not fetched; run acquire.fetch([{entry.id!r}], root) first")
+    parts = Path(entry.path).parts  # molmospaces/mujoco/robots/<name>/<version>/shards/00000.tar
+    name, version = parts[3], parts[4]
+    dest = robot_dir(root, name, version)
+    if (dest / "MANIFEST.json").exists():
+        return dest
+    tmp = dest.with_name(dest.name + ".part")
+    shutil.rmtree(tmp, ignore_errors=True)
+    tmp.mkdir(parents=True)
+    files = {}
+    with tarfile.open(shard, "r:") as outer:
+        src = outer.extractfile(outer.getmember(f"{name}.tar.zst"))
+        stream, finish = zstd_stream(iter(lambda: src.read(CHUNK), b""))
+        try:
+            with tarfile.open(fileobj=stream, mode="r|") as tar:
+                for mem in tar:
+                    rel = Path(mem.name)
+                    if not mem.isfile() or rel.is_absolute() or ".." in rel.parts:
+                        continue
+                    data = tar.extractfile(mem).read()
+                    (tmp / rel).parent.mkdir(parents=True, exist_ok=True)
+                    (tmp / rel).write_bytes(data)
+                    files[rel.as_posix()] = hashlib.sha256(data).hexdigest()
+                for _ in tar:
+                    pass
+            stream.read()
+        except BaseException as exc:
+            cause = finish(abort=True)
+            shutil.rmtree(tmp, ignore_errors=True)
+            if cause is not None and cause is not exc:
+                raise cause from exc
+            raise
+        finish()
+    (tmp / "MANIFEST.json").write_text(json.dumps(
+        {"catalog_id": entry.id, "url": entry.url, "revision": entry.revision, "shard_sha256": entry.sha256,
+         "license": entry.license, "files": files}, indent=1, sort_keys=True))
+    os.replace(tmp, dest)
+    return dest
 
 
 # ---------------------------------------------------------------- geometry helpers
@@ -533,10 +592,39 @@ def _t0_track(pose7, T: int, role: str, geometry: dict) -> ObjectTrack:
 
 # ---------------------------------------------------------------- adapter
 
-def _member_info(path: Path, packages):
+def find_package(path: Path, packages=None, digest: str | None = None):
+    """``(package, member)`` of a fetched trajectory file: ``package`` is a flat view of its
+    ``range_package`` catalog entry (catalog + family fields, ``shard``, ``shard_sha256`` and
+    ``range_sha256``, the latter from ``package_members.json`` for trust-on-first-use
+    packages), ``member`` its member record; ``(None, None)`` when not catalogued."""
+    if packages is None:
+        from ..acquire import load_catalog
+        packages = {k: e for k, e in load_catalog().items() if e.family == "molmobot" and e.transport == "range_package"}
+    digest = digest or hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    hit = None
+    for pkg in packages.values():
+        m = next((m for m in pkg.source.get("members") or [] if m["sha256"] == digest), None)
+        if m is not None:
+            hit = (pkg, m)
+            break
+    manifest_path = Path(path).parent / "package_members.json"
+    man = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    if hit is None and man.get("package_id") in packages:
+        m = next((m for m in man["members"] if m["sha256"] == digest), None)
+        hit = (packages[man["package_id"]], m) if m is not None else None
+    if hit is None:
+        return None, None
+    pkg, m = hit
+    view = SimpleNamespace(**{"scene_family": None, "commercial_valid_episodes": None, **pkg.meta}, id=pkg.id,
+                           url=pkg.url, revision=pkg.revision, license=pkg.license, shard=pkg.source.get("archive"),
+                           shard_sha256=pkg.source.get("archive_sha256"),
+                           range_sha256=pkg.source.get("range_sha256") or man.get("range_sha256"))
+    return view, m
+
+
+def _member_info(path: Path, packages, digest):
     try:
-        from .molmobot_fetch import find_package
-        return find_package(path, packages)
+        return find_package(path, packages, digest)
     except Exception:  # noqa: BLE001 - catalog lookup is optional provenance
         return None, None
 
@@ -559,7 +647,7 @@ def read_molmobot_h5(path: Path, *, family: str, trajs=None, root=None, robot_as
     """
     path = Path(path)
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
-    pkg, member = _member_info(path, packages)
+    pkg, member = _member_info(path, packages, digest)
     config, split, part, house = _layout(path)
     if pkg is not None:
         config, split, part = pkg.config, pkg.split, pkg.part

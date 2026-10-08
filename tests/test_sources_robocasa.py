@@ -17,8 +17,10 @@ mujoco = pytest.importorskip("mujoco")
 pa = pytest.importorskip("pyarrow")
 import pyarrow.parquet as pq  # noqa: E402
 
-from reachy_retarget.acquire import CatalogEntry  # noqa: E402
-from reachy_retarget.sources import robocasa_fetch as rf  # noqa: E402
+from reachy_retarget.acquire import (TAR_MANIFEST, CatalogEntry, ChecksumMismatch, InsufficientDisk,  # noqa: E402
+                                     fetch, is_image_name, load_catalog)
+from reachy_retarget.acquire.assets import fetch_robocasa_asset_subset  # noqa: E402
+from reachy_retarget.acquire.generators import robocasa as gen  # noqa: E402
 from reachy_retarget.sources.robocasa import RobocasaAssets, read_robocasa  # noqa: E402
 from reachy_retarget.sources.registry import iter_episodes  # noqa: E402
 
@@ -254,8 +256,8 @@ def test_assets_from_catalogued_zip(tmp_path):
     with zipfile.ZipFile(z, "w") as zf:
         zf.writestr("objaverse/cube/model.stl", tetra_stl())
     e = CatalogEntry(id="robocasa/assets/objaverse.zip", family="robocasa", path="assets/objaverse.zip", url="x",
-                     revision="r", sha256="0" * 64, size=1, license="CC-BY-4.0", kind="assets",
-                     asset_marker="robocasa/models/assets/objects/")
+                     revision="r", sha256="0" * 64, size=1, license="CC-BY-4.0", kind="file",
+                     content="assets", asset_marker="robocasa/models/assets/objects/")
     (ep,) = read_robocasa(ds, root=tmp_path, catalog={e.id: e}, tars={})
     assert ep.provenance["state_route"] == "mjcf_states" and not ep.provenance["assets_from_subset"]
     used = {s["id"]: s["members_used"] for s in ep.provenance["asset_sources"]}
@@ -265,16 +267,18 @@ def test_assets_from_catalogued_zip(tmp_path):
 def test_manifest_mismatch_and_lineage(tmp_path):
     ds = make_dataset(tmp_path, moving=False, name="OpenDrawer")
     rel = "v1.0/pretrain/atomic/OpenDrawer/20250101/mg/demo/x/lerobot.tar"
-    tar = rf.TarEntry(id=f"robocasa/{rel}", path=rel, dataset="robocasa/" + rel.rsplit("/", 1)[0], task="OpenDrawer",
-                      split="pretrain", task_type="atomic", source="mg", variant="mg_path", url="u",
-                      shared_link="s", box_file_id="1", box_file_version="2", box_sha1="a" * 40, size=1,
-                      seed="robocasa/v1.0/pretrain/atomic/OpenDrawer/20250101", license="CC-BY-4.0")
+    seed = "robocasa/v1.0/pretrain/atomic/OpenDrawer/20250101"
+    tar = CatalogEntry(id=f"robocasa/{rel}", family="robocasa", path=rel, url="u", revision="c", sha256=None, size=1,
+                       license="CC-BY-4.0", kind="tar_stream", content="low_dim", dataset="robocasa/" + rel.rsplit("/", 1)[0],
+                       usable=False, digests={"sha1": "a" * 40},
+                       meta=dict(task="OpenDrawer", split="pretrain", task_type="atomic", source="mg", variant="mg_path",
+                                 shared_link="s", box_file_id="1", box_file_version="2", seed=seed))
     # Point the tar entry at the fixture directory and lineage follows the catalogue.
-    tar = rf.TarEntry(**{**tar.__dict__, "path": "v1.0/pretrain/atomic/OpenDrawer/20250101/lerobot.tar"})
+    tar = CatalogEntry(**{**tar.__dict__, "path": "v1.0/pretrain/atomic/OpenDrawer/20250101/lerobot.tar"})
     (ep,) = read_robocasa(ds, root=tmp_path, catalog={}, tars={tar.id: tar})
-    assert ep.lineage == {"generated": True, "seed": tar.seed, "seed_demo": None, "variant_group": "mg_path"}
+    assert ep.lineage == {"generated": True, "seed": seed, "seed_demo": None, "variant_group": "mg_path"}
     assert ep.dataset == tar.dataset and ep.provenance["revision"]["box_sha1"] == "a" * 40
-    (ds / rf.MANIFEST).write_text(json.dumps({"members": [
+    (ds / TAR_MANIFEST).write_text(json.dumps({"members": [
         {"member": "lerobot/extras/episode_000000/states.npz", "sha256": "0" * 64, "size": 1, "tar_offset": 0}]}))
     with pytest.raises(ValueError, match="differ from the extraction manifest"):
         next(read_robocasa(ds, root=tmp_path, catalog={}, tars={}))
@@ -345,53 +349,55 @@ def toy_tar() -> bytes:
 
 def tar_entry(blob, **kw):
     path = "v1.0/pretrain/atomic/Toy/20250101/lerobot.tar"
-    return rf.TarEntry(**{**dict(id=f"robocasa/{path}", path=path, dataset="robocasa/v1.0/pretrain/atomic/Toy/20250101",
-                                 task="Toy", split="pretrain", task_type="atomic", source="human",
-                                 variant="human_path", url="https://example.test/x.tar", shared_link="s",
-                                 box_file_id="1", box_file_version="2", box_sha1=hashlib.sha1(blob).hexdigest(),
-                                 size=len(blob), license="CC-BY-4.0"), **kw})
+    return CatalogEntry(**{**dict(
+        id=f"robocasa/{path}", family="robocasa", path=path, url="https://example.test/x.tar", revision="c",
+        sha256=None, size=len(blob), license="CC-BY-4.0", kind="tar_stream", content="low_dim",
+        dataset="robocasa/v1.0/pretrain/atomic/Toy/20250101", digests={"sha1": hashlib.sha1(blob).hexdigest()},
+        meta=dict(task="Toy", split="pretrain", task_type="atomic", source="human", variant="human_path",
+                  shared_link="s", box_file_id="1", box_file_version="2")), **kw})
 
 
-def test_fetch_tars_keeps_only_non_image_members_and_resumes(tmp_path):
+def test_fetch_tar_keeps_only_non_image_members_and_resumes(tmp_path):
     blob = toy_tar()
     e = tar_entry(blob)
     log = []
-    (rec,) = rf.fetch_tars([e], tmp_path, opener=range_opener(blob, log, drop_first_at=20000), reserve=0)
+    (rec,) = fetch([e], tmp_path, opener=range_opener(blob, log, drop_first_at=20000), reserve=0)
     assert log[0] is None and log[1] == "bytes=20000-"           # resumed after the drop
-    d = e.local_dir(tmp_path)
+    d = e.output_dir(tmp_path)
     assert not list(d.rglob("*.mp4")) and (d / "lerobot/data/chunk-000/episode_000000.parquet").exists()
-    man = json.loads((d / rf.MANIFEST).read_text())
+    man = json.loads((d / TAR_MANIFEST).read_text())
     assert man["tar_sha1_verified"] and man["dropped_image_members"] == {"members": 1, "bytes": 40000}
+    assert man["box_sha1"] == e.digests["sha1"] and man["box_file_id"] == "1"  # earlier manifest layout kept
     assert {m["member"] for m in man["members"]} == {
         "lerobot/meta/info.json", "lerobot/data/chunk-000/episode_000000.parquet",
         "lerobot/extras/episode_000000/ep_meta.json", "lerobot/extras/episode_000001/ep_meta.json", "README.md"}
     for m in man["members"]:
         assert blob[m["tar_offset"]:m["tar_offset"] + m["size"]] == (d / m["member"]).read_bytes()
-    assert rec["stripped"]["box_sha1_verified"] == e.box_sha1 and rec["kind"] == "images_embedded"
+    assert rec["stripped"]["box_sha1_verified"] == e.digests["sha1"] and rec["kind"] == "tar_stream"
     assert (tmp_path / "raw" / "ledger" / f"{e.id}.json").exists()
     # A second call is satisfied by the verified manifest without any transfer.
     log2 = []
-    rf.fetch_tars([e], tmp_path, opener=range_opener(blob, log2), reserve=0)
+    fetch([e], tmp_path, opener=range_opener(blob, log2), reserve=0)
     assert log2 == []
 
 
-def test_fetch_tars_max_episodes_and_sha1_mismatch(tmp_path):
+def test_fetch_tar_max_episodes_and_sha1_mismatch(tmp_path):
     blob = toy_tar()
-    rf.fetch_tars([tar_entry(blob)], tmp_path, opener=range_opener(blob, []), reserve=0, max_episodes=1)
-    d = tar_entry(blob).local_dir(tmp_path)
+    fetch([tar_entry(blob)], tmp_path, opener=range_opener(blob, []), reserve=0, max_episodes=1)
+    d = tar_entry(blob).output_dir(tmp_path)
     assert (d / "lerobot/extras/episode_000000/ep_meta.json").exists()
     assert not (d / "lerobot/extras/episode_000001").exists()
-    bad = tar_entry(blob, box_sha1="0" * 40, path="v1.0/pretrain/atomic/Bad/20250101/lerobot.tar",
+    bad = tar_entry(blob, digests={"sha1": "0" * 40}, path="v1.0/pretrain/atomic/Bad/20250101/lerobot.tar",
                     id="robocasa/v1.0/pretrain/atomic/Bad/20250101/lerobot.tar")
-    with pytest.raises(rf.ChecksumMismatch):
-        rf.fetch_tars([bad], tmp_path, opener=range_opener(blob, []), reserve=0)
-    assert not list(bad.local_dir(tmp_path).rglob("*.json"))
+    with pytest.raises(ChecksumMismatch):
+        fetch([bad], tmp_path, opener=range_opener(blob, []), reserve=0)
+    assert not list(bad.output_dir(tmp_path).rglob("*.json"))
 
 
-def test_fetch_tars_refuses_without_disk(tmp_path):
+def test_fetch_tar_refuses_without_disk(tmp_path):
     blob = toy_tar()
-    with pytest.raises(rf.InsufficientDisk):
-        rf.fetch_tars([tar_entry(blob)], tmp_path, opener=range_opener(blob, []), reserve=10 ** 18)
+    with pytest.raises(InsufficientDisk):
+        fetch([tar_entry(blob)], tmp_path, opener=range_opener(blob, []), reserve=10 ** 18)
 
 
 def test_fetch_asset_subset_reads_members_by_range(tmp_path):
@@ -402,10 +408,11 @@ def test_fetch_asset_subset_reads_members_by_range(tmp_path):
     blob = zbuf.getvalue()
     e = CatalogEntry(id="robocasa/assets/objaverse.zip", family="robocasa", path="assets/objaverse.zip",
                      url="https://example.test/o.zip", revision="r", sha256=hashlib.sha256(blob).hexdigest(),
-                     size=len(blob), license="CC-BY-4.0", kind="assets", asset_marker="robocasa/models/assets/objects/")
+                     size=len(blob), license="CC-BY-4.0", kind="file", content="assets",
+                     asset_marker="robocasa/models/assets/objects/")
     log = []
-    man = rf.fetch_asset_subset(["objects/objaverse/cube/model.stl", "textures/none.png"], tmp_path,
-                                catalog={e.id: e}, opener=range_opener(blob, log), reserve=0)
+    man = fetch_robocasa_asset_subset(["objects/objaverse/cube/model.stl", "textures/none.png"], tmp_path,
+                                      catalog={e.id: e}, opener=range_opener(blob, log), reserve=0)
     assert all(r and r.startswith("bytes=") for r in log)       # never a whole-file request
     got = tmp_path / "raw" / "robocasa" / "asset_subset" / "objects" / "objaverse" / "cube" / "model.stl"
     assert got.read_bytes() == tetra_stl()
@@ -414,15 +421,15 @@ def test_fetch_asset_subset_reads_members_by_range(tmp_path):
 
 
 def test_helpers():
-    assert rf.static_url("https://utexas.box.com/s/abc123", "tar") == "https://utexas.box.com/shared/static/abc123.tar"
-    assert rf.is_image_member("lerobot/videos/chunk-000/x/episode_000000.mp4")
-    assert rf.is_image_member("foo/bar.PNG") and not rf.is_image_member("lerobot/extras/episode_0/states.npz")
-    assert rf.zip_marker("assets/objaverse.zip") == "robocasa/models/assets/objects/"
-    assert rf.zip_marker("assets/textures.zip") == "robocasa/models/assets/"
-    reg = rf.parse_registry('X = OrderedDict(\n    Foo=dict(\n        pretrain=dict(\n'
-                            '            mg_path="v1.0/pretrain/atomic/Foo/1/mg/demo/2",\n'
-                            '            human_path="v1.0/pretrain/atomic/Foo/1",\n        ),\n'
-                            '        horizon=450,\n    ),\n)')
+    assert gen.static_url("https://utexas.box.com/s/abc123", "tar") == "https://utexas.box.com/shared/static/abc123.tar"
+    assert is_image_name("lerobot/videos/chunk-000/x/episode_000000.mp4")
+    assert is_image_name("foo/bar.PNG") and not is_image_name("lerobot/extras/episode_0/states.npz")
+    assert gen.zip_marker("assets/objaverse.zip") == "robocasa/models/assets/objects/"
+    assert gen.zip_marker("assets/textures.zip") == "robocasa/models/assets/"
+    reg = gen.parse_registry('X = OrderedDict(\n    Foo=dict(\n        pretrain=dict(\n'
+                             '            mg_path="v1.0/pretrain/atomic/Foo/1/mg/demo/2",\n'
+                             '            human_path="v1.0/pretrain/atomic/Foo/1",\n        ),\n'
+                             '        horizon=450,\n    ),\n)')
     assert reg == {"pretrain/atomic/Foo/1/mg/demo/2/lerobot.tar": ("Foo", "mg_path", 450),
                    "pretrain/atomic/Foo/1/lerobot.tar": ("Foo", "human_path", 450)}
     assets = RobocasaAssets([])
@@ -431,12 +438,15 @@ def test_helpers():
 
 
 def test_catalog_tars_are_pinned():
-    tars = rf.load_tars()
+    tars = {k: e for k, e in load_catalog().items() if e.family == "robocasa" and e.kind == "tar_stream"}
     assert len(tars) == 410
     for e in tars.values():
-        assert re.fullmatch(r"[0-9a-f]{40}", e.box_sha1) and e.size > 0 and e.license == "CC-BY-4.0"
+        assert re.fullmatch(r"[0-9a-f]{40}", e.digests["sha1"]) and e.size > 0 and e.license == "CC-BY-4.0"
         assert e.url.startswith("https://utexas.box.com/shared/static/") and e.url.endswith(".tar")
         assert e.dataset == "robocasa/" + e.path.rsplit("/", 1)[0]
-        assert (e.source == "mg") == ("/mg/" in e.path) and (e.seed is not None) == (e.source == "mg")
-    humans = {t.dataset for t in tars.values() if t.source == "human"}
-    assert all(e.seed in humans for e in tars.values() if e.seed)
+        mg = e.meta["source"] == "mg"
+        assert mg == ("/mg/" in e.path) and ("seed" in e.meta) == mg
+        assert e.usable is not mg  # MimicGen tars carry no simulator extras: catalogued, never selected by prefix
+    human = [e for e in tars.values() if e.usable]
+    assert len(human) == 350 and {(e.meta["split"], e.meta["task_type"]) for e in human} == {
+        ("pretrain", "atomic"), ("pretrain", "composite"), ("target", "atomic"), ("target", "composite")}

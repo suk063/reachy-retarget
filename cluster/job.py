@@ -37,12 +37,17 @@ def write_json(path: Path, value) -> None:
 
 
 def same_ledger_record(a: Path, b: Path) -> bool:
-    """Two fetch-ledger records for the same verified file (only the fetch time differs)."""
+    """Two fetch-ledger records of the same verified local content: same id, local path and
+    digests (the fetch time and descriptive fields written by other code versions may differ;
+    see ``reachy_retarget.acquire.ledger.same_record``)."""
     if "ledger" not in a.parts or a.suffix != ".json":
         return False
     ra, rb = (json.loads(p.read_text()) for p in (a, b))
-    ra.pop("fetched_at", None), rb.pop("fetched_at", None)
-    return ra == rb
+
+    def key(r):
+        return (r.get("id"), r.get("local_path"), r.get("sha256_verified"),
+                (r.get("stripped") or {}).get("sha256"))
+    return key(ra) == key(rb)
 
 
 def publish(out: Path, dest: Path) -> list[dict]:

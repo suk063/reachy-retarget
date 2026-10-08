@@ -1,10 +1,11 @@
 # Pinned source files. Generated from publisher metadata (HF LFS oid = sha256,
 # PyPI digests; GitHub archive digests computed on download, see notes); edit by
 # regenerating, not by hand. Ids are '<family>/<path>'.
-# kind: low_dim (states/low-dim obs only), images_embedded (HDF5 also holds
-# image observations; fetch refuses these unless strip_images=True, which keeps a
-# state-only <stem>.state.hdf5 copy), assets (simulator models; asset_marker = the
-# path fragment of recorded MJCF file references that resolves into the archive).
+# content: low_dim (states/low-dim obs only; kind file_images_embedded files also hold image observations
+# and are fetched only with strip_images=True, which keeps a state-only <stem>.state.hdf5 copy), assets
+# (simulator models; asset_marker = the recorded MJCF path fragment that resolves into the archive).
+# kind = how bytes are acquired (file | file_images_embedded | tar_stream | range_member | range_package; all
+# through reachy_retarget.acquire.fetch); content = what they are (low_dim | metadata | assets | docs | index ...).
 sources:
 - family: robosuite
   repo: https://pypi.org/project/robosuite/
@@ -16,7 +17,8 @@ sources:
     url: https://files.pythonhosted.org/packages/f4/15/82093cadf23811463d0b52ec6745949356b66badf6e25bee64ec82aa8689/robosuite-1.5.1-py3-none-any.whl
     sha256: 39810a9e9f193455fcb13a9b4846424abef77481ac3091892c2077c88dcdc153
     size: 152011410
-    kind: assets
+    kind: file
+    content: assets
     asset_marker: robosuite/models/assets/
 - family: robosuite
   repo: https://pypi.org/project/robosuite/
@@ -28,7 +30,8 @@ sources:
     url: https://files.pythonhosted.org/packages/60/2f/bbcdf3130fc2c53c098d8699048724ac14292795dfb671168d1d5013fa03/robosuite-1.4.1-py3-none-any.whl
     sha256: 62587cd5888d9d3d813f3ffcc7017f6f77efa618952527a0b9bb139ffd0a3741
     size: 193518002
-    kind: assets
+    kind: file
+    content: assets
     asset_marker: robosuite/models/assets/
 - family: robosuite
   repo: https://github.com/ARISE-Initiative/robosuite-task-zoo
@@ -41,5 +44,6 @@ sources:
     url: https://github.com/ARISE-Initiative/robosuite-task-zoo/archive/74eab7f88214c21ca1ae8617c2b2f8d19718a9ed.zip
     sha256: a8c5ba39488727d420413e171cbdfd2e21799c552482b2dac8e21ee94d512d73
     size: 1717852
-    kind: assets
+    kind: file
+    content: assets
     asset_marker: robosuite_task_zoo/models/

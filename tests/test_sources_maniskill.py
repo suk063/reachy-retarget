@@ -42,7 +42,7 @@ def test_registry_and_catalog():
     cat = {k: e for k, e in load_catalog().items() if e.family == "maniskill"}
     h5 = [e for e in cat.values() if e.path.endswith(".h5")]
     assert len(h5) == 31 and all(e.sha256 and len(e.sha256) == 64 and e.size for e in cat.values())
-    assert all(e.path.endswith(".json") is False or e.kind == "metadata" for e in cat.values())
+    assert all(e.path.endswith(".json") is False or e.content == "metadata" for e in cat.values())
     # every trajectory has its metadata, and excluded embodiments are not catalogued
     assert all(e.id[:-3] + ".json" in cat for e in h5)
     assert not any(t in e.path for e in cat.values() for t in ("PushT", "DrawTriangle", "AnymalC", ".mp4", ".zip", ".pt"))

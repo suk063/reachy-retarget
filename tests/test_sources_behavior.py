@@ -36,16 +36,18 @@ def test_registry_and_catalog():
     assert "behavior" in families()
     cat = {k: e for k, e in load_catalog().items() if e.family == "behavior"}
     pqs = [e for e in cat.values() if e.path.endswith(".parquet")]
-    assert len(pqs) == 80 and all(e.sha256 and len(e.sha256) == 64 and e.size for e in cat.values())
-    assert all(e.kind != "images_embedded" for e in cat.values())
+    assert len(pqs) == 10000 and all(e.sha256 and len(e.sha256) == 64 and e.size for e in pqs)
+    for e in cat.values():  # JSON files are plain git files: pinned by git blob sha1 when no sha256 was computed
+        assert e.size and (e.sha256 or len(e.digests["git_blob_sha1"]) == 40) and e.kind == "file"
     assert not any(s in e.path for e in cat.values() for s in ("videos/", ".mp4", "episodes_stats"))
-    for e in pqs:  # every parquet has its metadata, annotation and raw source catalogued
+    for e in pqs:  # every parquet has its metadata and annotation catalogued
         tail = e.path.split("/data/")[1][:-len(".parquet")]
         assert f"behavior/2025-challenge-demos/meta/episodes/{tail}.json" in cat
         assert f"behavior/2025-challenge-demos/annotations/{tail}.json" in cat
-        assert f"behavior/2025-challenge-rawdata/{tail}.hdf5" in cat
+    raw = [e for e in cat.values() if "2025-challenge-rawdata/" in e.path]
+    assert len(raw) == 80  # the earlier subset's raw HDF5 (success flags); not part of the full-scale fetch
     assert "behavior/omnigibson-robot-assets/models/r1pro/urdf/r1pro.urdf" in cat
-    assert len({e.dataset for e in pqs}) == 8
+    assert len({e.dataset for e in pqs}) == 50 and len({e.meta["episode_index"] for e in pqs}) == 10000
 
 
 def test_task_info_layout():

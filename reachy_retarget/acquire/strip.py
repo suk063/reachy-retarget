@@ -2,7 +2,7 @@
 
 Many published demonstration files (MimicGen, LIBERO, DexMimicGen) store camera
 observations next to the simulator states. This project never stores images, so a
-verified download of a ``kind: images_embedded`` file is rewritten as
+verified download of a ``kind: file_images_embedded`` file is rewritten as
 ``<stem>.state.hdf5``: every group, dataset and attribute is copied except image-like
 datasets, then the original is deleted. A dataset is dropped when its full HDF5 path
 matches the image guard of :func:`reachy_retarget.schema.io.check_not_image` (names

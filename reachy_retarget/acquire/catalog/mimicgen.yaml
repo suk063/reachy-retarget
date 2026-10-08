@@ -1,374 +1,431 @@
 # Pinned source files. Generated from publisher metadata (HF LFS oid = sha256,
 # PyPI digests; GitHub archive digests computed on download, see notes); edit by
 # regenerating, not by hand. Ids are '<family>/<path>'.
-# kind: low_dim (states/low-dim obs only), images_embedded (HDF5 also holds
-# image observations; fetch refuses these unless strip_images=True, which keeps a
-# state-only <stem>.state.hdf5 copy), assets (simulator models; asset_marker = the
-# path fragment of recorded MJCF file references that resolves into the archive).
+# content: low_dim (states/low-dim obs only; kind file_images_embedded files also hold image observations
+# and are fetched only with strip_images=True, which keeps a state-only <stem>.state.hdf5 copy), assets
+# (simulator models; asset_marker = the recorded MJCF path fragment that resolves into the archive).
+# kind = how bytes are acquired (file | file_images_embedded | tar_stream | range_member | range_package; all
+# through reachy_retarget.acquire.fetch); content = what they are (low_dim | metadata | assets | docs | index ...).
 sources:
 - family: mimicgen
   repo: https://huggingface.co/datasets/amandlek/mimicgen_datasets
   revision: 33016f8a62c02334f929f2913af8fdd2a8a129e1
   license: CC-BY-4.0
-  note: 'MimicGen (CoRL 2023) source: human source demonstrations (D0), ~10 per task; the seeds of every other group.
-    Every file embeds 84x84 RGB observations (fetch with strip_images=True).'
+  note: 'MimicGen (CoRL 2023) source: human source demonstrations (D0), ~10 per task; the seeds of every other group. Every
+    file embeds 84x84 RGB observations (fetch with strip_images=True).'
   files:
   - path: source/coffee.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/coffee.hdf5
     sha256: d36b22adf480432910bf789bb87f9798c9d785da53619742b9576049c441bc8b
     size: 20019192
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/coffee
   - path: source/coffee_preparation.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/coffee_preparation.hdf5
     sha256: 9b4201afe44bb5a02eff49b587b2f65ef80696ee635b5f3ef4ba23038183b4ce
     size: 74801237
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/coffee_preparation
   - path: source/hammer_cleanup.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/hammer_cleanup.hdf5
     sha256: ac3e988ab6cce691bcbc6703c87321d5f066abf1ac68bf9427ad52132d0770a9
     size: 32567107
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/hammer_cleanup
   - path: source/kitchen.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/kitchen.hdf5
     sha256: 5cdf217046bd9c47d3279ad2f7862d8a27b1d8d5f2418b5d22001b6b58f7d43e
     size: 76251728
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/kitchen
   - path: source/mug_cleanup.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/mug_cleanup.hdf5
     sha256: ab585eb4c22d8e6d8d4bc8e56a5a4b06a330ba1570d5052f0a1e00e5bea8eb04
     size: 34494237
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/mug_cleanup
   - path: source/nut_assembly.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/nut_assembly.hdf5
     sha256: 9a5364c797ab9c2374dd542a5607fe93b1bafe17899d0ae3267dcff888a48861
     size: 35563485
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/nut_assembly
   - path: source/pick_place.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/pick_place.hdf5
     sha256: 18cb7d4e6947120e200b9ab27c041297f0056aaac20e43f1b79a49a3b3e4f723
     size: 92016062
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/pick_place
   - path: source/square.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/square.hdf5
     sha256: c917e99362fd9bd11978d6e2642c1ea88272702fbf55b50367ed471febf550e2
     size: 16451426
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/square
   - path: source/stack.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack.hdf5
     sha256: 00331a889de2fa610be9b5c4a0e066f4d387298e0b117181930f166c44076418
     size: 11753280
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/stack
   - path: source/stack_three.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/stack_three.hdf5
     sha256: 68b9033fefe904a5575e79bdf5040c2d2d207c1bfcc939bbaec5b438a9d7fcfe
     size: 24904535
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/stack_three
   - path: source/threading.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/threading.hdf5
     sha256: 4f7d90c819c966e0d3e3b5f1046efbafec3793cc2074d8dd220e9d2355feff74
     size: 18553470
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/threading
   - path: source/three_piece_assembly.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/source/three_piece_assembly.hdf5
     sha256: e926f303bb703cd21fae082689702df7341163a04984b573d8595ef7ba1dcc13
     size: 34033008
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/source/three_piece_assembly
 - family: mimicgen
   repo: https://huggingface.co/datasets/amandlek/mimicgen_datasets
   revision: 33016f8a62c02334f929f2913af8fdd2a8a129e1
   license: CC-BY-4.0
-  note: 'MimicGen (CoRL 2023) core: MimicGen-generated from source/<task> at reset distribution D<k>. Every file
-    embeds 84x84 RGB observations (fetch with strip_images=True).'
+  note: 'MimicGen (CoRL 2023) core: MimicGen-generated from source/<task> at reset distribution D<k>. Every file embeds 84x84
+    RGB observations (fetch with strip_images=True).'
   files:
   - path: core/coffee_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/coffee_d0.hdf5
     sha256: b2a2ea0ecb9bb3f1541c7b1abb551f7920ba0857b596f6f854bee41f777bd296
     size: 1993504156
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/coffee_d0
   - path: core/coffee_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/coffee_d1.hdf5
     sha256: 654b240a32dd4db283cfaaf9dc4bc231c5027fc5202f09117397a953122fb699
     size: 1986737698
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/coffee_d1
   - path: core/coffee_d2.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/coffee_d2.hdf5
     sha256: 089f8dc4c85f1eeae58e206d4068333a3be9ac846db300536e6292f64163f61a
     size: 2053370275
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/coffee_d2
   - path: core/coffee_preparation_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/coffee_preparation_d0.hdf5
     sha256: b4394ca1868c0d55de8226f2301ca0335677c636cee3f99d9243062004407c8c
     size: 7187662878
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/coffee_preparation_d0
   - path: core/coffee_preparation_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/coffee_preparation_d1.hdf5
     sha256: 0e9e1eac8d969c05a5fff90358f702b6530ea80bb7a9977497e3a3740b88cf55
     size: 6923699908
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/coffee_preparation_d1
   - path: core/hammer_cleanup_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/hammer_cleanup_d0.hdf5
     sha256: 2287acb013e458f85c813532563be921bd3632b017813a71b37aa8856040c987
     size: 3268612023
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/hammer_cleanup_d0
   - path: core/hammer_cleanup_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/hammer_cleanup_d1.hdf5
     sha256: 069b4ee095b1810490271a3d23c1bbf60fea6398168b0dd5ef30e0be02004b10
     size: 3092918856
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/hammer_cleanup_d1
   - path: core/kitchen_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/kitchen_d0.hdf5
     sha256: e48313382504a4515629170a36cbb5329d50534351cf548c9e775725b1978a12
     size: 7857090550
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/kitchen_d0
   - path: core/kitchen_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/kitchen_d1.hdf5
     sha256: e43e339f85283aca458a2455acfe013a0642d72b117412d3218844ffd7d82dfb
     size: 7069704890
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/kitchen_d1
   - path: core/mug_cleanup_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/mug_cleanup_d0.hdf5
     sha256: 4b97ea6c5ada32399990339da60b0cdf1cc596a91716d64e9103b9be4ac0dbf7
     size: 3381439966
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/mug_cleanup_d0
   - path: core/mug_cleanup_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/mug_cleanup_d1.hdf5
     sha256: 54dcbb2b310230233661385f42b48e721354abc88d7774934a4c7789f93a4bb5
     size: 3319576572
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/mug_cleanup_d1
   - path: core/nut_assembly_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/nut_assembly_d0.hdf5
     sha256: 3d8f067dc2651dcb5e2df383f6c00648f8186e84199a6b15ecae887aa1a6e238
     size: 3605785240
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/nut_assembly_d0
   - path: core/pick_place_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/pick_place_d0.hdf5
     sha256: 8728b9d8f8a56a95fef88716be5eae593e638fb2f1322ce575f9712443a70c2c
     size: 9604622287
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/pick_place_d0
   - path: core/square_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/square_d0.hdf5
     sha256: 41fc24bce0f88343099c0b1b5bf6eee08cbc35851e71276d4509a01c9b75481c
     size: 1621351476
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/square_d0
   - path: core/square_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/square_d1.hdf5
     sha256: bdb88ebb36f791645ed4b42512b5cf92e337c1673a71ddf4a7a6295c446fabdf
     size: 1659441082
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/square_d1
   - path: core/square_d2.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/square_d2.hdf5
     sha256: 2fa7bd08c158d13f4fab1b507ce2117905df0fc5a126f3d4e971bc8668074434
     size: 1570601672
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/square_d2
   - path: core/stack_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/stack_d0.hdf5
     sha256: 3b687047f9d6446da762c9afe4fcb87d77a1a7c2ddf7527c56965311777868f3
     size: 1138107058
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/stack_d0
   - path: core/stack_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/stack_d1.hdf5
     sha256: edc9815a2738a583dcb3e7a9e239a71eca6057396a839e52b022935c273cfd61
     size: 1072340218
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/stack_d1
   - path: core/stack_three_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/stack_three_d0.hdf5
     sha256: 47f4392bd178f59d39c9a5c594059532a2f5f82159ab89cc8985aa5368b4d432
     size: 2529753990
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/stack_three_d0
   - path: core/stack_three_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/stack_three_d1.hdf5
     sha256: 26d11c47b69c1826f2806a6ae91a718c4a01ecfbc93a743bf7e54cbc0710baee
     size: 2314260776
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/stack_three_d1
   - path: core/threading_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/threading_d0.hdf5
     sha256: 6931bec7b828f4c8afcb258a99c211f235f0a74da173a088f64df1b17f526a0f
     size: 1801476063
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/threading_d0
   - path: core/threading_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/threading_d1.hdf5
     sha256: c5aeb64c8315150f4956e3323cfd594692e392ffd43492246f172f95a01696d2
     size: 1893772892
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/threading_d1
   - path: core/threading_d2.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/threading_d2.hdf5
     sha256: 1d56c44fe3eecfd0c8fc10058531f70f228aa0816051a875c830df0857813c24
     size: 2057862324
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/threading_d2
   - path: core/three_piece_assembly_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/three_piece_assembly_d0.hdf5
     sha256: 1399fc061022bc4b9d1e299835d454df0af41a7007206c632e533f29ebd757cc
     size: 3275940613
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/three_piece_assembly_d0
   - path: core/three_piece_assembly_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/three_piece_assembly_d1.hdf5
     sha256: 7f5cad32fdf492b210c181b84b4856eaff1a90573ffbc5eeae871cbe8e01e586
     size: 3237234348
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/three_piece_assembly_d1
   - path: core/three_piece_assembly_d2.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/core/three_piece_assembly_d2.hdf5
     sha256: 40b99fb57e42281f32a965d07d2b112132ef90b27d4c82befc21a50632f2cd07
     size: 3270131030
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/core/three_piece_assembly_d2
 - family: mimicgen
   repo: https://huggingface.co/datasets/amandlek/mimicgen_datasets
   revision: 33016f8a62c02334f929f2913af8fdd2a8a129e1
   license: CC-BY-4.0
-  note: 'MimicGen (CoRL 2023) object: MimicGen-generated MugCleanup with other mugs (O1, O2) from source/mug_cleanup.
-    Every file embeds 84x84 RGB observations (fetch with strip_images=True).'
+  note: 'MimicGen (CoRL 2023) object: MimicGen-generated MugCleanup with other mugs (O1, O2) from source/mug_cleanup. Every
+    file embeds 84x84 RGB observations (fetch with strip_images=True).'
   files:
   - path: object/mug_cleanup_o1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/object/mug_cleanup_o1.hdf5
     sha256: 1b28ba30df2a9fcd3699f88acbde23283dfdfe0953daed2cff8e54d65c0fb260
     size: 3311501706
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/object/mug_cleanup_o1
   - path: object/mug_cleanup_o2.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/object/mug_cleanup_o2.hdf5
     sha256: f4fc2b5c7833252091152df57aa88a3a00486808879279bae5b493990f2cd0d5
     size: 3338217980
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/object/mug_cleanup_o2
 - family: mimicgen
   repo: https://huggingface.co/datasets/amandlek/mimicgen_datasets
   revision: 33016f8a62c02334f929f2913af8fdd2a8a129e1
   license: CC-BY-4.0
-  note: 'MimicGen (CoRL 2023) robot: MimicGen-generated on other arms (Panda, Sawyer, IIWA, UR5e) from source/<task>
-    (Panda). Every file embeds 84x84 RGB observations (fetch with strip_images=True).'
+  note: 'MimicGen (CoRL 2023) robot: MimicGen-generated on other arms (Panda, Sawyer, IIWA, UR5e) from source/<task> (Panda).
+    Every file embeds 84x84 RGB observations (fetch with strip_images=True).'
   files:
   - path: robot/square_d0_iiwa.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/square_d0_iiwa.hdf5
     sha256: be5822e79cecf70c070262049c78316c0460e61d78095d475981aea8d2287640
     size: 1421248043
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/square_d0_iiwa
   - path: robot/square_d0_panda.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/square_d0_panda.hdf5
     sha256: 41fc24bce0f88343099c0b1b5bf6eee08cbc35851e71276d4509a01c9b75481c
     size: 1621351476
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/square_d0_panda
   - path: robot/square_d0_sawyer.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/square_d0_sawyer.hdf5
     sha256: 610f7f0e7a398d83ccc7bbb9961e7fd83637b6ed569c0063c9c02cb258bc2b44
     size: 1548114151
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/square_d0_sawyer
   - path: robot/square_d0_ur5e.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/square_d0_ur5e.hdf5
     sha256: 341d25889f54762230101071dea024dada846d0d0419e6363a7c392694882522
     size: 1419333772
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/square_d0_ur5e
   - path: robot/square_d1_iiwa.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/square_d1_iiwa.hdf5
     sha256: d04bb4ff98570bcfd34d58e1f8ecb7afdf22255e71cfec391c69dda5371110c8
     size: 1422943358
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/square_d1_iiwa
   - path: robot/square_d1_panda.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/square_d1_panda.hdf5
     sha256: bdb88ebb36f791645ed4b42512b5cf92e337c1673a71ddf4a7a6295c446fabdf
     size: 1659441082
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/square_d1_panda
   - path: robot/square_d1_sawyer.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/square_d1_sawyer.hdf5
     sha256: 7096461b6e92055a93ac918cbce52d75a81f13bd6dc6285ef5ea7af1eb64acf4
     size: 1552171421
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/square_d1_sawyer
   - path: robot/square_d1_ur5e.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/square_d1_ur5e.hdf5
     sha256: 210b9cb29f1d3b962167694582de173eccd20a811c9adc503d9de6a70e2cae70
     size: 1442647514
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/square_d1_ur5e
   - path: robot/threading_d0_iiwa.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/threading_d0_iiwa.hdf5
     sha256: cc7fd87537437402da20557d44b4250ea480c6de37bb36811238a05a33df973f
     size: 1650941936
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/threading_d0_iiwa
   - path: robot/threading_d0_panda.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/threading_d0_panda.hdf5
     sha256: 6931bec7b828f4c8afcb258a99c211f235f0a74da173a088f64df1b17f526a0f
     size: 1801476063
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/threading_d0_panda
   - path: robot/threading_d0_sawyer.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/threading_d0_sawyer.hdf5
     sha256: 3996bcada3c8671a529a65d31ab5bf89e24153275788bc022b11385ea0a48256
     size: 1713139714
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/threading_d0_sawyer
   - path: robot/threading_d0_ur5e.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/threading_d0_ur5e.hdf5
     sha256: 9698646e6831e054967cb5337ea4e2317545f0132f321e0c5408b0139c0e1a1d
     size: 1657603930
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/threading_d0_ur5e
   - path: robot/threading_d1_iiwa.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/threading_d1_iiwa.hdf5
     sha256: e5e23306e4ae02f25f82b80de35e3da15816190d03416fee958e96a687597b7b
     size: 1752961859
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/threading_d1_iiwa
   - path: robot/threading_d1_panda.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/threading_d1_panda.hdf5
     sha256: c5aeb64c8315150f4956e3323cfd594692e392ffd43492246f172f95a01696d2
     size: 1893772892
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/threading_d1_panda
   - path: robot/threading_d1_sawyer.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/threading_d1_sawyer.hdf5
     sha256: 045da4387d14478de3abdc2accc81704167d8ecc3894318261291d707d453565
     size: 1864892833
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/threading_d1_sawyer
   - path: robot/threading_d1_ur5e.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/robot/threading_d1_ur5e.hdf5
     sha256: 949a083247cad597c1ada284480eb8031f48a10664ea2464c0dc059b5764ce2d
     size: 1789141554
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/robot/threading_d1_ur5e
 - family: mimicgen
   repo: https://huggingface.co/datasets/amandlek/mimicgen_datasets
@@ -381,49 +438,56 @@ sources:
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/large_interpolation/coffee_d1.hdf5
     sha256: 435a2271259ba378c15486d823eebb331f9207df3c818df8e870b5d31902afbf
     size: 2636834968
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/large_interpolation/coffee_d1
   - path: large_interpolation/pick_place_d0.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/large_interpolation/pick_place_d0.hdf5
     sha256: 8cff07728f772ad5de7e3491439d6876ea4ac372783a1d4d45f18c2d49eafae7
     size: 13274984674
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/large_interpolation/pick_place_d0
   - path: large_interpolation/square_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/large_interpolation/square_d1.hdf5
     sha256: 8884c9ba8281991037a59d11cfe883ab97e652a7f837287919a6b9135a708aaf
     size: 2255599081
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/large_interpolation/square_d1
   - path: large_interpolation/stack_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/large_interpolation/stack_d1.hdf5
     sha256: ac64a72baa35e65adf9c7dd0913139040615d9bed67935f79390c54df8e003ef
     size: 1568176967
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/large_interpolation/stack_d1
   - path: large_interpolation/threading_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/large_interpolation/threading_d1.hdf5
     sha256: d4f7d13bd2d3e5db2e6827f8a264a0a351497301515e813de4db577778510c75
     size: 2519862800
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/large_interpolation/threading_d1
   - path: large_interpolation/three_piece_assembly_d1.hdf5
     url: https://huggingface.co/datasets/amandlek/mimicgen_datasets/resolve/33016f8a62c02334f929f2913af8fdd2a8a129e1/large_interpolation/three_piece_assembly_d1.hdf5
     sha256: c9309d443fba6ccb867b67d07c0bee6e559a62bed0585689a61343d0c08d6db3
     size: 4597953838
-    kind: images_embedded
+    kind: file_images_embedded
+    content: low_dim
     dataset: mimicgen/large_interpolation/three_piece_assembly_d1
 - family: mimicgen
   repo: https://github.com/NVlabs/mimicgen
   revision: 45db4b35a5a79e82ca8a70ce1321f855498ca82c
   license: NVIDIA-Source-Code-License (non-commercial research/evaluation use)
-  note: GitHub archive of NVlabs/mimicgen tag v0.1.1 (package mimicgen_envs, the version the datasets were recorded
-    with). Only mimicgen_envs/models/robosuite/assets/* is read (as a zip, never imported). sha256/size computed
-    from two identical downloads on 2026-10-07 (GitHub publishes no digest).
+  note: GitHub archive of NVlabs/mimicgen tag v0.1.1 (package mimicgen_envs, the version the datasets were recorded with).
+    Only mimicgen_envs/models/robosuite/assets/* is read (as a zip, never imported). sha256/size computed from two identical
+    downloads on 2026-10-07 (GitHub publishes no digest).
   files:
   - path: code/mimicgen-45db4b35a5a79e82ca8a70ce1321f855498ca82c.zip
     url: https://github.com/NVlabs/mimicgen/archive/45db4b35a5a79e82ca8a70ce1321f855498ca82c.zip
     sha256: 3e3d2d4ba0d2319de8c84acd9d2123b461e5e8130eb712bdabca0ae12fad9892
     size: 16117556
-    kind: assets
+    kind: file
+    content: assets
     asset_marker: mimicgen_envs/models/robosuite/assets/

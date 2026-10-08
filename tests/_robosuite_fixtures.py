@@ -42,5 +42,5 @@ def archive_entry(root: Path, family: str, path: str, xml: str, recorded_marker:
         for name, data in (extra or {}).items():
             z.writestr(member_prefix + name, data)
     return CatalogEntry(id=f"{family}/{path}", family=family, path=path, url="https://example.invalid/" + path,
-                        revision="test", sha256=None, size=None, license="MIT", kind="assets",
+                        revision="test", sha256=None, size=None, license="MIT", kind="file", content="assets",
                         asset_marker=asset_marker)

@@ -81,7 +81,7 @@ def test_mimicgen_lineage_points_at_catalogued_source_seeds():
     assert _seed_task("three_piece_assembly_d1") == "three_piece_assembly"
     groups = set()
     for e in cat.values():
-        if e.family != "mimicgen" or e.kind != "images_embedded":
+        if e.family != "mimicgen" or e.kind != "file_images_embedded":
             continue
         lin = _default_lineage(e, e.dataset)
         group = e.dataset.split("/")[1]

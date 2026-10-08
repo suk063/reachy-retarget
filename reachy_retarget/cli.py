@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 
@@ -11,32 +12,35 @@ def _catalog(args):
 
     for entry in load_catalog().values():
         if args.family in (None, entry.family):
-            print(f"{entry.id}\t{entry.size / 1e6:.1f} MB\t{entry.kind}\t{entry.license}")
+            size = "?" if entry.size is None else f"{entry.size / 1e6:.1f} MB"
+            flag = "" if entry.usable else "\tunusable"
+            print(f"{entry.id}\t{size}\t{entry.kind}\t{entry.content or ''}\t{entry.license}{flag}")
 
 
 def _fetch(args):
-    from .acquire import fetch, load_catalog
+    from .acquire import fetch, load_catalog, select
 
     catalog = load_catalog()
-    ids = list(args.ids) + [e.id for e in catalog.values()
-                            if e.family in args.family and (not args.match or args.match in e.id)]
-    if not ids:
+    entries = select(catalog, args.ids, families=args.family, match=args.match)
+    if not entries:
         raise SystemExit("nothing selected")
-    for record in fetch(ids, args.root, catalog=catalog, strip_images=args.strip_images):
-        print(json.dumps(record, sort_keys=True))
+    log = (lambda e, recs: print(f"# {e.id}: {len(recs)} records", file=sys.stderr, flush=True)) if args.verbose \
+        else None
+    for rec in fetch(entries, args.root, catalog=catalog, strip_images=args.strip_images, workers=args.workers,
+                     max_episodes=args.max_episodes, log=log):
+        print(json.dumps(rec, sort_keys=True))
 
 
 def _verify(args):
-    from .acquire import load_catalog, read_ledger, sha256_file
+    from .acquire import load_catalog, read_ledger, record_digest, sha256_file
 
     catalog, problems = load_catalog(), 0
     ledger = read_ledger(args.root)
     for entry_id, rec in sorted(ledger.items()):
         path = Path(args.root) / rec["local_path"]
-        expected = rec["stripped"]["sha256"] if rec.get("stripped") else rec["sha256_verified"]
         if not path.exists():
             problem = "missing"
-        elif sha256_file(path) != expected:
+        elif sha256_file(path) != record_digest(rec):
             problem = "sha256 mismatch"
         elif entry_id in catalog and catalog[entry_id].sha256 not in (None, rec["sha256_verified"]):
             problem = "ledger differs from catalog"
@@ -44,12 +48,21 @@ def _verify(args):
             continue
         problems += 1
         print(f"{problem}\t{entry_id}")
-    selected = [e for e in catalog.values() if e.family in args.family]
-    absent = [e.id for e in selected if e.id not in ledger]
+    selected = [e for e in catalog.values() if e.family in args.family and e.usable]
+    absent = [e.id for e in selected if not _fetched(e, ledger)]
     for entry_id in absent:
         print(f"not fetched\t{entry_id}")
-    print(f"{len(ledger)} ledger records, {problems} problems, {len(absent)} catalogued files not fetched")
+    print(f"{len(ledger)} ledger records, {problems} problems, {len(absent)} catalogued entries not fetched")
     raise SystemExit(1 if problems or absent else 0)
+
+
+def _fetched(e, ledger) -> bool:
+    """An entry is fetched when its record exists; range packages fetched by earlier versions
+    have only their (catalogued) member records."""
+    if e.id in ledger:
+        return True
+    members = e.source.get("members") if e.transport == "range_package" else None
+    return bool(members) and all(e.member_id(m["name"]) in ledger for m in members)
 
 
 def _index(args):
@@ -66,12 +79,16 @@ def main(argv=None):
     p = sub.add_parser("catalog", help="list catalogued source files")
     p.add_argument("--family")
     p.set_defaults(run=_catalog)
-    p = sub.add_parser("fetch", help="download catalogued files (explicit network access)")
-    p.add_argument("ids", nargs="*", help="catalog ids '<family>/<path>'")
-    p.add_argument("--family", action="append", default=[], help="fetch every file of a family")
+    p = sub.add_parser("fetch", help="acquire catalogued entries (explicit network access)")
+    p.add_argument("ids", nargs="*", help="catalog ids '<family>/<path>', or prefixes ending in '/' "
+                                          "(every usable entry below)")
+    p.add_argument("--family", action="append", default=[], help="fetch every usable entry of a family")
     p.add_argument("--match", help="substring filter applied to --family selections")
     p.add_argument("--root", required=True, help="data root; files land in <root>/raw/<family>/")
     p.add_argument("--strip-images", action="store_true", help="keep a state-only copy of image-bearing files")
+    p.add_argument("--workers", type=int, default=1, help="entries fetched concurrently")
+    p.add_argument("--max-episodes", type=int, help="tar_stream: keep extras/ of the first N episodes only")
+    p.add_argument("-v", "--verbose", action="store_true", help="progress on stderr")
     p.set_defaults(run=_fetch)
     p = sub.add_parser("verify", help="re-hash every ledger record under a data root")
     p.add_argument("--root", required=True)
