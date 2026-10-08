@@ -362,6 +362,7 @@ def _fetch_range_package(e: CatalogEntry, root: Path, reserve, opener) -> list[d
     _ensure_space(dest, need, reserve, e.id)
     digest, counter, parts, found, dropped = hashlib.sha256(), [0], {}, {}, {"members": 0, "bytes": 0}
     stream, finish = zstd_stream(range_chunks(e.url, s["offset"], s["stored_size"], opener, digest, counter))
+    stream = _CountingReader(stream)
     member_bytes = 0
     try:
         with tarfile.open(fileobj=stream, mode="r|") as tar:
@@ -406,8 +407,10 @@ def _fetch_range_package(e: CatalogEntry, root: Path, reserve, opener) -> list[d
         problems.append(f"range {counter[0]} bytes != {s['stored_size']}")
     if s.get("range_sha256") and digest.hexdigest() != s["range_sha256"]:
         problems.append(f"range sha256 {digest.hexdigest()} != {s['range_sha256']}")
-    if s.get("inflated_size") is not None and member_bytes != s["inflated_size"]:
-        problems.append(f"members inflated to {member_bytes} bytes != {s['inflated_size']}")
+    # The publisher's inflated_size is either the summed member sizes or the whole tar stream
+    # (headers and block padding included); both forms occur.
+    if s.get("inflated_size") is not None and s["inflated_size"] not in (member_bytes, stream.count):
+        problems.append(f"inflated to {stream.count} bytes ({member_bytes} in members) != {s['inflated_size']}")
     missing = set(listed) - set(done) - set(found)
     if missing:
         problems.append(f"members not found in the package: {sorted(missing)}")
@@ -426,6 +429,18 @@ def _write_json(path: Path, doc: dict) -> Path:
     tmp.write_text(json.dumps(doc, indent=1, sort_keys=True))
     os.replace(tmp, path)
     return path
+
+
+class _CountingReader:
+    """File-like wrapper counting the bytes read through it."""
+
+    def __init__(self, f):
+        self.f, self.count = f, 0
+
+    def read(self, n=-1):
+        block = self.f.read(n)
+        self.count += len(block)
+        return block
 
 
 def _package_manifest(e, range_sha256, inflated, members: dict, dropped, keep) -> dict:
