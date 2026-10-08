@@ -353,3 +353,29 @@ def test_declared_inactive_bodies_replace_the_distance_rule():
     tier, rollout = physics.simulate(ep, ref, physics.PhysicsConfig(replay=False))
     assert rollout.info["scene"]["removed"]["parked_bodies"] == ["milk_main"]  # near, but declared inactive
     assert tier["metrics"]["removed_inactive_bodies"]["rule"].startswith("declared")
+
+
+def test_a_hand_commanded_wider_than_pad_contact_has_released_the_object():
+    # a 40 mm cube held squeezed, then the fingers open past the cube (still below the 0.5 opening
+    # point) and it falls 10 mm: a release, not a slip in the hand
+    n, contact = 10, float(gripper.width_to_angle(0.04))
+    assert contact + 0.08 < physics.CLOSED_ANGLE
+    cmd = np.r_[np.full(5, contact - 0.05), contact + 0.02 * np.arange(1, 6)]
+    site = np.tile(np.eye(4), (n, 2, 1, 1))
+    pose = np.tile([0, 0, 0, 1, 0, 0, 0.0], (n, 1))
+    pose[7:, 2] = -0.01
+    grec = {"time": list(np.arange(n) * DT), "cmd": [[physics.CLOSED_ANGLE + 1, c] for c in cmd],
+            "held": [(False, i < 5) for i in range(n)], "site": list(site), "finger": [[0.0, c] for c in cmd],
+            "bilateral": [[[False], [i < 6]] for i in range(n)]}
+    geometry = {"cube": {"kind": "box", "half_extents": [0.02] * 3}}
+    th = dict(physics.THRESHOLDS)
+    new, _ = physics.grasp_carries(grec, {"cube": pose}, geometry, {"cube": -0.1}, th, physics.PhysicsConfig())
+    st = new[("right", "cube")]
+    assert st["acquired"] and st["translation"] == pytest.approx(0.0)
+    (rel,) = st["releases"]
+    assert rel["rule"] == "pad_contact_angle" and rel["time_s"] == pytest.approx(5 * DT)
+    assert rel["contact_angle_rad"] == pytest.approx(contact) and rel["contact_width_m"] == pytest.approx(0.04)
+    old, traces = physics.grasp_carries(grec, {"cube": pose}, geometry, {"cube": -0.1}, th,
+                                        physics.PhysicsConfig(release_at_contact=False, grasp_trace=True))
+    assert old[("right", "cube")]["translation"] == pytest.approx(0.01) and not old[("right", "cube")]["releases"]
+    assert traces["right/cube"].shape == (n, 14)

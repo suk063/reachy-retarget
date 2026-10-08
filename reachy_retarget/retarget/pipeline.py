@@ -18,7 +18,7 @@ from dataclasses import dataclass, field, replace
 
 import numpy as np
 
-from ..robot import VELOCITY, Reachy, min_clearance
+from ..robot import VELOCITY, Reachy, gripper, min_clearance
 from ..robot.reachy import GRIPPERS, NECK
 from ..schema.episode import DT, SIDES, ReachyEpisode, Reference
 from ..schema.rotations import so3_log
@@ -29,9 +29,10 @@ from .assign import assign, posture, tuck_posture
 from .config import RetargetConfig
 from .gaze import gaze_error, gaze_points, solve_neck
 from .placement import diagnostics as placement_diagnostics
-from .targets import (blend_orientation, contact_width, finger_angles, grasp_labels, gripper_state,
+from .targets import (approach_width, blend_orientation, contact_width, finger_angles, grasp_labels, gripper_state,
                       hand_object_distance, held_masks, manipulated_ids, object_centric, orientation_weight,
                       offset_track, place_labels, push_labels, release_ramp, release_starts, source_closed,
+                      straight_approach,
                       tcp_targets, _runs)
 from .wbik import ARM_COLUMNS, refine, smooth, solve_trajectory, tcp_errors
 
@@ -119,7 +120,7 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         # short drops after a release are placed: the hand follows the object to rest, then opens
         for k in src.effectors:
             labels_src[k], place_diag[k] = place_labels(src, k, labels_src[k], cfg)
-    oc_diag, push_diag = {}, {}
+    oc_diag, push_diag, straight_diag = {}, {}, {}
     if cfg.object_centric:
         # Hands carry held objects rigidly along the source object path (targets.object_centric).
         effectors = {}
@@ -133,6 +134,10 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
                                 "segments": [[int(a), int(b)] for a, b in _runs(push >= 0)]}
             placed = {e for _, e, _, _ in place_diag.get(k, ())}
             pose, oc_diag[k] = object_centric(src, k, lab, cfg, force_ends=placed)
+            if cfg.straight_approach:
+                # picks are approached straight along the approach axis (pushes are kept as they are)
+                pose, straight_diag[k] = straight_approach(pose, src.time, labels_src[k], cfg, src.objects,
+                                                           frozen=(lab >= 0) & (labels_src[k] < 0))
             effectors[k] = replace(e, pose=pose)
         src = replace(src, effectors=effectors)
     try:
@@ -188,8 +193,17 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
 
     # Fingers and gaze.
     for key, side in sides.items():
-        q_src[:, GRIPPERS.start + SIDES.index(side)] = finger_angles(
+        col = GRIPPERS.start + SIDES.index(side)
+        q_src[:, col] = finger_angles(
             src.effectors[key], labels[side] >= 0, cfg, contact_width(src, key, offsets[side], labels[side]))
+        if cfg.approach_narrow:
+            cap = approach_width(src, key, offsets[side], labels[side], cfg)
+            q_src[:, col] = np.minimum(q_src[:, col], gripper.width_to_angle(cap))
+        if cfg.place_hold_squeeze:
+            # placed drops: the source fingers open while Reachy carries the object down; keep the
+            # squeeze of the source release until the object has settled (it opens there, see below)
+            for b, e, _, _ in place_diag.get(key, ()):
+                q_src[b:e, col] = q_src[b - 1, col]
     ids = manipulated_ids(src.objects)
     fk = robot.fk(q_src)
     hands = {side: fk[f"{side}_grasp"][:, :3, 3] for side in targets}
@@ -198,7 +212,8 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
     gaze_err = gaze_error(q_src, points)
 
     # Time scaling, resampling and refinement on the output clock.
-    clock = timing.clock(src.time, q_src, cfg, timing.grasp_events(labels.values()))
+    clock = timing.clock(src.time, q_src, cfg, timing.grasp_events(labels.values()),
+                         timing.slide_positions(src) if cfg.slide_speed else None)
     q = timing.linear(clock, q_src)
     targets_out = {s: timing.poses(clock, X) for s, X in targets.items()}
     base_out = timing.linear(clock, base_ref)
@@ -214,9 +229,18 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         for side, lab in labels.items():
             col = GRIPPERS.start + SIDES.index(side)
             src_rows = release_starts(q_src[:, col], lab, cfg.release_start_angle)
+            key = next(k for k, s in sides.items() if s == side)
+            placed = sorted(e for _, e, _, _ in place_diag.get(key, ())) if cfg.place_hold_squeeze else []
+            if placed:
+                # a placed segment opens from its last held row (the source fingers are open by then)
+                held = lab >= 0
+                ends = np.flatnonzero(held[:-1] & ~held[1:]) + 1
+                src_rows = [r for r in src_rows if int(ends[ends <= r + 1].max(initial=-1)) not in placed]
+                src_rows = sorted(set(src_rows) | {e - 1 for e in placed if e < len(lab)})
             starts = [int(np.searchsorted(clock.source_time, src.time[r], side="right")) - 1 for r in src_rows]
+            exact_out = {int(np.searchsorted(clock.source_time, src.time[e - 1], side="right")) - 1 for e in placed}
             q[:, col], events = release_ramp(q[:, col], clock.time, starts, grasp_out[:, SIDES.index(side)],
-                                             VELOCITY[col] * cfg.velocity_scale)
+                                             VELOCITY[col] * cfg.velocity_scale, exact=exact_out)
             release_diag[side] = {"source_rows": src_rows, "output_rows": events}
     qd = timing.velocity(q)
     t_time = _time.perf_counter()
@@ -235,6 +259,7 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         "push": push_diag,
         "release_ramp": release_diag,
         "placed_drops": place_diag,
+        "straight_approach": straight_diag,
         "object_centric": {k: {seg: {"max_hand_shift_m": v[0], "max_hand_turn_rad": v[1]} for seg, v in d.items()}
                            for k, d in oc_diag.items()},
         "timing": clock.diagnostics(src.time),

@@ -420,3 +420,91 @@ def test_object_extent_of_a_union_of_boxes_is_its_thinnest_part():
                          "boxes": [{"center": [0, 0, 0], "half_extents": [0.04, 0.04, 0.045]},
                                    {"center": [0.05, 0, 0], "half_extents": [0.0045, 0.005, 0.03]}]})
     assert object_extent(track, np.arange(2), np.tile([0, 1.0, 0], (2, 1))) == pytest.approx([0.009, 0.009])
+
+
+def test_closing_extent_spans_the_parts_between_the_pads():
+    from reachy_retarget.retarget.targets import closing_extent
+    # a hammer: 24 mm handle below a 56 mm head (head centre 39 mm above the handle centre)
+    geom = {"kind": "boxes", "frame": "body",
+            "boxes": [{"center": [0, 0, 0], "half_extents": [0.012, 0.012, 0.025]},
+                      {"center": [0, 0, 0.039], "half_extents": [0.028, 0.014, 0.014]}]}
+    track = ObjectTrack(np.tile([0, 0, 0, 1, 0, 0, 0.0], (3, 1)), np.ones(3, bool), "manipulated", geom)
+    F = np.tile(np.eye(4), (3, 1, 1))  # grasp frames closing along the hammer x axis
+    F[:, :3, :3] = [[0, 1, 0], [-1, 0, 0], [0, 0, 1]]
+    F[0, 2, 3] = -0.005       # pads around the handle only: its 24 mm
+    F[1, 2, 3] = 0.039        # pads around the head: 56 mm
+    F[2, 2, 3] = 0.2          # nothing between the pads
+    w = closing_extent(track, np.arange(3), F[:, :3, 1], F)
+    assert w[0] == pytest.approx(0.024) and w[1] == pytest.approx(0.056) and np.isnan(w[2])
+    # without grasp frames: the enclosing box along the axis (the finger command's cap)
+    assert closing_extent(track, np.arange(1), F[:1, :3, 1])[0] == pytest.approx(0.056)
+    # a box turned 45 deg about the approach axis spans its diagonal
+    cube = ObjectTrack(np.tile([0, 0, 0, np.cos(np.pi / 8), 0, 0, np.sin(np.pi / 8)], (1, 1)), np.ones(1, bool),
+                       "manipulated", {"kind": "box", "half_extents": [0.02] * 3})
+    assert closing_extent(cube, [0], [[0, 1.0, 0]], np.eye(4)[None])[0] == pytest.approx(0.04 * np.sqrt(2))
+
+
+def test_approach_opening_only_clears_the_next_object():
+    from reachy_retarget.retarget.targets import approach_width
+    T = 6
+    hand = np.tile(np.eye(4), (T, 1, 1))
+    hand[:, 0, 3] = [0.3, 0.06, 0.01, 0.0, 0.0, 0.0]  # far, near and 1 cm off the centre, then over it
+    cube = ObjectTrack(np.tile([0, 0, 0, 1, 0, 0, 0.0], (T, 1)), np.ones(T, bool), "manipulated",
+                       {"kind": "box", "half_extents": [0.02] * 3})
+    hand[:, :3, :3] = [[0, 1, 0], [-1, 0, 0], [0, 0, 1]]  # closing axis = world -x
+    src = SourceEpisode("f", "f/d", "0", "t", np.arange(T) * 0.1, {"h": Effector(hand, np.ones(T), np.full(T, 0.08))},
+                        objects={"cube": cube})
+    lab = np.array([-1, -1, -1, -1, 0, 0])
+    w = approach_width(src, "h", (False, 0.0, 0.0), lab, CFG)
+    assert np.isinf(w[0]) and np.isinf(w[4:]).all()           # far away, and while holding
+    assert w[2] == pytest.approx(0.04 + 0.02 + 2 * CFG.approach_clearance)
+    assert w[3] == pytest.approx(0.04 + 2 * CFG.approach_clearance)
+
+
+def test_straight_approach_descends_along_the_approach_axis_onto_picks_only():
+    from reachy_retarget.retarget.targets import straight_approach
+    T = 8
+    hand = np.tile(np.eye(4), (T, 1, 1))  # approach axis +z: the hand comes from -z
+    hand[:, 0, 3] = [0.10, 0.08, 0.06, 0.04, 0.02, 0.0, 0.0, 0.0]
+    hand[:, 2, 3] = [-0.20, -0.16, -0.12, -0.08, -0.04, 0.0, 0.0, 0.0]
+    z = np.zeros((T, 7))
+    z[:, 3] = 1
+    lifted = z.copy()
+    lifted[6:, 2] = 0.05  # lifted (world z) during the grasp
+    lab = np.array([-1] * 5 + [0] * 3)
+    geom = {"kind": "box", "half_extents": [0.02] * 3}
+    out, info = straight_approach(hand, np.arange(T) * 0.1, lab, CFG,
+                                  {"cube": ObjectTrack(lifted, np.ones(T, bool), "manipulated", geom)})
+    # fingertips (19 mm past the gc) within 5 mm of the cube's far side (20 mm): no sideways offset
+    # within 44 mm, full offset beyond 74 mm, the path inside the grasp unchanged
+    height = 0.02 + (gripper.DISTAL_BOX[2][1] - gripper.PAD_DEPTH) + CFG.straight_approach_height
+    assert out[4, 0, 3] == pytest.approx(0.0) and out[0, 0, 3] == pytest.approx(0.10)
+    assert out[3, 0, 3] == pytest.approx(0.04 * np.clip((0.08 - height) / CFG.straight_approach_blend, 0, 1))
+    np.testing.assert_allclose(out[:, 2, 3], hand[:, 2, 3])
+    np.testing.assert_allclose(out[5:], hand[5:])
+    assert info["5-8"] == pytest.approx(0.02)
+    # an object that is not lifted (an RL push closing on the cube) keeps the source approach
+    out, _ = straight_approach(hand, np.arange(T) * 0.1, lab, CFG,
+                               {"cube": ObjectTrack(z, np.ones(T, bool), "manipulated", geom)})
+    np.testing.assert_allclose(out, hand)
+
+
+def test_placed_release_opens_from_the_last_held_row():
+    from reachy_retarget.retarget.targets import release_ramp
+    q = np.array([0.8, 0.8, 0.8, 1.6, 1.8, 1.8])  # squeeze held to row 2, the source is open by row 3
+    lab = np.array([0, 0, 0, -1, -1, -1])
+    t = np.arange(6) * 0.1
+    ramp, events = release_ramp(q, t, [2], lab, rate=3.0, exact={2})
+    assert events == [(2, 5)]
+    np.testing.assert_allclose(ramp, [0.8, 0.8, 0.8, 1.1, 1.4, 1.7])
+    np.testing.assert_allclose(release_ramp(q, t, [2], lab, rate=3.0)[0], q)  # never below the given angles
+
+
+def test_drawers_are_slowed_to_the_slide_speed():
+    from reachy_retarget.retarget import timing
+    times = np.arange(5) * 0.1
+    q = np.zeros((5, 22))
+    slides = np.array([[0.0], [0.02], [0.04], [0.04], [0.04]])  # 0.2 m/s
+    d = timing.dilation(times, q, CFG, slides=slides)
+    assert d[0] == pytest.approx(0.2 / CFG.slide_speed) and d[-1] >= 1.0
+    assert np.all(timing.dilation(times, q, CFG) == 1.0)

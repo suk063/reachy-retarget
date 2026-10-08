@@ -225,14 +225,25 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
    *Placed drops* (`targets.place_labels`, derived label, `extra["retarget"]["placed_drops"]`):
    when the source object falls ≤ 4 cm away from the hand after the release and settles within
    0.6 s, the grasp label extends to the row where it has settled (≤ 3 mm and 0.05 rad from its
-   rest pose); the hand carries it down object-centrically and opens there. Skipped when Reachy's
+   rest pose); the hand carries it down object-centrically, keeping the squeeze it had at the source
+   release (the source fingers open during the fall; following them left the cube unsqueezed as it
+   landed), and opens from the last held row at the finger speed. Skipped when Reachy's
    fingers would sink into scene boxes on the way down or scene geometry stands within 1 cm
    beside the settled object (insertions: the coffee pod into its holder, objects into bins).
+   *Approach opening* (`targets.approach_width`): within 12 cm of the next (or previous) grasped
+   object the pads open only to its extent along the closing axis plus twice its centre offset
+   plus 8 mm per side (Reachy's distal fingers are 27.5 mm thick, the Panda's about 10 mm).
+   *Straight final approach* (`targets.straight_approach`): before a pick (the object rises ≥ 15 mm
+   during the grasp), the path's offset across the grasp's approach axis is removed while the
+   fingertips are within 5 mm of the object's far side, blending back over 3 cm; closed-hand pushes
+   and the retreat are unchanged.
 7. **Timing.** Phase-preserving time scaling so joint and base speed limits hold, then
    resampling at 50 Hz. The source↔target time map is stored. The source step into and out of
    each grasp lasts at least 0.3 s, so Reachy's fingers settle on the object before the arm
    lifts it (the source gripper stalls within one control step; without the dwell the Lift
-   cube slid 2–3 cm down the pads).
+   cube slid 2–3 cm down the pads). Articulated slide joints (drawers, typed `slide` in the source
+   MJCF) move at most 0.04 m/s: drawer damping resists the position-servoed arm in proportion to
+   the speed.
 
 ## Validation tiers
 
@@ -280,7 +291,8 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
   * Object–environment contacts during the settle phase (objects released from the
     source's initial state; robosuite cubes start ~1 cm above the table) are reported, not
     gated. Grasp gates also count a hand as closed while the episode's grasp label is set
-    (large objects stall the fingers above the 0.5 opening point).
+    (large objects stall the fingers above the 0.5 opening point), and only while its finger
+    reference is at or below the pad-contact angle of the object (see the loop 2 section).
 
 ## Quality evaluation
 
@@ -468,6 +480,106 @@ open (soft contact preloaded by 1–3 N); insertion contacts while carrying (26 
 violations); creep of light objects (7–21 g); approach collisions of Reachy's wider fingers with
 neighbouring objects (StackThree demo 0 knocks cubeC, ThreePieceAssembly fingers land on the
 piece); drawer and lid manipulation that blocks the hand (MugCleanup `tcp_tracking` 3–8 cm).
+
+### Tier-P physics loop 2: release definition and approach geometry (2026-10-08)
+
+Same dev / held-out split as loop 1 (MimicGen demos 0–4 / 5–9 of 12 tasks, robomimic Can and Lift);
+ManiSkill spot check = first 10 episodes of PickCube (teleop), StackPyramid, PushCube. Runs and
+audit inputs in `runs/eval/pq2/`.
+
+*Decision: release at pad contact (measurement definition, thresholds unchanged).* In tier P a hand
+is closed on object o for `grasp_drift` / `carry_contact` only while, in addition to the existing
+condition (reference below the 0.5 opening angle or grasp label set), its finger reference is at
+or below the angle at which its pads touch o on both sides: `gripper.width_to_angle` of o's extent
+along the closing axis inside the pad prism (`targets.closing_extent`, the width logic of the
+finger command, on the measured grasp-center and object poses; exact per part of a union of
+boxes, `targets._clipped_span`; NaN, nothing between the pads, adds no condition). Commanded wider,
+the object is released and judged by `task_final_pose`, `objects_at_rest` and
+`object_environment_penetration`. Every carry records its release time, rule
+(`pad_contact_angle` | `closed_point`), command, measured finger, contact angle and width in
+`metrics.grasps[...].releases` (`PhysicsConfig.grasp_trace` stores the per-row traces). The first
+attempt, the extent of the part nearest the grasp center, failed the audit: on the 32-box mug the
+nearest part was 18 mm narrower than the pad gap, so the squeezed hand never counted as closed and
+a 9.5° mug carry disappeared; reference poses instead of measured ones lost hands whose IK misses
+the object (NutAssembly).
+
+Reclassification audit (old and new rule on the same rollouts): dev `grasp_drift` failures 41 → 29
+episodes, `carry_contact` 8 → 6, P 20 → 24, K & P 17 → 20; held-out `grasp_drift` 48 → 35, P 15 →
+21, K & P 12 → 16. Every acquired carry keeps its acquisition (82 / 82 dev, 90 / 90 held-out). The
+violations no longer counted (14 dev, 16 held-out) all start 0.00–0.06 s after the command passed
+the contact angle with at most one pad touching (13 / 14 and 16 / 16: the object falls, 0.2 m/s,
+or a placed cube rocks 3–5° as the pads open); the drift up to the release stays within the gate
+(max 3.0 mm / 2.9°). Borderline: Square dev demo 2 (nut pushed onto the peg) reaches 2.97 mm while
+commanded closed and 3.1 mm on the release row itself, with both pads still touching through the
+0.02 rad finger servo lag. Releases caused by geometry (the object turned or slid in the hand so
+its extent fell below the command, 5 held-out carries) all violated the gate before, under both
+rules. No in-hand slip while the pads command contact is hidden.
+
+Changes (dev P / K & P; ManiSkill 30: K / P / K & P):
+
+| step | dev | ManiSkill |
+| --- | --- | --- |
+| baseline (loop 1, old rule) | 20 / 17 | 23 / 22 / 18 |
+| release at pad contact | 24 / 20 | 23 / 22 / 18 |
+| placed drops keep the squeeze, open from the last held row | 25 / 21 | 23 / 22 / 18 |
+| narrowed approach opening | 26 / 21 | 23 / 23 / 18 |
+| straight approach and retreat, every grasp (rejected) | 24 / 21 | not run |
+| straight approach only, every grasp (rejected) | 31 / 24 | 21 / 18 / 11 |
+| straight approach to picks only, pushes frozen | 31 / 24 | 22 / 25 / 18 |
+| drawer slide speed 0.04 m/s (final) | 29 / 22 | 22 / 25 / 18 |
+
+The last row's dev drop is Coffee demos 2 and 4 (pod `grasp_drift` 3.1° and 5.7°) with retargets
+identical to the previous row within 5e-12 rad: the pod's in-hand rotation is chaotic at the
+1e-12 level, so ±2 Coffee episodes are noise. Rejected: straightening the retreat (the Kitchen
+pot and bread end 10 cm off), straightening approaches that end in a closed-hand push or an RL
+grasp that never lifts the cube (StackPyramid K & P 6 → 0: the hand no longer pushed cubeA;
+PushCube traj 2 missed its goal), selecting segments by the finger screen's neighbour depth
+(`finger_penetration` did not predict the physics contacts: StackThree demo 0's depth rose
+11 → 27 mm·rows with the fix that cleared cubeC; dev 26 / 21).
+
+| task | baseline dev | release rule dev | final dev | baseline held-out | release rule held-out | final held-out |
+| --- | --- | --- | --- | --- | --- | --- |
+| stack | 5 / 3 (3) | 5 / 4 (4) | 5 / 5 (5) | 3 / 2 (2) | 3 / 3 (2) | 3 / 5 (3) |
+| stack_three | 4 / 3 (3) | 4 / 3 (3) | 3 / 4 (3) | 5 / 0 (0) | 5 / 1 (1) | 4 / 3 (2) |
+| threading | 2 / 5 (2) | 2 / 5 (2) | 3 / 4 (3) | 2 / 5 (2) | 2 / 5 (2) | 3 / 4 (3) |
+| coffee | 5 / 2 (2) | 5 / 2 (2) | 5 / 3 (3) | 4 / 2 (2) | 4 / 2 (2) | 4 / 5 (4) |
+| square | 3 / 0 (0) | 3 / 1 (1) | 4 / 0 (0) | 2 / 0 (0) | 2 / 0 (0) | 4 / 0 (0) |
+| three_piece_assembly | 2 / 0 (0) | 2 / 0 (0) | 3 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) | 0 / 1 (0) |
+| mug_cleanup | 4 / 0 (0) | 4 / 0 (0) | 5 / 0 (0) | 4 / 0 (0) | 4 / 0 (0) | 5 / 0 (0) |
+| coffee_preparation | 1 / 0 (0) | 1 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) |
+| kitchen | 0 / 0 (0) | 0 / 1 (0) | 1 / 4 (1) | 2 / 0 (0) | 2 / 3 (2) | 2 / 3 (2) |
+| hammer_cleanup | 5 / 0 (0) | 5 / 1 (1) | 5 / 1 (1) | 5 / 0 (0) | 5 / 1 (1) | 5 / 2 (2) |
+| nut_assembly | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) |
+| pick_place | 0 / 0 (0) | 0 / 0 (0) | 0 / 1 (0) | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) |
+| robomimic Can | 5 / 2 (2) | 5 / 2 (2) | 4 / 2 (1) | 2 / 1 (1) | 2 / 1 (1) | 4 / 1 (1) |
+| robomimic Lift | 5 / 5 (5) | 5 / 5 (5) | 5 / 5 (5) | 5 / 5 (5) | 5 / 5 (5) | 5 / 4 (4) |
+| **total (70)** | 41 / 20 (17) | 41 / 24 (20) | 43 / 29 (22) | 34 / 15 (12) | 34 / 21 (16) | 39 / 28 (21) |
+
+ManiSkill final per task (K / P / K & P, baseline → final): PickCube 7/9/6 → 6/10/6, PushCube
+9/6/6 → 9/7/6, StackPyramid 7/7/6 → 7/8/6. Held-out Lift demo 8 fails `grasp_drift` (4.1° in a
+carry that passed before); Can and StackThree lose K episodes to TCP rotation residuals on the
+straightened approaches (0.05–0.1 rad near the ±30° wrist limits).
+
+Measurements behind the remaining failure modes (final dev):
+* *Placed cubes rocking*: with the release definition and the held squeeze, Stack passes 5 / 5 dev
+  and held-out; the rocking itself (3–5° as the pads open) is now judged by the rest and final-pose
+  gates, which it passes.
+* *Neighbour contact on approach*: StackThree demo 0's mimic finger tipped cubeC while the hand
+  descended 14 mm off cubeA's centre line with the source's 78 mm opening; fixed by the straight
+  approach (narrowing alone does not clear it). Remaining: K residuals on straightened approaches.
+* *Scene contact while carrying*: 35 carries violate `grasp_drift`; 23 touch scene geometry in the
+  0.3 s before (pegs, bins, the coffee machine, assembly pieces). At the violation the reference
+  tracks the source within 0.4 mm median (K residual; 3 of 35 have 0.15–0.23 rad orientation
+  residual) and the base is still, so the carry paths do not deviate from the source near
+  obstacles: these are the source's own insertions, which press the object against the scene and
+  turn it in Reachy's pads. IK clearance to static geometry would not change them. The other 12 are
+  pivots without scene contact (MugCleanup mug 3–24°, PickPlace Milk at 3.0–3.1°).
+* *Drawers*: MugCleanup `tcp_tracking` (3–4 cm) is the hand stalled by the drawer's 100 N s/m
+  damping at the source's 0.14 m/s; the slide speed limit leaves 1 of 5 dev episodes over 3 cm
+  (3.2 cm). MugCleanup still fails `grasp_drift` in all 10 (the mug pivots 0.17–0.42 rad in the
+  pads); CoffeePreparation fails on K, joint margins and the lid/pod sequence.
+* NutAssembly (0 / 0) is bounded by K (TCP residuals 5–37 mm) and PickPlace by K (wrist rotation
+  while holding); Square by `task_final_pose` after the nut is dropped onto the peg.
 
 ## Episode storage (`reachy-retarget-episode-v2`)
 

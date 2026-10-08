@@ -26,14 +26,14 @@ from dataclasses import dataclass, field
 import numpy as np
 from scipy.optimize import minimize
 
-from ..robot import LOWER, UPPER, Reachy
+from ..robot import LOWER, UPPER, Reachy, gripper
 from ..robot.resources import profile
 from ..schema.rotations import se2_compose
 from . import footprint
 from .config import RetargetConfig
-from .targets import (finger_angles, finger_penetration, grasp_segments, grasp_symmetry, hand_object_distance,
-                      held_masks, offset_candidates, orientation_weight, source_closed, tcp_targets,
-                      touch_labels)
+from .targets import (approach_width, finger_angles, finger_penetration, grasp_segments, grasp_symmetry,
+                      hand_object_distance, held_masks, offset_candidates, orientation_weight, source_closed,
+                      tcp_targets, touch_labels)
 from .wbik import ARM_COLUMNS, Clearance, FrameSolver, tcp_errors
 
 INFEASIBLE = 100.0      # cost added when the base footprint overlaps scene geometry
@@ -115,7 +115,11 @@ class PlacementProblem:
             # objects a closed hand touches are in contact by design, like held ones (StackPyramid:
             # the closed fingers push cubeA; counting that contact as depth rejected every tilt)
             touch = touch_labels(src, key, lab, cfg, source_closed(src.effectors[key], cfg, src.time))
-            depth = {o: float(finger_penetration(src, key, side, o, touch, finger, cfg).max()) for o in opts}
+            def opened(o, finger=finger, key=key, lab=lab):  # the fingers as commanded (narrowed approach)
+                if not cfg.approach_narrow:
+                    return finger
+                return np.minimum(finger, gripper.width_to_angle(approach_width(src, key, o, lab, cfg)))
+            depth = {o: float(finger_penetration(src, key, side, o, touch, opened(o), cfg).max()) for o in opts}
             best = min(depth.values())
             self.options[side] = [o for o in opts if depth[o] <= best + cfg.finger_depth_slack]
             self.finger_depth[side] = {f"{int(o[0])}/{o[1]:g}/{o[2]:g}": round(v, 4) for o, v in depth.items()}

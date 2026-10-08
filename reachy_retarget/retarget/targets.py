@@ -526,7 +526,7 @@ def release_starts(angles, labels, start_angle) -> list[int]:
     return out
 
 
-def release_ramp(angles, times, starts, labels, rate):
+def release_ramp(angles, times, starts, labels, rate, exact=()):
     """Finger angles (T,) with each release opened at ``rate`` (rad/s), on the output clock.
 
     The source gripper's measured width is a poor command for a release: a Panda whose finger
@@ -536,7 +536,9 @@ def release_ramp(angles, times, starts, labels, rate):
     From each row of ``starts`` (the last plateau row, see :func:`release_starts`, so the release
     instant stays the source's) the angle rises at ``rate`` toward the first local maximum of the
     given angles before the next grasp of ``labels`` (never wider than the source opens before it
-    closes again), and never below the given angles. Returns (angles, [(start row, peak row)])."""
+    closes again), and never below the given angles, except from the rows of ``exact`` (placed drops,
+    whose given angles hold the squeeze to the start row and then jump to the source's opening),
+    where the ramp replaces them. Returns (angles, [(start row, peak row)])."""
     q = np.array(angles, float)
     t = np.asarray(times, float)
     held = np.asarray(labels) >= 0
@@ -552,31 +554,153 @@ def release_ramp(angles, times, starts, labels, rate):
         if q[p] <= q[r0]:
             continue
         ramp = np.minimum(q[r0] + rate * (t[r0 + 1:p + 1] - t[r0]), q[p])
-        q[r0 + 1:p + 1] = np.maximum(q[r0 + 1:p + 1], ramp)
+        q[r0 + 1:p + 1] = ramp if r0 in exact else np.maximum(q[r0 + 1:p + 1], ramp)
         out.append((int(r0), int(p)))
     return q, out
 
 
+# Pad prism in the grasp-center frame (x across the pad, y closing, z along the approach axis):
+# the region the two pad faces sweep while they close (gripper.DISTAL_BOX, pad centre at the grasp
+# center, pads at most MAX_WIDTH apart).
+PAD_PRISM = ((gripper.DISTAL_BOX[0][0], gripper.DISTAL_BOX[0][1]), (-gripper.MAX_WIDTH / 2, gripper.MAX_WIDTH / 2),
+             (gripper.DISTAL_BOX[2][0] - gripper.PAD_DEPTH, gripper.DISTAL_BOX[2][1] - gripper.PAD_DEPTH))
+
+
+def _clipped_span(center, axes, half, prism):
+    """(lo, hi) (n,) of the closing coordinate (frame y) over the intersection of oriented boxes
+    with an axis-aligned prism, NaN where they do not intersect. ``center`` (n, 3): box centres in
+    the frame; ``axes`` (n, 3, 3): box axes (columns) in the frame; ``half`` (3,): half extents.
+    Exact: the extremes of a linear function over the intersection polytope lie on vertices, which
+    are enumerated as the feasible intersections of three of its 12 bounding planes."""
+    n = len(center)
+    # planes N . u = b in box coordinates u (|u_i| <= half_i): 6 box faces, then 6 prism faces
+    normals, offsets = [], []
+    for i in range(3):
+        e = np.zeros((n, 3))
+        e[:, i] = 1.0
+        normals += [e, e]
+        offsets += [np.full(n, -half[i]), np.full(n, half[i])]
+    for k in range(3):
+        a = axes[:, k, :]  # frame coordinate k of a box point = center_k + a . u
+        normals += [a, a]
+        offsets += [prism[k][0] - center[:, k], prism[k][1] - center[:, k]]
+    N, B = np.stack(normals, 1), np.stack(offsets, 1)  # (n, 12, 3), (n, 12)
+    lo, hi = np.full(n, np.inf), np.full(n, -np.inf)
+    tol = 1e-9
+    for a, b, c in ((a, b, c) for a in range(12) for b in range(a + 1, 12) for c in range(b + 1, 12)):
+        n1, n2, n3 = N[:, a], N[:, b], N[:, c]
+        c23, c31, c12 = np.cross(n2, n3), np.cross(n3, n1), np.cross(n1, n2)
+        det = np.einsum("ij,ij->i", n1, c23)
+        ok = np.abs(det) > 1e-12
+        if not ok.any():
+            continue
+        u = (B[:, a, None] * c23 + B[:, b, None] * c31 + B[:, c, None] * c12) / np.where(ok, det, 1.0)[:, None]
+        p = center + np.einsum("nij,nj->ni", axes, u)
+        ok &= np.all(np.abs(u) <= half + tol, axis=1)
+        for k in range(3):
+            ok &= (p[:, k] >= prism[k][0] - tol) & (p[:, k] <= prism[k][1] + tol)
+        lo = np.where(ok, np.minimum(lo, p[:, 1]), lo)
+        hi = np.where(ok, np.maximum(hi, p[:, 1]), hi)
+    bad = ~(hi >= lo)
+    lo[bad], hi[bad] = np.nan, np.nan
+    return lo, hi
+
+
+def closing_extent(track, rows, axes, frames=None) -> np.ndarray:
+    """Extent (n,) of object ``track`` along world closing axes ``axes`` (n, 3) at track rows
+    ``rows``: the pad separation at which a parallel jaw closing along ``axes`` touches it on both
+    sides. A cylinder uses its exact extent; a box or ``aabb`` the extent of its box (an aabb is an
+    envelope, so this is an upper bound). With grasp-center ``frames`` (n, 4, 4; closing axis =
+    column 1), a box, aabb or union of ``boxes`` uses the span along the closing axis of the object
+    inside the pad prism (``PAD_PRISM``: the pad faces' sweep), computed exactly per part
+    (:func:`_clipped_span`): the outermost surfaces the two pads meet, e.g. a hammer handle below
+    its head or a mug wall. NaN without box geometry, where the track is invalid, or (with
+    ``frames``) where no part lies inside the pad prism (nothing between the pads)."""
+    rows = np.asarray(rows, int)
+    out = np.full(len(rows), np.nan)
+    box = box_geometry(track.geometry)
+    if box is None or not len(rows):
+        return out
+    ok = np.asarray(track.valid)[rows]
+    R = quat_to_matrix(track.pose[rows[ok], 3:])
+    yo = np.einsum("tji,tj->ti", R, np.asarray(axes, float)[ok])
+    cyl = cylinder_geometry(track.geometry)
+    if cyl is not None:
+        c = np.minimum(np.abs(yo[:, cyl[1]]), 1.0)
+        out[ok] = 2.0 * (cyl[2] * np.sqrt(1.0 - c ** 2) + cyl[3] * c)
+        return out
+    if frames is None:
+        out[ok] = 2.0 * np.abs(yo) @ box[1]
+        return out
+    F = np.asarray(frames, float)[ok]
+    Fi = np.swapaxes(F[:, :3, :3], 1, 2)
+    A = Fi @ R  # object axes (columns) in the grasp frame
+    origin = np.einsum("tij,tj->ti", Fi, track.pose[rows[ok], :3] - F[:, :3, 3])  # object origin, grasp frame
+    lo, hi = np.full(len(A), np.inf), np.full(len(A), -np.inf)
+    for c, h in box_parts(track.geometry):
+        a, b = _clipped_span(origin + A @ c, A, h, PAD_PRISM)
+        lo, hi = np.fmin(lo, a), np.fmax(hi, b)
+    out[ok] = np.where(hi >= lo, hi - lo, np.nan)
+    return out
+
+
 def contact_width(src, key, offset, labels) -> np.ndarray:
     """Extent (T,) of the held object's cylinder/box/aabb along the closing axis of effector ``key``'s
-    grasp frame composed with ``offset`` (inf where nothing is held or without box geometry)."""
+    grasp frame composed with ``offset`` (:func:`closing_extent` of the enclosing box; inf where
+    nothing is held or without box geometry)."""
     ids = manipulated_ids(src.objects)
     lab = np.asarray(labels)
     out = np.full(len(lab), np.inf)
     y = (src.effectors[key].pose @ offset_matrices(offset))[:, :3, 1]
     for k in np.unique(lab[lab >= 0]):
         track = src.objects[ids[k]]
-        box = box_geometry(track.geometry)
         rows = np.flatnonzero((lab == k) & track.valid)
-        if box is None or not len(rows):
+        if box_geometry(track.geometry) is None or not len(rows):
             continue
-        yo = np.einsum("tji,tj->ti", quat_to_matrix(track.pose[rows, 3:]), y[rows])
-        cyl = cylinder_geometry(track.geometry)
-        if cyl is not None:
-            c = np.minimum(np.abs(yo[:, cyl[1]]), 1.0)
-            out[rows] = 2.0 * (cyl[2] * np.sqrt(1.0 - c ** 2) + cyl[3] * c)
-        else:
-            out[rows] = 2.0 * np.abs(yo) @ box[1]
+        out[rows] = closing_extent(track, rows, y[rows])
+    return out
+
+
+def approach_width(src, key, offset, labels, cfg: RetargetConfig) -> np.ndarray:
+    """Largest useful pad separation (T,) of effector ``key`` (grasp frame composed with ``offset``)
+    outside its grasp segments (inf elsewhere and without box geometry).
+
+    Reachy's distal fingers are 27.5 mm thick and 30 mm wide (the Panda's about 10 x 20 mm), so
+    opened as wide as the source gripper they reach 1-2 cm further out along the closing axis and
+    land on neighbouring objects (MimicGen StackThree: the open mimic finger tips cubeC over while
+    the hand descends onto cubeA). Near the object of the next grasp (approach) or of the previous
+    one (retreat), within ``cfg.contact_free_distance`` of its box, the pads only need to clear it:
+    its extent along the closing axis plus twice its centre's offset from the grasp center along
+    that axis plus ``cfg.approach_clearance`` per side. Where both apply the larger one is used."""
+    ids = manipulated_ids(src.objects)
+    lab = np.asarray(labels)
+    T = len(lab)
+    out = np.full(T, np.inf)
+    segs = grasp_segments(lab)
+    if not segs:
+        return out
+    E = src.effectors[key].pose @ offset_matrices(offset)
+    y, g = E[:, :3, 1], E[:, :3, 3]
+    need = np.full(T, -np.inf)
+    for i, (a, b) in enumerate(segs):
+        lo = segs[i - 1][1] if i > 0 else 0
+        hi = segs[i + 1][0] if i + 1 < len(segs) else T
+        track = src.objects[ids[lab[a]]]
+        box = box_geometry(track.geometry)
+        if box is None:
+            continue
+        dist = object_distance(g, track)
+        for rows in (np.arange(lo, a), np.arange(b, hi)):
+            rows = rows[dist[rows] <= cfg.contact_free_distance]  # NaN (invalid) rows drop out
+            if not len(rows):
+                continue
+            ext = closing_extent(track, rows, y[rows])
+            centre = track.pose[rows, :3] + np.einsum("tij,j->ti", quat_to_matrix(track.pose[rows, 3:]), box[0])
+            off = np.abs(np.einsum("ti,ti->t", centre - g[rows], y[rows]))
+            req = ext + 2.0 * off + 2.0 * cfg.approach_clearance
+            need[rows] = np.fmax(need[rows], req)
+    out[np.isfinite(need)] = need[np.isfinite(need)]
+    out[lab >= 0] = np.inf
     return out
 
 
@@ -812,4 +936,71 @@ def object_centric(src, key, labels, cfg: RetargetConfig, force_ends=()):
         s = 1.0 - np.abs(times[span] - times[row]) / window  # 1 at the segment end, 0 at the window edge
         corr = _blend_pose(np.broadcast_to(np.eye(4), (len(span), 4, 4)), np.broadcast_to(C, (len(span), 4, 4)), s)
         out[span] = corr @ out[span]
+    return out, info
+
+
+def straight_approach(poses, times, labels, cfg: RetargetConfig, objects=None, frozen=None):
+    """Grasp-center path (T, 4, 4) whose final approach to each pick runs straight along the
+    grasp's approach axis. Returns (poses, {segment: max sideways shift m}).
+
+    Reachy's fingers are wider and thicker than the source's and reach further past the grasp
+    center (19-21 mm, the Panda's 9 mm), so a source hand that still moves sideways while its
+    fingertips are already at the height of the object sweeps them through neighbouring objects
+    (MimicGen StackThree demo 0: the open mimic finger tips cubeC over while the hand descends
+    onto cubeA 14 mm off its centre line). Before each grasp segment, the path's offset from the
+    grasp pose across the approach axis (grasp-frame x, y) is scaled by ``s``: 0 while the
+    fingertips (``gripper.DISTAL_BOX`` reach past the grasp center) are within
+    ``cfg.straight_approach_height`` of the grasped object's far side along the approach axis (its
+    box corners in the grasp frame at the segment start; without ``objects`` or box geometry,
+    within ``cfg.straight_approach_height`` of the grasp pose), rising linearly to 1 over the next
+    ``cfg.straight_approach_blend``. Only the stretch after the last row at which the hand was that
+    far away changes (the path stays continuous; nothing changes when it never was). Rows inside
+    grasp segments and ``frozen`` rows (T,) bool (closed-hand pushes, :func:`push_labels`: the
+    hand's contact with an object is the task there) are unchanged, and the stretch never reaches
+    back across a frozen row, so object paths, pushes and hand-object poses are untouched. With
+    ``objects``, only segments that lift their object by ``cfg.straight_min_lift`` are picks and
+    straightened (RL pushes close on the cube for a few frames and hit it from the side on
+    purpose). The retreat is left as the source's (straightening it moved the MimicGen Kitchen pot
+    and bread 10 cm off their goals)."""
+    E = np.array(poses, float)
+    out = E.copy()
+    lab = np.asarray(labels)
+    held = lab >= 0
+    segs = grasp_segments(lab)
+    ids = manipulated_ids(objects) if objects is not None else []
+    info = {}
+    for i, (a, b) in enumerate(segs):
+        key = f"{a}-{b}"
+        info[key] = 0.0
+        track = objects[ids[lab[a]]] if objects is not None else None
+        if track is not None:
+            z = track.pose[a:b, 2][np.asarray(track.valid)[a:b]]
+            if not len(z) or z.max() - z[0] < cfg.straight_min_lift:
+                continue  # not a pick (an RL push that closes on the object): unchanged
+        rows = np.arange(segs[i - 1][1] if i > 0 else 0, a)
+        rows = rows[~held[rows]]
+        if frozen is not None and len(rows):
+            fz = np.flatnonzero(np.asarray(frozen)[rows])
+            rows = rows[fz[-1] + 1:] if len(fz) else rows
+        if not len(rows):
+            continue
+        A = E[a]
+        rel = (out[rows, :3, 3] - A[:3, 3]) @ A[:3, :3]  # grasp-frame offsets of the path
+        height = cfg.straight_approach_height
+        box = box_geometry(track.geometry) if track is not None else None
+        if box is not None and track.valid[a]:
+            corners = box[0] + box[1] * np.array([[x, y, z] for x in (-1, 1) for y in (-1, 1) for z in (-1, 1)])
+            world = corners @ quat_to_matrix(track.pose[a, 3:]).T + track.pose[a, :3]
+            far = float(np.max(-((world - A[:3, 3]) @ A[:3, 2])))  # object extent behind the grasp center
+            reach = gripper.DISTAL_BOX[2][1] - gripper.PAD_DEPTH  # fingertips past the grasp center
+            height = far + reach + cfg.straight_approach_height
+        s = np.clip((-rel[:, 2] - height) / cfg.straight_approach_blend, 0.0, 1.0)
+        away = np.flatnonzero(s >= 1.0)
+        if not len(away):
+            continue  # the hand never leaves the object's height before the grasp: unchanged
+        k = np.where(np.arange(len(rows)) > away[-1], s, 1.0)
+        new = rel.copy()
+        new[:, :2] *= k[:, None]
+        out[rows, :3, 3] = A[:3, 3] + new @ A[:3, :3].T
+        info[key] = float(np.linalg.norm(rel[:, :2] - new[:, :2], axis=1).max())
     return out, info

@@ -41,16 +41,24 @@ class Clock:
                 "dilated_intervals": int(np.sum(self.dilation > 1 + 1e-9))}
 
 
-def dilation(times, q, cfg: RetargetConfig, grasp_events=None):
+def dilation(times, q, cfg: RetargetConfig, grasp_events=None, slides=None):
     """Per-interval slow-down factor (T-1,) >= 1 so q (T, 22) respects scaled speed limits.
 
     ``grasp_events``: source rows where a grasp starts or ends; the interval ending at a grasp
     start and the one starting at a grasp end last at least ``cfg.grasp_dwell_s`` so the fingers
     settle on (or off) the object before the arm moves it (the source gripper stalls on the
     object within one control step, Reachy's position-servoed fingers in about 0.1-0.2 s).
-    The dwell is not spread by the sliding maximum."""
+    The dwell is not spread by the sliding maximum.
+
+    ``slides`` (T, n): source positions (m) of articulated slide joints (drawers). They move no
+    faster than ``cfg.slide_speed``: a drawer's damping resists the hand with a force proportional
+    to its speed, and Reachy's position-servoed arm, pulling a robosuite drawer (damping 100 N s/m)
+    at the source's 0.14 m/s, lagged its reference by 3-4 cm (MimicGen MugCleanup tcp_tracking)."""
     dt = np.diff(times)
     required = np.max(np.abs(np.diff(q, axis=0)) / (VELOCITY * cfg.velocity_scale), axis=1) / dt
+    if slides is not None and np.size(slides) and cfg.slide_speed:
+        s = np.nan_to_num(np.asarray(slides, float).reshape(len(times), -1))
+        required = np.maximum(required, np.max(np.abs(np.diff(s, axis=0)), axis=1) / cfg.slide_speed / dt)
     required = np.maximum(required, 1.0)
     window = max(1, round(cfg.dilation_window_s / np.median(dt)))
     out = np.maximum(maximum_filter1d(required, 2 * window + 1, mode="nearest"), required)
@@ -59,6 +67,22 @@ def dilation(times, q, cfg: RetargetConfig, grasp_events=None):
         if 0 <= i < len(dt):
             out[i] = max(out[i], cfg.grasp_dwell_s / dt[i])
     return out
+
+
+def slide_positions(src) -> np.ndarray | None:
+    """(T, n) source positions of the articulated joints of ``src`` whose MJCF type is ``slide``
+    (read from the scene XML, no simulator), or None."""
+    if src.scene is None or not src.articulations:
+        return None
+    import xml.etree.ElementTree as ET
+    try:
+        root = ET.fromstring(src.scene.mjcf)
+    except ET.ParseError:
+        return None
+    kinds = {j.get("name"): j.get("type", "hinge") for j in root.iter("joint") if j.get("name")}
+    cols = [a.qpos[:, i] for a in src.articulations.values() for i, n in enumerate(a.joint_names)
+            if kinds.get(n) == "slide"]
+    return np.stack(cols, axis=1) if cols else None
 
 
 def grasp_events(labels) -> list[tuple[str, int]]:
@@ -73,11 +97,11 @@ def grasp_events(labels) -> list[tuple[str, int]]:
     return out
 
 
-def clock(times, q, cfg: RetargetConfig, grasp_events=None) -> Clock:
+def clock(times, q, cfg: RetargetConfig, grasp_events=None, slides=None) -> Clock:
     """Output clock for source times (T,) and source-rate joint values q (T, 22)
-    (``grasp_events``: see :func:`dilation`)."""
+    (``grasp_events``, ``slides``: see :func:`dilation`)."""
     times = np.asarray(times, float)
-    d = dilation(times, q, cfg, grasp_events)
+    d = dilation(times, q, cfg, grasp_events, slides)
     warped = np.r_[0.0, np.cumsum(np.diff(times) * d)]
     n = int(np.ceil(warped[-1] / DT - 1e-9)) + 1
     t = np.arange(n) * DT

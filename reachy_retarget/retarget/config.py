@@ -49,6 +49,13 @@ class RetargetConfig:
     place_rest_turn: float = 0.05        # rad, the placed object is released within this of its rest orientation
     place_finger_clearance: float = 0.001  # m, finger depth into scene boxes a placement may add
     place_side_clearance: float = 0.01   # m, scene geometry this close beside the resting object = insertion, not placed
+    place_hold_squeeze: bool = True      # keep the release squeeze while a placed object is carried down, then open
+    approach_narrow: bool = True         # open only as wide as the next/previous grasped object needs (targets.approach_width)
+    approach_clearance: float = 0.008    # m per side beyond the object (and its offset from the grasp center)
+    straight_approach: bool = True       # final approach to a pick along the grasp approach axis (targets.straight_approach)
+    straight_approach_height: float = 0.005  # m fingertip clearance above the object below which the approach is straight
+    straight_approach_blend: float = 0.03   # m over which the sideways offset returns
+    straight_min_lift: float = 0.015     # m an object must rise during a grasp for its approach to be straightened
     floor_support_height: float = 0.05   # support boxes whose top is lower are the floor
 
     # Grasp re-selection (targets.py): offsets of the source grasp-center frame.
@@ -129,6 +136,7 @@ class RetargetConfig:
     # Timing.
     velocity_scale: float = 0.95         # fraction of robot.VELOCITY used for time scaling
     dilation_window_s: float = 0.1       # max-filter half window of the time dilation
+    slide_speed: float = 0.04            # m/s, articulated slide joints (drawers) move no faster (timing.dilation)
     grasp_dwell_s: float = 0.3           # minimum duration of the source step into / out of a grasp
     rate_hz: float = float(HZ)
 

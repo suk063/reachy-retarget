@@ -44,7 +44,7 @@ additions marked new):
 | `joint_margin` | measured arm and neck joints >= 0.025 rad inside the URDF limits |
 | `arm_speed`, `neck_speed`, `base_speed` | measured arm <= 1.001 rad/s, neck <= 30 deg/s + 0.001 (new), base body-frame vx, vy <= 0.611 m/s, wz <= 114 deg/s + 0.001 |
 | `tcp_tracking` | measured TCP (`{l,r}_arm_tip`) vs FK of the retargeted q at the same instant (the reference, not the lead-shifted ctrl): position <= 3 cm, rotation <= 0.2 rad (new) |
-| `grasp_drift` | while a hand is commanded closed (finger reference below the 0.5 opening angle, or the episode's grasp label `validation["grasp_object"]` set: large objects stall the fingers above the 0.5 opening) and holds an object lifted by > 15 mm with both pads (positive normal force), the object pose relative to the grasp-center site drifts <= 3 mm / 3 deg from its pose at acquisition |
+| `grasp_drift` | while a hand is commanded closed on the object (finger reference below the 0.5 opening angle, or the episode's grasp label `validation["grasp_object"]` set: large objects stall the fingers above the 0.5 opening; and, with `cfg.release_at_contact`, at or below the angle at which its pads touch the object across its extent along the closing axis, `contact_angles`: commanded wider, the hand has released it and what follows is judged by `task_final_pose`, `objects_at_rest` and `object_environment_penetration`; each release is recorded with its time and rule in `metrics["grasps"][...]["releases"]`) and holds an object lifted by > 15 mm with both pads (positive normal force), the object pose relative to the grasp-center site drifts <= 3 mm / 3 deg from its pose at acquisition |
 | `carry_contact` | both pads touch the carried object during >= 95 % of each carry |
 | `task_final_pose` | every `manipulated` object with a scene body is within `cfg.object_position_tol_m` (default 3 cm, about a can radius; new) of its final pose in `ep.objects` (the source's final object pose): after the hold when the source object is at rest at its end, else at the instant the retargeted trajectory reaches the source's last frame (see *Source end motion*); orientation is reported only (symmetric objects) |
 | `objects_at_rest` | at the end of the hold every free object moves < 0.02 m/s and < 0.2 rad/s; required for every free body except tracked objects that still move at the end of the source (reported only, see *Source end motion*) |
@@ -81,6 +81,7 @@ from ..robot import gripper as rgripper
 from ..robot.collision import min_clearance
 from ..robot.mjcf import FINGER_BODIES
 from ..schema.episode import DT, PhysicsRollout, ReachyEpisode
+from ..schema.rotations import quat_to_matrix
 from ..schema.source import SceneRef
 from .scene import MissingSceneAssets, Scene, build_scene, parked_bodies, reset, subtree
 
@@ -116,6 +117,8 @@ class PhysicsConfig:
     velocity_reference: bool = True  # lead each servo command by its kv/kp (see servo_lead)
     park_distance_m: float = 2.0   # untracked free bodies farther than this from the workspace are removed
     source_rest_window_s: float = 0.1  # source time over which the end speed of an object is measured
+    release_at_contact: bool = True  # a hand commanded wider than pad contact with o has released o
+    grasp_trace: bool = False  # record per-row grasp measurements in metrics["grasp_traces"] (audits)
     thresholds: dict = field(default_factory=lambda: dict(THRESHOLDS))
 
 
@@ -343,6 +346,22 @@ def source_end_motion(ep: ReachyEpisode, track, window_s: float, linear_m_s: flo
     return out
 
 
+def contact_angles(grasp_frames, object_poses, geometry) -> tuple[np.ndarray, np.ndarray]:
+    """(angle (n,), width (n,)): the finger angle at which a hand's pads touch an object on both
+    sides, ``gripper.width_to_angle`` of the object's extent along the closing axis inside the pad
+    prism (:func:`retarget.targets.closing_extent`, the width logic of the retargeted finger
+    command), for grasp-center frames (n, 4, 4) and object body poses (n, 7: xyz + wxyz) of the
+    body that ``geometry`` describes. NaN where nothing of the object lies between the pads or it
+    has no box geometry."""
+    from types import SimpleNamespace
+
+    from ..retarget.targets import closing_extent
+    n = len(grasp_frames)
+    track = SimpleNamespace(pose=np.asarray(object_poses, float), valid=np.ones(n, bool), geometry=geometry)
+    w = closing_extent(track, np.arange(n), np.asarray(grasp_frames)[:, :3, 1], grasp_frames)
+    return np.where(np.isfinite(w), rgripper.width_to_angle(np.nan_to_num(w)), np.nan), w
+
+
 def _track_body(oid, track, free, cfg):
     candidates = [(cfg.object_bodies or {}).get(oid), track.geometry.get("body"), oid, f"{oid}_main"]
     return next((c for c in candidates if c and c in free), None)
@@ -379,6 +398,78 @@ def _parked(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig) -> dict[
     return parked_bodies(scene_ref, keep, np.concatenate(pts), cfg.park_distance_m)
 
 
+def grasp_carries(grec: dict, obj_poses: dict, geometry: dict, z0: dict, th: dict, cfg: PhysicsConfig,
+                  episode_time_offset: float = 0.0):
+    """Carry phases per (side, object) from the recorded rows (``grec``, one entry per recorded
+    row after the reset row; ``obj_poses`` {object: (n, 7)} measured body poses on the same rows).
+
+    A hand is closed on object o while its finger reference is below the 0.5 opening angle or its
+    grasp label is set (``closed_point``) and, with ``cfg.release_at_contact``, its reference is at
+    or below the angle at which its pads touch o (:func:`contact_angles` on the measured
+    grasp-center and object poses; NaN, nothing between the pads, adds no condition). A carry is
+    acquired while closed, with both pads on o and o lifted by more than the acquisition lift; it
+    ends at the first row the hand is not closed, recorded in ``releases`` with its time and rule
+    (``pad_contact_angle``: commanded wider than pad contact; ``closed_point``: the old rule).
+    Returns ({(side, o): carry state}, traces or None)."""
+    n = len(grec["time"])
+    sides = ("left", "right")
+    objs = list(obj_poses)
+    t = np.asarray(grec["time"])
+    cmd = np.asarray(grec["cmd"]).reshape(n, 2)
+    held = np.asarray(grec["held"], bool).reshape(n, 2)
+    site = np.asarray(grec["site"]).reshape(n, 2, 4, 4)
+    finger = np.asarray(grec["finger"]).reshape(n, 2)
+    bil = np.asarray(grec["bilateral"], bool).reshape(n, 2, len(objs))
+    carry, traces = {}, ({} if cfg.grasp_trace else None)
+    for i, side in enumerate(sides):
+        closed_point = (cmd[:, i] < CLOSED_ANGLE) | held[:, i]
+        for k, o in enumerate(objs):
+            P = obj_poses[o]
+            st = dict(anchor=None, phases=0, acquired=False, carry_s=0.0, bilateral_s=0.0, translation=0.0,
+                      rotation=0.0, releases=[])
+            carry[(side, o)] = st
+            a_c, w_c = np.full(n, np.nan), np.full(n, np.nan)
+            if cfg.release_at_contact and n:
+                rows = np.flatnonzero(closed_point)
+                if len(rows):
+                    a_c[rows], w_c[rows] = contact_angles(site[rows, i], P[rows], geometry[o])
+            opened = np.isfinite(a_c) & (cmd[:, i] > a_c)
+            closed = closed_point & ~opened
+            Rs = quat_to_matrix(P[:, 3:]) if n else np.zeros((0, 3, 3))
+            rel = np.zeros((n, 4, 4))
+            Si = np.linalg.inv(site[:, i]) if n else rel
+            body = np.zeros((n, 4, 4))
+            body[:, :3, :3], body[:, :3, 3], body[:, 3, 3] = Rs, P[:, :3], 1.0
+            rel = Si @ body
+            lift = P[:, 2] - z0[o]
+            for r in range(n):
+                b = bool(bil[r, i, k])
+                if not closed[r]:
+                    if st["anchor"] is not None:  # end of a carry phase: when and by which rule
+                        st["releases"].append({
+                            "time_s": float(t[r]), "episode_time_s": float(t[r] + episode_time_offset),
+                            "rule": "pad_contact_angle" if closed_point[r] else "closed_point",
+                            "finger_command_rad": float(cmd[r, i]), "finger_measured_rad": float(finger[r, i]),
+                            "contact_angle_rad": float(a_c[r]), "contact_width_m": float(w_c[r]),
+                            "translation_m": st["translation"], "rotation_rad": st["rotation"]})
+                    st["anchor"] = None
+                    continue
+                if st["anchor"] is None and b and lift[r] > th["acquisition_lift_m"]:
+                    st["anchor"], st["acquired"] = rel[r], True
+                    st["phases"] += 1
+                if st["anchor"] is not None:
+                    delta = np.linalg.inv(st["anchor"]) @ rel[r]
+                    st["translation"] = max(st["translation"], float(np.linalg.norm(delta[:3, 3])))
+                    st["rotation"] = max(st["rotation"], _rot_angle(delta[:3, :3]))
+                    st["carry_s"] += DT
+                    st["bilateral_s"] += DT * b
+            if traces is not None:
+                rv = Rotation.from_matrix(rel[:, :3, :3]).as_rotvec() if n else np.zeros((0, 3))
+                traces[f"{side}/{o}"] = np.c_[t, cmd[:, i], a_c, closed_point, bil[:, i, k], lift, rel[:, :3, 3], rv,
+                                              finger[:, i], w_c]
+    return carry, traces
+
+
 def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None = None, *,
              asset_resolver=None, meshdir=None):
     """Run tier P; returns ({"passed", "reasons", "metrics"}, PhysicsRollout | None)."""
@@ -413,8 +504,10 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
     sites = {s: m.site(f"{p}{s}_tcp").id for s in ("left", "right")}
     grasp_sites = {s: m.site(f"{p}{s}_grasp").id for s in ("left", "right")}
     z0 = {o: float(d.xpos[b][2]) for o, b in objects.items()}
-    carry = {(s, o): dict(anchor=None, phases=0, acquired=False, carry_s=0.0, bilateral_s=0.0, translation=0.0,
-                          rotation=0.0, phase_bilateral=[]) for s in ("left", "right") for o in objects}
+    finger_q = [m.jnt_qposadr[m.joint(f"{p}{n}").id] for n in JOINTS[20:22]]
+    # per recorded row: finger reference, grasp label, grasp-center site poses, measured fingers,
+    # objects touched by both pads of each hand (evaluated after the rollout, see grasp_carries)
+    grec = {"time": [], "cmd": [], "held": [], "site": [], "finger": [], "bilateral": []}
 
     rows = {"time": [0.0], "qpos": [d.qpos.copy()], "qvel": [d.qvel.copy()], "ctrl": [d.ctrl.copy()],
             "ref": [ep.q[0].copy()],
@@ -424,35 +517,26 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
 
     labels = np.asarray(ep.validation.get("grasp_object", np.full((ep.length, 2), -1)))
 
+    def row_at(k):
+        """Episode row at the end of physics step k (clamped: settle -> 0, hold -> last row)."""
+        t = ep.time[0] + (k + 1) * timestep - n_settle * timestep
+        return int(np.clip(np.searchsorted(ep.time, t, side="right") - 1, 0, ep.length - 1))
+
     def held_at(k):
         """Retargeting grasp labels (left, right) at the end of physics step k."""
         t = ep.time[0] + (k + 1) * timestep - n_settle * timestep
         if t < ep.time[0] or t > ep.time[-1]:
             return (False, False)
-        i = min(int(np.searchsorted(ep.time, t, side="right")) - 1, ep.length - 1)
-        return tuple(bool(x) for x in labels[i] >= 0)
+        return tuple(bool(x) for x in labels[row_at(k)] >= 0)
 
-    def grasp_update(d, cmd, held):
+    def grasp_record(d, cmd, held):
         holds = mon.pad_contacts(d)
-        for (side, o), st in carry.items():
-            i = 0 if side == "left" else 1
-            closed = cmd[20 + i] < CLOSED_ANGLE or held[i]
-            b = objects[o]
-            bilateral = b in holds[side]
-            lift = float(d.xpos[b][2]) - z0[o]
-            rel = np.linalg.inv(_site_pose(d, grasp_sites[side])) @ _body_pose(d, b)
-            if not closed:
-                st["anchor"] = None
-                continue
-            if st["anchor"] is None and bilateral and lift > th["acquisition_lift_m"]:
-                st["anchor"], st["acquired"] = rel, True
-                st["phases"] += 1
-            if st["anchor"] is not None:
-                delta = np.linalg.inv(st["anchor"]) @ rel
-                st["translation"] = max(st["translation"], float(np.linalg.norm(delta[:3, 3])))
-                st["rotation"] = max(st["rotation"], _rot_angle(delta[:3, :3]))
-                st["carry_s"] += DT
-                st["bilateral_s"] += DT * bilateral
+        grec["time"].append(float(d.time))
+        grec["cmd"].append(cmd[20:22].copy())
+        grec["held"].append(held)
+        grec["site"].append([_site_pose(d, grasp_sites[s]) for s in ("left", "right")])
+        grec["finger"].append(d.qpos[finger_q].copy())
+        grec["bilateral"].append([[b in holds[s] for b in objects.values()] for s in ("left", "right")])
 
     for k in range(n_steps):
         d.ctrl[act] = ctrl_steps[k]
@@ -472,11 +556,15 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
             rows["tcp"].append([_site_pose(d, sites[s]) for s in ("left", "right")])
             for o, b in objects.items():
                 obj_rows[o].append(np.r_[d.xpos[b], d.xquat[b]])
-            grasp_update(d, ref_steps[k], held_at(k))
+            grasp_record(d, ref_steps[k], held_at(k))
     for w in BAD_WARNINGS:
         count = int(d.warning[int(getattr(mujoco.mjtWarning, w))].number)
         if count:
             warnings[w] = count
+
+    carry, traces = grasp_carries(grec, {o: np.array(r[1:]) for o, r in obj_rows.items()},
+                                  {o: ep.objects[o].geometry for o in objects}, z0, th, cfg,
+                                  episode_time_offset=float(ep.time[0]) - settle_s)
 
     qpos_names, qvel_names = _names(m)
     ctrl_names = [m.actuator(i).name for i in range(m.nu)]
@@ -570,7 +658,7 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
                                          f"{mo['linear_m_s']:.3f} m/s {mo['angular_rad_s']:.3f} rad/s"}
         rest[name]["required"] = rest_rule[name]["required"]
 
-    grasps = {f"{s}/{o}": {k: v for k, v in st.items() if k not in ("anchor", "phase_bilateral")}
+    grasps = {f"{s}/{o}": {k: v for k, v in st.items() if k != "anchor"}
               for (s, o), st in carry.items() if st["acquired"] or st["carry_s"]}
     for g in grasps.values():
         g["bilateral_fraction"] = g["bilateral_s"] / g["carry_s"] if g["carry_s"] else None
@@ -660,9 +748,20 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
         "peak_base_speed_body": mon.peak_base.tolist(),
         "tcp_position_error_max_m": pos_err.max(axis=0).tolist(), "tcp_rotation_error_max_rad": rot_err.max(axis=0).tolist(),
         "tcp_position_error_rms_m": np.sqrt((pos_err ** 2).mean(axis=0)).tolist(),
-        "grasps": grasps, "task": task, "unmapped_objects": unmapped, "objects_final_speed": rest,
+        "grasps": grasps, "grasp_release_rule": (
+            "a hand is closed on object o while its finger reference is below the 0.5 opening angle or the "
+            "grasp label is set, and (release_at_contact) at or below the angle at which its pads touch o "
+            "across its extent along the closing axis (contact_angles); a carry ends at the first row that "
+            "violates either (releases[].rule = pad_contact_angle | closed_point)"
+            if cfg.release_at_contact else "finger reference below the 0.5 opening angle or grasp label set"),
+        "task": task, "unmapped_objects": unmapped, "objects_final_speed": rest,
         "objects_at_rest_rule": rest_rule,
         "actuator_replay_max_abs_diff": replay_diff, "simulator_warnings": warnings,
         "steps": steps_done, "expected_steps": n_steps,
     }
+    if traces is not None:
+        metrics["grasp_traces"] = {
+            "columns": ["time_s", "finger_command_rad", "contact_angle_rad", "closed_point", "bilateral", "lift_m",
+                        "rel_x", "rel_y", "rel_z", "rel_rx", "rel_ry", "rel_rz", "finger_measured_rad", "contact_width_m"],
+            "rows": traces}
     return {"passed": all(gates.values()), "reasons": reasons, "metrics": metrics}, rollout
