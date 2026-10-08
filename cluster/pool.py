@@ -34,7 +34,7 @@ if [ ! -d /tmp/rr2/release/{rel} ]; then
 fi
 """
 
-LAUNCH = """
+LAUNCH = """exec 9>&-  # release the prepare lock so the detached job does not inherit it
 job=/tmp/rr2/jobs/{id}
 if [ -e "$job/status.json" ]; then echo exists; exit 0; fi
 mkdir -p "$job"
