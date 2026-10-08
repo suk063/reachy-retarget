@@ -190,7 +190,9 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
     base_ref = place.base.copy()
     base_ref[:, 2] = np.unwrap(base_ref[:, 2])
     weights = {side: orientation_weight(src.time, labels[side], cfg,
-                                        hand_object_distance(src, key) if cfg.orientation_by_distance else None)
+                                        hand_object_distance(src, key, cfg.orientation_articulated,
+                                                             cfg.orientation_articulated_motion)
+                                        if cfg.orientation_by_distance else None)
                for key, side in sides.items()}
     pos_weights = ({side: position_weight(src.time, labels[side], cfg, idle_distance(src, key, cfg))
                     for key, side in sides.items()} if cfg.idle_position and place.mobile else {})
@@ -278,8 +280,8 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         # Releases open at the finger speed limit once the source fingers leave the object.
         for side, lab in labels.items():
             col = GRIPPERS.start + SIDES.index(side)
-            src_rows = release_starts(q_src[:, col], lab, cfg.release_start_angle)
             key = next(k for k, s in sides.items() if s == side)
+            src_rows = release_starts(q_src[:, col], lab, cfg.release_start_angle, cfg.release_at_command)
             placed = sorted(e for _, e, _, _ in place_diag.get(key, ())) if cfg.place_hold_squeeze else []
             if placed:
                 # a placed segment opens from its last held row (the source fingers are open by then)
@@ -290,7 +292,9 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
             starts = [int(np.searchsorted(clock.source_time, src.time[r], side="right")) - 1 for r in src_rows]
             exact_out = {int(np.searchsorted(clock.source_time, src.time[e - 1], side="right")) - 1 for e in placed}
             q[:, col], events = release_ramp(q[:, col], clock.time, starts, grasp_out[:, SIDES.index(side)],
-                                             VELOCITY[col] * cfg.velocity_scale, exact=exact_out)
+                                             VELOCITY[col] * cfg.velocity_scale, exact=exact_out,
+                                             rise=cfg.squeeze_angle + cfg.release_start_angle
+                                             if cfg.release_at_command else 0.0)
             release_diag[side] = {"source_rows": src_rows, "output_rows": events}
     qd = timing.velocity(q)
     t_time = _time.perf_counter()
@@ -336,7 +340,8 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         validation={"grasp_object": grasp_out},
         extra={"retarget": _jsonable(diag), "retarget_config": cfg.to_dict(), "grasp_object_ids": ids,
                "grasp_flips": _jsonable(place.flips),
-               "grasp_offsets": _jsonable({s: {"flip": bool(o[0]), "theta_deg": o[1], "tilt_deg": o[2]}
+               "grasp_offsets": _jsonable({s: {"flip": bool(o[0]), "theta_deg": o[1], "tilt_deg": o[2],
+                                               "lift_m": o[3] if len(o) > 3 else 0.0}
                                            for s, o in place.offsets.items()}),
                "grasp_offset_segments": _jsonable(placement_diagnostics(place)["segment_grasp_offsets"]),
                "notes": _notes(src, sides) + ([f"navigation regime: source effectors {dropped} not retargeted, "

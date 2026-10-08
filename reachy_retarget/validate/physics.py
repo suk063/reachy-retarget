@@ -357,7 +357,7 @@ def contact_angles(grasp_frames, object_poses, geometry) -> tuple[np.ndarray, np
     """(angle (n,), width (n,)): the finger angle at which a hand's pads touch an object on both
     sides, ``gripper.width_to_angle`` of the object's extent along the closing axis inside the pad
     prism (:func:`retarget.targets.closing_extent`, the width logic of the retargeted finger
-    command), for grasp-center frames (n, 4, 4) and object body poses (n, 7: xyz + wxyz) of the
+    command; per oriented part where the geometry records one), for grasp-center frames (n, 4, 4) and object body poses (n, 7: xyz + wxyz) of the
     body that ``geometry`` describes. NaN where nothing of the object lies between the pads or it
     has no box geometry."""
     from types import SimpleNamespace

@@ -85,13 +85,17 @@ def box_geometry(geometry: dict):
     return center, half
 
 
-def box_parts(geometry: dict) -> list[tuple[np.ndarray, np.ndarray]]:
-    """Exact solid boxes [(center (3,), half extents (3,)), ...] in the object frame: the parts of
-    a body-frame ``boxes`` union (empty if any part is malformed), else ``[box_geometry]`` (one
-    box, or [] without box geometry)."""
+def box_parts(geometry: dict, oriented: bool = False) -> list[tuple]:
+    """Solid boxes [(center (3,), half extents (3,)), ...] in the object frame: the parts of a
+    body-frame ``boxes`` union (empty if any part is malformed), else ``[box_geometry]`` (one box,
+    or [] without box geometry). Parts are object-frame AABBs; with ``oriented`` each entry is
+    ``(center, half extents, R (3, 3))`` and a part that records its oriented box (``obb``:
+    ``center``, ``half_extents``, ``quat`` wxyz; robosuite geoms turned in the body, e.g. the 1.4 mm
+    LIBERO bowl walls, whose AABBs are 13-29 mm thick) uses it."""
+    eye = np.eye(3)
     if geometry.get("kind") != "boxes":
         box = box_geometry(geometry)
-        return [] if box is None else [box]
+        return [] if box is None else [(*box, eye) if oriented else box]
     if geometry.get("frame", "body") != "body":
         return []
     out = []
@@ -100,7 +104,16 @@ def box_parts(geometry: dict) -> list[tuple[np.ndarray, np.ndarray]]:
         h = np.asarray(b.get("half_extents", ()), float)
         if c.shape != (3,) or h.shape != (3,):
             return []
-        out.append((c, h))
+        if not oriented:
+            out.append((c, h))
+            continue
+        o = b.get("obb")
+        if o is not None:
+            oc, oh, q = (np.asarray(o.get(k, ()), float) for k in ("center", "half_extents", "quat"))
+            if oc.shape == (3,) and oh.shape == (3,) and q.shape == (4,) and np.linalg.norm(q) > 0:
+                out.append((oc, oh, quat_to_matrix(q / np.linalg.norm(q))))
+                continue
+        out.append((c, h, eye))
     return out
 
 

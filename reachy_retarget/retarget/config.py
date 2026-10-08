@@ -43,8 +43,10 @@ class RetargetConfig:
     carry_max_slip: float = 0.03         # m, ... while staying this close to its median pose in the source grasp frame
     grasp_gap_s: float = 0.25            # shorter gaps between runs on the same object are bridged
     squeeze_angle: float = 0.05          # finger angle below object contact while grasping (0.4 Nm at kp 8)
+    grasp_width_rise: float | None = 0.002  # m a held grasp's width may rise above its running minimum (None: off)
     release_ramp: bool = True            # fingers open at their speed limit once the source fingers leave the object
     release_start_angle: float = 0.01    # rad of source-mapped opening past the post-grasp plateau that starts it
+    release_at_command: bool = True      # ... or rather from the grasp label's end (the source's open command)
     place_drops: bool = True             # a short source drop after a release is placed instead (targets.place_labels)
     place_max_drop: float = 0.04         # m, largest fall away from the source hand (release to rest) that is followed
     place_max_turn: float = 0.35         # rad, largest object turn from release to rest that is followed
@@ -53,6 +55,7 @@ class RetargetConfig:
     place_rest_turn: float = 0.05        # rad, the placed object is released within this of its rest orientation
     place_finger_clearance: float = 0.001  # m, finger depth into scene boxes a placement may add
     place_side_clearance: float = 0.01   # m, scene geometry this close beside the resting object = insertion, not placed
+    place_side_height: float = 0.5      # ... and reaching above this fraction of its height (a plate rim is not)
     place_hold_squeeze: bool = True      # keep the release squeeze while a placed object is carried down, then open
     approach_narrow: bool = True         # open only as wide as the next/previous grasped object needs (targets.approach_width)
     approach_clearance: float = 0.008    # m per side beyond the object (and its offset from the grasp center)
@@ -76,6 +79,12 @@ class RetargetConfig:
     arm_contact_weight: float = 1.0      # placement cost per arm_contact_scale of arm-link depth in scene boxes (keyframes)
     arm_contact_scale: float = 0.01      # m
     finger_depth_slack: float = 0.003    # offsets whose finger path sinks deeper into boxes than the best + this are dropped
+    support_lift_min: float = 0.002       # m of finger depth into supports while holding tolerated without a lift
+    support_lift_margin: float = 0.002    # m added to the depth (targets.support_lift)
+    support_lift_pickup: float = 0.01     # m, rows of a grasp until its object moved this far are the pick-up
+    support_lift_max: float | None = 0.015  # m, largest retraction of the grasp center along the approach axis
+    min_pad_coverage: float | None = 0.8  # offsets whose pads hold less of the object's closing extent than this
+                                          # fraction of the source frame's are dropped (targets.pad_coverage)
 
     # Object-centric grasps (targets.object_centric): the hand carries the object rigidly.
     object_centric: bool = True
@@ -94,6 +103,8 @@ class RetargetConfig:
     contact_strict_distance: float = 0.05  # grasp center to object surface: orientation strict within
     contact_free_distance: float = 0.12    # ... and free beyond (outside grasp segments)
     orientation_by_distance: bool = True
+    orientation_articulated: bool = True  # ... articulated fixtures with box geometry count as objects
+    orientation_articulated_motion: bool = True  # ... at distance 0 while their joints move after the hand reached them
     # Idle hands of mobile sources (targets.position_weight): the position is strict near task
     # objects and around grasps and free (nearest reachable pose, then tracked strictly) far away.
     idle_position: bool = True

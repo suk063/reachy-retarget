@@ -578,3 +578,104 @@ def test_steep_tilts_only_for_grasping_hands():
     assert max(tilts) == 90.0 and min(tilts) == -90.0
     assert max(abs(t) for t in {o[2] for o in offset_candidates(sym, cfg, grasps=False)}) == cfg.nongrasp_max_tilt_deg
     assert offset_candidates(sym, cfg)[0] == (False, 0.0, 0.0)
+
+
+def test_oriented_box_parts_give_the_thin_wall_between_the_pads():
+    from reachy_retarget.retarget.targets import closing_extent
+    # a 1.4 mm wall turned 45 deg about the object z axis: its body-frame AABB is ~2 cm thick
+    q = [np.cos(np.pi / 8), 0, 0, np.sin(np.pi / 8)]
+    geom = {"kind": "boxes", "frame": "body",
+            "boxes": [{"center": [0, 0, 0], "half_extents": [0.0076, 0.0076, 0.02],
+                       "obb": {"center": [0, 0, 0], "half_extents": [0.0007, 0.01, 0.02], "quat": q}},
+                      {"center": [0.2, 0, 0], "half_extents": [0.01, 0.01, 0.01]}]}
+    parts = footprint.box_parts(geom, oriented=True)
+    assert len(parts) == 2 and parts[1][2].tolist() == np.eye(3).tolist()
+    assert footprint.box_parts(geom)[0][1].tolist() == [0.0076, 0.0076, 0.02]   # unchanged AABB parts
+    track = ObjectTrack(np.tile([0, 0, 0, 1, 0, 0, 0.0], (1, 1)), np.ones(1, bool), "manipulated", geom)
+    F = np.eye(4)[None].copy()
+    c, s = np.cos(np.pi / 4), np.sin(np.pi / 4)   # closing axis along the wall normal (turned x)
+    F[0, :3, :3] = [[-s, c, 0], [c, s, 0], [0, 0, -1]]
+    assert closing_extent(track, [0], F[:, :3, 1], F)[0] == pytest.approx(0.0014, abs=1e-6)
+
+
+def test_release_starts_at_the_open_command_and_skips_the_plateau_peak():
+    from reachy_retarget.retarget.targets import release_ramp, release_starts
+    src = np.array([0.80, 0.80, 0.80, 0.85, 0.85, 0.849, 0.85, 1.00, 1.40, 1.80, 1.80])
+    lab = np.array([0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1])
+    assert release_starts(src, lab, 0.005, at_command=True) == [2]   # last held row
+    t = np.arange(len(src)) * 0.1
+    q, events = release_ramp(src, t, [2], lab, rate=3.0, rise=0.06)
+    assert events == [(2, 10)]              # the plateau's jitter is not the peak
+    np.testing.assert_allclose(q[3:5], [1.1, 1.4])
+    _, events = release_ramp(src, t, [2], lab, rate=3.0)
+    assert events == [(2, 4)]
+
+
+def test_a_held_grasp_does_not_follow_pried_fingers():
+    T = 8
+    eff = Effector(np.tile(np.eye(4), (T, 1, 1)), np.full(T, 0.1), width=np.array([.03, .0042, .0042, .0064, .0118, .0118, .03, .05]))
+    held = np.array([0, 1, 1, 1, 1, 1, 0, 0], bool)
+    a = finger_angles(eff, held, CFG)
+    b = finger_angles(eff, held, RetargetConfig(grasp_width_rise=None))
+    w = gripper.width_to_angle(0.0042 + CFG.grasp_width_rise) - CFG.squeeze_angle
+    np.testing.assert_allclose(a[3:6], w)          # capped at the running minimum + the rise
+    assert np.all(b[4:6] > a[4:6]) and a[6] == b[6]
+
+
+def test_a_plate_rim_beside_a_bowl_is_not_an_insertion():
+    from reachy_retarget.retarget.targets import _surrounded
+    T = 2
+    objs = {"bowl": ObjectTrack(np.tile([0, 0, 0.03, 1, 0, 0, 0], (T, 1)), np.ones(T, bool), "manipulated",
+                                {"kind": "box", "half_extents": [0.05, 0.05, 0.03]}),
+            "rim": ObjectTrack(np.tile([0.06, 0, 0.0075, 1, 0, 0, 0], (T, 1)), np.ones(T, bool), "manipulated",
+                               {"kind": "box", "half_extents": [0.005, 0.08, 0.0075]})}
+    src = SourceEpisode("f", "f/d", "0", "t", np.arange(T) * 0.1, {"h": Effector(np.tile(np.eye(4), (T, 1, 1)), np.ones(T))},
+                        objects=objs)
+    assert _surrounded(src, "bowl", 0, 0.01)                         # 15 mm rim within the old 5 mm floor
+    assert not _surrounded(src, "bowl", 0, 0.01, floor_fraction=0.5)  # but below half the bowl's height
+
+
+def test_support_lift_raises_fingers_off_the_table_only_for_sinking_grasps():
+    from reachy_retarget.retarget.targets import offset_matrix, support_lift
+    T = 6
+    # an 18 mm flat box on a table, held across its 43 mm width 9 mm above the table (Panda fingertips)
+    hand = np.tile(np.eye(4), (T, 1, 1))
+    hand[:, :3, :3] = np.diag([1.0, -1.0, -1.0])     # approach along -z
+    hand[:, 2, 3] = 0.009
+    objs = {"cheese": ObjectTrack(np.tile([0, 0, 0.009, 1, 0, 0, 0], (T, 1)), np.ones(T, bool), "manipulated",
+                                  {"kind": "box", "half_extents": [0.04, 0.0215, 0.009]}),
+            "table": ObjectTrack(np.tile([0, 0, -0.015, 1, 0, 0, 0], (T, 1)), np.ones(T, bool), "support",
+                                 {"kind": "box", "half_extents": [0.3, 0.3, 0.015]})}
+    src = SourceEpisode("f", "f/d", "0", "t", np.arange(T) * 0.1, {"h": Effector(hand, np.zeros(T), width=np.full(T, 0.043))},
+                        objects=objs)
+    lab = np.zeros(T, int)
+    finger = np.full(T, gripper.width_to_angle(0.043))
+    lift = support_lift(src, "h", "right", (False, 0.0, 0.0), lab, finger, CFG)
+    assert 0.008 < lift <= CFG.support_lift_max
+    assert offset_matrix((False, 0.0, 0.0, lift))[2, 3] == pytest.approx(-lift)
+    # a cube held at mid height keeps its grasp
+    hand2 = hand.copy()
+    hand2[:, 2, 3] = 0.03
+    src2 = SourceEpisode("f", "f/d", "0", "t", np.arange(T) * 0.1, {"h": Effector(hand2, np.zeros(T), width=np.full(T, 0.043))},
+                         objects={**objs, "cheese": ObjectTrack(np.tile([0, 0, 0.03, 1, 0, 0, 0], (T, 1)), np.ones(T, bool),
+                                                                "manipulated", {"kind": "box", "half_extents": [0.03] * 3})})
+    assert support_lift(src2, "h", "right", (False, 0.0, 0.0), lab, finger, CFG) == 0.0
+
+
+def test_orientation_is_strict_at_an_articulated_fixture_while_it_moves():
+    from reachy_retarget.retarget.targets import hand_object_distance
+    from reachy_retarget.schema.source import Articulation
+    T = 30
+    t = np.arange(T) * 0.1
+    pose = np.tile(np.eye(4), (T, 1, 1))
+    pose[:, 0, 3] = np.r_[np.linspace(0.5, 0.2, 10), np.full(5, 0.2), np.linspace(0.21, 0.5, 15)]  # reach, pull
+    drawer = ObjectTrack(np.tile([0.0, 0, 0, 1, 0, 0, 0], (T, 1)), np.ones(T, bool), "receptacle",
+                         {"kind": "aabb", "center": [0, 0, 0], "half_extents": [0.2, 0.2, 0.1]})
+    slide = np.r_[np.zeros(15), np.linspace(0.01, 0.3, 15)]
+    src = SourceEpisode("f", "f/d", "0", "t", t, {"h": Effector(pose, np.ones(T))}, objects={"drawer": drawer},
+                        articulations={"drawer": Articulation(["slide"], slide[:, None])})
+    assert np.all(np.isinf(hand_object_distance(src, "h")))       # no manipulated object
+    d = hand_object_distance(src, "h", articulated=True)
+    assert d[0] == pytest.approx(0.3) and np.all(d[14:] == 0.0)    # on the handle, and while it slides
+    d2 = hand_object_distance(src, "h", articulated=True, follow_motion=False)
+    assert d2[-1] == pytest.approx(0.3)                           # the static fixture body is left behind

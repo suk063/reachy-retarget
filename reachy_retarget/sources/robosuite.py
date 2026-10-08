@@ -294,30 +294,42 @@ class _Model:
         with the envelope under ``"aabb"``. An envelope hides the part a gripper holds: the MimicGen
         mug (32 convex parts) is held by its 9 mm handle and the ThreePieceAssembly pieces (12-22
         voxel boxes, 34-40 mm thick) are 102-160 mm envelopes, so a pad separation measured
-        against the envelope reads as fingers closed on nothing. With ``static`` only geoms of
+        against the envelope reads as fingers closed on nothing. Each part also records its
+        oriented box ``obb`` (``center``, ``half_extents``, ``quat`` wxyz in ``b``'s frame: the geom's
+        own box, exact for box geoms): the LIBERO bowl walls are 1.4 mm boxes turned about the bowl
+        axis whose body-frame AABBs are 13-29 mm thick. With ``static`` only geoms of
         bodies that cannot move are used (a fixture's articulated parts are left out). Empty when
         assets were missing (placeholder geoms carry no real extent).
         """
         m, d = self.m, self.d
         if self.missing:
             return {}
-        boxes = []
+        boxes, obbs = [], []
+        Rb = d.xmat[b].reshape(3, 3)
         for g in np.flatnonzero((m.body_rootid[m.geom_bodyid] == b)
                                 & ((m.geom_contype | m.geom_conaffinity) != 0)
                                 & ~(static & self.moving[m.geom_bodyid])):
             c, h = m.geom_aabb[g, :3], m.geom_aabb[g, 3:]
             corners = c + h * np.array([[sx, sy, sz] for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)])
-            world = d.geom_xpos[g] + corners @ d.geom_xmat[g].reshape(3, 3).T
-            local = (world - d.xpos[b]) @ d.xmat[b].reshape(3, 3)
+            Rg = d.geom_xmat[g].reshape(3, 3)
+            world = d.geom_xpos[g] + corners @ Rg.T
+            local = (world - d.xpos[b]) @ Rb
             boxes.append((local.min(0), local.max(0)))
+            # the geom-frame box itself (exact for a box geom, the geom-frame bounds of a mesh part), in b's frame
+            R = Rb.T @ Rg
+            q = np.empty(4)
+            self.mj.mju_mat2Quat(q, R.reshape(-1))
+            obbs.append((Rb.T @ (d.geom_xpos[g] + Rg @ c - d.xpos[b]), h.copy(), q))
         if not boxes:
             return {}
         lo, hi = np.min([x for x, _ in boxes], axis=0), np.max([x for _, x in boxes], axis=0)
         env = {"center": ((lo + hi) / 2).round(6).tolist(), "half_extents": ((hi - lo) / 2).round(6).tolist()}
         if parts and len(boxes) > 1:
             return {"kind": "boxes", "frame": "body", "aabb": env,
-                    "boxes": [{"center": ((a + z) / 2).round(6).tolist(), "half_extents": ((z - a) / 2).round(6).tolist()}
-                              for a, z in boxes]}
+                    "boxes": [{"center": ((a + z) / 2).round(6).tolist(), "half_extents": ((z - a) / 2).round(6).tolist(),
+                               "obb": {"center": oc.round(6).tolist(), "half_extents": oh.round(6).tolist(),
+                                       "quat": oq.round(7).tolist()}}
+                              for (a, z), (oc, oh, oq) in zip(boxes, obbs)]}
         return {"kind": "aabb", **env, "frame": "body"}
 
     def in_subtree(self, b: int, root: int) -> bool:

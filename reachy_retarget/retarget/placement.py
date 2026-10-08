@@ -31,7 +31,8 @@ from ..robot.resources import profile
 from ..schema.rotations import se2_compose
 from . import footprint
 from .config import RetargetConfig
-from .targets import (approach_width, finger_angles, finger_penetration, grasp_segments, grasp_symmetry,
+from .targets import (approach_width, finger_angles, finger_penetration, grasp_segments, grasp_symmetry, pad_coverage,
+                      support_lift,
                       hand_object_distance, held_masks, idle_distance, offset_candidates, orientation_weight,
                       position_weight, source_closed,
                       tcp_targets, touch_labels)
@@ -106,10 +107,12 @@ class PlacementProblem:
         self.symmetry = {side: grasp_symmetry(src, key, labels.get(key, np.full(src.length, -1)), cfg)
                          for key, side in sides.items()}
         self.options, self.finger_depth, self.rot_weight, self.pos_weight = {}, {}, {}, {}
+        self.pad_coverage = {}
         self.labels = {side: np.asarray(labels.get(key, np.full(src.length, -1))) for key, side in sides.items()}
         for key, side in sides.items():
             lab = labels.get(key, np.full(src.length, -1))
-            dist = hand_object_distance(src, key) if cfg.orientation_by_distance else None
+            dist = (hand_object_distance(src, key, cfg.orientation_articulated, cfg.orientation_articulated_motion)
+                    if cfg.orientation_by_distance else None)
             self.rot_weight[side] = orientation_weight(src.time, lab, cfg, dist)[self.kf]
             self.pos_weight[side] = (position_weight(src.time, lab, cfg, idle_distance(src, key, cfg))[self.kf]
                                      if cfg.idle_position and self.mobile else np.ones(len(self.kf)))
@@ -122,10 +125,18 @@ class PlacementProblem:
                 if not cfg.approach_narrow:
                     return finger
                 return np.minimum(finger, gripper.width_to_angle(approach_width(src, key, o, lab, cfg)))
+            if cfg.min_pad_coverage is not None:  # the pads must still hold what the source pads hold
+                cover = {o: pad_coverage(src, key, o, lab) for o in opts}
+                kept = [o for o in opts if cover[o] >= cfg.min_pad_coverage]
+                self.pad_coverage[side] = {f"{int(o[0])}/{o[1]:g}/{o[2]:g}": round(v, 3) for o, v in cover.items()}
+                opts = kept or opts
+            if cfg.support_lift_max and (lab >= 0).any():  # fingers clear of the support while holding
+                opts = [(*o, support_lift(src, key, side, o, lab, finger, cfg)) for o in opts]
             depth = {o: float(finger_penetration(src, key, side, o, touch, opened(o), cfg).max()) for o in opts}
             best = min(depth.values())
             self.options[side] = [o for o in opts if depth[o] <= best + cfg.finger_depth_slack]
-            self.finger_depth[side] = {f"{int(o[0])}/{o[1]:g}/{o[2]:g}": round(v, 4) for o, v in depth.items()}
+            self.finger_depth[side] = {f"{int(o[0])}/{o[1]:g}/{o[2]:g}" + (f"/{o[3]:g}" if len(o) > 3 else ""): round(v, 4)
+                                     for o, v in depth.items()}
         self.targets = {}
         for key, side in sides.items():
             for o in self.options[side]:
@@ -280,6 +291,10 @@ class PlacementProblem:
                 sym = grasp_symmetry(self.src, key, lab, cfg)
                 finger = finger_angles(self.src.effectors[key], lab >= 0, cfg)
                 opts = offset_candidates(sym, cfg)
+                if cfg.min_pad_coverage is not None:
+                    opts = [o for o in opts if pad_coverage(self.src, key, o, lab) >= cfg.min_pad_coverage] or opts
+                if cfg.support_lift_max:
+                    opts = [(*o, support_lift(self.src, key, side, o, lab, finger, cfg)) for o in opts]
                 depth = {o: float(finger_penetration(self.src, key, side, o, lab, finger, cfg)[a:b].max()) for o in opts}
                 best_depth = min(depth.values())
                 opts = [o for o in opts if depth[o] <= best_depth + cfg.finger_depth_slack]
@@ -458,7 +473,7 @@ class PlacementProblem:
             scored = [(Score(float(proxy[i]), {}, {}, self.nominal.copy()), i) for i in order]
         best, i = min(scored, key=lambda s: s[0].cost)
         diag = {"candidates": len(cand), "scored": len(order), "proxy": float(proxy[i]), "details": best.details,
-                "grasp_symmetry": self.symmetry, "finger_depth_by_offset": self.finger_depth,
+                "grasp_symmetry": self.symmetry, "finger_depth_by_offset": self.finger_depth, "pad_coverage_by_offset": self.pad_coverage,
                 "obstacle_notes": self.obstacles.notes, "keyframes": self.kf.tolist()}
         return self._placement(cand[i], best, diag)
 
@@ -489,7 +504,9 @@ def diagnostics(p: Placement) -> dict:
     """JSON-compatible summary of a placement for ``episode.extra``."""
     key = "offset" if p.mobile else "pose"
     return {"mobile": p.mobile, key: np.asarray(p.pose).tolist(), "flips": p.flips,
-            "grasp_offsets": {s: {"flip": bool(o[0]), "theta_deg": o[1], "tilt_deg": o[2]} for s, o in p.offsets.items()},
+            "grasp_offsets": {s: {"flip": bool(o[0]), "theta_deg": o[1], "tilt_deg": o[2],
+                                  "lift_m": o[3] if len(o) > 3 else 0.0} for s, o in p.offsets.items()},
             "segment_grasp_offsets": {s: [{"rows": [int(a), int(b)], "flip": bool(o[0]), "theta_deg": o[1],
-                                           "tilt_deg": o[2]} for a, b, o in segs] for s, segs in p.segments.items()},
+                                           "tilt_deg": o[2], "lift_m": o[3] if len(o) > 3 else 0.0}
+                                          for a, b, o in segs] for s, segs in p.segments.items()},
             "cost": p.cost, **p.diagnostics}

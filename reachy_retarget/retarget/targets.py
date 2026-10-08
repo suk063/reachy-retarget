@@ -47,14 +47,64 @@ IDLE_FINGER = gripper.CONTACT_ANGLE     # inactive hands: fingers just touching,
 
 
 def offset_matrix(offset) -> np.ndarray:
-    """4x4 grasp-center offset of ``offset`` = bool flip or (flip, theta_deg, beta_deg)."""
-    flip, theta, beta = (offset, 0.0, 0.0) if isinstance(offset, (bool, np.bool_)) else offset
+    """4x4 grasp-center offset of ``offset`` = bool flip or (flip, theta_deg, beta_deg[, lift_m]):
+    the grasp center first retracted by ``lift_m`` along the source approach axis (see
+    :func:`support_lift`), then turned about it."""
+    if isinstance(offset, (bool, np.bool_)):
+        offset = (offset, 0.0, 0.0)
+    flip, theta, beta = offset[:3]
+    lift = float(offset[3]) if len(offset) > 3 else 0.0
     a, b = np.pi * bool(flip) + np.radians(theta), np.radians(beta)
     Rz = np.array([[np.cos(a), -np.sin(a), 0], [np.sin(a), np.cos(a), 0], [0, 0, 1.0]])
     Ry = np.array([[np.cos(b), 0, np.sin(b)], [0, 1.0, 0], [-np.sin(b), 0, np.cos(b)]])
     M = np.eye(4)
     M[:3, :3] = Rz @ Ry
+    M[2, 3] = -lift
     return M
+
+
+def support_lift(src, key, side, offset, labels, finger, cfg: RetargetConfig) -> float:
+    """Retraction (m) along the source approach axis that keeps Reachy's fingers out of the support
+    and fixture boxes while effector ``key`` picks an object up (grasp rows of ``labels`` while the
+    object is within ``cfg.support_lift_pickup`` of where it was taken; fingers at ``finger`` angles
+    (T,); set-downs into receptacles are not lifted), 0 when they sink at most ``cfg.support_lift_min`` (or the source grasp
+    frame itself does: a tilt or turn is not made feasible by lifting it; ManiSkill StackPyramid lost
+    4 of 5 P passes and robomimic Lift demo 3 one that way): the depth plus
+    ``cfg.support_lift_margin``, at most ``cfg.support_lift_max``, reduced in 2 mm steps while the
+    pads would hold less than ``cfg.min_pad_coverage`` of what the source frame holds
+    (:func:`pad_coverage`). Reachy's pads reach 19-21 mm past the grasp center (the Panda's 9 mm):
+    the Panda holds the 18 mm LIBERO cream cheese 9 mm above the table, where Reachy's fingers stand
+    on the table and the hand stalls 17 mm above its reference. The object path is unchanged (a
+    constant offset in the hand frame)."""
+    if cfg.support_lift_max is None or cfg.support_lift_max <= 0:
+        return 0.0
+    lab = np.asarray(labels)
+    ids = manipulated_ids(src.objects)
+    rows = []
+    for a, b in grasp_segments(lab):  # the pick-up: rows while the object is still where it was taken
+        p = src.objects[ids[lab[a]]].pose[a:b, :3]
+        rows += list(a + np.flatnonzero(np.linalg.norm(p - p[0], axis=1) <= cfg.support_lift_pickup))
+    rows = np.asarray(rows, int)
+    if not len(rows):
+        return 0.0
+    from dataclasses import replace
+    sup = {n: o for n, o in src.objects.items() if o.role in ("support", "fixture")}
+    if not sup:
+        return 0.0
+    s2 = replace(src, objects=sup)
+    base = tuple(offset[:3]) if not isinstance(offset, (bool, np.bool_)) else (offset, 0.0, 0.0)
+    free = np.full(len(lab), -1)
+    if float(finger_penetration(s2, key, side, (False, 0.0, 0.0), free, finger, cfg, rows=rows).max()) \
+            <= cfg.support_lift_min:
+        return 0.0  # the source grasp keeps Reachy's fingers clear: an offset is not made feasible by lifting it
+    depth = float(finger_penetration(s2, key, side, base, free, finger, cfg, rows=rows).max())
+    if depth <= cfg.support_lift_min:
+        return 0.0
+    lift = min(depth + cfg.support_lift_margin, cfg.support_lift_max)
+    while lift > 0 and cfg.min_pad_coverage is not None \
+            and pad_coverage(src, key, (*base, lift), lab) < cfg.min_pad_coverage:
+        lift -= 0.002
+    return round(max(lift, 0.0), 4)
 
 
 def offset_matrices(offset) -> np.ndarray:
@@ -409,7 +459,14 @@ def finger_angles(effector, grasping, cfg: RetargetConfig, contact_width=None):
     """
     if effector.width is None:
         return gripper.opening_to_angle(effector.opening)
-    width = np.asarray(effector.width, float)
+    width = np.array(effector.width, float)
+    if cfg.grasp_width_rise is not None:
+        # While holding, the source fingers only open passively: LIBERO operators press a bowl held
+        # by its rim onto the plate and the rim pries the Panda's fingers from 4 to 12 mm before the
+        # open command. Reachy keeps its grip: at most ``grasp_width_rise`` above the narrowest
+        # width of the grasp so far.
+        for a, b in _runs(np.asarray(grasping, bool)):
+            width[a:b] = np.minimum(width[a:b], np.minimum.accumulate(width[a:b]) + cfg.grasp_width_rise)
     if contact_width is not None:
         width = np.where(grasping, np.minimum(width, contact_width), width)
     angle = gripper.width_to_angle(width)
@@ -497,17 +554,18 @@ def place_labels(src, key, labels, cfg: RetargetConfig, rest_speed=0.02):
         depth = finger_penetration(src, key, "right", False, trial, finger, cfg, rows=rows)
         if depth[1:].max() > depth[0] + cfg.place_finger_clearance:
             continue
-        if _surrounded(src, ids[lab[b - 1]], rest, cfg.place_side_clearance):
+        if _surrounded(src, ids[lab[b - 1]], rest, cfg.place_side_clearance, floor_fraction=cfg.place_side_height):
             continue  # an insertion (pod into its holder, objects into bins): the hand would jam it
         lab = trial
         out.append((int(b), int(rest + 1), drop, turn))
     return lab, out
 
 
-def _surrounded(src, oid, row, clearance, floor=0.005, n=5) -> bool:
+def _surrounded(src, oid, row, clearance, floor=0.005, n=5, floor_fraction=0.0) -> bool:
     """Whether scene geometry stands beside object ``oid`` at source row ``row``: points on the
     four vertical faces of its world-frame bounding box, pushed out by ``clearance`` and from
-    ``floor`` above its bottom to its top (the support below is not "beside"), fall inside another
+    ``floor`` (at least ``floor_fraction`` of the box height) above its bottom to its top (the
+    support below is not "beside"; nor is a plate rim 15 mm up a 64 mm bowl), fall inside another
     object's box parts or cylinder (receptacles count: their aabb envelope is the bin)."""
     track = src.objects[oid]
     box = box_geometry(track.geometry)
@@ -517,6 +575,7 @@ def _surrounded(src, oid, row, clearance, floor=0.005, n=5) -> bool:
     R, pos = quat_to_matrix(track.pose[row, 3:]), track.pose[row, :3]
     corners = (c + h * np.array([[x, y, z] for x in (-1, 1) for y in (-1, 1) for z in (-1, 1)])) @ R.T + pos
     lo, hi = corners.min(0), corners.max(0)
+    floor = max(floor, floor_fraction * (hi[2] - lo[2]))
     u = np.linspace(0, 1, n)
     zs = lo[2] + floor + u * max(hi[2] - lo[2] - floor, 0.0)
     pts = []
@@ -545,22 +604,25 @@ def _surrounded(src, oid, row, clearance, floor=0.005, n=5) -> bool:
     return False
 
 
-def release_starts(angles, labels, start_angle) -> list[int]:
+def release_starts(angles, labels, start_angle, at_command=False) -> list[int]:
     """Source rows (one per grasp segment end of ``labels``) of the last post-grasp plateau frame:
     the row before the source-mapped finger angle (T,) first exceeds its value at the segment end
-    by ``start_angle`` (the source fingers leave the object). Segments after which the hand never
-    opens are skipped."""
+    by ``start_angle`` (the source fingers leave the object). With ``at_command`` the last held
+    row of the segment instead (the grasp label ends with the source's open command; a Panda
+    ramping out of its squeeze leaves the object 0.1-0.4 s later, while the hand already retreats:
+    LIBERO bowls are dragged 3-5 mm by their rim on the plate). Segments after which the hand
+    never opens are skipped."""
     q = np.asarray(angles, float)
     held = np.asarray(labels) >= 0
     out = []
     for b in np.flatnonzero(held[:-1] & ~held[1:]) + 1:
         rows = np.flatnonzero(q[b:] > q[b] + start_angle)
         if len(rows):
-            out.append(int(b + rows[0] - 1))
+            out.append(int(b - 1) if at_command else int(b + rows[0] - 1))
     return out
 
 
-def release_ramp(angles, times, starts, labels, rate, exact=()):
+def release_ramp(angles, times, starts, labels, rate, exact=(), rise=0.0):
     """Finger angles (T,) with each release opened at ``rate`` (rad/s), on the output clock.
 
     The source gripper's measured width is a poor command for a release: a Panda whose finger
@@ -572,7 +634,9 @@ def release_ramp(angles, times, starts, labels, rate, exact=()):
     given angles before the next grasp of ``labels`` (never wider than the source opens before it
     closes again), and never below the given angles, except from the rows of ``exact`` (placed drops,
     whose given angles hold the squeeze to the start row and then jump to the source's opening),
-    where the ramp replaces them. Returns (angles, [(start row, peak row)])."""
+    where the ramp replaces them. Local maxima less than ``rise`` above the start angle do not count
+    (a ramp that starts at the open command, before the source fingers leave their plateau).
+    Returns (angles, [(start row, peak row)])."""
     q = np.array(angles, float)
     t = np.asarray(times, float)
     held = np.asarray(labels) >= 0
@@ -583,7 +647,7 @@ def release_ramp(angles, times, starts, labels, rate, exact=()):
         nxt = np.flatnonzero(held[r0 + 1:])
         stop = r0 + 1 + int(nxt[0]) if len(nxt) else len(q)
         p = r0 + 1
-        while p + 1 < stop and q[p + 1] >= q[p] - 1e-9:
+        while p + 1 < stop and (q[p + 1] >= q[p] - 1e-9 or q[p] < q[r0] + rise):
             p += 1
         if q[p] <= q[r0]:
             continue
@@ -600,41 +664,50 @@ PAD_PRISM = ((gripper.DISTAL_BOX[0][0], gripper.DISTAL_BOX[0][1]), (-gripper.MAX
              (gripper.DISTAL_BOX[2][0] - gripper.PAD_DEPTH, gripper.DISTAL_BOX[2][1] - gripper.PAD_DEPTH))
 
 
-def _clipped_span(center, axes, half, prism):
+_TRIPLES = np.array([(a, b, c) for a in range(12) for b in range(a + 1, 12) for c in range(b + 1, 12)])
+
+
+def _clipped_span(center, axes, half, prism, chunk=1024):
     """(lo, hi) (n,) of the closing coordinate (frame y) over the intersection of oriented boxes
     with an axis-aligned prism, NaN where they do not intersect. ``center`` (n, 3): box centres in
-    the frame; ``axes`` (n, 3, 3): box axes (columns) in the frame; ``half`` (3,): half extents.
-    Exact: the extremes of a linear function over the intersection polytope lie on vertices, which
-    are enumerated as the feasible intersections of three of its 12 bounding planes."""
+    the frame; ``axes`` (n, 3, 3): box axes (columns) in the frame; ``half`` (3,) or (n, 3): half
+    extents. Exact: the extremes of a linear function over the intersection polytope lie on
+    vertices, which are enumerated as the feasible intersections of three of its 12 bounding planes
+    (all 220 triples at once, ``chunk`` boxes at a time)."""
+    center, axes = np.asarray(center, float), np.asarray(axes, float)
+    n = len(center)
+    half = np.broadcast_to(np.asarray(half, float), (n, 3))
+    lo, hi = np.full(n, np.nan), np.full(n, np.nan)
+    for s0 in range(0, n, chunk):
+        sl = slice(s0, min(n, s0 + chunk))
+        lo[sl], hi[sl] = _clipped_span_block(center[sl], axes[sl], half[sl], prism)
+    return lo, hi
+
+
+def _clipped_span_block(center, axes, half, prism):
     n = len(center)
     # planes N . u = b in box coordinates u (|u_i| <= half_i): 6 box faces, then 6 prism faces
-    normals, offsets = [], []
+    N = np.zeros((n, 12, 3))
+    B = np.zeros((n, 12))
     for i in range(3):
-        e = np.zeros((n, 3))
-        e[:, i] = 1.0
-        normals += [e, e]
-        offsets += [np.full(n, -half[i]), np.full(n, half[i])]
+        N[:, 2 * i:2 * i + 2, i] = 1.0
+        B[:, 2 * i], B[:, 2 * i + 1] = -half[:, i], half[:, i]
     for k in range(3):
-        a = axes[:, k, :]  # frame coordinate k of a box point = center_k + a . u
-        normals += [a, a]
-        offsets += [prism[k][0] - center[:, k], prism[k][1] - center[:, k]]
-    N, B = np.stack(normals, 1), np.stack(offsets, 1)  # (n, 12, 3), (n, 12)
-    lo, hi = np.full(n, np.inf), np.full(n, -np.inf)
+        N[:, 6 + 2 * k] = N[:, 7 + 2 * k] = axes[:, k, :]  # frame coordinate k = center_k + a . u
+        B[:, 6 + 2 * k], B[:, 7 + 2 * k] = prism[k][0] - center[:, k], prism[k][1] - center[:, k]
+    a, b, c = _TRIPLES.T
+    n1, n2, n3 = N[:, a], N[:, b], N[:, c]                       # (n, 220, 3)
+    c23, c31, c12 = np.cross(n2, n3), np.cross(n3, n1), np.cross(n1, n2)
+    det = np.einsum("ntj,ntj->nt", n1, c23)
+    ok = np.abs(det) > 1e-12
+    u = (B[:, a, None] * c23 + B[:, b, None] * c31 + B[:, c, None] * c12) / np.where(ok, det, 1.0)[..., None]
+    p = center[:, None] + np.einsum("nij,ntj->nti", axes, u)
     tol = 1e-9
-    for a, b, c in ((a, b, c) for a in range(12) for b in range(a + 1, 12) for c in range(b + 1, 12)):
-        n1, n2, n3 = N[:, a], N[:, b], N[:, c]
-        c23, c31, c12 = np.cross(n2, n3), np.cross(n3, n1), np.cross(n1, n2)
-        det = np.einsum("ij,ij->i", n1, c23)
-        ok = np.abs(det) > 1e-12
-        if not ok.any():
-            continue
-        u = (B[:, a, None] * c23 + B[:, b, None] * c31 + B[:, c, None] * c12) / np.where(ok, det, 1.0)[:, None]
-        p = center + np.einsum("nij,nj->ni", axes, u)
-        ok &= np.all(np.abs(u) <= half + tol, axis=1)
-        for k in range(3):
-            ok &= (p[:, k] >= prism[k][0] - tol) & (p[:, k] <= prism[k][1] + tol)
-        lo = np.where(ok, np.minimum(lo, p[:, 1]), lo)
-        hi = np.where(ok, np.maximum(hi, p[:, 1]), hi)
+    ok &= np.all(np.abs(u) <= half[:, None] + tol, axis=2)
+    for k in range(3):
+        ok &= (p[..., k] >= prism[k][0] - tol) & (p[..., k] <= prism[k][1] + tol)
+    lo = np.where(ok, p[..., 1], np.inf).min(axis=1)
+    hi = np.where(ok, p[..., 1], -np.inf).max(axis=1)
     bad = ~(hi >= lo)
     lo[bad], hi[bad] = np.nan, np.nan
     return lo, hi
@@ -647,8 +720,8 @@ def closing_extent(track, rows, axes, frames=None) -> np.ndarray:
     envelope, so this is an upper bound). With grasp-center ``frames`` (n, 4, 4; closing axis =
     column 1), a box, aabb or union of ``boxes`` uses the span along the closing axis of the object
     inside the pad prism (``PAD_PRISM``: the pad faces' sweep), computed exactly per part
-    (:func:`_clipped_span`): the outermost surfaces the two pads meet, e.g. a hammer handle below
-    its head or a mug wall. NaN without box geometry, where the track is invalid, or (with
+    (:func:`_clipped_span`, oriented parts where recorded, :func:`.footprint.box_parts`): the
+    outermost surfaces the two pads meet, e.g. a hammer handle below its head or a mug wall. NaN without box geometry, where the track is invalid, or (with
     ``frames``) where no part lies inside the pad prism (nothing between the pads)."""
     rows = np.asarray(rows, int)
     out = np.full(len(rows), np.nan)
@@ -670,11 +743,59 @@ def closing_extent(track, rows, axes, frames=None) -> np.ndarray:
     Fi = np.swapaxes(F[:, :3, :3], 1, 2)
     A = Fi @ R  # object axes (columns) in the grasp frame
     origin = np.einsum("tij,tj->ti", Fi, track.pose[rows[ok], :3] - F[:, :3, 3])  # object origin, grasp frame
-    lo, hi = np.full(len(A), np.inf), np.full(len(A), -np.inf)
-    for c, h in box_parts(track.geometry):
-        a, b = _clipped_span(origin + A @ c, A, h, PAD_PRISM)
-        lo, hi = np.fmin(lo, a), np.fmax(hi, b)
+    lo, hi = _part_span(track.geometry, origin, A)
     out[ok] = np.where(hi >= lo, hi - lo, np.nan)
+    return out
+
+
+def _part_span(geometry, origin, A):
+    """(lo, hi) (n,) closing coordinates (grasp-frame y) of the object parts inside ``PAD_PRISM``,
+    for object origins (n, 3) and axes A (n, 3, 3) in the grasp frame; NaN where none is."""
+    parts = box_parts(geometry, oriented=True)
+    n, P = len(A), len(parts)
+    lo, hi = np.full(n, np.inf), np.full(n, -np.inf)
+    if not P or not n:
+        return np.full(n, np.nan), np.full(n, np.nan)
+    C = np.array([c for c, _, _ in parts])                     # (P, 3)
+    H = np.repeat(np.array([h for _, h, _ in parts]), n, axis=0)
+    R = np.array([r for _, _, r in parts])                     # (P, 3, 3)
+    centers = (origin[None] + np.einsum("nij,pj->pni", A, C)).reshape(-1, 3)
+    axes = np.einsum("nij,pjk->pnik", A, R).reshape(-1, 3, 3)
+    a, b = _clipped_span(centers, axes, H, PAD_PRISM)
+    lo = np.nanmin(np.where(np.isnan(a), np.inf, a).reshape(P, n), axis=0)
+    hi = np.nanmax(np.where(np.isnan(b), -np.inf, b).reshape(P, n), axis=0)
+    bad = ~(hi >= lo)
+    lo[bad], hi[bad] = np.nan, np.nan
+    return lo, hi
+
+
+def pad_coverage(src, key, offset, labels, per_segment=3) -> float:
+    """Smallest fraction (over grasp segments of ``labels``, sampled at ``per_segment`` rows each)
+    of the held object's closing extent between the pads of effector ``key``'s grasp frame composed
+    with ``offset`` (:func:`closing_extent` with frames, the part inside the pad prism) relative to
+    the source frame's (no offset). 1 without grasps or box geometry; 0 where the source frame
+    holds something and the offset frame nothing. A tilt about the closing axis keeps the pads on
+    the faces they press only for parts near the grasp center: the Panda holds the 18 mm LIBERO
+    cream cheese 25 mm below its grasp center, and a 75 deg tilt swings Reachy's pads past it."""
+    ids = manipulated_ids(src.objects)
+    lab = np.asarray(labels)
+    E = np.asarray(src.effectors[key].pose)
+    out = 1.0
+    for a, b in grasp_segments(lab):
+        track = src.objects[ids[lab[a]]]
+        if box_geometry(track.geometry) is None or cylinder_geometry(track.geometry) is not None:
+            continue
+        rows = np.unique(np.linspace(a, b - 1, per_segment).round().astype(int))
+        rows = rows[np.asarray(track.valid)[rows]]
+        if not len(rows):
+            continue
+        ref = closing_extent(track, rows, E[rows, :3, 1], E[rows])
+        Eo = E[rows] @ offset_matrices(offset)[rows] if np.ndim(offset_matrices(offset)) == 3 \
+            else E[rows] @ offset_matrix(offset)
+        got = closing_extent(track, rows, Eo[:, :3, 1], Eo)
+        ok = np.isfinite(ref) & (ref > 0)
+        if ok.any():
+            out = min(out, float(np.min(np.nan_to_num(got[ok]) / ref[ok])))
     return out
 
 
@@ -787,11 +908,28 @@ def finger_penetration(src, key, side, offset, labels, finger, cfg: RetargetConf
     return depth
 
 
-def hand_object_distance(src, key) -> np.ndarray:
+def hand_object_distance(src, key, articulated: bool = False, follow_motion: bool = True) -> np.ndarray:
     """Distance (T,) from effector ``key``'s grasp center to the nearest manipulated object
-    (box/cylinder surface or centre, :func:`object_distance`); inf without objects."""
+    (box/cylinder surface or centre, :func:`object_distance`); inf without objects. With
+    ``articulated`` also to the box geometry of objects that are articulated fixtures (their id
+    names an articulation: RoboCasa drawers, whose handle the source hand pulls without a grasp
+    label; a free orientation there turned Reachy's palm into the drawer front, 10-160 N)."""
     pts = src.effectors[key].pose[:, :3, 3]
-    d = [object_distance(pts, src.objects[k]) for k in manipulated_ids(src.objects)]
+    ids = list(manipulated_ids(src.objects))
+    fixtures = [k for k, o in src.objects.items() if articulated and k in src.articulations
+                and o.role != "manipulated" and box_geometry(o.geometry) is not None]
+    d = [object_distance(pts, src.objects[k]) for k in ids + fixtures]
+    t = np.asarray(src.time, float)
+    for k, dk in zip(fixtures, d[len(ids):]):
+        # the fixture track is its static body; while its joints move after the hand reached it
+        # (the drawer slides out with the hand on its handle) the hand stays on it
+        q = np.nan_to_num(np.asarray(src.articulations[k].qpos, float).reshape(len(t), -1))
+        if len(t) < 3 or not follow_motion:
+            continue
+        moving = np.abs(np.gradient(q, t, axis=0)).max(axis=1) > 0.005
+        for a, b in _runs(moving):
+            if np.nanmin(dk[max(a - 1, 0):a + 1]) <= 0.02:
+                dk[a:b] = 0.0
     if not d:
         return np.full(len(pts), np.inf)
     return np.nanmin(np.where(np.isnan(d), np.inf, d), axis=0)

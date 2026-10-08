@@ -160,11 +160,18 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      nut slides 5–44 mm while pushed onto the peg), the hand follows the object pose times the
      grasp at the segment's third frame, and the correction to the source hand path decays to
      zero over the approach/retreat windows. Grasps the source holds rigidly keep its hand path.
+   * *Pad coverage and support lift* (loop 3, `targets.pad_coverage`, `targets.support_lift`): offsets
+     whose pads hold less than 80 % of the closing extent the source frame's pads hold are dropped.
+     When the source grasp frame's fingers sink more than 2 mm into support/fixture boxes during the
+     pick-up (until the object has moved 1 cm), each candidate retracts the grasp center along the
+     source approach axis by its own depth + 2 mm (≤ 15 mm, reduced while the coverage would fall below
+     80 %): a fourth offset element `lift_m`, constant in the hand frame, so the object path is unchanged.
    * *Free orientation away from grasps* (`targets.orientation_weight`): the TCP orientation is
      strict inside grasp windows (segment − 0.5 s … + 0.3 s) and its weight decays to 0.05 over
      1 s outside them. Outside grasp segments the weight is further capped by a proximity ramp
      (`contact_strict_distance` 5 cm → `contact_free_distance` 12 cm, grasp center to the nearest
-     manipulated object): the orientation only matters where the fingers can touch something.
+     manipulated object or, loop 3, articulated fixture with box geometry, at distance 0 while its
+     joints move after the hand reached it within 2 cm): the orientation only matters where the fingers can touch something.
      Hands that never grasp (pushing, poking with the fingers) were strict on every frame and
      failed tier K at the first frames, where an RL Panda starts above the table with a wrist
      pose Reachy's ±30° wrist cannot copy; an approach that starts far away now starts free. A first IK pass with these weights gives the orientation Reachy prefers
@@ -256,10 +263,13 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
    curve, continuous and binary. While grasping, the pad separation is at most the held
    object's extent along the (re-selected) closing axis, minus a 0.05 rad squeeze
    (0.4 Nm at kp 8, about 8 N per pad). A 0.15 rad squeeze made the cube creep 4–7° in the hand.
-   *Release* (`targets.release_starts`, `release_ramp`, on the output clock): from the last
-   post-grasp plateau row of the source-mapped angle (the source fingers start to leave the
-   object; a Panda whose command ramps out of its squeeze stays at the object width for 0.2–0.3 s)
-   the fingers open at their 3 rad/s speed limit (× `velocity_scale`) toward the source's next
+   *Held width* (`grasp_width_rise`, loop 3): while a grasp label is set the source width rises at
+   most 2 mm above its running minimum (a bowl rim pried open as the operator presses it down is not
+   a release).
+   *Release* (`targets.release_starts`, `release_ramp`, on the output clock): from the last held
+   row (the source's open command, `release_at_command`, loop 3; before, the last post-grasp plateau
+   row of the source-mapped angle, which waited 0.2–0.4 s while a Panda ramped out of its squeeze
+   and the hand already retreated) the fingers open at their 3 rad/s speed limit (× `velocity_scale`) toward the source's next
    opening peak, never below the source-mapped angle (`extra["retarget"]["release_ramp"]`).
    *Placed drops* (`targets.place_labels`, derived label, `extra["retarget"]["placed_drops"]`):
    when the source object falls ≤ 4 cm away from the hand after the release and settles within
@@ -268,7 +278,8 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
    release (the source fingers open during the fall; following them left the cube unsqueezed as it
    landed), and opens from the last held row at the finger speed. Skipped when Reachy's
    fingers would sink into scene boxes on the way down or scene geometry stands within 1 cm
-   beside the settled object (insertions: the coffee pod into its holder, objects into bins).
+   beside the settled object above half its height (insertions: the coffee pod into its holder,
+   objects into bins; a plate rim 15 mm up a 64 mm bowl is not one, loop 3).
    *Approach opening* (`targets.approach_width`): within 12 cm of the next (or previous) grasped
    object the pads open only to its extent along the closing axis plus twice its centre offset
    plus 8 mm per side (Reachy's distal fingers are 27.5 mm thick, the Panda's about 10 mm).
@@ -807,6 +818,88 @@ cheese: K passes, P loses 1 dev and 2 held-out episodes: no grasp or forearm con
 above the shoulder (wine bottle onto the cabinet, 1.3 m); hold orientations beyond the wrist
 (moka-pot handle reached sideways); targets below 0.46 m (LIBERO floor and living-room scenes);
 bimanual reach (above).
+
+### Tier-P physics loop 3: rims, flat objects, drawers (2026-10-08)
+
+Dev (40, fixed before any change): LIBERO demos 0–1 of the 11 local files, RoboCasa OpenDrawer and
+PickPlaceCounterToCabinet episodes 0–3, robomimic `ph` Can and Square demos 0–4. Held-out (38, run once at
+the end): LIBERO demos 10–11, RoboCasa episodes 5–7, Can and Square demos 100–104. Regression: robomimic Lift
+0–4, ManiSkill PickCube teleop 10, StackPyramid/PushCube/PokeCube/PullCube `traj_0`–`4`. Runs in
+`runs/eval/pq3/` (`base-*` = HEAD `cecb3de`; `final2-dev`, `final-ho`, `final2-reg`). K / P (K & P):
+
+| set | baseline dev | final dev | baseline held-out | final held-out |
+| --- | --- | --- | --- | --- |
+| LIBERO (22) | 14 / 5 (4) | 13 / 11 (9) | 16 / 5 (5) | 15 / 8 (8) |
+| RoboCasa OpenDrawer (4 / 3) | 4 / 0 (0) | 3 / 1 (1) | 3 / 0 (0) | 3 / 1 (1) |
+| RoboCasa PickPlaceCounterToCabinet (4 / 3) | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) | 0 / 0 (0) |
+| robomimic Can (5) | 5 / 1 (1) | 5 / 2 (2) | 4 / 1 (1) | 4 / 0 (0) |
+| robomimic Square (5) | 3 / 0 (0) | 3 / 0 (0) | 4 / 1 (1) | 4 / 1 (1) |
+| **total** | 26 / 6 (5) | 24 / 14 (12) | 27 / 7 (7) | 26 / 10 (10) |
+
+LIBERO dev per task (K & P, baseline → final): black bowl between plate and ramekin 0 → 2, black bowl on the
+cookie box 0 → 1 (demo 0 passes P, fails K by 0.0625 rad on 15 frames of its now placed landing), cream cheese
+in the bowl 0 → 2; bowl on the plate, book, wine bottle, moka pot, floor and living-room tasks unchanged.
+Held-out gains: cream cheese 0 → 2, cookie-box bowl 0 → 1, OpenDrawer 0 → 1; losses: Can demo 103, bowl-on-plate
+demo 10 K (0.41 rad rotation residual while held), Square demo 101 K. The held-out Can now misses
+`task_final_pose` in all 5 (3.8–10.8 cm, before 1 of 5) and the bin depth in 1 (before 3): opening at the
+command releases the thrown can earlier. Gating the earlier release on the held object being at rest (found
+on held-out, so not an independent result) lost 2 dev episodes (Can demo 3, cream cheese demo 0) and was not
+kept (`runs/eval/pq3/x-restgate-dev.jsonl`). Regression (35): 34 / 32 (31) → 34 / 33 (32): Lift 5 / 5 (5),
+PickCube 10 / 10 (10) unchanged, PushCube traj 3 gains P. Seconds per episode (retarget + physics, one process): cream cheese 7.0 → 9.0,
+cookie-box bowl 12.7 → 11.5, Can 6.8 → 8.0; the exact clipped span is vectorized over parts and plane
+triples (a 40-part bowl's offset screen took 91 s per episode before).
+
+LIBERO dev by step (22): baseline 14 / 5 (4); oriented boxes + release at the open command 14 / 7 (6); held
+width 14 / 8 (7); plate rims are not insertions 13 / 9 (7); support lift 13 / 11 (9). Drawer orientation
+(OpenDrawer dev 0 → 1 K & P, 8 episodes incl. 8–11: 0 → 1).
+
+Root causes and changes (dev, measured):
+* *Envelope contact width (tier-P measurement).* The LIBERO bowl walls are 1.4 mm box geoms turned in the
+  bowl; their body-frame AABBs are 13–29 mm thick, so `closing_extent` gave a 37 mm contact width where the
+  squeezed pads measured 5.2 mm. The release rule then never saw the release (finger reference 0.2–0.52 rad
+  below the 0.89 rad "contact angle"), and the bowl tilting 18° on the plate as the hand opened was counted as
+  carry drift (12 mm / 0.32 rad, `carry_contact` 0.65; the carry itself drifted 0.4 mm / 1.3°). robosuite
+  `boxes` parts now also record their oriented box (`obb`: the geom's own box, exact for box geoms) and
+  `closing_extent` / `contact_angles` use it (12 mm; thresholds and gates unchanged).
+* *Release after the hand moved.* The ramp started at the end of the source-width plateau, 0.3–0.4 s after the
+  open command, while the dwell-stretched retreat already lifted the hand: the rim was dragged 4 mm / 3°.
+  The ramp now starts at the last held row (local maxima less than the squeeze + 0.01 rad above the start do
+  not end it).
+* *Pried fingers.* Operators press the bowl onto the plate after it lands; the rim pries the Panda's fingers
+  from 4.2 to 11.8 mm under a closed command, and Reachy following that width let the landing bowl turn
+  4–9° in its pads. Held width ≤ running minimum + 2 mm (0.5 mm: cookie-box bowl demo 1 2.2 → 3.2 mm, rejected).
+* *Drops onto plates treated as insertions.* The source opens 7–9 mm above the plate; `_surrounded` saw the
+  plate rim (15 mm above the bowl's bottom, bowl 64 mm) and kept a drop (8 mm / 8° while the pads opened).
+* *Flat objects.* The Panda holds the 18 mm cream cheese 9 mm above the table; Reachy's pads reach 19–21 mm
+  past the grasp center, so the source frame's fingers sink 6.3–7.0 mm into the table, and the 75° tilt the
+  wrist preferred passed the finger screen (depth relative to the best candidate): Reachy's hand stalled on
+  the table 17 mm above its reference and closed beside the cheese (no carry). The support lift (12 mm,
+  tilt −30/−45°) picks it in all 4 dev and held-out episodes. Lifting only where the source frame itself sinks: lifted tilts beat untilted grasps in
+  StackPyramid (P 4 → 0) and a 101° turn sank where the source did not (Lift demo 3, 3.3° drift); lifting
+  for set-downs moved the book (caddy insertion, 23 mm) and lost its K.
+* *Drawers.* The handle is no manipulated object and the drawer box (`stack_02…`, 0.38 N of damping at
+  0.04 m/s) is a static fixture track, so the hand was free (orientation weight 0.06, 1.2 rad from the source)
+  and the hand pressed into the drawer front with 10–62 N during the pull (160 N before it); the
+  arm lagged 2–6 cm and slipped off the handle (drawer 13 cm short). Articulated fixtures with box geometry
+  now count for the orientation ramp, at distance 0 while their joints move after the hand reached them.
+  Dev `tcp_tracking` failures 4 / 4 → 1 / 4, `joint_margin` 3 / 4 → 2 / 4.
+
+Rejected: narrowing the approach to the part between the pads at the grasp (the Panda slides over the rim
+along the pad width and pushes the bowl 1.6 cm while closing; narrowed fingers landed on the rim: bowl-on-plate
+demo 0 lost the bowl); re-straightening approaches along the tilted grasp frame's axis (LIBERO dev K & P −2,
+Can −1).
+
+Remaining failure modes: bowl-on-plate (dev demo 0: the source hand slides in over the rim along the pad
+width; Reachy's open mimic finger, 27.5 mm thick and reaching 19–21 mm past the grasp center, strikes the upper
+wall and tips the bowl 27° before the grasp; demo 1: the bowl turns 3.8° while pressed onto the
+plate); drawer pulls: wrist roll/pitch at the IK margin (0.045 rad) dip 0.03–0.07 rad under the pull
+(`joint_margin`, 2 of 4 dev, 2 of 3 held-out), and the hand slips off the handle in dev episode 3 (which now
+fails K: 2.25 rad rotation residual); PickPlaceCounterToCabinet fails K (base held off the counter by its
+footprint, 5–19 cm residuals); Can: the source throws the can
+14–22 cm into the bin and the landing depth (3.3–5.5 mm) exceeds the 20 Hz-sampled source reference + 1 mm
+(no change to the reference); Square: the nut pivots 4–5° about the handle grasp while carried and is pushed
+onto the peg (`grasp_drift` 5–68 mm), and dropped nuts miss the peg (`task_final_pose` 11–36 cm); LIBERO
+book, wine bottle and moka pot (`grasp_drift`, wrist limits).
 
 ## Episode storage (`reachy-retarget-episode-v2`)
 

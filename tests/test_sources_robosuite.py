@@ -184,3 +184,21 @@ def test_fixture_with_articulated_children_keeps_its_static_geometry():
     assert [model.body_names[b] for b in model.fixtures] == ["table"]
     np.testing.assert_allclose(model.body_aabb(model.fixtures[0], static=True)["half_extents"], [0.4, 0.4, 0.025])
     np.testing.assert_allclose(model.body_aabb(model.fixtures[0])["half_extents"], [0.4, 0.4, 0.0875])
+
+
+def test_union_of_boxes_records_each_part_oriented_box():
+    # LIBERO bowl walls: thin box geoms turned in the body; their body-frame AABB is much thicker
+    from reachy_retarget.sources.robosuite import _Model
+    xml = """<mujoco><worldbody>
+    <body name="bowl_main" pos="0 0 0.9"><freejoint/>
+      <geom type="box" size="0.0007 0.01 0.02" pos="0.03 0 0" euler="0 0 45"/>
+      <geom type="box" size="0.02 0.02 0.002" pos="0 0 -0.02"/></body>
+    </worldbody></mujoco>"""
+    model = _Model(xml, None)
+    model.mj.mj_forward(model.m, model.d)
+    g = model.body_aabb(model.m.body("bowl_main").id, parts=True)
+    wall = g["boxes"][0]
+    assert wall["half_extents"][0] > 0.007                       # the AABB part, as before
+    np.testing.assert_allclose(wall["obb"]["half_extents"], [0.0007, 0.01, 0.02], atol=1e-6)
+    np.testing.assert_allclose(wall["obb"]["center"], [0.03, 0, 0], atol=1e-6)
+    np.testing.assert_allclose(np.abs(wall["obb"]["quat"]), [np.cos(np.pi / 8), 0, 0, np.sin(np.pi / 8)], atol=1e-6)
