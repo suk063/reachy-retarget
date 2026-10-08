@@ -62,7 +62,8 @@ class Pool:
         random.shuffle(self.free)
         self.jobs = {j["id"]: j for j in jobs}
         self.prepared = set()
-        self.retired = set()  # pods whose node is below the free-space reserve
+        self.retired = set()
+        self.losses = {}  # pods whose node is below the free-space reserve
         self.lock = threading.Lock()
         self.events = (self.out / "events.jsonl").open("a")
 
@@ -109,6 +110,9 @@ class Pool:
         for line in text.splitlines():
             job_id, _, payload = line.partition("\t")
             status = json.loads(payload or "{}")
+            if status.get("state") is None and time.time() - self.running[job_id][2] > 120:
+                self.lost(job_id, pod)  # job directory vanished: the container restarted (e.g. OOM)
+                continue
             if status.get("state") in (None, "running"):
                 continue
             if status["state"] == "refused":  # the node lacks free space: retire the slot, rerun elsewhere
@@ -125,6 +129,20 @@ class Pool:
                 if pod_ not in self.retired:
                     self.free.append((pod_, slot))
             self.log(event="finished", id=job_id, pod=pod, state=status["state"])
+
+    def lost(self, job_id, pod):
+        """Requeue a job whose pod lost it; after three losses record it as failed."""
+        with self.lock:
+            pod_, slot, _ = self.running.pop(job_id)
+            self.free.append((pod_, slot))
+            self.losses[job_id] = self.losses.get(job_id, 0) + 1
+            final = self.losses[job_id] >= 3
+            if not final:
+                self.todo.append(self.jobs[job_id])
+        if final:
+            (self.out / f"{job_id}.json").write_text(json.dumps(
+                {"id": job_id, "state": "lost", "error": "job lost three times (container restarts)"}, indent=1))
+        self.log(event="finished" if final else "requeued", id=job_id, pod=pod, state="lost")
 
     def run(self, interval=15.0):
         with ThreadPoolExecutor(32) as executor:

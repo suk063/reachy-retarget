@@ -15,11 +15,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import resource
 import time
 import traceback
 from pathlib import Path
 
 from .evaluate import process_source
+
+_MACOS = __import__("sys").platform == "darwin"  # ru_maxrss is bytes on macOS, KiB on Linux
 from .sources import iter_episodes
 
 
@@ -61,13 +64,15 @@ def build(family: str, path: str, shard: tuple[int, int], out: str, *, physics: 
                 rec = {"family": family, "dataset": src.dataset, "episode_id": src.episode_id, "status": "error",
                        "error": repr(error), "traceback": traceback.format_exc()[-2000:]}
                 counts["errors"] += 1
-            rec.update(path=path, index=index - 1)
+            rec.update(path=path, index=index - 1,
+                       max_rss_mb=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (1 << 20 if _MACOS else 1 << 10))
             fh.write(json.dumps(rec) + "\n")
             fh.flush()
             counts["episodes"] += 1
             counts["K"] += bool((rec.get("K") or {}).get("passed"))
             counts["P_tested"] += rec.get("P") is not None
             counts["P"] += bool((rec.get("P") or {}).get("passed"))
+    counts["max_rss_mb"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (1 << 20 if _MACOS else 1 << 10)
     return counts
 
 
