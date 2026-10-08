@@ -8,7 +8,7 @@ rounded up (base 0.245 m, column 0.136 m, torso 0.183 m at zero posture). Arms a
 they reach over tables by design and are checked by self-clearance and tier P.
 
 Static obstacles are the ``support`` and ``fixture`` objects with box geometry (see
-:func:`box_geometry`, pose = first valid row): their floor projection is the convex hull of
+:func:`box_geometry`; a cylinder counts as its bounding box; pose = first valid row): their floor projection is the convex hull of
 the eight projected corners and they occupy the height interval of their corners. Boxes whose
 top lies below ``cfg.floor_support_height`` are the floor itself and are ignored. A body disc
 is tested against an obstacle only when their height intervals overlap, so the base may pass
@@ -36,14 +36,34 @@ BODY_PROFILE = ((-np.inf, 0.30, BASE_FOOTPRINT_RADIUS), (0.30, 0.95, 0.14), (0.9
 
 def box_geometry(geometry: dict):
     """(center (3,), half extents (3,)) in the object frame of a ``box`` or body-frame ``aabb``
-    geometry record (optional ``center``, default 0), else None."""
-    if geometry.get("kind") not in ("box", "aabb") or geometry.get("frame", "body") != "body":
+    geometry record, or the bounding box of a body-frame ``cylinder`` (``radius``,
+    ``half_length``, ``axis`` "x"/"y"/"z", default "z"); optional ``center``, default 0. Else None."""
+    if geometry.get("frame", "body") != "body":
         return None
-    half = np.asarray(geometry.get("half_extents", ()), float)
     center = np.asarray(geometry.get("center", (0.0, 0.0, 0.0)), float)
+    kind = geometry.get("kind")
+    if kind == "cylinder":
+        axis = "xyz".find(str(geometry.get("axis", "z")))
+        if axis < 0 or "radius" not in geometry or "half_length" not in geometry:
+            return None
+        half = np.full(3, float(geometry["radius"]))
+        half[axis] = float(geometry["half_length"])
+    elif kind in ("box", "aabb"):
+        half = np.asarray(geometry.get("half_extents", ()), float)
+    else:
+        return None
     if half.shape != (3,) or center.shape != (3,):
         return None
     return center, half
+
+
+def cylinder_geometry(geometry: dict):
+    """(center (3,), axis index, radius, half_length) of a body-frame ``cylinder`` record, else None."""
+    box = box_geometry(geometry)
+    if box is None or geometry.get("kind") != "cylinder":
+        return None
+    axis = "xyz".index(str(geometry.get("axis", "z")))
+    return box[0], axis, float(geometry["radius"]), float(geometry["half_length"])
 
 
 @dataclass

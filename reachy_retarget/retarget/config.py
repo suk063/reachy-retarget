@@ -43,6 +43,7 @@ class RetargetConfig:
     grasp_tilt_cost: float = 0.1         # placement cost per 30 deg of tilt
     symmetry_axis_tol_deg: float = 15.0  # approach vs object principal axis for quarter turns
     symmetry_extent_tol: float = 0.1     # relative difference of the cross-section half extents
+    cylinder_theta_step_deg: float = 45.0  # turns about the approach axis tried for a cylinder grasped along its axis
     align_max_deg: float = 20.0          # largest closing-axis to face-normal alignment applied
     align_agree_deg: float = 5.0         # grasped objects of one hand must agree on it within this
     finger_depth_slack: float = 0.003    # offsets whose finger path sinks deeper into boxes than the best + this are dropped

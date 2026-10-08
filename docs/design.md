@@ -59,13 +59,15 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
 * `effectors`: source end effectors, keyed by a source-specific id. Each has a world
   pose of the **grasp center** (the point between the pads, not the flange), with
   approach axis = +z and closing axis = +y (adapters convert their gripper convention to
-  this), an opening in [0, 1] (1 = fully open), optional width in metres and an optional
-  `side_hint` (`left`/`right`).
+  this), an opening in [0, 1] (1 = fully open), optional width in metres, an optional
+  `side_hint` (`left`/`right`) and an optional recorded gripper `command` in [0, 1]
+  (1 = commanded closed).
 * `base`: source mobile base SE(2) path or `None` for fixed-base sources.
 * `objects`: pose tracks with validity masks, a role (`manipulated`, `support`,
   `receptacle`, `fixture`) and simple geometry.
 * `articulations`: articulated scene joints (drawers, doors) with joint names.
-* `scene`: optional MuJoCo scene for tier P.
+* `scene`: optional MuJoCo scene for tier P, with the bodies the source parks out of use
+  (`inactive_bodies`) and `reference` values measured on the source's own states.
 * provenance, license, lineage (`seed`, `variant_of`), task, instruction, source success.
 
 ## Retargeting method
@@ -75,7 +77,11 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
    Reachy grasp-center offset from `{l,r}_arm_tip`. Hand–object relative poses are
    preserved by construction.
    * *Grasp labels* (`targets.source_closed`): a source hand holds an object while it is
-     closed and within 4 cm of the object's box. "Closed" is inferred from the opening: below
+     closed and within 4 cm of the object's box or cylinder. With a recorded gripper command
+     (robomimic, MimicGen, LIBERO) a hand is closed from the frame its fingers stop closing
+     after a close command until the open command (the command leads the stall by 6–8 frames
+     while the hand still descends; the release label ends 3–6 frames earlier than inferred
+     and no longer splits on finger jitter). Otherwise "closed" is inferred from the opening: below
      0.5, or stalled (|rate| ≤ 0.25/s) more than 0.1 below the episode's open level, and not
      opening. A gripper that closes on an object stalls at the object's width (the robomimic
      Panda holds the Lift cube at opening 0.52, the Can at 0.62), so a fixed threshold missed
@@ -90,7 +96,9 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      pads hold the Lift cube 9–19° off its faces, Reachy's 30 × 39 mm flat pads then touch two
      edges and the cube turns between them), plus quarter turns when the object is symmetric
      under them (derived from the box/aabb geometry: approach within 15° of a box axis and
-     equal cross-section half extents ±10 %; recorded with the reason). Offsets whose fingers
+     equal cross-section half extents ±10 %; recorded with the reason). A cylinder grasped
+     along its axis (the robomimic Can from the top) has no faces to align and is symmetric
+     under any turn: `theta` ∈ {0, 45, 90, 135}° (flips add the rest). Offsets whose fingers
      would sink into scene boxes along the path more than 3 mm beyond the best offset are
      discarded before any IK (quarter turns are mostly rejected here: the source approach is
      off-centre along the other axis and a finger would land on the cube).
@@ -162,9 +170,21 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
   retargeted joints, and only actuator commands drive the rollout. Gates follow the
   physical thresholds from the previous phase (`legacy/reachy_retarget/physical_gates.py`)
   plus a task predicate and actuator-only replay reproducibility.
-  * Free bodies that no episode object refers to and that start more than 2 m from the
-    workspace are removed as parked (robosuite PickPlaceCan parks Milk, Bread and Cereal
-    overlapping at (10, 10, 10): the constant 0.0399 m object–environment depth).
+  * Bodies the adapter declares inactive (`SceneRef.inactive_bodies`) are removed (robosuite
+    PickPlaceCan parks Milk, Bread and Cereal overlapping at (10, 10, 10): the constant
+    0.0399 m object–environment depth). Sources that declare none (`None`) fall back to
+    removing free bodies that no episode object refers to and that start more than 2 m from
+    the workspace.
+  * *Source-relative object–environment gate.* MuJoCo contacts are soft, so source objects
+    rest or land millimetres deep in their supports. The allowed object–environment depth is
+    `max(2 mm, source reference + 1 mm)`, where the reference
+    (`SceneRef.reference["object_environment_depth_m"]`, `sources/contact_reference.py`) is
+    the deepest contact between a free object and any non-robot body (object–object included)
+    over the source's recorded states (state set, `mj_forward`, never stepped). The
+    reference, the applied threshold, and the absolute 2 mm verdict are all stored in the
+    tier-P metrics, and the reason text names the threshold that applied. Sources without a
+    reference (ManiSkill primitive scenes, RoboVerse) keep 2 mm. Robot gates (robot–environment,
+    hand–object, self) stay absolute.
   * Servo commands lead the retargeted `q` by each servo's `kv/kp` (0.13 s for the arms):
     `kp (q(t + kv/kp) − q) − kv q̇ ≈ kp (q_ref − q) + kv (q̇_ref − q̇)`, a PD servo with
     velocity reference, still a deterministic function of the retargeted trajectory. Fingers
@@ -184,18 +204,24 @@ JSON line per episode, and with `--write` stores every episode (failures include
 `index.parquet`. Results on robomimic v1.5 `ph` (dev = demos 0–19 used while developing,
 held-out = demos 100–119, evaluated at the end and not used for tuning), episodes passing K / P:
 
-| task | baseline dev | final dev | baseline held-out | final held-out |
-| --- | --- | --- | --- | --- |
-| Lift | 20 / 0 | 20 / 20 | 19 / 0 | 19 / 19 (K & P 18) |
-| Can | 0 / 0 | 17 / 0 | 0 / 0 | 16 / 0 |
-| Square | 0 / 0 | 13 / 0 | 1 / 0 | 14 / 0 |
-| Transport | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
+| task | baseline dev | v5 dev | final dev | baseline held-out | v5 held-out | final held-out |
+| --- | --- | --- | --- | --- | --- | --- |
+| Lift | 20 / 0 | 20 / 20 | 20 / 20 | 19 / 0 | 19 / 19 | 19 / 19 (K & P 18) |
+| Can | 0 / 0 | 17 / 0 | 15 / 5 (K & P 4) | 0 / 0 | 16 / 0 | 15 / 5 (K & P 4) |
+| Square | 0 / 0 | 13 / 0 | 13 / 0 | 1 / 0 | 14 / 0 | 15 / 0 |
+| Transport | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
 
-Tier P on Can, Square and Transport is bounded by the source scenes themselves: re-stepping
-the source MuJoCo model at 2 ms from its recorded states gives object–environment depths of
-5.4–7.7 mm (Can dropped into its bin), 7.9–8.1 mm (Square nut on the peg / table) and
-9–19 mm (Transport drops), above the 2 mm gate that is kept unchanged. 12 of 20 dev and 9 of
-20 held-out Can episodes pass K and every P gate except that one. Open K failure modes: IK
+"final" = source-relative object–environment gate, recorded gripper commands for grasp labels,
+the Can as a cylinder and declared inactive bodies (v5 used the absolute 2 mm gate). No episode
+passes P under the absolute 2 mm gate on Can, Square or Transport. The source references
+(state-sampled, 20 Hz) are Lift 2.6–5.7 mm (cube resting in the table), Can 1.3–9.5 mm (median
+3.2), Square 7.6–18.9 mm, Transport 11–27 mm. They agree with re-stepping the source at 2 ms for
+Square (7.9–8.1 mm) and Transport (9–19 mm) but are lower for Can (5.4–7.7 mm): the Can's drop
+into its bin peaks between recorded states. 8 dev and 4 held-out Can episodes still pass K and
+every P gate except the object–environment one (the Reachy rollout drops the can 4–7 mm deep).
+Square P is now bounded by `grasp_drift` (18 / 19 of 20), not by penetration. The Can K count
+moves with the larger grasp-offset search (cylinder turns in 45° steps): dev loses demos 7
+(0.0306 rad > 0.03), 9 and 12 and gains demo 19. Open K failure modes: IK
 branch switches between consecutive source frames (0.44–0.92 rad in 5 of the 7 failing dev
 Square episodes; the time scaling keeps the speed limits but the interpolated poses miss the
 target by 2–5 cm) and, for Transport, the two-robot handover (position residual median

@@ -58,6 +58,7 @@ import numpy as np
 
 from ..acquire import load_catalog
 from ..schema.source import Articulation, Effector, ObjectTrack, SceneRef, SourceEpisode
+from .contact_reference import ObjectEnvironmentDepth
 from .registry import register
 
 FAMILY = "bigym"
@@ -289,6 +290,7 @@ class _Model:
         collides_b = lambda b: any((m.geom_contype[g] or m.geom_conaffinity[g]) for g in range(m.ngeom)
                                    if self.in_subtree(int(m.geom_bodyid[g]), b))
         self.inactive = sorted(n for n, j in self.free.items() if not collides_b(int(m.jnt_bodyid[j])))
+        self.inactive_bodies = [self.body_names[m.jnt_bodyid[self.free[n]]] for n in self.inactive]
         for n in self.inactive:
             self.free.pop(n)
         self.articulations: dict[str, list[int]] = {}
@@ -412,9 +414,16 @@ def _episode(rec: Path, meta: dict, arrays: dict, asset_dir, catalog, family, wi
     base, torso = np.zeros((T, 3)), np.zeros(T)
     obj_pose = {n: np.zeros((T, 7)) for n in model.free}
     art = {n: np.zeros((T, len(js))) for n, js in model.articulations.items()}
+    # Source reference depth (SceneRef.reference): contacts of the replayed states. Disabled props
+    # have no collision geometry, so every collidable free body is an object of the scene.
+    reference = (ObjectEnvironmentDepth(m, {n: int(m.jnt_bodyid[j]) for n, j in model.free.items()}, model.is_robot)
+                 if with_scene and not model.missing else None)
     for t in range(T):
         d.qpos[:] = qpos[t]
         model.mj.mj_kinematics(m, d)
+        if reference is not None:
+            model.mj.mj_collision(m, d)
+            reference.update(d, t, time[t])
         for k, g in model.grippers.items():
             poses[k][t], opening[k][t], width[k][t] = g.read(d)
         base[t] = [d.xpos[pelvis][0], d.xpos[pelvis][1], _yaw(d.xmat[pelvis].reshape(3, 3))]
@@ -458,7 +467,8 @@ def _episode(rec: Path, meta: dict, arrays: dict, asset_dir, catalog, family, wi
     scene = None
     if with_scene and not model.missing and floor_z == 0.0:
         scene = SceneRef(mjcf=model.xml, robot_prefixes=[ROBOT_PREFIX], initial_qpos=initial_qpos,
-                         assets=model.assets)
+                         assets=model.assets, inactive_bodies=list(model.inactive_bodies),
+                         reference=reference.result())
 
     error = meta.get("error")
     complete = error is None and meta.get("replayed_actions") == meta.get("n_actions")
@@ -513,6 +523,7 @@ def _episode(rec: Path, meta: dict, arrays: dict, asset_dir, catalog, family, wi
         "base_source": f"{meta['robot']['pelvis']} body world pose (x, y, yaw); torso_height = pelvis z",
         "articulation_roots": sorted(model.articulations),
         "inactive_free_bodies": model.inactive,
+        "scene_reference": None if scene is None else scene.reference,
         "task_group": task_group(task),
         "instruction_source": "derived from the BiGym task class docstring (recordings carry no language)",
         "env_class": meta.get("env_class"),

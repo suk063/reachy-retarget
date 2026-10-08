@@ -21,7 +21,7 @@ from ..robot import Reachy, min_clearance
 from ..robot.reachy import GRIPPERS, NECK
 from ..schema.episode import DT, SIDES, ReachyEpisode, Reference
 from ..schema.rotations import so3_log
-from ..schema.source import Articulation, Effector, SourceEpisode
+from ..schema.source import Articulation, SourceEpisode
 from ..validate import kinematic
 from . import footprint, timing
 from .assign import assign, posture, tuck_posture
@@ -116,7 +116,7 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         effectors = {}
         for k, e in src.effectors.items():
             pose, oc_diag[k] = object_centric(src, k, labels_src[k], cfg)
-            effectors[k] = Effector(pose, e.opening, e.width, e.side_hint)
+            effectors[k] = replace(e, pose=pose)
         src = replace(src, effectors=effectors)
     try:
         tuck = tuck_posture(cfg)

@@ -274,3 +274,40 @@ def test_finger_commands_lead_only_while_closing():
     closing, opening = slice(0, 30), slice(60, 90)
     assert np.all(led[closing, 20] < now[closing, 20] - 1e-9)    # led while closing
     np.testing.assert_allclose(led[opening, 20], now[opening, 20])  # never opens early
+
+
+def test_object_environment_gate_is_source_relative():
+    """Soft source contacts let objects rest a few mm deep; the gate allows the source's own
+    reference depth + 1 mm (never less than the absolute 2 mm) and records both verdicts."""
+    xml = scene_xml().replace('mass="0.1"/></body>', 'mass="0.1" solref="0.3 1"/></body>', 1)
+    ep = make_episode(np.arange(3) * DT, np.zeros((3, 22)))
+    cfg = physics.PhysicsConfig(replay=False)
+    base = dict(mjcf=xml, robot_prefixes=["robot0_", "gripper0_"], initial_qpos={"box_joint": [*BOX0, 1, 0, 0, 0]})
+    tier, _ = physics.simulate(ep, SceneRef(**base), cfg)
+    m = tier["metrics"]
+    depth = m["max_depth_m"]["object_environment"]
+    assert depth > 0.003  # the soft box rests deeper than the absolute gate
+    assert not m["gates"]["object_environment_penetration"] and not m["object_environment_passed_absolute"]
+    assert m["object_environment_reference_depth_m"] is None and m["object_environment_threshold_m"] == 0.002
+    assert any(r.startswith("object_environment_penetration") and "absolute threshold" in r for r in tier["reasons"])
+
+    tier, _ = physics.simulate(ep, SceneRef(**base, reference={"object_environment_depth_m": depth - 0.0005}), cfg)
+    m = tier["metrics"]
+    assert m["gates"]["object_environment_penetration"] and not m["object_environment_passed_absolute"]
+    assert m["object_environment_threshold_m"] == pytest.approx(depth + 0.0005)
+    assert "source-relative" in m["object_environment_threshold_rule"]
+
+    tier, _ = physics.simulate(ep, SceneRef(**base, reference={"object_environment_depth_m": depth - 0.002}), cfg)
+    assert not tier["metrics"]["gates"]["object_environment_penetration"]
+    assert any("source reference" in r for r in tier["reasons"] if r.startswith("object_environment"))
+
+
+def test_declared_inactive_bodies_replace_the_distance_rule():
+    xml = scene_xml().replace("</worldbody>", '<body name="milk_main" pos="0.3 0 2"><freejoint name="milk_joint"/>'
+                              '<geom size=".03" mass=".1"/></body></worldbody>')
+    ep = make_episode(np.arange(3) * DT, np.zeros((3, 22)))
+    ref = SceneRef(mjcf=xml, robot_prefixes=["robot0_", "gripper0_"], inactive_bodies=["milk_main"],
+                   initial_qpos={"box_joint": [*BOX0, 1, 0, 0, 0], "milk_joint": [0.3, 0, 2, 1, 0, 0, 0]})
+    tier, rollout = physics.simulate(ep, ref, physics.PhysicsConfig(replay=False))
+    assert rollout.info["scene"]["removed"]["parked_bodies"] == ["milk_main"]  # near, but declared inactive
+    assert tier["metrics"]["removed_inactive_bodies"]["rule"].startswith("declared")

@@ -1,10 +1,12 @@
 """Tier P: physics validation of a retargeted episode in the source's MuJoCo scene.
 
 `simulate(ep, scene_ref, cfg)` builds the scene (`validate.scene.build_scene`: source robot
-removed, Reachy attached at the world origin; free bodies that no episode object track refers to
-and whose initial position lies more than `cfg.park_distance_m` from every object position, TCP
-and base position of the episode are removed as parked, see `scene.parked_bodies`), resets it once and then drives it with actuator
-commands only:
+removed, Reachy attached at the world origin; the bodies the adapter declares inactive in
+`SceneRef.inactive_bodies` are removed; when an adapter declares none (`None`), free bodies that
+no episode object track refers to and whose initial position lies more than
+`cfg.park_distance_m` from every object position, TCP and base position of the episode are
+removed as parked instead, see `scene.parked_bodies`), resets it once and then drives it with
+actuator commands only:
 
 1. **Reset.** MJCF defaults, the source's initial object qpos (`SceneRef.initial_qpos`) and
    Reachy at `ep.q[0]` (mimic finger joints coupled), `ctrl = ep.q[0]`, `mj_forward`. The
@@ -34,7 +36,7 @@ additions marked new):
 | --- | --- |
 | `rollout_complete` | every planned step ran, the state stayed finite, no MuJoCo BADQACC/BADQPOS/BADQVEL/BADCTRL warning |
 | `robot_environment_penetration` | Reachy vs non-object scene geometry depth <= 2 mm (every step) |
-| `object_environment_penetration` | free object vs scene/other objects depth <= 2 mm (every step after the settle phase; while settling, objects released from the source's initial state may drop onto their supports, e.g. robosuite cubes start about 1 cm above the table, and the impact depth is reported as `settle_object_environment_depth_m`, not gated) |
+| `object_environment_penetration` | free object vs scene/other objects depth <= max(2 mm, source reference + 1 mm), source-relative (every step after the settle phase; while settling, objects released from the source's initial state may drop onto their supports, e.g. robosuite cubes start about 1 cm above the table, and the impact depth is reported as `settle_object_environment_depth_m`, not gated). The source reference `SceneRef.reference["object_environment_depth_m"]` is the deepest object-environment contact of the source's own recorded states (soft contacts: the robomimic Square nut rests 7.6 mm deep in the table); without it the absolute 2 mm applies. The reference, the applied threshold and the absolute verdict are recorded (`object_environment_reference_depth_m`, `object_environment_threshold_m`, `object_environment_passed_absolute`) |
 | `hand_object_penetration` | Reachy hand links vs objects depth <= 1 mm |
 | `no_nonhand_object_contact` | no object contact with a Reachy link outside the hands |
 | `robot_self_penetration` | Reachy self contacts depth <= 2 mm (contacts between the finger links of one hand are reported, not gated: closing an empty hand presses its pads together) |
@@ -77,7 +79,9 @@ THRESHOLDS = dict(  # legacy physical_gates.THRESHOLDS (+ new tier-P entries at 
     positive_contact_force_n=1e-6, replay_absolute_tolerance=1e-7,
     # new in tier P
     neck_speed_rad_s=float(np.deg2rad(30) + .001), tcp_position_m=.03, tcp_rotation_rad=.2,
-    object_position_m=.03)
+    object_position_m=.03,
+    # object-environment depth allowed above the source's own reference depth (source-relative gate)
+    object_environment_reference_margin_m=.001)
 ARM_NECK = JOINTS[3:20]
 NECK_JOINTS = JOINTS[17:20]
 BAD_WARNINGS = ("mjWARN_BADQACC", "mjWARN_BADQPOS", "mjWARN_BADQVEL", "mjWARN_BADCTRL")
@@ -313,9 +317,13 @@ def _object_bodies(ep: ReachyEpisode, scene: Scene, cfg: PhysicsConfig):
     return out, missing
 
 
-def _parked(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig) -> dict[str, float]:
-    """Untracked free bodies parked far from the workspace (scene.parked_bodies): the workspace is
-    every valid object position of the episode, the robot's TCP path and its base path."""
+def _parked(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig) -> dict[str, float | None]:
+    """Bodies removed before the rollout: ``scene_ref.inactive_bodies`` when the adapter declares
+    them (value None), else untracked free bodies parked far from the workspace
+    (scene.parked_bodies, value = distance): the workspace is every valid object position of the
+    episode, the robot's TCP path and its base path."""
+    if scene_ref.inactive_bodies is not None:
+        return {b: None for b in scene_ref.inactive_bodies}
     keep = set((cfg.object_bodies or {}).values())
     pts = [np.c_[ep.q[:, :2], np.zeros(len(ep.q))]]
     for oid, track in ep.objects.items():
@@ -492,10 +500,21 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
 
     peak_arm = mon.peak_joint[~mon.is_neck]
     peak_neck = mon.peak_joint[mon.is_neck]
+    # Object-environment gate, source-relative: max(absolute, source reference + margin).
+    oe_depth, oe_abs = mon.depth["object_environment"], th["object_environment_depth_m"]
+    oe_ref = (scene_ref.reference or {}).get("object_environment_depth_m")
+    if oe_ref is None:
+        oe_th, oe_rule = oe_abs, f"absolute threshold {oe_abs:.4f} m (no source reference)"
+    else:
+        margin = th["object_environment_reference_margin_m"]
+        oe_th = max(oe_abs, float(oe_ref) + margin)
+        oe_rule = (f"source-relative threshold {oe_th:.4f} m = max(absolute {oe_abs:.4f} m, source reference "
+                   f"{oe_ref:.4f} m + {margin:.4f} m), {'source reference' if oe_th > oe_abs else 'absolute'} "
+                   f"applies; absolute verdict {'pass' if oe_depth <= oe_abs else 'fail'}")
     gates = {
         "rollout_complete": bool(finite and steps_done == n_steps and not warnings),
         "robot_environment_penetration": mon.depth["robot_environment"] <= th["robot_environment_depth_m"],
-        "object_environment_penetration": mon.depth["object_environment"] <= th["object_environment_depth_m"],
+        "object_environment_penetration": oe_depth <= oe_th,
         "hand_object_penetration": mon.depth["hand_object"] <= th["hand_object_depth_m"],
         "no_nonhand_object_contact": mon.nonhand_object_contacts == 0,
         "robot_self_penetration": mon.depth["robot_self"] <= th["robot_self_depth_m"],
@@ -518,7 +537,7 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
     details = {
         "rollout_complete": f"steps {steps_done}/{n_steps}, finite={finite}, warnings={warnings}",
         "robot_environment_penetration": f"{mon.depth['robot_environment']:.4f} m",
-        "object_environment_penetration": f"{mon.depth['object_environment']:.4f} m",
+        "object_environment_penetration": f"{oe_depth:.4f} m > {oe_rule}",
         "hand_object_penetration": f"{mon.depth['hand_object']:.4f} m",
         "no_nonhand_object_contact": f"{mon.nonhand_object_contacts} contacts, first {mon.nonhand_event}",
         "robot_self_penetration": f"{mon.depth['robot_self']:.4f} m",
@@ -543,6 +562,12 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
         "gates": gates, "thresholds": dict(th), "object_position_tol_m": cfg.object_position_tol_m,
         "max_depth_m": dict(mon.depth), "worst_contacts": dict(mon.depth_event),
         "settle_object_environment_depth_m": mon.settle_depth, "settle_object_environment_contact": mon.settle_event,
+        "object_environment_reference_depth_m": None if oe_ref is None else float(oe_ref),
+        "object_environment_threshold_m": oe_th, "object_environment_threshold_rule": oe_rule,
+        "object_environment_passed_absolute": bool(oe_depth <= oe_abs),
+        "removed_inactive_bodies": {"bodies": sorted(parked), "rule": "declared by the adapter (SceneRef.inactive_bodies)"
+                                    if scene_ref.inactive_bodies is not None else
+                                    f"untracked free bodies > {cfg.park_distance_m} m from the workspace"},
         "nonhand_object_contacts": mon.nonhand_object_contacts,
         "min_self_clearance_m": float(clearance.min()), "min_joint_margin_rad": mon.min_margin,
         "min_joint_margin_joint": mon.margin_joint,

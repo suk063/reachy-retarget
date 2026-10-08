@@ -20,8 +20,14 @@ hand stays constant during every grasp. Allowed offsets:
   then press flat on two faces), plus quarter turns when every grasped object is symmetric
   under them: the mean approach axis in the object frame lies within
   ``cfg.symmetry_axis_tol_deg`` of a principal axis of its box/aabb geometry and the two other
-  half extents agree within ``cfg.symmetry_extent_tol`` (relative). The derived symmetry and
-  alignment are recorded with the choice.
+  half extents agree within ``cfg.symmetry_extent_tol`` (relative). A ``cylinder`` grasped
+  along its axis (mean approach within ``cfg.symmetry_axis_tol_deg``, e.g. the robomimic Can
+  from the top) is symmetric under any turn: no face alignment, and ``theta`` steps by
+  ``cfg.cylinder_theta_step_deg``. The derived symmetry and alignment are recorded with the
+  choice.
+
+Object geometry: ``box``/``aabb`` records and body-frame ``cylinder`` records (radius,
+half_length, axis); distances, contact widths and finger depths use the exact cylinder.
 
 The choice is made by placement scoring and recorded as a derived label
 (``extra["grasp_offsets"]``).
@@ -33,7 +39,7 @@ import numpy as np
 from ..robot import Reachy, angle_to_opening, angle_to_width, gripper
 from ..schema.rotations import quat_to_matrix
 from .config import RetargetConfig
-from .footprint import box_geometry
+from .footprint import box_geometry, cylinder_geometry
 
 FLIP = np.diag([-1.0, -1.0, 1.0, 1.0])  # half turn about the grasp-center approach axis
 IDLE_FINGER = gripper.CONTACT_ANGLE     # inactive hands: fingers just touching, no squeeze
@@ -75,6 +81,7 @@ def grasp_symmetry(src, key, labels, cfg: RetargetConfig) -> dict:
     ids = manipulated_ids(src.objects)
     lab = np.asarray(labels)
     out, ok, aligns = {}, bool((lab >= 0).any()), []
+    rotational = ok
     E = src.effectors[key].pose
     for k in np.unique(lab[lab >= 0]):
         oid = ids[k]
@@ -82,12 +89,20 @@ def grasp_symmetry(src, key, labels, cfg: RetargetConfig) -> dict:
         rows = np.flatnonzero((lab == k) & track.valid)
         box = box_geometry(track.geometry)
         if box is None or not len(rows):
-            out[oid], ok = "no box geometry", False
+            out[oid], ok, rotational = "no box geometry", False, False
             aligns.append(None)
             continue
         R = quat_to_matrix(track.pose[rows, 3:])
         a = np.einsum("tji,tj->ti", R, E[rows, :3, 2]).mean(axis=0)
         a /= np.linalg.norm(a)
+        cyl = cylinder_geometry(track.geometry)
+        if cyl is not None:
+            angle = float(np.degrees(np.arccos(min(1.0, abs(a[cyl[1]])))))
+            if angle <= cfg.symmetry_axis_tol_deg:
+                out[oid] = f"approach {angle:.0f} deg from the cylinder axis {'xyz'[cyl[1]]}: symmetric under any turn"
+                aligns.append(0.0)
+                continue
+        rotational = False
         axis = int(np.argmax(np.abs(a)))
         angle = float(np.degrees(np.arccos(min(1.0, abs(a[axis])))))
         other = np.delete(box[1], axis)
@@ -114,13 +129,18 @@ def grasp_symmetry(src, key, labels, cfg: RetargetConfig) -> dict:
     if aligns and all(a is not None for a in aligns) and np.ptp(aligns) <= cfg.align_agree_deg:
         mean = float(np.mean(aligns))
         align = mean if abs(mean) <= cfg.align_max_deg else 0.0
-    return {"quarter_turn": ok, "align_deg": round(align, 3), "objects": out}
+    return {"quarter_turn": ok, "rotational": rotational, "align_deg": round(align, 3), "objects": out}
 
 
 def offset_candidates(symmetry: dict, cfg: RetargetConfig) -> list[tuple[bool, float, float]]:
     """Candidate grasp offsets (flip, theta_deg, beta_deg) for one side, source frame first."""
     a = float(symmetry.get("align_deg", 0.0))
-    thetas = (a, a + 90.0) if symmetry.get("quarter_turn") else (a,)
+    if symmetry.get("rotational"):
+        thetas = tuple(a + t for t in np.arange(0.0, 180.0, cfg.cylinder_theta_step_deg))  # flips add the rest
+    elif symmetry.get("quarter_turn"):
+        thetas = (a, a + 90.0)
+    else:
+        thetas = (a,)
     out = [(f, t, float(b)) for b in sorted(cfg.grasp_tilts_deg, key=abs) for t in thetas for f in (False, True)]
     return out
 
@@ -131,21 +151,34 @@ def manipulated_ids(objects):
 
 
 def object_distance(points, track, valid_rows=None):
-    """Distance (T,) from points (T, 3) to an object: to its box if ``geometry`` is a box or
-    body-frame aabb (:func:`.footprint.box_geometry`), else to its origin. NaN where the
-    object is invalid."""
+    """Distance (T,) from points (T, 3) to an object: to its cylinder or box if ``geometry`` is a
+    body-frame cylinder, box or aabb (:func:`.footprint.box_geometry`), else to its origin. NaN
+    where the object is invalid."""
     valid = track.valid if valid_rows is None else valid_rows
     out = np.full(len(points), np.nan)
     if not valid.any():
         return out
     pose = track.pose[valid]
     rel = np.einsum("tji,tj->ti", quat_to_matrix(pose[:, 3:]), points[valid] - pose[:, :3])
-    box = box_geometry(track.geometry)
-    if box is not None:
+    box, cyl = box_geometry(track.geometry), cylinder_geometry(track.geometry)
+    if cyl is not None:
+        radial, axial = _cylinder_coords(rel, cyl)
+        rel = np.stack([np.maximum(radial - cyl[2], 0.0), np.maximum(np.abs(axial) - cyl[3], 0.0)], axis=-1)
+    elif box is not None:
         rel = rel - box[0]
         rel = rel - np.clip(rel, -box[1], box[1])
     out[valid] = np.linalg.norm(rel, axis=-1)
     return out
+
+
+def _cylinder_coords(rel, cyl):
+    """(radial distance, axial coordinate) of object-frame points ``rel`` (..., 3) in a cylinder
+    record ``(center, axis, radius, half_length)``."""
+    center, axis = cyl[0], cyl[1]
+    rel = rel - center
+    axial = rel[..., axis]
+    radial = np.linalg.norm(np.delete(rel, axis, axis=-1), axis=-1)
+    return radial, axial
 
 
 def grasp_labels(grasp_points, closed, objects, cfg: RetargetConfig):
@@ -168,19 +201,48 @@ def grasp_labels(grasp_points, closed, objects, cfg: RetargetConfig):
 
 
 def source_closed(effector, cfg: RetargetConfig, times=None):
-    """Commanded-closed state (T,) of a source effector, inferred from its opening.
+    """Closed (holding) state (T,) of a source effector.
 
-    A parallel gripper that closes on an object stalls at the object's width, which may be
-    well above half its stroke (robosuite's Panda holds the Lift cube at opening 0.52 and the
-    Can at 0.62), so a fixed threshold misses most grasps. A frame is closed when the opening
-    is below ``cfg.closed_opening``, or when it is more than ``cfg.closed_drop`` below the
-    episode's open level (95th percentile) and stalled (|rate| <= ``cfg.opening_rate`` per
-    second), and in both cases not opening faster than ``cfg.opening_rate`` (the release, or the
-    initial opening from a half-closed start state). The closing motion itself is not closed:
-    the hand holds the object once the fingers stall on it. Without ``times`` only the
-    threshold applies.
+    The hand holds an object once its fingers stall on it, not while they are still closing.
+    With a recorded gripper command (``effector.command``, 1 = close), each run of command
+    >= 0.5 is closed from the frame where the fingers, having started to close, no longer
+    close faster than ``cfg.opening_rate`` per second (the first such frame more than
+    ``cfg.closed_drop`` below the open level when there is one: robomimic Lift demo_4 pauses at
+    opening 0.92 on the way down), up to the release command: the command
+    fixes the grasp intent and its release, the opening only when contact is made (robomimic
+    Lift: the command leads the stall by 6-8 frames while the hand still descends about 1 cm).
+
+    Without a command the state is inferred from the opening: a parallel gripper that closes
+    on an object stalls at the object's width, which may be well above half its stroke
+    (robosuite's Panda holds the Lift cube at opening 0.52 and the Can at 0.62), so a fixed
+    threshold misses most grasps. A frame is closed when the opening is below
+    ``cfg.closed_opening``, or when it is more than ``cfg.closed_drop`` below the episode's
+    open level (95th percentile) and stalled (|rate| <= ``cfg.opening_rate``), and in both cases
+    not opening faster than ``cfg.opening_rate`` (the release, or the initial opening from a
+    half-closed start state). Without ``times`` only the command or the threshold applies.
     """
     o = np.asarray(effector.opening, float)
+    if effector.command is not None:
+        cmd = np.asarray(effector.command, float) >= 0.5
+        if times is None or len(o) < 3:
+            return cmd
+        closing = np.gradient(o, np.asarray(times, float)) < -cfg.opening_rate
+        dropped = o < float(np.quantile(o, 0.95)) - cfg.closed_drop
+        closed = np.zeros(len(o), bool)
+        d = np.diff(np.r_[0, cmd.astype(int), 0])
+        for a, b in zip(np.flatnonzero(d == 1), np.flatnonzero(d == -1)):
+            moving = np.flatnonzero(closing[a:b])
+            if not len(moving):          # already closed when commanded (or a stalled start)
+                closed[a:b] = True
+                continue
+            m0 = a + moving[0]
+            # prefer a stall well below the open level (a pause on the way down is not contact)
+            stop = np.flatnonzero(~closing[m0:b] & dropped[m0:b])
+            if not len(stop):
+                stop = np.flatnonzero(~closing[m0:b])
+            if len(stop):
+                closed[m0 + stop[0]:b] = True
+        return closed
     closed = o < cfg.closed_opening
     if times is None or len(o) < 3:
         return closed
@@ -210,7 +272,7 @@ def finger_angles(effector, grasping, cfg: RetargetConfig, contact_width=None):
 
 
 def contact_width(src, key, offset, labels) -> np.ndarray:
-    """Extent (T,) of the held object's box/aabb along the closing axis of effector ``key``'s
+    """Extent (T,) of the held object's cylinder/box/aabb along the closing axis of effector ``key``'s
     grasp frame composed with ``offset`` (inf where nothing is held or without box geometry)."""
     ids = manipulated_ids(src.objects)
     lab = np.asarray(labels)
@@ -223,7 +285,12 @@ def contact_width(src, key, offset, labels) -> np.ndarray:
         if box is None or not len(rows):
             continue
         yo = np.einsum("tji,tj->ti", quat_to_matrix(track.pose[rows, 3:]), y[rows])
-        out[rows] = 2.0 * np.abs(yo) @ box[1]
+        cyl = cylinder_geometry(track.geometry)
+        if cyl is not None:
+            c = np.minimum(np.abs(yo[:, cyl[1]]), 1.0)
+            out[rows] = 2.0 * (cyl[2] * np.sqrt(1.0 - c ** 2) + cyl[3] * c)
+        else:
+            out[rows] = 2.0 * np.abs(yo) @ box[1]
     return out
 
 
@@ -261,8 +328,13 @@ def finger_penetration(src, key, side, offset, labels, finger, cfg: RetargetConf
         if not rows.any():
             continue
         R = quat_to_matrix(track.pose[rows, 3:])
-        rel = np.einsum("tji,tnj->tni", R, world[rows] - track.pose[rows, None, :3]) - box[0]
-        inside = np.min(box[1] - np.abs(rel), axis=-1)  # > 0 inside the box
+        rel = np.einsum("tji,tnj->tni", R, world[rows] - track.pose[rows, None, :3])
+        cyl = cylinder_geometry(track.geometry)
+        if cyl is not None:
+            radial, axial = _cylinder_coords(rel, cyl)
+            inside = np.minimum(cyl[2] - radial, cyl[3] - np.abs(axial))  # > 0 inside the cylinder
+        else:
+            inside = np.min(box[1] - np.abs(rel - box[0]), axis=-1)  # > 0 inside the box
         depth[rows] = np.maximum(depth[rows], np.maximum(inside, 0.0).max(axis=-1))
     return depth
 

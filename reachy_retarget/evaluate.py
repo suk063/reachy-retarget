@@ -94,6 +94,9 @@ def process_source(src, *, physics: bool = True, write: str | None = None, cfg=N
         m = tier.get("metrics", {})
         rec["P"] = {"passed": tier["passed"], "reasons": tier["reasons"],
                     "metrics": _jsonable(_short(m, ("max_depth_m", "worst_contacts", "peak_arm_speed_rad_s",
+                                                    "object_environment_reference_depth_m",
+                                                    "object_environment_threshold_m",
+                                                    "object_environment_passed_absolute",
                                                     "tcp_position_error_max_m", "tcp_rotation_error_max_rad",
                                                     "grasps", "task")))}
         ep.tier = {"K": ep.tier["K"], "P": {"passed": tier["passed"], "reasons": tier["reasons"]}}

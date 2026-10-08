@@ -28,6 +28,9 @@ class Effector:
     opening: np.ndarray              # (T,) in [0, 1], 1 = fully open
     width: np.ndarray | None = None  # (T,) finger separation in metres, if known
     side_hint: Side | None = None
+    # (T,) recorded gripper command in [0, 1], 1 = commanded closed (e.g. robomimic
+    # actions[:, -1] mapped from -1 open / +1 close); None when the source has none
+    command: np.ndarray | None = None
 
 
 @dataclass
@@ -52,6 +55,15 @@ class SceneRef:
     robot_prefixes: list[str]        # body-name prefixes of the source robot to remove
     initial_qpos: dict = field(default_factory=dict)  # object joint name -> qpos at t0
     assets: dict = field(default_factory=dict)        # asset file name -> bytes
+    # World-child bodies the source keeps in its MJCF but never uses (e.g. robosuite parks
+    # PickPlaceCan's Milk/Bread/Cereal at (10, 10, 10)); removed before validation. None = not
+    # declared by the adapter (tier P then falls back to a distance rule).
+    inactive_bodies: list[str] | None = None
+    # Reference values measured on the source's own recorded states, e.g.
+    # {"object_environment_depth_m": float, "method": str, "per_object": {name: float}}:
+    # the deepest object-environment (incl. object-object) contact of the source itself,
+    # which sets tier P's source-relative object-environment threshold.
+    reference: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -95,6 +107,12 @@ class SourceEpisode:
                 e.width = np.asarray(e.width, float)
                 if e.width.shape != (T,):
                     raise ValueError(f"effector {name}: width must be (T,)")
+            if e.command is not None:
+                e.command = np.asarray(e.command, float)
+                if e.command.shape != (T,) or not np.all(np.isfinite(e.command)):
+                    raise ValueError(f"effector {name}: command must be (T,) finite values")
+                if e.command.min() < -1e-6 or e.command.max() > 1 + 1e-6:
+                    raise ValueError(f"effector {name}: command outside [0, 1]")
         for name, o in self.objects.items():
             o.pose = np.asarray(o.pose, float)
             o.valid = np.asarray(o.valid, bool)

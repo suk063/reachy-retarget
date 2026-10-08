@@ -119,6 +119,10 @@ def test_full_scene_route_with_asset_archive(tmp_path):
     np.testing.assert_allclose(scene.initial_qpos["Can_joint0"], ep.objects["Can"].pose[0], atol=1e-12)
     m = mujoco.MjModel.from_xml_string(scene.mjcf, scene.assets)
     assert m.nq == 37 and m.nmesh > 0
+    # Parked objects are declared inactive; the source reference covers the Can only.
+    assert scene.inactive_bodies == ["Bread_main", "Cereal_main", "Milk_main"]
+    assert set(scene.reference["per_object"]) == {"Can"} and scene.reference["frames"] == ep.length
+    assert scene.reference["object_environment_depth_m"] >= 0 and ep.provenance["scene_reference"] == scene.reference
     # Kinematics do not depend on mesh shapes: identical to the fallback route.
     np.testing.assert_allclose(next(iter(ep.effectors.values())).pose,
                                next(iter(episode().effectors.values())).pose, atol=1e-12)
@@ -134,3 +138,30 @@ def test_real_can_ph_file():
     assert ep.provenance["state_route"] == "mjcf_states" and ep.scene is not None
     assert ep.provenance["revision"] == "74fa018461f479cd9fd15b924a16103012096203"
     assert ep.length == 118 and ep.lineage == {"generated": False}
+    # source reference: the Can sinks 2.1 mm into bin1 (soft contacts), Milk/Bread/Cereal parked
+    ref = ep.scene.reference
+    assert 0.0015 < ref["object_environment_depth_m"] < 0.003 and ref["worst_contact"]["bodies"] == ["bin1", "Can_main"]
+    assert ep.scene.inactive_bodies == ["Bread_main", "Cereal_main", "Milk_main"]
+    can = ep.objects["Can"].geometry
+    assert can["kind"] == "cylinder" and can["axis"] == "z" and abs(can["radius"] - 0.0261) < 5e-4
+    (eff,) = ep.effectors.values()
+    with h5py.File(REPO / "data/raw/robomimic/v1.5/can/ph/low_dim_v15.hdf5") as f:
+        np.testing.assert_array_equal(eff.command, (f["data/demo_0/actions"][:, -1] + 1) / 2)
+
+
+def test_gripper_command_from_actions(tmp_path):
+    import shutil
+    path = tmp_path / "can.hdf5"
+    shutil.copy(FIXTURE, path)
+    with h5py.File(path, "a") as f:
+        g = f["data/demo_0"]
+        a = np.zeros((len(g["states"]), 7))
+        a[:, 6] = np.where(np.arange(len(a)) >= 8, 1.0, -1.0)
+        g["actions"] = a
+    (eff,) = next(iter_episodes("robomimic", path)).effectors.values()
+    np.testing.assert_array_equal(eff.command, np.arange(len(a)) >= 8)
+    with h5py.File(path, "a") as f:
+        f["data/demo_0/actions"][:, 6] = 0.3  # not a binary -1/+1 command: not used
+    ep = next(iter_episodes("robomimic", path))
+    assert next(iter(ep.effectors.values())).command is None
+    assert "not all -1 / +1" in ep.provenance["gripper_command"]["reason"]

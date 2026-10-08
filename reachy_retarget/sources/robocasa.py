@@ -1,6 +1,7 @@
 """Adapter for RoboCasa365 LeRobot datasets with simulator extras (family ``robocasa``).
 
-Input is one extracted dataset directory (see :mod:`.robocasa_fetch`): the folder that
+Input is one extracted dataset directory (a ``tar_stream`` catalog entry fetched with
+:func:`reachy_retarget.acquire.fetch`, which keeps only non-image members): the folder that
 holds ``lerobot/`` (or the ``lerobot`` folder itself) with
 
 * ``extras/episode_<k>/model.xml.gz``: the complete MJCF the episode was recorded with,
@@ -23,7 +24,7 @@ the torso height is the ``mobilebase0_joint_torso_height`` value (0 to 0.34 m).
 Assets: references under ``robocasa/models/assets/`` resolve in the catalogued RoboCasa
 archives (GitHub source zip, HF ``robocasa/robocasa-assets`` zips, Box lightwheel zips)
 and, as a fallback, in ``raw/robocasa/asset_subset/`` (CRC-checked members copied out of
-those archives by :func:`.robocasa_fetch.fetch_asset_subset`); references under
+those archives by :func:`reachy_retarget.acquire.assets.fetch_robocasa_asset_subset`); references under
 ``robosuite/models/assets/`` resolve in the robosuite wheel of the recorded version.
 Missing assets give the kinematic-only route (``provenance["state_route"]``).
 """
@@ -37,14 +38,16 @@ import re
 import zipfile
 from functools import lru_cache
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 
-from ..acquire import load_catalog
+from ..acquire import TAR_MANIFEST, load_catalog
 from ..schema.source import Articulation, Effector, ObjectTrack, SceneRef, SourceEpisode
 from .registry import register
 from .robosuite import ASSET_MARKER as ROBOSUITE_MARKER
-from .robosuite import AssetArchive, _Model
+from .contact_reference import ObjectEnvironmentDepth
+from .robosuite import PARK_DISTANCE_M, AssetArchive, _Model
 
 ASSET_MARKER = "robocasa/models/assets/"
 BASE_BODY = "mobilebase0_base"
@@ -137,13 +140,13 @@ class RobocasaAssets:
 def asset_sources_from_catalog(catalog) -> list[dict]:
     """Catalogued RoboCasa asset zips: ``{"id", "marker", "member": rel -> zip member name}``.
 
-    Used by :func:`.robocasa_fetch.fetch_asset_subset` to locate members remotely. Only
+    Used by :func:`reachy_retarget.acquire.assets.fetch_robocasa_asset_subset` to locate members remotely. Only
     archives whose members are named relative to their marker are listed (the GitHub
     source archive is small and fetched whole).
     """
     out = []
     for e in catalog.values():
-        if e.kind != "assets" or not e.asset_marker or not e.asset_marker.startswith(ASSET_MARKER):
+        if not _is_assets(e) or not e.asset_marker or not e.asset_marker.startswith(ASSET_MARKER):
             continue
         if e.path.endswith(".zip") and e.path.startswith("assets/"):
             sub = e.asset_marker[len(ASSET_MARKER):]
@@ -164,7 +167,7 @@ def locate_assets(root, catalog, robosuite_version):
     wheel = None
     if root is not None:
         for e in sorted(catalog.values(), key=lambda e: e.id):
-            if e.kind == "assets" and e.asset_marker and e.asset_marker.startswith(ASSET_MARKER) \
+            if _is_assets(e) and e.asset_marker and e.asset_marker.startswith(ASSET_MARKER) \
                     and e.local_path(root).exists():
                 sources.append(_Source("zip", e.local_path(root), e.asset_marker, e.id, e.sha256))
         subset = Path(root) / "raw" / "robocasa" / SUBSET_DIR
@@ -209,15 +212,32 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _is_assets(e) -> bool:
+    return e.content == "assets" or e.kind == "assets"  # kind "assets": entries built the earlier way
+
+
 def _find_tar(lerobot: Path, root, tars):
+    """The ``tar_stream`` catalog entry the dataset was extracted from, as a flat view
+    (catalog fields + family fields + ``box_sha1``), or ``None``."""
     if tars is None:
-        from .robocasa_fetch import load_tars
-        tars = load_tars()
-    for e in tars.values():
-        if root is not None and e.local_dir(root).resolve() == lerobot.parent.resolve():
-            return e
+        tars = {k: e for k, e in load_catalog().items() if e.family == "robocasa" and e.transport == "tar_stream"}
     rel = lerobot.parent.as_posix()
-    return next((e for e in tars.values() if rel.endswith(posixpath.dirname(e.path))), None)
+    hit = next((e for e in tars.values() if root is not None
+                and e.output_dir(root).resolve() == lerobot.parent.resolve()), None) \
+        or next((e for e in tars.values() if rel.endswith(posixpath.dirname(e.path))), None)
+    if hit is None:
+        return None
+    return SimpleNamespace(**{"seed": None, "horizon": None, **hit.meta}, id=hit.id, url=hit.url,
+                           dataset=hit.dataset, revision=hit.revision, license=hit.license,
+                           box_sha1=hit.digests.get("sha1"))
+
+
+def _read_manifest(dataset_dir: Path) -> dict | None:
+    """``tar_members.json`` of an extracted tar directory (or its ``lerobot`` child)."""
+    for p in (dataset_dir / TAR_MANIFEST, dataset_dir.parent / TAR_MANIFEST):
+        if p.exists():
+            return json.loads(p.read_text())
+    return None
 
 
 def _parquet(lerobot: Path, ep: str):
@@ -258,8 +278,7 @@ def read_robocasa(path: Path, *, family: str = "robocasa", episodes=None, root=N
     root = _data_root(path, root)
     catalog = catalog if catalog is not None else load_catalog()
     tar = _find_tar(lerobot, root, tars)
-    from .robocasa_fetch import read_manifest
-    manifest = read_manifest(lerobot.parent)
+    manifest = _read_manifest(lerobot.parent)
     member_sha = {m["member"]: m["sha256"] for m in (manifest or {}).get("members", [])}
     dmeta_path = lerobot / "extras" / "dataset_meta.json"
     dmeta = json.loads(dmeta_path.read_text()) if dmeta_path.exists() else {}
@@ -342,8 +361,19 @@ def _episode(model, ep, *, family, lerobot, tar, manifest, member_sha, dmeta, ve
                         == "mobilebase0_center"), None)
     grip_site = {k: gr.site for k, gr in model.grippers.items()}
     grip_pos = {k: np.zeros((T, 3)) for k in model.grippers}
+    free_body = {n: int(m.jnt_bodyid[j]) for n, j in model.free.items()}
+    prefixes = (*model.robot_prefixes, *EXTRA_ROBOT_PREFIXES)
+    robot_body = np.array([model.body_names[m.body_rootid[b]].startswith(prefixes) for b in range(m.nbody)])
+    reference = (ObjectEnvironmentDepth(m, free_body, robot_body)
+                 if with_scene and not model.missing else None)  # placeholder geoms: no contacts
+    untracked = [n for n in model.free if n not in tracked]
+    untracked_pos = np.zeros((T, len(untracked), 3))
     for t in range(T):
         model.set_state(states[t])
+        if reference is not None:
+            reference.update(d, t, time[t])
+        for i, n in enumerate(untracked):
+            untracked_pos[t, i] = d.xpos[free_body[n]]
         for k, gr in model.grippers.items():
             poses[k][t], widths[k][t] = gr.read(d)
             grip_pos[k][t] = d.site_xpos[grip_site[k]]
@@ -359,6 +389,12 @@ def _episode(model, ep, *, family, lerobot, tar, manifest, member_sha, dmeta, ve
         if site_center is not None:
             center[0][t], center[1][t] = d.site_xpos[site_center], d.site_xmat[site_center].reshape(3, 3)
     base[:, 2] = np.unwrap(base[:, 2])
+    # Untracked free bodies that stay farther than PARK_DISTANCE_M from the base path and every
+    # tracked object sample are parked out of use (inactive, removed for validation).
+    workspace = np.concatenate([np.c_[base[:, :2], np.zeros(T)] if base_b is not None else np.zeros((0, 3)),
+                                *[obj_pose[n][:, :3] for n in tracked]])
+    far = lambda i: np.linalg.norm(workspace[:, None] - untracked_pos[None, :, i], axis=-1).min() > PARK_DISTANCE_M
+    inactive = sorted(n for i, n in enumerate(untracked) if len(workspace) and far(i))
 
     model.set_state(states[0])
     floor_z = _floor_top(model)
@@ -408,7 +444,9 @@ def _episode(model, ep, *, family, lerobot, tar, manifest, member_sha, dmeta, ve
     scene = None
     if with_scene and not model.missing:
         scene = SceneRef(mjcf=model.xml, robot_prefixes=sorted({*model.robot_prefixes, *EXTRA_ROBOT_PREFIXES}),
-                         initial_qpos=initial_qpos, assets=model.assets)
+                         initial_qpos=initial_qpos, assets=model.assets,
+                         inactive_bodies=[model.body_names[free_body[n]] for n in inactive],
+                         reference=reference.result(inactive))
 
     success, success_source, obs_check = None, None, {}
     if pq is not None:
@@ -468,7 +506,9 @@ def _episode(model, ep, *, family, lerobot, tar, manifest, member_sha, dmeta, ve
         "distractors": {n: {"pose0": obj_pose[n][0].round(6).tolist(), "max_displacement_m": round(obj_moved[n], 4)}
                         for n in distractors},
         "object_max_displacement_m": {n: round(obj_moved[n], 4) for n in task_objs},
-        "inactive_free_bodies": sorted(set(model.free) - set(tracked)),
+        "inactive_free_bodies": inactive,
+        "untracked_free_bodies_in_scene": sorted(set(untracked) - set(inactive)),
+        "scene_reference": None if scene is None else scene.reference,
         "success_source": success_source, "observation_check": obs_check,
     }
     return SourceEpisode(

@@ -198,3 +198,47 @@ def test_evaluate_demo_ranges():
     from reachy_retarget.evaluate import parse_demos
     assert parse_demos("0-2,5") == ["demo_0", "demo_1", "demo_2", "demo_5"]
     assert parse_demos(None) is None and parse_demos("all") is None
+
+
+def test_source_closed_prefers_the_recorded_command():
+    from reachy_retarget.retarget.targets import source_closed
+    t = np.arange(40) * 0.05
+    opening = np.r_[np.ones(10), np.linspace(1.0, 0.6, 5), np.full(20, 0.6), np.linspace(0.6, 1.0, 5)]
+    command = np.r_[np.zeros(10), np.ones(25), np.zeros(5)]
+    e = Effector(np.tile(np.eye(4), (40, 1, 1)), opening, command=command)
+    closed = source_closed(e, CFG, t)
+    assert not closed[:15].any()          # commanded at frame 10, but the fingers still close
+    assert closed[15:35].all()            # stalled on the object until the release command
+    assert not closed[35:].any()          # released by the command, before the fingers open
+    np.testing.assert_array_equal(source_closed(e, CFG), command >= 0.5)  # without times: the command
+    with pytest.raises(ValueError, match="command"):
+        SourceEpisode("f", "f/d", "0", "t", t, {"h": Effector(e.pose, opening, command=2 * command)})
+
+
+def test_cylinder_grasped_along_its_axis_is_rotationally_symmetric():
+    from reachy_retarget.retarget.targets import (contact_width, finger_penetration, grasp_symmetry,
+                                                  object_distance, offset_candidates)
+    T = 10
+    t = np.arange(T) * 0.1
+    hand = np.tile(np.diag([1.0, -1.0, -1.0, 1.0]), (T, 1, 1))  # approach -z (top grasp), closing -y
+    hand[:, :3, 3] = [0.0, 0.0, 0.9]
+    can = ObjectTrack(np.tile([0, 0, 0.9, np.cos(0.2), 0, 0, np.sin(0.2)], (T, 1)), np.ones(T, bool), "manipulated",
+                      {"kind": "cylinder", "radius": 0.026, "half_length": 0.04, "axis": "z"})
+    src = SourceEpisode("f", "f/d", "0", "t", t, {"h": Effector(hand, np.full(T, 0.6))}, objects={"Can": can})
+    labels = np.zeros(T, int)
+    sym = grasp_symmetry(src, "h", labels, CFG)
+    assert sym["rotational"] and sym["align_deg"] == 0.0
+    thetas = sorted({o[1] for o in offset_candidates(sym, CFG)})
+    assert thetas == [0.0, 45.0, 90.0, 135.0]
+    for theta in thetas:  # the pads span the diameter whatever the turn
+        np.testing.assert_allclose(contact_width(src, "h", (False, theta, 0.0), labels), 0.052, atol=1e-9)
+    # exact cylinder distance: a point beside the rim, not the bounding-box corner
+    p = np.tile([0.03 / np.sqrt(2), 0.03 / np.sqrt(2), 0.9], (T, 1))
+    np.testing.assert_allclose(object_distance(p, can), 0.004, atol=1e-9)
+    depth = finger_penetration(src, "h", "right", (False, 45.0, 0.0), np.full(T, -1), np.full(T, 0.0), CFG)
+    assert np.all(depth >= 0)
+    # a side grasp (approach across the axis) keeps the box rules
+    side = np.tile(np.eye(4), (T, 1, 1))
+    side[:, :3, :3] = [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]  # approach +x
+    src2 = SourceEpisode("f", "f/d", "0", "t", t, {"h": Effector(side, np.full(T, 0.6))}, objects={"Can": can})
+    assert not grasp_symmetry(src2, "h", labels, CFG)["rotational"]

@@ -2,16 +2,14 @@
 
 Runtime: a venv built once on a pod at its final absolute path ``/tmp/rr2/runtime/<hash>``
 and archived to ``<PVC>/runtime/<hash>.tar.gz``; other pods extract it to the same path.
-Release: the tracked package sources archived to ``<PVC>/releases/<sha256>.tar.gz``.
+Release: the committed package sources (``git archive HEAD``) archived to ``<PVC>/releases/<sha256>.tar.gz``.
 Both are content addressed and never overwritten.
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
-import io
 import subprocess
-import tarfile
 from pathlib import Path
 
 from cluster import k8s
@@ -19,7 +17,7 @@ from cluster import k8s
 ROOT = Path(__file__).resolve().parents[1]
 REQUIREMENTS = ("numpy==2.5.3", "scipy==1.18.1", "h5py==3.16.0", "pyyaml==6.0.3",
                 "pyarrow==25.0.1", "mujoco==3.15.0")  # same versions as the local development venv
-RELEASE_PATHS = ("reachy_retarget", "cluster", "pyproject.toml", "configs")
+RELEASE_PATHS = ("reachy_retarget", "cluster", "pyproject.toml")
 
 
 def runtime_hash() -> str:
@@ -45,17 +43,12 @@ mv -n "$archive.partial" "$archive"
 
 
 def release_archive() -> tuple[str, bytes]:
-    """Deterministic tar.gz of git-tracked release files; returns (sha256, bytes)."""
-    files = subprocess.run(["git", "-C", str(ROOT), "ls-files", "--", *RELEASE_PATHS],
-                           check=True, capture_output=True, text=True).stdout.split()
-    raw = io.BytesIO()
-    with tarfile.open(fileobj=raw, mode="w") as tar:
-        for name in sorted(files):
-            data = (ROOT / name).read_bytes()
-            info = tarfile.TarInfo(name)
-            info.size, info.mode, info.mtime = len(data), 0o644, 0
-            tar.addfile(info, io.BytesIO(data))
-    payload = raw.getvalue()
+    """Deterministic tar of the committed (HEAD) release paths; returns (sha256, bytes).
+
+    Built from HEAD rather than the working tree so uncommitted edits never ship.
+    """
+    payload = subprocess.run(["git", "-C", str(ROOT), "archive", "--format=tar", "HEAD", "--", *RELEASE_PATHS],
+                             check=True, capture_output=True).stdout
     return hashlib.sha256(payload).hexdigest(), payload
 
 

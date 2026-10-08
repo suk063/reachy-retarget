@@ -46,16 +46,25 @@ import numpy as np
 
 from ..acquire import CatalogEntry, identify, load_catalog
 from ..schema.source import Effector, ObjectTrack, Articulation, SceneRef, SourceEpisode
+from .contact_reference import ObjectEnvironmentDepth
 from .registry import register
 
 ASSET_MARKER = "robosuite/models/assets/"
 ROBOT_PREFIX = re.compile(r"^((?:robot|gripper|mount|fixed_mount)\d+_)")
 GRIP_SITE = re.compile(r"^(gripper\d+(?:_(?:right|left))?)_grip_site$")
 PARALLEL_YAW_TOL = np.deg2rad(30)
+# Untracked free bodies farther than this from every robot base and tracked object at t0
+# are parked by the env (robosuite ``clear_objects`` moves them to (10, 10, 10)).
+PARK_DISTANCE_M = 2.0
+# Free objects whose collision shape is a cylinder about one body axis (robosuite CanObject:
+# a cylinder mesh); their geometry is recorded as kind "cylinder", fitted to the body aabb.
+CYLINDER_OBJECTS = ("Can",)
+CYLINDER_TOL = 0.1  # relative difference of the two cross-section half extents
 
 # Task-relevant free bodies and roles per robosuite env (object name = body minus
-# "_main"/"_root"). Other free bodies are inactive (e.g. hidden Milk/Bread/Cereal in
-# PickPlaceCan) and only listed in provenance. Unknown envs keep every free body.
+# "_main"/"_root"). Other free bodies are inactive when parked out of the workspace (e.g.
+# Milk/Bread/Cereal in PickPlaceCan, RoundNut in NutAssemblySquare): listed in provenance and
+# in ``SceneRef.inactive_bodies``. Unknown envs keep every free body.
 TASK_OBJECTS = {
     "Lift": {"cube": "manipulated"},
     "PickPlaceCan": {"Can": "manipulated"},
@@ -206,6 +215,7 @@ class _Model:
         self.joint_names = [name(mujoco.mjtObj.mjOBJ_JOINT, i) for i in range(m.njnt)]
         self.robot_prefixes = sorted({mt.group(1) for n in self.body_names if (mt := ROBOT_PREFIX.match(n))})
         is_robot = lambda b: any(self.body_names[m.body_rootid[b]].startswith(p) for p in self.robot_prefixes)
+        self.robot_body = np.array([is_robot(b) for b in range(m.nbody)])
         free = int(mujoco.mjtJoint.mjJNT_FREE)
         self.free = {re.sub(r"_(main|root)$", "", self.body_names[m.jnt_bodyid[j]]): j
                      for j in range(m.njnt) if m.jnt_type[j] == free}
@@ -411,6 +421,50 @@ def _yaw(R: np.ndarray) -> float:
     return float(np.arctan2(R[1, 0], R[0, 0]))
 
 
+def cylinder_from_aabb(aabb: dict) -> dict | None:
+    """``{"kind": "cylinder", "radius", "half_length", "axis", "center"}`` fitted to a body-frame
+    aabb whose cross-section (the two half extents other than the axis) agree within
+    ``CYLINDER_TOL``; the axis is the body axis with the best-agreeing cross-section."""
+    half = np.asarray(aabb.get("half_extents", ()), float)
+    if half.shape != (3,):
+        return None
+    rel = [abs(np.subtract(*np.delete(half, k))) / max(np.delete(half, k).max(), 1e-9) for k in range(3)]
+    k = int(np.argmin(rel))
+    if rel[k] > CYLINDER_TOL:
+        return None
+    return {"kind": "cylinder", "radius": round(float(np.delete(half, k).mean()), 6),
+            "half_length": round(float(half[k]), 6), "axis": "xyz"[k], "center": aabb["center"], "frame": "body",
+            "fit": "body-frame aabb of the collision geometry (cross-section half extents "
+                   f"{np.delete(half, k).round(6).tolist()})"}
+
+
+def gripper_commands(g, grippers, T: int) -> tuple[dict, dict]:
+    """Recorded gripper commands ``{gripper key: (T,) in [0, 1], 1 = close}`` and a provenance note.
+
+    robosuite actions are the concatenation over robots of ``[arm (6), gripper (1)]`` for
+    single-gripper robots (OSC_POSE in robosuite 1.4, the BASIC composite controller in 1.5),
+    the gripper entry -1 = open, +1 = close. Used only when every robot has exactly one
+    gripper, the action width is 7 per robot, the rows match the states and every gripper
+    entry is exactly -1 or +1 (teleoperation and MimicGen commands); otherwise none.
+    """
+    if "actions" not in g:
+        return {}, {"source": None, "reason": "no actions"}
+    a = np.asarray(g["actions"][:], float)
+    owner = {k: int(re.match(r"gripper(\d+)", k).group(1)) for k in grippers}
+    robots = sorted(set(owner.values()))
+    if len(robots) != len(owner) or robots != list(range(len(robots))):
+        return {}, {"source": None, "reason": "not one gripper per robot"}
+    if a.ndim != 2 or a.shape != (T, 7 * len(robots)):
+        return {}, {"source": None, "reason": f"actions shape {a.shape} is not (T, 7 x {len(robots)} robots)"}
+    cols = {k: 7 * i + 6 for k, i in owner.items()}
+    if not all(np.all(np.abs(np.abs(a[:, c]) - 1) < 1e-6) for c in cols.values()):
+        return {}, {"source": None, "reason": "gripper action entries are not all -1 / +1"}
+    return ({k: (a[:, c] + 1) / 2 for k, c in cols.items()},
+            {"source": {k: f"actions[:, {c}]" for k, c in cols.items()},
+             "convention": "-1 open, +1 close -> command = (a + 1) / 2, 1 = closed",
+             "alignment": "actions[t] is commanded at state row t"})
+
+
 def _side_hints(bases: dict[str, list[float]], grippers) -> tuple[dict, str | None]:
     """Left/right from the robot base layout when all arms face the same way.
 
@@ -499,8 +553,21 @@ def _episode(model, g, key, *, family, dataset, env_name, env_version, control_f
     obj_names = [n for n in model.free if roles is None or n in roles]
     obj_pose = {n: np.zeros((T, 7)) for n in obj_names}
     art = {n: np.zeros((T, len(js))) for n, js in model.articulations.items()}
+    free_body = {n: int(m.jnt_bodyid[j]) for n, j in model.free.items()}
+
+    # Untracked free bodies parked out of the workspace are inactive (removed for validation).
+    model.set_state(states[0])
+    anchors = np.array([d.xpos[b] for n, b in free_body.items() if n in obj_names]
+                       + [d.xpos[i] for i, n in enumerate(model.body_names) if re.fullmatch(r"robot\d+_base", n)])
+    inactive = sorted(n for n in model.free if n not in obj_names and len(anchors)
+                      and np.linalg.norm(anchors - d.xpos[free_body[n]], axis=1).min() > PARK_DISTANCE_M)
+    reference = None
+    if with_scene and not model.missing:  # placeholder geoms would give meaningless contacts
+        reference = ObjectEnvironmentDepth(m, free_body, model.robot_body)
     for t in range(T):
         model.set_state(states[t])
+        if reference is not None:
+            reference.update(d, t, time[t])
         for k, gr in model.grippers.items():
             poses[k][t], widths[k][t] = gr.read(d)
         for n in obj_names:
@@ -513,15 +580,18 @@ def _episode(model, g, key, *, family, dataset, env_name, env_version, control_f
     bases = {n: [float(d.xpos[i][0]), float(d.xpos[i][1]), _yaw(d.xmat[i].reshape(3, 3))]
              for i, n in enumerate(model.body_names) if re.fullmatch(r"robot\d+_base", n)}
     sides, side_source = _side_hints(bases, model.grippers)
+    commands, command_note = gripper_commands(g, model.grippers, T)
     effectors = {k: Effector(pose=poses[k], width=widths[k],
                              opening=np.clip(widths[k] / model.grippers[k].width_max, 0, 1),
-                             side_hint=sides.get(k))
+                             side_hint=sides.get(k), command=commands.get(k))
                  for k in model.grippers}
-    objects = {n: ObjectTrack(pose=obj_pose[n], valid=np.ones(T, bool),
-                              role=(roles or {}).get(n, "manipulated"),
-                              geometry={**model.body_aabb(m.jnt_bodyid[model.free[n]]),
-                                        "body": model.body_names[m.jnt_bodyid[model.free[n]]]})
-               for n in obj_names}
+    objects = {}
+    for n in obj_names:
+        geometry = model.body_aabb(free_body[n])
+        if n in CYLINDER_OBJECTS:
+            geometry = cylinder_from_aabb(geometry) or geometry
+        objects[n] = ObjectTrack(pose=obj_pose[n], valid=np.ones(T, bool), role=(roles or {}).get(n, "manipulated"),
+                                 geometry={**geometry, "body": model.body_names[free_body[n]]})
     for b in model.fixtures:
         name = model.body_names[b]
         pose = np.r_[d.xpos[b], d.xquat[b]]
@@ -537,7 +607,9 @@ def _episode(model, g, key, *, family, dataset, env_name, env_version, control_f
     scene = None
     if with_scene and not model.missing:
         scene = SceneRef(mjcf=model.xml, robot_prefixes=model.robot_prefixes,
-                         initial_qpos=initial_qpos, assets=model.assets)
+                         initial_qpos=initial_qpos, assets=model.assets,
+                         inactive_bodies=[model.body_names[free_body[n]] for n in inactive],
+                         reference=reference.result(inactive))
 
     success = success_fn(g, kwargs)
 
@@ -562,7 +634,10 @@ def _episode(model, g, key, *, family, dataset, env_name, env_version, control_f
         "effectors": {k: gr.describe(model) for k, gr in model.grippers.items()},
         "opening": "pad separation along +y minus fully-closed separation, / its open-closed range",
         "side_hint_source": side_source,
-        "inactive_free_bodies": sorted(set(model.free) - set(obj_names)),
+        "inactive_free_bodies": inactive,
+        "untracked_free_bodies_in_scene": sorted(set(model.free) - set(obj_names) - set(inactive)),
+        "scene_reference": None if scene is None else scene.reference,
+        "gripper_command": command_note,
         "articulation_roots": sorted(model.articulations),
         "robot_bases_xy_yaw": bases,
         "splits": sorted(k for k, v in masks.items() if key in v),
@@ -581,5 +656,5 @@ def _episode(model, g, key, *, family, dataset, env_name, env_version, control_f
         license=entry.license if entry else "unknown", provenance=provenance, lineage=dict(lineage))
 
 
-__all__ = ["ASSET_MARKER", "AssetArchive", "Profile", "ROBOSUITE", "TASK_OBJECTS", "read_robosuite_family",
-           "read_robosuite_hdf5", "resolve_mjcf"]
+__all__ = ["ASSET_MARKER", "AssetArchive", "Profile", "ROBOSUITE", "TASK_OBJECTS", "cylinder_from_aabb",
+           "gripper_commands", "read_robosuite_family", "read_robosuite_hdf5", "resolve_mjcf"]
