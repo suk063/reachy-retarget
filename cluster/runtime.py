@@ -35,9 +35,10 @@ mkdir -p {k8s.PVC}/runtime /tmp/rr2/runtime
 rm -rf /tmp/rr2/runtime/{h}
 python3 -m venv /tmp/rr2/runtime/{h}
 /tmp/rr2/runtime/{h}/bin/pip install -q --no-cache-dir {reqs}
-tar -C /tmp/rr2/runtime -czf "$archive.partial" {h}
+tar -C /tmp/rr2/runtime -czf "$archive.$$.partial" {h}
 sync
-mv -n "$archive.partial" "$archive"
+mv -n "$archive.$$.partial" "$archive"
+rm -f "$archive.$$.partial"
 """, timeout=1800)
     return h
 
@@ -59,10 +60,12 @@ def publish_release(pod: str) -> str:
 target={k8s.PVC}/releases/{sha}.tar
 [ -f "$target" ] && exit 0
 mkdir -p {k8s.PVC}/releases
-cat > "$target.partial"
-[ "$(sha256sum "$target.partial" | cut -d' ' -f1)" = {sha} ]
+partial="$target.$$.partial"  # unique per uploader: concurrent pools may publish the same release
+cat > "$partial"
+[ "$(sha256sum "$partial" | cut -d' ' -f1)" = {sha} ]
 sync
-mv -n "$target.partial" "$target"
+mv -n "$partial" "$target"
+rm -f "$partial"
 """, stdin=payload)
     return sha
 
