@@ -41,6 +41,19 @@ def tuck_posture(cfg: RetargetConfig):
     return q
 
 
+def stow_posture(cfg: RetargetConfig):
+    """``rest`` with both shoulders rolled ``cfg.stow_roll_deg`` toward the torso instead of 10 deg:
+    the narrowest hanging posture for navigation (arm spheres within 0.26 m of the base axis instead
+    of 0.32 m, self-clearance 24 mm). Raises if it is not clear of the IK margin."""
+    q = posture("rest")
+    roll = np.radians(cfg.stow_roll_deg)
+    q[LEFT_ARM.start + 1], q[RIGHT_ARM.start + 1] = -roll, roll
+    clearance = float(min_clearance(q))
+    if clearance < cfg.self_clearance_margin:
+        raise RuntimeError(f"stow posture self-clearance {clearance:.4f} m is below the IK margin")
+    return q
+
+
 def _source_frame(src):
     """(origin xy, yaw) of the source robot for lateral side decisions."""
     if src.base_hint is not None:
@@ -79,8 +92,9 @@ class Assignment:
     scores: dict[str, float]      # per candidate side (single-arm sources)
 
 
-def assign(src, cfg: RetargetConfig, labels) -> Assignment:
-    """Assign effectors to arms and place the base. ``labels``: {effector key: grasp labels}."""
+def assign(src, cfg: RetargetConfig, labels, scene_obstacles=None) -> Assignment:
+    """Assign effectors to arms and place the base. ``labels``: {effector key: grasp labels};
+    ``scene_obstacles``: optional static scene footprint obstacles (:func:`.footprint.scene_obstacles`)."""
     nominal = posture("ready")
     keys = sorted(src.effectors)
     if len(keys) > 2:
@@ -90,11 +104,11 @@ def assign(src, cfg: RetargetConfig, labels) -> Assignment:
         return Assignment({}, Placement(base, True, np.zeros(3), {}, 0.0, nominal), "no effectors", {})
     if len(keys) == 2:
         sides, rule = bimanual_sides(src)
-        problem = PlacementProblem(src, sides, cfg, nominal, labels)
+        problem = PlacementProblem(src, sides, cfg, nominal, labels, scene_obstacles)
         return Assignment(sides, problem.segment_offsets(problem.refine(problem.search())), rule, {})
     best, scores = None, {}
     for side in ("right", "left"):
-        problem = PlacementProblem(src, {keys[0]: side}, cfg, nominal, labels)
+        problem = PlacementProblem(src, {keys[0]: side}, cfg, nominal, labels, scene_obstacles)
         placement = problem.search()
         scores[side] = placement.cost
         if best is None or placement.cost < best[1].cost:

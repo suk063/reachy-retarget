@@ -194,7 +194,7 @@ class FrameSolver:
         self.obstacles = obstacles if base_free and obstacles is not None and (
             obstacles.polygons or len(obstacles.points)) else None
 
-    def _system(self, q, targets, q_prev, base_ref, rot_scale=None):
+    def _system(self, q, targets, q_prev, base_ref, rot_scale=None, pos_scale=None):
         cfg, f = self.cfg, self.free
         rows, rhs, worst = [], [], 0.0
         for side in self.active:
@@ -203,14 +203,22 @@ class FrameSolver:
             ep = X[:3, 3] - T[:3, 3]
             er = _rotvec(X[:3, :3] @ T[:3, :3].T)
             w = 1.0 if rot_scale is None else float(rot_scale.get(side, 1.0))
-            worst = max(worst, np.linalg.norm(ep) / cfg.tcp_pos_tol, w * np.linalg.norm(er) / cfg.tcp_rot_tol)
-            rows += [cfg.w_pos * J[:3, f], w * cfg.w_rot * J[3:, f]]
-            rhs += [cfg.w_pos * ep, w * cfg.w_rot * er]
+            wp = 1.0 if pos_scale is None else float(pos_scale.get(side, 1.0))
+            worst = max(worst, wp * np.linalg.norm(ep) / cfg.tcp_pos_tol, w * np.linalg.norm(er) / cfg.tcp_rot_tol)
+            rows += [wp * cfg.w_pos * J[:3, f], w * cfg.w_rot * J[3:, f]]
+            rhs += [wp * cfg.w_pos * ep, w * cfg.w_rot * er]
         eye = np.eye(len(f))
         rows.append(cfg.w_prev * eye)
         rhs.append(cfg.w_prev * (q_prev[f] - q[f]))
-        rows.append(cfg.w_nominal * eye[self.is_arm])
-        rhs.append(cfg.w_nominal * (self.nominal[f] - q[f])[self.is_arm])
+        w_nom = np.full(len(f), cfg.w_nominal)
+        if pos_scale:
+            # an idle hand (position weight < 1) settles toward the nominal posture, not into whatever
+            # twisted configuration comes closest to an unreachable source point
+            for side in self.active:
+                wp = float(pos_scale.get(side, 1.0))
+                w_nom[np.isin(f, ARM_COLUMNS[side])] += cfg.w_nominal_idle * (1.0 - wp)
+        rows.append(w_nom[self.is_arm, None] * eye[self.is_arm])
+        rhs.append((w_nom * (self.nominal[f] - q[f]))[self.is_arm])
         if self.base_free:
             rows.append(cfg.w_base * eye[~self.is_arm])
             rhs.append(cfg.w_base * (base_ref - q[:3]))
@@ -225,13 +233,13 @@ class FrameSolver:
         rhs.append(np.zeros(len(f)))
         return np.vstack(rows), np.concatenate(rhs), worst, collided
 
-    def solve(self, q, targets, q_prev, base_ref, max_iter, box=None, rot_scale=None):
+    def solve(self, q, targets, q_prev, base_ref, max_iter, box=None, rot_scale=None, pos_scale=None):
         """Refine ``q`` (22,) toward ``targets`` {side: 4x4 TCP}; returns (q, iterations used).
 
         ``q_prev`` is the posture-regularization reference, ``base_ref`` (3,) the base target
         (also the fixed base pose when the base is not a variable); ``box`` = optional
         absolute (lower (22,), upper (22,)) bounds intersected with the joint limits;
-        ``rot_scale`` = optional {side: factor} on the orientation weight.
+        ``rot_scale`` / ``pos_scale`` = optional {side: factor} on the orientation / position weight.
         """
         q = np.array(q, float)
         if not self.base_free:
@@ -246,7 +254,7 @@ class FrameSolver:
         q[f] = np.clip(q[f], lower, upper)
         step = self.cfg.ik_step
         for it in range(max_iter):
-            A, b, worst, collided = self._system(q, targets, q_prev, base_ref, rot_scale)
+            A, b, worst, collided = self._system(q, targets, q_prev, base_ref, rot_scale, pos_scale)
             if worst < 0.05 and not collided and it and (
                     self.obstacles is None or self._footprint(q[:2])[0] >= self.cfg.footprint_margin):
                 return q, it
@@ -259,14 +267,16 @@ class FrameSolver:
                 # the current and at the violating end point (a penalty on the current clearance
                 # alone chatters across the boundary). Up to three rounds.
                 extra_A, extra_b = [], []
-                for xy in (q[:2], None, None):
+                for k in range(3):
                     end = q[:2] + dq[:2]
-                    if xy is None:
+                    if k:
                         if footprint.clearance(end[None], self.obstacles)[0] >= self.cfg.footprint_margin:
                             break
                         xy = end
+                    else:
+                        xy = q[:2].copy()
                     c, g = self._footprint(xy)
-                    if xy is q[:2] and c + g @ dq[:2] >= self.cfg.footprint_margin:
+                    if not k and c + g @ dq[:2] >= self.cfg.footprint_margin:
                         break
                     row = np.zeros(len(f))
                     row[:2] = g
@@ -285,14 +295,17 @@ class FrameSolver:
         c = footprint.clearance(np.array([xy, xy + (h, 0.0), xy + (0.0, h)]), self.obstacles)
         return float(c[0]), (c[1:] - c[0]) / h
 
-    def error(self, q, targets, rot_scale=None):
-        """Worst normalized TCP residual of one configuration (rotation scaled by ``rot_scale``)."""
+    def error(self, q, targets, rot_scale=None, pos_scale=None):
+        """Worst normalized TCP residual of one configuration (rotation scaled by ``rot_scale``,
+        position by ``pos_scale``)."""
         errs = tcp_errors(q[None], {s: X[None] for s, X in targets.items()})
         if rot_scale:
             errs = {s: (p, r * rot_scale.get(s, 1.0)) for s, (p, r) in errs.items()}
+        if pos_scale:
+            errs = {s: (p * pos_scale.get(s, 1.0), r) for s, (p, r) in errs.items()}
         return float(normalized_error(errs, self.cfg)[0])
 
-    def cold_solve(self, q, targets, base_ref, max_iter, rot_scale=None):
+    def cold_solve(self, q, targets, base_ref, max_iter, rot_scale=None, pos_scale=None):
         """Multi-start solve for frames without a warm start: ``q`` with its active arms set to
         the nominal posture and to ``cfg.ik_seeds - 1`` deterministic pseudo-random postures,
         ``cfg.ik_seed_iter`` iterations each; the best is then solved to ``max_iter``."""
@@ -302,11 +315,12 @@ class FrameSolver:
         for k in range(cfg.ik_seeds):
             seed = np.array(q, float)
             seed[cols] = self.nominal[cols] if k == 0 else rng.uniform(-1.2, 1.2, len(cols))
-            seed = self.solve(seed, targets, seed, base_ref, cfg.ik_seed_iter, rot_scale=rot_scale)[0]
-            e = self.error(seed, targets, rot_scale)
+            seed = self.solve(seed, targets, seed, base_ref, cfg.ik_seed_iter, rot_scale=rot_scale,
+                              pos_scale=pos_scale)[0]
+            e = self.error(seed, targets, rot_scale, pos_scale)
             if best is None or e < best[0]:
                 best = (e, seed)
-        return self.solve(best[1], targets, best[1], base_ref, max_iter, rot_scale=rot_scale)
+        return self.solve(best[1], targets, best[1], base_ref, max_iter, rot_scale=rot_scale, pos_scale=pos_scale)
 
     def manipulability(self, q):
         """Smallest Yoshikawa measure sqrt(det(J J^T)) of the active arms' 6x7 TCP Jacobians."""
@@ -316,12 +330,12 @@ class FrameSolver:
 
 
 def solve_trajectory(cfg: RetargetConfig, targets, base_ref, base_free, q0, nominal, rot_scale=None,
-                     max_iter=None, box=None, obstacles=None):
+                     max_iter=None, box=None, obstacles=None, pos_scale=None):
     """Frame-by-frame IK along the source clock.
 
     targets: {side: (T, 4, 4) world TCP}; base_ref: (T, 3) base path (the fixed base when
     ``base_free`` is False); q0: (22,) seed of the first frame (its non-variable entries are
-    kept for every frame); rot_scale: optional {side: (T,)} orientation weight factors;
+    kept for every frame); rot_scale / pos_scale: optional {side: (T,)} orientation / position weight factors;
     max_iter: iterations per frame after the first (default ``cfg.ik_max_iter``); box: optional
     absolute (lower (22,), upper (22,)) bounds for every frame; obstacles: footprint obstacles
     repelling a free base (``cfg.footprint_margin``).
@@ -337,15 +351,17 @@ def solve_trajectory(cfg: RetargetConfig, targets, base_ref, base_free, q0, nomi
         frame = {s: X[t] for s, X in targets.items()}
         limit = cfg.ik_first_max_iter if t == 0 else (max_iter or cfg.ik_max_iter)
         scale = None if rot_scale is None else {s: w[t] for s, w in rot_scale.items()}
-        cur, iters[t] = solver.solve(cur, frame, cur, base_ref[t], limit, box=box, rot_scale=scale)
+        pscale = None if pos_scale is None else {s: w[t] for s, w in pos_scale.items()}
+        cur, iters[t] = solver.solve(cur, frame, cur, base_ref[t], limit, box=box, rot_scale=scale, pos_scale=pscale)
         q[t] = cur
     return q, iters
 
 
-def smooth(cfg: RetargetConfig, q, targets, base_free):
+def smooth(cfg: RetargetConfig, q, targets, base_free, obstacles=None):
     """Light Gaussian smoothing of the IK variables, kept per frame only where it does not
     push the TCP residual above max(previous residual, cfg.refine_fraction of the tolerance)
-    nor lower the self-clearance below min(previous clearance, the IK margin).
+    nor lower the self-clearance below min(previous clearance, the IK margin), nor (free base with
+    ``obstacles``) the footprint clearance below min(previous clearance, ``cfg.footprint_margin``).
 
     Returns (smoothed q, fraction of frames that kept the smoothed value).
     """
@@ -358,10 +374,13 @@ def smooth(cfg: RetargetConfig, q, targets, base_free):
     clear = Clearance(tuple(targets))
     c_old, c_new = clear.minimum(q), clear.minimum(qs)
     keep = (e_new <= np.maximum(e_old, cfg.refine_fraction)) & (c_new >= np.minimum(c_old, cfg.self_clearance_margin))
+    if base_free and obstacles is not None and (obstacles.polygons or len(obstacles.points)):
+        f_old, f_new = footprint.clearance(q[:, :2], obstacles), footprint.clearance(qs[:, :2], obstacles)
+        keep &= f_new >= np.minimum(f_old, cfg.footprint_margin)
     return np.where(keep[:, None], qs, q), float(keep.mean())
 
 
-def refine(cfg: RetargetConfig, q, targets, base_ref, base_free, nominal, dt, obstacles=None):
+def refine(cfg: RetargetConfig, q, targets, base_ref, base_free, nominal, dt, obstacles=None, skip=None):
     """Re-solve output frames whose residual exceeds ``cfg.refine_fraction`` of the tolerance.
 
     Frames are processed in order, warm-started and regularized at their current value, and
@@ -370,14 +389,21 @@ def refine(cfg: RetargetConfig, q, targets, base_ref, base_free, nominal, dt, ob
     """
     if not targets:
         return q, 0
-    bad = np.flatnonzero(normalized_error(tcp_errors(q, targets), cfg) > cfg.refine_fraction)
+    over = normalized_error(tcp_errors(q, targets), cfg) > cfg.refine_fraction
+    if skip is not None:  # rows the caller knows cannot reach the tolerance (``skip`` (N,) bool)
+        over &= ~np.asarray(skip, bool)
+    bad = np.flatnonzero(over)
     if not len(bad):
         return q, 0
     solver = FrameSolver(cfg, tuple(targets), base_free, nominal, obstacles=obstacles)
     step = VELOCITY * dt * (1 - 1e-6)
+    step[:2] /= np.sqrt(2.0)  # world-axis steps whose body-frame components stay within the base limit
     q = q.copy()
     for t in bad:
         nb = q[[i for i in (t - 1, t + 1) if 0 <= i < len(q)]]
-        box = (nb.max(axis=0) - step, nb.min(axis=0) + step)
+        lo, hi = nb.max(axis=0) - step, nb.min(axis=0) + step
+        empty = lo > hi  # neighbours already farther apart than the box allows: keep the value
+        lo[empty], hi[empty] = q[t, empty], q[t, empty]
+        box = (lo, hi)
         q[t] = solver.solve(q[t], {s: X[t] for s, X in targets.items()}, q[t], base_ref[t], cfg.ik_max_iter, box)[0]
     return q, len(bad)

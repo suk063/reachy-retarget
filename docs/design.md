@@ -61,9 +61,11 @@ Canonical joint vector `q` (22 values, this order everywhere):
 | 20–21 | `l_hand_finger`, `r_hand_finger` (rad) |
 
 Limits: URDF joint limits (wrist roll/pitch ±30°, neck roll/pitch ±30°, yaw ±60°), arm
-joint speed 1 rad/s, neck 30°/s, base 0.61 m/s per axis and 114°/s (whole-body
-controller limits). The more conservative task-space executor limits of reachy-agent
-(0.22 m/s, 0.6 rad/s base) are reported as a flag, not enforced.
+joint speed 1 rad/s, neck 30°/s, base 0.61 m/s per body axis and 114°/s (whole-body
+controller limits; time scaling and tier K use base-frame translation, as tier P measures it).
+The more conservative task-space executor limits of reachy-agent (0.22 m/s, 0.6 rad/s base) are
+reported as a flag (`tier_k_metrics.base_exceeds_executor_limits`, `peak_base_speed_body`), not
+enforced.
 
 Frames: `world` (source world), `base_link` (Reachy base on the floor, +x forward, +y
 left, +z up), TCP = `{l,r}_arm_tip`, head = `head`. Poses are stored as
@@ -118,7 +120,9 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      objects with several collision geoms are unions of per-geom `boxes` (the mug is held by its
      9 mm handle, ThreePieceAssembly pieces are 34–40 mm voxel arms of 102–160 mm envelopes):
      before, 38 of the 105 closed-gripper runs of the MimicGen dev demos had no grasp label (no
-     squeeze, no grasp-phase checks); now all 105 have one.
+     squeeze, no grasp-phase checks); now all 105 have one. An `aabb` closed run that carries the
+     object (it travels > 3 cm and stays within 3 cm of its median pose in the grasp frame) is a grasp
+     whatever the width: BiGym's Robotiq holds a mug by its wall at 15 mm, half of the 95 mm envelope.
    * *Closed-hand pushes* (`targets.push_labels`, derived label recorded in
      `extra["retarget"]["push"]`, never a grasp label): frames where a closed but empty hand is
      within contact distance of an object that moves faster than 2 cm/s together with the hand
@@ -166,8 +170,20 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      in free space; the reference rotation is that one blended into the source (offset)
      rotation by the weight, and a second pass tracks this reference strictly, so tier K still
      checks every frame against a stored reference (`reference.tcp`).
+   * *Idle hands of mobile sources* (`targets.position_weight`, `idle_distance`): the position
+     weight follows the same rule with a 0.15 m (strict) to 0.30 m (free, weight 0.05) ramp on the
+     distance to the nearest task object (manipulated or receptacle surface; objects without box
+     geometry: origin distance − 0.15 m; articulated fixtures without geometry and objects whose
+     pose is unknown at that row count as 0). In the first pass an idle arm also gets an extra
+     nominal-posture weight 0.3 × (1 − w); where w < 1 its position reference is the first-pass
+     pose (`free_orientation.<side>.idle_shifted_frames`, `max_reference_shift_m`). BEHAVIOR's R1
+     Pro carries its free arm at z 0.44 m, below Reachy's reach; tracking it twisted the arm and
+     dilated time 4.6× (episode 00000010: K 7,996 failing frames → 0, 253 s → 45 s).
 2. **Arm assignment.** Single-arm sources are assigned to the arm with the better
-   reachability score over the trajectory. Bimanual sources keep their side hints. A
+   reachability score over the trajectory. Bimanual sources keep their side hints. Navigation
+   episodes (`regime = "navigation"`, RoboCasa NavigateKitchen holds the Panda hand fixed on the
+   base) retarget no effector: the arms hold `stow` (`rest` with 16° shoulder roll toward the torso),
+   only the base and the head move (`extra["notes"]`). A
    mirrored or alternate-arm variant may be written but carries `variant_of`.
 3. **Base placement.** Fixed-base sources: search a single base SE(2) pose (grid, then
    local refinement) that makes every TCP target reachable with joint-limit and
@@ -197,6 +213,18 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      holds the object are not obstacles. Grasp offsets are searched per candidate (cold IK once
      per placement, offsets warm started, the first offset within 0.6 of the tolerance wins,
      else the two best of a 3-keyframe screen are scored on all keyframes).
+   * *Scene geometry* (`footprint.scene_obstacles`): when the source ships a MuJoCo scene, every
+     colliding environment geom (walls, counters, cabinets, appliances, articulated parts at their
+     initial state; not free objects) within 1.5 m of the source hands/base becomes a footprint
+     polygon with its height interval, for placement, the free-base IK constraint and tier K (stored
+     in `extra["scene_footprint"]`). The disc stack ends at 1.45 m (head top 1.41 m); a mobile
+     episode with a resting arm adds the arm's band (`footprint.arm_band`: 0.44–1.21 m, 0.33 m for
+     `rest`, 0.27 m for the navigation `stow` posture).
+   * *Mobile sources* keep the free base (deviation penalty) and get the same linearized footprint
+     constraint (static objects + scene geometry). Until 2026-10-08 the constraint rows were added on
+     every iteration (an identity test on a fresh array view never held), which pinned a free base to
+     the margin contour of the nearest obstacle: base assistance then turned the base by up to
+     1.4 rad instead of stepping 0.3 m (RoboCasa OpenDrawer).
    * *Base assistance* (`pipeline`): when the fixed-base IK leaves frames outside the tier-K
      tolerances, the IK is re-solved with the base free in a box (±0.6 m, ±1 rad) around the
      placement, a deviation penalty, and the footprint clearance ≥ 5 cm as a linearized
@@ -210,7 +238,8 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
    follows. The bounded least squares is an exact active-set solver of the damped normal
    equations (3–4× faster than BVLS; IK, FK and Jacobian inner loops were profiled).
 5. **Gaze.** Neck targets point the head at the currently manipulated object (or the
-   active hand), within neck limits; the neck is scaled toward 0 where the turned head would
+   active hand; without active hands, 1.5 m ahead along the direction of travel, toward the base
+   position 1 m further along its path), within neck limits; the neck is scaled toward 0 where the turned head would
    come closer to an arm than the IK clearance margin (the arm IK assumes the neck at 0), with
    a backward pass so the rate limit can return it in time.
 6. **Gripper.** Opening maps to `{l,r}_hand_finger` through the calibrated opening
@@ -237,8 +266,10 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
    during the grasp), the path's offset across the grasp's approach axis is removed while the
    fingertips are within 5 mm of the object's far side, blending back over 3 cm; closed-hand pushes
    and the retreat are unchanged.
-7. **Timing.** Phase-preserving time scaling so joint and base speed limits hold, then
-   resampling at 50 Hz. The source↔target time map is stored. The source step into and out of
+7. **Timing.** Phase-preserving time scaling so joint and base speed limits hold (base translation
+   per body axis), then resampling at 50 Hz. Output-clock refinement skips rows between two source
+   rows whose TCP position the source-clock IK already left more than 2 cm off (unreachable
+   targets; smaller misses are often recovered on the output clock). The source↔target time map is stored. The source step into and out of
    each grasp lasts at least 0.3 s, so Reachy's fingers settle on the object before the arm
    lifts it (the source gripper stalls within one control step; without the dwell the Lift
    cube slid 2–3 cm down the pads). Articulated slide joints (drawers, typed `slide` in the source
@@ -247,7 +278,9 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
 
 ## Validation tiers
 
-* **K** (every episode): TCP residual (≤ 5 mm, ≤ 0.05 rad), joint limits, speed limits,
+* **K** (every episode): TCP residual (≤ 5 mm, ≤ 0.05 rad; failing frames whose grasp-center target
+  lies outside Reachy's reach band z 0.46–1.87 m are named as such, `<side>_unreachable_frames`),
+  navigation episodes end within 3 cm of their base reference, joint limits, speed limits,
   self-clearance ≥ 9 mm, base footprint clear of static scene geometry, grasp-phase
   hand–object relative pose consistency. Failures are saved with reasons.
 * **P** (sources with a MuJoCo scene): the source robot is removed from the source
@@ -288,6 +321,18 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
     measured keep the rest requirement. Rules, end speeds and both errors are stored per
     object (`metrics.task`, `metrics.objects_at_rest_rule`); robot gates and thresholds are
     unchanged.
+  * *Task predicate without a manipulated object* (missing measurements still fail otherwise): a
+    `navigation` episode passes `task_final_pose` when the measured base ends within 3 cm of the
+    last base reference; an articulated task (BiGym drawers, cupboards, dishwasher racks) when every
+    scene joint the source moved by ≥ 1 cm / 0.05 rad ends within 3 cm / 0.05 rad of the source's
+    final value after the hold (`metrics.task[...]`, rule `navigation_destination` |
+    `articulation_final`). Before, both always failed.
+  * *Floor bodies*: Reachy's wheels are excluded against every static body carrying the floor (a
+    plane at z = 0, or a horizontal box wider than 1 m whose top is at z = 0: BiGym `floor`,
+    RoboCasa `floor*_room_main`), as they already were against `world`. Wheel–floor friction dragged
+    the planar base joints (stick-slip): BiGym DishwasherLoadCups measured base 0.86 m/s and 2.5 rad/s
+    against a 0.44 m/s / 1.2 rad/s reference, then `arm_speed` 2.1 rad/s and `tcp_tracking` 7 cm;
+    with the exclusion all three gates pass.
   * Object–environment contacts during the settle phase (objects released from the
     source's initial state; robosuite cubes start ~1 cm above the table) are reported, not
     gated. Grasp gates also count a hand as closed while the episode's grasp label is set
@@ -580,6 +625,85 @@ Measurements behind the remaining failure modes (final dev):
   pads); CoffeePreparation fails on K, joint margins and the lid/pod sequence.
 * NutAssembly (0 / 0) is bounded by K (TCP residuals 5–37 mm) and PickPlace by K (wrist rotation
   while holding); Square by `task_final_pose` after the nut is dropped onto the peg.
+
+### Mobile / whole-body loop (2026-10-08)
+
+Dev (52 episodes, fixed before any change): BEHAVIOR 10 (the first episode of each of the 8 local
+tasks, the second of tasks 0 and 1), MobileManiBench 10 (2 per task type), MolmoBot 10 RB-Y1
+(5 door, 2 open, 2 pick, 1 pick-and-place), RoboCasa 12 (episodes 0–3 of OpenDrawer,
+PickPlaceCounterToCabinet, NavigateKitchen; P with the source scene), BiGym 10 (record 0 of every
+4th task; P). Held-out (49, evaluated once at the end): the 6th/7th BEHAVIOR episodes, the next 2
+MobileManiBench episodes per type, the other 10 RB-Y1 trajectories, RoboCasa episodes 5–7, record 0
+of 10 other BiGym tasks. Runs: `runs/eval/mobile/{baseline,final}-{dev,ho}.jsonl` (baseline = HEAD
+`54909d5`). Episodes passing K / P (K & P); P only where a scene exists:
+
+| family | baseline dev | final dev | baseline held-out | final held-out | s/episode dev (base → final) |
+| --- | --- | --- | --- | --- | --- |
+| BEHAVIOR (R1 Pro) | 0 / – | 2 / – | 0 / – | 3 / – | 1001 → 257 |
+| MobileManiBench (G1) | 4 / – | 4 / – | 3 / – | 5 / – | 30 → 15 |
+| MolmoBot (RB-Y1) | 9 / – (1 error) | 10 / – | 7 / – (2 errors) | 8 / – | 9 → 8 |
+| RoboCasa | 5 / 0 (0) | 4 / 0 (0) | 4 / 0 (0) | 4 / 0 (0) | 49 → 40 |
+| BiGym (H1) | 2 / 0 (0) | 3 / 1 (1) | 2 / 0 (0) | 2 / 0 (0) | 106 → 101 |
+| **total** | 20 / 0 | 23 / 1 | 16 / 0 | 22 / 0 | |
+
+RoboCasa K includes the new navigation check (NavigateKitchen 4 / 4 → 0 / 4 dev, 3 / 3 → 1 / 3
+held-out); without it the totals are 27 dev and 24 held-out. Per task (dev, K baseline → final):
+OpenDrawer 1 → 4, radio 0 → 1 of 2, microwave popcorn 0 → 1, DishwasherLoadCups 0 → 1, MovePlate K & P
+0 → 1, MolmoBot pick-and-place error → pass; unchanged: MobileManiBench close microwave and pick 4 / 4,
+lever door, drawer (open table) and cart 0 / 6, MolmoBot door/open/pick 9 / 9. Held-out BEHAVIOR
+timing 780 → 298 s, BiGym 255 → 122 s. Robomimic Lift demos 0–4: 5 / 5 K & P before and after;
+ManiSkill PickCube teleop 10: 6 / 10 / 6 before and after (same episodes, same reasons).
+
+Root causes (dev, measured):
+* *Idle arms below reach*: BEHAVIOR failed K in 10 / 10 with 53–60 % of its frames on targets at
+  z 0.43–0.44 m (R1 Pro arms parked at its side; Reachy's grasp center reaches 0.46–1.87 m, sampled
+  over the arm workspace with self-clearance), far from every task object. Tracking them twisted the
+  arm (self-clearance −103 mm) and dilated time up to 42× per interval (4.6× overall). Fix: idle
+  position weights (above). Episode 00000010: K failing frames 7,996 → 0.
+* *Targets Reachy cannot reach*: BEHAVIOR floor picks (shoes 0.05 m, trash 0.12–0.24 m, tripod
+  0.07 m), MobileManiBench drawers at 0.30 m, BiGym crouched H1 (pelvis 0.40 m) reaching 0.42–0.56 m
+  into dishwashers, and wall cabinets behind counters (TakeCups: shoulder distance 0.70–0.80 m with
+  the base held off the counter by the footprint; Reachy's arm 0.62 m). These stay K failures and
+  are now named (`TCP target outside Reachy's reach band`, 4 BEHAVIOR + 2 MMB + 1–3 BiGym episodes).
+* *Footprint constraint pinned the base* (bug, all sources with base assistance or a free base):
+  RoboCasa OpenDrawer 1 → 4 / 4 K.
+* *No scene geometry in the footprint*: RoboCasa and BiGym bases drove into cabinet doors and
+  dishwashers (P `robot_environment_penetration` 0.15 m on NavigateKitchen; BiGym K footprint overlap
+  5 / 10). With `scene_obstacles` K now sees them; P robot–environment first failures: RoboCasa 4 → 3
+  (PickPlaceCounterToCabinet stands where the counter blocks the base: K footprint reason), BiGym
+  held-out 4 → 0.
+* *World-axis base limit*: diagonal motion at 0.58 m/s per world axis is 0.82 m/s in the body; tier P
+  measured 0.62 m/s (NavigateKitchen). Time scaling and K now use body-axis increments.
+* *Wheel–floor friction in BiGym/RoboCasa scenes* (floor is its own body): `base_speed` 7 / 10 → 0,
+  `arm_speed` 9 → 4–5 and `tcp_tracking` 9 → 6–7 BiGym P first/any reasons.
+* *Envelope geometry hid BiGym grasps*: 15 mm Robotiq widths against 95 mm mug aabbs; the carried-run
+  rule labels both DishwasherLoadCups mugs (left 174 / right 180 frames).
+* *Task predicates that could not pass*: BiGym articulated tasks and navigation had no manipulated
+  object; DrawerTopOpen now opens its drawer to 0.1 mm of the source in P (it fails on
+  self-clearance: the two hands' collision spheres overlap by up to 10 mm at the handle).
+* *Navigation*: the source Panda hand was tracked through the house. Now only base and head move;
+  RoboCasa P gates all pass except the destination: Reachy with hanging arms cannot stand where the
+  Omron base ended (source path clearance −0.10 to −0.24 m against Reachy's body discs + arm band;
+  destination missed by 0.03–0.23 m after the `stow` posture, 0.10–3.78 m with `rest`). RoboCasa's own
+  success region is 0.20 m around a target the recording does not store, so 3 cm of the source's final
+  pose is the gate. Gaze looks along the travel direction.
+* *Refinement of unreachable rows*: BiGym SaucepanToHob spent 42 of 68 s re-solving them.
+* MolmoBot pick-and-place: receptacle ids with '/' broke episode assembly (adapter fix).
+
+Base speed: sources drive 0.2–0.3 m/s (BEHAVIOR, MobileManiBench, MolmoBot) and up to 1.3 m/s and
+2.3 rad/s (BiGym, RoboCasa navigation 0.95 m/s); time scaling keeps 0.61 m/s and 114°/s. 39 / 52 dev
+and 33 / 49 held-out episodes exceed the reachy-agent executor flag (0.22 m/s, 0.6 rad/s).
+
+Remaining failure modes: unreachable heights and distances above; MobileManiBench lever door
+(handle at 0.62–0.65 m, rotation residual 0.5 rad at Reachy's lower reach edge) and cart (handle at
+0.55–0.60 m: arm branch flips, self-clearance); BiGym bimanual handle grasps (hands within 1 cm of
+each other), mug handle grasps slipping in Reachy's flat pads (P `grasp_drift`), object-environment
+depth of the mug in the dishwasher rack; RoboCasa OpenDrawer P (wrist dips 0.02 rad past the margin
+and the hand lags the drawer 3.6–7.7 cm: `joint_margin`, `tcp_tracking`); BEHAVIOR carries are not
+labelled (asset geometry only, object origins 4–19 cm from the grasp center), so its K passes do not
+check hand–object drift; BEHAVIOR, MobileManiBench and MolmoBot have no scene (no P, no footprint
+geometry); articulated fixtures do not make the orientation strict (`hand_object_distance` uses
+manipulated objects only).
 
 ## Episode storage (`reachy-retarget-episode-v2`)
 

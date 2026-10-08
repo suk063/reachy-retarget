@@ -25,12 +25,13 @@ from ..schema.rotations import so3_log
 from ..schema.source import Articulation, SourceEpisode
 from ..validate import kinematic
 from . import footprint, timing
-from .assign import assign, posture, tuck_posture
+from .assign import assign, posture, stow_posture, tuck_posture
 from .config import RetargetConfig
 from .gaze import gaze_error, gaze_points, solve_neck
 from .placement import diagnostics as placement_diagnostics
 from .targets import (approach_width, blend_orientation, contact_width, finger_angles, grasp_labels, gripper_state,
-                      hand_object_distance, held_masks, manipulated_ids, object_centric, orientation_weight,
+                      hand_object_distance, held_masks, idle_distance, manipulated_ids, object_centric,
+                      orientation_weight, position_weight,
                       offset_track, place_labels, push_labels, release_ramp, release_starts, source_closed,
                       straight_approach,
                       tcp_targets, _runs)
@@ -82,26 +83,41 @@ def _bad_frames(cfg, q, targets, labels):
     return int(np.sum(bad | (min_clearance(q) < cfg.min_self_clearance)))
 
 
-def _ik(cfg, robot, targets, weights, labels, base_ref, base_free, q0, nominal, box=None, obstacles=None):
-    """Two-pass whole-body IK on the source clock (free orientation away from grasps, then strict
-    tracking of the blended reference) and smoothing; returns q, the blended targets and stats."""
+def _ik(cfg, robot, targets, weights, labels, base_ref, base_free, q0, nominal, box=None, obstacles=None,
+        pos_weights=None):
+    """Two-pass whole-body IK on the source clock (free orientation away from grasps and, with
+    ``pos_weights``, free position of idle hands; then strict tracking of the blended reference) and
+    smoothing; returns q, the blended targets and stats."""
     targets = dict(targets)
-    relaxed = {s: w for s, w in weights.items() if (w < 1).any()}
+    pos_weights = pos_weights or {}
+    relaxed = {s for s, w in weights.items() if (w < 1).any()} | {s for s, w in pos_weights.items() if (w < 1).any()}
     orient = {}
     if relaxed:
-        # Pass 1: orientation weight lowered away from grasps; its achieved TCP rotation becomes
-        # the reference there (blended into the source rotation near grasps), tracked strictly.
+        # Pass 1: orientation (and idle position) weights lowered away from grasps; its achieved TCP
+        # pose becomes the reference there (blended into the source pose near grasps), tracked strictly.
         q_free, _ = solve_trajectory(cfg, targets, base_ref, base_free, q0, nominal, rot_scale=weights,
-                                     max_iter=cfg.ik_free_iter, box=box, obstacles=obstacles)
+                                     max_iter=cfg.ik_max_iter if pos_weights else cfg.ik_free_iter, box=box,
+                                     obstacles=obstacles,
+                                     pos_scale=pos_weights or None)
         fk_free = robot.fk(q_free)
-        for side in relaxed:
+        for side in sorted(relaxed):
             src_t = targets[side]
-            targets[side] = blend_orientation(src_t, fk_free[f"{side}_tcp"], weights[side])
+            X_free = fk_free[f"{side}_tcp"]
+            targets[side] = blend_orientation(src_t, X_free, weights[side])
             dev = np.linalg.norm(so3_log(np.swapaxes(src_t[:, :3, :3], 1, 2) @ targets[side][:, :3, :3]), axis=1)
             orient[side] = {"relaxed_frames": int(np.sum(weights[side] < 1)),
                             "max_reference_deviation_rad": float(dev.max())}
+            if side in pos_weights:
+                # an idle hand's reference is where the weighted pass put it (feasible by construction;
+                # a linear blend toward an unreachable source point inside the ramp is not)
+                wp = pos_weights[side]
+                targets[side][:, :3, 3] = np.where((wp < 1)[:, None], X_free[:, :3, 3], src_t[:, :3, 3])
+                shift = np.linalg.norm(targets[side][:, :3, 3] - src_t[:, :3, 3], axis=1)
+                orient[side].update(idle_frames=int(np.sum(pos_weights[side] < 1)),
+                                    idle_shifted_frames=int(np.sum(shift > cfg.tcp_pos_tol)),
+                                    max_reference_shift_m=float(shift.max()))
     q, iters = solve_trajectory(cfg, targets, base_ref, base_free, q0, nominal, box=box, obstacles=obstacles)
-    q, smoothed = smooth(cfg, q, targets, base_free)
+    q, smoothed = smooth(cfg, q, targets, base_free, obstacles)
     return {"q": q, "iters": iters, "smoothed": smoothed, "targets": targets, "orientation": orient,
             "bad_frames": _bad_frames(cfg, q, targets, labels)}
 
@@ -112,6 +128,12 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
     cfg = cfg or RetargetConfig()
     t_start = _time.perf_counter()
     robot = Reachy.load()
+    dropped = []
+    if cfg.navigation_arms_rest and src.regime == "navigation" and src.base is not None and src.effectors:
+        # Navigation: the source hand pose carries no task (RoboCasa NavigateKitchen holds the Panda
+        # hand fixed on the base); only the base and the head move, the arms rest.
+        dropped = sorted(src.effectors)
+        src = replace(src, effectors={})
     closed_src = {k: source_closed(e, cfg, src.time) for k, e in src.effectors.items()}
     labels_src = {k: grasp_labels(e.pose[:, :3, 3], closed_src[k], src.objects, cfg, effector=e, times=src.time)
                   for k, e in src.effectors.items()}
@@ -140,9 +162,17 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
                                                            frozen=(lab >= 0) & (labels_src[k] < 0))
             effectors[k] = replace(e, pose=pose)
         src = replace(src, effectors=effectors)
+    scene_obs = None
+    if cfg.scene_footprint and src.scene is not None:
+        # Static source-scene geometry (house walls, counters, cabinets) for the base footprint.
+        near = [e.pose[:, :2, 3] for e in src.effectors.values()]
+        near += [src.base[:, :2]] if src.base is not None else []
+        near += [src.base_hint[None, :2]] if src.base_hint is not None else []
+        if near:
+            scene_obs = footprint.scene_obstacles(src.scene, cfg, np.concatenate(near), cfg.scene_footprint_radius)
     try:
-        tuck = tuck_posture(cfg)
-        assignment = assign(src, cfg, labels_src)
+        tuck = stow_posture(cfg) if dropped else tuck_posture(cfg)
+        assignment = assign(src, cfg, labels_src, scene_obs)
     except (ValueError, RuntimeError) as err:
         return RetargetResult(None, "failed", [str(err)], {"stage": "assignment"})
     sides, place = assignment.sides, assignment.placement
@@ -162,7 +192,18 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
     weights = {side: orientation_weight(src.time, labels[side], cfg,
                                         hand_object_distance(src, key) if cfg.orientation_by_distance else None)
                for key, side in sides.items()}
-    fixed = _ik(cfg, robot, targets, weights, labels, base_ref, place.mobile, q0, nominal)
+    pos_weights = ({side: position_weight(src.time, labels[side], cfg, idle_distance(src, key, cfg))
+                    for key, side in sides.items()} if cfg.idle_position and place.mobile else {})
+    static_obs = footprint.obstacles(src.objects, cfg, static_only=True)
+    if scene_obs is not None:
+        static_obs = footprint.merge(static_obs, scene_obs)
+    rest_arm = place.mobile and len(targets) < 2
+    if rest_arm:  # a resting arm travels beside the torso
+        static_obs.bands = footprint.BODY_PROFILE + (footprint.arm_band(tuck),)
+    # a mobile base keeps its footprint clear of static geometry (linearized IK constraint)
+    mobile_obs = static_obs if place.mobile and (static_obs.polygons or len(static_obs.points)) else None
+    fixed = _ik(cfg, robot, targets, weights, labels, base_ref, place.mobile, q0, nominal, pos_weights=pos_weights,
+                obstacles=mobile_obs)
     best, base_free = fixed, place.mobile
     base_diag = {"assist": "mobile source" if place.mobile else "not needed" if fixed["bad_frames"] == 0
                  else "disabled"}
@@ -174,6 +215,8 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         lo[:3], hi[:3] = base_ref[0] - span, base_ref[0] + span
         cfg_b = replace(cfg, w_base=cfg.w_base_assist)
         obs = footprint.obstacles(src.objects, cfg, held=held_masks(src.objects, labels.values()))
+        if scene_obs is not None:
+            obs = footprint.merge(obs, scene_obs)
         assisted = _ik(cfg_b, robot, targets, weights, labels, base_ref, True, q0, nominal, box=(lo, hi),
                        obstacles=obs)
         has_obstacles = bool(obs.polygons) or len(obs.points) > 0
@@ -218,8 +261,15 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
     targets_out = {s: timing.poses(clock, X) for s, X in targets.items()}
     base_out = timing.linear(clock, base_ref)
     assist = base_free and not place.mobile
+    # Refinement recovers interpolation residuals; output rows between two source rows whose position
+    # the source-clock IK already left outside the tolerance (unreachable targets) are not re-solved (BiGym
+    # SaucepanToHob: 42 of 68 s were spent re-solving such rows without effect).
+    hopeless = None
+    if targets:
+        out_src = np.max([p for p, _ in tcp_errors(q_src, targets).values()], axis=0) > cfg.refine_skip_pos
+        hopeless = out_src[clock.index] & out_src[np.minimum(clock.index + 1, len(out_src) - 1)]
     q, refined = refine(replace(cfg, w_base=cfg.w_base_assist) if assist else cfg, q, targets_out, base_out,
-                        base_free, nominal, DT, obstacles=obs if assist else None)
+                        base_free, nominal, DT, obstacles=obs if assist else mobile_obs, skip=hopeless)
     grasp_out = np.full((len(q), 2), -1, dtype=np.int16)
     for side, lab in labels.items():
         grasp_out[:, SIDES.index(side)] = timing.labels(clock, lab)
@@ -289,7 +339,20 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
                "grasp_offsets": _jsonable({s: {"flip": bool(o[0]), "theta_deg": o[1], "tilt_deg": o[2]}
                                            for s, o in place.offsets.items()}),
                "grasp_offset_segments": _jsonable(placement_diagnostics(place)["segment_grasp_offsets"]),
-               "notes": _notes(src, sides)})
+               "notes": _notes(src, sides) + ([f"navigation regime: source effectors {dropped} not retargeted, "
+                                                "arms in the rest posture"] if dropped else [])})
+    if rest_arm:
+        episode.extra["footprint_bands"] = [list(b) for b in static_obs.bands]
+    if scene_obs is not None and scene_obs.polygons:
+        # the scene geometry near the final base path, for the tier-K footprint check
+        verts, rad = footprint._packed(scene_obs)
+        d = footprint._polygons_distance(q[:: max(1, len(q) // 400), :2], verts).min(axis=0) - rad
+        keep = np.flatnonzero(d < 1.0)
+        episode.extra["scene_footprint"] = {
+            "polygons": [np.round(scene_obs.polygons[i], 4).tolist() for i in keep],
+            "heights": [list(np.round(scene_obs.heights[i], 4)) for i in keep],
+            "source": "colliding environment geoms of the source scene (footprint.scene_obstacles), "
+                      "within 1 m of the base path"}
     k = kinematic.check(episode, cfg)
     episode.validation.update(k["frames"])
     episode.tier = {"K": {"passed": k["passed"], "reasons": k["reasons"]}, "P": None}

@@ -2,7 +2,8 @@
 
 Reachy is modelled as a stack of discs around ``base_link`` (``BODY_PROFILE``): the mobile
 base (radius ``BASE_FOOTPRINT_RADIUS``) up to 0.30 m, the tripod column up to 0.95 m and the
-torso/head above. The column and torso radii are the largest horizontal distance from the
+torso/head up to 1.45 m (head top 1.41 m); ``REST_ARM_BAND`` is added for an arm that rests the
+whole episode (``Obstacles.bands``). The column and torso radii are the largest horizontal distance from the
 base axis of the MuJoCo collision geometry (``robot.mjcf``) of the non-arm links in each band,
 rounded up (base 0.245 m, column 0.136 m, torso 0.183 m at zero posture). Arms are excluded:
 they reach over tables by design and are checked by self-clearance and tier P.
@@ -32,7 +33,23 @@ from .config import RetargetConfig
 
 STATIC_ROLES = ("support", "fixture")
 # (z_low, z_high, radius) in m around the base_link axis; see the module docstring.
-BODY_PROFILE = ((-np.inf, 0.30, BASE_FOOTPRINT_RADIUS), (0.30, 0.95, 0.14), (0.95, np.inf, 0.19))
+BODY_PROFILE = ((-10.0, 0.30, BASE_FOOTPRINT_RADIUS), (0.30, 0.95, 0.14), (0.95, 1.45, 0.19))
+# An arm resting in the ``rest`` posture for a whole episode hangs beside the torso: its collision
+# spheres span z 0.44-1.21 m out to 0.32 m from the base axis (robot.collision sphere model);
+# :func:`arm_band` measures it for any posture (the navigation ``stow`` posture: 0.26 m).
+REST_ARM_BAND = (0.44, 1.22, 0.33)
+
+
+def arm_band(q, margin: float = 0.005):
+    """(z_low, z_high, radius) of the arm collision spheres of posture q (22,) around the base axis
+    (+ ``margin`` on the radius)."""
+    from ..robot import SelfCollision
+    sc = SelfCollision.load()
+    c = sc.sphere_centers(np.asarray(q, float)[None])[0][0]
+    arm = np.array([sc.links[sc.link_index[i]].startswith(("l_", "r_")) for i in range(len(c))])
+    r = sc.radii[arm]
+    return (float((c[arm, 2] - r).min()), float((c[arm, 2] + r).max()),
+            float((np.linalg.norm(c[arm, :2], axis=1) + r).max() + margin))
 
 
 def box_geometry(geometry: dict):
@@ -104,6 +121,7 @@ class Obstacles:
     point_radii: np.ndarray = field(default_factory=lambda: np.zeros(0))
     point_heights: np.ndarray = field(default_factory=lambda: np.zeros((0, 2)))
     notes: list[str] = field(default_factory=list)
+    bands: tuple = BODY_PROFILE  # body discs (z_low, z_high, radius); + REST_ARM_BAND when an arm rests
 
 
 def _box_corners(pose7, center, half):
@@ -170,14 +188,45 @@ def _polygon_distance(xy, poly):
     return np.where(inside, -dist, dist)
 
 
-def body_radius(z_low, z_high):
-    """Largest BODY_PROFILE radius over the bands overlapping [z_low, z_high] (array-friendly);
-    0 where no band overlaps."""
+def body_radius(z_low, z_high, bands=BODY_PROFILE):
+    """Largest radius of the body ``bands`` (default BODY_PROFILE) overlapping [z_low, z_high]
+    (array-friendly); 0 where no band overlaps."""
     z_low, z_high = np.asarray(z_low, float), np.asarray(z_high, float)
     r = np.zeros(np.broadcast(z_low, z_high).shape)
-    for lo, hi, rad in BODY_PROFILE:
+    for lo, hi, rad in bands:
         r = np.where((z_low < hi) & (z_high > lo), np.maximum(r, rad), r)
     return r
+
+
+def _packed(obs: Obstacles):
+    """(vertices (P, V, 2) padded by repeating the last vertex, body radius (P,)) of the polygons,
+    cached on ``obs`` while its polygon list is unchanged."""
+    key = (id(obs.polygons), len(obs.polygons), tuple(obs.bands))
+    cache = getattr(obs, "_packed_cache", None)
+    if cache is None or cache[0] != key:
+        V = max(len(p) for p in obs.polygons)
+        verts = np.stack([np.concatenate([p, np.repeat(p[-1:], V - len(p), axis=0)]) for p in obs.polygons])
+        rad = np.array([body_radius(lo, hi, obs.bands) for lo, hi in obs.heights], float)
+        cache = (key, verts, rad)
+        obs._packed_cache = cache
+    return cache[1], cache[2]
+
+
+def _polygons_distance(xy, verts, chunk: int = 256):
+    """Signed distances (N, P) from points (N, 2) to convex counter-clockwise polygons (P, V, 2)
+    (padded with repeated vertices: zero-length edges count as inside-tests that always pass)."""
+    a, b = verts, np.roll(verts, -1, axis=1)
+    e = b - a                                              # (P, V, 2)
+    ee = np.maximum(np.sum(e * e, -1), 1e-18)
+    out = np.empty((len(xy), len(verts)))
+    for i in range(0, len(xy), chunk):
+        rel = xy[i:i + chunk, None, None, :] - a[None]     # (n, P, V, 2)
+        t = np.clip(np.sum(rel * e, -1) / ee, 0, 1)
+        dist = np.linalg.norm(rel - t[..., None] * e, axis=-1).min(axis=-1)
+        cross = e[None, ..., 0] * rel[..., 1] - e[None, ..., 1] * rel[..., 0]
+        inside = np.all(cross >= -1e-15, axis=-1)
+        out[i:i + chunk] = np.where(inside, -dist, dist)
+    return out
 
 
 def clearance(base_xy, obs: Obstacles) -> np.ndarray:
@@ -185,10 +234,80 @@ def clearance(base_xy, obs: Obstacles) -> np.ndarray:
     obstacle minus the radius of the body band at the obstacle's height (negative = overlap)."""
     xy = np.atleast_2d(np.asarray(base_xy, float))
     d = np.full(len(xy), np.inf)
-    for poly, (lo, hi) in zip(obs.polygons, obs.heights):
-        d = np.minimum(d, _polygon_distance(xy, poly) - body_radius(lo, hi))
+    if obs.polygons:
+        verts, rad = _packed(obs)
+        d = np.minimum(d, (_polygons_distance(xy, verts) - rad).min(axis=1))
     if len(obs.points):
-        rad = body_radius(obs.point_heights[:, 0], obs.point_heights[:, 1])
+        rad = body_radius(obs.point_heights[:, 0], obs.point_heights[:, 1], obs.bands)
         dist = np.linalg.norm(xy[:, None] - obs.points[None], axis=-1) - obs.point_radii - rad
         d = np.minimum(d, dist.min(axis=1))
     return d
+
+
+def scene_obstacles(scene_ref, cfg: RetargetConfig, near_xy=None, radius: float = 1.5) -> Obstacles:
+    """Static floor obstacles from a source MuJoCo scene (``SceneRef``): every colliding geom of
+    the environment (bodies that are neither Reachy, the removed source robot, nor under a free
+    joint: walls, counters, cabinets, appliances, articulated doors and drawers at their initial
+    joint state), as the convex hull of its oriented bounding box projected on the floor with its
+    height interval (the same records as box objects). Planes and geoms whose top is below
+    ``cfg.floor_support_height`` are the floor. With ``near_xy`` (n, 2) only geoms whose hull
+    comes within ``radius`` of one of those points are kept (house-scale scenes hold thousands).
+
+    The scene is compiled as tier P builds it (:func:`validate.scene.build_scene`, inactive bodies
+    declared by the adapter removed); compile failures give no polygons and a note."""
+    import mujoco
+
+    from ..validate.scene import build_scene, reset, subtree
+    out = Obstacles()
+    try:
+        scene = build_scene(scene_ref, drop_bodies=sorted(scene_ref.inactive_bodies or ()))
+    except Exception as err:  # missing assets, unsupported MJCF: no scene geometry
+        out.notes.append(f"scene geometry unavailable: {type(err).__name__}: {err}")
+        return out
+    m = scene.model
+    d = reset(scene, np.zeros(22))
+    skip = set(scene.reachy_bodies())
+    for b in scene.free_bodies.values():
+        skip |= subtree(m, m.body(b).id)
+    pts = None if near_xy is None else np.asarray(near_xy, float).reshape(-1, 2)
+    if pts is not None and len(pts) > 400:
+        pts = pts[np.linspace(0, len(pts) - 1, 400).round().astype(int)]
+    signs = np.array(np.meshgrid([-1, 1], [-1, 1], [-1, 1])).reshape(3, -1).T
+    kept = 0
+    for g in range(m.ngeom):
+        if int(m.geom_bodyid[g]) in skip or m.geom_type[g] == mujoco.mjtGeom.mjGEOM_PLANE:
+            continue
+        if not (m.geom_contype[g] or m.geom_conaffinity[g]):
+            continue
+        c, h = m.geom_aabb[g, :3], m.geom_aabb[g, 3:]
+        corners = d.geom_xpos[g] + (c + signs * h) @ d.geom_xmat[g].reshape(3, 3).T
+        if corners[:, 2].max() < cfg.floor_support_height:
+            continue
+        xy = corners[:, :2]
+        try:
+            hull = xy[ConvexHull(xy).vertices]
+        except Exception:  # degenerate (zero-area) projection: a thin vertical plate seen edge-on
+            lo, hi = xy.min(axis=0) - 1e-3, xy.max(axis=0) + 1e-3
+            hull = np.array([lo, (hi[0], lo[1]), hi, (lo[0], hi[1])])
+        if pts is not None and _polygon_distance(pts, hull).min() > radius:
+            continue
+        out.polygons.append(hull)
+        out.heights.append((float(corners[:, 2].min()), float(corners[:, 2].max())))
+        kept += 1
+    out.notes.append(f"scene geometry: {kept} colliding environment geoms near the path")
+    return out
+
+
+def merge(*parts: Obstacles) -> Obstacles:
+    """One obstacle set holding every polygon and point of ``parts``."""
+    out = Obstacles(bands=tuple(sorted(set().union(*(p.bands for p in parts))))) if parts else Obstacles()
+    for p in parts:
+        out.polygons += list(p.polygons)
+        out.heights += list(p.heights)
+        out.notes += list(p.notes)
+    pts = [p for p in parts if len(p.points)]
+    if pts:
+        out.points = np.concatenate([p.points for p in pts])
+        out.point_radii = np.concatenate([p.point_radii for p in pts])
+        out.point_heights = np.concatenate([p.point_heights for p in pts])
+    return out

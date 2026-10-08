@@ -2,8 +2,10 @@
 
 Gaze point per frame, in priority order: the objects held by active hands (grasp label
 set), else the objects the active hands approach next (label of the next grasp phase),
-else the midpoint of the active hands' grasp centers, else a point 1.5 m ahead of the base
-at 0.6 m height (no active hand). The point path is Gaussian-smoothed in time.
+else the midpoint of the active hands' grasp centers, else a point 1.5 m ahead of the base at
+0.6 m height (no active hand: navigation), ahead along the direction of travel (toward the base
+position ``cfg.gaze_lookahead_m`` further along its path) while the base moves, else along its
+heading. The point path is Gaussian-smoothed in time.
 
 The head's viewing axis is the optical (+z) axis of the URDF eye cameras expressed in the
 ``head`` frame (it equals head +x); the viewpoint is the midpoint of the two eyes. Neck
@@ -56,6 +58,7 @@ def gaze_points(hands, labels, ids, objects, base, cfg: RetargetConfig, times):
     """
     T = len(base)
     out, rule = np.zeros((T, 3)), np.full(T, 3)
+    ahead = None if hands else travel_direction(base, cfg.gaze_lookahead_m)
     nxt = {s: _next_label(lab) for s, lab in labels.items()}
     for t in range(T):
         for r, lab in ((0, labels), (1, nxt)):
@@ -68,10 +71,27 @@ def gaze_points(hands, labels, ids, objects, base, cfg: RetargetConfig, times):
             if hands:
                 out[t], rule[t] = np.mean([h[t] for h in hands.values()], axis=0), 2
             else:
-                c, s = np.cos(base[t, 2]), np.sin(base[t, 2])
-                out[t] = (base[t, 0] + 1.5 * c, base[t, 1] + 1.5 * s, 0.6)
+                d = ahead[t]
+                out[t] = (base[t, 0] + 1.5 * d[0], base[t, 1] + 1.5 * d[1], 0.6)
     sigma = cfg.gaze_smoothing_s / np.median(np.diff(times))
     return gaussian_filter1d(out, sigma, axis=0, mode="nearest"), rule
+
+
+def travel_direction(base, lookahead):
+    """Unit floor directions (T, 2) to look along while moving: toward the base position
+    ``lookahead`` metres further along its path (where the base is going), else the heading
+    (standing, turning in place, or the last ``lookahead`` metres of the path)."""
+    base = np.asarray(base, float)
+    out = np.c_[np.cos(base[:, 2]), np.sin(base[:, 2])]
+    step = np.linalg.norm(np.diff(base[:, :2], axis=0), axis=1)
+    s = np.r_[0.0, np.cumsum(step)]
+    j = np.searchsorted(s, s + lookahead)
+    ok = j < len(base)
+    d = base[np.minimum(j, len(base) - 1), :2] - base[:, :2]
+    n = np.linalg.norm(d, axis=1)
+    ok &= n > 0.5 * lookahead  # mostly straight progress, not a turn on the spot
+    out[ok] = d[ok] / n[ok, None]
+    return out
 
 
 def _view(q):

@@ -78,7 +78,9 @@ def process_source(src, *, physics: bool = True, write: str | None = None, cfg=N
                 "metrics": _short(ep.extra.get("tier_k_metrics", {}),
                                   ("left_max_pos_residual", "left_max_rot_residual", "right_max_pos_residual",
                                    "right_max_rot_residual", "max_speed_ratio", "min_self_clearance",
-                                   "max_grasp_drift_pos", "max_grasp_drift_rot"))}
+                                   "max_grasp_drift_pos", "max_grasp_drift_rot", "left_unreachable_frames",
+                                   "right_unreachable_frames", "peak_base_speed_body", "base_exceeds_executor_limits",
+                                   "min_footprint_clearance"))}
     rec["retarget"] = {k: res.diagnostics.get(k) for k in ("assignment", "timing", "seconds")}
     rec["retarget"]["placement"] = {k: res.diagnostics.get("placement", {}).get(k)
                                     for k in ("mobile", "pose", "offset", "flips", "cost", "grasp_offsets")}

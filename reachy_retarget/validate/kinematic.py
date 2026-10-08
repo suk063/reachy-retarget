@@ -5,10 +5,12 @@ Checks, all on the stored canonical state:
 * TCP residual against ``reference.tcp`` on every frame of every tracked side
   (``cfg.tcp_pos_tol`` / ``cfg.tcp_rot_tol``; the stricter ``grasp_*`` tolerances while the
   hand holds an object),
-* joint limits (URDF, no margin) and joint speed limits (``robot.VELOCITY``) from ``q`` and
+* joint limits (URDF, no margin) and joint speed limits (``robot.VELOCITY``; base translation per body axis) from ``q`` and
   ``time``,
 * self-clearance of the collision-sphere model >= ``cfg.min_self_clearance``,
-* the base footprint disc clear of static support/fixture box geometry,
+* the base footprint discs clear of static support/fixture box geometry and of the source scene
+  geometry recorded in ``extra["scene_footprint"]`` (colliding environment geoms near the path),
+* navigation episodes: the base ends within 3 cm of its reference destination,
 * grasp-phase consistency: while a hand holds an object, the object pose expressed in the
   Reachy grasp-center frame stays constant within ``cfg.grasp_rel_*_tol``, i.e. the
   retargeted hand motion reproduces the source object motion.
@@ -25,6 +27,14 @@ from ..retarget.config import RetargetConfig
 from ..robot import LOWER, UPPER, VELOCITY, Reachy, min_clearance
 from ..schema.episode import SIDES
 from ..schema.rotations import se3_inv, so3_log, vec7_to_pose, wrap_angle
+
+
+# Height band (m, world z) of the grasp center reachable by Reachy's arms with the tripod at 0 and
+# any base pose: 2e5 uniform samples of the right arm within the IK joint margin and with
+# self-clearance >= 9 mm reach 0.46-1.87 m (0.53 m at 0.3 m in front of the base axis).
+REACH_Z = (0.46, 1.87)
+NAVIGATION_GOAL_TOL = 0.03  # m: the tier-P object position tolerance, applied to a navigation destination
+EXECUTOR_BASE = (0.22, 0.6)  # m/s per axis, rad/s: reachy-agent task-space executor limits (flag only)
 
 
 def _segments(mask):
@@ -92,6 +102,14 @@ def check(ep, cfg: RetargetConfig | None = None) -> dict:
         tol_r = np.where(holding[:, i], cfg.grasp_tcp_rot_tol, cfg.tcp_rot_tol)
         metrics[f"{side}_max_pos_residual"] = float(pos.max())
         metrics[f"{side}_max_rot_residual"] = float(rot.max())
+        # Failing frames whose target no Reachy pose reaches (a diagnosis, not a gate of its own).
+        z = (ep.reference.tcp[side] @ Reachy.load().grasp_center(side))[:, 2, 3]
+        out = ((z < REACH_Z[0]) | (z > REACH_Z[1])) & ((pos > tol_p) | (rot > tol_r))
+        metrics[f"{side}_unreachable_frames"] = int(out.sum())
+        if out.any():
+            j = int(np.flatnonzero(out)[np.argmax(np.abs(z[out] - np.clip(z[out], *REACH_Z)))])
+            reasons.append(f"{side} TCP target outside Reachy's reach band: grasp center z {z[j]:.2f} m not in "
+                           f"{REACH_Z[0]:.2f}-{REACH_Z[1]:.2f} m at frame {j} ({int(out.sum())} frames)")
         for name, err, tol, unit, scale in (("position", pos, tol_p, "mm", 1e3), ("rotation", rot, tol_r, "rad", 1)):
             bad = err > tol
             if bad.any():
@@ -105,8 +123,19 @@ def check(ep, cfg: RetargetConfig | None = None) -> dict:
         reasons.append(f"joint limit exceeded by {-margin.min():.4g} rad at frame {int(np.argmin(margin))}")
     dq = np.diff(q, axis=0)
     dq[:, 2] = wrap_angle(dq[:, 2])
-    ratio = np.abs(dq) / np.diff(ep.time)[:, None] / VELOCITY
+    dqb = dq.copy()  # base translation per body axis (the controller's and tier P's base limits)
+    yaw = q[:-1, 2] + dq[:, 2] / 2
+    dqb[:, 0] = np.cos(yaw) * dq[:, 0] + np.sin(yaw) * dq[:, 1]
+    dqb[:, 1] = -np.sin(yaw) * dq[:, 0] + np.cos(yaw) * dq[:, 1]
+    ratio = np.abs(dqb) / np.diff(ep.time)[:, None] / VELOCITY
     metrics["max_speed_ratio"] = float(ratio.max())
+    # Base speed in its own frame against the conservative task-space executor of reachy-agent
+    # (0.22 m/s, 0.6 rad/s): a flag for consumers, not a gate (docs/design.md, Reachy model).
+    if len(dq):
+        vx, vy = dqb[:, 0] / np.diff(ep.time), dqb[:, 1] / np.diff(ep.time)
+        peak = (float(np.abs(vx).max()), float(np.abs(vy).max()), float(np.abs(dq[:, 2] / np.diff(ep.time)).max()))
+        metrics["peak_base_speed_body"] = peak
+        metrics["base_exceeds_executor_limits"] = bool(max(peak[0], peak[1]) > EXECUTOR_BASE[0] or peak[2] > EXECUTOR_BASE[1])
     if ratio.max() > 1 + 1e-6:
         t, j = np.unravel_index(int(np.argmax(ratio)), ratio.shape)
         reasons.append(f"speed limit exceeded: joint {j} at {ratio[t, j]:.3g} x limit (frame {t})")
@@ -116,6 +145,12 @@ def check(ep, cfg: RetargetConfig | None = None) -> dict:
         reasons.append(f"self-clearance {clear.min() * 1e3:.3g} mm < {cfg.min_self_clearance * 1e3:.3g} mm "
                        f"at frame {int(np.argmin(clear))}")
     obs = footprint.obstacles(ep.objects, cfg, static_only=True)
+    if (ep.extra or {}).get("footprint_bands"):  # e.g. + the resting-arm band of a mobile episode
+        obs.bands = tuple(tuple(float(v) for v in b) for b in ep.extra["footprint_bands"])
+    scene = (ep.extra or {}).get("scene_footprint")
+    if scene and scene.get("polygons"):
+        obs = footprint.merge(obs, footprint.Obstacles(polygons=[np.asarray(p, float) for p in scene["polygons"]],
+                                                       heights=[tuple(h) for h in scene["heights"]]))
     if obs.polygons:
         fp = footprint.clearance(q[:, :2], obs)
         metrics["min_footprint_clearance"] = float(fp.min())
@@ -123,6 +158,15 @@ def check(ep, cfg: RetargetConfig | None = None) -> dict:
             reasons.append(f"base footprint overlaps static scene geometry by {-fp.min() * 1e3:.3g} mm "
                            f"at frame {int(np.argmin(fp))}")
     metrics["footprint_notes"] = obs.notes
+    base_ref = getattr(ep.reference, "base", None)
+    if base_ref is not None and len(base_ref) == len(q):
+        dev = np.linalg.norm(q[:, :2] - np.asarray(base_ref)[:, :2], axis=1)
+        metrics["max_base_deviation_m"] = float(dev.max())
+        metrics["final_base_deviation_m"] = float(dev[-1])
+        if ep.regime == "navigation" and dev[-1] > NAVIGATION_GOAL_TOL:
+            # navigation has no hand target: its task is the destination
+            reasons.append(f"navigation destination missed: base ends {dev[-1]:.3g} m from its reference "
+                           f"(> {NAVIGATION_GOAL_TOL:.3g} m; max deviation {dev.max():.3g} m)")
     dp, dr, events = _grasp_drift(ep, labels, ids)
     metrics.update(grasp_phases=len(events), max_grasp_drift_pos=dp, max_grasp_drift_rot=dr)
     for side, obj, a, b, p, r in events:

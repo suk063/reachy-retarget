@@ -29,6 +29,8 @@ class RetargetConfig:
     grasp_rel_rot_tol: float = 0.1
     min_self_clearance: float = 0.009    # sphere-model signed distance
     footprint_margin: float = 0.05       # added to BASE_FOOTPRINT_RADIUS around scene geometry
+    scene_footprint: bool = True         # static geometry of a source MuJoCo scene joins the footprint obstacles
+    scene_footprint_radius: float = 1.5  # m, scene geoms farther than this from the source hands/base are ignored
 
     # Gripper and grasp labelling.
     closed_opening: float = 0.5          # source opening below this = commanded closed
@@ -37,6 +39,8 @@ class RetargetConfig:
     grasp_contact_distance: float = 0.04  # grasp center to object surface (box) or centre
     grasp_min_width_fraction: float = 0.5  # closed pads nearer than this x object extent hold nothing (push)
     grasp_min_duration_s: float = 0.2    # shorter grasp runs are dropped (a closed hand brushing an object)
+    carry_min_travel: float = 0.03       # m an aabb object must travel in a closed run to count as carried
+    carry_max_slip: float = 0.03         # m, ... while staying this close to its median pose in the source grasp frame
     grasp_gap_s: float = 0.25            # shorter gaps between runs on the same object are bridged
     squeeze_angle: float = 0.05          # finger angle below object contact while grasping (0.4 Nm at kp 8)
     release_ramp: bool = True            # fingers open at their speed limit once the source fingers leave the object
@@ -86,6 +90,16 @@ class RetargetConfig:
     contact_strict_distance: float = 0.05  # grasp center to object surface: orientation strict within
     contact_free_distance: float = 0.12    # ... and free beyond (outside grasp segments)
     orientation_by_distance: bool = True
+    # Idle hands of mobile sources (targets.position_weight): the position is strict near task
+    # objects and around grasps and free (nearest reachable pose, then tracked strictly) far away.
+    idle_position: bool = True
+    free_pos_weight: float = 0.05
+    idle_strict_distance: float = 0.15   # grasp center to a task object surface: position strict within
+    idle_free_distance: float = 0.30     # ... and free beyond (outside grasp segments)
+    idle_origin_margin: float = 0.15     # subtracted from origin distances of objects without box geometry
+    w_nominal_idle: float = 0.3          # extra nominal-posture weight x (1 - position weight) of an idle arm
+    navigation_arms_rest: bool = True    # navigation-regime sources: arms rest, only base and head move
+    stow_roll_deg: float = 16.0          # navigation: shoulders rolled this far toward the torso (rest: 10)
 
     # Whole-body IK (bounded damped least squares, warm started).
     joint_limit_margin: float = 0.045    # physics tracking dips ~0.015 rad below it; the tier-P gate needs 0.025
@@ -107,6 +121,7 @@ class RetargetConfig:
     collision_pairs: int = 4             # at most this many offending link pairs per step
     smoothing_sigma: float = 1.0         # Gaussian smoothing of q, in source frames
     refine_fraction: float = 0.5         # re-solve output frames above this fraction of tol
+    refine_skip_pos: float = 0.02        # m: output rows between source rows the IK left this far off are not re-solved
 
     # Base assistance for fixed-base sources (pipeline): when the fixed placement leaves frames
     # outside the tier-K tolerances, the base may move within a box around the placement.
@@ -132,6 +147,7 @@ class RetargetConfig:
     # Gaze.
     gaze_smoothing_s: float = 0.15
     gaze_margin: float = 0.03            # neck limit margin
+    gaze_lookahead_m: float = 1.0        # without active hands, look toward the base path this far ahead
 
     # Timing.
     velocity_scale: float = 0.95         # fraction of robot.VELOCITY used for time scaling

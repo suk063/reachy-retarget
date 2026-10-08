@@ -32,7 +32,8 @@ from ..schema.rotations import se2_compose
 from . import footprint
 from .config import RetargetConfig
 from .targets import (approach_width, finger_angles, finger_penetration, grasp_segments, grasp_symmetry,
-                      hand_object_distance, held_masks, offset_candidates, orientation_weight, source_closed,
+                      hand_object_distance, held_masks, idle_distance, offset_candidates, orientation_weight,
+                      position_weight, source_closed,
                       tcp_targets, touch_labels)
 from .wbik import ARM_COLUMNS, Clearance, FrameSolver, tcp_errors
 
@@ -97,19 +98,21 @@ class Score:
 class PlacementProblem:
     """Score base placements for the effector-to-side map ``sides`` of a source episode."""
 
-    def __init__(self, src, sides, cfg: RetargetConfig, nominal, labels):
+    def __init__(self, src, sides, cfg: RetargetConfig, nominal, labels, scene_obstacles=None):
         self.src, self.sides, self.cfg = src, dict(sides), cfg
         self.nominal = np.asarray(nominal, float)
         self.mobile = src.base is not None
         self.kf = keyframes(src.length, list(labels.values()), cfg.placement_keyframes)
         self.symmetry = {side: grasp_symmetry(src, key, labels.get(key, np.full(src.length, -1)), cfg)
                          for key, side in sides.items()}
-        self.options, self.finger_depth, self.rot_weight = {}, {}, {}
+        self.options, self.finger_depth, self.rot_weight, self.pos_weight = {}, {}, {}, {}
         self.labels = {side: np.asarray(labels.get(key, np.full(src.length, -1))) for key, side in sides.items()}
         for key, side in sides.items():
             lab = labels.get(key, np.full(src.length, -1))
             dist = hand_object_distance(src, key) if cfg.orientation_by_distance else None
             self.rot_weight[side] = orientation_weight(src.time, lab, cfg, dist)[self.kf]
+            self.pos_weight[side] = (position_weight(src.time, lab, cfg, idle_distance(src, key, cfg))[self.kf]
+                                     if cfg.idle_position and self.mobile else np.ones(len(self.kf)))
             finger = finger_angles(src.effectors[key], lab >= 0, cfg)
             opts = offset_candidates(self.symmetry[side], cfg)
             # objects a closed hand touches are in contact by design, like held ones (StackPyramid:
@@ -131,11 +134,15 @@ class PlacementProblem:
         self.points = np.concatenate(points) if points else np.zeros((0, 3))
         self.obstacles = footprint.obstacles(src.objects, cfg, static_only=self.mobile,
                                              held=held_masks(src.objects, labels.values()))
+        if scene_obstacles is not None:  # static source-scene geometry (walls, counters, cabinets)
+            self.obstacles = footprint.merge(self.obstacles, scene_obstacles)
         self.solvers = {s: FrameSolver(cfg, (s,), False, self.nominal, collisions=False) for s in sides.values()}
         self.clearance = {s: Clearance((s,)) for s in sides.values()}
         rest = profile()["postures"]["rest"]
         self.rest = np.zeros(22)
         self.rest[ARM_COLUMNS["left"]], self.rest[ARM_COLUMNS["right"]] = np.radians(rest["left"]), np.radians(rest["right"])
+        if self.mobile and len(sides) < 2:  # a resting arm travels beside the torso
+            self.obstacles.bands = footprint.BODY_PROFILE + (footprint.arm_band(self.rest),)
         self.manip_ref = _reference_manipulability(tuple(self.nominal))
 
     def path(self, pose, rows=None):
@@ -161,8 +168,8 @@ class PlacementProblem:
             d = p[:, :2] - base[:, :2]
             local = np.c_[c * d[:, 0] + s * d[:, 1], -s * d[:, 0] + c * d[:, 1], p[:, 2]] - shoulders()[side]
             r = np.linalg.norm(local, axis=1)
-            cost += np.mean(np.maximum(0, r - REACH[1]) ** 2 + np.maximum(0, REACH[0] - r) ** 2
-                            + np.maximum(0, 0.1 - local[:, 0]) ** 2)
+            cost += np.mean(self.pos_weight[side] * (np.maximum(0, r - REACH[1]) ** 2 + np.maximum(0, REACH[0] - r) ** 2
+                                                     + np.maximum(0, 0.1 - local[:, 0]) ** 2))
         clear = self.footprint_clearance(pose)
         return cost + (INFEASIBLE - clear if clear < 0 else 0.0)
 
@@ -235,18 +242,20 @@ class PlacementProblem:
         solver, X = self.solvers[side], self._target(side, offset)
         iters = iters or self.cfg.placement_iter
         rows = np.arange(len(base)) if rows is None else np.asarray(rows)
-        X, base, w = X[rows], base[rows], self.rot_weight[side][rows]
+        X, base, w, wp = X[rows], base[rows], self.rot_weight[side][rows], self.pos_weight[side][rows]
         qs = np.empty((len(base), 22))
         for k in range(len(base)):
             frame = {side: X[k]}
             if k == 0 and seed is None:
-                q = solver.cold_solve(self.nominal, frame, base[k], iters, rot_scale={side: w[k]})[0]
+                q = solver.cold_solve(self.nominal, frame, base[k], iters, rot_scale={side: w[k]},
+                                      pos_scale={side: wp[k]})[0]
             else:
                 q0 = seed if k == 0 else qs[k - 1]
-                q = solver.solve(q0, frame, q0, base[k], iters * (2 if k == 0 else 1), rot_scale={side: w[k]})[0]
+                q = solver.solve(q0, frame, q0, base[k], iters * (2 if k == 0 else 1), rot_scale={side: w[k]},
+                                 pos_scale={side: wp[k]})[0]
             qs[k] = q
         pos, rot = tcp_errors(qs, {side: X})[side]
-        e = np.maximum(pos / self.cfg.tcp_pos_tol, w * rot / self.cfg.tcp_rot_tol)
+        e = np.maximum(wp * pos / self.cfg.tcp_pos_tol, w * rot / self.cfg.tcp_rot_tol)
         cols = ARM_COLUMNS[side]
         margin = np.minimum(qs[:, cols] - LOWER[cols], UPPER[cols] - qs[:, cols]).min(axis=1)
         manip = np.mean([solver.manipulability(qk) for qk in qs]) / self.manip_ref

@@ -508,3 +508,45 @@ def test_drawers_are_slowed_to_the_slide_speed():
     d = timing.dilation(times, q, CFG, slides=slides)
     assert d[0] == pytest.approx(0.2 / CFG.slide_speed) and d[-1] >= 1.0
     assert np.all(timing.dilation(times, q, CFG) == 1.0)
+
+
+def test_idle_position_weight_is_free_far_from_task_objects_and_strict_near_them():
+    from reachy_retarget.retarget.targets import idle_distance, position_weight
+    T = 4
+    pose = np.tile(np.eye(4), (T, 1, 1))
+    pose[:, :3, 3] = [[0, 0, 0.5], [0.2, 0, 0.5], [0.45, 0, 0.5], [0.6, 0, 0.5]]
+    cube = ObjectTrack(np.tile([0.7, 0, 0.5, 1, 0, 0, 0.0], (T, 1)), np.ones(T, bool), "manipulated",
+                       {"kind": "box", "half_extents": [0.02, 0.02, 0.02]})
+    src = SourceEpisode("f", "f/d", "0", "t", np.arange(T) * 0.1, {"h": Effector(pose, np.ones(T))},
+                        objects={"cube": cube})
+    d = idle_distance(src, "h", CFG)
+    np.testing.assert_allclose(d, [0.68, 0.48, 0.23, 0.08], atol=1e-9)
+    w = position_weight(src.time, np.full(T, -1), CFG, d)
+    assert w[0] == w[1] == CFG.free_pos_weight and w[3] == 1.0 and CFG.free_pos_weight < w[2] < 1.0
+    # an object recorded at t0 only is unknown later: never far (MolmoBot)
+    cube.valid[1:] = False
+    assert np.all(idle_distance(src, "h", CFG)[1:] == 0.0)
+
+
+def test_travel_direction_looks_along_the_path_and_body_frame_base_increments():
+    from reachy_retarget.retarget.gaze import travel_direction
+    from reachy_retarget.retarget.timing import body_increments
+    base = np.c_[np.linspace(0, 2, 21), np.zeros(21), np.full(21, np.pi / 2)]  # strafing along +x, facing +y
+    d = travel_direction(base, 1.0)
+    np.testing.assert_allclose(d[0], [1, 0], atol=1e-9)        # ahead along the path
+    np.testing.assert_allclose(d[-1], [0, 1], atol=1e-9)       # the end: the heading
+    inc = body_increments(base)
+    np.testing.assert_allclose(inc[:, 0], 0, atol=1e-9)        # no forward motion in the body frame
+    np.testing.assert_allclose(inc[:, 1], -0.1, atol=1e-9)     # sideways (to the right) at 0.1 m per row
+
+
+def test_scene_footprint_clearance_matches_the_per_polygon_reference():
+    obs = footprint.Obstacles(polygons=[np.array([[1.0, -1], [2, -1], [2, 1], [1, 1]]),
+                                        np.array([[-1.0, 2], [1, 2], [1, 3], [-1, 3]])],
+                              heights=[(0.0, 0.9), (1.0, 1.4)])
+    xy = np.array([[0.0, 0], [1.5, 0], [0, 1.5]])
+    ref = np.min([footprint._polygon_distance(xy, p) - footprint.body_radius(*h) for p, h in
+                  zip(obs.polygons, obs.heights)], axis=0)
+    np.testing.assert_allclose(footprint.clearance(xy, obs), ref, atol=1e-12)
+    rest = footprint.arm_band(posture("rest"))
+    assert 0.3 < rest[2] < 0.34 and rest[0] < 0.5 < 1.1 < rest[1]

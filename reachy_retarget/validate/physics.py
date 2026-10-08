@@ -65,7 +65,11 @@ requirement. The rule, the source end speed and both errors are recorded per obj
 (``metrics["task"][id]``, ``metrics["objects_at_rest_rule"]``).
 
 Missing measurements fail: e.g. no manipulated object with a scene body fails
-`task_final_pose`. `simulate` returns `({"passed", "reasons", "metrics"}, rollout)`; store
+`task_final_pose`, except in a `navigation` episode, whose task is its destination (the measured base
+after the hold within `cfg.object_position_tol_m` of the last pose of `ep.reference.base`), and in an
+articulated task without a manipulated object, whose task is the final position of every scene joint
+the source moved by >= 1 cm / 0.05 rad (after the hold, within `cfg.object_position_tol_m` for slides
+and `cfg.articulation_angle_tol_rad` for hinges; e.g. BiGym DrawerTopOpen). `simulate` returns `({"passed", "reasons", "metrics"}, rollout)`; store
 `{"passed", "reasons"}` as `ep.tier["P"]`. When the scene cannot be built the rollout is `None`.
 """
 from __future__ import annotations
@@ -118,6 +122,9 @@ class PhysicsConfig:
     park_distance_m: float = 2.0   # untracked free bodies farther than this from the workspace are removed
     source_rest_window_s: float = 0.1  # source time over which the end speed of an object is measured
     release_at_contact: bool = True  # a hand commanded wider than pad contact with o has released o
+    articulation_moved_m: float = 0.01      # a slide joint the source moved this far is part of the task
+    articulation_moved_rad: float = 0.05    # ... a hinge joint this far
+    articulation_angle_tol_rad: float = 0.05  # final hinge angle tolerance (3 cm of arc at 0.6 m), new
     grasp_trace: bool = False  # record per-row grasp measurements in metrics["grasp_traces"] (audits)
     thresholds: dict = field(default_factory=lambda: dict(THRESHOLDS))
 
@@ -608,6 +615,40 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
         return float(np.linalg.norm(final[:3] - target[:3])), float(rq.magnitude())
 
     task, task_ok = {}, bool(objects) and not unmapped
+    nav_ref = getattr(ep.reference, "base", None)
+    if not objects and not unmapped and ep.regime == "navigation" and nav_ref is not None and len(nav_ref):
+        # Navigation has no manipulated object: the task is the destination, i.e. the base after the
+        # hold within the object position tolerance of the retargeted base reference's last pose
+        # (the source's final base pose composed with the constant placement offset).
+        err = float(np.linalg.norm(meas_q[-1, :2] - np.asarray(nav_ref)[-1, :2]))
+        yaw = float(abs(np.angle(np.exp(1j * (meas_q[-1, 2] - np.asarray(nav_ref)[-1, 2])))))
+        task["base"] = {"rule": "navigation_destination", "final_base": meas_q[-1, :3].tolist(),
+                        "reference_final_base": np.asarray(nav_ref)[-1].tolist(), "position_error_m": err,
+                        "yaw_error_rad": yaw}
+        task_ok = err <= cfg.object_position_tol_m
+    elif not objects and not unmapped:
+        # Articulated tasks without a manipulated object (BiGym drawers, doors, dishwasher racks): the
+        # task is the final state of every scene joint the source moved, after the hold.
+        for aid, art in ep.articulations.items():
+            for i, jn in enumerate(art.joint_names):
+                jid = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, jn)
+                track = np.asarray(art.qpos[:, i], float)
+                if jid < 0 or not np.isfinite(track).any():
+                    continue
+                jtype = int(m.jnt_type[jid])
+                slide = jtype == int(mujoco.mjtJoint.mjJNT_SLIDE)
+                if jtype not in (int(mujoco.mjtJoint.mjJNT_SLIDE), int(mujoco.mjtJoint.mjJNT_HINGE)):
+                    continue
+                moved = np.nanmax(track) - np.nanmin(track)
+                if moved < (cfg.articulation_moved_m if slide else cfg.articulation_moved_rad):
+                    continue
+                final = float(rows["qpos"][-1][m.jnt_qposadr[jid]])
+                target = float(track[np.flatnonzero(np.isfinite(track))[-1]])
+                tol = cfg.object_position_tol_m if slide else cfg.articulation_angle_tol_rad
+                task[f"{aid}:{jn}"] = {"rule": "articulation_final", "kind": "slide" if slide else "hinge",
+                                       "final": final, "source_final": target, "error": abs(final - target),
+                                       "source_range": float(moved), "tolerance": tol}
+        task_ok = bool(task) and all(t["error"] <= t["tolerance"] for t in task.values())
     for o, b in objects.items():
         track, mo = ep.objects[o], motion[o]
         if mo is None:
@@ -722,8 +763,9 @@ def simulate(ep: ReachyEpisode, scene_ref: SceneRef, cfg: PhysicsConfig | None =
         "grasp_drift": "; ".join(f"{k}: {g['translation']:.4f} m, {g['rotation']:.4f} rad"
                                  for k, g in grasps.items() if g["acquired"]) or "no carry",
         "carry_contact": "; ".join(f"{k}: {g['bilateral_fraction']}" for k, g in grasps.items()) or "no carry",
-        "task_final_pose": ("no manipulated object with a scene body" if not objects else
-                            "; ".join(f"{o}: {t.get('position_error_m', float('nan')):.4f} m ({t.get('rule')})"
+        "task_final_pose": ("no manipulated object with a scene body" if not objects and not task else
+                            "; ".join(f"{o}: {t.get('position_error_m', t.get('error', float('nan'))):.4f} "
+                                      f"{'rad' if t.get('kind') == 'hinge' else 'm'} ({t.get('rule')})"
                                       for o, t in task.items()))
                            + (f"; unmapped objects {unmapped}" if unmapped else ""),
         "objects_at_rest": "; ".join(f"{k}: {v['linear_m_s']:.3f} m/s {v['angular_rad_s']:.3f} rad/s"

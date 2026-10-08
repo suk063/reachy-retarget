@@ -738,12 +738,13 @@ def _episode(g, key, path, digest, pkg, member, config, split, part, house, batc
     pickup = tc.get("pickup_obj_name")
     if task_type in ("pick", "pick_and_place", "pick_and_place_color", "pick_and_place_next_to") and pickup:
         start = tc.get("pickup_obj_start_pose") or extra["obj_start"][0].tolist()
-        objects[pickup] = _t0_track(start, T, "manipulated", {"body": pickup})
+        objects[pickup.replace("/", ":")] = _t0_track(start, T, "manipulated", {"body": pickup})
         rec_name = tc.get("place_receptacle_name") or scene.get("place_receptacle_name")
         rec_pose = tc.get("place_receptacle_start_pose")
         if rec_name and rec_pose is not None:
             role = ROLE_BY_TASK.get(task_type, {}).get("receptacle", "receptacle")
-            objects[rec_name] = _t0_track(rec_pose, T, role, {"body": rec_name})
+            # episode object ids may not contain '/' (HDF5 paths); the scene name stays in "body"
+            objects[rec_name.replace("/", ":")] = _t0_track(rec_pose, T, role, {"body": rec_name})
     task_info = _json_rows(extra["task_info"])
     if task_type == "door_open" and "door_state" in extra:
         ds = _json_rows(extra["door_state"])
@@ -762,7 +763,7 @@ def _episode(g, key, path, digest, pkg, member, config, split, part, house, batc
         derived_notes.append("door handle orientation derived from hinge->handle direction")
     elif task_type == "open" and tc.get("joint_name"):
         jp = np.asarray([ti.get("joint_position", np.nan) for ti in task_info], float)
-        art = pickup or "articulated_object"
+        art = (pickup or "articulated_object").replace("/", ":")
         articulations[art] = Articulation(joint_names=[tc["joint_name"]], qpos=jp[:, None])
         if tc.get("pickup_obj_start_pose") is not None:
             objects[art] = _t0_track(tc["pickup_obj_start_pose"], T, "fixture", {"body": art})

@@ -38,6 +38,7 @@ import numpy as np
 
 from ..robot import Reachy, angle_to_opening, angle_to_width, gripper
 from ..schema.rotations import quat_to_matrix
+from ..schema.source import ObjectTrack
 from .config import RetargetConfig
 from .footprint import box_geometry, box_parts, cylinder_geometry
 
@@ -289,6 +290,10 @@ def grasp_labels(grasp_points, closed, objects, cfg: RetargetConfig, effector=No
             rows = np.flatnonzero(hit & (nearest == k))
             ext = object_extent(objects[oid], rows, np.asarray(effector.pose)[rows, :3, 1])
             empty = np.isfinite(ext) & (width[rows] < cfg.grasp_min_width_fraction * ext)
+            if objects[oid].geometry.get("kind") == "aabb" and empty.any():
+                # an aabb is an envelope (a mug held by its wall or handle at 15 mm is 95 mm thick
+                # here): a closed run that carries the object rigidly is a grasp whatever the width
+                empty &= ~_carried(effector, objects[oid], rows, cfg)
             hit[rows[empty]] = False
     labels[hit] = nearest[hit]
     if times is None:
@@ -309,6 +314,28 @@ def grasp_labels(grasp_points, closed, objects, cfg: RetargetConfig, effector=No
         if end - times[a] < cfg.grasp_min_duration_s - 1e-9:
             labels[a:b] = -1
     return labels
+
+
+def _carried(effector, track, rows, cfg: RetargetConfig) -> np.ndarray:
+    """(len(rows),) bool: rows of contiguous runs in which the object moves more than
+    ``cfg.carry_min_travel`` while its position in the source grasp frame stays within
+    ``cfg.carry_max_slip`` of the run's median (the hand carries it)."""
+    out = np.zeros(len(rows), bool)
+    if not len(rows):
+        return out
+    pose = np.asarray(effector.pose)
+    splits = np.flatnonzero(np.diff(rows) > 1) + 1
+    for seg in np.split(np.arange(len(rows)), splits):
+        r = rows[seg]
+        r = r[track.valid[r]]
+        if len(r) < 2:
+            continue
+        p = track.pose[r, :3]
+        rel = np.einsum("tji,tj->ti", pose[r, :3, :3], p - pose[r, :3, 3])
+        slip = np.linalg.norm(rel - np.median(rel, axis=0), axis=1).max()
+        if np.linalg.norm(p.max(axis=0) - p.min(axis=0)) > cfg.carry_min_travel and slip <= cfg.carry_max_slip:
+            out[seg] = True
+    return out
 
 
 def source_closed(effector, cfg: RetargetConfig, times=None):
@@ -779,9 +806,13 @@ def orientation_weight(times, labels, cfg: RetargetConfig, distance=None) -> np.
     approach that starts far from the object starts free. Without ``distance`` a hand without
     grasps keeps weight 1.
     """
+    return _distance_weight(times, labels, cfg, distance, cfg.free_rot_weight, cfg.contact_strict_distance,
+                            cfg.contact_free_distance)
+
+
+def _distance_weight(times, labels, cfg: RetargetConfig, distance, lo_w, strict, free):
     times = np.asarray(times, float)
     lab = np.asarray(labels) >= 0
-    lo_w = cfg.free_rot_weight
     if lab.any():
         d = np.diff(np.r_[0, lab.astype(int), 0])
         dist = np.full(len(times), np.inf)
@@ -792,10 +823,51 @@ def orientation_weight(times, labels, cfg: RetargetConfig, distance=None) -> np.
     else:
         w = np.ones(len(times))
     if distance is not None:
-        near = (cfg.contact_free_distance - np.asarray(distance, float)) / max(
-            cfg.contact_free_distance - cfg.contact_strict_distance, 1e-9)
+        near = (free - np.asarray(distance, float)) / max(free - strict, 1e-9)
         w = np.where(lab, 1.0, np.minimum(w, np.clip(near, lo_w, 1.0)))
     return w
+
+
+def idle_distance(src, key, cfg: RetargetConfig) -> np.ndarray:
+    """Distance (T,) from effector ``key``'s grasp center to the nearest task object (manipulated or
+    receptacle; the object surface when it has box/cylinder geometry, else its origin minus
+    ``cfg.idle_origin_margin``), the measure of :func:`position_weight`.
+
+    Articulated fixtures (an object whose id names an articulation: MolmoBot drawers and doors of
+    furniture, MobileManiBench objects) are task objects too; without box geometry their extent is
+    unknown and they give 0 (the hand stays strict). Unknown positions never count as far: a
+    manipulated object whose row is invalid (MolmoBot objects are recorded at t0 only) gives 0
+    there; receptacles and fixtures keep their last valid pose. inf without task objects."""
+    pts = src.effectors[key].pose[:, :3, 3]
+    out = np.full(len(pts), np.inf)
+    for oid, o in src.objects.items():
+        articulated = o.role == "fixture" and oid in src.articulations
+        if (o.role not in ("manipulated", "receptacle") and not articulated) or not o.valid.any():
+            continue
+        if articulated and box_geometry(o.geometry) is None:
+            return np.zeros(len(pts))
+        if o.role != "manipulated" and not o.valid.all():
+            idx = np.maximum.accumulate(np.where(o.valid, np.arange(len(pts)), -1))
+            first = int(np.argmax(o.valid))
+            idx = np.where(idx < 0, first, idx)
+            o = ObjectTrack(o.pose[idx], np.ones(len(pts), bool), o.role, o.geometry)
+        d = object_distance(pts, o)
+        if box_geometry(o.geometry) is None:
+            d = d - cfg.idle_origin_margin
+        out = np.minimum(out, np.where(np.isnan(d), 0.0 if o.role == "manipulated" else np.inf, d))
+    return out
+
+
+def position_weight(times, labels, cfg: RetargetConfig, distance) -> np.ndarray:
+    """Position weight (T,) in [cfg.free_pos_weight, 1] of one hand's TCP target (mobile sources).
+
+    The position analogue of :func:`orientation_weight`: 1 in and around grasp segments, and
+    outside them a proximity ramp on :func:`idle_distance`, 1 within ``cfg.idle_strict_distance``
+    of a task object and ``cfg.free_pos_weight`` beyond ``cfg.idle_free_distance``. An idle hand
+    far from every task object (BEHAVIOR's R1 Pro carries its free arm at 0.44 m, below Reachy's
+    reach) then takes the nearest pose Reachy reaches with a natural arm posture."""
+    return _distance_weight(times, labels, cfg, distance, cfg.free_pos_weight, cfg.idle_strict_distance,
+                            cfg.idle_free_distance)
 
 
 def blend_orientation(X_src, X_free, w):

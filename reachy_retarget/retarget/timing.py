@@ -55,7 +55,7 @@ def dilation(times, q, cfg: RetargetConfig, grasp_events=None, slides=None):
     to its speed, and Reachy's position-servoed arm, pulling a robosuite drawer (damping 100 N s/m)
     at the source's 0.14 m/s, lagged its reference by 3-4 cm (MimicGen MugCleanup tcp_tracking)."""
     dt = np.diff(times)
-    required = np.max(np.abs(np.diff(q, axis=0)) / (VELOCITY * cfg.velocity_scale), axis=1) / dt
+    required = np.max(np.abs(body_increments(q)) / (VELOCITY * cfg.velocity_scale), axis=1) / dt
     if slides is not None and np.size(slides) and cfg.slide_speed:
         s = np.nan_to_num(np.asarray(slides, float).reshape(len(times), -1))
         required = np.maximum(required, np.max(np.abs(np.diff(s, axis=0)), axis=1) / cfg.slide_speed / dt)
@@ -67,6 +67,19 @@ def dilation(times, q, cfg: RetargetConfig, grasp_events=None, slides=None):
         if 0 <= i < len(dt):
             out[i] = max(out[i], cfg.grasp_dwell_s / dt[i])
     return out
+
+
+def body_increments(q) -> np.ndarray:
+    """Row increments (T-1, 22) of q with the base translation in the base frame (at the interval's
+    mid yaw): Reachy's base limits (0.61 m/s) hold per body axis, as the whole-body controller and
+    the tier-P ``base_speed`` gate measure them (world-axis increments of 0.58 m/s each are 0.82 m/s
+    along a diagonal heading)."""
+    q = np.asarray(q, float)
+    dq = np.diff(q, axis=0)
+    yaw = (q[:-1, 2] + q[1:, 2]) / 2
+    c, s = np.cos(yaw), np.sin(yaw)
+    dq[:, 0], dq[:, 1] = c * dq[:, 0] + s * dq[:, 1], -s * dq[:, 0] + c * dq[:, 1]
+    return dq
 
 
 def slide_positions(src) -> np.ndarray | None:

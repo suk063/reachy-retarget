@@ -342,6 +342,16 @@ def build_scene(scene_ref: SceneRef, *, prefix: str = "reachy/", floor_z: float 
     rmjcf.attach_reachy(spec, prefix=prefix, pos=(0.0, 0.0, floor_z))
     model = spec.compile()
     reachy = subtree(model, model.body(f"{prefix}base_link").id)
+    floors = floor_bodies(model, reachy, floor_z)
+    if floors:
+        # The wheels rest on the floor: attach_reachy excludes them against `world`; scenes whose floor
+        # is a body of its own (BiGym `floor`, RoboCasa `floor*_room_main` boxes) get the same exclusion
+        # (wheel-floor friction otherwise drags the planar base joints: stick-slip, base_speed overshoot).
+        for body in floors:
+            for wheel in rmjcf.floor_excludes(prefix):
+                spec.add_exclude(bodyname1=body, bodyname2=wheel)
+        model = spec.compile()
+        reachy = subtree(model, model.body(f"{prefix}base_link").id)
     _audit_no_assistance(model, reachy)
 
     free_bodies = {model.joint(j).name: model.body(model.jnt_bodyid[j]).name for j in range(model.njnt)
@@ -379,6 +389,35 @@ def build_scene(scene_ref: SceneRef, *, prefix: str = "reachy/", floor_z: float 
             "scene_sha256": hashlib.sha256(xml.encode()).hexdigest()}
     return Scene(model=model, spec=spec, xml=xml, assets=vfs, prefix=prefix, free_bodies=free_bodies,
                  initial_qpos=initial, info=info)
+
+
+def floor_bodies(model, reachy: set[int], floor_z: float = 0.0, tol: float = 0.005) -> list[str]:
+    """Names of the static non-world bodies other than Reachy's that carry the floor: a plane geom at
+    ``floor_z``, or a horizontal box whose top is within ``tol`` of it and wider than 1 m."""
+    data = mujoco.MjData(model)
+    mujoco.mj_kinematics(model, data)
+    out = set()
+    for g in range(model.ngeom):
+        b = int(model.geom_bodyid[g])
+        if b == 0 or b in reachy or model.body_dofnum[b] or any(
+                model.body_dofnum[a] for a in _ancestors(model, b)):
+            continue
+        R = data.geom_xmat[g].reshape(3, 3)
+        if abs(R[2, 2]) < 0.999:
+            continue
+        kind, size, z = int(model.geom_type[g]), model.geom_size[g], float(data.geom_xpos[g][2])
+        if kind == int(mujoco.mjtGeom.mjGEOM_PLANE) and abs(z - floor_z) <= tol:
+            out.add(model.body(b).name)
+        elif (kind == int(mujoco.mjtGeom.mjGEOM_BOX) and abs(z + size[2] - floor_z) <= tol
+              and min(size[0], size[1]) > 0.5):
+            out.add(model.body(b).name)
+    return sorted(out)
+
+
+def _ancestors(model, b: int):
+    while b:
+        b = int(model.body_parentid[b])
+        yield b
 
 
 def reset(scene: Scene, q0, data: mujoco.MjData | None = None) -> mujoco.MjData:
