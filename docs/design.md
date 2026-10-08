@@ -132,8 +132,9 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      in `extra["grasp_offsets"]`). The task is the object path, not the Panda hand pose, so
      each arm uses the source grasp frame composed with a constant offset
      `Rz(pi·flip + theta) · Ry(tilt)` about the grasp center: `flip` (half turn, always a
-     parallel-jaw symmetry); `tilt` ∈ {0, ±15, ±30, ±45}° about the closing axis (pad planes
-     unchanged, the pads press the same faces); `theta` = the rotation that lays the closing
+     parallel-jaw symmetry); `tilt` ∈ {0, ±15, …, ±90}° about the closing axis (pad planes
+     unchanged, the pads press the same faces; hands without grasp segments stop at ±45°, and the
+     placement score penalizes arm links inside scene boxes, see the reachability loop); `theta` = the rotation that lays the closing
      axis onto the nearest face normal of the grasped object's box (≤ 20°; the Panda's narrow
      pads hold the Lift cube 9–19° off its faces, Reachy's 30 × 39 mm flat pads then touch two
      edges and the cube turns between them), plus quarter turns when the object is symmetric
@@ -213,6 +214,15 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
      holds the object are not obstacles. Grasp offsets are searched per candidate (cold IK once
      per placement, offsets warm started, the first offset within 0.6 of the tolerance wins,
      else the two best of a 3-keyframe screen are scored on all keyframes).
+   * *Projected candidates* (`placement._project`): a ring candidate whose footprint overlaps scene
+     geometry is moved straight away from the target centroid (heading kept, 2 cm steps, ≤ 0.8 m)
+     to the footprint margin, for episodes with grasps. *Arm screen* (`PlacementProblem.arm_contact`):
+     the placement score adds the depth (per cm, mean + max over keyframes) of the upper arm,
+     forearm and palm collision spheres in solid object boxes (a grasped object is exempt within its
+     approach/retreat window).
+   * *Scene geometry replaces envelopes* (`footprint.merge_scene`): with source-scene geometry, a
+     static object envelope is dropped where a scene geom inside it reaches its top (± 2 cm), in
+     placement, IK and tier K alike.
    * *Scene geometry* (`footprint.scene_obstacles`): when the source ships a MuJoCo scene, every
      colliding environment geom (walls, counters, cabinets, appliances, articulated parts at their
      initial state; not free objects) within 1.5 m of the source hands/base becomes a footprint
@@ -704,6 +714,99 @@ labelled (asset geometry only, object origins 4–19 cm from the grasp center), 
 check hand–object drift; BEHAVIOR, MobileManiBench and MolmoBot have no scene (no P, no footprint
 geometry); articulated fixtures do not make the orientation strict (`hand_object_distance` uses
 manipulated objects only).
+
+### Reachability loop: LIBERO and bimanual sources (2026-10-08)
+
+Dev (39): demos 0–1 of 11 LIBERO files (fetched with `--strip-images`: `libero_goal` bowl-on-plate,
+cream-cheese-in-bowl, wine-bottle-on-cabinet, turn-on-stove; `libero_spatial` two black-bowl tasks;
+`libero_object` salad dressing; `libero_10` STUDY_SCENE1 book, LIVING_ROOM_SCENE2 cheese+butter;
+`libero_90` KITCHEN_SCENE3 moka pot, KITCHEN_SCENE5 drawer), DexMimicGen demos 0–3 of threading,
+three-piece assembly and transport (state-only samples read by HTTP range requests,
+`data/raw/dexmimicgen/range_samples/provenance.json`; generated variants), robomimic Transport `ph`
+demos 0–4. Held-out (33, run once): LIBERO demos 10–11, DexMimicGen demos 500–501, Transport
+100–104. Regression sets: the ManiSkill dev set of the ManiSkill loop (100), robomimic Can and
+Square `ph` 0–4, Lift 0–4. Runs in `runs/eval/reach/` (`base-*` = HEAD `a771755`). K / P (K & P):
+
+| set | baseline | final |
+| --- | --- | --- |
+| LIBERO dev (22) | 5 / 5 (4) | 14 / 5 (4) |
+| DexMimicGen dev (12) | 1 / 1 (0) | 1 / 1 (0) |
+| Transport dev (5) | 0 / 0 (0) | 0 / 0 (0) |
+| LIBERO held-out (22) | 6 / 6 (5) | 16 / 5 (5) |
+| DexMimicGen + Transport held-out (11) | 0 / 0 (0) | 0 / 0 (0) |
+| ManiSkill dev (100) | 48 / 35 (28) | 68 / 38 (37) |
+| robomimic Can + Square 0–4 (10) | 9 / 2 (2) | 8 / 1 (1) |
+| robomimic Lift 0–4 | 5 / 5 (5) | 5 / 5 (5) |
+
+LIBERO per task, K / P (K & P) of 2, dev baseline → final; held-out baseline → final:
+
+| task | dev | held-out |
+| --- | --- | --- |
+| goal: put the bowl on the plate | 0/0 (0) → 2/0 (0) | 1/0 (0) → 2/0 (0) |
+| goal: put the cream cheese in the bowl | 0/1 (0) → 2/0 (0) | 1/2 (1) → 2/0 (0) |
+| goal: put the wine bottle on top of the cabinet | 0/0 (0) → 0/1 (0) | 0/0 (0) → 2/1 (1) |
+| goal: turn on the stove | 2/2 (2) → 2/2 (2) | 2/2 (2) → 2/2 (2) |
+| spatial: black bowl between plate and ramekin | 0/0 (0) → 2/0 (0) | 0/0 (0) → 2/0 (0) |
+| spatial: black bowl on the cookie box | 1/0 (0) → 2/0 (0) | 0/0 (0) → 2/0 (0) |
+| object: salad dressing in the basket (floor) | 0/0 (0) → 0/0 (0) | 0/0 (0) → 0/0 (0) |
+| 10: STUDY_SCENE1 book into the caddy | 0/0 (0) → 2/0 (0) | 0/0 (0) → 2/0 (0) |
+| 10: LIVING_ROOM_SCENE2 cheese and butter in the basket | 0/0 (0) → 0/0 (0) | 0/0 (0) → 0/0 (0) |
+| 90: KITCHEN_SCENE3 moka pot on the stove | 0/0 (0) → 0/0 (0) | 0/0 (0) → 0/0 (0) |
+| 90: KITCHEN_SCENE5 close the top drawer | 2/2 (2) → 2/2 (2) | 2/2 (2) → 2/2 (2) |
+
+The floor (`libero_object`, grasp center z 0.12 m) and living-room (z 0.45 m) tasks stay below
+Reachy's 0.46 m reach band. ManiSkill: PickCube teleop
+6/10/6 → 10/10/10, StackPyramid 7/7/6 → 10/9/9, PegInsertionSide K 3 → 6, PullCubeTool K 0 → 4,
+LiftPegUpright K 0 → 3, PullCube 6/4/3 unchanged. robomimic: Can demo 3 loses P (the can lands
+7.1 mm deep in its bin, the known source-relative borderline) and Square demo 2 loses K (a 75° tilt
+chosen on keyframes, 8 mm position residual between them). Placement takes 9.7 → 14.7 s per dev
+episode (12.3 → 16.5 held-out, 5.9 → 7.1 ManiSkill); retargeting 28 → 32 s.
+
+Root causes (dev, measured):
+* *Table edge holds the base back.* LIBERO kitchen tables are a 0.85–0.90 m slab, inside the tripod
+  column's band (0.30–0.95 m, radius 0.14 m): the base axis stays ≥ 0.19 m behind the edge, the
+  shoulders (z 1.166 m) 0.2 m behind the Panda mount. 102 of 105 placement candidates overlapped
+  the table, the 3 feasible ones were 0.2 m behind the mount, and the placement depended on
+  Nelder-Mead finding the edge (bowl-on-plate: failing targets 0.61–0.65 m from the shoulder, moka pot
+  0.64–0.65 m with the elbow straight; Reachy's arm reaches 0.62 m). With projected candidates the
+  failing targets are ≤ 0.61 m away and sideways stances are chosen (yaw ±0.8–1.57 rad).
+* *Envelope tables.* LIBERO's study table is the enclosing box of its collision geoms, a block from the
+  floor to 0.88 m; its scene geometry is a 0.81–0.89 m slab: every candidate overlapped by 0.1–0.16 m
+  (K `base footprint overlaps` at frame 0 in both book demos).
+* *Wrist limits in holds.* With reach fixed, the remaining LIBERO failures are hold frames with the
+  wrist roll and pitch both at the ±30° limit (minus the 0.045 rad margin): top-down grasps
+  (approach z −0.95) carried at 0.95–1.3 m, near shoulder height. Of 2·10⁵ sampled right-arm
+  postures (joint margin, self-clearance ≥ 9 mm, grasp center ≥ 0.15 m in front), a top-down grasp
+  center (approach within 25° of vertical) lies at z 0.9–1.0 / 1.0–1.1 / 1.1–1.2 m in 353 / 85 / 4
+  samples and never higher; approach 35–57° from vertical: 2233 / 1435 / 658 (179 at 1.2–1.3 m);
+  horizontal (within 17°): 2259 / 3589 / 4770 (5199 at 1.2–1.3 m). Cold
+  multi-start IK (60 seeds) at the failing frames finds the same residual: not an IK branch problem.
+  Tilts to ±90° fix them where the arm stays clear of the scene: without the arm screen, dev ManiSkill
+  went 68 / 31 (31), with it 71 / 34 (34) (the earlier rejection of ±90°, +8 K −10 P, was the
+  forearm in the objects). LIBERO: a 75° tilt put the forearm into the wine bottle beside the
+  cheese; with the screen it does not.
+* *Pushes.* ManiSkill PullCube (no grasps): steep tilts took P 4 → 1, projected placements 4 → 0
+  (the arm stalls against the pulled cube; elbow error grows to 0.7 rad); both are off for hands /
+  episodes without grasp segments.
+* *Bimanual.* DexMimicGen tables (top 0.75–0.80 m) hold the base at x −0.59 m: threading and
+  assembly need both hands 0.63–0.69 m from the shoulders (two Pandas 0.5 m apart reach 0.85 m), and
+  the remaining frames are wrist-limited holds; robomimic Transport needs 0.15–0.24 m more reach
+  for the payload and base assistance is rejected (footprint −19 mm against the bins). Arm
+  assignment by side hints is not the cause (the hands stay on their own sides).
+
+Rejected: a 2 cm placement footprint margin (dev K 15 → 15, P 5 → 3); 16 keyframes (+1 K); 10 IK-scored
+candidates (± 0); projecting only candidates within 60° of the source robot's side (ManiSkill
+71 / 34 → 65 / 33); a finger screen against support boxes for tilts > 45° (meant for the 18 mm cream
+cheese, whose 75–90° grasps pass K and fail P: dev + ManiSkill + robomimic K 91 → 86, K & P 42 → 40,
+P equal; the support depth did not separate the cheese from PickCube grasps that pass).
+
+Remaining failure modes: LIBERO black bowls pass K and fail P (`grasp_drift` 7–25 mm / 0.04–0.43
+rad, `carry_contact` 0.65–0.92: the source Panda pushes the bowl 1.6 cm while closing on its rim and
+Reachy's pads acquire it 0.4 s after the label starts); thin flat objects with steep tilts (cream
+cheese: K passes, P loses 1 dev and 2 held-out episodes: no grasp or forearm contact); placements
+above the shoulder (wine bottle onto the cabinet, 1.3 m); hold orientations beyond the wrist
+(moka-pot handle reached sideways); targets below 0.46 m (LIBERO floor and living-room scenes);
+bimanual reach (above).
 
 ## Episode storage (`reachy-retarget-episode-v2`)
 

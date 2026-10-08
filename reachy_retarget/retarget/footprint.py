@@ -298,6 +298,35 @@ def scene_obstacles(scene_ref, cfg: RetargetConfig, near_xy=None, radius: float 
     return out
 
 
+def merge_scene(objects: Obstacles, scene: Obstacles, top_tol: float = 0.02) -> Obstacles:
+    """``objects`` (from :func:`obstacles`) merged with source-scene geometry (:func:`scene_obstacles`),
+    without the static object envelopes the scene geometry already resolves.
+
+    A static ``support``/``fixture`` object is the enclosing box of all its collision geoms: a table
+    with collision legs becomes a block down to the floor (LIBERO's study table: z 0-0.88 m, its
+    top is a 0.81-0.89 m slab over legs-free space), which keeps the base disc 0.1 m farther back than
+    the tripod column needs. An envelope polygon is dropped when a scene polygon whose centroid lies
+    inside it reaches the envelope's top within ``top_tol`` (the same body, resolved per geom)."""
+    if not scene.polygons or not objects.polygons:
+        return merge(objects, scene)
+    cents = np.array([p.mean(axis=0) for p in scene.polygons])
+    tops = np.array([h[1] for h in scene.heights])
+    keep, dropped = [], 0
+    for poly, (lo, hi) in zip(objects.polygons, objects.heights):
+        inside = _polygon_distance(cents, poly) <= 0
+        if np.any(inside & (np.abs(tops - hi) <= top_tol)):
+            dropped += 1
+            continue
+        keep.append((poly, (lo, hi)))
+    rest = Obstacles(polygons=[p for p, _ in keep], heights=[h for _, h in keep], points=objects.points,
+                     notes=list(objects.notes), bands=objects.bands)
+    if len(objects.points):
+        rest.point_radii, rest.point_heights = objects.point_radii, objects.point_heights
+    if dropped:
+        rest.notes.append(f"{dropped} static object envelopes replaced by their scene geoms")
+    return merge(rest, scene)
+
+
 def merge(*parts: Obstacles) -> Obstacles:
     """One obstacle set holding every polygon and point of ``parts``."""
     out = Obstacles(bands=tuple(sorted(set().union(*(p.bands for p in parts))))) if parts else Obstacles()

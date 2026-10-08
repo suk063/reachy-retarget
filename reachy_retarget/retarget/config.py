@@ -63,7 +63,9 @@ class RetargetConfig:
     floor_support_height: float = 0.05   # support boxes whose top is lower are the floor
 
     # Grasp re-selection (targets.py): offsets of the source grasp-center frame.
-    grasp_tilts_deg: tuple[float, ...] = (0.0, -15.0, 15.0, -30.0, 30.0, -45.0, 45.0)  # about the closing axis
+    grasp_tilts_deg: tuple[float, ...] = (0.0, -15.0, 15.0, -30.0, 30.0, -45.0, 45.0, -60.0, 60.0, -75.0, 75.0,
+                                          -90.0, 90.0)  # about the closing axis (beyond 45: placement arm screen)
+    nongrasp_max_tilt_deg: float = 45.0  # hands without grasp segments (pushes) tilt no further
     grasp_tilt_cost: float = 0.1         # placement cost per 30 deg of tilt
     symmetry_axis_tol_deg: float = 15.0  # approach vs object principal axis for quarter turns
     symmetry_extent_tol: float = 0.1     # relative difference of the cross-section half extents
@@ -71,6 +73,8 @@ class RetargetConfig:
     align_max_deg: float = 20.0          # largest closing-axis to face-normal alignment applied
     align_agree_deg: float = 5.0         # grasped objects of one hand must agree on it within this
     segment_offsets: bool = True         # a hand with several grasp segments may re-select per segment
+    arm_contact_weight: float = 1.0      # placement cost per arm_contact_scale of arm-link depth in scene boxes (keyframes)
+    arm_contact_scale: float = 0.01      # m
     finger_depth_slack: float = 0.003    # offsets whose finger path sinks deeper into boxes than the best + this are dropped
 
     # Object-centric grasps (targets.object_centric): the hand carries the object rigidly.
@@ -137,6 +141,9 @@ class RetargetConfig:
     placement_hint_offsets: tuple[float, ...] = (-0.2, 0.0, 0.2)  # x/y around base_hint, m
     placement_mobile_offsets: tuple[float, ...] = (-0.3, -0.15, 0.0, 0.15)  # body x/y, m
     placement_candidates: int = 5        # best proxy candidates evaluated with IK
+    placement_project: bool = True       # candidates overlapping scene geometry are moved back to its margin
+    placement_project_step: float = 0.02  # m, ... in steps of this along the centroid-to-candidate direction
+    placement_project_max: float = 0.8   # m, ... at most this far
     placement_refine_evals: int = 30     # Nelder-Mead function evaluations
     placement_iter: int = 15             # IK iterations per keyframe while scoring
     placement_quick_keyframes: int = 3   # keyframes of the grasp-offset pre-screen

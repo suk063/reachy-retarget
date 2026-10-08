@@ -196,7 +196,7 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
                     for key, side in sides.items()} if cfg.idle_position and place.mobile else {})
     static_obs = footprint.obstacles(src.objects, cfg, static_only=True)
     if scene_obs is not None:
-        static_obs = footprint.merge(static_obs, scene_obs)
+        static_obs = footprint.merge_scene(static_obs, scene_obs)
     rest_arm = place.mobile and len(targets) < 2
     if rest_arm:  # a resting arm travels beside the torso
         static_obs.bands = footprint.BODY_PROFILE + (footprint.arm_band(tuck),)
@@ -216,7 +216,7 @@ def retarget(src: SourceEpisode, cfg: RetargetConfig | None = None) -> RetargetR
         cfg_b = replace(cfg, w_base=cfg.w_base_assist)
         obs = footprint.obstacles(src.objects, cfg, held=held_masks(src.objects, labels.values()))
         if scene_obs is not None:
-            obs = footprint.merge(obs, scene_obs)
+            obs = footprint.merge_scene(obs, scene_obs)
         assisted = _ik(cfg_b, robot, targets, weights, labels, base_ref, True, q0, nominal, box=(lo, hi),
                        obstacles=obs)
         has_obstacles = bool(obs.polygons) or len(obs.points) > 0

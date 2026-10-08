@@ -182,8 +182,14 @@ def grasp_symmetry(src, key, labels, cfg: RetargetConfig) -> dict:
     return {"quarter_turn": ok, "rotational": rotational, "align_deg": round(align, 3), "objects": out}
 
 
-def offset_candidates(symmetry: dict, cfg: RetargetConfig) -> list[tuple[bool, float, float]]:
-    """Candidate grasp offsets (flip, theta_deg, beta_deg) for one side, source frame first."""
+def offset_candidates(symmetry: dict, cfg: RetargetConfig, grasps: bool = True) -> list[tuple[bool, float, float]]:
+    """Candidate grasp offsets (flip, theta_deg, beta_deg) for one side, source frame first.
+
+    A tilt about the closing axis keeps the pads on the faces they press, which is what makes it a
+    free choice for a grasp. A hand without grasp segments (``grasps=False``: pushing, pulling or
+    poking with the closed fingers) touches objects with its fingertips and finger backs, so its
+    tilts stop at ``cfg.nongrasp_max_tilt_deg`` (ManiSkill PullCube: tilts up to 90 deg kept K 6 / 10
+    and took P from 4 to 1)."""
     a = float(symmetry.get("align_deg", 0.0))
     if symmetry.get("rotational"):
         thetas = tuple(a + t for t in np.arange(0.0, 180.0, cfg.cylinder_theta_step_deg))  # flips add the rest
@@ -191,7 +197,8 @@ def offset_candidates(symmetry: dict, cfg: RetargetConfig) -> list[tuple[bool, f
         thetas = (a, a + 90.0)
     else:
         thetas = (a,)
-    out = [(f, t, float(b)) for b in sorted(cfg.grasp_tilts_deg, key=abs) for t in thetas for f in (False, True)]
+    tilts = [b for b in cfg.grasp_tilts_deg if grasps or abs(b) <= cfg.nongrasp_max_tilt_deg + 1e-9]
+    out = [(f, t, float(b)) for b in sorted(tilts, key=abs) for t in thetas for f in (False, True)]
     return out
 
 

@@ -225,3 +225,50 @@ def test_round_trip(single, tmp_path):
                                pose_to_vec7(ep.reference.tcp["right" if "right_arm" in ep.body_parts else "left"]),
                                atol=1e-12)
     assert set(back.objects) == {"cube", "table"}
+
+
+def _problem(src, side="right", cfg=None):
+    from reachy_retarget.retarget.assign import posture
+    from reachy_retarget.retarget.placement import PlacementProblem
+    from reachy_retarget.retarget.targets import grasp_labels, source_closed
+    cfg = cfg or RetargetConfig()
+    labels = {k: grasp_labels(e.pose[:, :3, 3], source_closed(e, cfg, src.time), src.objects, cfg, effector=e,
+                              times=src.time) for k, e in src.effectors.items()}
+    return PlacementProblem(src, {next(iter(src.effectors)): side}, cfg, posture("ready"), labels)
+
+
+def test_placement_candidates_are_moved_out_of_the_table():
+    """Ring candidates inside the table are moved straight back from the targets to the footprint
+    margin (heading kept); without the projection most of them overlap the table."""
+    src = single_arm()
+    raw = _problem(src, cfg=RetargetConfig(placement_project=False))
+    moved = _problem(src)
+    a, b = raw.candidates(), moved.candidates()
+    clear_a = np.array([raw.footprint_clearance(p) for p in a])
+    clear_b = np.array([moved.footprint_clearance(p) for p in b])
+    assert (clear_a < 0).sum() > len(a) // 3
+    assert (clear_b >= 0).mean() > 0.9  # the rest would need more than placement_project_max
+    moved_far = np.linalg.norm(b[:, :2] - a[:, :2], axis=1)
+    assert ((clear_b >= 0) | (moved_far >= RetargetConfig().placement_project_max - 0.02)).all()
+    np.testing.assert_allclose(a[:, 2], b[:, 2])
+    fixed = clear_a >= 0
+    np.testing.assert_allclose(a[fixed], b[fixed])
+
+
+def test_arm_contact_measures_arm_links_inside_scene_boxes():
+    """The placement arm screen: a fixture box around the forearm of the scored posture is found,
+    the grasped cube near the hand during its grasp window is not."""
+    from dataclasses import replace as dc_replace
+
+    src = single_arm()
+    prob = _problem(src)
+    rows = np.arange(len(prob.kf))
+    q = np.tile(prob.nominal, (len(rows), 1))
+    q[:, :3] = [0.0, 0.0, 0.0]
+    assert prob.arm_contact("right", q, rows).max() == 0.0
+    elbow = prob._spheres().sphere_centers(q[:1])[0][0][prob._arm_spheres("right")].mean(axis=0)
+    T = src.length
+    post = ObjectTrack(np.tile(np.r_[elbow, 1, 0, 0, 0], (T, 1)), np.ones(T, bool), "fixture",
+                       {"kind": "box", "half_extents": [0.03, 0.03, 0.03]})
+    blocked = _problem(dc_replace(src, objects={**src.objects, "post": post}))
+    assert (blocked.arm_contact("right", q, rows) > 0.02).all()

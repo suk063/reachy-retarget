@@ -5,7 +5,7 @@ import pytest
 from reachy_retarget.retarget import RetargetConfig, footprint
 from reachy_retarget.retarget.assign import bimanual_sides, posture, tuck_posture
 from reachy_retarget.retarget.gaze import eye_axes
-from reachy_retarget.retarget.targets import (FLIP, finger_angles, grasp_labels, object_distance, object_extent,
+from reachy_retarget.retarget.targets import (FLIP, finger_angles, grasp_labels, object_distance, object_extent, offset_candidates,
                                               tcp_targets)
 from reachy_retarget.retarget.wbik import FrameSolver, tcp_errors
 from reachy_retarget.robot import BASE_FOOTPRINT_RADIUS, Reachy, gripper, min_clearance
@@ -550,3 +550,31 @@ def test_scene_footprint_clearance_matches_the_per_polygon_reference():
     np.testing.assert_allclose(footprint.clearance(xy, obs), ref, atol=1e-12)
     rest = footprint.arm_band(posture("rest"))
     assert 0.3 < rest[2] < 0.34 and rest[0] < 0.5 < 1.1 < rest[1]
+
+
+def test_scene_geometry_replaces_the_static_envelope_it_resolves():
+    """A table whose collision legs make its envelope a block to the floor (LIBERO study table) is
+    replaced by its scene geoms (a top slab: the base disc may stand under it); an envelope the
+    scene does not resolve is kept."""
+    block = ObjectTrack(np.array([[0.0, 0, 0.44, 1, 0, 0, 0]]), np.ones(1, bool), "support",
+                        {"kind": "box", "half_extents": [0.7, 1.4, 0.44]})
+    shelf = ObjectTrack(np.array([[-2.0, 0, 0.5, 1, 0, 0, 0]]), np.ones(1, bool), "fixture",
+                        {"kind": "box", "half_extents": [0.2, 0.2, 0.5]})
+    objects = footprint.obstacles({"table": block, "shelf": shelf}, CFG, static_only=True)
+    top = footprint.Obstacles(polygons=[np.array([[-0.7, -1.4], [0.7, -1.4], [0.7, 1.4], [-0.7, 1.4]])],
+                              heights=[(0.81, 0.89)])
+    merged = footprint.merge_scene(objects, top)
+    assert len(merged.polygons) == 2 and (0.81, 0.89) in merged.heights and (0.0, 1.0) in merged.heights
+    assert any("replaced" in n for n in merged.notes)
+    x = np.array([[-0.85, 0.0]])  # base disc under the top, column 0.15 m from its edge
+    assert footprint.clearance(x, footprint.merge(objects, top))[0] < 0
+    np.testing.assert_allclose(footprint.clearance(x, merged)[0], 0.15 - footprint.body_radius(0.81, 0.89))
+
+
+def test_steep_tilts_only_for_grasping_hands():
+    cfg = RetargetConfig()
+    sym = {"align_deg": 0.0}
+    tilts = {o[2] for o in offset_candidates(sym, cfg)}
+    assert max(tilts) == 90.0 and min(tilts) == -90.0
+    assert max(abs(t) for t in {o[2] for o in offset_candidates(sym, cfg, grasps=False)}) == cfg.nongrasp_max_tilt_deg
+    assert offset_candidates(sym, cfg)[0] == (False, 0.0, 0.0)

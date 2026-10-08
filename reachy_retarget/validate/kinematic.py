@@ -149,8 +149,8 @@ def check(ep, cfg: RetargetConfig | None = None) -> dict:
         obs.bands = tuple(tuple(float(v) for v in b) for b in ep.extra["footprint_bands"])
     scene = (ep.extra or {}).get("scene_footprint")
     if scene and scene.get("polygons"):
-        obs = footprint.merge(obs, footprint.Obstacles(polygons=[np.asarray(p, float) for p in scene["polygons"]],
-                                                       heights=[tuple(h) for h in scene["heights"]]))
+        obs = footprint.merge_scene(obs, footprint.Obstacles(
+            polygons=[np.asarray(p, float) for p in scene["polygons"]], heights=[tuple(h) for h in scene["heights"]]))
     if obs.polygons:
         fp = footprint.clearance(q[:, :2], obs)
         metrics["min_footprint_clearance"] = float(fp.min())

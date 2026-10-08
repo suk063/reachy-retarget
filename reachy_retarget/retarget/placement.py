@@ -114,7 +114,7 @@ class PlacementProblem:
             self.pos_weight[side] = (position_weight(src.time, lab, cfg, idle_distance(src, key, cfg))[self.kf]
                                      if cfg.idle_position and self.mobile else np.ones(len(self.kf)))
             finger = finger_angles(src.effectors[key], lab >= 0, cfg)
-            opts = offset_candidates(self.symmetry[side], cfg)
+            opts = offset_candidates(self.symmetry[side], cfg, grasps=bool((lab >= 0).any()))
             # objects a closed hand touches are in contact by design, like held ones (StackPyramid:
             # the closed fingers push cubeA; counting that contact as depth rejected every tilt)
             touch = touch_labels(src, key, lab, cfg, source_closed(src.effectors[key], cfg, src.time))
@@ -135,7 +135,7 @@ class PlacementProblem:
         self.obstacles = footprint.obstacles(src.objects, cfg, static_only=self.mobile,
                                              held=held_masks(src.objects, labels.values()))
         if scene_obstacles is not None:  # static source-scene geometry (walls, counters, cabinets)
-            self.obstacles = footprint.merge(self.obstacles, scene_obstacles)
+            self.obstacles = footprint.merge_scene(self.obstacles, scene_obstacles)
         self.solvers = {s: FrameSolver(cfg, (s,), False, self.nominal, collisions=False) for s in sides.values()}
         self.clearance = {s: Clearance((s,)) for s in sides.values()}
         rest = profile()["postures"]["rest"]
@@ -144,6 +144,77 @@ class PlacementProblem:
         if self.mobile and len(sides) < 2:  # a resting arm travels beside the torso
             self.obstacles.bands = footprint.BODY_PROFILE + (footprint.arm_band(self.rest),)
         self.manip_ref = _reference_manipulability(tuple(self.nominal))
+        self.arm_boxes = {side: self._arm_boxes(key) for key, side in sides.items()} if cfg.arm_contact_weight else {}
+
+    def _arm_boxes(self, key):
+        """Scene boxes the arm links of effector ``key``'s side must stay out of at each keyframe:
+        [(center (k, 3), rotation (k, 3, 3), half extents (3,), mask (k,))] in world, one entry per
+        box part of every solid object (manipulated, support, fixture with box geometry; receptacles
+        are hollow envelopes and are skipped). A manipulated object is masked out at keyframes within
+        the approach/retreat window of a grasp of this hand on it (the hand is there by design)."""
+        from ..schema.rotations import quat_to_matrix
+        from .targets import SOLID_ROLES, manipulated_ids
+        cfg, src = self.cfg, self.src
+        times = np.asarray(src.time, float)
+        tk = times[self.kf]
+        lab = self.labels[next(s for k, s in self.sides.items() if k == key)]
+        ids = manipulated_ids(src.objects)
+        out = []
+        for name, track in sorted(src.objects.items()):
+            if track.role not in SOLID_ROLES:
+                continue
+            parts = footprint.box_parts(track.geometry)
+            if not parts:
+                continue
+            mask = track.valid[self.kf].copy()
+            if name in ids:
+                for a, b in grasp_segments(np.where(lab == ids.index(name), lab, -1)):
+                    lo, hi = times[a] - cfg.approach_window_s, times[b - 1] + cfg.retreat_window_s
+                    mask &= ~((tk >= lo) & (tk <= hi))
+            if not mask.any():
+                continue
+            pose = track.pose[self.kf]
+            R = quat_to_matrix(pose[:, 3:])
+            for c, h in parts:
+                out.append((pose[:, :3] + R @ c, R, np.asarray(h, float), mask))
+        return out
+
+    def arm_contact(self, side, qs, rows):
+        """Deepest penetration (k,) in m of the upper arm, forearm and palm collision spheres of
+        ``side`` into the scene boxes of :meth:`_arm_boxes` at keyframes ``rows`` (``qs`` (k, 22)
+        with the base). The finger screen (:func:`.targets.finger_penetration`) covers the fingers on
+        the source path; this covers the links behind the hand, which a tilted grasp swings sideways
+        (LIBERO: a 75 deg tilt put the forearm into the wine bottle beside the cream cheese)."""
+        boxes = self.arm_boxes.get(side)
+        depth = np.zeros(len(rows))
+        if not boxes:
+            return depth
+        sc = self._spheres()
+        c = sc.sphere_centers(qs)[0][:, self._arm_spheres(side)]
+        r = sc.radii[self._arm_spheres(side)]
+        for center, R, h, mask in boxes:
+            m = mask[rows]
+            if not m.any():
+                continue
+            rel = np.einsum("kji,knj->kni", R[rows][m], c[m] - center[rows][m][:, None])
+            out = np.maximum(np.abs(rel) - h, 0.0)
+            outside = np.linalg.norm(out, axis=-1)
+            inside = np.minimum(np.min(h - np.abs(rel), axis=-1), 0.0)  # <= 0 inside
+            sd = np.where(outside > 0, outside, inside)
+            depth[m] = np.maximum(depth[m], np.max(r - sd, axis=-1).clip(min=0.0))
+        return depth
+
+    @staticmethod
+    @functools.cache
+    def _spheres():
+        from ..robot import SelfCollision
+        return SelfCollision.load()
+
+    @functools.cache
+    def _arm_spheres(self, side):
+        sc = self._spheres()
+        prefixes = tuple(f"{side[0]}_{p}" for p in ("elbow_arm", "elbow_forearm", "hand_palm"))
+        return np.flatnonzero([sc.links[sc.link_index[i]].startswith(prefixes) for i in range(len(sc.radii))])
 
     def path(self, pose, rows=None):
         """Base path (n, 3) for a placement parameter at source rows (default: keyframes)."""
@@ -265,11 +336,14 @@ class PlacementProblem:
                 qc[:, cols] = self.rest[cols]
         clear = self.clearance[side].minimum(qc)  # the scoring IK has no repulsion term
         crowd = np.maximum(0.0, self.cfg.self_clearance_margin - clear) / self.cfg.self_clearance_margin
+        contact = self.arm_contact(side, qs, rows) if self.cfg.arm_contact_weight else np.zeros(len(rows))
+        hit = self.cfg.arm_contact_weight * contact / self.cfg.arm_contact_scale
         cost = (np.mean(e) + np.max(e) + 0.5 * np.mean(np.maximum(0, LIMIT_SOFT - margin) / LIMIT_SOFT)
                 - 0.2 * min(manip, 1.0) + self.cfg.grasp_tilt_cost * abs(offset[2]) / 30.0
-                + np.mean(crowd) + np.max(crowd))
+                + np.mean(crowd) + np.max(crowd) + np.mean(hit) + np.max(hit))
         return cost, {"max_normalized_residual": float(np.max(e)), "min_limit_margin": float(margin.min()),
-                      "manipulability": float(manip), "min_self_clearance": float(clear.min())}, qs[0]
+                      "manipulability": float(manip), "min_self_clearance": float(clear.min()),
+                      "max_arm_contact_m": float(contact.max())}, qs[0]
 
     def _best_offset(self, side, base, seed):
         """Grasp offset of one side at one placement. The first keyframe is cold-solved once with
@@ -338,6 +412,34 @@ class PlacementProblem:
                 out += [np.r_[c - R @ (r, lateral), yaw] for r in cfg.placement_radii]
         if not out:
             out.append(np.zeros(3))
+        out = np.array(out)
+        grasps = any((lab >= 0).any() for lab in self.labels.values())
+        if cfg.placement_project and grasps and len(self.points):
+            out = self._project(out, self.points[:, :2].mean(axis=0))
+        return out
+
+    def _project(self, cand, centroid):
+        """Candidates whose footprint overlaps scene geometry, moved straight away from the target
+        centroid (heading kept) to the first position whose clearance reaches the margin.
+
+        A table edge holds Reachy's tripod column 0.19 m back (0.14 m + margin): LIBERO's kitchen
+        table top (z 0.85-0.90) left 3 of 105 ring candidates feasible, all 0.2 m behind the
+        source robot's mount, and the placement depended on Nelder-Mead finding the edge. Episodes
+        without grasp segments (pushes, pulls, pokes) keep the unprojected candidates: on the ManiSkill
+        push tasks the projected placements gained 5 K and lost 3 P of 40 (PullCube P 4 -> 0, the arm
+        stalls against the pulled cube from a placement beside the table)."""
+        step, limit = self.cfg.placement_project_step, self.cfg.placement_project_max
+        out = []
+        for p in cand:
+            d = p[:2] - centroid
+            n = np.linalg.norm(d)
+            u = d / n if n > 1e-6 else np.array([-np.cos(p[2]), -np.sin(p[2])])
+            q = np.array(p, float)
+            k = 0
+            while self.footprint_clearance(q) < 0 and k * step < limit:
+                k += 1
+                q[:2] = p[:2] + k * step * u
+            out.append(q)
         return np.array(out)
 
     def search(self):
