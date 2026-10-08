@@ -34,7 +34,7 @@ if [ ! -d /tmp/rr2/release/{rel} ]; then
 fi
 """
 
-LAUNCH = """set -eu
+LAUNCH = """
 job=/tmp/rr2/jobs/{id}
 if [ -e "$job/status.json" ]; then echo exists; exit 0; fi
 mkdir -p "$job"
@@ -61,7 +61,6 @@ class Pool:
         self.free = [(pod, s) for s in range(slots) for pod in pods if (pod, s) not in busy]
         random.shuffle(self.free)
         self.jobs = {j["id"]: j for j in jobs}
-        self.prepared = set()
         self.retired = set()
         self.losses = {}  # pods whose node is below the free-space reserve
         self.lock = threading.Lock()
@@ -86,12 +85,11 @@ class Pool:
 
     def launch(self, job, pod, slot):
         try:
-            if pod not in self.prepared:
-                k8s.run(pod, PREPARE.format(rt=self.rt, rel=self.rel, pvc=k8s.PVC), timeout=900)
-                self.prepared.add(pod)
+            # Prepare on every launch (a no-op when present): a restarted container loses /tmp.
             spec = {**job, "batch": self.batch, "release": self.rel, "slot": slot}
-            k8s.run(pod, LAUNCH.format(id=job["id"], rel=self.rel, rt=self.rt),
-                    stdin=json.dumps(spec).encode(), timeout=120)
+            k8s.run(pod, PREPARE.format(rt=self.rt, rel=self.rel, pvc=k8s.PVC)
+                    + LAUNCH.format(id=job["id"], rel=self.rel, rt=self.rt),
+                    stdin=json.dumps(spec).encode(), timeout=900)
             with self.lock:
                 self.running[job["id"]] = (pod, slot, time.time())
             self.log(event="launched", id=job["id"], pod=pod, slot=slot)
