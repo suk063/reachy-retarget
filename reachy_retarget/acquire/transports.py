@@ -224,12 +224,14 @@ class KeepAliveOpener:
     """``urlopen``-compatible opener with per-thread persistent HTTPS connections.
 
     Redirect targets of a URL (e.g. signed CDN URLs) are cached and reused until the
-    target answers 401/403/404/410, then resolved again. Used for many small ranges of
+    target answers 401/403/404/410, then resolved again. 429/503 answers are retried
+    after ``Retry-After`` (or an exponential back-off). Used for many small ranges of
     one archive; behaves like ``urlopen`` for the request types used here (GET, Range).
     """
 
-    def __init__(self, timeout=120, max_redirects=5):
+    def __init__(self, timeout=120, max_redirects=5, max_throttle_retries=8):
         self.timeout, self.max_redirects = timeout, max_redirects
+        self.max_throttle_retries = max_throttle_retries
         self._local = threading.local()
         self._redirects: dict[str, str] = {}
         self._lock = threading.Lock()
@@ -267,8 +269,16 @@ class KeepAliveOpener:
         headers = {k: v for k, v in req.header_items()}
         with self._lock:
             url = self._redirects.get(orig, orig)
-        for _ in range(self.max_redirects + 1):
+        throttled = 0
+        for _ in range(self.max_redirects + 1 + self.max_throttle_retries):
             key, resp = self._once(url, headers)
+            if resp.status in (429, 503) and throttled < self.max_throttle_retries:
+                # Rate limited: honour Retry-After (seconds), else back off exponentially.
+                resp.read()
+                retry_after = resp.getheader("Retry-After") or ""
+                time.sleep(min(300.0, float(retry_after) if retry_after.isdigit() else 5.0 * 2 ** throttled))
+                throttled += 1
+                continue
             if resp.status in (301, 302, 303, 307, 308):
                 loc = urllib.parse.urljoin(url, resp.getheader("Location"))
                 resp.read()

@@ -16,7 +16,7 @@ from cluster import k8s
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIREMENTS = ("numpy==2.5.3", "scipy==1.18.1", "h5py==3.16.0", "pyyaml==6.0.3",
-                "pyarrow==25.0.1", "mujoco==3.15.0")  # same versions as the local development venv
+                "pyarrow==25.0.1", "mujoco==3.15.0", "zstandard==0.25.0")  # same versions as the local development venv
 RELEASE_PATHS = ("reachy_retarget", "cluster", "pyproject.toml")
 
 
