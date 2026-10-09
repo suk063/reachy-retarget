@@ -185,6 +185,18 @@ PHYSICAL = {
     "TwoRobotStackCube-v1": {"cubeA": _dyn("cube"), "cubeB": _dyn("cube")},
 }
 STATIC_PHYSICAL = {"table-workspace": {**_STATIC_KINEMATIC, "source": "table"}}
+# Render colours of task actors (geom rgba of the stored scene meshes), only where the task source
+# sets a constant colour; other actors keep MuJoCo's default grey with rgba null in the provenance.
+# The table's source visual is a textured GLB (TableSceneBuilder table.glb, not catalogued): the
+# stored table is its collision box (cropped, see TABLE_CROP_MARGIN) in the default grey.
+VISUALS = {
+    "PickCube-v1": {"cube": {"rgba": [1.0, 0.0, 0.0, 1.0],
+                             "source": SOURCE + "envs/tasks/tabletop/pick_cube.py (build_cube color=[1, 0, 0, 1])"}},
+    "StackCube-v1": {"cubeA": {"rgba": [1.0, 0.0, 0.0, 1.0],
+                               "source": SOURCE + "envs/tasks/tabletop/stack_cube.py (cubeA color=[1, 0, 0, 1])"},
+                     "cubeB": {"rgba": [0.0, 1.0, 0.0, 1.0],
+                               "source": SOURCE + "envs/tasks/tabletop/stack_cube.py (cubeB color=[0, 1, 0, 1])"}},
+}
 
 
 def scene_for(env_id: str, objects: dict) -> tuple:
@@ -199,7 +211,8 @@ def scene_for(env_id: str, objects: dict) -> tuple:
             "defaults": DEFAULT_MATERIAL,
             "floor": {"z": -TABLE_HEIGHT + WORLD_Z_OFFSET, "source": "ground"},
             "option": {"timestep": 1.0 / DEFAULT_SIM_FREQ, "gravity": [0.0, 0.0, -9.81]},
-            "objects": {k: v for k, v in table.items() if k in objects}})
+            "objects": {k: v for k, v in table.items() if k in objects}},
+            visual={k: v for k, v in VISUALS.get(env_id, {}).items() if k in objects})
     except primitive_scene.UnrepresentableObject as e:
         return None, f"none: {e}"
     return ref, "primitive_scene: SAPIEN scene rebuilt from primitives (see provenance['scene_physical'])"

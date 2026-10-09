@@ -80,6 +80,11 @@ class SourceEpisode:
     torso_height: np.ndarray | None = None
     articulations: dict[str, Articulation] = field(default_factory=dict)
     scene: SceneRef | None = None
+    # Per-frame positions of every non-robot scene joint of ``scene`` (free objects, distractors,
+    # articulated parts), as in the source states: ``joint_names`` are qpos columns named like the
+    # tier-P rollout (``<joint>`` for hinge/slide, ``<joint>/x .. /qz`` for free joints, wxyz).
+    # Used only to pose the scene components of the stored episode (meshes.components).
+    scene_qpos: Articulation | None = None
     instruction: str | None = None
     success: bool | None = None
     regime: Literal["tabletop", "mobile_manipulation", "navigation"] = "tabletop"
@@ -130,6 +135,10 @@ class SourceEpisode:
             a.qpos = np.asarray(a.qpos, float)
             if a.qpos.shape != (T, len(a.joint_names)):
                 raise ValueError(f"articulation {name}: qpos must be (T, n)")
+        if self.scene_qpos is not None:
+            self.scene_qpos.qpos = np.asarray(self.scene_qpos.qpos, float)
+            if self.scene_qpos.qpos.shape != (T, len(self.scene_qpos.joint_names)):
+                raise ValueError("scene_qpos must be (T, n) with one name per column")
 
     @property
     def length(self) -> int:

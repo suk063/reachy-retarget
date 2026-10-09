@@ -137,8 +137,12 @@ def _first_pose(oid: str, track: ObjectTrack) -> np.ndarray:
 
 
 def build(objects: dict[str, ObjectTrack], *, floor: bool = True, physical: dict,
-          name: str = "primitive_scene") -> SceneRef:
-    """Complete MJCF scene of primitive objects (see the module docstring)."""
+          name: str = "primitive_scene", visual: dict | None = None) -> SceneRef:
+    """Complete MJCF scene of primitive objects (see the module docstring).
+
+    ``visual``: optional ``{object id: {"rgba": [r, g, b, a], "source": str}}`` render colours
+    (geom ``rgba``; no effect on physics). Objects without one keep MuJoCo's default grey and
+    their record says ``rgba: null`` (colour not known)."""
     defaults = dict(physical.get("defaults", {}))
     for k in ("static_friction", "dynamic_friction", "restitution", "density"):
         if k not in defaults:
@@ -148,6 +152,10 @@ def build(objects: dict[str, ObjectTrack], *, floor: bool = True, physical: dict
     unknown = sorted(set(per_object) - set(objects))
     if unknown:
         raise ValueError(f"physical['objects'] names objects not in the scene: {unknown}")
+    visual = dict(visual or {})
+    unknown = sorted(set(visual) - set(objects))
+    if unknown:
+        raise ValueError(f"visual names objects not in the scene: {unknown}")
 
     root = ET.Element("mujoco", model=name)
     ET.SubElement(root, "compiler", angle="radian", autolimits="true")
@@ -208,6 +216,8 @@ def build(objects: dict[str, ObjectTrack], *, floor: bool = True, physical: dict
                                pos=_num(g["pos"]), **attrs)
             if "quat" in g:
                 el.set("quat", _num(g["quat"]))
+            if oid in visual:
+                el.set("rgba", _num(visual[oid]["rgba"]))
             if body_type == "dynamic":
                 el.set("density", _num(d))
         mass = float(sum(_volume(g) * d for g, d in zip(geoms, dens))) if body_type == "dynamic" else None
@@ -217,7 +227,9 @@ def build(objects: dict[str, ObjectTrack], *, floor: bool = True, physical: dict
                                              for k, v in g.items()} for g in geoms],
                                   "density_kg_m3": dens if body_type == "dynamic" else None,
                                   "mass_kg": mass, **m, "initial_pose": pose.round(9).tolist(),
-                                  "source": spec.get("source")}
+                                  "source": spec.get("source"),
+                                  "rgba": list(map(float, visual[oid]["rgba"])) if oid in visual else None,
+                                  "rgba_source": visual[oid].get("source") if oid in visual else None}
 
     for el in root.iter():
         if el.get("name", "").startswith(NO_ROBOT_PREFIX):

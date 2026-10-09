@@ -27,6 +27,8 @@ ARMS = {"left": slice(3, 10), "right": slice(10, 17)}
 BODY_PARTS = ("left_arm", "right_arm", "head", "base")
 REGIMES = ("tabletop", "mobile_manipulation", "navigation")
 OBJECT_ROLES = ("manipulated", "support", "receptacle", "fixture")
+COMPONENT_ROLES = (*OBJECT_ROLES, "articulated_part", "robot_link")
+POSE_SOURCES = ("object_track", "scene_state", "static", "robot_fk")
 
 
 def _array(name, a, shape, *, finite=True):
@@ -96,6 +98,60 @@ class PhysicsRollout:
 
 
 @dataclass
+class SceneComponents:
+    """Rigid scene components with their mesh parts and per-frame world poses (``/scene``).
+
+    ``components[c]`` describes pose column ``c`` (see docs/schema.md: name, role, source body,
+    pose source, visual and collision parts referencing the asset library by SHA-256);
+    ``materials`` and ``textures`` are keyed by the names the parts use. ``poses[t, c]`` is the
+    world pose (xyz + wxyz) of component ``c`` at episode row ``t`` (NaN where ``valid`` is
+    False); ``physics_poses`` the same on the tier-P rollout clock (``/physics/time``).
+    """
+
+    components: list[dict]
+    poses: np.ndarray                        # (T, C, 7)
+    valid: np.ndarray                        # (T, C) bool
+    materials: dict = field(default_factory=dict)
+    textures: dict = field(default_factory=dict)
+    physics_poses: np.ndarray | None = None  # (N, C, 7)
+    info: dict = field(default_factory=dict)
+
+    def __post_init__(self):
+        self.components = list(self.components)
+        C = len(self.components)
+        names = [c.get("name") for c in self.components]
+        if len(set(names)) != C or not all(isinstance(n, str) and n for n in names):
+            raise ValueError("scene component names must be unique non-empty strings")
+        for c in self.components:
+            if c.get("role") not in COMPONENT_ROLES:
+                raise ValueError(f"scene component {c.get('name')!r}: role must be one of {COMPONENT_ROLES}")
+            if c.get("pose_source") not in POSE_SOURCES:
+                raise ValueError(f"scene component {c.get('name')!r}: pose_source must be one of {POSE_SOURCES}")
+            for kind in ("visual", "collision"):
+                for p in c.get(kind, []):
+                    if p.get("material") is not None and p["material"] not in self.materials:
+                        raise ValueError(f"scene component {c['name']!r}: unknown material {p['material']!r}")
+        for name, m in self.materials.items():
+            for tex in [m.get("texture"), *(m.get("layers") or {}).values()]:
+                if tex is not None and tex not in self.textures:
+                    raise ValueError(f"material {name!r}: unknown texture {tex!r}")
+        self.poses = np.asarray(self.poses, float)
+        self.valid = np.asarray(self.valid, bool)
+        if self.poses.ndim != 3 or self.poses.shape[1:] != (C, 7) or self.valid.shape != self.poses.shape[:2]:
+            raise ValueError(f"scene poses must be (T, {C}, 7) with valid (T, {C})")
+        if not np.isfinite(self.poses[self.valid]).all():
+            raise ValueError("scene poses: valid rows must be finite")
+        if self.physics_poses is not None:
+            self.physics_poses = np.asarray(self.physics_poses, float)
+            if self.physics_poses.ndim != 3 or self.physics_poses.shape[1:] != (C, 7):
+                raise ValueError(f"scene physics_poses must be (N, {C}, 7)")
+
+    @property
+    def names(self) -> list[str]:
+        return [c["name"] for c in self.components]
+
+
+@dataclass
 class ReachyEpisode:
     """One retargeted episode at 50 Hz in the canonical :data:`JOINTS` order."""
 
@@ -126,6 +182,7 @@ class ReachyEpisode:
     articulations: dict[str, Articulation] = field(default_factory=dict)
     validation: dict[str, np.ndarray] = field(default_factory=dict)  # name -> (T, ...) per frame
     physics: PhysicsRollout | None = None
+    scene: SceneComponents | None = None               # scene components, meshes and poses
     extra: dict = field(default_factory=dict)          # JSON metadata, e.g. simulation assumptions
 
     def __post_init__(self):
@@ -182,6 +239,12 @@ class ReachyEpisode:
             if v.ndim < 1 or v.shape[0] != T or v.dtype.kind not in "biuf":
                 raise ValueError(f"validation {k}: expected a numeric per-frame array with T rows")
             self.validation[k] = v
+        if self.scene is not None:
+            if self.scene.poses.shape[0] != T:
+                raise ValueError(f"scene poses must have {T} rows")
+            if self.scene.physics_poses is not None and (
+                    self.physics is None or len(self.scene.physics_poses) != len(self.physics.time)):
+                raise ValueError("scene physics_poses need a physics rollout with as many rows")
 
     @property
     def length(self) -> int:

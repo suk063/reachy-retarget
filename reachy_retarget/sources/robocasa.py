@@ -48,6 +48,7 @@ from .registry import register
 from .robosuite import ASSET_MARKER as ROBOSUITE_MARKER
 from .contact_reference import ObjectEnvironmentDepth
 from .robosuite import PARK_DISTANCE_M, AssetArchive, _Model
+from ..meshes.mujoco_scene import qpos_columns
 
 ASSET_MARKER = "robocasa/models/assets/"
 BASE_BODY = "mobilebase0_base"
@@ -444,12 +445,14 @@ def _episode(model, ep, *, family, lerobot, tar, manifest, member_sha, dmeta, ve
     initial_qpos.update({model.joint_names[j]: float(d.qpos[m.jnt_qposadr[j]])
                          for js in model.articulations.values() for j in js})
     route = "mjcf_kinematic_only" if model.missing else "mjcf_states"
-    scene = None
+    scene = scene_qpos = None
     if with_scene and not model.missing:
         scene = SceneRef(mjcf=model.xml, robot_prefixes=sorted({*model.robot_prefixes, *EXTRA_ROBOT_PREFIXES}),
                          initial_qpos=initial_qpos, assets=model.assets,
                          inactive_bodies=[model.body_names[free_body[n]] for n in inactive],
                          reference=reference.result(inactive))
+        cols, adr = qpos_columns(m, model.mj, keep=lambda b: not robot_body[b])
+        scene_qpos = Articulation(joint_names=cols, qpos=states[:, 1 + adr])
 
     success, success_source, obs_check = None, None, {}
     if pq is not None:
@@ -518,7 +521,7 @@ def _episode(model, ep, *, family, lerobot, tar, manifest, member_sha, dmeta, ve
         family=family, dataset=dataset, episode_id=ep, task=dmeta.get("env") or (tar.task if tar else "unknown"),
         time=time, effectors=effectors, objects=objects,
         base=base if moved else None, base_hint=base[0].copy() if base_b is not None else None,
-        torso_height=torso if torso_adr is not None else None, articulations=art_out, scene=scene,
+        torso_height=torso if torso_adr is not None else None, articulations=art_out, scene=scene, scene_qpos=scene_qpos,
         instruction=meta.get("lang"), success=success, regime=regime,
         license=tar.license if tar else LICENSE, provenance=provenance, lineage=lineage)
 

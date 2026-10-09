@@ -6,6 +6,14 @@ thousands of entries keep their rows in a gzip TSV next to the yaml (`table:`).
 "Catalogued", "fetched", "adapted" (a `SourceEpisode` was produced) and
 "physics-validated" are separate states; nothing here implies the next.
 
+Scene meshes are required for building (docs/design.md, *Scene meshes*): the status of every
+family is in `sources.registry.MESHES`. Built: robomimic, MimicGen, LIBERO, DexMimicGen, RoboCasa,
+BiGym, ManiSkill (primitive scenes; actor colours only where the task source sets a constant one,
+the table's textured GLB visual is not catalogued and its collision box stands in). Pending:
+RoboVerse, MobileManiBench. Excluded (no obtainable meshes): BEHAVIOR-1K (encrypted object
+assets), MolmoBot-Data (no per-frame object poses). Episodes of built families whose assets are
+not fetched (e.g. RoboCasa tars outside the asset subset) are excluded one by one (`no_meshes`).
+
 ## Acquisition
 
 One interface for every source: `reachy_retarget.acquire.fetch(ids, root, ...)` and

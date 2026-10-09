@@ -22,7 +22,7 @@ only**; the writer refuses any dataset whose path contains `image`, `img`, `rgb`
 * rotation6d = first two matrix columns `(r00, r10, r20, r01, r11, r21)` as in
   reachy-agent `rotation_values`; inverse by Gram–Schmidt.
 * Gripper opening in `[0, 1]` (1 = open); width in metres.
-* All gzip-compressed (with shuffle) float64 unless stated.
+* All gzip-compressed (with shuffle) float64 unless stated (`/scene` poses are float32).
 
 ## Layout
 
@@ -48,6 +48,11 @@ only**; the writer refuses any dataset whose path contains `image`, `img`, `rgb`
 | `/validation/<name>` | (T, ...) | per-frame tier-K diagnostics, e.g. `tcp_pos_residual` (T, 2) |
 | `/physics/{time,qpos,qvel,ctrl}` | (N, ·) | optional tier-P rollout on the simulator clock; attrs `columns` per array, group attr `info` (JSON: simulator, timestep, assumptions) |
 | `/actions/<mode>/<array>` | (T-1 or T, k) | precomputed control views; attr `columns`, group attrs `frame`, `units`, `semantics` |
+| `/scene` | group | scene components and their meshes (see *Scene components and asset library*); attrs `schema` = `reachy-retarget-scene-v1`, `library` |
+| `/scene/description` | (n,) uint8 | gzip-compressed JSON `{"components", "materials", "textures", "info"}` |
+| `/scene/poses` | (T, C, 7) float32 | world pose of every component at every episode row (NaN where not valid); attr `components` (names in column order) |
+| `/scene/valid` | (T, C) bool | pose validity |
+| `/scene/physics_poses` | (N, C, 7) float32 | optional: the same components on the tier-P clock (`/physics/time`) |
 
 Metadata details: `uid` defaults to `<dataset>/<episode_id>`; `regime` is one of
 `tabletop, mobile_manipulation, navigation`; `body_parts` is the subset of
@@ -59,6 +64,78 @@ never merged); `retarget_config` is the retarget configuration hash; `extra` is 
 
 Only canonical arrays are read back: world views and `/actions` are regenerated from
 them. `recompute_modes(path)` rewrites every control view from the canonical state.
+
+## Scene components and asset library
+
+Every written episode stores the meshes of its scene (a policy builds a per-component surface
+feature map from them, as reachy-agent `policy/build_map.py` does, and assembles it at training
+time from per-frame component poses). Episodes whose meshes cannot be obtained are not written
+(build record `status: "excluded"`, `excluded: "no_meshes"`); see docs/design.md, *Scene meshes*.
+Read with `reachy_retarget.schema.scene_assets`: `read_scene(path)`,
+`load_component_meshes(path, kind="visual" | "collision", frame=None)` (trimesh-compatible arrays)
+and `scene_mjcf(path, frame=0, physics=False)` (an MJCF string that MuJoCo compiles and renders; `frame=None` puts every component at the origin, e.g. to render one component in its own frame for a surface map).
+
+**Asset library.** `<out>/assets/<sha256>.<ext>` next to `<out>/episodes/`, one per build output
+root (= dataset release): every mesh and texture file once, named by the SHA-256 of its bytes,
+written to a temporary name and hard-linked into place (never overwritten; identical content gives
+the identical name, so libraries of several roots merge by copying missing names). There is no
+index: every reference is `{"sha256", "format", "bytes"}` (meshes add `vertices`, `faces`,
+`normals`, `uv`). `/scene` attr `library` is the library path relative to the episode's folder;
+readers fall back to the first `assets/` folder above the episode. Formats:
+
+* `msh` (all meshes): MuJoCo's binary mesh, int32 `nvertex, nnormal, ntexcoord, nface`, float32
+  vertices (nvertex, 3), normals (nnormal, 3), texture coordinates (ntexcoord, 2, used as stored,
+  no v flip) and int32 faces (nface, 3); `nnormal`, `ntexcoord` are 0 or `nvertex`.
+* textures keep their recorded bytes and format (`png`, `jpg`, ...). Textures are asset files of
+  the meshes, not observations; rendered images are never stored.
+
+**Components** (`description.components`, in pose-column order): rigid bodies of the scene.
+
+| key | content |
+| --- | --- |
+| `name` | unique: the object id for tracked objects (`/objects/<id>`), else the source body name; `worldbody` for geoms of the world body; `reachy/<link>` for Reachy links |
+| `role` | `manipulated` (free object; `task` False for untracked free bodies such as distractors), `support`, `receptacle`, `fixture`, `articulated_part`, `robot_link` |
+| `source_body`, `bodies` | the source body that defines the component frame (MuJoCo body / URDF link) and every source body merged into it |
+| `kind` | `free`, `articulated`, `static`, `robot` |
+| `task` | tracked object or tracked articulation |
+| `object_id`, `articulation`, `joints` | the `/objects` id, the `/articulations` id and the source joints of the component |
+| `pose_source` | `object_track` (`/objects/<id>/pose`), `scene_state` (forward kinematics of the source scene joints), `static`, `robot_fk` (Reachy FK of `q`) |
+| `visual_from_collision` | the component has no visual-only geoms and its visible colliding geoms are its visual parts |
+| `visual`, `collision` | parts (below) |
+
+A **part** is one geom, in the component frame: `geom` (source name), `type` (`mesh`, `box`,
+`sphere`, `capsule`, `cylinder`, `ellipsoid`, `plane`), `size` (MuJoCo geom size: box half
+extents, radius / half length, ...), `pos`, `quat` (wxyz), `group`, `contype`, `conaffinity`,
+`rgba` (geom rgba; MuJoCo uses it instead of the material colour when it differs from the default
+0.5 0.5 0.5 1), `material` (name or null), and
+
+* `mesh`: library reference of the compiled MuJoCo mesh (scale, refpos/refquat and MuJoCo's
+  re-centring applied, vertices in the mesh frame; the part pose is the compiled geom pose) with
+  `mesh_source` = `{name, file, sha256, scale, mesh_pos, mesh_quat}` (`stored vertex =
+  R(mesh_quat)^T (scale * file vertex - mesh_pos)`); collision meshes add `collision_shape`
+  (MuJoCo collides with the convex hull);
+* `generated_mesh` (visual primitives only): a surface mesh of the primitive
+  (`scene_assets.primitive_mesh`); collision primitives have type and size only.
+
+`description.materials[name]`: `rgba, specular, shininess, reflectance, emission, metallic,
+roughness, texrepeat, texuniform, texture` (+ `layers` `{role: texture}` for MuJoCo material
+layers); Reachy materials keep their COLLADA/URDF origin under `source`.
+`description.textures[name]`: `attributes` (every MJCF texture attribute except name and files:
+`type`, `builtin`, `rgb1`, `rgb2`, `mark`, `width`, `height`, `gridsize`, `gridlayout`, ...),
+`files` `{attribute: reference + source_file}` (`file`, `fileright`, ...), `file` (= `files.file`),
+`builtin`. Builtin textures have no file.
+
+`description.info`: selection rules and radius, `omitted` components (with distance), source
+scene digest and removed robot elements, `track_vs_scene_state` (max deviation between tracked
+object poses and the scene kinematics), Reachy URDF digest and skipped visual parts, `library`.
+
+**Poses.** `poses[t, c]` is the world pose of component `c` at episode row `t`: tracked objects
+from `/objects/<id>/pose` (the retargeted, resampled source track; NaN where invalid), untracked
+moving parts by forward kinematics of the source scene joint positions resampled onto the episode
+clock, static parts constant, Reachy links by FK of `q` (`base_link` = `planar(q[0:3])`).
+`physics_poses[n, c]` holds the same components on the tier-P clock: forward kinematics of
+`/physics/qpos` (objects as simulated) and Reachy FK of the rollout's joint positions. To assemble a
+reachy-agent-style map observation: `body_names` = component names, `body_poses` = `poses[t]`.
 
 ## Control modes
 

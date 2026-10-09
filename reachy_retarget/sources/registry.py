@@ -9,6 +9,11 @@ position of an episode in the adapter's order. Positions it rejects are yielded 
 ``None`` (so callers keep counting positions) and never read. Adapters registered with
 ``select=True`` implement this themselves (unselected episodes are not loaded, compiled or
 replayed); for the others the registry builds every episode and drops the unselected ones.
+
+Scene meshes (``MESHES``): built episodes must store the meshes of their scene components (the
+policy builds a surface feature map from them, see docs/design.md "Scene meshes"). This table is
+the single place that says which families provide them; :func:`require_meshes` refuses the
+others before a build reads anything.
 """
 from __future__ import annotations
 
@@ -29,6 +34,38 @@ MODULES = {
     "maniskill": "maniskill", "mimicgen": "robosuite", "mobilemanibench": "mobilemanibench",
     "molmobot": "molmobot", "robocasa": "robocasa", "robomimic": "robosuite", "roboverse": "roboverse",
 }
+
+
+# family -> (status, note). "available": the adapter attaches a MuJoCo scene (SceneRef) whose
+# meshes and textures are resolved from pinned archives (episodes whose scene cannot be resolved
+# are still excluded one by one: build record ``excluded: no_meshes``); "pending": mesh extraction
+# not implemented yet; "excluded": meshes cannot be obtained, the family is not built.
+MESHES = {
+    "robomimic": ("available", "robosuite MJCF per demo + robosuite wheel assets"),
+    "mimicgen": ("available", "robosuite MJCF per demo + robosuite wheel and MimicGen assets"),
+    "libero": ("available", "robosuite MJCF per demo + LIBERO assets"),
+    "dexmimicgen": ("available", "robosuite MJCF per demo + robosuite/DexMimicGen assets"),
+    "robocasa": ("available", "recorded kitchen MJCF + RoboCasa asset archives"),
+    "bigym": ("available", "replay-record MJCF + exported BiGym assets"),
+    "maniskill": ("available", "primitive scene rebuilt from the task geometry (boxes, spheres, ...)"),
+    "roboverse": ("pending", "scene mesh extraction for RoboVerse sources is not implemented yet"),
+    "mobilemanibench": ("pending", "scene mesh extraction for MobileManiBench is not implemented yet"),
+    "behavior": ("excluded", "BEHAVIOR-1K object assets are encrypted; no meshes can be stored"),
+    "molmobot": ("excluded", "MolmoBot-Data has no per-frame object poses and no scene meshes"),
+}
+
+
+def mesh_status(family: str) -> tuple[str, str]:
+    """``(status, note)`` of a family in :data:`MESHES` (unknown families: ``("unknown", ...)``)."""
+    return MESHES.get(family, ("unknown", "family not listed in sources.registry.MESHES"))
+
+
+def require_meshes(family: str) -> None:
+    """Raise ``ValueError`` unless ``family`` provides scene meshes (``MESHES`` status ``available``)."""
+    status, note = mesh_status(family)
+    if status != "available":
+        raise ValueError(f"family {family!r} cannot be built: scene meshes {status} ({note}). Episodes must store "
+                         "their object meshes; see sources.registry.MESHES")
 
 
 def register(family: str, *more: str, select: bool = False) -> Callable[[Adapter], Adapter]:

@@ -13,7 +13,7 @@ images are stored.
 ## Pipeline
 
 ```
-source files ──adapter──▶ SourceEpisode ──retarget──▶ Reachy trajectory ──validate K/P──▶ ReachyEpisode (HDF5)
+source files ──adapter──▶ SourceEpisode ──retarget──▶ Reachy trajectory ──validate K/P──▶ scene meshes ──▶ ReachyEpisode (HDF5) + assets/
 ```
 
 * `reachy_retarget.acquire`: pinned catalog and one explicit `fetch` for every acquisition kind
@@ -25,7 +25,10 @@ source files ──adapter──▶ SourceEpisode ──retarget──▶ Reachy
 * `reachy_retarget.retarget`: embodiment-independent mapping onto Reachy.
 * `reachy_retarget.validate`: tier K (kinematic) for every episode, tier P (MuJoCo,
   free objects) when the source ships a MuJoCo scene.
-* `reachy_retarget.schema`: data model, HDF5 I/O, control-mode registry.
+* `reachy_retarget.meshes`: scene components with their visual/collision meshes, materials and
+  textures, the content-addressed asset library and per-frame component poses (*Scene meshes*).
+* `reachy_retarget.schema`: data model, HDF5 I/O, control-mode registry, scene reader
+  (`schema.scene_assets`).
 * `cluster/`: job pool over the persistent worker pods (two jobs per pod); `cluster/manifests.py`
   writes size-batched fetch manifests.
 
@@ -88,7 +91,12 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
   `receptacle`, `fixture`) and simple geometry.
 * `articulations`: articulated scene joints (drawers, doors) with joint names.
 * `scene`: optional MuJoCo scene for tier P, with the bodies the source parks out of use
-  (`inactive_bodies`) and `reference` values measured on the source's own states.
+  (`inactive_bodies`) and `reference` values measured on the source's own states. It is also the
+  source of the stored scene meshes; an episode without one is not written.
+* `scene_qpos`: per-frame positions of every non-robot joint of `scene` (free objects including
+  untracked ones such as distractors, articulated parts), columns named like the tier-P rollout
+  (`<joint>`, `<joint>/x .. /qz`); robosuite family, RoboCasa and BiGym fill it from their recorded
+  states. Used only to pose scene components.
 * provenance, license, lineage (`seed`, `variant_of`), task, instruction, source success.
 
 ## Retargeting method
@@ -901,6 +909,71 @@ footprint, 5–19 cm residuals); Can: the source throws the can
 onto the peg (`grasp_drift` 5–68 mm), and dropped nuts miss the peg (`task_final_pose` 11–36 cm); LIBERO
 book, wine bottle and moka pot (`grasp_drift`, wrist limits).
 
+## Scene meshes
+
+Episodes must store the meshes of their scene: the policy builds a surface feature map per
+component (reachy-agent `policy/build_map.py`: each body's textured visual parts in its local
+frame, rendered with MuJoCo, DINO features sampled at surface points; the table keeps its upward
+top faces) and assembles it at training time from per-frame component poses (`body_poses`,
+xyz + wxyz, world) of every component including Reachy's links. Layout: docs/schema.md,
+*Scene components and asset library*. Code: `reachy_retarget/meshes/`.
+
+**Family policy** (`sources.registry.MESHES`, the single place): `available` for robomimic,
+MimicGen, LIBERO, DexMimicGen (robosuite MJCF per demo + pinned asset archives), RoboCasa
+(recorded kitchen MJCF + RoboCasa asset archives), BiGym (replay-record MJCF + exported assets)
+and ManiSkill (primitive scenes); `pending` for RoboVerse and MobileManiBench; `excluded` for
+BEHAVIOR (encrypted object assets) and MolmoBot (no per-frame object poses). `build` refuses
+every family that is not `available` before reading anything. Within an available family an
+episode whose scene cannot be resolved (adapter `state_route` kinematic-only, missing collision or
+visual mesh or texture files) is not written: its build record says `status: "excluded"`,
+`excluded: "no_meshes"` with the reason, and `report` counts it under `excluded`.
+
+**Extraction from a MuJoCo `SceneRef`** (`meshes.mujoco_scene`): the scene is prepared as for tier P
+(robot, mocap and declared inactive bodies removed, assets pruned and resolved), compiled without
+textures, and read from the compiled model so that mesh `scale`, `refpos`/`refquat` and MuJoCo's
+re-centring are applied exactly. Components are rigid groups (a body with a joint or a world child
+plus its joint-less descendants; world-body geoms form `worldbody`). Visual parts are the visible
+geoms that do not collide or lie in one of the scene's visual render groups (robosuite family and
+RoboCasa: group 1, BiGym: group 2; the robosuite floor collides and renders); a component without
+any falls back to its visible colliding geoms (BiGym floor, ManiSkill primitives). Collision parts
+are the colliding geoms: primitives with their size, meshes stored like visual meshes (MuJoCo
+collides with their hull). Meshes go to the library as `.msh` with compiled normals and texture
+coordinates, visual primitives also get a generated surface mesh, textures keep their recorded
+file bytes, builtin textures their parameters, materials their compiled values.
+
+**Selection rule** (all families; it matters for RoboCasa kitchens): tracked objects and tracked
+articulated parts always; every other rigid group (static scene parts, untracked free bodies,
+untracked articulated parts) and every world-body geom when a geom's world AABB in the initial
+state is within 2.5 m of the robot path (Reachy's base on the floor, its TCP and head positions and
+the tracked object positions over the episode); omitted groups are listed with their distance in
+`/scene` info. A robomimic table scene keeps everything but the far arena walls; a RoboCasa kitchen
+keeps about 120 of its rigid groups.
+
+**Poses**: tracked objects from the retargeted (resampled) source tracks; untracked moving groups by
+forward kinematics of `SourceEpisode.scene_qpos` resampled onto the episode clock through the
+episode's `source_time` (linear for hinge/slide, slerp for free joints; ManiSkill without
+`scene_qpos`: the tracked free objects and articulations drive the kinematics); static groups
+constant; Reachy links by FK of `q` over all URDF links with geometry (`reachy/<link>`). With
+tier P, `physics_poses` gives the same components on the rollout clock from the rollout `qpos`.
+The kinematics of the tracked objects is checked against their tracks
+(`info.track_vs_scene_state`, ~1e-17 m on robomimic).
+
+**Reachy links** (`meshes.reachy_links`, as reachy-agent `simulation/prepare.py`): the vendored
+COLLADA visuals are parsed here (no trimesh/pycollada; `instance_node`/library nodes, node
+transforms, units, per-corner normals), split per material into parts in the link frame with the
+URDF visual origin and scale baked in; colours from the URDF material when named (antennas
+`neckwhite`), else the COLLADA diffuse colour (raw effect values recorded); parts with fewer than 4
+distinct vertices (single-triangle patches MuJoCo rejects) are skipped and listed. Collision parts
+are the tier-P ones (URDF primitives, hulls of collider-mesh components). Reachy's 161 mesh files
+(7.0 MB) enter each library once.
+
+**Memory and size.** Assets are written once per output root and deduplicated by digest inside a
+job (`meshes.library.open_library` keeps one writer per library directory); the extraction model is
+compiled without textures and released after the episode. Scene extraction adds 0.05-2 s and about
+0.3 GB transient memory (RoboCasa) per episode, below each family's existing retargeting / tier-P
+peak. Component poses are stored as float32 (about 1 um at 10 m).
+
 ## Episode storage (`reachy-retarget-episode-v2`)
 
-One HDF5 file per episode plus a dataset `index.parquet`. See `docs/schema.md`.
+One HDF5 file per episode plus a dataset `index.parquet` and the dataset's asset library
+`assets/` (scene meshes and textures, *Scene meshes*). See `docs/schema.md`.

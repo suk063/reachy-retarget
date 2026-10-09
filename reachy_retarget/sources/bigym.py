@@ -57,6 +57,7 @@ from pathlib import Path
 import numpy as np
 
 from ..acquire import load_catalog
+from ..meshes.mujoco_scene import qpos_columns
 from ..schema.source import Articulation, Effector, ObjectTrack, SceneRef, SourceEpisode
 from .contact_reference import ObjectEnvironmentDepth
 from .registry import register
@@ -472,11 +473,13 @@ def _episode(rec: Path, meta: dict, arrays: dict, asset_dir, catalog, family, wi
                     for j in model.free.values()}
     initial_qpos.update({model.joint_names[j]: float(qpos[0, m.jnt_qposadr[j]])
                          for js in model.articulations.values() for j in js})
-    scene = None
+    scene = scene_qpos = None
     if with_scene and not model.missing and floor_z == 0.0:
         scene = SceneRef(mjcf=model.xml, robot_prefixes=[ROBOT_PREFIX], initial_qpos=initial_qpos,
                          assets=model.assets, inactive_bodies=list(model.inactive_bodies),
                          reference=reference.result())
+        cols, adr = qpos_columns(m, model.mj, keep=lambda b: not model.is_robot[b])
+        scene_qpos = Articulation(joint_names=cols, qpos=qpos[:, adr])
 
     error = meta.get("error")
     complete = error is None and meta.get("replayed_actions") == meta.get("n_actions")
@@ -547,7 +550,7 @@ def _episode(rec: Path, meta: dict, arrays: dict, asset_dir, catalog, family, wi
         effectors=effectors, objects=objects, base=base, torso_height=torso,
         articulations={n: Articulation(joint_names=[model.joint_names[j] for j in js], qpos=art[n])
                        for n, js in model.articulations.items()},
-        scene=scene, instruction=_instruction(meta.get("env_doc")), success=success,
+        scene=scene, scene_qpos=scene_qpos, instruction=_instruction(meta.get("env_doc")), success=success,
         regime="mobile_manipulation", license=zip_entry.license if zip_entry else "Apache-2.0",
         provenance=provenance, lineage=lineage)
 

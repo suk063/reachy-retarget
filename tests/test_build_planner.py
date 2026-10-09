@@ -225,6 +225,7 @@ def test_build_accepts_several_paths(tmp_path, monkeypatch):
 
     monkeypatch.setattr(build, "iter_episodes", fake_iter)
     monkeypatch.setattr(build, "process_source", fake_process)
+    monkeypatch.setattr(build, "require_meshes", lambda family: None)  # synthetic family "f"
     paths = [str(tmp_path / "raw/f/a.bin"), str(tmp_path / "raw/f/bad.bin"), str(tmp_path / "raw/f/c.bin")]
     counts = build.build("f", paths, (0, 1), str(tmp_path / "out"))
     assert counts["episodes"] == 7 and counts["errors"] == 1 and counts["K"] == 7

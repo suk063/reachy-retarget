@@ -53,11 +53,17 @@ def evaluate_episode(family: str, path: str, demo: str, *, physics: bool = True,
 
 
 def process_source(src, *, physics: bool = True, write: str | None = None, cfg=None, physics_cfg=None,
-                   read_seconds: float = 0.0, layout: str = "task") -> dict:
+                   read_seconds: float = 0.0, layout: str = "task", library: str | None = None) -> dict:
     """Retarget one SourceEpisode, run tier K (and P when it has a scene); optionally write it.
 
     ``layout="task"`` writes ``<write>/<task>/<episode>.h5`` (evaluation runs);
     ``layout="dataset"`` writes ``<write>/<dataset>/<episode>.h5`` (unique across files).
+
+    Written episodes carry their scene components and meshes (``meshes.components``), with mesh
+    and texture files in the asset library ``library`` (default ``<write>/assets``). An episode
+    whose scene meshes cannot be obtained is not written: its record has ``status: "excluded"``,
+    ``excluded: "no_meshes"`` and the reason (checked before retargeting when the source has no
+    scene at all).
     """
     from .retarget import retarget
     from .retarget.pipeline import _jsonable
@@ -66,6 +72,11 @@ def process_source(src, *, physics: bool = True, write: str | None = None, cfg=N
     t_read = read_seconds
     rec = {"family": src.family, "task": src.task, "dataset": src.dataset, "episode_id": src.episode_id,
            "source_frames": src.length, "source_success": src.success}
+    if write and src.scene is None:
+        from .meshes.components import no_scene_reason
+        rec.update(status="excluded", excluded="no_meshes", reason=no_scene_reason(src), K=None, P=None,
+                   seconds={"read": t_read})
+        return rec
     res = retarget(src, cfg)
     t_ret = time.perf_counter() - t0
     rec["status"] = res.status
@@ -106,10 +117,24 @@ def process_source(src, *, physics: bool = True, write: str | None = None, cfg=N
         ep.physics = rollout
     rec["seconds"] = {"read": t_read, "retarget": t_ret, "physics": t_phys}
     if write:
+        from .meshes.components import NoMeshes, build_scene_components
+        from .meshes.library import open_library
         from .schema.io import index_row, write_episode
+        lib = open_library(library or Path(write) / "assets")
+        t2 = time.perf_counter()
+        try:
+            scene, scene_stats = build_scene_components(ep, src, lib, rollout=ep.physics)
+        except NoMeshes as e:
+            rec.update(status="excluded", excluded="no_meshes", reason=e.reason)
+            rec["seconds"]["scene"] = time.perf_counter() - t2
+            return _jsonable(rec)
         out = Path(write) / (src.task if layout == "task" else src.dataset) / f"{src.episode_id}.h5"
         out.parent.mkdir(parents=True, exist_ok=True)
+        scene.info["library"] = lib.relative_to(out.parent)
+        ep.scene = scene
         write_episode(out, ep)
+        rec["seconds"]["scene"] = time.perf_counter() - t2
+        rec["scene"] = {**scene_stats, "episode_bytes": out.stat().st_size}
         rec["file"] = str(out)
         rec["index_row"] = _jsonable(index_row(ep, str(out.relative_to(write))))
     return _jsonable(rec)
@@ -147,14 +172,14 @@ def summarize(records) -> str:
         by[r.get("task", "?")].append(r)
     lines = [f"{'task':<22}{'n':>4}{'K':>6}{'P':>6}{'K&P':>6}{'s/ep':>8}"]
     for task, rs in sorted(by.items()):
-        k = sum(bool(r["K"]["passed"]) for r in rs)
+        k = sum(bool((r.get("K") or {}).get("passed")) for r in rs)
         p = sum(bool(r.get("P") and r["P"]["passed"]) for r in rs)
-        kp = sum(bool(r["K"]["passed"] and r.get("P") and r["P"]["passed"]) for r in rs)
+        kp = sum(bool((r.get("K") or {}).get("passed") and r.get("P") and r["P"]["passed"]) for r in rs)
         sec = sum(sum((r.get("seconds") or {}).values()) for r in rs) / len(rs)
         lines.append(f"{task:<22}{len(rs):>4}{k:>6}{p:>6}{kp:>6}{sec:>8.1f}")
         kc, pc = Counter(), Counter()
         for r in rs:
-            kc.update({_reason_key(x) for x in r["K"]["reasons"]})
+            kc.update({_reason_key(x) for x in (r.get("K") or {}).get("reasons", [])})
             if r.get("P"):
                 pc.update({_reason_key(x) for x in r["P"]["reasons"]})
         if kc:
@@ -181,7 +206,7 @@ def run(family, path, demos=None, *, physics=True, out=None, write=None, jobs=1,
                 fh.write(json.dumps(r) + "\n")
                 fh.flush()
             if verbose:
-                k, p = r["K"], r.get("P")
+                k, p = r.get("K") or {"passed": False, "reasons": [f"excluded: {r.get('reason')}"]}, r.get("P")
                 ps = "-" if p is None else ("PASS" if p["passed"] else "fail")
                 sec = sum((r.get("seconds") or {}).values())
                 print(f"{r.get('task', '?')} {r['demo']}: K {'PASS' if k['passed'] else 'fail'} P {ps} "

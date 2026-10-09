@@ -44,6 +44,7 @@ import h5py
 import numpy as np
 
 from ..acquire import CatalogEntry, identify, load_catalog
+from ..meshes.mujoco_scene import qpos_columns
 from ..schema.source import Effector, ObjectTrack, Articulation, SceneRef, SourceEpisode
 from .contact_reference import ObjectEnvironmentDepth
 from .registry import register
@@ -716,12 +717,14 @@ def _episode(model, g, key, *, family, dataset, env_name, env_version, control_f
     initial_qpos.update({model.joint_names[j]: float(d.qpos[m.jnt_qposadr[j]])
                          for js in model.articulations.values() for j in js})
     route = "mjcf_kinematic_only" if model.missing else "mjcf_states"
-    scene = None
+    scene = scene_qpos = None
     if with_scene and not model.missing:
         scene = SceneRef(mjcf=model.xml, robot_prefixes=model.robot_prefixes,
                          initial_qpos=initial_qpos, assets=model.assets,
                          inactive_bodies=[model.body_names[free_body[n]] for n in inactive],
                          reference=reference.result(inactive))
+        cols, adr = qpos_columns(m, model.mj, keep=lambda b: not model.robot_body[b])
+        scene_qpos = Articulation(joint_names=cols, qpos=states[:, 1 + adr])
 
     success = success_fn(g, kwargs)
 
@@ -765,7 +768,7 @@ def _episode(model, g, key, *, family, dataset, env_name, env_version, control_f
         effectors=effectors, objects=objects, base_hint=None if first_base is None else np.array(first_base),
         articulations={n: Articulation(joint_names=[model.joint_names[j] for j in js], qpos=art[n])
                        for n, js in model.articulations.items()},
-        scene=scene, instruction=instruction, success=success, regime="tabletop",
+        scene=scene, scene_qpos=scene_qpos, instruction=instruction, success=success, regime="tabletop",
         license=entry.license if entry else "unknown", provenance=provenance, lineage=dict(lineage))
 
 

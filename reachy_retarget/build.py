@@ -5,7 +5,9 @@ retargets every ``k``-th episode of the file (``index % n == k``), runs tier K a
 the source carries a scene, tier P, and writes:
 
 * ``DIR/episodes/<dataset>/<episode_id>.h5`` for every produced trajectory (K or P may fail;
-  failed retargets are data too), and
+  failed retargets are data too) with its scene components and their meshes,
+* ``DIR/assets/<sha256>.<ext>``: the content-addressed mesh/texture library the episodes reference
+  (written once per file content, never overwritten; Reachy's link meshes are in it once), and
 * ``DIR/records/<family>/<path below raw/>.<k>-of-<n>.jsonl`` with one record per source episode,
   including errors.
 
@@ -19,6 +21,13 @@ passed to the adapter as ``select``, see :mod:`.sources.registry`, so adapters t
 never load, compile or replay the other episodes); each episode is released and freed heap
 pages are returned to the OS before the next one is read; MuJoCo's compiler asset cache is
 off unless ``--mujoco-cache-mb`` is given.
+
+Scene meshes are required: a family whose meshes cannot be obtained (``sources.registry.MESHES``
+status other than ``available``) is refused before anything is read, and an episode whose scene
+meshes cannot be resolved is not written (record ``status: "excluded"``, ``excluded: "no_meshes"``).
+Records of written episodes carry ``scene`` sizes: ``episode_bytes``, the bytes of every library
+file the episode references (``assets_referenced_bytes``) and the bytes it added to the library
+(``assets_new_bytes``).
 
 The dataset index is built afterwards over the merged output (``reachy-retarget index``).
 """
@@ -34,7 +43,7 @@ import traceback
 from pathlib import Path
 
 from .evaluate import process_source
-from .sources import iter_episodes
+from .sources import iter_episodes, require_meshes
 
 _MACOS = sys.platform == "darwin"  # ru_maxrss is bytes on macOS, KiB on Linux
 
@@ -102,10 +111,11 @@ def build(family: str, path, shard: tuple[int, int], out: str, *, physics: bool 
     k, n = shard
     if not 0 <= k < n:
         raise ValueError("shard must be k/n with 0 <= k < n")
+    require_meshes(family)
     limit_mujoco_cache(mujoco_cache_mb)
     records_dir = Path(out) / "records" / family
     records_dir.mkdir(parents=True, exist_ok=True)
-    counts = {"episodes": 0, "errors": 0, "K": 0, "P": 0, "P_tested": 0}
+    counts = {"episodes": 0, "errors": 0, "excluded": 0, "written": 0, "K": 0, "P": 0, "P_tested": 0}
     for p in [path] if isinstance(path, (str, os.PathLike)) else list(path):
         _build_path(family, str(p), (k, n), out, records_dir, counts, physics, source_kw)
     counts["max_rss_mb"] = max_rss_mb()
@@ -133,7 +143,7 @@ def _build_path(family, path, shard, out, records_dir, counts, physics, source_k
                 continue
             try:
                 rec = process_source(src, physics=physics, write=str(Path(out) / "episodes"), layout="dataset",
-                                     read_seconds=time.perf_counter() - t0)
+                                     library=str(Path(out) / "assets"), read_seconds=time.perf_counter() - t0)
             except Exception as error:  # keep going; the failure is a record
                 rec = {"family": family, "dataset": src.dataset, "episode_id": src.episode_id, "status": "error",
                        "error": repr(error), "traceback": traceback.format_exc()[-2000:]}
@@ -144,6 +154,8 @@ def _build_path(family, path, shard, out, records_dir, counts, physics, source_k
             fh.write(json.dumps(rec) + "\n")
             fh.flush()
             counts["episodes"] += 1
+            counts["excluded"] += rec.get("status") == "excluded"
+            counts["written"] += "file" in rec
             counts["K"] += bool((rec.get("K") or {}).get("passed"))
             counts["P_tested"] += rec.get("P") is not None
             counts["P"] += bool((rec.get("P") or {}).get("passed"))

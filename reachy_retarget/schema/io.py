@@ -102,6 +102,8 @@ def write_episode(path, ep: ReachyEpisode) -> Path:
                 _put(g, "time", p.time)
                 for k in ("qpos", "qvel", "ctrl"):
                     _put(g, k, getattr(p, k), columns=_json(getattr(p, f"{k}_names")))
+            if ep.scene is not None:
+                write_scene(f, ep.scene)
             act = f.create_group("actions")
             for name, arrays in modes.items():
                 spec, g = MODES[name], act.create_group(name)
@@ -112,6 +114,28 @@ def write_episode(path, ep: ReachyEpisode) -> Path:
     finally:
         tmp.unlink(missing_ok=True)
     return path
+
+
+def write_scene(f: h5py.File, scene) -> None:
+    """``/scene``: attrs ``schema`` and ``library`` (asset library path relative to the episode's
+    folder); ``description`` = gzip-compressed JSON ``{"components", "materials", "textures", "info"}``
+    as a uint8 vector; ``poses`` (T, C, 7), ``valid`` (T, C) and optional ``physics_poses`` (N, C, 7),
+    each with attr ``components`` (names in column order). Poses are stored as float32 (about 1 um
+    at 10 m), which halves the largest arrays of the file."""
+    import gzip
+
+    from .scene_assets import SCENE_SCHEMA
+    g = f.create_group("scene")
+    g.attrs["schema"] = SCENE_SCHEMA
+    g.attrs["library"] = str(scene.info.get("library") or "")
+    desc = _json({"components": scene.components, "materials": scene.materials, "textures": scene.textures,
+                  "info": scene.info})
+    _put(g, "description", np.frombuffer(gzip.compress(desc.encode(), mtime=0), np.uint8))
+    names = _json(scene.names)
+    _put(g, "poses", scene.poses.astype(np.float32), components=names)
+    _put(g, "valid", scene.valid, components=names)
+    if scene.physics_poses is not None:
+        _put(g, "physics_poses", scene.physics_poses.astype(np.float32), components=names, time="/physics/time")
 
 
 def read_episode(path) -> ReachyEpisode:
@@ -140,13 +164,17 @@ def read_episode(path) -> ReachyEpisode:
                 *(json.loads(g[k].attrs["columns"]) for k in ("qpos", "qvel", "ctrl")),
                 info=json.loads(g.attrs["info"]))
         st = f["state"]
+        scene = None
+        if "scene" in f:
+            from .scene_assets import read_scene
+            scene, _ = read_scene(path)
         return ReachyEpisode(
             time=f["time"][()], source_time=f["source_time"][()], q=st["q"][()], qd=st["qd"][()],
             tcp_base={s: vec7_to_pose(st[f"tcp/{s}/base"][()]) for s in SIDES},
             head_base=vec7_to_pose(st["head/base"][()]),
             gripper_opening=st["gripper/opening"][()], gripper_width=st["gripper/width"][()],
             reference=reference, objects=objects, articulations=arts,
-            validation={k: d[()] for k, d in f["validation"].items()}, physics=physics, **meta)
+            validation={k: d[()] for k, d in f["validation"].items()}, physics=physics, scene=scene, **meta)
 
 
 def recompute_modes(path) -> Path:
