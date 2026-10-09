@@ -183,3 +183,22 @@ contract `base-tcp-head-world-base-xy-sincos-opening-v8`.
 file)` dicts: `uid, file, family, dataset, task, regime, body_parts (list),
 tier_k_passed, tier_p_passed (null if no P), license, lineage_seed, variant_of, length,
 duration`. Count independent demonstrations by `lineage_seed`, not by rows.
+
+## Tracking episodes
+
+`family = "tracking"` episodes (docs/tracking.md) use the same layout with these specifics.
+
+They contain no `/objects` and no `/articulations`. `/validation` holds:
+- `grasp_object` = −1;
+- `head_rot_residual` (T,);
+- `witness_q` (T, 22) for witness cells: the joint path whose FK produced the reference.
+
+`/reference/tcp/*` and `/reference/head` hold the tracked reference unmodified. The head pose's
+rotation is the target, and its position is the achieved head position. `/reference/base` is the
+nominal base path; the base is free, so it is not a target.
+
+`metadata.extra` holds:
+- `tracking`: the scenario, its parameters, diagnostics and the `head_tip` offset;
+- `tracking_config`.
+
+`retarget_config` is the `TrackingConfig` digest, and `tier.P` is null.

@@ -35,6 +35,26 @@ Design: [docs/design.md](docs/design.md). Storage and control modes:
 [docs/schema.md](docs/schema.md). Sources, licenses and verification:
 [docs/sources.md](docs/sources.md). K and P passes are always reported separately.
 
+## Pure tracking retargeting
+
+`reachy_retarget.tracking` is a separate pipeline that tracks a reference **as given**: both TCP
+poses, a head rotation (reachy-control `head_tip` convention), gripper openings and a nominal base
+path (the base is free). Kinematic validation only (tier K + head residual); no objects, no physics.
+References come from a procedural scenario generator (navigation, mobile carry/reach/world-hold/
+free, single-arm, bimanual independent/symmetric/rigid/handover, neck-only and joint-space witness
+cells × 8 neck modes × lengths 2–60 s × speeds × start postures × gripper styles) and from the
+hand paths of the source datasets. Output uses the same `reachy-retarget-episode-v2` format
+(`family = "tracking"`). The URDF, collision spheres and the Viser viewer match reachy-control.
+See [docs/tracking.md](docs/tracking.md).
+
+```bash
+OPENBLAS_NUM_THREADS=1 .venv/bin/python -m reachy_retarget.tracking.build synthetic \
+    --namespace tracking-v1 --split train --count 300 --jobs 24 --out runs/tracking/pilot
+.venv/bin/python -m reachy_retarget.tracking.report runs/tracking/pilot
+uv pip install --python .venv/bin/python -e '.[viz]'
+.venv/bin/python -m reachy_retarget.tracking.viewer --run runs/tracking/pilot
+```
+
 ## Source families
 
 robomimic, MimicGen, LIBERO, DexMimicGen (parallel-gripper tasks), ManiSkill3 demos,
