@@ -7,6 +7,8 @@ poses come from this package's URDF kinematics (:class:`reachy_retarget.robot.ur
 mimic joints included) instead of pinocchio; :func:`prepare_episode` asserts, as reachy-control's
 ``prepare_motion`` does, that the replayed TCPs match the episode's stored TCPs.
 
+The tripod bars, plain URDF boxes, are extended to the torso for display (:func:`tripod_extensions`).
+
 Requires the ``viz`` extra (viser, trimesh, pycollada); nothing else imports this module.
 """
 from __future__ import annotations
@@ -76,6 +78,65 @@ def prepare_episode(ep):
     return links, pos, rot
 
 
+TRIPOD_BARS = ("back_bar_inner", "left_bar_inner", "right_bar_inner")
+
+
+def _box_visual(link_name):
+    root = ET.parse(URDF).getroot()
+    link = next(e for e in root.findall("link") if e.get("name") == link_name)
+    visual = link.find("visual")
+    origin = visual.find("origin")
+    xyz = np.fromstring(origin.get("xyz", "0 0 0"), sep=" ") if origin is not None else np.zeros(3)
+    rpy = np.fromstring(origin.get("rpy", "0 0 0"), sep=" ") if origin is not None else np.zeros(3)
+    size = np.fromstring(visual.find("geometry")[0].get("size"), sep=" ")
+    return pose(xyz, rpy), size
+
+
+@functools.cache
+def tripod_extensions(overlap: float = 0.01):
+    """Display-only boxes that close the gap between the tripod bars and the torso.
+
+    The URDF draws the tripod bars as plain boxes (no tripod meshes exist); the two front bars end
+    17 mm below the bottom of ``torso_visual.dae`` and the back bar barely touches it, so the torso
+    appears to float. Each bar whose upper end is below the torso mesh is extended along its own
+    axis to ``overlap`` above the torso bottom. The URDF, the kinematics and the collision model
+    are unchanged. Returns ``{link: (size (3,), pose (4, 4) in the link frame)}``."""
+    import trimesh
+    from ..schema.rotations import quat_to_matrix
+    links, pos, rot = link_poses(np.zeros((1, 22)))
+
+    def world(name):
+        T = np.eye(4)
+        j = links.index(name)
+        T[:3, :3], T[:3, 3] = quat_to_matrix(rot[0, j]), pos[0, j]
+        return T
+    root = ET.parse(URDF).getroot()
+    torso = next(e for e in root.findall("link") if e.get("name") == "torso").find("visual")
+    o = torso.find("origin")
+    T_vis = pose(np.fromstring(o.get("xyz", "0 0 0"), sep=" ") if o is not None else np.zeros(3),
+                 np.fromstring(o.get("rpy", "0 0 0"), sep=" ") if o is not None else np.zeros(3))
+    mesh = trimesh.load_scene(mesh_path(torso.find("geometry")[0].get("filename")), process=False).to_mesh()
+    V = (world("torso") @ T_vis @ np.c_[mesh.vertices, np.ones(len(mesh.vertices))].T).T
+    bottom = float(V[:, 2].min())
+    out = {}
+    for name in TRIPOD_BARS:
+        T_box, size = _box_visual(name)
+        W = world(name)
+        ends = [T_box @ np.array([0, 0, s * size[2] / 2, 1.0]) for s in (-1, 1)]  # box ends, link frame
+        top = max(ends, key=lambda p: (W @ p)[2])
+        axis = (W[:3, :3] @ T_box[:3, 2]) * (1 if top is ends[1] else -1)  # world direction of "up the bar"
+        gap = bottom - (W @ top)[2]
+        if gap <= -overlap or axis[2] <= 1e-6:
+            continue
+        length = (gap + overlap) / axis[2]
+        direction = T_box[:3, 2] * (1 if top is ends[1] else -1)  # in the link frame
+        P = np.eye(4)
+        P[:3, :3] = T_box[:3, :3]
+        P[:3, 3] = top[:3] + direction * length / 2
+        out[name] = (np.array([size[0], size[1], length]), P)
+    return out
+
+
 @functools.lru_cache(maxsize=None)
 def mesh_glb(path):
     import trimesh
@@ -134,4 +195,10 @@ def add_robot_visuals(server, links, kind="visual"):
                 rgba = np.array([.25, .69, .85, .25])
             server.scene.add_mesh_simple(node, mesh.vertices, mesh.faces,
                                          color=tuple((255 * rgba[:3]).astype(int)), opacity=float(rgba[3]), **placement)
+            if kind == "visual" and index == 0 and name in tripod_extensions():
+                size, P = tripod_extensions()[name]
+                ext = trimesh.creation.box(extents=size)
+                server.scene.add_mesh_simple(f"{parent}/tripod_extension", ext.vertices, ext.faces,
+                                             color=tuple((255 * rgba[:3]).astype(int)), opacity=float(rgba[3]),
+                                             position=P[:3, 3], wxyz=matrix_to_quat(P[:3, :3]))
     return handles

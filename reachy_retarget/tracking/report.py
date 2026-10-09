@@ -13,7 +13,7 @@ from pathlib import Path
 
 from ..report import reason_kind
 
-AXES = ("cell", "neck", "length", "speed", "start")
+AXES = ("cell", "neck", "extent", "speed", "start", "base_motion")
 
 
 def load(roots):

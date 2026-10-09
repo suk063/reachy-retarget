@@ -63,6 +63,11 @@ Filters: cell, regime, neck mode, tier-K result, and final or all attempts.
 
 `--collision` inspects the collision spheres with joint sliders. Spheres turn yellow below the 10 mm gate.
 
+The tripod bars are plain URDF boxes (there are no tripod meshes). The two front bars end 17 mm below
+the bottom of `torso_visual.dae` and the back bar barely reaches it, so the torso looked detached.
+For display only, the viewer extends each bar along its own axis to 1 cm above the torso bottom
+(`visual.tripod_extensions`). The URDF, the kinematics and the collision model are unchanged.
+
 Link poses come from this repo's URDF kinematics. On 484 frames of a pilot episode they match pinocchio (reachy-control's library) to 1.2e-7 m. Every loaded episode is asserted to replay its stored TCPs (1e-5 m). Install with `uv pip install -e '.[viz]'`.
 
 ## Pipeline (`tracking.pipeline.track`)
@@ -106,40 +111,53 @@ On top of that, a head rotation residual ≤ 0.05 rad is checked. Base deviation
 
 ## Synthetic scenarios (`tracking.synthetic`)
 
-Scenario `<namespace>/<split>/<index>` is one independent lineage seed (SHA-256 of the id, as in `rl_tracking/data.py`). The cell is stratified: every block of 15 consecutive indices holds each cell once. All other axes are sampled independently.
+**One scenario is one stage.** Every body part does at most one action, going once from its start to
+one goal: no return, no repetition, no cycle, no sequence of steps. Several parts may act at the same
+time within the stage, e.g. the base drives while an arm reaches and the head turns. Parts that act
+together start within the first 30 % of the stage. The stage has a 0.2–0.5 s still start and a
+0.5–1 s still end. A test checks the rule on the references: for each arm (base-relative), the
+base, the neck and each gripper, at most one movement.
+
+Scenario `<namespace>/<split>/<index>` is one independent lineage seed (SHA-256 of the id, as in
+`rl_tracking/data.py`). The cell is stratified: every block of 15 consecutive indices holds each cell
+once. All other axes are sampled independently.
 
 | axis | values (weights) |
 | --- | --- |
-| cell, stationary base | `hold`, `left`, `right`, `bimanual_independent`, `bimanual_symmetric` (mirror), `bimanual_rigid` (virtual box), `handover`, `neck_only`, `witness_arms` |
-| cell, moving base | `navigation`, `mobile_carry`, `mobile_reach` (drive, stop, manipulate, repeat), `mobile_world_hold` (hand fixed in the world while the base repositions), `mobile_free` (manipulation relative to a driving base), `witness_whole_body` |
-| neck | `off` .25 (no head reference), `base_hold` .1, `world_hold` .1, `look_at_point` .1 (1–3 fixed points), `look_at_hand` .15 (alternating for two hands), `scan` .1, `look_ahead` .1 (travel direction; mobile only), `random` .1 |
-| length | short 2–6 s .4, medium 6–20 s .4, long 20–60 s .2 (primitive chains) |
-| speed | slow / normal / fast: hand 0.06–0.12 / 0.12–0.25 / 0.25–0.4 m/s and 0.25–0.5 / 0.5–0.9 / 0.9–1.3 rad/s; base cruise 0.2–0.3 / 0.3–0.42 / 0.42–0.55 m/s (at or above the ~0.2 m/s start threshold measured on the real base); yaw 0.3–1.4 rad/s |
+| cell, stationary base | `gripper_only` (one gripper action), `neck_only` (one head turn), `left`, `right`, `bimanual_independent` (one action per hand, staggered start), `bimanual_symmetric` (mirrored action), `bimanual_rigid` (a held virtual box moves once: lift/lower, slide, turn, tilt), `handover` (both hands move once to meet; at the meeting the taker closes and the giver opens), `witness_arms` (one joint-space move) |
+| cell, moving base | `navigation` (one base motion, arms hold), `mobile_carry` (one base motion with a held box, which may also move once), `mobile_reach` (a hand reaches a world goal near the destination, arriving with the base), `mobile_world_hold` (a hand keeps or moves along a world pose while the base repositions ≤ 0.3 m / 0.35 rad), `mobile_free` (base-relative hand actions while the base drives), `witness_whole_body` (one base motion + one joint-space move) |
+| hand motion | `reach` .3 (to a reachable goal posture), `curved_reach` .15 (to such a goal along a bowed path), `line` .15 (push/pull/lift/lower/slide, orientation kept), `approach` .1 (along the tool axis, forward or back), `hinge` .1 (door/lid arc about an external axis), `twist` .1 (about the tool axis: exactly a wrist-yaw turn, within its range), `tilt` .1 (about a horizontal axis through the grasp center) |
+| base motion | `drive` .3 (holonomic straight, optional heading change), `strafe` .15, `turn` .15 (in place), `arc` .2, `curve` .2 (one cubic Bezier leaving along the current heading, heading on the tangent; a straight drive below 0.3 m) |
+| neck | `off` .25 (no head reference), `hold` .1, `world_hold` .1, `look_at_point` .15 (one gaze shift to a fixed point), `look_at_hand` .15 (follows the acting hand), `look_ahead` .1 (travel direction; mobile only), `shift` .15 (one turn to a new orientation). A gaze-following path that would stop and start again becomes one turn toward where the gaze ends |
+| extent | small .35 / medium .4 / large .25: goal step 0.45 / 0.75 / 1.0 × the joint step; translation 4–9 / 9–17 / 17–28 cm; rotation 0.15–0.4 / 0.4–0.75 / 0.75–1.1 rad; base travel 0.2–0.6 / 0.6–1.5 / 1.5–3 m; base turn 0.3–0.8 / 0.8–1.6 / 1.6–3.1 rad |
+| speed | slow / normal / fast: hand 0.06–0.12 / 0.12–0.25 / 0.25–0.4 m/s and 0.25–0.5 / 0.5–0.9 / 0.9–1.3 rad/s; base cruise 0.2–0.3 / 0.3–0.42 / 0.42–0.55 m/s (at or above the ~0.2 m/s start threshold measured on the real base); yaw 0.3–1.4 rad/s; witness joint speed 0.25–0.8 × the limit |
 | start posture | reachy-control experiment start .3, `ready` .2, `rest` .15, random clear posture .35 |
-| region per hand | any, low, mid, high, front, side, cross-midline |
-| gripper per hand | open, closed, toggle at keyframe arrivals (grasp/release-like), cycle, partial levels. Overrides: closed for carries, close-then-open for handover. Ramped at 0.9 × finger speed |
+| region per hand | goal region: any, low, mid, high, front, side, cross-midline |
+| gripper per hand | `keep_open` .25, `keep_closed` .15, `close` .25, `open` .2, `partial` .15: at most one transition, when the hand's action ends (overrides: closed for carried boxes, the handover exchange) |
 | base start | world x, y ∈ [−2, 2] m, yaw uniform |
 
-**Hand motions.**
-- **Keyframes** come from a joint-space random walk. Each keyframe is reachable and self-clear (≥ 25 mm) on its own, within limits − 0.12 rad.
-- **Primitives** run between keyframes: line, circle, raster, press, hinge (door/lid arc), twist (exactly a wrist-yaw turn, kept within its range), pour/tilt, oscillation, smooth random wander. All are min-jerk, at the sampled speeds.
-- **Base segments:** drive, strafe, arc, turn in place, splines with tangent or fixed heading (turning to the spline's initial tangent first). Each segment is stretched until body-frame speeds stay below 0.85 × the limits.
-- **Witness cells** follow a PCHIP joint path through random-walk knots (no overshoot) with these bounds:
-  - limits − 0.12 rad;
-  - 0.85 × speed limits;
-  - self-clearance ≥ 15 mm every 0.1 s (knots redrawn otherwise).
-  Their FK is the reference; the joint path is stored (`witness_q`) for audit only.
-- **Head references** are the rotation of a neck path within limits − 0.07 rad and 0.8 × neck speed, relative to the nominal base. They are reachable whenever the base follows its path.
+**Feasibility.**
+- **Reach goals** are postures one joint-space step from the start: each is reachable and self-clear
+  (≥ 25 mm) on its own, within limits − 0.12 rad.
+- **Base motions** are stretched until body-frame speeds stay below 0.85 × the limits.
+- **Witness moves** are one min-jerk joint-space move to a goal posture with self-clearance ≥ 15 mm
+  every 0.1 s (goals redrawn otherwise). Their FK is the reference; the joint path is stored
+  (`witness_q`) for audit only.
+- **Head references** are the rotation of a neck path within limits − 0.07 rad and 0.8 × neck speed,
+  relative to the nominal base. They are reachable whenever the base follows its path.
 
 **Retries** (`tracking.build`):
-1. A reference that fails the cheap pre-screen is regenerated with motions × 0.75, at most 4 times, without IK. The pre-screen checks:
+1. A reference that fails the cheap pre-screen is regenerated with motions × 0.75, at most 4 times,
+   without IK. The pre-screen checks:
    - grasp-center height inside 0.46–1.87 m;
    - TCP within 0.665 m of the shoulder ball.
 2. A tier-K failure is regenerated at most twice:
-   - **slower** (durations × 1.5), when the IK was at its speed box where tracking was first lost and has not been slowed yet;
+   - **slower** (durations × 1.5), when the IK was at its speed box where tracking was first lost and
+     has not been slowed yet;
    - **smaller** (× 0.75) otherwise.
 
-Every IK attempt is written. Earlier attempts get `episode_id` suffix `-try<k>` and `variant_of` = the last attempt's uid, and share its lineage seed.
+Every IK attempt is written. Earlier attempts get `episode_id` suffix `-try<k>` and `variant_of` =
+the last attempt's uid, and share its lineage seed.
 
 ## Source paths (`tracking.source`)
 
@@ -179,24 +197,24 @@ Layout:
 ## Pilot results (2026-10-08)
 
 **Synthetic, namespace `dev`, split `pilot`, indices 0–299 (20 per cell).**
-- 297 / 300 scenarios pass tier K (99.0 %).
-  - 271 scenarios needed one IK attempt, 15 two, 14 three.
-- Every cell passes ≥ 95 %. All 15 cells are at 100 % except `bimanual_independent`, `bimanual_rigid` and `bimanual_symmetric` (19/20 each).
-- Volume: 1.43 h of motion, 343 files, 1.69 MB per file, 0.41 CPU-h (about 2 min on 24 workers).
-- An earlier variant regularized the arm redundancy toward the generator's joint postures. It passed 296 / 300, but its joint paths differed by more than 0.2 rad in 142 of 296 episodes. It was removed: redundancy is the IK's own.
-- Remaining failures: TCP rotation or position residuals (2 + 2), e.g. independent bimanual chains whose hands meet.
-
-Passing episodes, base-relative hand path per arm:
-
-| quantity | median | p90 | max |
-| --- | --- | --- | --- |
-| path per arm (m) | 0.5 | 2.0 | 9.2 |
-| hand extent (m) | 0.19 | 0.5 | 1.0 |
-| base travel (m) | 0.15 | 2.6 | 12.4 |
-| base turn (rad) | — | 2.1 | 7.2 |
-| neck range (rad) | 0.51 | — | 1.96 |
-| gripper open/close changes | 1 | 11 | 49 |
-| duration (s) | 13 | 35 | 65 |
+- 298 / 300 scenarios pass tier K (99.3 %).
+  - 288 scenarios needed one IK attempt, 4 two, 8 three.
+  - 72 pre-screen regenerations.
+- Every cell passes ≥ 95 %. The two failures: a `navigation` episode at 9.87 mm self-clearance, and
+  one `right` rotation residual.
+- Episode duration: median 3.5 s, p10 2.0 s, p90 8.9 s, max 25 s.
+- Volume: 0.38 h of motion, 320 files, 0.52 MB per file, 0.10 CPU-h.
+- **One stage:** in all 298 passing references every arm, the base, the neck and each gripper moves
+  at most once.
+- **Free base drift.** The IK can still move the free base off its nominal path to help an arm. 16 of
+  179 stationary episodes drift more than 1 cm (max 14 cm); mobile episodes deviate up to 0.31 m /
+  34°, and the neck then corrects the head, so in 5 episodes the solved neck moves more than once.
+  - With the base fixed to its nominal path (`TrackingConfig(base_free=False)`), 286 / 300 pass
+    (95.3 %) and no unplanned base motion remains.
+- An earlier variant regularized the arm redundancy toward the generator's joint postures. It was
+  removed: redundancy is the IK's own.
+- An earlier generator chained several primitives per scenario (up to 65 s). It was replaced by the
+  one-stage generator.
 
 **Source paths.** 33 / 46 pass:
 
@@ -219,7 +237,8 @@ The extracted RoboCasa episodes are not on this machine, so RoboCasa was not run
 
 ## Known limits
 
-- **Independent bimanual chains** plan the second arm's keyframes against the first arm's start posture, so the hands can meet (repulsion, then residuals).
+- **Independent bimanual actions** plan the second hand's goal against the first arm's start posture, so the hands can meet (repulsion, then residuals).
 - **The neck** is solved after the arms. Head–arm contacts are caught by tier K, not avoided.
-- **The base box** (0.5 m / 0.8 rad around the nominal path) lets the base help an arm. A large deviation shifts the head reference, which assumes the nominal base yaw (0.04 rad of neck margin covers small deviations).
+- **The free base** (boxed 0.5 m / 0.8 rad around the nominal path) can help an arm, which adds base motion the stage does not plan. A large deviation shifts the head reference, which assumes the nominal base yaw (0.04 rad of neck margin covers small deviations). `base_free=False` removes both effects.
+- **Source paths** are recorded demonstrations with several stages (approach, grasp, carry, place). They are not cut into single stages.
 - **Source paths** ignore the source scene: no footprint obstacles, no objects.

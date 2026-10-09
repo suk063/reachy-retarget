@@ -40,10 +40,12 @@ Design: [docs/design.md](docs/design.md). Storage and control modes:
 `reachy_retarget.tracking` is a separate pipeline that tracks a reference **as given**: both TCP
 poses, a head rotation (reachy-control `head_tip` convention), gripper openings and a nominal base
 path (the base is free). Kinematic validation only (tier K + head residual); no objects, no physics.
-References come from a procedural scenario generator (navigation, mobile carry/reach/world-hold/
-free, single-arm, bimanual independent/symmetric/rigid/handover, neck-only and joint-space witness
-cells × 8 neck modes × lengths 2–60 s × speeds × start postures × gripper styles) and from the
-hand paths of the source datasets. Output uses the same `reachy-retarget-episode-v2` format
+References come from a procedural scenario generator and from the hand paths of the source
+datasets. Each synthetic scenario is **one stage**: every body part goes at most once from its start
+to one goal, several parts possibly at the same time (cells: navigation, mobile carry/reach/world-hold/
+free, single-arm, bimanual independent/symmetric/rigid/handover, neck-only, gripper-only and
+joint-space witness × 7 hand motions × 5 base motions × 7 neck modes × extents × speeds × start
+postures × gripper actions). Output uses the same `reachy-retarget-episode-v2` format
 (`family = "tracking"`). The URDF, collision spheres and the Viser viewer match reachy-control.
 See [docs/tracking.md](docs/tracking.md).
 

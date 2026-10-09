@@ -20,11 +20,11 @@ from reachy_retarget.tracking.reference import TrackingReference
 NS = "test"
 
 
-def first(cell, length=None, start=0, limit=400):
-    """Index of the first scenario of ``cell`` (and length bucket) in namespace ``test``."""
+def first(cell, extent=None, start=0, limit=400):
+    """The first scenario of ``cell`` (and extent) in namespace ``test``."""
     for i in range(start, limit):
         sc = S.scenario(NS, "unit", i)
-        if sc.cell == cell and (length is None or sc.length == length):
+        if sc.cell == cell and (extent is None or sc.extent == extent):
             return sc
     raise LookupError(cell)
 
@@ -63,7 +63,7 @@ def test_every_cell_generates_a_valid_reference(cell):
 
 
 def test_witness_reference_passes_tier_k():
-    sc = first("witness_arms", "short")
+    sc = first("witness_arms", "small")
     ref = S.generate(sc)
     assert ref.witness is not None
     ep = track(ref).episode
@@ -140,16 +140,18 @@ def test_track_continuity():
     Q = P.copy()
     Q[:3, 3] += [0.1, 0, 0]
     tr.add(*pr.reach(P, Q, speed), "reach")
-    tr.add(*pr.circle(tr.end, 0.05, [0, 0, 1], 1, speed), "circle")
+    tr.add(*pr.line(tr.end, [0, 0, 1], 0.05, speed), "line")
     t = np.arange(0, tr.t + 0.5, DT)
     X = tr.sample(t)
-    assert np.allclose(X[0], P) and np.allclose(X[-1], Q)
+    R = Q.copy()
+    R[2, 3] += 0.05
+    assert np.allclose(X[0], P) and np.allclose(X[-1], R)
     assert np.linalg.norm(np.diff(X[:, :3, 3], axis=0), axis=1).max() < 0.25 * DT * 1.01
 
 
 def test_ik_does_not_use_the_witness():
     """The witness (the joint path that generated a reference) is stored for audit only."""
-    sc = first("witness_arms", "short")
+    sc = first("witness_arms", "small")
     ref = S.generate(sc)
     a = track(ref).episode
     ref.witness = None
@@ -158,7 +160,7 @@ def test_ik_does_not_use_the_witness():
 
 
 def test_run_scenario_writes_episode_record_and_index(tmp_path):
-    sc = first("hold", "short")
+    sc = first("gripper_only")
     rec = run_scenario(NS, "unit", sc.index, tmp_path)
     assert rec["K"]["passed"] and rec["P"] is None
     rows = rec["index_rows"]
@@ -177,3 +179,32 @@ def test_tracking_does_not_load_the_manipulation_pipeline():
     assert not loaded & {"reachy_retarget.retarget.pipeline", "reachy_retarget.retarget.targets",
                          "reachy_retarget.retarget.placement", "reachy_retarget.retarget.assign",
                          "reachy_retarget.retarget.gaze"}
+
+
+def _runs(mask):
+    d = np.diff(np.r_[0, mask.astype(int), 0])
+    st, en = np.flatnonzero(d == 1), np.flatnonzero(d == -1)
+    return 0 if not len(st) else 1 + int(np.sum((st[1:] - en[:-1]) * DT > 0.1))
+
+
+@pytest.mark.parametrize("cell", S.CELLS)
+def test_one_stage_each_part_acts_at_most_once(cell):
+    """One scenario is one stage: every body part goes once from its start to one goal (or holds)."""
+    from reachy_retarget.robot import planar
+    from reachy_retarget.schema.rotations import so3_log
+    for sc in [first(cell, start=k) for k in (0, 60)]:
+        ref = S.generate(sc)
+        W = np.linalg.inv(planar(ref.base[:, 0], ref.base[:, 1], ref.base[:, 2]))
+        for s in SIDES:
+            L = W @ ref.tcp[s]
+            v = np.linalg.norm(np.diff(L[:, :3, 3], axis=0), axis=1) / DT
+            w = np.linalg.norm(so3_log(np.swapaxes(L[:-1, :3, :3], 1, 2) @ L[1:, :3, :3]), axis=1) / DT
+            assert _runs((v > 0.005) | (w > 0.02)) <= 1, (sc, s)
+            assert _runs(np.abs(np.diff(ref.opening[:, SIDES.index(s)])) / DT > 0.01) <= 1, (sc, s)
+        b = ref.base
+        assert _runs((np.linalg.norm(np.diff(b[:, :2], axis=0), axis=1) / DT > 0.005)
+                     | (np.abs(np.diff(b[:, 2])) / DT > 0.02)) <= 1, sc
+        if ref.head is not None:
+            Rb = np.swapaxes(planar(b[:, 0], b[:, 1], b[:, 2])[:, :3, :3], 1, 2) @ ref.head
+            n = N.solve_base(Rb, None, 0.0, 30)
+            assert _runs(np.abs(np.diff(n, axis=0)).max(axis=1) / DT > 0.02) <= 1, sc

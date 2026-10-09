@@ -6,18 +6,17 @@ phases, SE(3) paths with linear translation and geodesic rotation, +X look-at) a
 imports nothing from that repository.
 
 * :class:`Track`: a hand pose timeline built from segments ``(duration, u -> (n, 4, 4))``.
-* Hand primitives (``reach``, ``line``, ``circle``, ``raster``, ``press``, ``hinge``, ``twist``,
-  ``pour``, ``oscillate``, ``wander``): each returns ``(duration, fn)`` starting at the current
-  pose ``P``; durations follow from linear and angular speeds (``speed["lin"]`` m/s,
-  ``speed["ang"]`` rad/s) and the min-jerk peak factor.
-* :class:`BasePath` and base primitives (``drive``, ``arc``, ``turn``, ``spline``) for SE(2) paths
-  with unwrapped yaw.
+* Hand motions (``reach``, ``curved_reach``, ``line``, ``approach``, ``hinge``, ``twist``, ``tilt``):
+  each goes once from the current pose ``P`` to one goal and returns ``(duration, fn)``; durations
+  follow from linear and angular speeds (``speed["lin"]`` m/s, ``speed["ang"]`` rad/s) and the
+  min-jerk peak factor.
+* :class:`BasePath` and base motions (``drive``, ``arc``, ``turn``, ``curve``) for SE(2) paths with
+  unwrapped yaw, each one drive to one goal.
 * :func:`gripper_profile`: piecewise-constant openings ramped at the finger speed.
 """
 from __future__ import annotations
 
 import numpy as np
-from scipy.interpolate import CubicSpline, PchipInterpolator
 
 from ..schema.rotations import so3_exp, so3_log
 
@@ -27,11 +26,6 @@ PEAK = 1.875  # peak / mean speed of a min-jerk profile
 def min_jerk(u):
     u = np.clip(np.asarray(u, float), 0.0, 1.0)
     return u ** 3 * (10 - 15 * u + 6 * u * u)
-
-
-def bump(u):
-    """0 -> 1 -> 0 with zero slope at both ends (sin^2)."""
-    return np.sin(np.pi * np.clip(np.asarray(u, float), 0.0, 1.0)) ** 2
 
 
 def rot(axis, angle):
@@ -110,7 +104,8 @@ class Track:
         return out
 
 
-# ---------------------------------------------------------------------------- hand primitives
+# ---------------------------------------------------------------------------- hand motions
+# Every motion goes once from the current pose P to one goal: no return, repetition or cycle.
 
 
 def reach(P, Q, speed):
@@ -125,134 +120,64 @@ def reach(P, Q, speed):
     return duration(dist, np.linalg.norm(rel), speed, 0.4), fn
 
 
-def line(P, direction, length, speed, back=True):
+def curved_reach(P, Q, bulge, speed):
+    """P to Q along a quadratic Bezier bowed by ``bulge`` (3,) at its middle (one smooth stroke)."""
+    P, Q = np.array(P, float), np.array(Q, float)
+    rel = so3_log(P[:3, :3].T @ Q[:3, :3])
+    a, c = P[:3, 3], Q[:3, 3]
+    b = (a + c) / 2 + 2 * np.asarray(bulge, float)  # control point: the curve's middle is (a+c)/2 + bulge
+    t = np.linspace(0, 1, 200)[:, None]
+    length = np.linalg.norm(np.diff((1 - t) ** 2 * a + 2 * t * (1 - t) * b + t ** 2 * c, axis=0), axis=1).sum()
+
+    def fn(u):
+        s = min_jerk(u)[:, None]
+        return _poses(P[:3, :3] @ so3_exp(s * rel), (1 - s) ** 2 * a + 2 * s * (1 - s) * b + s ** 2 * c)
+    return duration(length, np.linalg.norm(rel), speed, 0.4), fn
+
+
+def line(P, direction, length, speed):
+    """Translate by ``length`` along ``direction`` with the orientation kept (push, pull, lift, slide)."""
     d = unit(direction) * length
 
     def fn(u):
-        s = bump(u) if back else min_jerk(u)
-        return _poses(np.broadcast_to(P[:3, :3], (len(u), 3, 3)), P[:3, 3] + s[:, None] * d)
-    # bump: peak speed pi * length / dur
-    dur = max(0.4, np.pi * length / speed["lin"]) if back else duration(length, 0, speed)
-    return dur, fn
+        return _poses(np.broadcast_to(P[:3, :3], (len(u), 3, 3)), P[:3, 3] + min_jerk(u)[:, None] * d)
+    return duration(length, 0, speed), fn
 
 
-def circle(P, radius, normal, turns, speed):
-    n = unit(normal)
-    e1 = unit(np.cross(n, [1.0, 0.0, 0.0]) if abs(n[0]) < 0.9 else np.cross(n, [0.0, 1.0, 0.0]))
-    e2 = np.cross(n, e1)
-    center = P[:3, 3] - radius * e1
-
-    def fn(u):
-        a = 2 * np.pi * turns * min_jerk(u)
-        p = center + radius * (np.cos(a)[:, None] * e1 + np.sin(a)[:, None] * e2)
-        return _poses(np.broadcast_to(P[:3, :3], (len(u), 3, 3)), p)
-    return duration(2 * np.pi * radius * turns, 0, speed), fn
+def approach(P, depth, speed):
+    """Move along the approach axis (TCP -z, wrist toward fingertips) by ``depth`` (< 0: retreat)."""
+    return line(P, -P[:3, 2] * np.sign(depth or 1.0), abs(depth), speed)
 
 
-def raster(P, axis_a, axis_b, width, height, rows, speed):
-    """Zig-zag over a ``width`` (along ``axis_a``) x ``height`` (along ``axis_b``) patch in ``rows``
-    passes, then straight back to the start."""
-    a, b = unit(axis_a), unit(axis_b)
-    rows = max(int(rows), 2)
-    pts = []
-    for r in range(rows):
-        y = height * r / (rows - 1)
-        xs = (0.0, width) if r % 2 == 0 else (width, 0.0)
-        pts += [xs[0] * a + y * b, xs[1] * a + y * b]
-    pts.append(np.zeros(3))
-    pts = np.array(pts)
-    legs = np.linalg.norm(np.diff(pts, axis=0), axis=1)
-    pts = pts[np.r_[True, legs > 1e-9]]
-    legs = np.linalg.norm(np.diff(pts, axis=0), axis=1)
-    durs = np.array([duration(L, 0, speed, 0.2) for L in legs])
-    edges = np.r_[0, np.cumsum(durs)] / durs.sum()
-
-    def fn(u):
-        u = np.asarray(u, float)
-        k = np.clip(np.searchsorted(edges, u, side="right") - 1, 0, len(legs) - 1)
-        s = min_jerk((u - edges[k]) / (edges[k + 1] - edges[k]))
-        p = P[:3, 3] + pts[k] + s[:, None] * (pts[k + 1] - pts[k])
-        return _poses(np.broadcast_to(P[:3, :3], (len(u), 3, 3)), p)
-    return float(durs.sum()), fn
-
-
-def press(P, depth, reps, speed):
-    """Along the approach axis (TCP -z: from the wrist toward the fingertips) and back, ``reps`` times."""
-    a = -P[:3, 2]
-
-    def fn(u):
-        s = bump(np.mod(np.asarray(u) * reps, 1.0 + 1e-12))
-        s = np.where(np.asarray(u) >= 1.0, 0.0, s)
-        return _poses(np.broadcast_to(P[:3, :3], (len(u), 3, 3)), P[:3, 3] + s[:, None] * depth * a)
-    return max(0.5, reps * np.pi * depth / speed["lin"]), fn
-
-
-def hinge(P, pivot_offset, axis, angle, speed, back=False):
+def hinge(P, pivot_offset, axis, angle, speed):
     """Rotate the hand rigidly about an axis through ``P.p + pivot_offset`` (a door or lid)."""
     pivot = P[:3, 3] + np.asarray(pivot_offset, float)
     axis = unit(axis)
     r = np.linalg.norm(np.cross(axis, P[:3, 3] - pivot))
 
     def fn(u):
-        s = bump(u) if back else min_jerk(u)
-        R = rot(axis, s * angle)
+        R = rot(axis, min_jerk(u) * angle)
         return _poses(R @ P[:3, :3], pivot + np.einsum("nij,j->ni", R, P[:3, 3] - pivot))
-    dur = duration(r * abs(angle) * (2 if back else 1), abs(angle) * (2 if back else 1), speed)
-    return dur, fn
+    return duration(r * abs(angle), abs(angle), speed), fn
 
 
-def twist(P, angle, speed, back=True):
+def twist(P, angle, speed):
     """Rotate about the TCP z axis (exactly the wrist yaw joint)."""
     def fn(u):
-        s = bump(u) if back else min_jerk(u)
-        return _poses(P[:3, :3] @ rot([0.0, 0.0, 1.0], s * angle), np.broadcast_to(P[:3, 3], (len(u), 3)))
-    return duration(0, abs(angle) * (2 if back else 1), speed), fn
+        return _poses(P[:3, :3] @ rot([0.0, 0.0, 1.0], min_jerk(u) * angle), np.broadcast_to(P[:3, 3], (len(u), 3)))
+    return duration(0, abs(angle), speed), fn
 
 
-def pour(P, center, axis, angle, speed, hold_s=0.0):
-    """Tilt about a world ``axis`` through ``center`` (the grasp center) and back, holding the tilt
-    for ``hold_s``."""
+def tilt(P, center, axis, angle, speed):
+    """Tilt by ``angle`` about a world ``axis`` through ``center`` (the grasp center), one way."""
     axis = unit(axis)
-    tilt = duration(0, abs(angle), speed)
-    total = 2 * tilt + hold_s
+    center = np.asarray(center, float)
+    r = np.linalg.norm(np.cross(axis, P[:3, 3] - center))
 
     def fn(u):
-        t = np.asarray(u) * total
-        s = np.where(t < tilt, min_jerk(t / tilt), np.where(t < tilt + hold_s, 1.0,
-                                                               1.0 - min_jerk((t - tilt - hold_s) / tilt)))
-        R = rot(axis, s * angle)
+        R = rot(axis, min_jerk(u) * angle)
         return _poses(R @ P[:3, :3], center + np.einsum("nij,j->ni", R, P[:3, 3] - center))
-    return total, fn
-
-
-def oscillate(P, amp_pos, amp_rot, freq, cycles):
-    """Sinusoidal position (amp (3,), m) and rotation (amp (3,), rad, about world axes) offsets with
-    a sin^2 envelope."""
-    amp_pos, amp_rot = np.asarray(amp_pos, float), np.asarray(amp_rot, float)
-    dur = cycles / freq
-
-    def fn(u):
-        u = np.asarray(u, float)
-        w = np.sin(2 * np.pi * cycles * u)[:, None] * bump(u)[:, None]
-        return _poses(so3_exp(w * amp_rot) @ P[:3, :3], P[:3, 3] + w * amp_pos)
-    return dur, fn
-
-
-def wander(P, rng, amp_pos, amp_rot, knots, speed):
-    """Smooth random offsets (cubic spline through ``knots`` random points, zero at both ends)."""
-    k = max(int(knots), 1)
-    off_p = np.r_[[np.zeros(3)], rng.uniform(-1, 1, (k, 3)) * amp_pos, [np.zeros(3)]]
-    off_r = np.r_[[np.zeros(3)], rng.uniform(-1, 1, (k, 3)) * amp_rot, [np.zeros(3)]]
-    s = np.linspace(0, 1, k + 2)
-    sp, sr = CubicSpline(s, off_p, bc_type="clamped"), CubicSpline(s, off_r, bc_type="clamped")
-    path = np.linalg.norm(np.diff(sp(np.linspace(0, 1, 200)), axis=0), axis=1).sum()
-    ang = np.linalg.norm(np.diff(sr(np.linspace(0, 1, 200)), axis=0), axis=1).sum()
-    dur = 1.5 * max(path / speed["lin"], ang / speed["ang"], 0.5)
-
-    def fn(u):
-        u = np.asarray(u, float)
-        return _poses(so3_exp(sr(u)) @ P[:3, :3], P[:3, 3] + sp(u))
-    return dur, fn
+    return duration(r * abs(angle), abs(angle), speed), fn
 
 
 def mirror(X):
@@ -345,37 +270,26 @@ def turn(b, dyaw, speed):
     return drive(b, 0.0, 0.0, dyaw, speed)
 
 
-def spline(b, waypoints, speed, heading="tangent"):
-    """Smooth path through world ``waypoints`` (k, 2) from ``b``. ``heading``: ``tangent`` (face
-    the travel direction; the caller turns the base toward the initial tangent, ``fn(0)``'s yaw,
-    first) or ``fixed`` (keep b's heading, holonomic)."""
+def curve(b, goal_xy, goal_yaw, speed):
+    """One smooth drive to ``goal_xy`` along a cubic Bezier leaving along the current heading and
+    arriving along ``goal_yaw``; the heading follows the tangent (no turn in place first)."""
     b = np.array(b, float)
-    pts = np.r_[[b[:2]], np.asarray(waypoints, float)]
-    pts = pts[np.r_[True, np.linalg.norm(np.diff(pts, axis=0), axis=1) > 1e-6]]
-    if len(pts) < 2:
-        return 0.0, None
-    s = np.r_[0, np.cumsum(np.linalg.norm(np.diff(pts, axis=0), axis=1))]
-    cs = CubicSpline(s, pts, bc_type="natural") if len(pts) > 2 else None
-
-    def xy(q):
-        return cs(q) if cs is not None else pts[0] + np.outer(q / s[-1], pts[1] - pts[0])
-    fine = np.linspace(0, s[-1], 400)
-    p = xy(fine)
-    length = np.linalg.norm(np.diff(p, axis=0), axis=1).sum()
-    if heading == "tangent":
-        g = np.gradient(p, axis=0)
-        yaw_fine = np.unwrap(np.arctan2(g[:, 1], g[:, 0]))
-        yaw_fine += 2 * np.pi * np.round((b[2] - yaw_fine[0]) / (2 * np.pi))
-        yaw_of = PchipInterpolator(fine, yaw_fine)
-        turn_total = np.abs(np.diff(yaw_fine)).sum()
-    else:
-        yaw_of, turn_total = None, 0.0
-    dur = max(0.5, PEAK * max(length / speed["base"], turn_total / speed["yaw"]))
+    p0, p3 = b[:2], np.asarray(goal_xy, float)
+    span = np.linalg.norm(p3 - p0)
+    h0 = np.array([np.cos(b[2]), np.sin(b[2])])
+    h3 = np.array([np.cos(goal_yaw), np.sin(goal_yaw)])
+    p1, p2 = p0 + h0 * span / 3, p3 - h3 * span / 3
+    t = np.linspace(0, 1, 400)[:, None]
+    pts = (1 - t) ** 3 * p0 + 3 * t * (1 - t) ** 2 * p1 + 3 * t ** 2 * (1 - t) * p2 + t ** 3 * p3
+    d = 3 * (1 - t) ** 2 * (p1 - p0) + 6 * t * (1 - t) * (p2 - p1) + 3 * t ** 2 * (p3 - p2)  # exact tangent
+    yaw = np.unwrap(np.arctan2(d[:, 1], d[:, 0]))
+    yaw += 2 * np.pi * np.round((b[2] - yaw[0]) / (2 * np.pi))
+    seg = np.r_[0, np.cumsum(np.linalg.norm(np.diff(pts, axis=0), axis=1))]
+    dur = max(0.5, PEAK * max(seg[-1] / speed["base"], np.abs(np.diff(yaw)).sum() / speed["yaw"]))
 
     def fn(u):
-        q = min_jerk(u) * s[-1]
-        yaw = yaw_of(q) if yaw_of is not None else np.full(len(q), b[2])
-        return np.c_[xy(q), yaw]
+        q = np.interp(min_jerk(u) * seg[-1], seg, np.arange(len(seg)) / (len(seg) - 1))
+        return np.c_[np.interp(q, t[:, 0], pts[:, 0]), np.interp(q, t[:, 0], pts[:, 1]), np.interp(q, t[:, 0], yaw)]
     return dur, fn
 
 

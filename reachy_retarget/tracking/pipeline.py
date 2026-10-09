@@ -58,7 +58,7 @@ def solve_arms(ref: TrackingReference, cfg: TrackingConfig):
     would move: a reference faster than Reachy is then a tracking residual, never a joint jump."""
     ik = cfg.ik()
     nominal = _nominal(ref)
-    solver = FrameSolver(ik, SIDES, True, nominal)
+    solver = FrameSolver(ik, SIDES, cfg.base_free, nominal)
     T = ref.length
     q = np.empty((T, 22))
     iters = np.zeros(T, int)
@@ -86,17 +86,17 @@ def solve_arms(ref: TrackingReference, cfg: TrackingConfig):
         q[t] = cur
     kept = 0.0
     if ref.retime:  # speed-boxed frames are already continuous; smoothing could break the speed box
-        q, kept = smooth(ik, q, ref.tcp, True)
+        q, kept = smooth(ik, q, ref.tcp, cfg.base_free)
     return q, {"cold_start": cold, "mean_iterations": float(iters.mean()), "max_iterations": int(iters.max()),
                "smoothing_kept_fraction": kept}
 
 
-def _refine(ik, q, targets, base_ref, nominal):
+def _refine(ik, q, targets, base_ref, nominal, base_free=True):
     """:func:`reachy_retarget.retarget.wbik.refine` on the output clock, then refined rows that
     break a speed limit are put back (``refine`` keeps a base axis whose neighbours are already
     farther apart than its world-axis box but still moves the other axis, which can exceed the
     body-axis base limit)."""
-    new, refined = refine(ik, q, targets, base_ref, True, nominal, DT)
+    new, refined = refine(ik, q, targets, base_ref, base_free, nominal, DT)
     for _ in range(10):
         ratio = np.max(np.abs(timing.body_increments(new)) / DT / VELOCITY, axis=1)
         over = np.flatnonzero(ratio > 1.0)
@@ -173,7 +173,7 @@ def track(ref: TrackingReference, cfg: TrackingConfig | None = None) -> TrackRes
             raise ValueError(f"a reference that is not retimed must be sampled at {1 / DT:g} Hz")
         q = q_src
         out_time, source_time = times, ref.time.copy()
-    q, refined = _refine(ik, q, targets, base_ref, _nominal(ref))
+    q, refined = _refine(ik, q, targets, base_ref, _nominal(ref), cfg.base_free)
     if ref.retime and head_ref is not None:  # re-track the head on the refined base yaw
         q[:, NECK] = neck_mod.solve(q, head_ref, margin=cfg.neck_margin, iterations=cfg.neck_iterations,
                                     start=q[0, NECK], dt=np.diff(out_time) * cfg.velocity_scale)

@@ -202,7 +202,7 @@ def run_viewer(run, port=8086, initial=None):
         src = tr.get("source") or {}
         k = ep.tier["K"]
         title.content = (f"## {ep.episode_id}\n\n{ep.task} · {ep.regime} · {' + '.join(ep.body_parts) or 'static'}"
-                         + (f"\n\nneck {sc.get('neck')} · {sc.get('length')} · {sc.get('speed')} · start "
+                         + (f"\n\nneck {sc.get('neck')} · {sc.get('extent')} · {sc.get('speed')} · start "
                             f"{sc.get('start')}" if sc else "")
                          + (f"\n\nsource {src.get('uid')}" if src else "")
                          + f"\n\n**K {'PASS' if k['passed'] else 'FAIL'}** · {ep.length} states · {ep.duration:.1f} s")

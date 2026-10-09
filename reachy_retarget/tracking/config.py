@@ -36,7 +36,8 @@ class TrackingConfig:
     w_rot: float = 3.0
     w_prev: float = 0.05
     w_nominal: float = 0.01
-    w_base: float = 1.0                  # base deviation from the nominal base path
+    base_free: bool = True               # False: the base follows the nominal path exactly
+    w_base: float = 1.0                  # base deviation from the nominal base path (free base)
     base_box_xy: float = 0.5             # m, the base stays this close to its nominal path (each axis)
     base_box_yaw: float = 0.8            # rad
     smoothing_sigma: float = 1.0         # frames
