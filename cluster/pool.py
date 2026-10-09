@@ -1,6 +1,7 @@
 """Run a JSONL job manifest over the persistent worker pods, ``--slots`` jobs per pod.
 
-Each manifest line: ``{"id", "argv": [...], "publish": "<PVC-relative dir>", "timeout_s"?}``.
+Each manifest line: ``{"id", "argv": [...], "publish": "<PVC-relative dir>", "timeout_s"?,
+"stream"?: [globs published while the job runs], "publish_threads"?}`` (see :mod:`cluster.job`).
 ``argv`` is run as ``python <argv>`` from the extracted release; ``{out}`` and ``{pvc}``
 are substituted on the pod. Jobs are launched detached (``setsid``) so a dropped
 kubectl stream never kills them, then polled. A job whose receipt already exists in

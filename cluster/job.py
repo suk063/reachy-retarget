@@ -4,6 +4,12 @@ Runs from an extracted release directory (``python -m cluster.job <job dir>``). 
 command writes into ``<job dir>/out``; every output file is copied into
 ``<PVC>/<publish>/`` with a hash check and a no-overwrite rename. Failed jobs still publish
 whatever they produced (failed retargets are data) and always write a receipt.
+
+Copies run on ``publish_threads`` threads (spec, default 16): one small file on the CephFS PVC
+takes ~1-5 s (create, fsync, read-back hash, link), so a serial copy of a long job's episodes
+takes hours. Files matching a ``stream`` glob of the spec (relative to ``out``; for writers that
+create each file under a temporary name and rename it into place, so a visible file is complete)
+are published while the command still runs; everything else after it exits.
 """
 from __future__ import annotations
 
@@ -14,6 +20,7 @@ import shutil
 import subprocess
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 PVC = Path(os.environ.get("REACHY_RETARGET_PVC", "/mnt/reachy-retarget/v2"))
@@ -50,28 +57,60 @@ def same_ledger_record(a: Path, b: Path) -> bool:
     return key(ra) == key(rb)
 
 
-def publish(out: Path, dest: Path) -> list[dict]:
+def publish_file(out: Path, src: Path, dest: Path) -> dict:
+    """Copy one file under ``out`` to the same relative path under ``dest`` atomically; never
+    overwrite."""
+    rel = src.relative_to(out)
+    target = dest / rel
+    target.parent.mkdir(parents=True, exist_ok=True)
+    digest = sha256(src)
+    if target.exists():
+        if sha256(target) != digest and not same_ledger_record(src, target):
+            raise FileExistsError(f"{target} exists with different content")
+    else:
+        partial = target.with_name(f".{target.name}.{os.getpid()}.{os.urandom(4).hex()}.partial")
+        shutil.copyfile(src, partial)
+        with partial.open("rb") as f:
+            os.fsync(f.fileno())
+        if sha256(partial) != digest:
+            raise OSError(f"hash mismatch after copying {rel}")
+        os.link(partial, target)  # fails instead of overwriting a concurrent writer
+        partial.unlink()
+    return {"path": str(rel), "sha256": digest, "bytes": src.stat().st_size}
+
+
+class Publisher:
+    """Publishes files under ``out`` to ``dest`` on a thread pool, each path once."""
+
+    def __init__(self, out: Path, dest: Path, threads: int = 16):
+        self.out, self.dest = out, dest
+        self.pool = ThreadPoolExecutor(threads)
+        self.futures = {}  # relative path -> Future of its record
+
+    def submit(self, paths) -> None:
+        for src in sorted(paths):
+            rel = str(src.relative_to(self.out))
+            if rel not in self.futures:
+                self.futures[rel] = self.pool.submit(publish_file, self.out, src, self.dest)
+
+    def stream(self, patterns) -> None:
+        """Submit the complete files matching ``patterns`` (globs relative to ``out``)."""
+        self.submit(p for pattern in patterns for p in self.out.glob(pattern)
+                    if p.is_file() and not p.name.startswith("."))
+
+    def finish(self) -> list[dict]:
+        """Submit every remaining file, wait, and return the records sorted by path; raises the
+        first copy error."""
+        self.submit(p for p in self.out.rglob("*") if p.is_file())
+        try:
+            return [self.futures[rel].result() for rel in sorted(self.futures)]
+        finally:
+            self.pool.shutdown(wait=True)
+
+
+def publish(out: Path, dest: Path, threads: int = 16) -> list[dict]:
     """Copy every file under ``out`` into ``dest`` atomically; never overwrite."""
-    published = []
-    for src in sorted(p for p in out.rglob("*") if p.is_file()):
-        rel = src.relative_to(out)
-        target = dest / rel
-        target.parent.mkdir(parents=True, exist_ok=True)
-        digest = sha256(src)
-        if target.exists():
-            if sha256(target) != digest and not same_ledger_record(src, target):
-                raise FileExistsError(f"{target} exists with different content")
-        else:
-            partial = target.with_name(f".{target.name}.{os.getpid()}.partial")
-            shutil.copyfile(src, partial)
-            with partial.open("rb") as f:
-                os.fsync(f.fileno())
-            if sha256(partial) != digest:
-                raise OSError(f"hash mismatch after copying {rel}")
-            os.link(partial, target)  # fails instead of overwriting a concurrent writer
-            partial.unlink()
-        published.append({"path": str(rel), "sha256": digest, "bytes": src.stat().st_size})
-    return published
+    return Publisher(out, dest, threads).finish()
 
 
 def main(job_dir: str) -> int:
@@ -91,12 +130,22 @@ def main(job_dir: str) -> int:
         env = {**os.environ, "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1",
                "MALLOC_ARENA_MAX": "2", "REACHY_RETARGET_PVC": str(PVC)}
         argv = [arg.replace("{out}", str(out)).replace("{pvc}", str(PVC)) for arg in spec["argv"]]
+        publisher = Publisher(out, PVC / spec["publish"], spec.get("publish_threads", 16))
+        deadline = time.time() + spec.get("timeout_s", 6 * 3600)
         with (job_dir / "log.txt").open("wb") as log:
-            proc = subprocess.run([sys.executable, *argv], stdout=log, stderr=subprocess.STDOUT, env=env,
-                                  timeout=spec.get("timeout_s", 6 * 3600))
+            proc = subprocess.Popen([sys.executable, *argv], stdout=log, stderr=subprocess.STDOUT, env=env)
+            while proc.poll() is None:
+                if time.time() > deadline:
+                    proc.kill()
+                    proc.wait()
+                    receipt["error"] = f"timeout after {spec.get('timeout_s', 6 * 3600)} s"
+                    break
+                if spec.get("stream"):
+                    publisher.stream(spec["stream"])
+                time.sleep(10)
         receipt.update(returncode=proc.returncode, state="succeeded" if proc.returncode == 0 else "failed")
         try:
-            receipt["published"] = publish(out, PVC / spec["publish"])
+            receipt["published"] = publisher.finish()
         except Exception as error:  # noqa: BLE001 - recorded in the receipt
             receipt.update(state="publish_failed", error=repr(error))
     receipt["finished"] = time.time()
