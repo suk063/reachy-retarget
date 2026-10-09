@@ -52,26 +52,32 @@ def box_lsq(A, b, lo, hi, max_iter=None):
     n = len(g)
     x = np.clip(np.zeros(n), lo, hi)
     fixed = np.zeros(n, bool)
+    below, above = lo - 1e-12, hi + 1e-12
     for _ in range(max_iter or 3 * n):
         free = ~fixed
+        fi = np.flatnonzero(free)
         y = x.copy()
-        if free.any():
-            rhs = g[free] - H[np.ix_(free, fixed)] @ x[fixed]
-            y[free] = np.linalg.solve(H[np.ix_(free, free)], rhs)
-        viol = free & ((y < lo - 1e-12) | (y > hi + 1e-12))
-        if viol.any():
+        if len(fi) == n:
+            y = np.linalg.solve(H, g)
+        elif len(fi):
+            fx = np.flatnonzero(fixed)
+            y[fi] = np.linalg.solve(H[np.ix_(fi, fi)], g[fi] - H[np.ix_(fi, fx)] @ x[fx])
+        viol = np.flatnonzero(free & ((y < below) | (y > above)))
+        if len(viol):
             # step from x toward y until the first bound is hit, then fix that variable
             d = y - x
-            with np.errstate(divide="ignore", invalid="ignore"):
-                t = np.where(d < 0, (lo - x) / d, np.where(d > 0, (hi - x) / d, np.inf))
-            t = np.where(viol, t, np.inf)
-            k = int(np.argmin(t))
-            x = x + max(0.0, min(1.0, float(t[k]))) * d
+            dv = d[viol]
+            t = np.where(dv < 0, lo[viol] - x[viol], hi[viol] - x[viol]) / dv  # dv != 0: y left the box
+            j = int(np.argmin(t))
+            k = int(viol[j])
+            x = x + max(0.0, min(1.0, float(t[j]))) * d
             x[k] = lo[k] if d[k] < 0 else hi[k]
             fixed[k] = True
             x = np.clip(x, lo, hi)
             continue
         x = y
+        if not fixed.any():
+            break
         grad = H @ x - g  # KKT: at lower bound grad >= 0, at upper bound grad <= 0
         release = fixed & (((x <= lo + 1e-12) & (grad < -1e-12)) | ((x >= hi - 1e-12) & (grad > 1e-12)))
         if not release.any():
@@ -115,6 +121,25 @@ class Clearance:
         keep = moving[la] | moving[lb]
         self.a, self.b = self.sc.a[keep], self.sc.b[keep]
         self.radii = self.sc.pair_radii[keep]
+        # Broad phase of :meth:`gradients`: the selected pairs are contiguous per link pair; a link
+        # pair is examined only when the bounding spheres of its two links (link frame: centre of
+        # the sphere centres, radius reaching every sphere) are closer than the margin.
+        la, lb = la[keep], lb[keep]
+        key = la * len(self.sc.links) + lb
+        start = np.flatnonzero(np.r_[True, key[1:] != key[:-1]])
+        if len(start) != len(np.unique(key)):
+            raise AssertionError("sphere pairs are not grouped by link pair")
+        self.group_a, self.group_b = la[start], lb[start]
+        self.group_slices = np.c_[start, np.r_[start[1:], len(key)]]
+        self.link_mid = np.zeros((len(self.sc.links), 3))
+        self.link_reach = np.zeros(len(self.sc.links))
+        for i in range(len(self.sc.links)):
+            mine = self.sc.link_index == i
+            if mine.any():
+                centres = self.sc.local[mine, :3]
+                self.link_mid[i] = centres.mean(axis=0)
+                self.link_reach[i] = np.max(np.linalg.norm(centres - self.link_mid[i], axis=1) + self.sc.radii[mine])
+        self.node = [self.sc.tree.index[link] for link in self.sc.links]
 
     def distances(self, q):
         """Signed distances (..., P) of the selected pairs and the base-frame sphere centres."""
@@ -140,36 +165,51 @@ class Clearance:
         point Jacobians of the two sphere centres (base columns are zero: the base moves
         the whole body rigidly).
         """
-        d, c = self.distances(q)
-        hits = np.flatnonzero(d < margin)
+        # The same values as ``distances(q)`` restricted to the pairs of link pairs passing the broad
+        # phase (every pair below the margin passes it); one forward-kinematics pass serves the
+        # sphere centres and the point Jacobians.
+        qb = np.asarray(q, float)[BODY.start:]
+        P = self.sc.tree.node_poses(qb)
+        T = np.stack([P[i] for i in self.node])
+        mid = (T[:, :3, :3] @ self.link_mid[..., None])[..., 0] + T[:, :3, 3]
+        gap = (np.linalg.norm(mid[self.group_a] - mid[self.group_b], axis=-1)
+               - self.link_reach[self.group_a] - self.link_reach[self.group_b])
+        near = self.group_slices[gap < margin + 1e-6]
+        if not len(near):
+            return np.zeros(0), np.zeros((0, 22))
+        pairs = np.concatenate([np.arange(a, b) for a, b in near])
+        li = self.sc.link_index
+        c = (T[li] @ self.sc.local[..., None])[..., :3, 0]  # SelfCollision.sphere_centers at base 0
+        d = np.linalg.norm(c[self.a[pairs]] - c[self.b[pairs]], axis=-1) - self.radii[pairs]
+        below = d < margin
+        hits, d = pairs[below], d[below]
         if not len(hits):
             return np.zeros(0), np.zeros((0, 22))
-        li = self.sc.link_index
-        hits = hits[np.argsort(d[hits])]
-        chosen, seen = [], set()
-        for k in hits:
+        order = np.argsort(d)
+        chosen, dist, seen = [], [], set()
+        for k, dk in zip(hits[order], d[order]):
             key = (li[self.a[k]], li[self.b[k]])
             if key not in seen:
                 seen.add(key)
                 chosen.append(k)
+                dist.append(dk)
             if len(chosen) == limit:
                 break
-        qb = np.asarray(q, float)[BODY.start:]
         jac = {}
 
         def point_jacobian(sphere):
             link = self.sc.links[li[sphere]]
             if link not in jac:
-                jac[link] = self.sc.tree.jacobian(qb, link)
-            T, J = jac[link]
-            return J[:3] - _skew(c[sphere] - T[:3, 3]) @ J[3:]
+                jac[link] = self.sc.tree.jacobian(qb, link, P)
+            T_link, J = jac[link]
+            return J[:3] - _skew(c[sphere] - T_link[:3, 3]) @ J[3:]
 
         grads = np.zeros((len(chosen), 22))
         for i, k in enumerate(chosen):
             n = c[self.a[k]] - c[self.b[k]]
             n /= max(np.linalg.norm(n), 1e-9)
             grads[i, BODY.start:] = n @ (point_jacobian(self.a[k]) - point_jacobian(self.b[k]))
-        return d[chosen], grads
+        return np.array(dist), grads
 
 
 class FrameSolver:

@@ -75,6 +75,15 @@ def test_fk_batched_matches_single():
             assert np.allclose(batch[frame][i], T, atol=1e-12)
 
 
+def test_single_configuration_fast_path_is_bit_identical():
+    tree = R.SelfCollision.load().tree
+    for q in random_q(50)[:, 3:]:
+        batched = tree.node_poses(q[None])
+        assert all(np.array_equal(T, B[0]) for T, B in zip(tree.node_poses(q), batched))
+        T, J = tree.jacobian(q, "l_hand_palm_link")
+        assert np.array_equal(T, tree.jacobian(q, "l_hand_palm_link", tree.node_poses(q))[0])
+
+
 def pose_error(A, B):
     dR = A[:3, :3] @ B[:3, :3].T
     w = 0.5 * np.array([dR[2, 1] - dR[1, 2], dR[0, 2] - dR[2, 0], dR[1, 0] - dR[0, 1]])

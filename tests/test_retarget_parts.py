@@ -155,6 +155,28 @@ def test_box_lsq_matches_bvls():
         assert np.sum((A @ x - b) ** 2) <= np.sum((A @ y - b) ** 2) * (1 + 1e-9) + 1e-12
 
 
+def test_clearance_broad_phase_keeps_every_pair_below_the_margin():
+    from reachy_retarget.retarget.wbik import Clearance
+    rng = np.random.default_rng(2)
+    for sides in (("left", "right"), ("right",)):
+        clear = Clearance(sides)
+        hit = 0
+        for _ in range(300):
+            q = np.zeros(22)
+            q[3:20] = rng.uniform(-1.5, 1.5, 17) * rng.uniform(0, 1.5)
+            q[20:] = rng.uniform(0, 2, 2)
+            d_all = clear.distances(q)[0]
+            below = np.flatnonzero(d_all < .02)
+            d, g = clear.gradients(q, .02, 4)
+            hit += len(below) > 0
+            if not len(below):
+                assert not len(d)
+                continue
+            # the worst pair of all pairs is the first chosen one, at the same distance
+            assert d[0] == d_all[below].min() and len(d) == len(g) <= 4 and np.all(d < .02)
+        assert hit > 50
+
+
 def test_source_closed_detects_a_grasp_stalled_above_half_opening():
     from reachy_retarget.retarget.targets import source_closed
     t = np.arange(40) * 0.05

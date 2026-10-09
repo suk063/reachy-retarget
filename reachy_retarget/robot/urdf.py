@@ -36,6 +36,20 @@ def axis_rotation(axis, angle):
     return R
 
 
+_EYE4 = np.eye(4)
+
+
+def _axis_rotation_one(axis, angle):
+    """:func:`axis_rotation` of one angle: axis a tuple of Python floats (the same IEEE operations
+    in the same order, so bit-identical)."""
+    x, y, z = axis
+    c, s = float(np.cos(angle)), float(np.sin(angle))
+    C = 1.0 - c
+    return np.array([[c + x * x * C, x * y * C - z * s, x * z * C + y * s],
+                     [y * x * C + z * s, c + y * y * C, y * z * C - x * s],
+                     [z * x * C - y * s, z * y * C + x * s, c + z * z * C]])
+
+
 class URDF:
     """Joint tree of a URDF file.
 
@@ -152,6 +166,8 @@ class KinematicTree:
                     entry[child] = (parent, F)
         self.index = {t: entry[t][0] for t in self.targets}
         self.chains = {t: self._ancestors(self.index[t]) for t in self.targets}
+        # single-configuration fast path (IK inner loop): the axis as Python floats
+        self._axes = [None if axis is None else tuple(float(v) for v in axis) for _, _, axis, *_ in self.nodes]
 
     def _ancestors(self, i):
         out = []
@@ -166,6 +182,8 @@ class KinematicTree:
         q = np.asarray(q, float)
         if q.shape[-1] != len(self.names):
             raise ValueError(f"expected {len(self.names)} joint values, got shape {q.shape}")
+        if q.ndim == 1:
+            return self._node_poses_one(q)
         batch = q.shape[:-1]
         out = []
         for parent, F, axis, kind, c, mult, off in self.nodes:
@@ -183,15 +201,32 @@ class KinematicTree:
             out.append(T)
         return out
 
+    def _node_poses_one(self, q):
+        """:meth:`node_poses` of one configuration (q (len(names),)): the same floating-point
+        operations without the batch broadcasting, whose per-node overhead dominates IK time."""
+        out = []
+        for (parent, F, axis, kind, c, mult, off), xyz in zip(self.nodes, self._axes):
+            T = F if parent < 0 else out[parent] @ F
+            if kind:
+                v = mult * q[c] + off
+                M = _EYE4.copy()
+                if kind == 1:
+                    M[:3, :3] = _axis_rotation_one(xyz, v)
+                else:
+                    M[:3, 3] = v * axis
+                T = T @ M
+            out.append(T)
+        return out
+
     def fk(self, q):
         """{target: T_root_target (..., 4, 4)}."""
         P = self.node_poses(q)
         return {t: P[i] for t, i in self.index.items()}
 
-    def jacobian(self, q, target):
+    def jacobian(self, q, target, poses=None):
         """(T_root_target (4,4), 6 x len(names) geometric Jacobian in the root frame, linear rows
-        first) for one configuration q."""
-        P = self.node_poses(q)
+        first) for one configuration q; ``poses`` = ``node_poses(q)`` when already computed."""
+        P = self.node_poses(q) if poses is None else poses
         T = P[self.index[target]]
         J = np.zeros((6, len(self.names)))
         for i in self.chains[target]:
