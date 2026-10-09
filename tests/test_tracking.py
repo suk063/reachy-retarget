@@ -208,3 +208,56 @@ def test_one_stage_each_part_acts_at_most_once(cell):
             Rb = np.swapaxes(planar(b[:, 0], b[:, 1], b[:, 2])[:, :3, :3], 1, 2) @ ref.head
             n = N.solve_base(Rb, None, 0.0, 30)
             assert _runs(np.abs(np.diff(n, axis=0)).max(axis=1) / DT > 0.02) <= 1, sc
+
+
+def test_stage_cuts_start_one_movement_per_part_per_stage():
+    from reachy_retarget.tracking import stages
+    times = np.arange(100) * 0.1
+    parts = {"hand": [(0, 20), (40, 60)], "grip": [(25, 30), (70, 75)]}
+    bounds = stages.cuts(times, parts)
+    # the hand's second movement forces a cut just before it; the gripper's second one fits that stage
+    assert bounds == [0, 40, 99]
+    for a, b in zip(bounds[:-1], bounds[1:]):
+        for runs in parts.values():
+            assert sum(a <= s < b for s, _ in runs) <= 1
+
+
+def _pick_place_source():
+    """A Panda-like pick and place: approach down, close, lift and carry, open, retreat."""
+    from reachy_retarget.schema.source import Effector, SourceEpisode
+    t = np.arange(0, 7.0, 0.05)
+    p0 = np.array([0.45, -0.15, 0.95])
+    down, carry, back = np.array([0, 0, -0.15]), np.array([0, 0.2, 0.15]), np.array([0, 0, 0.12])
+
+    def ramp(a, b):
+        return pr.min_jerk((t - a) / (b - a))[:, None]
+    pos = p0 + ramp(0.3, 1.5) * down + ramp(2.4, 3.8) * carry + ramp(4.8, 6.0) * back
+    pose = np.tile(np.eye(4), (len(t), 1, 1))
+    pose[:, :3, :3] = np.array([[1, 0, 0], [0, -1, 0], [0, 0, -1.0]])  # approach (+z) pointing down
+    pose[:, :3, 3] = pos
+    opening = 1.0 - 0.6 * ramp(1.7, 2.2)[:, 0] + 0.6 * ramp(4.0, 4.5)[:, 0]
+    return SourceEpisode(family="synthetic", dataset="synthetic/pick", episode_id="pp0", task="pick",
+                         time=t, effectors={"hand": Effector(pose=pose, opening=opening)},
+                         lineage={"seed": "pp0"})
+
+
+def test_source_demonstration_is_cut_into_single_stages():
+    from reachy_retarget.robot import planar
+    from reachy_retarget.tracking import source as TS
+    from reachy_retarget.tracking import stages
+    th = stages.Thresholds()
+    refs = TS.references(_pick_place_source())
+    primary = [r for r in refs if r.variant_of is None]
+    assert len(primary) >= 3 and len(refs) == 2 * len(primary)  # single-arm source: both arms
+    assert all(r.lineage["seed"] == "pp0" for r in refs)
+    for ref in refs:
+        t = ref.time - ref.time[0]
+        W = np.linalg.inv(planar(ref.base[:, 0], ref.base[:, 1], ref.base[:, 2]))
+        for s in SIDES:
+            for runs in (stages.movements(t, pose=W @ ref.tcp[s]),
+                         stages.movements(t, scalar=ref.opening[:, SIDES.index(s)])):
+                assert sum(1 for a, b in runs if not (a == 0 and t[b - 1] <= th.tail)) <= 1, ref.episode_id
+        Rb = np.swapaxes(planar(ref.base[:, 0], ref.base[:, 1], ref.base[:, 2])[:, :3, :3], 1, 2) @ ref.head
+        assert N.movements(N.solve_base(Rb, None, 0.0, 30), t) <= 1
+    rows = [r.extra["stage"]["source_rows"] for r in primary]
+    assert rows[0][0] == 0 and all(a[1] == b[0] for a, b in zip(rows[:-1], rows[1:]))

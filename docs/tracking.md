@@ -170,6 +170,26 @@ For every `SourceEpisode` a family adapter yields:
 - **Idle hand.** Holds the carry pose relative to the base.
 - **Neck.** Looks at the active hand(s), or along the travel direction without one.
 - **Gripper.** The source opening.
+- **Stages** (`tracking.stages`). A demonstration chains several actions (approach, close, carry,
+  open, retreat), so it is cut into stages under the same rule as the synthetic scenarios: in each
+  stage every hand (relative to the base), the base and each gripper make at most one movement
+  toward one goal, and the head makes one movement.
+  - A part moves while its smoothed speed is above a threshold: hand 2 cm/s or 0.15 rad/s, base 2 cm/s
+    or 0.05 rad/s, gripper 0.2 opening/s.
+  - Pauses under 0.3 s do not split a movement. Movements under 0.15 s and 1 cm, and gripper changes
+    under 10 % of the stroke, are noise.
+  - A movement that slows below 30 % of its peak and turns by more than 90° (a reach and return) is two
+    movements.
+  - Scanning movements by start time, a new stage begins when a part starts its second movement in the
+    current stage. The cut lies within 0.5 s before that movement, at the latest instant where the
+    other parts move least.
+  - A movement still running at a cut continues in the new stage and counts there, unless it ends
+    within 0.3 s. Demonstrations overlap their actions (the hand still settles as the gripper starts to
+    close), and such a settling tail is not an action.
+  - Each stage is one episode, `<episode>[-<arm>]-stageNN`. `extra["stage"]` holds the index, count,
+    source rows, source times and the movements found. All stages share the source's lineage seed.
+  - The head follows the active hand(s) within the stage when that is one movement, else it makes one
+    turn toward where the gaze ends.
 - **Timing.** Retimed.
 - **Ignored.** Objects, grasp labels and scene geometry.
 - **Lineage.** `lineage.seed` = the source's seed (plus `tracking_of` = source uid). These episodes are not independent of the manipulation retargets of the same demonstrations.
@@ -216,17 +236,21 @@ Layout:
 - An earlier generator chained several primitives per scenario (up to 65 s). It was replaced by the
   one-stage generator.
 
-**Source paths.** 33 / 46 pass:
+**Source paths, cut into stages.** 98 / 165 stage episodes pass tier K:
 
-| source | passing |
-| --- | --- |
-| robomimic Lift demos 0–9, both arms | 20 / 20 |
-| robomimic Square demos 0–4 | 8 / 10 |
-| robomimic Transport demos 0–3 | 0 / 4 |
-| MolmoBot RB-Y1 door (mobile) and Franka pick fixtures | 3 / 3 |
-| LIBERO fixture | 0 / 2 |
-| DexMimicGen fixture | 0 / 1 |
-| MobileManiBench G1 fixtures | 0 / 4 |
+| source | stages per demo | stage episodes passing |
+| --- | --- | --- |
+| robomimic Lift demos 0–9, both arms | 2.3 (approach and open; close and lift) | 46 / 46 |
+| robomimic Square demos 0–4, both arms | 4 | 37 / 40 |
+| robomimic Transport demos 0–3 (bimanual) | 13 | 1 / 53 |
+| MolmoBot RB-Y1 door (mobile) and Franka pick fixtures | 2 | 4 / 6 |
+| MobileManiBench G1 fixtures | 2–3 | 4 / 10 |
+| LIBERO fixture | 1 | 0 / 2 |
+| DexMimicGen fixture | 2 | 0 / 2 |
+
+On the source clock, in each of the 86 robomimic Lift and Square stage references, every hand and
+gripper moves at most once. Checking the 50 Hz retimed episodes instead finds a few extra movements:
+slow, near-threshold motion resampled from 10–20 Hz splits into pieces there.
 
 The failures are source poses Reachy cannot reach with strict tracking:
 - Panda/G1 wrist orientations beyond Reachy's ±30° wrist;
@@ -240,5 +264,5 @@ The extracted RoboCasa episodes are not on this machine, so RoboCasa was not run
 - **Independent bimanual actions** plan the second hand's goal against the first arm's start posture, so the hands can meet (repulsion, then residuals).
 - **The neck** is solved after the arms. Head–arm contacts are caught by tier K, not avoided.
 - **The free base** (boxed 0.5 m / 0.8 rad around the nominal path) can help an arm, which adds base motion the stage does not plan. A large deviation shifts the head reference, which assumes the nominal base yaw (0.04 rad of neck margin covers small deviations). `base_free=False` removes both effects.
-- **Source paths** are recorded demonstrations with several stages (approach, grasp, carry, place). They are not cut into single stages.
+- **Source stages** start wherever the demonstration's next action starts. A stage may begin with a part still moving (its movement from the previous stage continues), and stages can be short (0.1–0.5 s, e.g. a gripper closing).
 - **Source paths** ignore the source scene: no footprint obstacles, no objects.

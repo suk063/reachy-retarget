@@ -13,7 +13,11 @@ and the scene is empty (no footprint obstacles). What is chosen here:
   source base path composed with a constant SE(2) offset chosen the same way,
 * **idle hand**: holds the ``home`` carry pose relative to the base,
 * **neck**: points ``head_tip`` at the active hand(s) (along the travel direction without one),
-* **gripper**: the source opening; **timing**: slowed down where Reachy's limits need it.
+* **gripper**: the source opening; **timing**: slowed down where Reachy's limits need it,
+* **stages**: a demonstration chains several actions, so it is cut into stages (:mod:`.stages`): in
+  each stage every hand, the base and each gripper make at most one movement toward one goal, and
+  the head makes one movement (the rule of the synthetic scenarios). Each stage is one episode
+  (``<episode>-stageNN``; all stages share the source's lineage seed).
 
 ``lineage.seed`` is the source's seed: these episodes are not independent of that source's
 manipulation retarget.
@@ -143,7 +147,7 @@ def place_base(src, targets, cfg: TrackingConfig, n_eval=4):
 
 
 def references(src, cfg: TrackingConfig | None = None, both_arms: bool = True) -> list[TrackingReference]:
-    """The tracking references of one SourceEpisode (one per arm assignment)."""
+    """The tracking references of one SourceEpisode: one per stage and arm assignment."""
     cfg = cfg or TrackingConfig()
     robot = Reachy.load()
     times = src.time - src.time[0]
@@ -166,7 +170,12 @@ def references(src, cfg: TrackingConfig | None = None, both_arms: bool = True) -
         scored.append((place.get("ik_score", 0.0), sides, targets, base, place))
     if len(scored) == 2:
         scored.sort(key=lambda s: s[0])
-    primary_uid = None
+    # stages: cut once per demonstration (on the first variant; the arm choice does not change when
+    # the source moves), every variant uses the same cuts
+    _, sides0, targets0, base0, _ = scored[0]
+    bounds, stage_parts = stage_bounds(src, times, sides0, targets0, base0)
+    out = []
+    primary = {}
     for n, (_, sides, targets, base, place) in enumerate(scored):
         W = planar(base[:, 0], base[:, 1], base[:, 2])
         carry = robot.fk_base(carry_posture())
@@ -186,25 +195,58 @@ def references(src, cfg: TrackingConfig | None = None, both_arms: bool = True) -
             d = w * v / np.maximum(spd, 1e-9) + (1 - w) * heading
             d /= np.maximum(np.linalg.norm(d, axis=1, keepdims=True), 1e-9)
             pts = np.c_[base[:, :2] + 1.5 * d, np.full(T, 1.0)]
-        neck = neck_mod.gaze_neck(pts, base, margin=0.07, start=np.zeros(3), dt=dt)
-        head = W[:, :3, :3] @ neck_mod.head_base(neck)[:, :3, :3]
-        parts = motion_parts(tcp, base, head)
+        gaze = neck_mod.gaze_neck(pts, base, margin=0.07, start=np.zeros(3), dt=dt)
         suffix = "-".join(sorted(sides.values())) if sides else "base"
-        episode_id = f"{src.episode_id}-{suffix}" if len(sides) == 1 else src.episode_id
         dataset = f"tracking/source/{src.dataset}"
-        ref = TrackingReference(
-            dataset=dataset, episode_id=episode_id, task=src.task, time=src.time, tcp=tcp, base=base,
-            opening=opening, head=head, q_start=None, retime=True,
-            regime="navigation" if navigation else regime_of(parts), body_parts=parts,
-            lineage=dict(src.lineage, tracking_of=src.uid), variant_of=primary_uid,
-            license=src.license, provenance=dict(src.provenance), instruction=src.instruction,
-            extra={"generator": GENERATOR,
-                   "source": {"family": src.family, "dataset": src.dataset, "episode_id": src.episode_id,
-                              "uid": src.uid, "regime": src.regime, "success": src.success},
-                   "params": jsonable({"sides": sides, "placement": place, "neck": "look_at_hand"
-                                       if targets else "look_ahead",
-                                       "notes": ["objects, grasp labels and scene geometry are ignored"]})})
-        if n == 0:
-            primary_uid = f"{dataset}/{episode_id}"
-        out.append(ref)
+        for k, (a, b) in enumerate(zip(bounds[:-1], bounds[1:])):
+            rows = slice(a, b + 1)
+            t = times[rows]
+            # one head action per stage: the gaze path of the stage, or one turn toward where it ends
+            neck = neck_mod.one_action(gaze[rows], t, gaze[a], (t[0], t[-1]), np.diff(t))
+            head = W[rows, :3, :3] @ neck_mod.head_base(neck)[:, :3, :3]
+            stage_tcp = {s: X[rows] for s, X in tcp.items()}
+            parts = motion_parts(stage_tcp, base[rows], head)
+            base_id = f"{src.episode_id}-{suffix}" if len(sides) == 1 else src.episode_id
+            episode_id = f"{base_id}-stage{k:02d}" if len(bounds) > 2 else base_id
+            ref = TrackingReference(
+                dataset=dataset, episode_id=episode_id, task=src.task, time=src.time[rows], tcp=stage_tcp,
+                base=base[rows], opening=opening[rows], head=head, q_start=None, retime=True,
+                regime="navigation" if navigation else regime_of(parts), body_parts=parts,
+                lineage=dict(src.lineage, tracking_of=src.uid, stage=k, stages=len(bounds) - 1),
+                variant_of=primary.get(k), license=src.license, provenance=dict(src.provenance),
+                instruction=src.instruction,
+                extra={"generator": GENERATOR,
+                       "source": {"family": src.family, "dataset": src.dataset, "episode_id": src.episode_id,
+                                  "uid": src.uid, "regime": src.regime, "success": src.success},
+                       "stage": {"index": k, "count": len(bounds) - 1, "source_rows": [int(a), int(b)],
+                                 "source_time": [float(src.time[a]), float(src.time[b])],
+                                 "movements": {name: [[int(x), int(y)] for x, y in runs if x < b and y > a]
+                                               for name, runs in stage_parts.items()}},
+                       "params": jsonable({"sides": sides, "placement": place, "neck": "look_at_hand"
+                                           if targets else "look_ahead",
+                                           "notes": ["objects, grasp labels and scene geometry are ignored",
+                                                     "one stage of the demonstration (stages.cuts)"]})})
+            if n == 0:
+                primary[k] = f"{dataset}/{episode_id}"
+            out.append(ref)
     return out
+
+
+def stage_bounds(src, times, sides, targets, base):
+    """Stage boundaries (source rows) of one demonstration and the movements of each part."""
+    from . import stages
+    W_inv = np.linalg.inv(planar(base[:, 0], base[:, 1], base[:, 2]))
+    parts, speeds = {}, []
+    for side, X in targets.items():
+        L = W_inv @ X
+        parts[f"{side}_hand"] = stages.movements(times, pose=L)
+        speeds.append((np.linalg.norm(np.gradient(L[:, :3, 3], times, axis=0), axis=1), 0.05))
+    for key, side in sides.items():
+        o = np.clip(src.effectors[key].opening, 0, 1)
+        parts[f"{side}_gripper"] = stages.movements(times, scalar=o)
+        speeds.append((np.abs(np.gradient(o, times)), 0.5))
+    if src.base is not None:
+        parts["base"] = stages.movements(times, planar=base)
+        speeds.append((np.linalg.norm(np.gradient(base[:, :2], times, axis=0), axis=1), 0.05))
+    bounds = stages.cuts(times, parts, stages.activity(times, speeds))
+    return bounds, parts

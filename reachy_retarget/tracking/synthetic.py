@@ -439,30 +439,15 @@ def joint_move(ctx: Context, q0, sides, tries: int = 40):
 # ---------------------------------------------------------------------------- neck references
 
 
-def _runs(neck, times, speed=0.02, gap=0.1):
-    """Number of separate neck movements (joint speed above ``speed`` rad/s; pauses > ``gap`` s split)."""
-    m = np.abs(np.diff(neck, axis=0)).max(axis=1) / np.diff(times) > speed
-    d = np.diff(np.r_[0, m.astype(int), 0])
-    st, en = np.flatnonzero(d == 1), np.flatnonzero(d == -1)
-    return 0 if not len(st) else 1 + int(np.sum((st[1:] - en[:-1]) * (times[1] - times[0]) > gap))
-
-
 def _one_action(neck, times, start, stage, dt):
-    """A gaze-following neck path that stops and starts again (the base turns, pauses, turns) becomes one
-    min-jerk turn over the stage toward where the gaze path ends."""
-    if _runs(neck, times) <= 1:
-        return neck
-    t0, t1 = stage
-    goal = neck[min(int(np.searchsorted(times, t1)), len(times) - 1)]
-    s = pr.min_jerk((times - t0) / max(t1 - t0, 0.5))
-    return neck_mod.rate_limit(start + s[:, None] * (goal - start), start, dt, 0.8)
+    return neck_mod.one_action(neck, times, start, stage, dt, rate_scale=0.8)
 
 
 def neck_path(ctx: Context, mode, times, base, tcp_world, q_start, active_sides, stage):
     """Neck angles (T, 3) of the head reference (None for ``off``): one action within the stage,
     inside the limits minus NECK_GEN_MARGIN and the neck speed (relative to the nominal ``base``).
     Gaze-following modes keep following their target when that is one continuous movement, else they
-    become one turn toward where the gaze ends (:func:`_one_action`)."""
+    become one turn toward where the gaze ends (:func:`.neck.one_action`)."""
     rng = ctx.rng
     start = q_start[NECK]
     dt = np.diff(times)

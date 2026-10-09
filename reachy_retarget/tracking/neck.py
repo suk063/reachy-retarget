@@ -138,3 +138,30 @@ def gaze_neck(points_world, base, *, margin: float, start, dt, iterations: int =
         origin = head_tip_base(neck)[:, :3, 3]
         neck = solve_base(look_at(origin, p), neck, margin, iterations)
     return rate_limit(neck, start, dt, rate_scale)
+
+
+def movements(neck, times, speed: float = 0.02, gap: float = 0.1) -> int:
+    """Number of separate neck movements: joint speed above ``speed`` rad/s, pauses longer than
+    ``gap`` seconds split movements."""
+    neck, times = np.asarray(neck, float), np.asarray(times, float)
+    if len(neck) < 2:
+        return 0
+    m = np.abs(np.diff(neck, axis=0)).max(axis=1) / np.diff(times) > speed
+    d = np.diff(np.r_[0, m.astype(int), 0])
+    st, en = np.flatnonzero(d == 1), np.flatnonzero(d == -1)
+    if not len(st):
+        return 0
+    return 1 + int(np.sum(times[np.minimum(st[1:], len(times) - 1)] - times[en[:-1]] > gap))
+
+
+def one_action(neck, times, start, stage, dt, rate_scale: float = 0.8):
+    """Keep a neck path that is one movement; a path that stops and starts again (a gaze follows a
+    base that turns, pauses, turns) becomes one min-jerk turn over ``stage`` = (t0, t1) from
+    ``start`` (3,) toward where the path ends, rate-limited to ``rate_scale`` x the neck speed."""
+    if movements(neck, times) <= 1:
+        return neck
+    t0, t1 = stage
+    goal = neck[min(int(np.searchsorted(times, t1)), len(times) - 1)]
+    u = np.clip((np.asarray(times) - t0) / max(t1 - t0, 0.5), 0.0, 1.0)
+    s = u ** 3 * (10 - 15 * u + 6 * u * u)
+    return rate_limit(start + s[:, None] * (goal - start), start, dt, rate_scale)
