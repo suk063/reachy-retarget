@@ -177,9 +177,24 @@ find . -type f ! -name '.*' -printf '%s\\t%P\\n'
 """
 
 
-def pull_all(source: str, dest, pod: str | None = None, *, run=None, stream=None) -> dict:
+def batches(files: list[str], sizes: dict, limit: float) -> list[list[str]]:
+    """Consecutive groups of files of at most ``limit`` bytes (a larger file is a group of its own)."""
+    out, size = [[]], 0
+    for f in files:
+        if out[-1] and size + sizes[f] > limit:
+            out.append([])
+            size = 0
+        out[-1].append(f)
+        size += sizes[f]
+    return out
+
+
+def pull_all(source: str, dest, pod: str | None = None, *, run=None, stream=None, batch_bytes: float = 200e6,
+             attempts: int = 3) -> dict:
     """Pull every file of the PVC folder ``source`` to ``dest`` (small folders, e.g. exported
-    scenes): same preflight, pod-side hashes and staging as :func:`pull_sample`."""
+    scenes): same preflight, pod-side hashes and staging as :func:`pull_sample`. Files go in tar
+    streams of at most ``batch_bytes``; a stream cut short (kubectl exec drops long transfers) is
+    retried up to ``attempts`` times."""
     run = run or (lambda p, s, stdin=None: k8s.run(p, s, stdin=stdin, timeout=3600))
     stream = stream or stream_tar
     dest = Path(dest).resolve()
@@ -207,7 +222,14 @@ def pull_all(source: str, dest, pod: str | None = None, *, run=None, stream=None
     stage = dest.with_name(f"{dest.name}.partial-{uuid.uuid4().hex[:8]}")
     stage.mkdir()
     t0 = time.time()
-    stream(pod, root, files, stage)
+    for group in batches(files, sizes, batch_bytes):
+        for attempt in range(attempts):
+            try:
+                stream(pod, root, group, stage)
+                break
+            except (tarfile.ReadError, RuntimeError):
+                if attempt == attempts - 1:
+                    raise
     manifest = {}
     for rel in files:
         digest = sha256(stage / rel)

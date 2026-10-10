@@ -73,3 +73,8 @@ def test_pull_all_copies_every_file_with_pod_side_hashes(tmp_path):
     assert "scenes/a/scene.xml" in sums and json.loads((dest / "PULL.json").read_text())["files"] == 3
     with pytest.raises(FileExistsError):
         pull.pull_all("datasets/scenes-x", dest, "pod", run=run, stream=stream)
+
+
+def test_batches_split_by_size():
+    sizes = {"a": 5, "b": 5, "c": 20, "d": 1}
+    assert pull.batches(["a", "b", "c", "d"], sizes, 10) == [["a", "b"], ["c"], ["d"]]
