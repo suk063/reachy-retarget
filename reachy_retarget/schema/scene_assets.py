@@ -132,8 +132,9 @@ def primitive_mesh(kind: str, size) -> tuple[np.ndarray, np.ndarray, np.ndarray]
                     p[axis], p[u], p[w] = sign * h[axis], cu * h[u], cw * h[w]
                     v.append(p)
                     nrm.append(np.eye(3)[axis] * sign)
-                # (u, w, axis) is a cyclic permutation of (x, y, z): counter-clockwise about +axis
-                tri = [[0, 1, 2], [0, 2, 3]] if sign > 0 else [[0, 2, 1], [0, 3, 2]]
+                # the corners run counter-clockwise about e_u x e_w (+axis for x and z, -axis for y)
+                ccw = sign * np.cross(np.eye(3)[u], np.eye(3)[w])[axis] > 0
+                tri = [[0, 1, 2], [0, 2, 3]] if ccw else [[0, 2, 1], [0, 3, 2]]
                 f += [[base + a for a in t] for t in tri]
         return np.array(v), np.array(nrm), np.array(f)
     if kind in ("sphere", "ellipsoid"):

@@ -108,8 +108,9 @@ def test_primitive_meshes_are_closed_outward_and_sized(kind, size, area):
     v, n, f = primitive_mesh(kind, size)
     assert surface_area(v, f) == pytest.approx(area, rel=0.01)
     tri = v[f]
-    if kind != "plane":
-        assert np.einsum("ij,ij->i", tri[:, 0], np.cross(tri[:, 1], tri[:, 2])).sum() > 0  # outward faces
+    normal = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
+    outward = np.einsum("ij,ij->i", normal, tri.mean(1)) if kind != "plane" else normal[:, 2]
+    assert (outward > 0).all()  # every face, not only the net volume
     np.testing.assert_allclose(np.linalg.norm(n, axis=1), 1, atol=1e-9)
 
 
