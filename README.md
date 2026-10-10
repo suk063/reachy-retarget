@@ -68,9 +68,14 @@ git clone https://github.com/suk063/reachy-policy external/reachy-policy
 uv pip install --python .venv/bin/python -e external/reachy-policy
 ```
 
-Its action contract is reachy-agent's v8, which the stored `reachy_agent_v8` control mode follows.
-`policy.build_map` and `policy.evaluate` render or simulate reachy-agent's MuJoCo scenes and run
-from a reachy-agent checkout.
+It trains on these builds (both arms; arm/head actions are base_link postures, which the stored
+`reachy_agent_v8` control mode follows, base actions are local steps): `policy.sources` selects and
+splits episodes, `policy.features` builds per-component DINO features from the scene meshes,
+`policy.cache` writes the training arrays, `policy.train` / `policy.evaluate` train and evaluate open
+loop. `policy.rollout` runs closed loop in the original tier-P physics scenes, which
+`python -m reachy_retarget.scene_export` regenerates from the raw data on the cluster (`manifest`
+writes the `cluster.pool` jobs) and `python -m cluster.pull <PVC folder> <dest> --all` copies back.
+See external/reachy-policy/policy/README.md.
 
 ## Source families
 
