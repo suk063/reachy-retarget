@@ -41,7 +41,8 @@ if [ -e "$job/status.json" ]; then echo exists; exit 0; fi
 mkdir -p "$job"
 cat > "$job/spec.json"
 cd /tmp/rr2/release/{rel}
-setsid nohup /tmp/rr2/runtime/{rt}/bin/python -m cluster.job "$job" > "$job/runner.txt" 2>&1 < /dev/null &
+# The PVC root is passed explicitly: releases published before it moved default to /mnt/reachy-retarget/v2.
+REACHY_RETARGET_PVC={pvc} setsid nohup /tmp/rr2/runtime/{rt}/bin/python -m cluster.job "$job" > "$job/runner.txt" 2>&1 < /dev/null &
 echo started
 """
 
@@ -89,7 +90,7 @@ class Pool:
             # Prepare on every launch (a no-op when present): a restarted container loses /tmp.
             spec = {**job, "batch": self.batch, "release": self.rel, "slot": slot}
             k8s.run(pod, PREPARE.format(rt=self.rt, rel=self.rel, pvc=k8s.PVC)
-                    + LAUNCH.format(id=job["id"], rel=self.rel, rt=self.rt),
+                    + LAUNCH.format(id=job["id"], rel=self.rel, rt=self.rt, pvc=k8s.PVC),
                     stdin=json.dumps(spec).encode(), timeout=900)
             with self.lock:
                 self.running[job["id"]] = (pod, slot, time.time())

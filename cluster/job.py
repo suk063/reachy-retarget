@@ -23,7 +23,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-PVC = Path(os.environ.get("REACHY_RETARGET_PVC", "/mnt/reachy-retarget/v2"))
+PVC = Path(os.environ.get("REACHY_RETARGET_PVC", "/mnt/reachy-retarget"))
 RESERVE = 50e9
 
 
@@ -74,8 +74,15 @@ def publish_file(out: Path, src: Path, dest: Path) -> dict:
             os.fsync(f.fileno())
         if sha256(partial) != digest:
             raise OSError(f"hash mismatch after copying {rel}")
-        os.link(partial, target)  # fails instead of overwriting a concurrent writer
-        partial.unlink()
+        try:
+            os.link(partial, target)  # fails instead of overwriting a concurrent writer
+        except FileExistsError:
+            # Another job published the same path meanwhile (shared content-addressed assets):
+            # fine when the content is identical, an error otherwise.
+            if sha256(target) != digest and not same_ledger_record(src, target):
+                raise FileExistsError(f"{target} exists with different content") from None
+        finally:
+            partial.unlink()
     return {"path": str(rel), "sha256": digest, "bytes": src.stat().st_size}
 
 

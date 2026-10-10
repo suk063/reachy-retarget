@@ -6,7 +6,7 @@ import subprocess
 
 NAMESPACE = "erl-ucsd"
 SELECTOR = "app.kubernetes.io/name=reachy-retarget-worker"
-PVC = "/mnt/reachy-retarget/v2"
+PVC = "/mnt/reachy-retarget"
 
 
 def ready_pods() -> list[str]:

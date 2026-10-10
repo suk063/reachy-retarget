@@ -218,7 +218,7 @@ def main(argv=None):
 #
 # ``python -m cluster.manifests build <family> --listing <file>`` plans the build jobs of one
 # family from a listing of the files on the PVC (``<size> <path>`` per line, as written by
-# ``kubectl exec <pod> -- find /mnt/reachy-retarget/v2/data/raw/<family> -type f -printf '%s %p\n'``;
+# ``kubectl exec <pod> -- find /mnt/reachy-retarget/data/raw/<family> -type f -printf '%s %p\n'``;
 # paths may be absolute, relative to the data root (``raw/...``, ``derived/...``) or relative to
 # ``raw/``). Each job runs ``python -m reachy_retarget.build --family F --path P [--path P2 ...]
 # --shard k/n [--physics] --out {out}`` and publishes to ``datasets/<wave>-<version>``.
@@ -241,7 +241,7 @@ def main(argv=None):
 # Every adapter of these families honours ``select`` (other shards' episodes are not read).
 # ``--physics`` only where the adapter can attach a SceneRef (robocasa, bigym, RoboVerse RLBench).
 
-PVC_DATA = "/mnt/reachy-retarget/v2/data"
+PVC_DATA = "/mnt/reachy-retarget/data"
 SECONDS_PER_EPISODE = 25.0
 CALVIN_BYTES_PER_EPISODE = 49_500  # env A: 389 files, 6,027 windows, 298.8 MB; D_val: 299, 1,087, 53.5 MB
 ROBOCASA_ROBOSUITE = "1.5.2"  # robosuite_version of all 350 RoboCasa365 dataset_meta.json on the PVC

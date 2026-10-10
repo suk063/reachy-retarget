@@ -28,6 +28,26 @@ def test_publisher_streams_complete_files_once_and_never_overwrites(tmp_path):
         job.publish(out, dest)
 
 
+@pytest.mark.parametrize("theirs, ok", [(b"same", True), (b"other", False)])
+def test_publish_file_accepts_a_concurrent_identical_writer(tmp_path, monkeypatch, theirs, ok):
+    out, dest = tmp_path / "out", tmp_path / "dest"
+    (out / "assets").mkdir(parents=True)
+    (out / "assets" / "a.msh").write_bytes(b"same")
+    link = job.os.link
+
+    def racing_link(src, dst):  # another job links the same name between the check and our link
+        (dest / "assets" / "a.msh").write_bytes(theirs)
+        link(src, dst)
+    monkeypatch.setattr(job.os, "link", racing_link)
+    if ok:
+        assert job.publish_file(out, out / "assets" / "a.msh", dest)["bytes"] == 4
+    else:
+        with pytest.raises(FileExistsError):
+            job.publish_file(out, out / "assets" / "a.msh", dest)
+    assert (dest / "assets" / "a.msh").read_bytes() == theirs
+    assert not list(dest.rglob(".*"))  # the partial copy is removed either way
+
+
 def test_job_streams_while_running_and_writes_a_receipt(tmp_path, monkeypatch):
     monkeypatch.setattr(job, "PVC", tmp_path / "pvc")
     monkeypatch.setattr(job, "RESERVE", 0)

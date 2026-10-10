@@ -16,7 +16,7 @@ from cluster import upload  # noqa: E402
 from reachy_retarget.acquire import CatalogEntry  # noqa: E402
 from reachy_retarget.sources import iter_episodes, registry  # noqa: E402
 
-PVC = "/mnt/reachy-retarget/v2/data"
+PVC = "/mnt/reachy-retarget/data"
 FIX = Path(__file__).parent / "fixtures"
 
 

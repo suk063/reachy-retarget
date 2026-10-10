@@ -26,7 +26,7 @@ locally while streaming fail the pod-side check.
     python -m cluster.upload data/derived/bigym/replay-v1 derived/bigym/replay-v1
     python -m cluster.upload data/derived/bigym/replay-v1 derived/bigym/replay-v1 --verify-only
 
-Destinations are relative to the PVC data root ``/mnt/reachy-retarget/v2/data``.
+Destinations are relative to the PVC data root ``/mnt/reachy-retarget/data``.
 """
 from __future__ import annotations
 
