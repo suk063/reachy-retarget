@@ -170,6 +170,57 @@ def test_run_scenario_writes_episode_record_and_index(tmp_path):
     json.dumps(rec)
 
 
+def test_mjviewer_replays_a_pod_record_on_the_mujoco_model(tmp_path):
+    pytest.importorskip("trimesh")
+    pytest.importorskip("mujoco")
+    from reachy_retarget.tracking import mjviewer, viewer
+    rec = run_scenario(NS, "unit", first("gripper_only").index, tmp_path)
+    rel = rec["index_rows"][-1]["file"]
+    path = viewer._resolve(tmp_path, f"/tmp/rr2/jobs/j/out/episodes/{rel}")  # as written on a pod
+    assert path == tmp_path / "episodes" / rel
+    model = mjviewer.display_model()
+    visual = model.geom_group == mjviewer.VISUAL_GROUP
+    assert visual.sum() > 50 and not model.geom_contype[visual].any() and not model.geom_conaffinity[visual].any()
+    ep = read_episode(path)
+    st = mjviewer.episode_states(model, ep)
+    assert st["qpos"].shape == (ep.length, model.nq) and st["xpos"].shape == (ep.length, model.nbody, 3)
+    assert model.nmocap == 0 and st["mocap_pos"].shape == (ep.length, 0, 3)  # tracking: no scene
+    ep.q[:, LEFT_ARM.start] += 0.05
+    with pytest.raises(ValueError, match="does not match"):
+        mjviewer.episode_states(model, ep)
+
+
+def test_mjviewer_textures_primitives_through_uv_meshes():
+    mujoco = pytest.importorskip("mujoco")
+    conversions = pytest.importorskip("mjviser.conversions")
+    from reachy_retarget.tracking import mjviewer
+    spec = mujoco.MjSpec.from_string("""<mujoco><asset>
+      <texture name="cube" type="cube" builtin="checker" width="8" height="8" rgb1="1 0 0" rgb2="0 0 1"/>
+      <texture name="flat" type="2d" builtin="checker" width="8" height="8"/>
+      <material name="wood" texture="cube"/><material name="tile" texture="flat" texrepeat="2 2" texuniform="true"/>
+      </asset><worldbody><body name="b" mocap="true">
+      <geom name="box" type="box" size=".2 .1 .05" material="wood" contype="0" conaffinity="0"/>
+      <geom name="floor" type="plane" size="1 1 .1" material="tile" contype="0" conaffinity="0"/>
+      <geom name="solid" type="box" size=".1 .1 .1" material="wood"/>
+      </body></worldbody></mujoco>""")
+    assert mjviewer.uv_textured_primitives(spec) == 2
+    m = spec.compile()
+    uv = {}
+    for name in ("box", "floor"):
+        g = m.geom(name).id
+        assert m.geom_type[g] == mujoco.mjtGeom.mjGEOM_MESH and conversions.get_geom_texture_id(m, g) >= 0
+        mesh = m.geom_dataid[g]
+        tc = m.mesh_texcoord[m.mesh_texcoordadr[mesh]:m.mesh_texcoordadr[mesh] + m.mesh_texcoordnum[mesh]]
+        faces = m.mesh_facetexcoord[m.mesh_faceadr[mesh]:m.mesh_faceadr[mesh] + m.mesh_facenum[mesh]]
+        uv[name] = tc[faces]  # (faces, 3 corners, 2)
+    assert m.geom_type[m.geom("solid").id] == mujoco.mjtGeom.mjGEOM_BOX  # colliding geoms are left alone
+    strip = np.floor(uv["box"][..., 1] * 6).astype(int)  # atlas face rows [k/6, (k+1)/6] of each corner
+    centre = np.floor(uv["box"][..., 1].mean(1) * 6).astype(int)
+    assert ((strip == centre[:, None]) | (strip == centre[:, None] + 1)).all()  # a triangle stays in one face
+    assert np.bincount(centre, minlength=6).tolist() == [2] * 6  # two triangles per cube face
+    np.testing.assert_allclose([uv["floor"].min(), uv["floor"].max()], [-2, 2])  # 2 repeats per metre
+
+
 def test_tracking_does_not_load_the_manipulation_pipeline():
     code = ("import sys, reachy_retarget.tracking.build, reachy_retarget.tracking.synthetic, "
             "reachy_retarget.tracking.source, reachy_retarget.tracking.pipeline; "

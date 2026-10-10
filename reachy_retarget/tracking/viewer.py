@@ -52,8 +52,15 @@ def load_catalog(run: Path):
 
 
 def _resolve(run: Path, file: str) -> Path:
+    """A record's episode file; records keep the path they were written to (on a pod
+    ``/tmp/rr2/jobs/<job>/out/episodes/...``, locally relative to the build's working directory),
+    which maps to ``run/episodes/...`` in a dataset folder pulled from the PVC or a moved run."""
     p = Path(file)
-    return p if p.is_absolute() or p.exists() else run / "episodes" / p
+    if p.exists():
+        return p
+    if "/episodes/" in file:
+        return run / "episodes" / file.split("/episodes/", 1)[1]
+    return p if p.is_absolute() else run / "episodes" / p
 
 
 def load_episode(path):

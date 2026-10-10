@@ -70,6 +70,16 @@ For display only, the viewer extends each bar along its own axis to 1 cm above t
 
 Link poses come from this repo's URDF kinematics. On 484 frames of a pilot episode they match pinocchio (reachy-control's library) to 1.2e-7 m. Every loaded episode is asserted to replay its stored TCPs (1e-5 m). Install with `uv pip install -e '.[viz]'`.
 
+`python -m reachy_retarget.tracking.mjviewer --run DIR` replays tracking records and build records (`records/<family>/*.jsonl`) on the MuJoCo model with mjviser (the viser-based MuJoCo viewer of reachy-control's mjlab environment):
+- the robot is the tier-P model (`robot.mjcf.reachy_mjcf`) plus display-only visual geoms: the URDF visual meshes, one mesh per material colour, in group 2 without contact, and the tripod extensions;
+- episodes with a `/scene` (manipulation builds) add their scene components from the asset library (`scene_assets.scene_mjcf`) as mocap bodies, Reachy links excluded since the robot is drawn from q; "Poses" switches between `/scene/poses` with `q` (kinematic) and `/scene/physics_poses` with the robot from `/physics/qpos` (tier-P rollout); the model is rebuilt only when the scene components change; textured primitive visual geoms become meshes with MuJoCo-style texture coordinates (cube textures as a six-face atlas), since mjviser textures only meshes with texture coordinates;
+- the collision geoms (group 3) and frame sites (group 4) start hidden; mjviser's Groups tab shows them, its Visualization tab adds frames and contacts;
+- the world frame is fixed and the camera frames the hands, the head and the moving objects of each episode; "Follow base" turns on mjviser's camera tracking, which shifts the whole world (scene, floor grid, overlays) by minus the base position every frame, so the grid then slides as the base drives;
+- each frame writes q into qpos (mimic joints included) and runs `mj_kinematics`, nothing is simulated; every kinematic replay is asserted to reproduce the stored TCPs on the MuJoCo model (1e-5 m);
+- filters: task or cell, tier-K result, final or all attempts.
+
+Both viewers accept a dataset folder copied from the PVC as `--run`: records written on a pod keep the pod's `/tmp/.../episodes/...` paths, which resolve below `DIR/episodes/`.
+
 ## Pipeline (`tracking.pipeline.track`)
 
 1. **First frame.** `q_start` when given (synthetic references start at the robot's state), else a multi-start cold solve.

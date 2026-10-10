@@ -55,6 +55,7 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python -m reachy_retarget.tracking.build synthe
 .venv/bin/python -m reachy_retarget.tracking.report runs/tracking/pilot
 uv pip install --python .venv/bin/python -e '.[viz]'
 .venv/bin/python -m reachy_retarget.tracking.viewer --run runs/tracking/pilot
+.venv/bin/python -m reachy_retarget.tracking.mjviewer --run runs/tracking/pilot   # MuJoCo model via mjviser
 ```
 
 ## Source families
@@ -86,6 +87,7 @@ uv pip install --python .venv/bin/python -e '.[physics,archives,dev]'
 .venv/bin/python -m reachy_retarget.build --family robomimic \
     --path data/raw/robomimic/v1.5/lift/ph/low_dim_v15.hdf5 --shard 0/10 --physics --out runs/lift
 .venv/bin/python -m reachy_retarget.report runs/lift
+.venv/bin/python -m reachy_retarget.tracking.mjviewer --run runs/lift   # robot + scene meshes, kinematic or physics
 ```
 
 ```python
