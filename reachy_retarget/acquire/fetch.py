@@ -475,11 +475,22 @@ def _package_records(root, e: CatalogEntry, man: dict, manifest: Path) -> list[d
 
 # ---------------------------------------------------------------- entry point
 
+TEXTURE_EXT = (".png", ".jpg", ".jpeg", ".bmp", ".tga", ".tif", ".tiff", ".exr", ".webp", ".ktx", ".ktx2", ".dds")
+
+
+def is_texture_asset(e: CatalogEntry) -> bool:
+    """A still image catalogued as ``content: assets`` (a mesh texture): texture files are mesh assets,
+    not observations (AGENTS.md), so the image rule does not apply to them; videos never qualify."""
+    parts = e.path.replace("\\", "/").split("/")
+    return (e.content == "assets" and e.path.lower().endswith(TEXTURE_EXT)
+            and not any(p in ("videos", "images") for p in parts[:-1]))
+
+
 def _guard(e: CatalogEntry, strip_images: bool) -> None:
     kind = e.transport
     if kind == "file_images_embedded" and not strip_images:
         raise PermissionError(f"{e.id} embeds images; refusing (pass strip_images=True to keep a state-only copy)")
-    if kind in ("file", "range_member", "file_images_embedded") and is_image_name(e.path):
+    if kind in ("file", "range_member", "file_images_embedded") and is_image_name(e.path) and not is_texture_asset(e):
         raise ImageRefused(f"{e.id}: image/video files are never fetched")
 
 

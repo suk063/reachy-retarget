@@ -286,10 +286,10 @@ def test_reachy_links_cover_the_urdf_visuals():
 def test_family_mesh_policy(tmp_path):
     from reachy_retarget.build import build
     from reachy_retarget.sources import MESHES, require_meshes
-    for fam in ("robomimic", "mimicgen", "libero", "dexmimicgen", "robocasa", "bigym", "maniskill"):
+    for fam in ("robomimic", "mimicgen", "libero", "dexmimicgen", "robocasa", "bigym", "maniskill", "roboverse"):
         require_meshes(fam)
-    assert MESHES["roboverse"][0] == MESHES["mobilemanibench"][0] == "pending"
-    for fam in ("behavior", "molmobot", "roboverse", "nope"):
+    assert MESHES["mobilemanibench"][0] == "pending"
+    for fam in ("behavior", "molmobot", "mobilemanibench", "nope"):
         with pytest.raises(ValueError, match="scene meshes"):
             build(fam, str(tmp_path / "missing.h5"), (0, 1), str(tmp_path / "out"))
     assert not (tmp_path / "out").exists()

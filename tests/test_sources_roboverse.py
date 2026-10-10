@@ -157,3 +157,103 @@ def test_unsupported_file(tmp_path):
     p.write_bytes(gzip.compress(pickle.dumps({"franka": []})))
     with pytest.raises(ValueError):
         episodes(p)
+
+
+def _png(w=2, h=2) -> bytes:
+    import struct
+    import zlib
+
+    def chunk(t, d):
+        return struct.pack(">I", len(d)) + t + d + struct.pack(">I", zlib.crc32(t + d) & 0xffffffff)
+    raw = b"".join(b"\x00" + b"\x80\x40\x20" * w for _ in range(h))
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0))
+            + chunk(b"IDAT", zlib.compress(raw)) + chunk(b"IEND", b""))
+
+
+def _cube_obj(half=0.05, at=(0, 0, 0), name=None, texcoords=False) -> str:
+    v = [(at[0] + sx * half, at[1] + sy * half, at[2] + sz * half) for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)]
+    f = [(1, 2, 4), (1, 4, 3), (5, 7, 8), (5, 8, 6), (1, 5, 6), (1, 6, 2), (3, 4, 8), (3, 8, 7), (1, 3, 7), (1, 7, 5),
+         (2, 6, 8), (2, 8, 4)]
+    lines = ([f"o {name}"] if name else []) + [f"v {x} {y} {z}" for x, y, z in v]
+    lines += ["vt 0 0", "vt 1 0", "vt 1 1"] if texcoords else []
+    return "\n".join(lines + [f"f {a} {b} {c}" for a, b, c in f]) + "\n"
+
+
+def calvin_assets(root: Path) -> Path:
+    """A synthetic CALVIN asset tree (scene A) with the real link/joint names: tiny cube meshes, a two-part
+    VHACD collision file, an MTL diffuse texture, block and plane URDFs."""
+    base = root / "raw/roboverse/assets/calvin"
+    t = base / "calvin_table_A"
+    (t / "urdf").mkdir(parents=True)
+    (t / "meshes").mkdir()
+    (t / "textures").mkdir()
+    (t / "textures/wood.png").write_bytes(_png())
+    (t / "meshes/wood.mtl").write_text("newmtl Material\nKd 0.8 0.8 0.8\nmap_Kd ../textures/wood.png\n")
+    (t / "meshes/base_link.obj").write_text("mtllib wood.mtl\n" + _cube_obj(0.3, (0, 0, 0.3), texcoords=True))
+    (t / "meshes/part.obj").write_text("mtllib wood.mtl\n" + _cube_obj(0.05))
+    # two convex parts; OBJ face indices are file-wide, so the second part's faces start at vertex 9
+    second = "\n".join(f"f {' '.join(str(int(i) + 8) for i in line.split()[1:])}" if line.startswith("f ") else line
+                       for line in _cube_obj(0.02, (0.03, 0, 0), "c1").splitlines())
+    (t / "meshes/part_vhacd2.obj").write_text(_cube_obj(0.02, (-0.03, 0, 0), "c0") + second + "\n")
+    joints = {"base__button": ("0 -1 0", "0.025"), "base__switch": ("0 0 -1", "0.11"),
+              "base__slide": ("-1 0 0", "0.35"), "base__drawer": ("0 0 1", "0.275")}
+    links = ['<link name="base_link"><visual><geometry><mesh filename="../meshes/base_link.obj"/></geometry>'
+             '<material name="w"><color rgba="1 1 1 1"/></material></visual><collision><geometry>'
+             '<mesh filename="../meshes/base_link.obj"/></geometry></collision></link>']
+    for k, (j, (axis, upper)) in enumerate(joints.items()):
+        links.append(f'<link name="l{k}"><inertial><mass value="0.2"/><inertia ixx="1e-4" iyy="1e-4" izz="1e-4" ixy="0" '
+                     f'ixz="0" iyz="0"/></inertial><visual><geometry><mesh filename="../meshes/part.obj"/></geometry>'
+                     f'</visual><collision><geometry><mesh filename="../meshes/part_vhacd2.obj"/></geometry></collision>'
+                     f'</link><joint name="{j}" type="prismatic"><origin xyz="{0.1 * k} 0 0.7" rpy="1.5708 0 0"/>'
+                     f'<parent link="base_link"/><child link="l{k}"/><axis xyz="{axis}"/>'
+                     f'<limit lower="0" upper="{upper}" effort="0" velocity="0"/></joint>')
+    links.append('<link name="led"><visual><geometry><mesh filename="../meshes/part.obj"/></geometry></visual></link>'
+                 '<joint name="base__led" type="fixed"><origin xyz="0 0.2 0.8" rpy="0 0 0"/><parent link="base_link"/>'
+                 '<child link="led"/></joint>')
+    (t / "urdf/calvin_table_A.urdf").write_text(f'<robot name="t">{"".join(links)}</robot>')
+    (base / "blocks").mkdir()
+    for colour, size, box in (("pink", "small", "0.05 0.05 0.05"), ("blue", "big", "0.1 0.05 0.05"),
+                              ("red", "middle", "0.07 0.05 0.05")):
+        (base / f"blocks/block_{colour}_{size}.urdf").write_text(
+            f'<robot name="b"><link name="base_link"><inertial><mass value="1"/></inertial><visual><geometry>'
+            f'<box size="{box}"/></geometry><material name="c"><color rgba="1 0 1 1"/></material></visual></link></robot>')
+    (base / "plane").mkdir()
+    (base / "plane/checker_blue.png").write_bytes(_png())
+    (base / "plane/plane.mtl").write_text("newmtl m\nmap_Kd checker_blue.png\n")
+    (base / "plane/plane.obj").write_text("mtllib plane.mtl\nv -15 -15 0\nv 15 -15 0\nv 15 15 0\nv -15 15 0\n"
+                                          "vt 0 0\nvt 1 0\nvt 1 1\nvt 0 1\nf 1/1 2/2 3/3\nf 1/1 3/3 4/4\n")
+    return root
+
+
+def test_calvin_scene_split_and_rotations():
+    from reachy_retarget.sources.calvin_scene import rpy_to_quat, split_obj
+    parts = split_obj((_cube_obj(0.1, name="a") + "o b\nv 0 0 0\nv 1 0 0\nv 0 1 0\nf 9 10 11\n").encode())
+    assert len(parts) == 2 and parts[1].decode().splitlines()[-1] == "f 1 2 3"
+    np.testing.assert_allclose(rpy_to_quat([np.pi / 2, 0, 0]), [np.cos(np.pi / 4), np.sin(np.pi / 4), 0, 0], atol=1e-12)
+
+
+def test_calvin_episode_carries_a_mesh_scene(tmp_path):
+    import mujoco
+
+    from reachy_retarget.evaluate import process_source
+    from reachy_retarget.schema.scene_assets import read_scene
+    root = calvin_assets(tmp_path / "data")
+    (ep,) = episodes(CV / "env_A_out/task_5_v2.pkl", root=root)
+    assert ep.scene is not None and ep.provenance["scene"].startswith("calvin_scene")
+    build = ep.provenance["scene_build"]
+    assert build["scaling"] == 0.8 and build["table_joints"] == [f"table/{j}" for j in
+                                                                 ("base__button", "base__switch", "base__slide",
+                                                                  "base__drawer")]
+    m = mujoco.MjModel.from_xml_string(ep.scene.mjcf, ep.scene.assets)
+    assert m.jnt_range[m.joint("table/base__drawer").id].tolist() == pytest.approx([0, 0.22])
+    assert sum(m.geom_group[i] == 3 and m.geom_bodyid[i] == m.body("table/l3").id for i in range(m.ngeom)) == 2
+    names = ep.scene_qpos.joint_names
+    assert names[:7] == [f"block_blue_joint/{k}" for k in ("x", "y", "z", "qw", "qx", "qy", "qz")]
+    np.testing.assert_allclose(ep.scene_qpos.qpos[:, names.index("block_red_joint/z")], ep.objects["block_red"].pose[:, 2])
+    rec = process_source(ep, physics=False, write=str(tmp_path / "out"), layout="dataset")
+    assert rec["status"] == "ok" and rec["file"], rec.get("reason")
+    scene, lib = read_scene(rec["file"])
+    comps = {c["name"]: c for c in scene.components}
+    assert {"table", "block_red", "block_blue", "block_pink"} <= set(comps)
+    assert comps["table"]["visual"] and comps["block_red"]["role"] == "manipulated"
+    assert any(c.get("articulation") == "table" for c in scene.components) and scene.valid.all()

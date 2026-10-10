@@ -41,8 +41,10 @@ but CALVIN orders them as listed in each scene config (A: pink, blue, red; C: bl
 pink): the colours are remapped here (``CALVIN_BLOCK_ORDER``; verified by language/motion
 agreement, see docs/sources.md). Blocks are boxes from CALVIN's block URDFs scaled by the
 scene ``global_scaling`` 0.8; the table is a mesh with four joints (slide, drawer, button,
-switch), recorded as the AABB of its scaled base mesh plus the asset reference, so no MuJoCo
-scene is attached.
+switch), tracked as the AABB of its scaled base mesh plus the asset reference. The MuJoCo scene
+(desk, blocks, floor from CALVIN's own assets, catalogued under ``assets/calvin``) is built by
+:mod:`.calvin_scene`; every step's block poses and table joints pose its components
+(``scene_qpos``). Without the assets the episode has no scene (the build excludes it, ``no_meshes``).
 
 Grasp centers (contract: +z approach, +y closing, origin between the pads), from robot
 models pinned in the catalog:
@@ -75,7 +77,7 @@ from scipy.spatial.transform import Rotation
 from ..acquire import load_catalog, sha256_file
 from ..robot.urdf import URDF, KinematicTree
 from ..schema.source import Articulation, Effector, ObjectTrack, SourceEpisode
-from . import primitive_scene
+from . import calvin_scene, primitive_scene
 from .registry import register
 from .roboverse_pickle import load as load_pickle
 from .roboverse_pickle import load_npy_object
@@ -422,11 +424,18 @@ def read_roboverse(path: Path, *, family: str, demos=None, limit=None, root=None
         scene, val, n = m_cv.group(1), bool(m_cv.group(2)), int(m_cv.group(3))
         gr = _calvin_robot(str(need(CALVIN_URDF)))
         ann = {v: k for k, v in load_npy_object(need(ANN_DICT)).items()}
+        cache = {}
+
+        def read_asset(rel):
+            if rel not in cache:
+                cache[rel] = need(rel).read_bytes()
+            return cache[rel]
         for pos, i in enumerate(idx):
             if select is not None and not select(pos):
                 yield None  # another shard's episode: not converted
                 continue
-            yield _calvin_episode(episodes[i], i, scene, val, n, ann.get(n), gr, family, entry, common, crosscheck)
+            yield _calvin_episode(episodes[i], i, scene, val, n, ann.get(n), gr, family, entry, common, crosscheck,
+                                  read_asset)
     else:
         raise ValueError(f"{rel}: not a supported RoboVerse trajectory (RLBench franka_v2.pkl.gz or "
                          "CALVIN calvin_traj_ann task_<N>_v2.pkl)")
@@ -563,7 +572,7 @@ def _rlbench_scene(objects, physics):
     return ref, "primitive_scene: primitives + synthesized table (see provenance['scene_physical'])"
 
 
-def _calvin_episode(ep, i, scene, val, task_index, sentence, gr, family, entry, common, crosscheck):
+def _calvin_episode(ep, i, scene, val, task_index, sentence, gr, family, entry, common, crosscheck, read_asset=None):
     states = ep["states"]
     T = len(states)
     time = np.arange(T) / CALVIN_FREQ_HZ
@@ -593,6 +602,17 @@ def _calvin_episode(ep, i, scene, val, task_index, sentence, gr, family, entry, 
                                              "note": "articulated desk (slide, drawer, button, switch); geometry is the "
                                                      "AABB of the scaled base_link collision mesh, moving parts excluded"})
     arts["table"] = Articulation(joint_names=[f"table/{j}" for j in joints], qpos=qpos)
+    scene_ref = scene_q = scene_build = None
+    scene_note = "none: CALVIN scene assets not available (fetch roboverse/assets/calvin/)"
+    if read_asset is not None:
+        try:
+            scene_ref, scene_build = calvin_scene.build_scene(
+                scene, read_asset, tpose[0], {c: (CALVIN_BLOCK_URDF[scene][c], objects[f"block_{c}"].pose[0])
+                                              for c in remap.values()})
+            scene_q = calvin_scene.scene_qpos({c: objects[f"block_{c}"].pose for c in remap.values()}, joints, qpos)
+            scene_note = "calvin_scene: desk, blocks and floor from CALVIN's assets (see provenance['scene_build'])"
+        except FileNotFoundError as e:
+            scene_note = f"none: CALVIN scene assets missing ({e})"
     src = (ep.get("env_meta") or {}).get("source_dir", "")
     m = re.search(r"episode_(\d+)_(\d+)_(\d+)_(\d+)$", src)
     frames = [int(m.group(3)), int(m.group(4))] if m else None
@@ -616,7 +636,7 @@ def _calvin_episode(ep, i, scene, val, task_index, sentence, gr, family, entry, 
         "init_state_note": "init_state is RoboVerse's PyBullet reset state, not a recorded frame; unused",
         "state_route": "kinematic: converted CALVIN robot_obs/scene_obs (human VR teleoperation in PyBullet)",
         "success_source": "derived: CALVIN language windows are labelled where CALVIN's task oracle detected the task",
-        "scene": "none: CALVIN table is an articulated mesh (calvin_table URDF), not primitive geometry",
+        "scene": scene_note, "scene_build": scene_build,
         "light_states": "dropped by RoboVerse (scene_obs lightbulb / green light not converted)"}
     lineage = {"generated": False, "human": True, "source_type": "teleoperation", "upstream": "CALVIN",
                "stream": f"calvin/{env}", "frames": frames,
@@ -626,7 +646,7 @@ def _calvin_episode(ep, i, scene, val, task_index, sentence, gr, family, entry, 
         family=family, dataset=entry.dataset if entry and entry.dataset else f"roboverse/calvin/{env}",
         episode_id=f"task{task_index}_ep{i:03d}", task=f"calvin/{sentence or task_index}", time=time, effectors=eff,
         objects=objects, base_hint=np.array([root[0, 0, 3], root[0, 1, 3], _yaw(root[0, :3, :3])]),
-        articulations=arts, scene=None, instruction=sentence, success=True, regime="tabletop",
+        articulations=arts, scene=scene_ref, scene_qpos=scene_q, instruction=sentence, success=True, regime="tabletop",
         license=entry.license if entry else "unknown", provenance=provenance, lineage=lineage)
 
 

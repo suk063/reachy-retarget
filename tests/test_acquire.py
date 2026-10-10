@@ -70,7 +70,8 @@ def test_packaged_catalog_is_pinned_and_explicit():
             assert e.source["archive_sha256"] and e.source["offset"] >= 0 and e.size > 0
         else:
             assert e.source["compression"] == "zstd" and e.source["stored_size"] > 0 and e.source["keep"]
-        assert not (e.kind in ("file", "range_member") and is_image_name(e.path))  # never images or videos
+        # never images or videos, except still textures catalogued as mesh assets (AGENTS.md)
+        assert not (e.kind in ("file", "range_member") and is_image_name(e.path) and not fetch_mod.is_texture_asset(e))
     datasets = {e.dataset for e in cat.values() if e.family == "robomimic"}
     for task in ["lift", "can", "square", "transport"]:
         assert {f"robomimic/{task}/ph", f"robomimic/{task}/mh"} <= datasets
@@ -179,6 +180,18 @@ def test_fetch_refuses_images_and_videos(tmp_path, plenty_of_disk):
                          source={"offset": 0, "archive": "a.tar", "archive_format": "tar"})],
                   tmp_path, opener=opener(log))
     assert log == [] and not list(tmp_path.rglob("*.*"))
+    for name, content in (("cam/frame_0001.png", "low_dim"), ("tex/wood.mp4", "assets"),
+                          ("images/wood.png", "assets")):  # observations, videos and image folders stay refused
+        with pytest.raises(ImageRefused):
+            fetch([entry(id=f"demo/{name}", path=name, content=content)], tmp_path, opener=opener(log))
+    assert log == []
+
+
+def test_fetch_keeps_texture_assets(tmp_path, plenty_of_disk):
+    log = []
+    e = entry(id="demo/table/textures/wood.png", path="table/textures/wood.png", content="assets")
+    fetch([e], tmp_path, opener=opener(log))
+    assert (tmp_path / "raw" / "demo" / "table" / "textures" / "wood.png").read_bytes() == PAYLOAD
 
 
 # ---------------------------------------------------------------- ledger

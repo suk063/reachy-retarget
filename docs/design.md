@@ -921,7 +921,8 @@ xyz + wxyz, world) of every component including Reachy's links. Layout: docs/sch
 **Family policy** (`sources.registry.MESHES`, the single place): `available` for robomimic,
 MimicGen, LIBERO, DexMimicGen (robosuite MJCF per demo + pinned asset archives), RoboCasa
 (recorded kitchen MJCF + RoboCasa asset archives), BiGym (replay-record MJCF + exported assets)
-and ManiSkill (primitive scenes); `pending` for RoboVerse and MobileManiBench; `excluded` for
+ManiSkill (primitive scenes) and RoboVerse (CALVIN desk/block/floor scene from CALVIN's assets, RLBench
+primitive scenes); `pending` for MobileManiBench; `excluded` for
 BEHAVIOR (encrypted object assets) and MolmoBot (no per-step pose of free objects). `build` refuses
 every family that is not `available` before reading anything. Within an available family an
 episode whose scene cannot be resolved (adapter `state_route` kinematic-only, missing collision or

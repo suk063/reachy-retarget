@@ -52,9 +52,9 @@ MESHES = {
     "robocasa": ("available", "recorded kitchen MJCF + RoboCasa asset archives"),
     "bigym": ("available", "replay-record MJCF + exported BiGym assets"),
     "maniskill": ("available", "primitive scene rebuilt from the task geometry (boxes, spheres, ...)"),
-    "roboverse": ("pending", "CALVIN: per-step block poses and table joints are recorded (light states dropped); "
-                             "table/block meshes in roboverse_data assets/calvin (MIT, = mees/calvin_env); scene "
-                             "assembly not implemented yet"),
+    "roboverse": ("available", "CALVIN: desk, blocks and floor from roboverse_data assets/calvin (= mees/calvin_env, "
+                               "MIT; sources.calvin_scene), per-step block poses and table joints; RLBench: primitive "
+                               "scene where every object is a primitive (others excluded one by one, no_meshes)"),
     "mobilemanibench": ("pending", "PartNet-Mobility meshes are in the release's Assets/Assets.zip (re-host; "
                                    "PartNet-Mobility terms: non-commercial research); per step only the moving "
                                    "link (handle) pose, the object root and other joints at their recorded initial "

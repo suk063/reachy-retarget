@@ -9,9 +9,9 @@ thousands of entries keep their rows in a gzip TSV next to the yaml (`table:`).
 Scene meshes are required for building (docs/design.md, *Scene meshes*): the status of every
 family is in `sources.registry.MESHES`. Built: robomimic, MimicGen, LIBERO, DexMimicGen, RoboCasa,
 BiGym, ManiSkill (primitive scenes; actor colours only where the task source sets a constant one,
-the table's textured GLB visual is not catalogued and its collision box stands in). Pending:
-RoboVerse, MobileManiBench (meshes and per-step object state obtainable, scene assembly not
-implemented). Excluded (meshes or per-step object poses not obtainable): BEHAVIOR-1K (encrypted
+the table's textured GLB visual is not catalogued and its collision box stands in), RoboVerse
+(CALVIN: desk, blocks and floor from CALVIN's own assets; RLBench: primitive scenes only). Pending:
+MobileManiBench (meshes and per-step object state obtainable, scene assembly not implemented). Excluded (meshes or per-step object poses not obtainable): BEHAVIOR-1K (encrypted
 object assets), MolmoBot-Data (no per-step pose of free objects in any release, see its *Known
 gaps*). Episodes of built families whose assets are not fetched (e.g. RoboCasa tars outside the
 asset subset) are excluded one by one (`no_meshes`), and so are episodes with an object,
@@ -1463,8 +1463,9 @@ either). RoboVerse's LIBERO and ManiSkill folders are migrations of sources read
   red middle; D: red middle, blue small, pink big) × `global_scaling` 0.8 (small 4 cm cube,
   middle 5.6 × 4 × 4 cm, big 8 × 4 × 4 cm). The desk is an articulated mesh
   (`base__slide`, `base__drawer`, `base__button`, `base__switch` → `articulations["table"]`),
-  recorded as the AABB of its scaled base mesh (0.88 × 0.36 × 0.65 m) plus the URDF reference;
-  no MuJoCo scene. Light states are dropped by RoboVerse.
+  tracked as the AABB of its scaled base mesh (0.88 × 0.36 × 0.65 m) plus the URDF reference;
+  the episode's MuJoCo scene (desk, blocks, floor) comes from `sources.calvin_scene` (see *Known
+  gaps (RoboVerse)*). Light states are dropped by RoboVerse.
 * Grasp center: CALVIN's own robot `robots/franka_calvin/panda_longer_finger.urdf`, link
   `tcp` (`tcp_link_id: 15`, 0.14 m from `panda_hand`; the DIGIT fingers have no pad
   primitive). Base fixed at (-0.34, -0.46, 0.24) (CALVIN world, floor plane at z = 0).
@@ -1505,8 +1506,16 @@ excursions: ≤ 0.005 rad (RLBench), ≤ 0.013 rad (CALVIN, against CALVIN's URD
   `roboverse_pack/tasks/calvin/data_preparation/convert_data_batch.py` at `5f3ec01` drops the
   lightbulb and LED states). Table A–D, block and plane URDFs/meshes are in
   `roboverse_data/assets/calvin` (identical to mees/calvin_env `797142c`, MIT); CALVIN scales
-  scenes by 0.8 and sizes blocks per env (`calvin_env/conf/scene/calvin_scene_*.yaml`). The scene
-  assembly is not implemented, so the family stays `pending` and is not built.
+  scenes by 0.8 and sizes blocks per env (`calvin_env/conf/scene/calvin_scene_*.yaml`).
+  `sources.calvin_scene` builds each episode's MuJoCo scene from them (all 149 files catalogued as
+  the "CALVIN scene assets" group, `content: assets`; textures are mesh assets and pass the fetch
+  image rule): desk body `table` with slide joints `table/base__{slide,drawer,button,switch}`
+  (ranges x 0.8; the recorded values are already scaled: drawer max 0.2199 = 0.275 x 0.8), visual
+  OBJ/STL meshes with their MTL diffuse texture, VHACD collision files split into convex parts,
+  free block boxes and the textured floor. Check on env A task 0 (8 windows): every block centre
+  is 20.0–22.3 mm above the visual surface below it (block half height 20 mm) except one held
+  block, i.e. scale and frames agree to ~2 mm. Light on/off states stay unrecorded (the lights do
+  not move).
 * CALVIN: env B, C, D training windows (~17k more by size) are catalogued but not yet
   fetched or adapted here; the play stream is not catalogued; windows overlap (count by group); the desk is approximated by an AABB for the
   footprint; RoboVerse's binary per-task files and retargeted UR5e/extension variants are
