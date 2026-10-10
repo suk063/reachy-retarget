@@ -67,7 +67,9 @@ def _fetched(e, ledger) -> bool:
 
 def index_rows(root: Path) -> list[dict]:
     """Index rows of a dataset directory: the ``index_row`` of every build record (``records/**/*.jsonl``)
-    whose episode file exists, else rows read from every ``*.h5``/``*.hdf5`` episode below ``root``."""
+    whose episode file exists, else rows read from every ``*.h5``/``*.hdf5`` episode below ``root``. Build
+    records give the episode path relative to the build's ``episodes/`` folder; rows store it relative to
+    ``root``."""
     import json
 
     from .schema.io import index_row, read_episode
@@ -78,8 +80,11 @@ def index_rows(root: Path) -> list[dict]:
         for f in records:
             for line in f.read_text().splitlines():
                 row = json.loads(line).get("index_row") if line.strip() else None
-                if row and (root / row["file"]).is_file():
-                    rows.append(row)
+                if not row:
+                    continue
+                rel = next((c for c in (row["file"], f"episodes/{row['file']}") if (root / c).is_file()), None)
+                if rel is not None:
+                    rows.append({**row, "file": rel})
         return sorted(rows, key=lambda r: r["file"])
     paths = sorted({*root.rglob("*.h5"), *root.rglob("*.hdf5")})
     return [index_row(read_episode(path), str(path.relative_to(root))) for path in paths]

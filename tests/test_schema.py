@@ -169,9 +169,9 @@ def test_index_command_reads_records_or_episode_files(tmp_path):
     write_episode(tmp_path / "episodes" / "d" / "b.h5", b)
     assert [r["file"] for r in index_rows(tmp_path)] == ["episodes/d/a.h5", "episodes/d/b.h5"]   # .h5 files read
     (tmp_path / "records" / "f").mkdir(parents=True)
-    recs = [{"status": "ok", "index_row": index_row(a, "episodes/d/a.h5")},
+    recs = [{"status": "ok", "index_row": index_row(a, "d/a.h5")},                # builds: relative to episodes/
             {"status": "excluded", "excluded": "no_meshes"},                       # not written: no row
-            {"status": "ok", "index_row": index_row(b, "episodes/d/gone.h5")}]     # file missing: skipped
+            {"status": "ok", "index_row": index_row(b, "d/gone.h5")}]              # file missing: skipped
     (tmp_path / "records" / "f" / "x.jsonl").write_text("".join(json.dumps(r) + "\n" for r in recs))
     rows = index_rows(tmp_path)
-    assert [r["uid"] for r in rows] == [a.uid]
+    assert [(r["uid"], r["file"]) for r in rows] == [(a.uid, "episodes/d/a.h5")]
