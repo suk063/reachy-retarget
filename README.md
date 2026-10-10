@@ -58,6 +58,20 @@ uv pip install --python .venv/bin/python -e '.[viz]'
 .venv/bin/python -m reachy_retarget.tracking.mjviewer --run runs/tracking/pilot   # MuJoCo model via mjviser
 ```
 
+## Policy
+
+The map + state policy is [reachy-policy](https://github.com/suk063/reachy-policy). Clone it into
+`external/` (gitignored) and install it editable:
+
+```bash
+git clone https://github.com/suk063/reachy-policy external/reachy-policy
+uv pip install --python .venv/bin/python -e external/reachy-policy
+```
+
+Its action contract is reachy-agent's v8, which the stored `reachy_agent_v8` control mode follows.
+`policy.build_map` and `policy.evaluate` render or simulate reachy-agent's MuJoCo scenes and run
+from a reachy-agent checkout.
+
 ## Source families
 
 robomimic, MimicGen, LIBERO, DexMimicGen (parallel-gripper tasks), ManiSkill3 demos,
