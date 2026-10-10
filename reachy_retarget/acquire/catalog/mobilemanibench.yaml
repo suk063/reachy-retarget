@@ -335,7 +335,7 @@ sources:
       size: 31297996800
       format: tar
       nfiles: 53087
-    Assets/Assets.zip:
+    Assets/Assets.zip: &id001
       url: https://huggingface.co/datasets/arnoldland/MobileManiBench/resolve/88bc86eed0162c3b9a27bc962ce2d4815cbf2e59/Assets/Assets.zip
       sha256: 494f56c26694151a24d0c04cce5f9111ec6fb5c706c6a72f67523869a030ef44
       size: 8507213644
@@ -357,3 +357,21 @@ sources:
     episodes: 137710
     bytes: 76335862745
     files: 170112
+- family: mobilemanibench
+  repo: https://huggingface.co/datasets/arnoldland/MobileManiBench
+  revision: 88bc86eed0162c3b9a27bc962ce2d4815cbf2e59
+  license: 'PartNet-Mobility terms of use (SAPIEN: non-commercial research and educational use only; ShapeNet terms apply),
+    re-hosted in arnoldland/MobileManiBench Assets/Assets.zip'
+  kind: range_member
+  note: 'PartNet-Mobility object assets of the catalogued episodes'' objects: URDF, OBJ meshes, MTL materials and their textures
+    (mesh assets, not observations), metadata and the Isaac process config.yaml (fix_base); members of Assets/Assets.zip read
+    by byte range (local header offset), zip CRC-32 checked, sha256 recorded trust-on-first-use. Rendered part images, point
+    samples and USD files are not catalogued.'
+  archives:
+    Assets/Assets.zip: *id001
+  table: mobilemanibench.assets.tsv.gz
+  totals:
+    objects: 317
+    files: 31225
+    bytes: 419550730
+    stored_bytes: 133664733

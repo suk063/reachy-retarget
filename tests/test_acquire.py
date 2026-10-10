@@ -180,8 +180,8 @@ def test_fetch_refuses_images_and_videos(tmp_path, plenty_of_disk):
                          source={"offset": 0, "archive": "a.tar", "archive_format": "tar"})],
                   tmp_path, opener=opener(log))
     assert log == [] and not list(tmp_path.rglob("*.*"))
-    for name, content in (("cam/frame_0001.png", "low_dim"), ("tex/wood.mp4", "assets"),
-                          ("images/wood.png", "assets")):  # observations, videos and image folders stay refused
+    for name, content in (("cam/frame_0001.png", "low_dim"), ("tex/wood.mp4", "assets"), ("images/f.png", "low_dim"),
+                          ("videos/wood.png", "assets")):  # observations and videos stay refused
         with pytest.raises(ImageRefused):
             fetch([entry(id=f"demo/{name}", path=name, content=content)], tmp_path, opener=opener(log))
     assert log == []
@@ -189,9 +189,9 @@ def test_fetch_refuses_images_and_videos(tmp_path, plenty_of_disk):
 
 def test_fetch_keeps_texture_assets(tmp_path, plenty_of_disk):
     log = []
-    e = entry(id="demo/table/textures/wood.png", path="table/textures/wood.png", content="assets")
-    fetch([e], tmp_path, opener=opener(log))
-    assert (tmp_path / "raw" / "demo" / "table" / "textures" / "wood.png").read_bytes() == PAYLOAD
+    for rel in ("table/textures/wood.png", "obj/images/texture_0.jpg"):   # PartNet keeps textures in images/
+        fetch([entry(id=f"demo/{rel}", path=rel, content="assets")], tmp_path, opener=opener(log))
+        assert (tmp_path / "raw" / "demo" / rel).read_bytes() == PAYLOAD
 
 
 # ---------------------------------------------------------------- ledger

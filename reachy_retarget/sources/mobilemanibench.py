@@ -42,20 +42,22 @@ joint orders are the ones listed in ``g1_robot_env.py`` and are checked here by 
   (translation along the rotated heading), so ``base_link`` moves on a polar rig about the
   spawn point (checked per episode, ``provenance["base_check"]``). ``torso_height`` = world z
   of ``arm_base_link`` (arm mount; the lift/pitch joints stay at their initial values).
-* **World**: the Isaac Lab env frame. The ground plane and ground box top are at z = 0; the
-  robot root floats at z = 0.01 (gravity disabled) and ``base_link`` at z = 0.02. No offset.
-* **Objects**: the recorded *grasp point* only. For articulated objects this is the handle
-  pose (publisher's closed-handle pose on the grasp link, composed with the link pose each
-  frame); for YCB objects it is the body COM pose. The object root pose and joint positions are
-  recorded only at t0 (``init``); the root track (fixture) is valid at t0 only. The goal
-  position (``object[:, 6:9]``) is kept in provenance. The support stage / table under
-  tabletop objects and the room are not recorded per episode.
-* **Articulations** (revolute / prismatic grasp joints): *derived* from the handle track,
-  because the release does not store per-frame object joint positions: theta(t) = rotation of
-  the handle about its dominant axis since t0 (revolute) or translation along the dominant
-  direction (prismatic); qpos = q0 + theta for ``open`` and q0 - theta for ``close`` with
-  q0 = the recorded initial value of the grasp joint (largest |init joint|; all are 0.001 for
-  open tasks). Residuals of the single-axis fit are in ``provenance["articulation"]``.
+* **World**: the Isaac Lab env frame. The terrain plane is at z = 0 and the ground box top at
+  z = 0.01 (``env_model.py``); the robot root floats at z = 0.01 (gravity disabled) and
+  ``base_link`` at z = 0.02. No offset.
+* **Objects**: the recorded *grasp point* (for articulated objects the handle pose: the
+  publisher's closed-handle pose on the grasp link, composed with the link pose each frame; for
+  YCB objects the body COM pose) and, for PartNet-Mobility objects, the articulation root
+  ``<group>_<id>``: static at the recorded initial pose for fixed-base objects, derived from the
+  handle for carts (free base; the grasp link is fixed to the root). The goal position
+  (``object[:, 6:9]``) is kept in provenance.
+* **Articulations** (revolute / prismatic grasp joints): the release stores no per-frame object
+  joint positions. With the PartNet-Mobility scene the grasp joint is solved at every step from
+  the handle track through the object's URDF kinematics (:func:`.partnet_scene.solve_grasp_joint`;
+  residuals ~1e-7 rad, t0 equals the recorded initial value); the other joints stay at the
+  source's initial value. Without the scene assets it falls back to :func:`derive_articulation`
+  (motion of the handle since t0 about/along its dominant axis added to the recorded initial
+  value; the root is then valid at t0 only and the episode cannot be written).
 * **Success**: per-frame flag; the recorder deletes every episode without success
   (``env_model.py`` ``_reset_idx``), so every released episode has ``success = True`` and the
   release says nothing about the failure rate.
@@ -63,8 +65,13 @@ joint orders are the ones listed in ``g1_robot_env.py`` and are checked here by 
   ``unimanip/utils/general_utils.py``): ``<skill> <object>[ at <part>]`` from
   ``configs/data/analysis_<category>.yaml``.
 
-No ``SceneRef``: rooms (GenieSim / IsaacSim USD) and objects (PartNet-Mobility, UniDoor, YCB
-USD in ``Assets/Assets.zip``) are Isaac Sim assets, not MuJoCo models.
+**Scene** (PartNet-Mobility groups): :mod:`.partnet_scene` rebuilds the object from its
+``mobility.urdf`` and OBJ meshes (``Assets/partnet/dataset/<id>/``, members of ``Assets/Assets.zip``;
+PartNet-Mobility terms: non-commercial research), scaled by the group's ``scale`` of
+``analysis_scene.yaml``, with the source's support stage and ground boxes; ``scene_qpos`` holds every
+object joint (and a cart's root) at every step. The room (GenieSim / IsaacSim USD, collision
+disabled in the source) is not representable and is listed in ``provenance["scene_omitted"]``.
+UniDoor (COLLADA) and YCB objects get no scene yet (``no_meshes`` at build time).
 """
 from __future__ import annotations
 
@@ -80,6 +87,7 @@ from scipy.spatial.transform import Rotation
 
 from ..acquire import load_catalog, locate_entry, sha256_file
 from ..schema.source import Articulation, Effector, ObjectTrack, SourceEpisode
+from . import partnet_scene
 from .registry import register
 
 FAMILY = "mobilemanibench"
@@ -128,6 +136,8 @@ GRIPPER_JOINT = "idx81_gripper_r_outer_joint1"
 PADS = ("gripper_r_inner_link5", "gripper_r_outer_link5")
 URDF_PATH = "Assets/g1_robot_rotate/G1_120s.urdf"
 ANALYSIS_PATH = "code/unimanip/configs/data/analysis_{}.yaml"
+PARTNET_DIR = "Assets/partnet/dataset/{id}"
+PARTNET_CONFIG = "Assets/partnet/process/{group}/{id}/config.yaml"
 SKILL_ALIASES = {("cart", "open"): "pull", ("cart", "close"): "push", ("chair", "open"): "pull",
                  ("chair", "close"): "push", ("ycb", "open"): "pick"}
 
@@ -458,6 +468,31 @@ def _episode(path: Path, family, root, urdf, catalog, fk_check) -> SourceEpisode
                         **{k: v for k, v in der.items() if k != "theta"},
                         "final_qpos": float(q0 + sign * der["theta"][-1])}
 
+    # MuJoCo scene of PartNet-Mobility episodes (object, stage, ground); room omitted (USD backdrop)
+    scene_ref = scene_q = scene_build = None
+    scene_note = f"none: {category} objects have no MuJoCo scene (only PartNet-Mobility groups are assembled)"
+    scene_omitted = [{"component": "room", "name": (scene_infos or {}).get("room_infos", {}).get("name"),
+                      "usd": (scene_infos or {}).get("room_infos", {}).get("usd_path"),
+                      "pose": {k: np.asarray(v).tolist() for k, v in init.get("room", {}).items()},
+                      "reason": "USD only (IsaacSim rooms are not in the release); a visual backdrop with "
+                                "collision disabled in the source"}]
+    if category == "partnet":
+        try:
+            built = _partnet_scene(path, root, lay, oinfo, scene_infos, root_state, init_joint, handle_T, action)
+        except FileNotFoundError as e:
+            scene_note = f"none: PartNet-Mobility scene assets missing ({e})"
+        else:
+            scene_ref, scene_q, scene_build = built["scene"], built["scene_qpos"], built["provenance"]
+            objects[built["root_id"]] = built["root_track"]
+            if built["articulation"] is not None:
+                if art_info is not None:
+                    old = articulations[built["root_id"]].qpos[:, 0]
+                    built["articulation_info"]["max_abs_diff_to_relative_derivation"] = float(
+                        np.abs(built["articulation"].qpos[:, 0] - old).max())
+                articulations[built["root_id"]] = built["articulation"]
+                art_info = built["articulation_info"]
+            scene_note = "partnet_scene: PartNet-Mobility object, support stage and ground (see provenance['scene_build'])"
+
     # success
     s = np.asarray(d["success"], float).reshape(-1) > 0.5
     success = bool(s.any())
@@ -489,7 +524,7 @@ def _episode(path: Path, family, root, urdf, catalog, fk_check) -> SourceEpisode
         "torso_joints": {n: [float(qpos[:, J[n]].min()), float(qpos[:, J[n]].max())]
                          for n in ("idx01_body_joint1", "idx02_body_joint2")},
         "head_joints": {n: float(np.median(qpos[:, J[n]])) for n in ("idx11_head_joint1", "idx12_head_joint2")},
-        "world": "Isaac Lab env frame (single env, origin 0); ground plane / ground box top at z = 0; no offset",
+        "world": "Isaac Lab env frame (single env, origin 0); terrain plane at z = 0, ground box top at z = 0.01; no offset",
         "object_goal_position": goal.tolist(),
         "object_root_init": root_state.tolist(), "object_init_joint_pos": None if init_joint is None else init_joint.tolist(),
         "articulation": art_info,
@@ -501,11 +536,10 @@ def _episode(path: Path, family, root, urdf, catalog, fk_check) -> SourceEpisode
         "success": {"source": "state_infos success flag (env_success_flag)", "first_success_frame": first,
                     "success_frames": int(s.sum()),
                     "selection": "the recorder deletes episodes without success; failures are not released"},
-        "missing": ["per-frame object joint positions (articulations are derived from the handle track)",
-                    "per-frame object root pose (t0 only)", "object, room and support-stage geometry (Isaac USD assets)",
-                    "failed rollouts (deleted by the recorder)"],
-        "scene": "none: Isaac Sim 4.5 / Isaac Lab scene (GenieSim/IsaacSim room USD + PartNet-Mobility/UniDoor/YCB USD "
-                 "from Assets/Assets.zip, stage cuboid under tabletop objects); no MuJoCo scene",
+        "missing": ["per-frame object joint positions (derived: grasp joint from the handle track, others constant)",
+                    "per-frame object root pose (static for fixed-base objects; carts: derived from the handle)",
+                    "room geometry (USD backdrop, omitted)", "failed rollouts (deleted by the recorder)"],
+        "scene": scene_note, "scene_build": scene_build, "scene_omitted": scene_omitted,
         "license_detail": {"dataset": "MIT (dataset card, arnoldland/MobileManiBench)",
                            "code": "BSD-3-Clause (DexHand/MobileManiBench LICENSE)",
                            "assets": "Assets.zip redistributes PartNet-Mobility (SAPIEN terms, non-commercial research), "
@@ -522,8 +556,71 @@ def _episode(path: Path, family, root, urdf, catalog, fk_check) -> SourceEpisode
         family=family, dataset=f"{FAMILY}/{lay['robot']}/{lay['task']}/{category}/{group}",
         episode_id=f"{lay['index']}/{lay['object']}/{lay['traj']}/{lay['episode']}", task=task, time=time,
         effectors=effectors, objects=objects, base=base, base_hint=base[0].copy(), torso_height=torso_height,
-        articulations=articulations, scene=None, instruction=instruction, success=success,
+        articulations=articulations, scene=scene_ref, scene_qpos=scene_q, instruction=instruction, success=success,
         regime="mobile_manipulation", license=LICENSE, provenance=provenance, lineage=lineage)
+
+
+def _partnet_scene(path, root, lay, oinfo, scene_infos, root_state, init_joint, handle_T, action) -> dict:
+    """Scene, per-step scene joints, root track and solved grasp joint of a PartNet-Mobility episode
+    (:mod:`.partnet_scene`). Raises ``FileNotFoundError`` when an asset is not fetched."""
+    group, oid = lay["group"], oinfo["id"]
+    base = _data_root(path, root)
+
+    def read(rel):
+        p = base / "raw" / FAMILY / rel if base is not None else None
+        if p is None or not p.is_file():
+            raise FileNotFoundError(f"{FAMILY}/{rel}")
+        return p.read_bytes()
+    analysis = yaml.safe_load(read(ANALYSIS_PATH.format("scene")))
+    cfg = (((analysis.get("object") or analysis.get("Object")) or {}).get("partnet") or {}).get(group)
+    if cfg is None:
+        raise FileNotFoundError(f"{ANALYSIS_PATH.format('scene')}: no partnet/{group} entry")
+    fix_base = (yaml.safe_load(read(PARTNET_CONFIG.format(group=group, id=oid))) or {}).get("fix_base", True)
+    room = (scene_infos or {}).get("room_infos") or {}
+    stage_top = float(room["height"]) if room.get("place") == "tabletop" else float(cfg.get("init_height", 0.0))
+    if not np.all(np.isfinite(root_state[:7])):
+        raise ValueError(f"{path}: no initial object root pose")
+    root0 = root_state[:7].copy()
+    name = f"{group}_{oid}"
+    jt = oinfo["joint_type"] if oinfo["joint_type"] in ("REVOLUTE", "PRISMATIC") else None
+    q0 = None
+    if jt is not None and init_joint is not None and init_joint.size:
+        q0 = float(init_joint[int(np.argmax(np.abs(init_joint)))])
+    ref, obj, model, prov = partnet_scene.build_scene(
+        read, PARTNET_DIR.format(id=oid), name=name, scale=float(cfg["scale"]), root_pose=root0, free=not fix_base,
+        place=str(cfg.get("place")), stage_top=stage_top, grasp_joint=oinfo["joint"] if jt else None, grasp_q0=q0)
+    initial = obj.initial_joints(oinfo["joint"] if jt else None, q0)
+    T = len(handle_T)
+    columns = list(initial)
+    rows = np.tile([initial[c] for c in columns], (T, 1))
+    art, art_info = None, None
+    if jt is not None:
+        q, check = partnet_scene.solve_grasp_joint(model, handle_T, joint=f"{name}:{oinfo['joint']}",
+                                                  link=f"{name}:{oinfo['link']}", initial=initial, joint_type=jt,
+                                                  root=root0 if not fix_base else None)
+        rows[:, columns.index(f"{name}:{oinfo['joint']}")] = q
+        art = Articulation(joint_names=[f"{name}:{oinfo['joint']}"], qpos=q[:, None])
+        art_info = {"label": "solved from the recorded handle track through the object's URDF kinematics",
+                    "joint_type": jt, "recorded_init": q0, "solved_t0": float(q[0]),
+                    "other_joints": "held at lower + 0.001 (the source's initial value)", **check}
+    geometry = {"kind": "mesh", "frame": "articulation root link", "body": name, "asset": PARTNET_DIR.format(id=oid),
+                "scale": float(cfg["scale"]), "fix_base": fix_base}
+    if fix_base:
+        track = ObjectTrack(pose=np.tile(root0, (T, 1)), valid=np.ones(T, bool), role="fixture",
+                            geometry={**geometry, "measured_rows": "t0 (init root_link_state_w); fixed base, static"})
+    else:
+        link = f"{name}:{oinfo['link']}" if oinfo["link"] else name
+        pose, check = partnet_scene.cart_root_track(model, handle_T, root0, link=link, initial=initial)
+        track = ObjectTrack(pose=pose, valid=np.ones(T, bool), role="manipulated",
+                            geometry={**geometry, "measured_rows": "derived from the handle track (free base)"})
+        prov["root_track"] = check
+        columns += [f"{name}:root/{k}" for k in ("x", "y", "z", "qw", "qx", "qy", "qz")]
+        rows = np.concatenate([rows, pose], axis=1)
+    prov.update(stage_top_rule="room height for tabletop rooms (scene_infos room_infos.place), else the group's "
+                               "init_height (= control_params.higher_random_object)",
+                room_place=room.get("place"), room_height=room.get("height"))
+    return {"scene": ref, "scene_qpos": Articulation(joint_names=columns, qpos=rows), "provenance": prov,
+            "root_id": name, "root_track": track, "articulation": art, "articulation_info": art_info}
 
 
 __all__ = ["read_mobilemanibench", "load_state", "load_env_yaml", "parse_object_name", "instruction_for",

@@ -922,7 +922,8 @@ xyz + wxyz, world) of every component including Reachy's links. Layout: docs/sch
 MimicGen, LIBERO, DexMimicGen (robosuite MJCF per demo + pinned asset archives), RoboCasa
 (recorded kitchen MJCF + RoboCasa asset archives), BiGym (replay-record MJCF + exported assets)
 ManiSkill (primitive scenes) and RoboVerse (CALVIN desk/block/floor scene from CALVIN's assets, RLBench
-primitive scenes); `pending` for MobileManiBench; `excluded` for
+primitive scenes) and MobileManiBench (PartNet-Mobility object, support stage and ground; room omitted);
+`excluded` for
 BEHAVIOR (encrypted object assets) and MolmoBot (no per-step pose of free objects). `build` refuses
 every family that is not `available` before reading anything. Within an available family an
 episode whose scene cannot be resolved (adapter `state_route` kinematic-only, missing collision or

@@ -55,10 +55,11 @@ MESHES = {
     "roboverse": ("available", "CALVIN: desk, blocks and floor from roboverse_data assets/calvin (= mees/calvin_env, "
                                "MIT; sources.calvin_scene), per-step block poses and table joints; RLBench: primitive "
                                "scene where every object is a primitive (others excluded one by one, no_meshes)"),
-    "mobilemanibench": ("pending", "PartNet-Mobility meshes are in the release's Assets/Assets.zip (re-host; "
-                                   "PartNet-Mobility terms: non-commercial research); per step only the moving "
-                                   "link (handle) pose, the object root and other joints at their recorded initial "
-                                   "state; scene assembly not implemented yet"),
+    "mobilemanibench": ("available", "PartNet-Mobility groups: object from mobility.urdf + OBJ meshes (members of the "
+                                     "release's Assets/Assets.zip, PartNet-Mobility terms: non-commercial research), "
+                                     "the source's support stage and ground; grasp joint solved per step from the "
+                                     "handle, carts' root derived (sources.partnet_scene); room (USD backdrop) omitted. "
+                                     "UniDoor and YCB episodes are excluded one by one (no_meshes)"),
     "behavior": ("excluded", "BEHAVIOR-1K object assets are encrypted; no meshes can be stored"),
     "molmobot": ("excluded", "MolmoBot-Data records no per-step pose of free objects in any release (the "
                              "generator computes object_poses but does not save them; env_states/actors is empty; "

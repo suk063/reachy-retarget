@@ -277,12 +277,13 @@ def _member_bytes(e: CatalogEntry, opener) -> tuple[bytes, list[str]]:
             data, checks = raw[512:], ["tar_header"]
         else:
             data = read_range(e.url, offset, stored, opener)
-    elif comp == "deflate":  # zip member: offset = local file header
+    elif comp in ("deflate", "stored"):  # zip member: offset = local file header
         head = read_range(e.url, offset, 30, opener)
         if head[:4] != b"PK\x03\x04":
             raise ChecksumMismatch(f"{e.id}: no zip local header at offset {offset}")
         nl, el = int.from_bytes(head[26:28], "little"), int.from_bytes(head[28:30], "little")
-        data = zlib.decompressobj(-15).decompress(read_range(e.url, offset + 30 + nl + el, stored, opener))
+        raw = read_range(e.url, offset + 30 + nl + el, stored, opener)
+        data = zlib.decompressobj(-15).decompress(raw) if comp == "deflate" else raw
     elif comp == "zstd":
         stream, finish = zstd_stream(range_chunks(e.url, offset, stored, opener))
         data = stream.read()
@@ -479,11 +480,11 @@ TEXTURE_EXT = (".png", ".jpg", ".jpeg", ".bmp", ".tga", ".tif", ".tiff", ".exr",
 
 
 def is_texture_asset(e: CatalogEntry) -> bool:
-    """A still image catalogued as ``content: assets`` (a mesh texture): texture files are mesh assets,
-    not observations (AGENTS.md), so the image rule does not apply to them; videos never qualify."""
+    """A still image catalogued as ``content: assets`` (a mesh texture, e.g. PartNet-Mobility's
+    ``images/texture_0.jpg`` referenced by an MTL file): texture files are mesh assets, not
+    observations (AGENTS.md), so the image rule does not apply to them; videos never qualify."""
     parts = e.path.replace("\\", "/").split("/")
-    return (e.content == "assets" and e.path.lower().endswith(TEXTURE_EXT)
-            and not any(p in ("videos", "images") for p in parts[:-1]))
+    return e.content == "assets" and e.path.lower().endswith(TEXTURE_EXT) and "videos" not in parts[:-1]
 
 
 def _guard(e: CatalogEntry, strip_images: bool) -> None:

@@ -10,8 +10,8 @@ Scene meshes are required for building (docs/design.md, *Scene meshes*): the sta
 family is in `sources.registry.MESHES`. Built: robomimic, MimicGen, LIBERO, DexMimicGen, RoboCasa,
 BiGym, ManiSkill (primitive scenes; actor colours only where the task source sets a constant one,
 the table's textured GLB visual is not catalogued and its collision box stands in), RoboVerse
-(CALVIN: desk, blocks and floor from CALVIN's own assets; RLBench: primitive scenes only). Pending:
-MobileManiBench (meshes and per-step object state obtainable, scene assembly not implemented). Excluded (meshes or per-step object poses not obtainable): BEHAVIOR-1K (encrypted
+(CALVIN: desk, blocks and floor from CALVIN's own assets; RLBench: primitive scenes only),
+MobileManiBench (PartNet-Mobility groups: object, support stage and ground; UniDoor and YCB not yet). Excluded (meshes or per-step object poses not obtainable): BEHAVIOR-1K (encrypted
 object assets), MolmoBot-Data (no per-step pose of free objects in any release, see its *Known
 gaps*). Episodes of built families whose assets are not fetched (e.g. RoboCasa tars outside the
 asset subset) are excluded one by one (`no_meshes`), and so are episodes with an object,
@@ -1341,22 +1341,36 @@ All 40 catalogued episodes (5 task types × 8; 147–242 frames) adapted.
 
 ### Known gaps (MobileManiBench)
 
-* No per-frame object joint positions or root poses; articulations are derived and the root
-  is valid at t0 only. No object, stage (table) or room geometry (Isaac USD assets).
-* Scene availability (checked 2026-10-10): `Assets/Assets.zip` of HF `arnoldland/MobileManiBench`
-  (rev `88bc86e`, 8.5 GB; read through its zip directory only) holds raw PartNet-Mobility for
-  2,347 objects (`partnet/dataset/<id>/mobility.urdf`, `textured_objs/*.obj`), the processed USD
-  and `room/GenieSim`. It is a re-host: PartNet-Mobility (sapien.ucsd.edu, HF
-  `sapien-sim/PartNetMobility`) is gated and limited to non-commercial research use. The recorder
-  (`unimanip/utils/env_model.py`, github.com/DexHand/MobileManiBench `1354666`) stores per step only
-  the handle (moving link) position and Euler angles, plus an `init` block with the object root pose
-  and all joint positions; the root of fixed-base objects is therefore static and the driven joint
-  derivable. Until the scene assembly exists the family stays `pending` and is not built.
+* No per-frame object joint positions or root poses in the release: the grasp joint is solved per
+  step from the handle (other joints at their initial value), fixed-base roots are static and cart
+  roots derived; without the PartNet scene assets the articulation falls back to the handle-motion
+  derivation and the root is valid at t0 only (such episodes are not written).
+* Scene (2026-10-10, `sources.partnet_scene`): `Assets/Assets.zip` of HF `arnoldland/MobileManiBench`
+  (rev `88bc86e`, 8.5 GB) re-hosts raw PartNet-Mobility for 2,347 objects; the catalog lists, for the
+  317 objects referenced by catalogued episodes, `mobility.urdf`, `textured_objs/*.obj|.mtl`,
+  `images/*` (textures), metadata and `process/<group>/<id>/config.yaml` (`fix_base`) as
+  `range_member` rows (`mobilemanibench.assets.tsv.gz`, 31,225 members, 420 MB; generator
+  `--assets` reads the zip central directory). PartNet-Mobility (sapien.ucsd.edu, HF
+  `sapien-sim/PartNetMobility`) is gated and limited to non-commercial research use; the asset
+  rows carry that licence. The source scene (`unimanip/utils/env_model.py`, `partnet_model.py` at
+  `1354666`): object scaled by `analysis_scene.yaml` (box, dishwasher 0.4, cart 0.5), fixed base
+  except carts; a 4 x 2 x 1 m stage (top at the room height for tabletop rooms, else the group's
+  `init_height`) shifted by the object's rotated lower-limit bounding box; a 4 x 4 x 0.02 m ground
+  (top z = 0.01) and a terrain plane (z = 0) — all colliding, hidden in the videos; a room (USD,
+  collision disabled) that is not representable and is listed in `provenance["scene_omitted"]`.
+  Checks on box 100141 / 100214, dishwasher 11622 / 11826 / 12484 and carts 100491 / 101083: the
+  solved grasp joint has off-axis residual <= 1e-7 rad, the handle stays fixed in the grasp link
+  to <= 2e-7 m, and its value at t0 equals the recorded initial value (one 1-step offset); cart
+  roots tilt <= 1.44° and sag 7 mm over 0.30 m of travel. Prismatic joints: source coordinates are
+  URDF units x object scale (dishwasher 11826 racks at lower + 0.001 sit 0.4 mm from their designed
+  closed pose that way; read as metres they would protrude 4 cm into the closed door). MuJoCo cannot
+  decode JPEG textures: JPEG-textured materials keep their MTL colour (listed per episode). UniDoor
+  (COLLADA) and YCB objects get no scene yet.
 * Success-only release (failed rollouts deleted by the recorder); 300K/≈138K are file-count
   estimates, not a walk of every tar.
 * The XHand (dexterous hand) half of the release is not used. Prismatic close tasks
-  (e.g. Close/partnet/table) are not in the subset; their q0 units (scaled PartNet joints) are
-  unverified.
+  (e.g. Close/partnet/table) are not in the subset; a driven prismatic joint is solved from the
+  handle displacement since t0 added to the scaled initial value (not yet checked on data).
 
 ## RoboVerse / MetaSim (family `roboverse`)
 
