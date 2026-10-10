@@ -90,7 +90,9 @@ def _index(args):
 
     root = Path(args.dir)
     rows = index_rows(root)
-    print(write_index(root, rows), len(rows))
+    out = Path(args.out) if args.out else root
+    out.mkdir(parents=True, exist_ok=True)
+    print(write_index(out, rows), len(rows))
 
 
 def main(argv=None):
@@ -117,6 +119,7 @@ def main(argv=None):
     p = sub.add_parser("index", help="write index.parquet for a dataset directory (from its build records, else "
                                      "from its episode files)")
     p.add_argument("dir")
+    p.add_argument("--out", help="directory to write index.parquet to (default: dir; file paths stay relative to dir)")
     p.set_defaults(run=_index)
     args = parser.parse_args(argv)
     args.run(args)
