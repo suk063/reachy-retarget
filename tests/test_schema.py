@@ -157,3 +157,21 @@ def test_rotation_helpers():
     np.testing.assert_allclose(rot.se2_log(rot.se2_exp(tw, 0.02), 0.02), tw, atol=1e-9)
     assert rot.wrap_angle(np.pi + 0.1) == pytest.approx(-np.pi + 0.1)
     assert len(JOINTS) == 22
+
+
+def test_index_command_reads_records_or_episode_files(tmp_path):
+    import json
+
+    from reachy_retarget.cli import index_rows
+    a, b = make_episode(), make_episode(episode_id="demo_4")
+    (tmp_path / "episodes" / "d").mkdir(parents=True)
+    write_episode(tmp_path / "episodes" / "d" / "a.h5", a)
+    write_episode(tmp_path / "episodes" / "d" / "b.h5", b)
+    assert [r["file"] for r in index_rows(tmp_path)] == ["episodes/d/a.h5", "episodes/d/b.h5"]   # .h5 files read
+    (tmp_path / "records" / "f").mkdir(parents=True)
+    recs = [{"status": "ok", "index_row": index_row(a, "episodes/d/a.h5")},
+            {"status": "excluded", "excluded": "no_meshes"},                       # not written: no row
+            {"status": "ok", "index_row": index_row(b, "episodes/d/gone.h5")}]     # file missing: skipped
+    (tmp_path / "records" / "f" / "x.jsonl").write_text("".join(json.dumps(r) + "\n" for r in recs))
+    rows = index_rows(tmp_path)
+    assert [r["uid"] for r in rows] == [a.uid]

@@ -65,11 +65,31 @@ def _fetched(e, ledger) -> bool:
     return bool(members) and all(e.member_id(m["name"]) in ledger for m in members)
 
 
+def index_rows(root: Path) -> list[dict]:
+    """Index rows of a dataset directory: the ``index_row`` of every build record (``records/**/*.jsonl``)
+    whose episode file exists, else rows read from every ``*.h5``/``*.hdf5`` episode below ``root``."""
+    import json
+
+    from .schema.io import index_row, read_episode
+
+    records = sorted((root / "records").rglob("*.jsonl")) if (root / "records").is_dir() else []
+    if records:
+        rows = []
+        for f in records:
+            for line in f.read_text().splitlines():
+                row = json.loads(line).get("index_row") if line.strip() else None
+                if row and (root / row["file"]).is_file():
+                    rows.append(row)
+        return sorted(rows, key=lambda r: r["file"])
+    paths = sorted({*root.rglob("*.h5"), *root.rglob("*.hdf5")})
+    return [index_row(read_episode(path), str(path.relative_to(root))) for path in paths]
+
+
 def _index(args):
-    from .schema.io import index_row, read_episode, write_index
+    from .schema.io import write_index
 
     root = Path(args.dir)
-    rows = [index_row(read_episode(path), str(path.relative_to(root))) for path in sorted(root.rglob("*.hdf5"))]
+    rows = index_rows(root)
     print(write_index(root, rows), len(rows))
 
 
@@ -94,7 +114,8 @@ def main(argv=None):
     p.add_argument("--root", required=True)
     p.add_argument("--family", action="append", default=[], help="also report unfetched files of a family")
     p.set_defaults(run=_verify)
-    p = sub.add_parser("index", help="write index.parquet for a directory of episodes")
+    p = sub.add_parser("index", help="write index.parquet for a dataset directory (from its build records, else "
+                                     "from its episode files)")
     p.add_argument("dir")
     p.set_defaults(run=_index)
     args = parser.parse_args(argv)
