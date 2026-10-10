@@ -70,7 +70,9 @@ them. `recompute_modes(path)` rewrites every control view from the canonical sta
 Every written episode stores the meshes of its scene (a policy builds a per-component surface
 feature map from them, as reachy-agent `policy/build_map.py` does, and assembles it at training
 time from per-frame component poses). Episodes whose meshes cannot be obtained are not written
-(build record `status: "excluded"`, `excluded: "no_meshes"`); see docs/design.md, *Scene meshes*.
+(build record `status: "excluded"`, `excluded: "no_meshes"`), nor episodes in which a tracked
+object, articulation or scene component lacks its pose at some step (`excluded: "no_object_poses"`);
+see docs/design.md, *Scene meshes*.
 Read with `reachy_retarget.schema.scene_assets`: `read_scene(path)`,
 `load_component_meshes(path, kind="visual" | "collision", frame=None)` (trimesh-compatible arrays)
 and `scene_mjcf(path, frame=0, physics=False)` (an MJCF string that MuJoCo compiles and renders; `frame=None` puts every component at the origin, e.g. to render one component in its own frame for a surface map).

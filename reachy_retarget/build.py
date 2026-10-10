@@ -25,6 +25,8 @@ off unless ``--mujoco-cache-mb`` is given.
 Scene meshes are required: a family whose meshes cannot be obtained (``sources.registry.MESHES``
 status other than ``available``) is refused before anything is read, and an episode whose scene
 meshes cannot be resolved is not written (record ``status: "excluded"``, ``excluded: "no_meshes"``).
+Per-step object state is required too: an episode in which a tracked object, articulation or scene
+component lacks its pose at some step is not written (``excluded: "no_object_poses"``).
 Records of written episodes carry ``scene`` sizes: ``episode_bytes``, the bytes of every library
 file the episode references (``assets_referenced_bytes``) and the bytes it added to the library
 (``assets_new_bytes``).

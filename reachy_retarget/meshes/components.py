@@ -4,7 +4,9 @@
 MuJoCo scene) and, when tier P ran, the physics rollout into a
 :class:`~reachy_retarget.schema.episode.SceneComponents`, writing every mesh and texture it needs
 to the asset library. It raises :class:`NoMeshes` when the source has no scene whose meshes can
-be resolved: such episodes are not written (build records say ``excluded: no_meshes``).
+be resolved, and :class:`NoObjectPoses` when a tracked object, articulation or scene component lacks
+its pose at some step (:func:`missing_object_poses`): such episodes are not written (build records
+say ``excluded: no_meshes`` / ``excluded: no_object_poses``).
 
 Components (selection rule, ``SCENE_RULES``):
 
@@ -71,6 +73,31 @@ class NoMeshes(Exception):
         super().__init__(f"no_meshes: {reason}")
 
 
+class NoObjectPoses(Exception):
+    """A tracked object or articulation lacks its state at some step (the episode is excluded, not written)."""
+
+    def __init__(self, reason: str):
+        self.reason = reason
+        super().__init__(f"no_object_poses: {reason}")
+
+
+def missing_object_poses(objects, articulations=None) -> str | None:
+    """Why the per-step object state is incomplete, or ``None`` when it is complete: every tracked object
+    needs a valid, finite pose and every articulation finite joint positions at every step."""
+    gaps = []
+    for oid, o in sorted(objects.items()):
+        ok = np.asarray(o.valid, bool) & np.isfinite(o.pose).all(1)
+        if not ok.all():
+            gaps.append(f"object {oid}: pose missing at {int((~ok).sum())} of {len(ok)} steps")
+    for k, a in sorted((articulations or {}).items()):
+        bad = ~np.isfinite(np.asarray(a.qpos, float)).all(1)
+        if bad.any():
+            gaps.append(f"articulation {k}: joint positions missing at {int(bad.sum())} of {len(bad)} steps")
+    if not gaps:
+        return None
+    return "; ".join(gaps[:5]) + (f" (+{len(gaps) - 5} more)" if len(gaps) > 5 else "")
+
+
 def no_scene_reason(src) -> str:
     p = src.provenance or {}
     route = p.get("state_route")
@@ -129,6 +156,9 @@ def build_scene_components(ep, src, library, *, rollout=None, radius: float = RA
 
     if src.scene is None:
         raise NoMeshes(no_scene_reason(src))
+    reason = missing_object_poses(ep.objects, ep.articulations)
+    if reason:
+        raise NoObjectPoses(reason)
     new0 = (library.new_files, library.new_bytes)
     try:
         ext = SceneExtraction(src.scene)
@@ -222,6 +252,10 @@ def build_scene_components(ep, src, library, *, rollout=None, radius: float = RA
             checks[c["name"]] = {"max_position_m": float(dp.max()), "max_rotation_rad": float(dr.max())}
         poses[:, i] = np.where(ok[:, None], o.pose, np.nan)
         valid[:, i] = ok
+    bad = ~(valid & np.isfinite(poses).all(2))
+    if bad.any():
+        raise NoObjectPoses("; ".join(f"component {comps[i]['name']}: pose missing at {int(bad[:, i].sum())} of {T} "
+                                      "steps" for i in np.flatnonzero(bad.any(0))[:5]))
     # Reachy links
     r_comps, r_mats = reachy_links.reachy_components(library)
     links = [c["source_body"] for c in r_comps]
@@ -282,5 +316,5 @@ def build_scene_components(ep, src, library, *, rollout=None, radius: float = RA
     return scene, stats
 
 
-__all__ = ["NoMeshes", "build_scene_components", "SCENE_RULES", "RADIUS_M", "path_points", "source_clock",
-           "resample_qpos", "no_scene_reason"]
+__all__ = ["NoMeshes", "NoObjectPoses", "missing_object_poses", "build_scene_components", "SCENE_RULES", "RADIUS_M",
+           "path_points", "source_clock", "resample_qpos", "no_scene_reason"]

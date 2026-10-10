@@ -7,8 +7,8 @@ No images are stored. Every episode keeps canonical robot and object state plus
 precomputed views for every control mode, because the policy state/action format is
 not fixed yet, and the meshes of its scene (objects, supports, fixtures, articulated parts and
 Reachy's links, with materials and texture files) plus per-frame poses of every scene component,
-so a policy can build a surface feature map of the scene. Datasets whose meshes cannot be
-obtained are excluded.
+so a policy can build a surface feature map of the scene. Datasets whose meshes or per-step
+object poses cannot be obtained are excluded, and so is every episode lacking either.
 
 The previous phase of this project (maximizing MuJoCo success on a few robomimic Can
 sources) is kept read-only in [`legacy/`](legacy/); see `legacy/DELETED.md` for the

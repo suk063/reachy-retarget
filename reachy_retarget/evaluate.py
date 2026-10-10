@@ -63,7 +63,9 @@ def process_source(src, *, physics: bool = True, write: str | None = None, cfg=N
     and texture files in the asset library ``library`` (default ``<write>/assets``). An episode
     whose scene meshes cannot be obtained is not written: its record has ``status: "excluded"``,
     ``excluded: "no_meshes"`` and the reason (checked before retargeting when the source has no
-    scene at all).
+    scene at all). Likewise an episode in which a tracked object, articulation or scene component
+    lacks its state at some step (``excluded: "no_object_poses"``, checked on the source before
+    retargeting and on the assembled scene).
     """
     from .retarget import retarget
     from .retarget.pipeline import _jsonable
@@ -77,6 +79,13 @@ def process_source(src, *, physics: bool = True, write: str | None = None, cfg=N
         rec.update(status="excluded", excluded="no_meshes", reason=no_scene_reason(src), K=None, P=None,
                    seconds={"read": t_read})
         return rec
+    if write:
+        from .meshes.components import missing_object_poses
+        reason = missing_object_poses(src.objects, src.articulations)
+        if reason:
+            rec.update(status="excluded", excluded="no_object_poses", reason=reason, K=None, P=None,
+                       seconds={"read": t_read})
+            return rec
     res = retarget(src, cfg)
     t_ret = time.perf_counter() - t0
     rec["status"] = res.status
@@ -117,15 +126,16 @@ def process_source(src, *, physics: bool = True, write: str | None = None, cfg=N
         ep.physics = rollout
     rec["seconds"] = {"read": t_read, "retarget": t_ret, "physics": t_phys}
     if write:
-        from .meshes.components import NoMeshes, build_scene_components
+        from .meshes.components import NoMeshes, NoObjectPoses, build_scene_components
         from .meshes.library import open_library
         from .schema.io import index_row, write_episode
         lib = open_library(library or Path(write) / "assets")
         t2 = time.perf_counter()
         try:
             scene, scene_stats = build_scene_components(ep, src, lib, rollout=ep.physics)
-        except NoMeshes as e:
-            rec.update(status="excluded", excluded="no_meshes", reason=e.reason)
+        except (NoMeshes, NoObjectPoses) as e:
+            rec.update(status="excluded", excluded="no_meshes" if isinstance(e, NoMeshes) else "no_object_poses",
+                       reason=e.reason)
             rec["seconds"]["scene"] = time.perf_counter() - t2
             return _jsonable(rec)
         out = Path(write) / (src.task if layout == "task" else src.dataset) / f"{src.episode_id}.h5"

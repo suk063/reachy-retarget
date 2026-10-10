@@ -10,10 +10,12 @@ position of an episode in the adapter's order. Positions it rejects are yielded 
 ``select=True`` implement this themselves (unselected episodes are not loaded, compiled or
 replayed); for the others the registry builds every episode and drops the unselected ones.
 
-Scene meshes (``MESHES``): built episodes must store the meshes of their scene components (the
-policy builds a surface feature map from them, see docs/design.md "Scene meshes"). This table is
-the single place that says which families provide them; :func:`require_meshes` refuses the
-others before a build reads anything.
+Scene meshes and per-step object poses (``MESHES``): built episodes must store the meshes of their
+scene components (the policy builds a surface feature map from them, see docs/design.md "Scene
+meshes") and the pose of every tracked object and articulation at every step. This table is the
+single place that says which families provide both; :func:`require_meshes` refuses the others
+before a build reads anything. Within a buildable family, an episode lacking either is not written
+(``excluded: no_meshes`` / ``no_object_poses``, see :mod:`reachy_retarget.meshes.components`).
 """
 from __future__ import annotations
 
@@ -37,9 +39,11 @@ MODULES = {
 
 
 # family -> (status, note). "available": the adapter attaches a MuJoCo scene (SceneRef) whose
-# meshes and textures are resolved from pinned archives (episodes whose scene cannot be resolved
-# are still excluded one by one: build record ``excluded: no_meshes``); "pending": mesh extraction
-# not implemented yet; "excluded": meshes cannot be obtained, the family is not built.
+# meshes and textures are resolved from pinned archives, and records per-step object state
+# (episodes whose scene or object poses are incomplete are still excluded one by one: build record
+# ``excluded: no_meshes`` / ``no_object_poses``); "pending": both are obtainable but the scene
+# assembly is not implemented yet; "excluded": meshes or per-step object poses cannot be obtained,
+# the family is not built.
 MESHES = {
     "robomimic": ("available", "robosuite MJCF per demo + robosuite wheel assets"),
     "mimicgen": ("available", "robosuite MJCF per demo + robosuite wheel and MimicGen assets"),
@@ -48,10 +52,18 @@ MESHES = {
     "robocasa": ("available", "recorded kitchen MJCF + RoboCasa asset archives"),
     "bigym": ("available", "replay-record MJCF + exported BiGym assets"),
     "maniskill": ("available", "primitive scene rebuilt from the task geometry (boxes, spheres, ...)"),
-    "roboverse": ("pending", "scene mesh extraction for RoboVerse sources is not implemented yet"),
-    "mobilemanibench": ("pending", "scene mesh extraction for MobileManiBench is not implemented yet"),
+    "roboverse": ("pending", "CALVIN: per-step block poses and table joints are recorded (light states dropped); "
+                             "table/block meshes in roboverse_data assets/calvin (MIT, = mees/calvin_env); scene "
+                             "assembly not implemented yet"),
+    "mobilemanibench": ("pending", "PartNet-Mobility meshes are in the release's Assets/Assets.zip (re-host; "
+                                   "PartNet-Mobility terms: non-commercial research); per step only the moving "
+                                   "link (handle) pose, the object root and other joints at their recorded initial "
+                                   "state; scene assembly not implemented yet"),
     "behavior": ("excluded", "BEHAVIOR-1K object assets are encrypted; no meshes can be stored"),
-    "molmobot": ("excluded", "MolmoBot-Data has no per-frame object poses and no scene meshes"),
+    "molmobot": ("excluded", "MolmoBot-Data records no per-step pose of free objects in any release (the "
+                             "generator computes object_poses but does not save them; env_states/actors is empty; "
+                             "seeds not stored, planners non-deterministic); meshes exist in allenai/molmospaces. "
+                             "Door/open tasks record the joint per step but need scene assembly (not implemented)"),
 }
 
 
@@ -65,7 +77,7 @@ def require_meshes(family: str) -> None:
     status, note = mesh_status(family)
     if status != "available":
         raise ValueError(f"family {family!r} cannot be built: scene meshes {status} ({note}). Episodes must store "
-                         "their object meshes; see sources.registry.MESHES")
+                         "their object meshes and per-step object poses; see sources.registry.MESHES")
 
 
 def register(family: str, *more: str, select: bool = False) -> Callable[[Adapter], Adapter]:

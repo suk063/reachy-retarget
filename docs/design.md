@@ -922,11 +922,15 @@ xyz + wxyz, world) of every component including Reachy's links. Layout: docs/sch
 MimicGen, LIBERO, DexMimicGen (robosuite MJCF per demo + pinned asset archives), RoboCasa
 (recorded kitchen MJCF + RoboCasa asset archives), BiGym (replay-record MJCF + exported assets)
 and ManiSkill (primitive scenes); `pending` for RoboVerse and MobileManiBench; `excluded` for
-BEHAVIOR (encrypted object assets) and MolmoBot (no per-frame object poses). `build` refuses
+BEHAVIOR (encrypted object assets) and MolmoBot (no per-step pose of free objects). `build` refuses
 every family that is not `available` before reading anything. Within an available family an
 episode whose scene cannot be resolved (adapter `state_route` kinematic-only, missing collision or
 visual mesh or texture files) is not written: its build record says `status: "excluded"`,
-`excluded: "no_meshes"` with the reason, and `report` counts it under `excluded`.
+`excluded: "no_meshes"` with the reason, and `report` counts it under `excluded`. Per-step object
+state is required as well (`meshes.components.missing_object_poses`): an episode in which a
+tracked object lacks a valid finite pose, an articulation finite joint positions, or a scene
+component a pose at some step is not written (`excluded: "no_object_poses"`; checked on the source
+before retargeting and on the assembled scene).
 
 **Extraction from a MuJoCo `SceneRef`** (`meshes.mujoco_scene`): the scene is prepared as for tier P
 (robot, mocap and declared inactive bodies removed, assets pruned and resolved), compiled without

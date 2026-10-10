@@ -222,6 +222,29 @@ def test_episodes_without_meshes_are_excluded(tmp_path):
     assert rec["status"] == "excluded" and rec["excluded"] == "no_meshes" and not (tmp_path / "episodes").exists()
 
 
+def test_episodes_without_per_step_object_poses_are_excluded(tmp_path):
+    from reachy_retarget.evaluate import process_source
+    from reachy_retarget.meshes.components import NoObjectPoses, missing_object_poses
+    ep, src = episode_pair(T=10)
+    assert missing_object_poses(src.objects, src.articulations) is None
+    # an object known only at t = 0 (MolmoBot-style): excluded before retargeting, nothing written
+    src.objects = {**src.objects, "box": ObjectTrack(src.objects["box"].pose, np.arange(10) == 0, "manipulated",
+                                                     {"body": "box_main"})}
+    assert missing_object_poses(src.objects) == "object box: pose missing at 9 of 10 steps"
+    rec = process_source(src, physics=False, write=str(tmp_path / "episodes"))
+    assert rec["status"] == "excluded" and rec["excluded"] == "no_object_poses" and rec["K"] is None
+    assert not (tmp_path / "episodes").exists()
+    # an articulation gap and a NaN pose in the retargeted episode stop the scene assembly
+    ep, src = episode_pair(T=10)
+    ep.articulations["table"].qpos[3] = np.nan
+    with pytest.raises(NoObjectPoses, match="articulation table: joint positions missing at 1 of 10"):
+        build_scene_components(ep, src, AssetLibrary(tmp_path))
+    ep, src = episode_pair(T=10)
+    ep.objects["box"].pose[4, 0] = np.nan
+    with pytest.raises(NoObjectPoses, match="object box: pose missing at 1 of 10"):
+        build_scene_components(ep, src, AssetLibrary(tmp_path))
+
+
 def test_physics_poses_follow_the_rollout(tmp_path):
     from reachy_retarget.robot.reachy import JOINTS
     from reachy_retarget.schema.episode import PhysicsRollout

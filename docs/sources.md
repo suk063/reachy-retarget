@@ -10,9 +10,12 @@ Scene meshes are required for building (docs/design.md, *Scene meshes*): the sta
 family is in `sources.registry.MESHES`. Built: robomimic, MimicGen, LIBERO, DexMimicGen, RoboCasa,
 BiGym, ManiSkill (primitive scenes; actor colours only where the task source sets a constant one,
 the table's textured GLB visual is not catalogued and its collision box stands in). Pending:
-RoboVerse, MobileManiBench. Excluded (no obtainable meshes): BEHAVIOR-1K (encrypted object
-assets), MolmoBot-Data (no per-frame object poses). Episodes of built families whose assets are
-not fetched (e.g. RoboCasa tars outside the asset subset) are excluded one by one (`no_meshes`).
+RoboVerse, MobileManiBench (meshes and per-step object state obtainable, scene assembly not
+implemented). Excluded (meshes or per-step object poses not obtainable): BEHAVIOR-1K (encrypted
+object assets), MolmoBot-Data (no per-step pose of free objects in any release, see its *Known
+gaps*). Episodes of built families whose assets are not fetched (e.g. RoboCasa tars outside the
+asset subset) are excluded one by one (`no_meshes`), and so are episodes with an object,
+articulation or scene component lacking its pose at some step (`no_object_poses`).
 
 ## Acquisition
 
@@ -751,6 +754,27 @@ run| vs. the recorded `task_info.position_error` differs by 3.3 mm median (max 2
 * RB-Y1 `grasp_state` flags are always false; `tcp_pose` is the left arm even when the
   right arm acts.
 * No SceneRef (MolmoSpaces scene assembly not implemented).
+* **Per-step object poses cannot be obtained (checked 2026-10-10)**, so the family is excluded
+  (`sources.registry.MESHES`; any episode would also fail `no_object_poses`):
+  * The pinned revision `159a5aec` (2026-07-24) is still the head of `allenai/molmobot-data`
+    (later commits touch only README, scripts and `commercial_episodes.parquet`); there is no
+    full-state variant, other HF repo or GitHub release with object trajectories, and the paper
+    (arXiv 2603.16861v2) lists only start/goal object poses.
+  * The generator (github.com/allenai/molmospaces at the MolmoBot release `cd23bec`, unchanged at
+    `713fd12`) computes an `object_poses` sensor every step but `save_utils` writes only an
+    allowlist of extra sensors that omits it, and `EnvStateSensor` (`env_states/actors`) fails
+    silently for every body, so only `env_states/articulations/panda` is stored.
+  * Regeneration is not possible (sampler seeds are not stored; the planners are not
+    deterministic). A MuJoCo replay from `frozen_config` (allenai/MolmoBot issue 8) would give
+    simulated, not recorded, object states (open-loop drift; door friction randomisation not
+    stored).
+  * `obs/extra/object_image_points` (up to 10 sampled visible points per camera) are not
+    keypoints: triangulated over the five cameras at t = 0 they lie 0.16 m from `obj_start`
+    (one FrankaPickAndPlaceColor trajectory), far from a pose.
+  * Meshes exist: `allenai/molmospaces` (HF `5f802a4`) publishes MJCF scenes (procthor-10k,
+    ithor, ...) and THOR/Objaverse object meshes (CC BY 4.0; Objaverse per-object licenses).
+    DoorOpening and RBY1Open record their joint per step (`door_state`, `task_info`), so those
+    two configs could qualify once the scene assembly exists; pick and pick-and-place cannot.
 * The rby1m package has no license file; its redistribution terms are unverified.
 * Opening-joint semantics for `open`: `task_info.joint_position` is assumed to be the raw
   joint position (units of the joint); success uses a normalised threshold (0.67).
@@ -1319,6 +1343,15 @@ All 40 catalogued episodes (5 task types × 8; 147–242 frames) adapted.
 
 * No per-frame object joint positions or root poses; articulations are derived and the root
   is valid at t0 only. No object, stage (table) or room geometry (Isaac USD assets).
+* Scene availability (checked 2026-10-10): `Assets/Assets.zip` of HF `arnoldland/MobileManiBench`
+  (rev `88bc86e`, 8.5 GB; read through its zip directory only) holds raw PartNet-Mobility for
+  2,347 objects (`partnet/dataset/<id>/mobility.urdf`, `textured_objs/*.obj`), the processed USD
+  and `room/GenieSim`. It is a re-host: PartNet-Mobility (sapien.ucsd.edu, HF
+  `sapien-sim/PartNetMobility`) is gated and limited to non-commercial research use. The recorder
+  (`unimanip/utils/env_model.py`, github.com/DexHand/MobileManiBench `1354666`) stores per step only
+  the handle (moving link) position and Euler angles, plus an `init` block with the object root pose
+  and all joint positions; the root of fixed-base objects is therefore static and the driven joint
+  derivable. Until the scene assembly exists the family stays `pending` and is not built.
 * Success-only release (failed rollouts deleted by the recorder); 300K/≈138K are file-count
   estimates, not a walk of every tar.
 * The XHand (dexterous hand) half of the release is not used. Prismatic close tasks
@@ -1467,6 +1500,13 @@ excursions: ≤ 0.005 rad (RLBench), ≤ 0.013 rad (CALVIN, against CALVIN's URD
   variation descriptions (language) absent; 30 episodes of `hang_frame_on_hanger` without
   object geometry; most objects are USD meshes (no tier-P scene); source grasps are
   kinematic parenting.
+* CALVIN scene availability (checked 2026-10-10): every step records the three block poses and
+  the table joints (slide, drawer, button, switch; RoboVerse's converter
+  `roboverse_pack/tasks/calvin/data_preparation/convert_data_batch.py` at `5f3ec01` drops the
+  lightbulb and LED states). Table A–D, block and plane URDFs/meshes are in
+  `roboverse_data/assets/calvin` (identical to mees/calvin_env `797142c`, MIT); CALVIN scales
+  scenes by 0.8 and sizes blocks per env (`calvin_env/conf/scene/calvin_scene_*.yaml`). The scene
+  assembly is not implemented, so the family stays `pending` and is not built.
 * CALVIN: env B, C, D training windows (~17k more by size) are catalogued but not yet
   fetched or adapted here; the play stream is not catalogued; windows overlap (count by group); the desk is approximated by an AABB for the
   footprint; RoboVerse's binary per-task files and retargeted UR5e/extension variants are

@@ -15,9 +15,11 @@ retarget them onto Reachy 2 as state-only training data for manipulation policie
   fixtures, articulated parts, Reachy links) its visual and collision parts with materials and
   texture files, in the content-addressed asset library `<out>/assets/`, plus per-frame component
   poses. Texture files are mesh assets, not observations; rendered images are never stored.
-* Exclude datasets whose meshes cannot be obtained: `sources.registry.MESHES` is the one place
-  that says which families provide meshes; the build refuses the others, and episodes whose
-  scene meshes cannot be resolved are not written (`excluded: no_meshes`).
+* Exclude datasets whose meshes or per-step object poses cannot be obtained:
+  `sources.registry.MESHES` is the one place that says which families provide both; the build
+  refuses the others, and episodes whose scene meshes cannot be resolved (`excluded: no_meshes`)
+  or in which a tracked object, articulation or scene component lacks its pose at some step
+  (`excluded: no_object_poses`) are not written.
 * Kinematic (K) and physics (P) validation tiers are reported separately and never
   merged. Physics rollouts never weld, teleport or overwrite moving-object state.
 * Save failed retargets and failed rollouts with their reasons as well as successes.
