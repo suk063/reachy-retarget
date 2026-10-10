@@ -58,7 +58,8 @@ def publish_release(pod: str) -> str:
     sha, payload = release_archive()
     k8s.run(pod, f"""set -eu
 target={k8s.PVC}/releases/{sha}.tar
-[ -f "$target" ] && exit 0
+# drain stdin before exiting: kubectl exec -i does not return while the payload is unread
+if [ -f "$target" ]; then cat > /dev/null; exit 0; fi
 mkdir -p {k8s.PVC}/releases
 partial="$target.$$.partial"  # unique per uploader: concurrent pools may publish the same release
 cat > "$partial"
