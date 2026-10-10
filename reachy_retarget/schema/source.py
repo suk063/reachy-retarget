@@ -7,13 +7,17 @@ translate every pose, object track and scene accordingly) and the source clock. 
 """
 from __future__ import annotations
 
+import hashlib
+import json
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Literal
 
 import numpy as np
 
 ObjectRole = Literal["manipulated", "support", "receptacle", "fixture"]
 Side = Literal["left", "right"]
+SCENE_REF_FORMAT = "reachy-retarget-scene-ref-v1"
 
 
 @dataclass
@@ -64,6 +68,52 @@ class SceneRef:
     # the deepest object-environment (incl. object-object) contact of the source itself,
     # which sets tier P's source-relative object-environment threshold.
     reference: dict = field(default_factory=dict)
+
+    def save(self, directory, names=None) -> dict:
+        """Write ``directory/scene.xml`` (the MJCF bytes), ``assets/<sha256>`` and ``scene_ref.json``;
+        ``names`` limits the assets to those keys (e.g. the ones left after removing the source
+        robot). ``directory`` must not exist. Returns the ``scene_ref.json`` content."""
+        directory = Path(directory)
+        directory.mkdir(parents=True)
+        (directory / "assets").mkdir()
+        names = sorted(self.assets if names is None else names)
+        assets = {}
+        for name in names:
+            data = bytes(self.assets[name])
+            digest = hashlib.sha256(data).hexdigest()
+            assets[name] = digest
+            path = directory / "assets" / digest
+            if not path.exists():
+                path.write_bytes(data)
+        mjcf = self.mjcf.encode()
+        (directory / "scene.xml").write_bytes(mjcf)
+        doc = {"format": SCENE_REF_FORMAT, "mjcf_sha256": hashlib.sha256(mjcf).hexdigest(),
+               "robot_prefixes": list(self.robot_prefixes),
+               "initial_qpos": {k: np.atleast_1d(np.asarray(v, float)).tolist() for k, v in self.initial_qpos.items()},
+               "inactive_bodies": None if self.inactive_bodies is None else list(self.inactive_bodies),
+               "reference": self.reference, "assets": assets}
+        (directory / "scene_ref.json").write_text(json.dumps(doc, indent=1, sort_keys=True))
+        return doc
+
+    @classmethod
+    def load(cls, directory) -> SceneRef:
+        """Read a SceneRef written by :meth:`save`; every file is checked against its sha256."""
+        directory = Path(directory)
+        doc = json.loads((directory / "scene_ref.json").read_text())
+        if doc.get("format") != SCENE_REF_FORMAT:
+            raise ValueError(f"{directory}: not a {SCENE_REF_FORMAT} scene")
+        mjcf = (directory / "scene.xml").read_bytes()
+        if hashlib.sha256(mjcf).hexdigest() != doc["mjcf_sha256"]:
+            raise ValueError(f"{directory}/scene.xml: sha256 mismatch")
+        assets = {}
+        for name, digest in doc["assets"].items():
+            data = (directory / "assets" / digest).read_bytes()
+            if hashlib.sha256(data).hexdigest() != digest:
+                raise ValueError(f"{directory}/assets/{digest}: sha256 mismatch")
+            assets[name] = data
+        return cls(mjcf=mjcf.decode(), robot_prefixes=list(doc["robot_prefixes"]),
+                   initial_qpos={k: np.asarray(v, float) for k, v in doc["initial_qpos"].items()},
+                   assets=assets, inactive_bodies=doc["inactive_bodies"], reference=doc["reference"])
 
 
 @dataclass

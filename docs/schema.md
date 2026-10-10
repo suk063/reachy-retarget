@@ -139,6 +139,20 @@ clock, static parts constant, Reachy links by FK of `q` (`base_link` = `planar(q
 `/physics/qpos` (objects as simulated) and Reachy FK of the rollout's joint positions. To assemble a
 reachy-agent-style map observation: `body_names` = component names, `body_poses` = `poses[t]`.
 
+**Exported source scenes.** Episodes keep only the digests of the scene their tier-P rollout used
+(`/physics` attr `info` -> `scene`: `source_mjcf_sha256`, resolved `assets` with sha256,
+`removed.parked_bodies`, `scene_sha256` of the compiled scene). `python -m
+reachy_retarget.scene_export export` regenerates the `SceneRef` from the raw source file (on the
+cluster, where the raw data is), rebuilds the tier-P scene and checks those digests (the compiled
+`scene_sha256` only when the MuJoCo version equals the recorded `simulator`). A verified scene is
+written by `SceneRef.save` as `scenes/<source_mjcf_sha256>/{scene.xml, scene_ref.json,
+assets/<sha256>}` (format `reachy-retarget-scene-ref-v1`: the exact MJCF bytes, robot prefixes,
+the exporting demo's initial qpos, inactive bodies, reference values and the asset name -> sha256
+map; only assets left after removing the source robot are kept) and read back, hash-checked, by
+`SceneRef.load`. `records/<job>.jsonl` holds one line per episode (status, checks). Rebuild an
+episode's scene with `build_scene(SceneRef.load(dir), drop_bodies=info["scene"]["removed"]["parked_bodies"])`
+and take its initial object state from `/physics/qpos`.
+
 ## Control modes
 
 Registry: `reachy_retarget.schema.control_modes.MODES` (`ModeSpec` with `frame`,

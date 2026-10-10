@@ -4,6 +4,8 @@ import shlex
 import subprocess
 import sys
 
+import pytest
+
 from cluster import k8s, pull
 
 
@@ -39,3 +41,35 @@ def test_select_draws_per_cell_passes_and_failures_with_every_attempt(tmp_path):
     assert all(f.startswith("episodes/tracking/synthetic-v1/") and (root / f).is_file() for f in sel["files"])
     assert sel["bytes"] == sum((root / f).stat().st_size for f in sel["files"])
     assert pull.select("datasets/tracking-v1", "pod", shards=2, per_cell=3, failed=2, seed=0, run=run) == sel
+
+
+def test_pull_all_copies_every_file_with_pod_side_hashes(tmp_path):
+    import tarfile
+
+    root = tmp_path / "pvc" / "datasets" / "scenes-x"
+    for rel, data in (("scenes/a/scene.xml", b"<mujoco/>"), ("scenes/a/assets/ff", b"\0" * 10),
+                      ("records/job.jsonl", b"{}\n")):
+        (root / rel).parent.mkdir(parents=True, exist_ok=True)
+        (root / rel).write_bytes(data)
+    (root / ".hidden.partial").write_bytes(b"in flight")
+
+    def run(pod, script, stdin=None):
+        script = script.replace(k8s.PVC, str(tmp_path / "pvc"))
+        return subprocess.run(["sh", "-c", script], input=stdin, capture_output=True, check=True).stdout.decode()
+
+    def stream(pod, src, files, dest):
+        src = src.replace(k8s.PVC, str(tmp_path / "pvc"))
+        with tarfile.open(fileobj=None, mode="w", name=tmp_path / "t.tar") as tar:
+            for f in files:
+                tar.add(f"{src}/{f}", arcname=f)
+        with tarfile.open(tmp_path / "t.tar") as tar:
+            tar.extractall(dest, filter="data")
+
+    out = pull.pull_all("datasets/scenes-x", tmp_path / "local" / "scenes-x", "pod", run=run, stream=stream)
+    dest = tmp_path / "local" / "scenes-x"
+    assert out["files"] == 3 and (dest / "scenes/a/assets/ff").read_bytes() == b"\0" * 10
+    assert not (dest / ".hidden.partial").exists()
+    sums = (dest / "SHA256SUMS").read_text()
+    assert "scenes/a/scene.xml" in sums and json.loads((dest / "PULL.json").read_text())["files"] == 3
+    with pytest.raises(FileExistsError):
+        pull.pull_all("datasets/scenes-x", dest, "pod", run=run, stream=stream)

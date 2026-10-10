@@ -23,6 +23,11 @@ the PVC is written.
     python -m cluster.pull datasets/tracking-v1 data/pulled/tracking-v1-sample
     python -m cluster.pull datasets/tracking-v1 data/pulled/tracking-v1-more --shards 6 --seed 1
 
+``--all`` pulls every file of a small folder (:func:`pull_all`, e.g. exported source scenes) with the
+same preflight, hash checks, ``SHA256SUMS`` and ``PULL.json``:
+
+    python -m cluster.pull datasets/scenes-mimicgen-kp data/pulled/scenes-mimicgen-kp --all
+
 Sources are relative to the PVC root ``/mnt/reachy-retarget``.
 """
 from __future__ import annotations
@@ -166,16 +171,72 @@ def pull_sample(source: str, dest, pod: str | None = None, *, shards: int = 3, p
             "bytes": sel["bytes"], "seconds": round(time.time() - t0, 1)}
 
 
+LIST = """set -eu
+cd {root}
+find . -type f ! -name '.*' -printf '%s\\t%P\\n'
+"""
+
+
+def pull_all(source: str, dest, pod: str | None = None, *, run=None, stream=None) -> dict:
+    """Pull every file of the PVC folder ``source`` to ``dest`` (small folders, e.g. exported
+    scenes): same preflight, pod-side hashes and staging as :func:`pull_sample`."""
+    run = run or (lambda p, s, stdin=None: k8s.run(p, s, stdin=stdin, timeout=3600))
+    stream = stream or stream_tar
+    dest = Path(dest).resolve()
+    if dest.exists():
+        raise FileExistsError(f"{dest} exists; not overwritten")
+    pod = pod or k8s.ready_pods()[0]
+    root = _source(source)
+    sizes = {}
+    for line in run(pod, LIST.format(root=shlex.quote(root))).splitlines():
+        size, rel = line.split("\t", 1)
+        sizes[rel] = int(size)
+    if not sizes:
+        raise RuntimeError(f"{root}: no files")
+    files = sorted(sizes)
+    total = sum(sizes.values())
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    free = shutil.disk_usage(dest.parent).free
+    if free - total < RESERVE:
+        raise OSError(f"local free space {free / 1e9:.1f} GB minus {total / 1e9:.1f} GB would fall below "
+                      f"the {RESERVE / 1e9:.0f} GB reserve")
+    remote = {}
+    for line in run(pod, HASH.format(root=shlex.quote(root)), "\n".join(files).encode()).splitlines():
+        digest, rel = line.split(None, 1)
+        remote[rel] = digest
+    stage = dest.with_name(f"{dest.name}.partial-{uuid.uuid4().hex[:8]}")
+    stage.mkdir()
+    t0 = time.time()
+    stream(pod, root, files, stage)
+    manifest = {}
+    for rel in files:
+        digest = sha256(stage / rel)
+        if digest != remote.get(rel):
+            raise RuntimeError(f"{rel}: local sha256 {digest} != pod {remote.get(rel)} (staging folder {stage})")
+        manifest[rel] = {"sha256": digest, "bytes": sizes[rel]}
+    (stage / SUMS).write_text(sums_text(manifest))
+    info = {"source": root, "pod": pod, "tool": "cluster.pull --all", "repo_revision": _git_revision(),
+            "created": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "files": len(files), "bytes": total,
+            "note": "every file is byte-identical to the PVC (sha256 checked against a pod-side hash)"}
+    (stage / INFO).write_text(json.dumps(info, indent=1))
+    stage.rename(dest)
+    return {"dest": str(dest), "pod": pod, "files": len(files), "bytes": total, "seconds": round(time.time() - t0, 1)}
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("source", help="dataset folder below the PVC root, e.g. datasets/tracking-v1")
     ap.add_argument("dest", help="new local folder, e.g. data/pulled/tracking-v1-sample")
+    ap.add_argument("--all", action="store_true", help="pull every file of the folder instead of a sample")
     ap.add_argument("--pod", help="worker pod (default: first Ready pod)")
     ap.add_argument("--shards", type=int, default=3, help="record files read, spread over the sorted list")
     ap.add_argument("--per-cell", type=int, default=10, help="tier-K passes drawn per cell")
     ap.add_argument("--failed", type=int, default=4, help="tier-K failures drawn per cell")
     ap.add_argument("--seed", type=int, default=0)
     a = ap.parse_args(argv)
+    if a.all:
+        print(json.dumps(pull_all(a.source, a.dest, a.pod)))
+        return
     print(json.dumps(pull_sample(a.source, a.dest, a.pod, shards=a.shards, per_cell=a.per_cell, failed=a.failed,
                                  seed=a.seed)))
 
