@@ -79,12 +79,12 @@ def index_rows(root: Path) -> list[dict]:
         rows = []
         for f in records:
             for line in f.read_text().splitlines():
-                row = json.loads(line).get("index_row") if line.strip() else None
-                if not row:
-                    continue
-                rel = next((c for c in (row["file"], f"episodes/{row['file']}") if (root / c).is_file()), None)
-                if rel is not None:
-                    rows.append({**row, "file": rel})
+                rec = json.loads(line) if line.strip() else {}
+                # Build records carry one ``index_row``; tracking records the ``index_rows`` of their final attempt.
+                for row in ([rec["index_row"]] if rec.get("index_row") else []) + list(rec.get("index_rows") or []):
+                    rel = next((c for c in (row["file"], f"episodes/{row['file']}") if (root / c).is_file()), None)
+                    if rel is not None:
+                        rows.append({**row, "file": rel})
         return sorted(rows, key=lambda r: r["file"])
     paths = sorted({*root.rglob("*.h5"), *root.rglob("*.hdf5")})
     return [index_row(read_episode(path), str(path.relative_to(root))) for path in paths]

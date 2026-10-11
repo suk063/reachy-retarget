@@ -175,3 +175,6 @@ def test_index_command_reads_records_or_episode_files(tmp_path):
     (tmp_path / "records" / "f" / "x.jsonl").write_text("".join(json.dumps(r) + "\n" for r in recs))
     rows = index_rows(tmp_path)
     assert [(r["uid"], r["file"]) for r in rows] == [(a.uid, "episodes/d/a.h5")]
+    # Tracking records list the final attempt's rows under ``index_rows``.
+    (tmp_path / "records" / "f" / "y.jsonl").write_text(json.dumps({"index_rows": [index_row(b, "d/b.h5")]}) + "\n")
+    assert [r["file"] for r in index_rows(tmp_path)] == ["episodes/d/a.h5", "episodes/d/b.h5"]
