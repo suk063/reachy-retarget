@@ -75,6 +75,9 @@ splits episodes, `policy.features` builds per-component DINO features from the s
 loop. `policy.rollout` runs closed loop in the original tier-P physics scenes, which
 `python -m reachy_retarget.scene_export` regenerates from the raw data on the cluster (`manifest`
 writes the `cluster.pool` jobs) and `python -m cluster.pull <PVC folder> <dest> --all` copies back.
+Tasks are specified by language: each episode's upstream instruction, or a template of the policy's
+instruction table for families without one (MimicGen), embedded once by a frozen Qwen3-Embedding-0.6B
+(`policy.language`); the builds themselves keep `instruction: null` where the source has none.
 See external/reachy-policy/policy/README.md.
 
 ## Source families
