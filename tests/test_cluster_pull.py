@@ -1,6 +1,7 @@
 """Sampling a published dataset folder for local inspection: the pod-side selection, run locally."""
 import json
 import shlex
+import shutil
 import subprocess
 import sys
 
@@ -78,3 +79,59 @@ def test_pull_all_copies_every_file_with_pod_side_hashes(tmp_path):
 def test_batches_split_by_size():
     sizes = {"a": 5, "b": 5, "c": 20, "d": 1}
     assert pull.batches(["a", "b", "c", "d"], sizes, 10) == [["a", "b"], ["c"], ["d"]]
+
+
+def test_select_final_only_takes_each_record_file_without_its_earlier_attempts(tmp_path):
+    root = tmp_path / "datasets" / "tracking-v1"
+    (root / "records" / "tracking").mkdir(parents=True)
+    lines = [_record(i, "ab"[i % 2], True, root, 1 + (i % 3 == 0)) for i in range(12)]
+    (root / "records" / "tracking" / "s0.jsonl").write_text("".join(json.dumps(r) + "\n" for r in lines))
+
+    def run(pod, script, stdin):
+        args = shlex.split(script)[2:]
+        args[0] = args[0].replace(k8s.PVC, str(tmp_path))
+        return subprocess.run([sys.executable, "-", *args], input=stdin, capture_output=True, check=True).stdout.decode()
+
+    sel = pull.select("datasets/tracking-v1", "pod", shards=9, per_cell=4, failed=0, seed=0, final_only=True, run=run)
+    recs = [json.loads(r["line"]) for r in sel["records"]]
+    assert len(recs) == 8 and len(sel["files"]) == 8
+    assert sel["files"] == ["episodes/" + r["file"].split("/episodes/", 1)[1] for r in recs]
+    assert sel["sizes"] == {f: (root / f).stat().st_size for f in sel["files"]}
+
+
+def test_transfer_retries_a_cut_stream_on_another_pod_and_resumes(tmp_path):
+    import tarfile
+
+    src = tmp_path / "pvc" / "d"
+    files = [f"episodes/e{i}.h5" for i in range(6)]
+    for i, f in enumerate(files):
+        (src / f).parent.mkdir(parents=True, exist_ok=True)
+        (src / f).write_bytes(bytes([i]) * (10 + i))
+    sizes = {f: (src / f).stat().st_size for f in files}
+
+    def run(pod, script, stdin=None):
+        return subprocess.run(["sh", "-c", script.replace(k8s.PVC, str(tmp_path / "pvc"))], input=stdin,
+                              capture_output=True, check=True).stdout.decode()
+
+    calls = []
+
+    def stream(pod, root, group, dest):
+        calls.append((pod, tuple(group)))
+        if pod == "bad":
+            raise tarfile.ReadError("unexpected end of data")
+        for f in group:
+            (dest / f).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(src / f, dest / f)
+
+    stage = tmp_path / "stage"
+    stage.mkdir()
+    out = pull.transfer(f"{k8s.PVC}/d", files, sizes, stage, ["bad", "good"], run=run, stream=stream,
+                        batch_bytes=25, workers=1)
+    assert sorted(out) == files and all((stage / f).read_bytes() == (src / f).read_bytes() for f in files)
+    good = [g for pod, g in calls if pod == "good"]
+    assert len(good) == len(set(good)) == len(pull.batches(files, sizes, 25))  # each stream once on "good"
+    assert any(pod == "bad" for pod, _ in calls) and all(g in good for pod, g in calls if pod == "bad")
+    calls.clear()
+    assert pull.transfer(f"{k8s.PVC}/d", files, sizes, stage, ["good"], run=run, stream=stream,
+                         batch_bytes=25) == out
+    assert calls == []  # resumed: every stream was already done
