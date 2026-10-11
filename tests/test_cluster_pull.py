@@ -135,3 +135,47 @@ def test_transfer_retries_a_cut_stream_on_another_pod_and_resumes(tmp_path):
     assert pull.transfer(f"{k8s.PVC}/d", files, sizes, stage, ["good"], run=run, stream=stream,
                          batch_bytes=25) == out
     assert calls == []  # resumed: every stream was already done
+
+
+def test_pull_sample_resumes_with_its_saved_selection(tmp_path):
+    root = tmp_path / "datasets" / "tracking-v1"
+    (root / "records" / "tracking").mkdir(parents=True)
+    lines = [_record(i, "ab"[i % 2], True, root, 1 + (i % 3 == 0)) for i in range(40)]
+    (root / "records" / "tracking" / "s0.jsonl").write_text("".join(json.dumps(r) + "\n" for r in lines))
+    selections = []
+
+    def run(pod, script, stdin=None):
+        if script.startswith("python3 - "):
+            selections.append(pod)
+            args = shlex.split(script)[2:]
+            args[0] = args[0].replace(k8s.PVC, str(tmp_path))
+            cmd = [sys.executable, "-", *args]
+        else:
+            cmd = ["sh", "-c", script.replace(k8s.PVC, str(tmp_path))]
+        return subprocess.run(cmd, input=stdin, capture_output=True, check=True).stdout.decode()
+
+    streams = []
+
+    def stream(pod, src, files, dest):
+        if broken and streams:
+            raise OSError("interrupted")
+        streams.append(tuple(files))
+        for f in files:
+            (dest / f).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(src.replace(k8s.PVC, str(tmp_path)) + "/" + f, dest / f)
+
+    dest = tmp_path / "local" / "sample"
+    kw = {"per_cell": 6, "failed": 0, "final_only": True, "batch_bytes": 40, "workers": 1, "run": run,
+          "stream": stream, "ready": lambda: ["p0", "p1"], "pods": 2}
+    broken = True
+    with pytest.raises(OSError):
+        pull.pull_sample("datasets/tracking-v1", dest, **kw)
+    assert not dest.exists() and len(streams) == 1
+    broken = False
+    out = pull.pull_sample("datasets/tracking-v1", dest, **kw)
+    assert selections == ["p0"]  # the second run used the saved selection
+    assert out["episode_files"] == 12 and len(streams) == len(set(streams))  # no stream sent twice
+    assert sorted(p.name for p in dest.iterdir()) == ["PULL.json", "SHA256SUMS", "episodes", "records"]
+    for line in (dest / "SHA256SUMS").read_text().splitlines():
+        digest, rel = line.split(None, 1)
+        assert pull.sha256(dest / rel) == digest

@@ -14,7 +14,8 @@ subsets. Steps (:func:`pull_sample`):
 3. the files are copied by :func:`transfer` into ``<dest>.partial``: tar streams of at most
    ``batch_bytes``, ``workers`` at once over ``pods`` worker pods; per stream the pod-side
    ``sha256sum`` of its files, and every extracted file must match it. A stream cut short is retried
-   on another pod; a rerun of the same command resumes from the finished streams;
+   on another pod; a rerun of the same command resumes from the finished streams and the drawn
+   records saved in the staging folder;
 4. the drawn record lines (under the record file's own relative path), ``SHA256SUMS`` and
    ``PULL.json`` (pods, PVC folder, record files read, selection, time, git revision of this repo)
    are written and the staging folder is renamed to ``<dest>``.
@@ -56,7 +57,8 @@ from cluster import k8s
 from cluster.upload import RESERVE, SUMS, _git_revision, sha256, sums_text
 
 INFO = "PULL.json"
-PLAN, DONE = ".plan.json", ".streams.jsonl"  # staging-folder bookkeeping of a resumable transfer
+# Staging-folder bookkeeping of a resumable transfer: plan digest, finished streams, the pod-side selection.
+PLAN, DONE, SELECTION = ".plan.json", ".streams.jsonl", ".selection.json.gz"
 
 # Runs on the pod with its system python3: argv = dataset root, shards, per_cell, failed, seed[, final_only].
 # Only (record file, byte offset) pairs are kept while grouping, so a million records fit a pod's memory;
@@ -104,9 +106,12 @@ out = {"record_files": chosen, "cells": {c: [len(g[0]), len(g[1])] for c, g in c
 sys.stdout.write(base64.b64encode(gzip.compress(json.dumps(out).encode(), 6)).decode())
 """
 
+# 16 files hashed at once: CephFS reads of small files are latency-bound (~0.3 s per file one at a
+# time); the hashed files stay in the pod's page cache for the tar stream that follows. With 16 files
+# per sha256sum call each call's output is one pipe write, so lines never interleave.
 HASH = """set -eu
 cd {root}
-tr '\\n' '\\0' | xargs -0 sha256sum --
+tr '\\n' '\\0' | xargs -0 -n 16 -P 16 sha256sum --
 """
 
 
@@ -245,7 +250,7 @@ def transfer(root: str, files: list[str], sizes: dict, stage: Path, pods: list[s
 def _finish(stage: Path, dest: Path, manifest: dict, info: dict) -> None:
     (stage / SUMS).write_text(sums_text(manifest))
     (stage / INFO).write_text(json.dumps(info, indent=1))
-    for name in (PLAN, DONE):
+    for name in (PLAN, DONE, SELECTION):
         (stage / name).unlink(missing_ok=True)
     stage.rename(dest)
 
@@ -273,11 +278,19 @@ def pull_sample(source: str, dest, pod: str | None = None, *, shards: int = 3, p
     pod = pod or names[0]
     root = _source(source)
     selection = {"shards": shards, "per_cell": per_cell, "failed": failed, "seed": seed, "final_only": final_only}
-    sel = select(source, pod, **selection, run=(lambda p, s, stdin: run(p, s, stdin)) if run else None)
+    saved, sel = dest.with_name(f"{dest.name}.partial") / SELECTION, None
+    if saved.exists():  # a resumed transfer keeps its drawn records instead of selecting again
+        held = json.loads(gzip.decompress(saved.read_bytes()))
+        if held["source"] == root and held["selection"] == selection:
+            sel = held["result"]
+    if sel is None:
+        sel = select(source, pod, **selection, run=(lambda p, s, stdin: run(p, s, stdin)) if run else None)
     if not sel["files"]:
         raise RuntimeError(f"{root}: no episode files referenced by the drawn records")
     _preflight(dest, sel["bytes"])
     stage = _stage(dest, {"source": root, "selection": selection, "files": sel["files"], "sizes": sel["sizes"]})
+    if not saved.exists():
+        saved.write_bytes(gzip.compress(json.dumps({"source": root, "selection": selection, "result": sel}).encode()))
     used = ([pod] + [p for p in names if p != pod])[:max(1, pods)]
     t0 = time.time()
     manifest = transfer(root, sel["files"], sel["sizes"], stage, used, run=run, stream=stream, workers=workers,
