@@ -30,7 +30,9 @@ explicit, body-relative targets, sampled for coverage rather than as a step from
 posture, and **sibling groups**:
 
 * ``reach_target``: each active hand reaches a TCP position drawn uniformly in :data:`TARGET_BOX`
-  (base frame, y outward), through a self-clear posture found among joint-space candidates;
+  (base frame, y outward), through a self-clear posture found among joint-space candidates; when 16
+  draws find none (about 1.5 % of hands) the hand takes a joint-space step goal instead and its
+  ``drawn_base`` is None (:func:`target_posture`);
 * ``gaze_target``: the head turns to a gaze direction (yaw, pitch of the head +X axis in base_link)
   drawn uniformly in :data:`GAZE_YAW` x :data:`GAZE_PITCH`;
 * ``joint_move``: one or two named arm joints, or one neck joint, move by a drawn amount and the
@@ -53,7 +55,7 @@ from dataclasses import asdict, dataclass
 import numpy as np
 
 from ..robot import LOWER, UPPER, VELOCITY, Reachy, gripper, min_clearance, planar
-from ..robot.reachy import GRIPPERS, LEFT_ARM, NECK, RIGHT_ARM
+from ..robot.reachy import GRIPPERS, JOINTS, LEFT_ARM, NECK, RIGHT_ARM
 from ..robot.resources import profile, urdf
 from ..schema.episode import DT, SIDES
 from ..schema.rotations import so3_exp, so3_log
@@ -188,6 +190,7 @@ def scenario(namespace: str, split: str, index: int, version: int = 1, group_siz
     cell = cells[order[pos]]
     key = f"{index:06d}" if group is None else f"g{group:06d}"
     rng = np.random.default_rng(seed_of(f"{namespace}/{split}/{key}/axes"))
+    # drive_target draws as a mobile cell: its base_motion draw (replaced below) keeps the version-2 stream.
     mobile = cell in MOBILE or cell == "drive_target"
     neck = _choice(rng, NECK_MODES, NECK_WEIGHTS)
     if neck == "look_ahead" and not mobile:
@@ -496,65 +499,74 @@ def _fit_base(dur, fn):
 # ---------------------------------------------------------------------------- witnesses
 
 
+def _clear_goal(q0, draw, tries):
+    """``(clearance, goal, info)`` of the first ``draw(attempt)`` (``(goal, info)``, or None to skip the
+    attempt) whose min-jerk path from ``q0`` keeps self-clearance >= WITNESS_CLEARANCE at 21 points,
+    else of the clearest goal drawn."""
+    u = pr.min_jerk(np.linspace(0, 1, 21))[:, None]
+    best = None
+    for attempt in range(tries):
+        drawn = draw(attempt)
+        if drawn is None:
+            continue
+        goal, info = drawn
+        clear = float(min_clearance(q0 + u * (goal - q0)).min())
+        if best is None or clear > best[0]:
+            best = (clear, goal, info)
+        if clear >= WITNESS_CLEARANCE:
+            break
+    if best is None:
+        raise ValueError("no joint move inside the limits")
+    return best
+
+
+def _joint_dur(ctx: Context, q0, goal, cols):
+    """Min-jerk duration of a joint move whose fastest joint peaks at the drawn fraction of its speed
+    limit (at least 0.6 s)."""
+    return max(0.6, pr.PEAK * float(np.max(np.abs(goal - q0)[cols] / (VELOCITY[cols] * ctx.speed["joint"]))))
+
+
 def joint_move(ctx: Context, q0, sides, tries: int = 40):
     """One smooth joint-space move of the arms ``sides`` from ``q0`` to one goal posture: min-jerk,
-    inside the limits minus KEY_MARGIN, self-clearance >= WITNESS_CLEARANCE every 0.1 s (goals are
-    redrawn otherwise). Returns (goal (22,), duration)."""
+    inside the limits minus KEY_MARGIN, self-clear along the path (:func:`_clear_goal`; the steps shrink
+    by 0.8 every 10 draws). Returns (goal (22,), duration)."""
     rng = ctx.rng
     cols = np.concatenate([np.arange(_arm(s).start, _arm(s).stop) for s in sides])
     lo, hi = LOWER[cols] + KEY_MARGIN, UPPER[cols] - KEY_MARGIN
     step = np.tile(ARM_STEP, len(sides)) * ctx.extent["step"]
-    best = None
-    for attempt in range(tries):
+
+    def draw(attempt):
         scale = ctx.size * 0.8 ** (attempt // 10)
         goal = q0.copy()
         goal[cols] = np.clip(q0[cols] + rng.uniform(-1, 1, len(cols)) * step * scale, lo, hi)
-        u = pr.min_jerk(np.linspace(0, 1, 21))[:, None]
-        clear = float(min_clearance(q0 + u * (goal - q0)).min())
-        if best is None or clear > best[0]:
-            best = (clear, goal)
-        if clear >= WITNESS_CLEARANCE:
-            break
-    clear, goal = best
+        return goal, None
+
+    clear, goal, _ = _clear_goal(q0, draw, tries)
     ctx.params["witness_clearance_m"] = clear
-    dq = np.abs(goal - q0)[cols]
-    dur = max(0.6, pr.PEAK * float(np.max(dq / (VELOCITY[cols] * ctx.speed["joint"]))))
-    return goal, dur
+    return goal, _joint_dur(ctx, q0, goal, cols)
 
 
 def named_joint_move(ctx: Context, q0, neck: bool, tries: int = 40):
     """One smooth joint-space move of one or two named joints of one arm, or of one neck joint, by
     JOINT_DELTA each; the other joints hold. Inside the limits minus KEY_MARGIN (NECK_GEN_MARGIN for
-    the neck), self-clearance >= WITNESS_CLEARANCE every 0.05 s of the path. Returns (goal (22,),
-    duration, info)."""
-    from ..robot.reachy import JOINTS
-
+    the neck), self-clear along the path (:func:`_clear_goal`; the deltas shrink by 0.85 every 10 draws,
+    moves under half the smallest delta are redrawn). Returns (goal (22,), duration, info)."""
     rng = ctx.rng
     if neck:
         cols, count, margin, side = np.arange(NECK.start, NECK.stop), 1, NECK_GEN_MARGIN, None
     else:
         side = str(rng.choice(SIDES))
         cols, count, margin = np.arange(_arm(side).start, _arm(side).stop), int(rng.choice([1, 2], p=[.6, .4])), KEY_MARGIN
-    best = None
-    for attempt in range(tries):
+
+    def draw(attempt):
         chosen = np.sort(rng.choice(cols, count, replace=False))
         delta = rng.choice([-1.0, 1.0], count) * rng.uniform(*JOINT_DELTA, count) * ctx.size * 0.85 ** (attempt // 10)
         goal = q0.copy()
         goal[chosen] = np.clip(q0[chosen] + delta, LOWER[chosen] + margin, UPPER[chosen] - margin)
-        moved = np.abs(goal[chosen] - q0[chosen])
-        if moved.min() < 0.5 * JOINT_DELTA[0]:
-            continue
-        u = pr.min_jerk(np.linspace(0, 1, 21))[:, None]
-        clear = float(min_clearance(q0 + u * (goal - q0)).min())
-        if best is None or clear > best[0]:
-            best = (clear, goal, chosen)
-        if clear >= WITNESS_CLEARANCE:
-            break
-    if best is None:
-        raise ValueError("no joint move inside the limits")
-    clear, goal, chosen = best
-    dq = np.abs(goal - q0)[chosen]
-    dur = max(0.6, pr.PEAK * float(np.max(dq / (VELOCITY[chosen] * ctx.speed["joint"]))))
+        return None if np.abs(goal[chosen] - q0[chosen]).min() < 0.5 * JOINT_DELTA[0] else (goal, chosen)
+
+    clear, goal, chosen = _clear_goal(q0, draw, tries)
+    dur = _joint_dur(ctx, q0, goal, chosen)
     info = {"side": side, "joints": [JOINTS[c] for c in chosen], "start_rad": q0[chosen].tolist(),
             "goal_rad": goal[chosen].tolist(), "delta_rad": (goal[chosen] - q0[chosen]).tolist(), "clearance_m": clear}
     return goal, dur, info
@@ -583,11 +595,23 @@ def _one_action(neck, times, start, stage, dt):
     return neck_mod.one_action(neck, times, start, stage, dt, rate_scale=0.8)
 
 
-def neck_path(ctx: Context, mode, times, base, tcp_world, q_start, active_sides, stage):
+def _neck_turn_dur(start, goal):
+    """Duration of a min-jerk neck turn peaking at 0.8 x the neck speed limit (at least 0.5 s)."""
+    return max(0.5, pr.PEAK * float(np.max(np.abs(goal - start) / (VELOCITY[NECK] * 0.8))))
+
+
+def _neck_turn(times, start, goal, begin, dur):
+    """Neck angles (T, 3) of one min-jerk turn from ``start`` to ``goal`` starting at ``begin``, rate-limited."""
+    s = pr.min_jerk((times - begin) / dur)
+    return neck_mod.rate_limit(start + s[:, None] * (goal - start), start, np.diff(times), 0.8)
+
+
+def neck_path(ctx: Context, mode, times, base, tcp_world, q_start, active_sides, stage, turn=None):
     """Neck angles (T, 3) of the head reference (None for ``off``): one action within the stage,
     inside the limits minus NECK_GEN_MARGIN and the neck speed (relative to the nominal ``base``).
     Gaze-following modes keep following their target when that is one continuous movement, else they
-    become one turn toward where the gaze ends (:func:`.neck.one_action`)."""
+    become one turn toward where the gaze ends (:func:`.neck.one_action`). ``turn``: the
+    ``(goal, begin, duration)`` of a ``gaze_target`` cell's head turn (:func:`build_cell`)."""
     rng = ctx.rng
     start = q_start[NECK]
     dt = np.diff(times)
@@ -597,18 +621,14 @@ def neck_path(ctx: Context, mode, times, base, tcp_world, q_start, active_sides,
     t0, t1 = stage
     if mode == "off":
         return None
-    if mode in ("hold", "joint"):  # "joint": the neck follows the witness (generate)
+    if mode == "hold":
         return np.tile(start, (T, 1))
     if mode == "gaze_target":  # the turn of build_cell, inside the stage
-        goal, begin, dur = ctx.neck_goal
-        s = pr.min_jerk((times - begin) / dur)
-        return neck_mod.rate_limit(start + s[:, None] * (goal - start), start, dt, 0.8)
+        return _neck_turn(times, start, *turn)
     if mode == "shift":  # one min-jerk turn of the head to a new orientation
         goal = rng.uniform(lo, hi) * {"small": 0.4, "medium": 0.7, "large": 1.0}[ctx.sc.extent]
-        dur = max(0.5, pr.PEAK * float(np.max(np.abs(goal - start) / (VELOCITY[NECK] * 0.8))))
-        begin = t0 + ctx.delay(max(t1 - t0, dur))
-        s = pr.min_jerk((times - begin) / dur)
-        return neck_mod.rate_limit(start + s[:, None] * (goal - start), start, dt, 0.8)
+        dur = _neck_turn_dur(start, goal)
+        return _neck_turn(times, start, goal, t0 + ctx.delay(max(t1 - t0, dur)), dur)
     if mode == "world_hold":
         R0 = W[0, :3, :3] @ neck_mod.head_base(start)[:3, :3]
         q = np.zeros((T, 22))
@@ -684,7 +704,8 @@ def build_cell(ctx: Context, q0, t0):
     Returns ``tracks`` {side: (Track, frame)} with frame ``world`` (a still base), ``base``
     (base-relative) or ``blend`` (a world goal reached from the base-relative start while the base
     drives: see :func:`generate`), ``base`` (BasePath), ``active`` sides, ``arrivals`` {side: time}
-    (when the hand action ends: the gripper acts there), optional ``witness`` and ``params``."""
+    (when the hand action ends: the gripper acts there), optional ``witness``, ``neck_turn`` (the
+    ``gaze_target`` head turn: goal, start, duration) and ``params``."""
     sc, rng, robot = ctx.sc, ctx.rng, ctx.robot
     cell = sc.cell
     B0 = planar(*sc.base_start)
@@ -714,8 +735,8 @@ def build_cell(ctx: Context, q0, t0):
         pass
     elif cell == "gaze_target":  # one head turn to an absolute gaze direction; the stage lasts until it ends
         goal, info = gaze_goal(ctx, q0[NECK])
-        dur = max(0.5, pr.PEAK * float(np.max(np.abs(goal - q0[NECK]) / (VELOCITY[NECK] * 0.8))))
-        ctx.neck_goal = (goal, t0, dur)
+        dur = _neck_turn_dur(q0[NECK], goal)
+        out["neck_turn"] = (goal, t0, dur)
         out["params"]["gaze_target"] = dict(info, start_s=t0, duration_s=dur)
         out["arrivals"] = {"head": t0 + dur}
     elif cell == "reach_target":
@@ -732,7 +753,7 @@ def build_cell(ctx: Context, q0, t0):
             out["params"].setdefault("hand", {})[s] = {
                 "kind": "reach_target", "target_base": pose[:3, 3].tolist(),
                 "drawn_base": None if drawn is None else drawn.tolist(), "start_s": t0 + delay, "duration_s": dur}
-            delay = ctx.delay(dur)
+            delay = ctx.delay(dur)  # drawn after the last hand too: the version-2 draw stream
     elif cell == "joint_move":
         goal, dur, info = named_joint_move(ctx, q0, sc.neck == "joint")
         out["witness"] = (goal, t0, dur)
@@ -935,9 +956,11 @@ def generate(sc: Scenario, attempt: Attempt = Attempt()) -> TrackingReference:
                 continue
             X = tr.sample(times)
             tcp[s] = _world(base, X) if frame == "base" else X
-    neck = neck_path(ctx, sc.neck, times, base, tcp, q_start, cell["active"], (t0, stage_end))
     if sc.neck == "joint":  # a neck joint move: the head follows the witness
         neck = wq[:, NECK].copy()
+    else:
+        neck = neck_path(ctx, sc.neck, times, base, tcp, q_start, cell["active"], (t0, stage_end),
+                         cell.get("neck_turn"))
     head = None
     if neck is not None:
         Wr = planar(base[:, 0], base[:, 1], base[:, 2])[:, :3, :3]
@@ -949,6 +972,7 @@ def generate(sc: Scenario, attempt: Attempt = Attempt()) -> TrackingReference:
     for i, s in enumerate(SIDES):
         levels = cell["gripper_override"].get(s, sc.grippers[i])
         if isinstance(levels, str):
+            # the default delay is drawn even when the hand has an arrival: the draw stream of the built datasets
             t_change = cell["arrivals"].get(s, t0 + ctx.delay(stage_end - t0))
             levels = gripper_levels(ctx, levels, t_change, start_rng)
         opening[:, i] = pr.gripper_profile(times, levels, FINGER_RATE)

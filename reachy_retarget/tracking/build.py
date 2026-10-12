@@ -94,14 +94,17 @@ def failing_frames(ep, cfg: TrackingConfig) -> np.ndarray:
 def run_scenario(namespace, split, index, out, cfg: TrackingConfig | None = None, version: int = 1,
                  group_size: int = 1) -> dict:
     """Generate, track and write one synthetic scenario (with retries); returns its record. The cells of
-    synthetic.FIXED_BASE are tracked with the base on its (still) nominal path."""
+    synthetic.FIXED_BASE are tracked with the base on its (still) nominal path (``base_free`` False, also
+    with a given ``cfg``)."""
     from . import synthetic as S
     from .pipeline import track
 
     t0 = time.perf_counter()
     sc = S.scenario(namespace, split, index, version, group_size)
-    cfg = cfg or TrackingConfig(base_free=sc.cell not in S.FIXED_BASE)
-    v = S.VERSIONS[version]
+    cfg = cfg or TrackingConfig()
+    if sc.cell in S.FIXED_BASE:
+        cfg = replace(cfg, base_free=False)
+    v = S.VERSIONS[sc.version]
     rec = {"family": "tracking", "generator": v["generator"], "dataset": v["dataset"], "episode_id": sc.episode_id,
            "task": sc.cell, "scenario": jsonable(sc.__dict__), "attempts": [], "prescreen": []}
     attempt = S.Attempt()

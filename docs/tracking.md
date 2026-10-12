@@ -151,7 +151,7 @@ once. All other axes are sampled independently.
   (≥ 25 mm) on its own, within limits − 0.12 rad.
 - **Base motions** are stretched until body-frame speeds stay below 0.85 × the limits.
 - **Witness moves** are one min-jerk joint-space move to a goal posture with self-clearance ≥ 15 mm
-  every 0.1 s (goals redrawn otherwise). Their FK is the reference; the joint path is stored
+  at 21 points along the path (goals redrawn otherwise, up to 40 draws; else the clearest). Their FK is the reference; the joint path is stored
   (`witness_q`) for audit only.
 - **Head references** are the rotation of a neck path within limits − 0.07 rad and 0.8 × neck speed,
   relative to the nominal base. They are reachable whenever the base follows its path.
@@ -178,7 +178,7 @@ v1 files exactly).
 
 | cell | slots of 10 | the action | everything else |
 |---|---|---|---|
-| `reach_target` | 2 | each active hand (one, or both with p = 1/3) reaches a TCP position drawn uniformly in x 0.15–0.60, outward y 0.00–0.55, z 0.55–1.30 m (base frame), through a self-clear posture within 4 cm of the draw | base on its path for the tracker, neck off, grippers kept |
+| `reach_target` | 2 | each active hand (one, or both with p = 1/3) reaches a TCP position drawn uniformly in x 0.15–0.60, outward y 0.00–0.55, z 0.55–1.30 m (base frame), through a self-clear posture within 4 cm of the draw; when 16 draws find none (about 1.5 % of hands), a joint-space step goal and `drawn_base` null | base on its path for the tracker, neck off, grippers kept |
 | `gaze_target` | 2 | one head turn to a gaze direction (head +X yaw, pitch in base_link) drawn uniformly in ±0.9 × −0.4–0.35 rad, solved to 0.02 rad; the stage lasts until the turn ends | arms still, base on its path, grippers kept |
 | `joint_move` | 1 | one or two named arm joints (or one neck joint, p = 1/4) move by 0.1–0.6 rad; the episode executes the joint path itself (`extra["exact_witness"]`: no IK), so the named joints are exact and the others hold | base on its path, grippers kept |
 | `drive_target` | 1 | the base goes straight (holonomic) to a body-frame goal dx −0.5–2.5 m, dy ±1 m, dyaw ±1.6 rad | arms hold base-relative, neck off, grippers kept |
@@ -190,7 +190,9 @@ levels (the group's seed), then each draws its own goals (its own seed). The sam
 leads to different motions, which the policy can only tell apart from the instruction. Members
 share `lineage.seed` (the group id; `lineage.group`, `lineage.member`) and are not independent
 demonstrations. Parameters record the drawn and reached targets (`hand.<side>.target_base`,
-`gaze_target.drawn_rad`, `joint_move.joints/goal_rad/delta_rad`, `base.goal_body`).
+`hand.<side>.drawn_base`, `gaze_target.drawn_rad`, `joint_move.joints/goal_rad/delta_rad`,
+`base.goal_body`). `tests/test_tracking.py` regenerates built version-1 and version-2 files (scenario,
+references, params, lineage) to check that later edits keep the generator's output.
 
 In version 1, `neck_only` head turns can outlast the stage: about a quarter end with the head still
 turning (neck speed 0.52 rad/s); `gaze_target` replaces that cell in version 2.

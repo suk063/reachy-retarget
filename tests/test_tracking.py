@@ -369,6 +369,8 @@ def test_version_two_cells_pass_tier_k_and_reach_their_targets(cell, tmp_path):
     if cell == "reach_target":
         for s, hand in params["hand"].items():
             assert np.linalg.norm(fk[f"{s}_tcp"][:3, 3] - hand["target_base"]) < 0.005
+            if hand["drawn_base"] is None:  # no draw reached: a step goal (synthetic.target_posture)
+                continue
             lo, hi = np.array(S.TARGET_BOX).T
             drawn = np.array(hand["drawn_base"]) * [1, 1 if s == "left" else -1, 1]
             assert np.all(drawn >= lo) and np.all(drawn <= hi)
@@ -392,22 +394,73 @@ def test_version_two_cells_pass_tier_k_and_reach_their_targets(cell, tmp_path):
         assert np.hypot(D[0, 3] - dx, D[1, 3] - dy) < 0.05 and abs(np.arctan2(D[1, 0], D[0, 0]) - dyaw) < 0.05
 
 
-def test_version_one_regenerates_the_pulled_episodes():
-    """Version 1 is unchanged by version 2: regenerated references equal pulled tracking-v1 files."""
-    import glob
-    import pathlib
+def _regenerated(root, files, version, group_size, exact):
+    """Each built episode file's scenario, references (TCP, base, head rotation, witness), params and lineage
+    come back from the generator; ``exact`` False allows the 4e-16 differences of builds on other machines."""
+    from dataclasses import asdict
+    from functools import partial
 
     import h5py
-    root = pathlib.Path(__file__).resolve().parents[1] / "data" / "pulled" / "tracking-v1-150k"
-    files = sorted(glob.glob(str(root / "episodes" / "tracking" / "synthetic-v1" / "*.h5")))[:5]
-    if not files:
-        pytest.skip("no pulled tracking-v1 episodes")
-    for path in files:
-        with h5py.File(path) as f:
+
+    from reachy_retarget.schema.rotations import pose_to_vec7
+
+    same = np.testing.assert_array_equal if exact else partial(np.testing.assert_allclose, rtol=0, atol=1e-12)
+    for file in files:
+        with h5py.File(root / file) as f:
             meta = json.loads(f.attrs["metadata"])
-            stored = {k: f[f"reference/{k}"][()] for k in ("tcp/left", "tcp/right", "base")}
-        sc0, attempt = meta["extra"]["tracking"]["scenario"], meta["extra"]["tracking"]["params"]["attempt"]
-        ref = S.generate(S.scenario(sc0["namespace"], sc0["split"], sc0["index"]), S.Attempt(**attempt))
+            stored = {k: f[k][()] for k in ("reference/tcp/left", "reference/tcp/right", "reference/base",
+                                            "reference/head", "validation/witness_q") if k in f}
+        tracking = meta["extra"]["tracking"]
+        sc0 = tracking["scenario"]
+        sc = S.scenario(sc0["namespace"], sc0["split"], sc0["index"], version, group_size)
+        assert json.loads(json.dumps(asdict(sc))) == {"version": 1, "group": None, "member": None, **sc0}, file
+        ref = S.generate(sc, S.Attempt(**tracking["params"]["attempt"]))
+        assert json.loads(json.dumps(ref.extra["params"])) == tracking["params"], file
+        assert ref.lineage == {k: v for k, v in meta["lineage"].items() if k != "attempt"}, file
         for s in SIDES:
-            np.testing.assert_allclose(ref.tcp[s][:, :3, 3], stored[f"tcp/{s}"][:, :3], atol=1e-12)
-        np.testing.assert_allclose(ref.base, stored["base"], atol=1e-12)
+            same(pose_to_vec7(ref.tcp[s]), stored[f"reference/tcp/{s}"])
+        same(ref.base, stored["reference/base"])
+        assert (ref.head is None) == ("reference/head" not in stored) and (ref.witness is None) == (
+            "validation/witness_q" not in stored), file
+        if ref.head is not None:  # the stored head pose sits at the tracked head position
+            head = np.broadcast_to(np.eye(4), (ref.length, 4, 4)).copy()
+            head[:, :3, :3] = ref.head
+            same(pose_to_vec7(head)[:, 3:], stored["reference/head"][:, 3:])
+        if ref.witness is not None:
+            same(ref.witness, stored["validation/witness_q"])
+
+
+ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
+
+
+def test_version_one_regenerates_the_pulled_episodes():
+    """Version 1 is unchanged by version 2 and later edits: one pulled tracking-v1 episode per cell."""
+    pd = pytest.importorskip("pandas")
+    root = ROOT / "data" / "pulled" / "tracking-v1-150k"
+    if not (root / "index.parquet").exists():
+        pytest.skip("no pulled tracking-v1 episodes")
+    index = pd.read_parquet(root / "index.parquet").sort_values("file")
+    files = index.groupby("task").head(1).file
+    assert len(files) == len(S.CELLS)
+    _regenerated(root, files, 1, 1, exact=False)
+
+
+def test_version_two_regenerates_the_built_episodes():
+    """The version-2 build (sibling groups of 4) comes back bit for bit: one final and one earlier attempt
+    per cell, and a neck joint move."""
+    import h5py
+
+    pd = pytest.importorskip("pandas")
+    root = ROOT / "runs" / "tracking" / "v2"
+    if not (root / "index.parquet").exists():
+        pytest.skip("no version-2 build")
+    index = pd.read_parquet(root / "index.parquet").sort_values("file")
+    finals, tries = index[index.variant_of.isna()], index[index.variant_of.notna()]
+    files = list(finals.groupby("task").head(1).file) + list(tries.groupby("task").head(1).file)
+    assert finals.task.nunique() == len(set(S.CELLS_V2)) and tries.task.nunique() > 1
+    for file in finals[finals.task == "joint_move"].file:
+        with h5py.File(root / file) as f:
+            if json.loads(f.attrs["metadata"])["extra"]["tracking"]["scenario"]["neck"] == "joint":
+                files.append(file)
+                break
+    _regenerated(root, files, 2, 4, exact=True)

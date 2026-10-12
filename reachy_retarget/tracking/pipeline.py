@@ -133,62 +133,89 @@ def _resample_rot(c, R):
     return A @ so3_exp(c.fraction[:, None] * rel)
 
 
-def track(ref: TrackingReference, cfg: TrackingConfig | None = None) -> TrackResult:
-    cfg = cfg or TrackingConfig()
-    ik = cfg.ik()
-    robot = Reachy.load()
-    t_start = _time.perf_counter()
-    exact = ref.witness is not None and bool(ref.extra.get("exact_witness"))
-    if exact and ref.retime:
+@dataclass
+class _Joints:
+    """A joint trajectory on the output clock (from 0) and the references it tracks there."""
+    q: np.ndarray
+    time: np.ndarray
+    source_time: np.ndarray
+    tcp: dict
+    base: np.ndarray
+    head: np.ndarray | None
+    ik: dict                      # IK diagnostics
+    refined: int = 0              # refined output frames
+    timing: dict | None = None    # retiming diagnostics
+    ik_seconds: float = 0.0
+
+
+def _start(ref: TrackingReference, cols):
+    return ref.q_start[cols] if ref.q_start is not None else None
+
+
+def _exact(ref: TrackingReference) -> _Joints:
+    """The witness joint path itself (``extra["exact_witness"]``): no IK, neck solve or refinement; the
+    fingers follow the reference opening as in :func:`_solve`."""
+    if ref.retime:
         raise ValueError("an exact witness cannot be retimed")
-    if exact:
-        q_src, ik_diag = ref.witness.copy(), {"exact_witness": True}
-    else:
-        q_src, ik_diag = solve_arms(ref, cfg)
+    times = ref.time - ref.time[0]
+    q = ref.witness.copy()
+    q[:, GRIPPERS] = finger_angles(ref.opening, times, _start(ref, GRIPPERS))
+    return _Joints(q, times, ref.time.copy(), ref.tcp, ref.base, ref.head, {"exact_witness": True})
+
+
+def _solve(ref: TrackingReference, cfg: TrackingConfig, ik) -> _Joints | None:
+    """Whole-body IK, neck and fingers on the reference clock, then retiming (``ref.retime``) and
+    refinement on the output clock; None when the IK is not finite."""
+    t0 = _time.perf_counter()
+    q_src, ik_diag = solve_arms(ref, cfg)
     if not np.isfinite(q_src).all():
-        return TrackResult(None, "failed", ["IK produced non-finite joint values"], {"stage": "ik"})
-    t_ik = _time.perf_counter()
+        return None
+    ik_seconds = _time.perf_counter() - t0
     times = ref.time - ref.time[0]
     dt = np.diff(times)
     # without a start state (source paths) the neck starts where the first head target puts it
-    start_neck = ref.q_start[NECK] if ref.q_start is not None else None
-    if exact:
-        pass  # the witness's neck
-    elif ref.head is not None:
+    start_neck = _start(ref, NECK)
+    if ref.head is not None:
         q_src[:, NECK] = neck_mod.solve(q_src, ref.head, margin=cfg.neck_margin, iterations=cfg.neck_iterations,
                                         start=start_neck, dt=dt * cfg.velocity_scale)
     else:
         q_src[:, NECK] = 0.0 if start_neck is None else start_neck
-    start_finger = ref.q_start[GRIPPERS] if ref.q_start is not None else None
-    q_src[:, GRIPPERS] = finger_angles(ref.opening, times, start_finger)
-
-    targets, base_ref, head_ref, opening = ref.tcp, ref.base, ref.head, ref.opening
-    timing_diag = None
+    q_src[:, GRIPPERS] = finger_angles(ref.opening, times, _start(ref, GRIPPERS))
+    out = _Joints(q_src, times, ref.time.copy(), ref.tcp, ref.base, ref.head, ik_diag, ik_seconds=ik_seconds)
     if ref.retime:
         # body-axis base speeds of the resampled path can exceed the per-interval bound when the base
         # turns within a dilated interval: re-time with a smaller speed fraction until they hold
         scaled = ik
         for _ in range(4):
             clock = timing.clock(times, q_src, scaled)
-            q = timing.linear(clock, q_src)
-            ratio = float(np.max(np.abs(timing.body_increments(q)) / DT / VELOCITY)) if len(q) > 1 else 0.0
+            out.q = timing.linear(clock, q_src)
+            ratio = float(np.max(np.abs(timing.body_increments(out.q)) / DT / VELOCITY)) if len(out.q) > 1 else 0.0
             if ratio <= 0.999:
                 break
             scaled = replace(scaled, velocity_scale=scaled.velocity_scale * 0.98 / ratio)
-        targets = {s: timing.poses(clock, X) for s, X in ref.tcp.items()}
-        base_ref = timing.linear(clock, ref.base)
-        head_ref = None if ref.head is None else _resample_rot(clock, ref.head)
-        out_time, source_time = clock.time, clock.source_time + ref.time[0]
-        timing_diag = clock.diagnostics(times)
-    else:
-        if not np.allclose(dt, DT, atol=1e-6):
-            raise ValueError(f"a reference that is not retimed must be sampled at {1 / DT:g} Hz")
-        q = q_src
-        out_time, source_time = times, ref.time.copy()
-    q, refined = (q, 0) if exact else _refine(ik, q, targets, base_ref, _nominal(ref), cfg.base_free)
-    if ref.retime and head_ref is not None:  # re-track the head on the refined base yaw
-        q[:, NECK] = neck_mod.solve(q, head_ref, margin=cfg.neck_margin, iterations=cfg.neck_iterations,
-                                    start=q[0, NECK], dt=np.diff(out_time) * cfg.velocity_scale)
+        out.tcp = {s: timing.poses(clock, X) for s, X in ref.tcp.items()}
+        out.base = timing.linear(clock, ref.base)
+        out.head = None if ref.head is None else _resample_rot(clock, ref.head)
+        out.time, out.source_time = clock.time, clock.source_time + ref.time[0]
+        out.timing = clock.diagnostics(times)
+    out.q, out.refined = _refine(ik, out.q, out.tcp, out.base, _nominal(ref), cfg.base_free)
+    if ref.retime and out.head is not None:  # re-track the head on the refined base yaw
+        out.q[:, NECK] = neck_mod.solve(out.q, out.head, margin=cfg.neck_margin, iterations=cfg.neck_iterations,
+                                        start=out.q[0, NECK], dt=np.diff(out.time) * cfg.velocity_scale)
+    return out
+
+
+def track(ref: TrackingReference, cfg: TrackingConfig | None = None) -> TrackResult:
+    cfg = cfg or TrackingConfig()
+    t_start = _time.perf_counter()
+    if not ref.retime and not np.allclose(np.diff(ref.time - ref.time[0]), DT, atol=1e-6):
+        raise ValueError(f"a reference that is not retimed must be sampled at {1 / DT:g} Hz")
+    exact = ref.witness is not None and bool(ref.extra.get("exact_witness"))
+    joints = _exact(ref) if exact else _solve(ref, cfg, cfg.ik())
+    if joints is None:
+        return TrackResult(None, "failed", ["IK produced non-finite joint values"], {"stage": "ik"})
+    q, targets, base_ref, head_ref, out_time = joints.q, joints.tcp, joints.base, joints.head, joints.time
+    robot = Reachy.load()
     qd = timing.velocity(q)
     fkb = robot.fk_base(q)
     angles = q[:, GRIPPERS]
@@ -201,12 +228,12 @@ def track(ref: TrackingReference, cfg: TrackingConfig | None = None) -> TrackRes
         head_world[:, :3, :3] = head_ref
     errors = tcp_errors(q, targets)
     diag = {
-        "ik": dict(ik_diag, refined_output_frames=int(refined), reference_frames=ref.length,
+        "ik": dict(joints.ik, refined_output_frames=int(joints.refined), reference_frames=ref.length,
                    output_frames=len(q)),
-        "timing": timing_diag,
+        "timing": joints.timing,
         "max_tcp_position_residual_m": {s: float(e[0].max()) for s, e in errors.items()},
         "max_tcp_rotation_residual_rad": {s: float(e[1].max()) for s, e in errors.items()},
-        "seconds": {"ik": t_ik - t_start, "total": None},
+        "seconds": {"ik": joints.ik_seconds, "total": None},
     }
     extra = {"tracking": jsonable(dict(ref.extra, frames={"head_tip_in_head": neck_mod.HEAD_TIP.tolist()},
                                        diagnostics=diag)),
@@ -219,7 +246,7 @@ def track(ref: TrackingReference, cfg: TrackingConfig | None = None) -> TrackRes
         family="tracking", dataset=ref.dataset, episode_id=ref.episode_id, task=ref.task,
         time=out_time, q=q, qd=qd, tcp_base={s: fkb[f"{s}_tcp"] for s in SIDES}, head_base=fkb["head"],
         gripper_opening=gripper.angle_to_opening(angles), gripper_width=gripper.angle_to_width(angles),
-        source_time=source_time, tier={"K": {"passed": False, "reasons": ["not validated"]}, "P": None},
+        source_time=joints.source_time, tier={"K": {"passed": False, "reasons": ["not validated"]}, "P": None},
         retarget_config=cfg.digest(), instruction=ref.instruction, regime=ref.regime, license=ref.license,
         provenance=dict(ref.provenance), lineage=dict(ref.lineage), variant_of=ref.variant_of,
         body_parts=ref.body_parts, reference=Reference(tcp=targets, head=head_world, base=base_ref),
