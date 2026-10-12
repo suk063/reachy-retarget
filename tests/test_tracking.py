@@ -312,3 +312,102 @@ def test_source_demonstration_is_cut_into_single_stages():
         assert N.movements(N.solve_base(Rb, None, 0.0, 30), t) <= 1
     rows = [r.extra["stage"]["source_rows"] for r in primary]
     assert rows[0][0] == 0 and all(a[1] == b[0] for a, b in zip(rows[:-1], rows[1:]))
+
+
+# ---------------------------------------------------------------------------- version 2
+
+
+def first_v2(cell, start=0, group_size=4, limit=400):
+    """The first member index of a version-2 sibling group of ``cell`` in namespace ``test``."""
+    for g in range(start, limit):
+        if S.scenario(NS, "unit", g * group_size, 2, group_size).cell == cell:
+            return g * group_size
+    raise LookupError(cell)
+
+
+def test_version_two_cells_are_stratified_and_siblings_share_the_start():
+    n = len(S.CELLS_V2)
+    cells = [S.scenario(NS, "unit", 4 * g, 2, 4).cell for g in range(n)]
+    assert sorted(cells) == sorted(S.CELLS_V2)
+    assert S.scenario(NS, "unit", 7) == S.scenario(NS, "unit", 7, 1, 1)  # version 1 defaults unchanged
+    for cell in ("left", "reach_target", "gaze_target", "navigation"):
+        i = first_v2(cell)
+        members = [S.scenario(NS, "unit", i + m, 2, 4) for m in range(4)]
+        assert {(sc.cell, sc.group, sc.seed) for sc in members} == {(cell, i // 4, members[0].seed)}
+        assert len({sc.episode_id for sc in members}) == 4
+        refs = [S.generate(sc) for sc in members]
+        for ref in refs:
+            assert np.array_equal(ref.q_start, refs[0].q_start) and np.array_equal(ref.base[0], refs[0].base[0])
+            assert np.array_equal(ref.opening[0], refs[0].opening[0]) and ref.lineage["seed"] == members[0].group_id
+            assert ref.dataset == "tracking/synthetic-v2" and ref.lineage["member"] in range(4)
+        ends = {json.dumps(np.round(np.concatenate([r.tcp[s][-1, :3, 3] for s in SIDES] + [r.base[-1]]), 4).tolist()
+                           + ([] if r.head is None else np.round(r.head[-1], 4).tolist())) for r in refs}
+        assert len(ends) > 1, cell  # different goals from the same start
+
+
+@pytest.mark.parametrize("cell", sorted(set(S.CELLS_V2)))
+def test_version_two_cells_pass_tier_k_and_reach_their_targets(cell, tmp_path):
+    import h5py
+
+    from reachy_retarget.robot.reachy import JOINTS
+
+    rec = None
+    for k in range(4):
+        i = first_v2(cell, start=k * 10)
+        rec = run_scenario(NS, "unit", i, tmp_path, version=2, group_size=4)
+        if rec["K"]["passed"]:
+            break
+    assert rec["K"]["passed"], rec["K"]["reasons"]
+    with h5py.File(rec["file"]) as f:
+        meta = json.loads(f.attrs["metadata"])
+        q = f["state/q"][()]
+    params = meta["extra"]["tracking"]["params"]
+    fk = Reachy.load().fk_base(q[-1])
+    if cell in S.KEEP_GRIPPERS:  # only the cell's action moves
+        fingers = [JOINTS.index(f"{p}_hand_finger") for p in ("l", "r")]
+        assert np.abs(q[:, fingers] - q[0, fingers]).max() < 1e-6
+    if cell == "reach_target":
+        for s, hand in params["hand"].items():
+            assert np.linalg.norm(fk[f"{s}_tcp"][:3, 3] - hand["target_base"]) < 0.005
+            lo, hi = np.array(S.TARGET_BOX).T
+            drawn = np.array(hand["drawn_base"]) * [1, 1 if s == "left" else -1, 1]
+            assert np.all(drawn >= lo) and np.all(drawn <= hi)
+            assert np.linalg.norm(np.array(hand["drawn_base"]) - hand["target_base"]) < S.TARGET_TOL
+        assert np.abs(q[:, :3] - q[0, :3]).max() < 1e-9  # the base stays
+    if cell == "gaze_target":
+        x = fk["head"][:3, 0]
+        drawn = params["gaze_target"]["drawn_rad"]
+        assert abs(np.arctan2(x[1], x[0]) - drawn[0]) < S.GAZE_TOL and abs(np.arcsin(x[2]) - drawn[1]) < S.GAZE_TOL
+        assert np.abs(q[:, 3:17] - q[0, 3:17]).max() < 1e-9  # the arms hold
+    if cell == "joint_move":
+        move = params["joint_move"]
+        moved = [JOINTS.index(j) for j in move["joints"]]
+        np.testing.assert_allclose(q[-1, moved], move["goal_rad"], atol=1e-9)
+        held = [c for c in range(3, 22) if c not in moved and not JOINTS[c].endswith("finger")]
+        assert np.abs(q[:, held] - q[0, held]).max() < 1e-9 and meta["extra"]["tracking"]["exact_witness"]
+    if cell == "drive_target":
+        from reachy_retarget.robot import planar
+        dx, dy, dyaw = params["base"]["goal_body"]
+        D = np.linalg.inv(planar(*q[0, :3])) @ planar(*q[-1, :3])
+        assert np.hypot(D[0, 3] - dx, D[1, 3] - dy) < 0.05 and abs(np.arctan2(D[1, 0], D[0, 0]) - dyaw) < 0.05
+
+
+def test_version_one_regenerates_the_pulled_episodes():
+    """Version 1 is unchanged by version 2: regenerated references equal pulled tracking-v1 files."""
+    import glob
+    import pathlib
+
+    import h5py
+    root = pathlib.Path(__file__).resolve().parents[1] / "data" / "pulled" / "tracking-v1-150k"
+    files = sorted(glob.glob(str(root / "episodes" / "tracking" / "synthetic-v1" / "*.h5")))[:5]
+    if not files:
+        pytest.skip("no pulled tracking-v1 episodes")
+    for path in files:
+        with h5py.File(path) as f:
+            meta = json.loads(f.attrs["metadata"])
+            stored = {k: f[f"reference/{k}"][()] for k in ("tcp/left", "tcp/right", "base")}
+        sc0, attempt = meta["extra"]["tracking"]["scenario"], meta["extra"]["tracking"]["params"]["attempt"]
+        ref = S.generate(S.scenario(sc0["namespace"], sc0["split"], sc0["index"]), S.Attempt(**attempt))
+        for s in SIDES:
+            np.testing.assert_allclose(ref.tcp[s][:, :3, 3], stored[f"tcp/{s}"][:, :3], atol=1e-12)
+        np.testing.assert_allclose(ref.base, stored["base"], atol=1e-12)

@@ -11,6 +11,10 @@
 5. Timing: references with ``retime`` (source paths) are slowed down where the speed limits need it
    and resampled to 50 Hz (:mod:`reachy_retarget.retarget.timing`), then refined on the output clock.
 6. Episode assembly with the reference stored unmodified, and tier K (:mod:`.validate`).
+
+A reference with ``extra["exact_witness"]`` (synthetic ``joint_move``) is executed as its witness joint
+path itself: no IK, no neck solve, no refinement (its TCP and head references are the witness's
+forward kinematics, so tier K still checks them).
 """
 from __future__ import annotations
 
@@ -134,7 +138,13 @@ def track(ref: TrackingReference, cfg: TrackingConfig | None = None) -> TrackRes
     ik = cfg.ik()
     robot = Reachy.load()
     t_start = _time.perf_counter()
-    q_src, ik_diag = solve_arms(ref, cfg)
+    exact = ref.witness is not None and bool(ref.extra.get("exact_witness"))
+    if exact and ref.retime:
+        raise ValueError("an exact witness cannot be retimed")
+    if exact:
+        q_src, ik_diag = ref.witness.copy(), {"exact_witness": True}
+    else:
+        q_src, ik_diag = solve_arms(ref, cfg)
     if not np.isfinite(q_src).all():
         return TrackResult(None, "failed", ["IK produced non-finite joint values"], {"stage": "ik"})
     t_ik = _time.perf_counter()
@@ -142,7 +152,9 @@ def track(ref: TrackingReference, cfg: TrackingConfig | None = None) -> TrackRes
     dt = np.diff(times)
     # without a start state (source paths) the neck starts where the first head target puts it
     start_neck = ref.q_start[NECK] if ref.q_start is not None else None
-    if ref.head is not None:
+    if exact:
+        pass  # the witness's neck
+    elif ref.head is not None:
         q_src[:, NECK] = neck_mod.solve(q_src, ref.head, margin=cfg.neck_margin, iterations=cfg.neck_iterations,
                                         start=start_neck, dt=dt * cfg.velocity_scale)
     else:
@@ -173,7 +185,7 @@ def track(ref: TrackingReference, cfg: TrackingConfig | None = None) -> TrackRes
             raise ValueError(f"a reference that is not retimed must be sampled at {1 / DT:g} Hz")
         q = q_src
         out_time, source_time = times, ref.time.copy()
-    q, refined = _refine(ik, q, targets, base_ref, _nominal(ref), cfg.base_free)
+    q, refined = (q, 0) if exact else _refine(ik, q, targets, base_ref, _nominal(ref), cfg.base_free)
     if ref.retime and head_ref is not None:  # re-track the head on the refined base yaw
         q[:, NECK] = neck_mod.solve(q, head_ref, margin=cfg.neck_margin, iterations=cfg.neck_iterations,
                                     start=q[0, NECK], dt=np.diff(out_time) * cfg.velocity_scale)

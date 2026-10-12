@@ -4,6 +4,8 @@ Synthetic scenarios (indices ``start .. start + count``, shard ``k/n`` takes ``i
 
     python -m reachy_retarget.tracking.build synthetic --namespace tracking-v1 --split pilot \\
         --count 300 --jobs 24 --out runs/tracking/pilot
+    python -m reachy_retarget.tracking.build synthetic --version 2 --group-size 4 --namespace tracking-v2 \\
+        --split train --count 72000 --jobs 16 --out runs/tracking/v2     # target cells, sibling groups
 
 Source hand paths (one source file, shard ``k/n`` over its episodes)::
 
@@ -89,15 +91,18 @@ def failing_frames(ep, cfg: TrackingConfig) -> np.ndarray:
     return np.flatnonzero(bad)
 
 
-def run_scenario(namespace, split, index, out, cfg: TrackingConfig | None = None) -> dict:
-    """Generate, track and write one synthetic scenario (with retries); returns its record."""
+def run_scenario(namespace, split, index, out, cfg: TrackingConfig | None = None, version: int = 1,
+                 group_size: int = 1) -> dict:
+    """Generate, track and write one synthetic scenario (with retries); returns its record. The cells of
+    synthetic.FIXED_BASE are tracked with the base on its (still) nominal path."""
     from . import synthetic as S
     from .pipeline import track
 
-    cfg = cfg or TrackingConfig()
     t0 = time.perf_counter()
-    sc = S.scenario(namespace, split, index)
-    rec = {"family": "tracking", "generator": S.GENERATOR, "dataset": S.DATASET, "episode_id": sc.episode_id,
+    sc = S.scenario(namespace, split, index, version, group_size)
+    cfg = cfg or TrackingConfig(base_free=sc.cell not in S.FIXED_BASE)
+    v = S.VERSIONS[version]
+    rec = {"family": "tracking", "generator": v["generator"], "dataset": v["dataset"], "episode_id": sc.episode_id,
            "task": sc.cell, "scenario": jsonable(sc.__dict__), "attempts": [], "prescreen": []}
     attempt = S.Attempt()
     results = []
@@ -157,11 +162,14 @@ def run_scenario(namespace, split, index, out, cfg: TrackingConfig | None = None
 
 
 def _scenario_job(args):
-    namespace, split, index, out = args
+    from .synthetic import VERSIONS
+
+    namespace, split, index, out, version, group_size = args
     try:
-        rec = run_scenario(namespace, split, index, out)
+        rec = run_scenario(namespace, split, index, out, version=version, group_size=group_size)
     except Exception as error:  # the failure is a record; the batch goes on
-        rec = {"family": "tracking", "dataset": "tracking/synthetic-v1", "episode_id": f"{namespace}-{split}-{index:06d}",
+        rec = {"family": "tracking", "dataset": VERSIONS[version]["dataset"],
+               "episode_id": f"{namespace}-{split}-{index:06d}",
                "status": "error", "error": repr(error), "traceback": traceback.format_exc()[-3000:],
                "K": {"passed": False, "reasons": [f"error: {error!r}"]}, "P": None}
     release_memory()
@@ -169,14 +177,14 @@ def _scenario_job(args):
     return rec
 
 
-def build_synthetic(namespace, split, start, count, out, shard=(0, 1), jobs=1) -> dict:
+def build_synthetic(namespace, split, start, count, out, shard=(0, 1), jobs=1, version=1, group_size=1) -> dict:
     k, n = shard
     indices = [i for i in range(start, start + count) if i % n == k]
     records_dir = Path(out) / "records" / "tracking"
     records_dir.mkdir(parents=True, exist_ok=True)
     name = f"synthetic__{namespace}__{split}__{start}-{start + count}.{k}-of-{n}.jsonl"
     counts = {"scenarios": 0, "K": 0, "errors": 0, "episodes_written": 0}
-    args = [(namespace, split, i, out) for i in indices]
+    args = [(namespace, split, i, out, version, group_size) for i in indices]
     with (records_dir / name).open("w") as fh:
         if jobs > 1:
             import multiprocessing as mp
@@ -297,6 +305,8 @@ def main(argv=None):
     p.add_argument("--count", type=int, required=True)
     p.add_argument("--shard", default="0/1")
     p.add_argument("--jobs", type=int, default=1)
+    p.add_argument("--version", type=int, default=1, choices=(1, 2), help="generator version (synthetic.VERSIONS)")
+    p.add_argument("--group-size", type=int, default=1, help="sibling group size (members share the start)")
     p.add_argument("--out", required=True)
     p = sub.add_parser("source")
     p.add_argument("--family", required=True)
@@ -313,7 +323,7 @@ def main(argv=None):
         return
     k, n = (int(x) for x in a.shard.split("/"))
     if a.command == "synthetic":
-        result = build_synthetic(a.namespace, a.split, a.start, a.count, a.out, (k, n), a.jobs)
+        result = build_synthetic(a.namespace, a.split, a.start, a.count, a.out, (k, n), a.jobs, a.version, a.group_size)
     else:
         result = build_source(a.family, a.path, a.out, (k, n), _range(a.demos) if a.demos else None,
                               both_arms=not a.one_arm)
