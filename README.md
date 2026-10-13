@@ -11,8 +11,8 @@ so a policy can build a surface feature map of the scene. Datasets whose meshes 
 object poses cannot be obtained are excluded, and so is every episode lacking either.
 
 The previous phase of this project (maximizing MuJoCo success on a few robomimic Can
-sources) is kept read-only in [`legacy/`](legacy/); see `legacy/DELETED.md` for the
-artifacts that were removed.
+sources) is in the git history: commit `fea7ea9`, folder `legacy/` (its `DELETED.md` lists the
+artifacts removed then).
 
 ## Pipeline
 

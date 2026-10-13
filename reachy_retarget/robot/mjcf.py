@@ -13,9 +13,10 @@ Structure
   Moving joints: the 17 arm/neck joints, `{l,r}_hand_finger` and every joint that mimics a
   finger joint. Mimic joints are coupled by `<equality joint>` constraints with
   `polycoef = (offset, multiplier)` of the URDF `<mimic>` tag (solref 0.004 s, i.e. two
-  physics steps, as in legacy physics.py) and carry no joint range of their own: the URDF
-  ranges of the proximal/distal mimics (upper 0.554 rad) are narrower than the image of the
-  finger range (0.592 rad at the closed limit) and would fight the coupling. All other
+  physics steps, as in the previous phase's physics.py: git fea7ea9, `legacy/reachy_retarget/`)
+  and carry no joint range of their own: the URDF ranges of the proximal/distal mimics (upper
+  0.554 rad) are narrower than the image of the finger range (0.592 rad at the closed limit)
+  and would fight the coupling. All other
   joints (tripod, antennas, the tripod bar mimics) are folded into fixed transforms at the
   tripod's 0 value, as in robot.reachy.
 * Inertials are the URDF ones (`fullinertia` rotated into the body frame). All robot bodies
@@ -35,7 +36,7 @@ form a hull and are dropped and listed in `MESH_REPORT`. The finger pads are the
 `pincette_distal_collider.dae`, whose flat inner face is the plane Y = -0.0125 m used by
 robot.gripper. Geoms use friction (1, 0.01, 0.001) and condim 4 (torsional friction), the
 reachy-agent settings that hold a can without creep (with elliptic cones and impratio 10, see
-`OPTIONS`), and the stiff contact of legacy physics.py: solref (0.004, 1) (two physics steps)
+`OPTIONS`), and the stiff contact of the previous-phase physics.py: solref (0.004, 1) (two physics steps)
 and solimp (0.95, 0.99, 0.001). `priority=1` makes these Reachy parameters govern every
 Reachy-object contact instead of being averaged with the object's (MuJoCo mixes solref/solimp
 of equal-priority geoms): with the default 0.02 s object solref, a 2 Nm finger squeeze sank the
@@ -43,7 +44,7 @@ pads about 2.3 mm into a held box, against 0.2 mm with priority. Objects keep th
 parameters for every other contact. Geoms have no mass (inertia comes from the URDF).
 
 Self-collision filtering: URDF parent/child pairs plus, across the massless dummy links of the
-multi-axis joints, each collision link and its nearest colliding ancestor (legacy physics.py,
+multi-axis joints, each collision link and its nearest colliding ancestor (previous-phase physics.py,
 reachy-agent prepare.py). Other pairs, including the two fingers of one hand, collide.
 Floor contact of the wheels is not filtered here (the floor belongs to the scene): call
 `floor_excludes(prefix)` for the body names to exclude against `world`.
@@ -57,7 +58,7 @@ One `<position>` actuator per canonical joint, named `{prefix}{joint}` and decla
 | --- | --- | --- | --- | --- |
 | base_x, base_y | 5e4 N/m | dampratio 1 | +/-2000 N | reachy-agent Config.base_kp/base_force |
 | base_yaw | 3e3 Nm/rad | dampratio 1 | +/-500 Nm | reachy-agent Config.base_yaw_kp/base_torque |
-| arms, neck | 180 Nm/rad | kv 24 | +/-40 Nm | reachy-agent Config.arm_* (legacy physics.py) |
+| arms, neck | 180 Nm/rad | kv 24 | +/-40 Nm | reachy-agent Config.arm_* (previous-phase physics.py) |
 | fingers | 8 Nm/rad | kv 0.8 | +/-2 Nm | reachy-agent Config.gripper_* |
 
 The base servos are an ideal planar base (wheels not simulated). Arm/neck/finger joints have

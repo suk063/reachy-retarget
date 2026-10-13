@@ -315,8 +315,8 @@ Defined in `reachy_retarget/schema/source.py`. Everything is in the source world
 * **P** (sources with a MuJoCo scene): the source robot is removed from the source
   scene, Reachy is inserted, objects are free bodies, position servos track the
   retargeted joints, and only actuator commands drive the rollout. Gates follow the
-  physical thresholds from the previous phase (`legacy/reachy_retarget/physical_gates.py`)
-  plus a task predicate and actuator-only replay reproducibility.
+  physical thresholds from the previous phase (`legacy/reachy_retarget/physical_gates.py` at git
+  `fea7ea9`) plus a task predicate and actuator-only replay reproducibility.
   * Bodies the adapter declares inactive (`SceneRef.inactive_bodies`) are removed (robosuite
     PickPlaceCan parks Milk, Bread and Cereal overlapping at (10, 10, 10): the constant
     0.0399 m object–environment depth). Sources that declare none (`None`) fall back to

@@ -1003,7 +1003,7 @@ sibling `2025-challenge-rawdata/` folder, the URDF from the catalog under the da
   serialized state, whose layout depends on the scene's object registry; decoding it needs
   OmniGibson's `Serializable` layout for that scene (object order and per-object state
   sizes from the scene registry), which is what the previous phase was blocked on
-  (`legacy/reachy_retarget/adapters/behavior.py`). Not attempted here.
+  (`legacy/reachy_retarget/adapters/behavior.py` at git `fea7ea9`). Not attempted here.
 * Lineage: human teleoperation, not generated; `initial_state =
   behavior/<task>/instance/<activity_instance_id>`, `raw_source` names the raw file.
 
@@ -1191,8 +1191,9 @@ WallCupboardClose 60/60, WallCupboardOpen 48/51.
 * Recorded termination flags vs replay success (complete replays): 285 terminated and
   succeeded, 26 terminated but failed, 1,073 never terminated but succeeded, 407 neither.
   Termination is therefore not a usable success label.
-* Prior work reproduced: the four MovePlate recordings from `legacy/docs/datasets/bigym-*`
-  give the same outcomes (0943 fails, c795 and 103d succeed, d470 rejected at action 0).
+* Prior work reproduced: the four MovePlate recordings of the previous phase
+  (`legacy/docs/datasets/bigym-*` at git `fea7ea9`) give the same outcomes (0943 fails, c795 and
+  103d succeed, d470 rejected at action 0).
 * Determinism: replaying in another process gives bit-identical `qpos`/`qvel`.
 * Kinematics across MuJoCo versions: body poses from the record's `qpos` in MuJoCo 3.1.5
   vs 3.15.0 agree to 4.4e-16 m (two records, all frames).

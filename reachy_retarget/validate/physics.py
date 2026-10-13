@@ -29,8 +29,8 @@ actuator commands only:
 `PhysicsRollout`. Per-step `ctrl` is not stored: it is the deterministic interpolation
 `control_sequence(ep, ...)` and is regenerated for the replay check.
 
-Gates (thresholds: `THRESHOLDS`, copied from legacy `physical_gates.THRESHOLDS`, plus the tier-P
-additions marked new):
+Gates (thresholds: `THRESHOLDS`, copied from the previous phase's `physical_gates.THRESHOLDS`, git
+fea7ea9, plus the tier-P additions marked new):
 
 | gate | criterion |
 | --- | --- |
@@ -89,7 +89,7 @@ from ..schema.rotations import quat_to_matrix
 from ..schema.source import SceneRef
 from .scene import MissingSceneAssets, Scene, build_scene, parked_bodies, reset, subtree
 
-THRESHOLDS = dict(  # legacy physical_gates.THRESHOLDS (+ new tier-P entries at the end)
+THRESHOLDS = dict(  # previous-phase physical_gates.THRESHOLDS (+ new tier-P entries at the end)
     arm_speed_rad_s=1.001, base_vx_m_s=.611, base_vy_m_s=.611, base_wz_rad_s=float(np.deg2rad(114) + .001),
     joint_margin_rad=.025, self_clearance_m=.009, hand_object_depth_m=.001, robot_environment_depth_m=.002,
     object_environment_depth_m=.002, robot_self_depth_m=.002, acquisition_lift_m=.015,

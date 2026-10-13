@@ -25,6 +25,4 @@ retarget them onto Reachy 2 as state-only training data for manipulation policie
 * Save failed retargets and failed rollouts with their reasons as well as successes.
 * Do not count overlapping versions, crops, mirrors or generated variants of the same
   seed as independent demonstrations; record lineage instead.
-* `legacy/` is read-only reference material from the previous project phase. Do not
-  import it from new code.
 * Never delete or recreate cluster pods, Deployments or nodes.
