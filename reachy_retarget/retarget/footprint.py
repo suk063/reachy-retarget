@@ -2,8 +2,8 @@
 
 Reachy is modelled as a stack of discs around ``base_link`` (``BODY_PROFILE``): the mobile
 base (radius ``BASE_FOOTPRINT_RADIUS``) up to 0.30 m, the tripod column up to 0.95 m and the
-torso/head up to 1.45 m (head top 1.41 m); ``REST_ARM_BAND`` is added for an arm that rests the
-whole episode (``Obstacles.bands``). The column and torso radii are the largest horizontal distance from the
+torso/head up to 1.45 m (head top 1.41 m); the band of an arm that rests the whole episode
+(:func:`arm_band`) is added to ``Obstacles.bands``. The column and torso radii are the largest horizontal distance from the
 base axis of the MuJoCo collision geometry (``robot.mjcf``) of the non-arm links in each band,
 rounded up (base 0.245 m, column 0.136 m, torso 0.183 m at zero posture). Arms are excluded:
 they reach over tables by design and are checked by self-clearance and tier P.
@@ -34,10 +34,6 @@ from .config import RetargetConfig
 STATIC_ROLES = ("support", "fixture")
 # (z_low, z_high, radius) in m around the base_link axis; see the module docstring.
 BODY_PROFILE = ((-10.0, 0.30, BASE_FOOTPRINT_RADIUS), (0.30, 0.95, 0.14), (0.95, 1.45, 0.19))
-# An arm resting in the ``rest`` posture for a whole episode hangs beside the torso: its collision
-# spheres span z 0.44-1.21 m out to 0.32 m from the base axis (robot.collision sphere model);
-# :func:`arm_band` measures it for any posture (the navigation ``stow`` posture: 0.26 m).
-REST_ARM_BAND = (0.44, 1.22, 0.33)
 
 
 def arm_band(q, margin: float = 0.005):
@@ -134,7 +130,7 @@ class Obstacles:
     point_radii: np.ndarray = field(default_factory=lambda: np.zeros(0))
     point_heights: np.ndarray = field(default_factory=lambda: np.zeros((0, 2)))
     notes: list[str] = field(default_factory=list)
-    bands: tuple = BODY_PROFILE  # body discs (z_low, z_high, radius); + REST_ARM_BAND when an arm rests
+    bands: tuple = BODY_PROFILE  # body discs (z_low, z_high, radius); + arm_band(...) when an arm rests
 
 
 def _box_corners(pose7, center, half):

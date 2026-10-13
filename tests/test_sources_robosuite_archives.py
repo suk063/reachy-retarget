@@ -4,7 +4,6 @@ import hashlib
 import zipfile
 from pathlib import Path
 
-import h5py
 import mujoco
 import numpy as np
 import pytest
@@ -98,7 +97,7 @@ def test_stripped_copy_reads_identically_and_keeps_catalog_identity(tmp_path):
     raw = FIXTURE.read_bytes()
     entry = CatalogEntry(id="robomimic/can_sub.hdf5", family="robomimic", path="can_sub.hdf5",
                          url="https://example.invalid/can_sub.hdf5", revision="r", size=len(raw),
-                         sha256=hashlib.sha256(raw).hexdigest(), license="MIT", kind="low_dim",
+                         sha256=hashlib.sha256(raw).hexdigest(), license="MIT", content="low_dim",
                          dataset="robomimic/can/sub")
     out = tmp_path / "can_sub.state.hdf5"
     strip_images(FIXTURE, out, original={"sha256": entry.sha256, "catalog_id": entry.id})

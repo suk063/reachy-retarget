@@ -488,7 +488,7 @@ def is_texture_asset(e: CatalogEntry) -> bool:
 
 
 def _guard(e: CatalogEntry, strip_images: bool) -> None:
-    kind = e.transport
+    kind = e.kind
     if kind == "file_images_embedded" and not strip_images:
         raise PermissionError(f"{e.id} embeds images; refusing (pass strip_images=True to keep a state-only copy)")
     if kind in ("file", "range_member", "file_images_embedded") and is_image_name(e.path) and not is_texture_asset(e):
@@ -501,7 +501,7 @@ def fetch_one(e: CatalogEntry, root, *, reserve=RESERVE_BYTES, strip_images=Fals
     _guard(e, strip_images)
     root = Path(root)
     opener = opener or KeepAliveOpener()
-    kind = e.transport
+    kind = e.kind
     if kind in ("file", "file_images_embedded"):
         return _fetch_file(e, root, reserve, opener, strip=kind == "file_images_embedded")
     if kind == "tar_stream":
@@ -588,7 +588,7 @@ def locate_entry(path, catalog=None, digest: str | None = None) -> CatalogEntry 
     if rel in catalog:
         return catalog[rel] if catalog[rel].sha256 in (None, digest) else None
     pkg = catalog.get(rel.rsplit("/", 1)[0])
-    if pkg is not None and pkg.transport == "range_package":
+    if pkg is not None and pkg.kind == "range_package":
         name = (rec.get("source") or {}).get("member", parts[-1])
         m = next((m for m in pkg.source.get("members") or [] if m["name"] == name),
                  {"name": name, "sha256": digest, "size": rec.get("bytes")})

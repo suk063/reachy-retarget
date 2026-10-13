@@ -336,7 +336,7 @@ class _Gripper:
     """Two-finger gripper; contact faces measured from collision geometry with fingers open."""
 
     def __init__(self, robot: RobotModel, key: str, spec: dict):
-        mj, m, d = robot.mj, robot.m, robot.d
+        m, d = robot.m, robot.d
         p = robot.spec["prefix"]
         self.key, self.site = key, m.site(p + spec["site"]).id
         self.side = spec["side"]
@@ -599,7 +599,7 @@ def find_package(path: Path, packages=None, digest: str | None = None):
     packages), ``member`` its member record; ``(None, None)`` when not catalogued."""
     if packages is None:
         from ..acquire import load_catalog
-        packages = {k: e for k, e in load_catalog().items() if e.family == "molmobot" and e.transport == "range_package"}
+        packages = {k: e for k, e in load_catalog().items() if e.family == "molmobot" and e.kind == "range_package"}
     digest = digest or hashlib.sha256(Path(path).read_bytes()).hexdigest()
     hit = None
     for pkg in packages.values():

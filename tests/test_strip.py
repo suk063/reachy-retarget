@@ -86,7 +86,7 @@ def source_entry(tmp_path, monkeypatch):
     e = CatalogEntry(id="demo/source/stack.hdf5", family="demo", path="source/stack.hdf5",
                      url="https://example.invalid/stack.hdf5", revision="r1",
                      sha256=hashlib.sha256(payload).hexdigest(), size=len(payload), license="CC-BY-4.0",
-                     kind="images_embedded", dataset="demo/source/stack")
+                     kind="file_images_embedded", dataset="demo/source/stack")
     log = []
 
     def opener(req):

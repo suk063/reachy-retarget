@@ -11,7 +11,7 @@ ever stepped.
 Mesh and texture paths in the MJCF are absolute paths on the recording machine. They
 are resolved inside pinned asset archives read as zip files: the robosuite wheel of the
 recorded ``env_version`` (``robosuite/models/assets/``) plus every catalogued
-``kind: assets`` archive whose ``asset_marker`` (or a family alias of it) occurs in the
+``content: assets`` archive whose ``asset_marker`` (or a family alias of it) occurs in the
 MJCF, e.g. MimicGen's ``mimicgen_envs/models/robosuite/assets/`` or LIBERO's
 ``libero/libero/assets/``. When assets are missing, mesh geoms are replaced by
 placeholders: kinematics stay exact but the episode gets no physics scene

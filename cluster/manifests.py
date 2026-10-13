@@ -52,18 +52,18 @@ FAMILIES = {  # family: catalog prefixes of the full-scale fetch
 def transfer_bytes(e: CatalogEntry) -> int:
     """Bytes moved over the network to acquire ``e``."""
     s = e.source
-    if e.transport == "range_member":
+    if e.kind == "range_member":
         return (s.get("stored_size") or e.size or 0) + 512
-    if e.transport == "range_package":
+    if e.kind == "range_package":
         return s["stored_size"]
     return e.size or 0
 
 
 def scratch_bytes(e: CatalogEntry) -> int:
     """Upper bound of the bytes written to the job's private root for ``e``."""
-    if e.transport == "range_package":
+    if e.kind == "range_package":
         return e.source.get("inflated_size") or 4 * e.source["stored_size"]
-    if e.transport == "file_images_embedded":
+    if e.kind == "file_images_embedded":
         return 2 * (e.size or 0)  # original + state-only copy until the original is deleted
     return e.size or 0
 
@@ -143,7 +143,7 @@ def plan(family: str, *, catalog=None, prefixes=None, target_bytes=3 * GB, max_b
         s = sum(scratch_bytes(e) for e in ents)
         if s > scratch_limit and len(ents) > 1:
             raise ValueError(f"job {sel[0]} needs {s} bytes of scratch")
-        requests = sum(1 for e in ents if e.transport in ("range_member", "file", "file_images_embedded"))
+        requests = sum(1 for e in ents if e.kind in ("range_member", "file", "file_images_embedded"))
         workers = 8 if requests > 50 else 1
         timeout = int(min(12 * 3600, max(3600, 1800 + t / 10e6 + requests * 1.0 / workers)))
         digest = hashlib.sha1("\n".join(sel).encode()).hexdigest()[:8]
@@ -337,7 +337,7 @@ def _molmobot_counts(catalog, files):
         by_pkg.setdefault(posixpath.dirname(f), []).append(f)
     counts = {}
     for e in catalog.values():
-        if e.family != "molmobot" or e.transport != "range_package":
+        if e.family != "molmobot" or e.kind != "range_package":
             continue
         local = _local(e)
         members = e.source.get("members") or []
@@ -457,7 +457,7 @@ def _parents(d):
 
 def _local(e) -> str:
     """Data-root-relative local path of a catalog entry (the extraction folder for tar streams)."""
-    p = e.output_dir("") if e.transport == "tar_stream" and hasattr(e, "output_dir") else e.local_path("")
+    p = e.output_dir("") if e.kind == "tar_stream" and hasattr(e, "output_dir") else e.local_path("")
     return Path(p).as_posix().lstrip("/")
 
 

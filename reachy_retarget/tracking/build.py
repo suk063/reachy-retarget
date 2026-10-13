@@ -132,7 +132,7 @@ def run_scenario(namespace, split, index, out, cfg: TrackingConfig | None = None
             attempt = replace(attempt, time=attempt.time * SLOWER)
         else:
             attempt = replace(attempt, size=attempt.size * SHRINK)
-    final_attempt, final = results[-1]
+    final = results[-1][1]
     final_uid = None if final.episode is None else final.episode.uid
     rows = []
     for k, (att, res) in enumerate(results):

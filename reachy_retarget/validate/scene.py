@@ -49,7 +49,6 @@ import numpy as np
 from ..robot import mjcf as rmjcf
 from ..schema.source import SceneRef
 
-ASSET_TAGS = ("mesh", "texture", "hfield", "skin")
 _SECTIONS = ("actuator", "sensor", "equality", "tendon", "contact")
 _FORBIDDEN_TAGS = ("include", "attach", "replicate", "frame", "composite", "flexcomp")
 

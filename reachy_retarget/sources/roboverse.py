@@ -141,7 +141,6 @@ RLBENCH_ASSUMPTIONS = [
 # ---------------------------------------------------------------- CALVIN constants
 CALVIN_FREQ_HZ = 30.0
 CALVIN_SCALING = 0.8
-CALVIN_ROBOT_BASE = (-0.34, -0.46, 0.24)
 # scene -> CALVIN movable_objects order (= scene_obs order) and block URDF sizes (unscaled, metres)
 CALVIN_BLOCK_ORDER = {"A": ("pink", "blue", "red"), "B": ("red", "blue", "pink"),
                       "C": ("blue", "red", "pink"), "D": ("red", "blue", "pink")}
@@ -151,7 +150,6 @@ CALVIN_BLOCK_URDF = {"A": {"pink": "small", "blue": "big", "red": "middle"},
                      "D": {"red": "middle", "blue": "small", "pink": "big"}}
 CALVIN_BLOCK_SIZE = {"small": (0.05, 0.05, 0.05), "middle": (0.07, 0.05, 0.05), "big": (0.1, 0.05, 0.05)}
 ROBOVERSE_BLOCK_ORDER = ("red", "blue", "pink")   # convert_data_batch.py: scene_obs[6:12], [12:18], [18:24]
-CALVIN_TABLE_JOINTS = ["base__slide", "base__drawer", "base__button", "base__switch"]
 # AABB of calvin_table_<X>/meshes/base_link.obj (desk + cabinet, link origin at the table pose,
 # identical for A-D) x global_scaling 0.8: x +-0.44, y +-0.18, z 0..0.6478 m.
 CALVIN_TABLE_AABB = {"center": [0.0, 0.0, 0.3239], "half_extents": [0.44, 0.18, 0.3239]}

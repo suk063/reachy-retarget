@@ -301,13 +301,6 @@ def _site_pose(d, sid):
     return T
 
 
-def _body_pose(d, bid):
-    T = np.eye(4)
-    T[:3, :3] = d.xmat[bid].reshape(3, 3)
-    T[:3, 3] = d.xpos[bid]
-    return T
-
-
 def replay(model, initial_state: np.ndarray, ctrl_steps: np.ndarray, act: np.ndarray, every: int):
     """Actuator-only rerun: restore the reset state once, then write only ctrl.
 

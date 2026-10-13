@@ -23,7 +23,6 @@ JOINTS = ("base_x", "base_y", "base_yaw",
           *(f"l_{j}" for j in _ARM), *(f"r_{j}" for j in _ARM),
           "neck_roll", "neck_pitch", "neck_yaw", "l_hand_finger", "r_hand_finger")
 BASE, NECK, FINGERS = slice(0, 3), slice(17, 20), slice(20, 22)
-ARMS = {"left": slice(3, 10), "right": slice(10, 17)}
 BODY_PARTS = ("left_arm", "right_arm", "head", "base")
 REGIMES = ("tabletop", "mobile_manipulation", "navigation")
 OBJECT_ROLES = ("manipulated", "support", "receptacle", "fixture")

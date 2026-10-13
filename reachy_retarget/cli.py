@@ -61,7 +61,7 @@ def _fetched(e, ledger) -> bool:
     have only their (catalogued) member records."""
     if e.id in ledger:
         return True
-    members = e.source.get("members") if e.transport == "range_package" else None
+    members = e.source.get("members") if e.kind == "range_package" else None
     return bool(members) and all(e.member_id(m["name"]) in ledger for m in members)
 
 

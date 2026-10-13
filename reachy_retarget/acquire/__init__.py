@@ -8,13 +8,12 @@ read publisher metadata live in :mod:`.generators` and use the network only when
 from .catalog import KINDS, CatalogEntry, load_catalog, load_family_catalog, select
 from .fetch import (PACKAGE_MANIFEST, RESERVE_BYTES, TAR_MANIFEST, ChecksumMismatch, ImageRefused,
                     InsufficientDisk, fetch, fetch_one, find_entry, identify, locate_entry, sha256_file)
-from .ledger import (ledger_record_path, migrate_ledger, read_ledger, read_ledger_record, record_digest,
-                     same_record)
+from .ledger import ledger_record_path, read_ledger, read_ledger_record, record_digest, same_record
 from .strip import STRIP_ATTR, read_strip_record, strip_images, stripped_path
 from .transports import is_image_name
 
 __all__ = ["KINDS", "PACKAGE_MANIFEST", "RESERVE_BYTES", "STRIP_ATTR", "TAR_MANIFEST", "CatalogEntry",
            "ChecksumMismatch", "ImageRefused", "InsufficientDisk", "fetch", "fetch_one", "find_entry", "identify",
-           "is_image_name", "ledger_record_path", "load_catalog", "load_family_catalog", "locate_entry", "migrate_ledger", "read_ledger",
+           "is_image_name", "ledger_record_path", "load_catalog", "load_family_catalog", "locate_entry", "read_ledger",
            "read_ledger_record", "read_strip_record", "record_digest", "same_record", "select", "sha256_file",
            "strip_images", "stripped_path"]

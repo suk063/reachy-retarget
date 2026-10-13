@@ -14,7 +14,7 @@ import pytest
 
 from reachy_retarget.acquire import (KINDS, CatalogEntry, ChecksumMismatch, ImageRefused, InsufficientDisk, fetch,
                                      find_entry, is_image_name, ledger_record_path, load_catalog, locate_entry,
-                                     migrate_ledger, read_ledger, read_ledger_record, same_record, select)
+                                     read_ledger, same_record, select)
 from reachy_retarget.acquire.catalog import parse_catalog
 from reachy_retarget.acquire.transports import walk_tar
 fetch_mod = importlib.import_module("reachy_retarget.acquire.fetch")  # module, not the function
@@ -170,8 +170,6 @@ def test_fetch_refuses_images_and_videos(tmp_path, plenty_of_disk):
     log = []
     with pytest.raises(PermissionError):  # image-embedding HDF5 without stripping
         fetch([entry(kind="file_images_embedded")], tmp_path, opener=opener(log))
-    with pytest.raises(PermissionError):  # entries built with the earlier content-class kind
-        fetch([entry(kind="images_embedded")], tmp_path, opener=opener(log))
     for name in ("videos/ep0.mp4", "cam/frame_0001.PNG", "rgb.webm"):
         with pytest.raises(ImageRefused):
             fetch([entry(id=f"demo/{name}", path=name)], tmp_path, opener=opener(log))
@@ -213,16 +211,6 @@ def test_ledgers_of_private_roots_merge_by_copy(tmp_path, plenty_of_disk):
     for job in (a, b):
         shutil.copytree(job, shared, dirs_exist_ok=True, copy_function=shutil.copy2)
     assert set(read_ledger(shared)) == {"demo/a/b.bin", "demo/c.bin"}
-
-
-def test_legacy_single_file_ledger_is_read_and_migrated(tmp_path):
-    rec = {"id": "demo/x.bin", "bytes": 1}
-    (tmp_path / "raw").mkdir()
-    (tmp_path / "raw" / "ledger.json").write_text(json.dumps({rec["id"]: rec}))
-    assert read_ledger_record(tmp_path, "demo/x.bin") == rec
-    assert migrate_ledger(tmp_path) == 1 and migrate_ledger(tmp_path) == 0
-    assert json.loads(ledger_record_path(tmp_path, "demo/x.bin").read_text()) == rec
-    assert read_ledger(tmp_path) == {"demo/x.bin": rec}
 
 
 def test_records_of_earlier_versions_stay_readable_and_match(tmp_path, plenty_of_disk):

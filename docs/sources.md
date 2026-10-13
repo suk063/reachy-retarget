@@ -52,7 +52,7 @@ Rules shared by all kinds (`acquire/fetch.py`, transports in `acquire/transports
   one each), so private roots of concurrent jobs merge by no-overwrite copies. Records of
   earlier versions (content class in `kind`, no `content`) stay readable; `ledger.same_record`
   and `cluster/job.py` treat records with the same id, local path and digests as the same
-  file. A legacy `raw/ledger.json` is still read and `migrate_ledger(root)` splits it.
+  file.
 * **Lookup**: `acquire.identify`/`find_entry` (by pinned SHA-256, also for stripped
   copies) and `acquire.locate_entry` (by place under `raw/<family>/` when the ledger
   records the same SHA-256; trust-on-first-use entries and package members).

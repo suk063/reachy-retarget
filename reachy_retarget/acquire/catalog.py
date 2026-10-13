@@ -44,7 +44,6 @@ from pathlib import Path
 import yaml
 
 KINDS = ("file", "file_images_embedded", "tar_stream", "range_member", "range_package")
-LEGACY_KINDS = {"images_embedded": "file_images_embedded"}  # earlier 'kind' values = content classes
 DIGEST_KEYS = ("sha1", "git_blob_sha1")
 SOURCE_KEYS = ("archive", "archive_sha256", "archive_size", "member", "offset", "stored_size", "compression", "crc32",
                "inflated_size", "range_sha256", "keep", "members")
@@ -77,19 +76,13 @@ class CatalogEntry:
     source: dict = field(default_factory=dict, hash=False)   # kind-specific transport fields
     meta: dict = field(default_factory=dict, hash=False)     # family-specific descriptive fields
 
-    @property
-    def transport(self) -> str:
-        """The acquisition kind; entries built with an earlier content-class ``kind`` map to
-        ``file`` (``images_embedded`` to ``file_images_embedded``)."""
-        return self.kind if self.kind in KINDS else LEGACY_KINDS.get(self.kind, "file")
-
     def local_path(self, root) -> Path:
         return Path(root) / "raw" / self.family / self.path
 
     def output_dir(self, root) -> Path:
         """Directory receiving the members of a ``tar_stream``/``range_package`` entry."""
         p = self.local_path(root)
-        return p.parent if self.transport == "tar_stream" else p
+        return p.parent if self.kind == "tar_stream" else p
 
     def member_id(self, name: str) -> str:
         """Ledger id of a ``range_package`` member (written flat into the package directory)."""

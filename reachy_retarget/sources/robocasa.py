@@ -45,7 +45,6 @@ import numpy as np
 from ..acquire import TAR_MANIFEST, load_catalog
 from ..schema.source import Articulation, Effector, ObjectTrack, SceneRef, SourceEpisode
 from .registry import register
-from .robosuite import ASSET_MARKER as ROBOSUITE_MARKER
 from .contact_reference import ObjectEnvironmentDepth
 from .robosuite import PARK_DISTANCE_M, AssetArchive, _Model
 from ..meshes.mujoco_scene import qpos_columns
@@ -221,7 +220,7 @@ def _find_tar(lerobot: Path, root, tars):
     """The ``tar_stream`` catalog entry the dataset was extracted from, as a flat view
     (catalog fields + family fields + ``box_sha1``), or ``None``."""
     if tars is None:
-        tars = {k: e for k, e in load_catalog(tables=False).items() if e.family == "robocasa" and e.transport == "tar_stream"}
+        tars = {k: e for k, e in load_catalog(tables=False).items() if e.family == "robocasa" and e.kind == "tar_stream"}
     rel = lerobot.parent.as_posix()
     hit = next((e for e in tars.values() if root is not None
                 and e.output_dir(root).resolve() == lerobot.parent.resolve()), None) \

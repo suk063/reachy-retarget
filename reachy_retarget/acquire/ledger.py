@@ -5,7 +5,7 @@ merged into a shared root by plain no-overwrite copies. Records written by every
 earlier version stay readable: a record is a JSON object with at least ``id``,
 ``local_path`` (relative to the root) and ``sha256_verified``; when ``stripped`` is present
 the local file is the stripped copy / extraction manifest and ``stripped.sha256`` is its
-digest. The single-file ``raw/ledger.json`` of the first version is read as a fallback.
+digest.
 """
 from __future__ import annotations
 
@@ -16,7 +16,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 LEDGER_DIR = "ledger"
-LEGACY_LEDGER = "ledger.json"  # single-file ledger of earlier versions; read-only fallback
 
 
 def _ledger_dir(root) -> Path:
@@ -30,16 +29,12 @@ def ledger_record_path(root, entry_id: str) -> Path:
 
 def read_ledger_record(root, entry_id: str) -> dict | None:
     p = ledger_record_path(root, entry_id)
-    if p.exists():
-        return json.loads(p.read_text())
-    legacy = Path(root) / "raw" / LEGACY_LEDGER
-    return json.loads(legacy.read_text()).get(entry_id) if legacy.exists() else None
+    return json.loads(p.read_text()) if p.exists() else None
 
 
 def read_ledger(root) -> dict:
-    """All ledger records keyed by catalog id (per-file records override the legacy file)."""
-    legacy = Path(root) / "raw" / LEGACY_LEDGER
-    out = json.loads(legacy.read_text()) if legacy.exists() else {}
+    """All ledger records keyed by catalog id."""
+    out = {}
     folder = _ledger_dir(root)
     if folder.exists():
         for p in sorted(folder.rglob("*.json")):
@@ -54,18 +49,6 @@ def write_record(root, rec: dict) -> None:
     tmp = p.with_name(f".{p.name}.tmp-{os.getpid()}-{id(rec)}")
     tmp.write_text(json.dumps(rec, indent=1, sort_keys=True))
     os.replace(tmp, p)
-
-
-def migrate_ledger(root) -> int:
-    """Write per-file records for every entry of a legacy ``raw/ledger.json`` that has none
-    yet. The legacy file is left in place. Returns the number of records written."""
-    legacy = Path(root) / "raw" / LEGACY_LEDGER
-    n = 0
-    for eid, rec in (json.loads(legacy.read_text()) if legacy.exists() else {}).items():
-        if not ledger_record_path(root, eid).exists():
-            write_record(root, rec)
-            n += 1
-    return n
 
 
 def record(root, entry, digest: str, size: int, sha256_source: str, *, local: Path | None = None,
@@ -105,5 +88,5 @@ def same_record(a: dict, b: dict) -> bool:
     return all(a.get(k) == b.get(k) for k in keys) and record_digest(a) == record_digest(b)
 
 
-__all__ = ["LEDGER_DIR", "LEGACY_LEDGER", "ledger_record_path", "migrate_ledger", "read_ledger",
-           "read_ledger_record", "record", "record_digest", "same_record", "write_record"]
+__all__ = ["LEDGER_DIR", "ledger_record_path", "read_ledger", "read_ledger_record", "record", "record_digest",
+           "same_record", "write_record"]
