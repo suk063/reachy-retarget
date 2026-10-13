@@ -41,11 +41,12 @@ Design: [docs/design.md](docs/design.md). Storage and control modes:
 poses, a head rotation (reachy-control `head_tip` convention), gripper openings and a nominal base
 path (the base is free). Kinematic validation only (tier K + head residual); no objects, no physics.
 References come from a procedural scenario generator and from the hand paths of the source
-datasets, which are cut into stages under the same rule. Each synthetic scenario is **one stage**: every body part goes at most once from its start
-to one goal, several parts possibly at the same time (cells: navigation, mobile carry/reach/world-hold/
-free, single-arm, bimanual independent/symmetric/rigid/handover, neck-only, gripper-only and
-joint-space witness × 7 hand motions × 5 base motions × 7 neck modes × extents × speeds × start
-postures × gripper actions). Output uses the same `reachy-retarget-episode-v2` format
+datasets, which are cut into stages under the same rule. Each synthetic scenario is **one stage**:
+every body part goes at most once from its start to one goal, several parts possibly at the same time
+(generator version 2, cells: reach to a drawn TCP target, gaze to a drawn direction, named joint move,
+drive to a body-frame goal, single-arm and bimanual hand motions, navigation × hand motions × base
+motions × neck modes × extents × speeds × start postures × gripper actions; sibling groups share a
+start). Output uses the same `reachy-retarget-episode-v2` format
 (`family = "tracking"`). The URDF, collision spheres and the Viser viewer match reachy-control.
 See [docs/tracking.md](docs/tracking.md).
 

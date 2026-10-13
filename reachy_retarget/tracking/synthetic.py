@@ -8,26 +8,24 @@ framed by a short still start and a still end.
 Every scenario is one independent seed (``<namespace>/<split>/<index>``, hashed as in reachy-control
 ``rl_tracking/data.py``) and samples these axes independently:
 
-* body-usage **cell** (:data:`CELLS`; stratified: every block of ``len(CELLS)`` consecutive
-  indices holds each cell once, in a seeded order),
+* body-usage **cell** (:data:`CELLS_V2`; stratified: every block of ``len(CELLS_V2)`` consecutive
+  indices holds each slot once, in a seeded order),
 * **hand motion** per active hand (:data:`HAND_MOTIONS`) and **base motion** (:data:`BASE_MOTIONS`),
 * **neck mode** (:data:`NECK_MODES`; ``off`` = no head reference),
 * **extent** (motion magnitude, :data:`EXTENTS`), **speed** class (:data:`SPEEDS`), **start**
   posture (:data:`STARTS`), **workspace region** per hand (:data:`REGIONS`), **gripper** action per
   hand (:data:`GRIPPER_ACTIONS`, at most one transition) and the world start pose of the base.
 
-Reach goals are postures from a joint-space step (each goal is reachable and clear of self-collision
-on its own). ``witness`` cells instead make one smooth joint-space move whose forward kinematics is
-the reference (feasible by construction, as in ``rl_tracking``). Head references are always the
-rotation of a neck path inside the limits and the neck speed relative to the nominal base.
+Head references are always the rotation of a neck path inside the limits and the neck speed
+relative to the nominal base.
 
 :func:`generate` builds a :class:`~.reference.TrackingReference` for one scenario and one
 :class:`Attempt` (``size`` scales motion magnitudes, ``time`` stretches every duration); the
 retry policy lives in :mod:`.build`.
 
-**Version 2** (:data:`VERSIONS`; dataset ``tracking/synthetic-v2``) adds cells whose goals are
-explicit, body-relative targets, sampled for coverage rather than as a step from the start
-posture, and **sibling groups**:
+The generator is version 2 (:data:`VERSIONS`; dataset ``tracking/synthetic-v2``; version 1, a different
+cell set, is retired). Most cells have explicit, body-relative goals, sampled for coverage rather than
+as a step from the start posture, and indices form **sibling groups**:
 
 * ``reach_target``: each active hand reaches a TCP position drawn uniformly in :data:`TARGET_BOX`
   (base frame, y outward), through a self-clear posture found among joint-space candidates; when 16
@@ -38,7 +36,10 @@ posture, and **sibling groups**:
 * ``joint_move``: one or two named arm joints, or one neck joint, move by a drawn amount and the
   others hold; the episode executes the joint path itself (``extra["exact_witness"]``);
 * ``drive_target``: the base goes straight (holonomic) to a body-frame goal (dx, dy, dyaw);
-* ``left``, ``right``, ``bimanual_independent``, ``navigation`` as in version 1.
+* ``left``, ``right`` (one hand motion, :data:`HAND_MOTIONS`, whose reach goals are postures one
+  joint-space step from the start, reachable and clear of self-collision), ``bimanual_independent``
+  (one such motion per hand, staggered start) and ``navigation`` (one base motion,
+  :data:`BASE_MOTIONS`; the arms hold).
 
 Arms, head and grippers that are not the cell's action hold (grippers keep their state; the base
 of the stationary target cells is not freed for the tracker, :data:`FIXED_BASE`). With
@@ -58,27 +59,16 @@ from ..robot import LOWER, UPPER, VELOCITY, Reachy, gripper, min_clearance, plan
 from ..robot.reachy import GRIPPERS, JOINTS, LEFT_ARM, NECK, RIGHT_ARM
 from ..robot.resources import profile, urdf
 from ..schema.episode import DT, SIDES
-from ..schema.rotations import so3_exp, so3_log
 from ..validate.kinematic import REACH_Z
 from . import neck as neck_mod
 from . import primitives as pr
 from .reference import TrackingReference, jsonable as _jsonable, motion_parts, regime_of
 
-GENERATOR = "tracking.synthetic/v1"
-DATASET = "tracking/synthetic-v1"
-
-STATIONARY = ("gripper_only", "neck_only", "left", "right", "bimanual_independent", "bimanual_symmetric",
-              "bimanual_rigid", "handover", "witness_arms")
-MOBILE = ("navigation", "mobile_carry", "mobile_reach", "mobile_world_hold", "mobile_free",
-          "witness_whole_body")
-CELLS = STATIONARY + MOBILE
-# Version 2: targets in the base frame, sibling groups (module docstring). reach_target fills two
-# stratification slots of ten, gaze_target (whose head turn always finishes, unlike neck_only's in about a
-# quarter of version-1 episodes at the 0.52 rad/s neck speed) two.
+# Stratification slots (module docstring): reach_target and gaze_target fill two of ten each.
 CELLS_V2 = ("reach_target", "reach_target", "gaze_target", "gaze_target", "left", "right", "bimanual_independent",
             "navigation", "joint_move", "drive_target")
-VERSIONS = {1: {"generator": GENERATOR, "dataset": DATASET, "cells": CELLS},
-            2: {"generator": "tracking.synthetic/v2", "dataset": "tracking/synthetic-v2", "cells": CELLS_V2}}
+VERSIONS = {2: {"generator": "tracking.synthetic/v2", "dataset": "tracking/synthetic-v2", "cells": CELLS_V2}}
+MOBILE = ("navigation", "drive_target")                      # the cells whose base moves
 FIXED_BASE = ("reach_target", "gaze_target", "joint_move")   # the tracker keeps the base on its path
 KEEP_GRIPPERS = ("reach_target", "gaze_target", "joint_move", "drive_target", "navigation")
 TARGET_BOX = ((0.15, 0.60), (0.0, 0.55), (0.55, 1.30))       # TCP x, outward y, z (m, base frame)
@@ -93,7 +83,6 @@ BASE_MOTIONS = ("drive", "strafe", "turn", "arc", "curve")
 BASE_WEIGHTS = (0.3, 0.15, 0.15, 0.2, 0.2)
 NECK_MODES = ("off", "hold", "world_hold", "look_at_point", "look_at_hand", "look_ahead", "shift")
 NECK_WEIGHTS = (0.25, 0.1, 0.1, 0.15, 0.15, 0.1, 0.15)
-OBJECT_MOTIONS = ("lift", "slide", "turn", "tilt")
 # Motion magnitude per extent: arm joint step scale, translation (m), rotation (rad), base travel (m),
 # base turn (rad).
 EXTENTS = {
@@ -102,7 +91,7 @@ EXTENTS = {
     "large": dict(step=1.0, lin=(0.17, 0.28), ang=(0.75, 1.1), base=(1.5, 3.0), turn=(1.6, 3.1)),
 }
 EXTENT_WEIGHTS = (0.35, 0.4, 0.25)
-# Linear/angular hand speeds, base cruise (m/s), base yaw rate (rad/s), witness joint-speed fraction.
+# Linear/angular hand speeds, base cruise (m/s), base yaw rate (rad/s), joint_move joint-speed fraction.
 SPEEDS = {
     "slow": dict(lin=(0.06, 0.12), ang=(0.25, 0.5), base=(0.2, 0.3), yaw=(0.3, 0.5), joint=(0.25, 0.4)),
     "normal": dict(lin=(0.12, 0.25), ang=(0.5, 0.9), base=(0.3, 0.42), yaw=(0.5, 0.9), joint=(0.4, 0.6)),
@@ -118,7 +107,7 @@ GRIPPER_WEIGHTS = (0.25, 0.15, 0.25, 0.2, 0.15)
 
 SHOULDER = {s: urdf().transform("base_link", f"{s[0]}_shoulder_ball_link")[:3, 3] for s in SIDES}
 TCP_REACH = 0.665       # m, TCP to shoulder ball (sampled maximum 0.66, the straight arm)
-KEY_MARGIN = 0.12       # rad inside the joint limits for goals and witnesses
+KEY_MARGIN = 0.12       # rad inside the joint limits for goals and joint moves
 KEY_CLEARANCE = 0.025   # m self-clearance of goal postures
 WITNESS_CLEARANCE = 0.015
 NECK_GEN_MARGIN = 0.07  # rad inside the neck limits for generated head references
@@ -142,8 +131,8 @@ class Scenario:
     hand_motions: tuple[str, str]
     base_motion: str | None
     base_start: tuple[float, float, float]
-    version: int = 1
-    group: int | None = None    # sibling group (version 2 with group_size > 1)
+    version: int = 2
+    group: int | None = None    # sibling group (group_size > 1)
     member: int | None = None
 
     @property
@@ -179,7 +168,7 @@ def _choice(rng, options, weights):
     return options[int(rng.choice(len(options), p=w / w.sum()))]
 
 
-def scenario(namespace: str, split: str, index: int, version: int = 1, group_size: int = 1) -> Scenario:
+def scenario(namespace: str, split: str, index: int, version: int = 2, group_size: int = 1) -> Scenario:
     """The deterministic scenario of one index (stratified cells, independent other axes; with
     ``group_size`` > 1, of its sibling group)."""
     cells = VERSIONS[version]["cells"]
@@ -190,40 +179,29 @@ def scenario(namespace: str, split: str, index: int, version: int = 1, group_siz
     cell = cells[order[pos]]
     key = f"{index:06d}" if group is None else f"g{group:06d}"
     rng = np.random.default_rng(seed_of(f"{namespace}/{split}/{key}/axes"))
-    # drive_target draws as a mobile cell: its base_motion draw (replaced below) keeps the version-2 stream.
-    mobile = cell in MOBILE or cell == "drive_target"
+    # Every axis is drawn for every cell, then overridden below: the draw stream of the built datasets.
+    mobile = cell in MOBILE
     neck = _choice(rng, NECK_MODES, NECK_WEIGHTS)
     if neck == "look_ahead" and not mobile:
         neck = "look_at_point"
-    if cell == "neck_only":  # the neck is the action
-        neck = _choice(rng, ("look_at_point", "shift"), (1, 1))
     extent = _choice(rng, tuple(EXTENTS), EXTENT_WEIGHTS)
     speed = _choice(rng, tuple(SPEEDS), SPEED_WEIGHTS)
     start = _choice(rng, STARTS, START_WEIGHTS)
-    if cell in ("mobile_carry", "bimanual_rigid") and start == "rest":
-        start = "home"
     regions = tuple(_choice(rng, REGIONS, REGION_WEIGHTS) for _ in SIDES)
-    if cell in ("bimanual_symmetric", "handover"):
-        regions = tuple("any" if r == "cross" else r for r in regions)
     grippers = tuple(_choice(rng, GRIPPER_ACTIONS, GRIPPER_WEIGHTS) for _ in SIDES)
-    if cell == "gripper_only":  # the gripper is the action
-        grippers = tuple(_choice(rng, ("close", "open", "partial"), (1, 1, 1)) for _ in SIDES)
     hand_motions = tuple(_choice(rng, HAND_MOTIONS, HAND_WEIGHTS) for _ in SIDES)
-    if cell == "mobile_reach":  # the hand reaches a world goal while the base drives
-        hand_motions = tuple("reach" if m not in ("reach", "curved_reach") else m for m in hand_motions)
     base_motion = _choice(rng, BASE_MOTIONS, BASE_WEIGHTS) if mobile else None
     base_start = (float(rng.uniform(-2, 2)), float(rng.uniform(-2, 2)), float(rng.uniform(-np.pi, np.pi)))
-    if version > 1:
-        if cell in KEEP_GRIPPERS:  # only the cell's action moves: grippers keep their drawn state
-            grippers = tuple("keep_open" if g in ("keep_open", "open") else "keep_closed" for g in grippers)
-        if cell == "gaze_target":
-            neck = "gaze_target"
-        elif cell == "joint_move":
-            neck = "joint" if rng.random() < 0.25 else "off"
-        elif cell in ("reach_target", "drive_target"):
-            neck = "off"
-        if cell == "drive_target":
-            base_motion = "drive_target"
+    if cell in KEEP_GRIPPERS:  # only the cell's action moves: grippers keep their drawn state
+        grippers = tuple("keep_open" if g in ("keep_open", "open") else "keep_closed" for g in grippers)
+    if cell == "gaze_target":
+        neck = "gaze_target"
+    elif cell == "joint_move":
+        neck = "joint" if rng.random() < 0.25 else "off"
+    elif cell in ("reach_target", "drive_target"):
+        neck = "off"
+    if cell == "drive_target":
+        base_motion = "drive_target"
     return Scenario(namespace, split, index, cell, neck, extent, speed, start, regions, grippers, hand_motions,
                     base_motion, base_start, version, group, member)
 
@@ -288,15 +266,11 @@ def start_posture(ctx: Context) -> np.ndarray:
             cand = q.copy()
             for side in SIDES:
                 cand[_arm(side)] = _clip_arm(q[_arm(side)] + rng.uniform(-1, 1, 7) * ARM_STEP * 1.3, side)
-            if sc.cell == "bimanual_symmetric":
-                cand[RIGHT_ARM] = cand[LEFT_ARM] * pr.MIRROR_SIGNS
             fk = ctx.robot.fk_base(cand)
             z = [fk[f"{s}_grasp"][2, 3] for s in SIDES]
             if min(z) > 0.65 and max(z) < 1.45 and min_clearance(cand) > 0.03:
                 q = cand
                 break
-    if sc.cell == "bimanual_symmetric":
-        q[RIGHT_ARM] = q[LEFT_ARM] * pr.MIRROR_SIGNS
     q[NECK] = 0.0
     return q
 
@@ -313,11 +287,11 @@ def _region_ok(p, side, region):
     return ok & (x > 0.12)
 
 
-def goal_posture(ctx: Context, side: str, q: np.ndarray, region: str, n=192, extra=None):
+def goal_posture(ctx: Context, side: str, q: np.ndarray, region: str, n=192):
     """A reachable, self-clear arm posture one joint-space step from ``q``'s arm, biased to a region.
 
     ``q``: (22,) full posture in the base frame (the other arm and the neck are kept for the
-    clearance check). ``extra``: optional predicate on the TCP (N, 4, 4) poses. Returns (q', pose)."""
+    clearance check). Returns (q', pose)."""
     rng = ctx.rng
     sl = _arm(side)
     cur = ctx.robot.fk_base(q)[f"{side}_tcp"]
@@ -331,8 +305,6 @@ def goal_posture(ctx: Context, side: str, q: np.ndarray, region: str, n=192, ext
         ok = (G[:, 2, 3] > REACH_Z[0] + 0.12) & (G[:, 2, 3] < 1.6)
         ok &= np.linalg.norm(P[:, :3, 3] - cur[:3, 3], axis=1) > min_move / (1.0 + relax)
         ok &= _region_ok(P[:, :3, 3], side, region if relax < 2 else "any")
-        if extra is not None:
-            ok &= extra(P)
         idx = np.flatnonzero(ok)
         if len(idx):
             idx = idx[rng.permutation(len(idx))[:24]]
@@ -374,7 +346,7 @@ def target_posture(ctx: Context, side: str, q: np.ndarray, n=1024, tries=16):
 # ---------------------------------------------------------------------------- one hand motion
 
 
-def hand_motion(ctx: Context, side, q, kind, region, anchor=np.eye(4), extra=None):
+def hand_motion(ctx: Context, side, q, kind, region, anchor=np.eye(4)):
     """One single-goal hand motion from the posture ``q`` (22,): ``(duration, fn, info)``. ``anchor``
     maps base-frame poses into the motion's frame (world for a still base, identity for
     base-relative motions)."""
@@ -382,7 +354,7 @@ def hand_motion(ctx: Context, side, q, kind, region, anchor=np.eye(4), extra=Non
     P = anchor @ ctx.robot.fk_base(q)[f"{side}_tcp"]
     info = {"kind": kind}
     if kind in ("reach", "curved_reach"):
-        _, goal = goal_posture(ctx, side, q, region, extra=extra)
+        _, goal = goal_posture(ctx, side, q, region)
         Q = anchor @ goal
         if kind == "reach":
             dur, fn = pr.reach(P, Q, sp)
@@ -447,12 +419,6 @@ def base_motion(ctx: Context, start, kind):
     b = np.array(start, float)
     dist = float(rng.uniform(*e["base"])) * ctx.size
     turn = float(rng.uniform(*e["turn"])) * ctx.size * rng.choice([-1, 1])
-    if ctx.sc.cell == "mobile_world_hold":  # a hand stays on a world pose: only a short repositioning
-        scale = {"small": 0.4, "medium": 0.7, "large": 1.0}[ctx.sc.extent] * ctx.size
-        dist = float(rng.uniform(0.05, 0.3)) * scale
-        turn = float(rng.uniform(0.1, 0.35)) * scale * np.sign(turn)
-        if kind in ("arc", "curve"):  # no room for a curved drive: a straight repositioning instead
-            kind = "drive"
     if kind == "curve" and dist < 0.3:  # a short Bezier would swing its heading back and forth
         kind = "drive"
     if kind == "drive":
@@ -496,7 +462,7 @@ def _fit_base(dur, fn):
     return dur
 
 
-# ---------------------------------------------------------------------------- witnesses
+# ---------------------------------------------------------------------------- joint moves
 
 
 def _clear_goal(q0, draw, tries):
@@ -524,26 +490,6 @@ def _joint_dur(ctx: Context, q0, goal, cols):
     """Min-jerk duration of a joint move whose fastest joint peaks at the drawn fraction of its speed
     limit (at least 0.6 s)."""
     return max(0.6, pr.PEAK * float(np.max(np.abs(goal - q0)[cols] / (VELOCITY[cols] * ctx.speed["joint"]))))
-
-
-def joint_move(ctx: Context, q0, sides, tries: int = 40):
-    """One smooth joint-space move of the arms ``sides`` from ``q0`` to one goal posture: min-jerk,
-    inside the limits minus KEY_MARGIN, self-clear along the path (:func:`_clear_goal`; the steps shrink
-    by 0.8 every 10 draws). Returns (goal (22,), duration)."""
-    rng = ctx.rng
-    cols = np.concatenate([np.arange(_arm(s).start, _arm(s).stop) for s in sides])
-    lo, hi = LOWER[cols] + KEY_MARGIN, UPPER[cols] - KEY_MARGIN
-    step = np.tile(ARM_STEP, len(sides)) * ctx.extent["step"]
-
-    def draw(attempt):
-        scale = ctx.size * 0.8 ** (attempt // 10)
-        goal = q0.copy()
-        goal[cols] = np.clip(q0[cols] + rng.uniform(-1, 1, len(cols)) * step * scale, lo, hi)
-        return goal, None
-
-    clear, goal, _ = _clear_goal(q0, draw, tries)
-    ctx.params["witness_clearance_m"] = clear
-    return goal, _joint_dur(ctx, q0, goal, cols)
 
 
 def named_joint_move(ctx: Context, q0, neck: bool, tries: int = 40):
@@ -701,11 +647,10 @@ def _world(B, X):
 def build_cell(ctx: Context, q0, t0):
     """Tracks and base path of the scenario's single stage, starting at ``t0`` (the still start).
 
-    Returns ``tracks`` {side: (Track, frame)} with frame ``world`` (a still base), ``base``
-    (base-relative) or ``blend`` (a world goal reached from the base-relative start while the base
-    drives: see :func:`generate`), ``base`` (BasePath), ``active`` sides, ``arrivals`` {side: time}
-    (when the hand action ends: the gripper acts there), optional ``witness``, ``neck_turn`` (the
-    ``gaze_target`` head turn: goal, start, duration) and ``params``."""
+    Returns ``tracks`` {side: (Track, frame)} with frame ``world`` (a still base) or ``base``
+    (base-relative), ``base`` (BasePath), ``active`` sides, ``arrivals`` {side: time} (when the hand
+    action ends: the gripper acts there), optional ``witness`` (the ``joint_move`` path: goal, start,
+    duration), ``neck_turn`` (the ``gaze_target`` head turn: goal, start, duration) and ``params``."""
     sc, rng, robot = ctx.sc, ctx.rng, ctx.robot
     cell = sc.cell
     B0 = planar(*sc.base_start)
@@ -715,12 +660,12 @@ def build_cell(ctx: Context, q0, t0):
     base = pr.BasePath(np.array(sc.base_start))
     base.hold(t0)
     out = {"tracks": {s: (single(start_w[s], 0.0), "world") for s in SIDES}, "base": base, "active": [],
-           "arrivals": {}, "params": {}, "gripper_override": {}}
+           "arrivals": {}, "params": {}}
     region = dict(zip(SIDES, sc.regions))
     motion = dict(zip(SIDES, sc.hand_motions))
 
-    def arm_action(side, delay, anchor, frame, extra=None):
-        dur, fn, info = hand_motion(ctx, side, q0, motion[side], region[side], anchor, extra)
+    def arm_action(side, delay, anchor, frame):
+        dur, fn, info = hand_motion(ctx, side, q0, motion[side], region[side], anchor)
         P0 = anchor @ start_b[side]
         out["tracks"][side] = (single(P0, t0 + delay, (dur, fn)), frame)
         out["arrivals"][side] = t0 + delay + dur
@@ -728,12 +673,7 @@ def build_cell(ctx: Context, q0, t0):
         out["params"].setdefault("hand", {})[side] = dict(info, start_s=t0 + delay, duration_s=dur)
         return dur
 
-    if cell == "gripper_only":
-        for s in SIDES:
-            out["arrivals"][s] = t0 + ctx.delay(1.0)
-    elif cell == "neck_only":
-        pass
-    elif cell == "gaze_target":  # one head turn to an absolute gaze direction; the stage lasts until it ends
+    if cell == "gaze_target":  # one head turn to an absolute gaze direction; the stage lasts until it ends
         goal, info = gaze_goal(ctx, q0[NECK])
         dur = _neck_turn_dur(q0[NECK], goal)
         out["neck_turn"] = (goal, t0, dur)
@@ -753,7 +693,7 @@ def build_cell(ctx: Context, q0, t0):
             out["params"].setdefault("hand", {})[s] = {
                 "kind": "reach_target", "target_base": pose[:3, 3].tolist(),
                 "drawn_base": None if drawn is None else drawn.tolist(), "start_s": t0 + delay, "duration_s": dur}
-            delay = ctx.delay(dur)  # drawn after the last hand too: the version-2 draw stream
+            delay = ctx.delay(dur)  # drawn after the last hand too: the draw stream of the built datasets
     elif cell == "joint_move":
         goal, dur, info = named_joint_move(ctx, q0, sc.neck == "joint")
         out["witness"] = (goal, t0, dur)
@@ -774,132 +714,14 @@ def build_cell(ctx: Context, q0, t0):
         first = str(rng.choice(SIDES))
         d = arm_action(first, 0.0, B0, "world")
         arm_action("right" if first == "left" else "left", ctx.delay(d), B0, "world")
-    elif cell == "bimanual_symmetric":
-        arm_action("left", 0.0, np.eye(4), "base", extra=lambda P: P[:, 1, 3] > 0.12)
-        tr = out["tracks"]["left"][0]
-        mirrored = pr.Track(pr.mirror(tr.start))
-        for _, dur, fn in tr.segments:
-            mirrored.add(dur, (lambda u, fn=fn: pr.mirror(fn(u))), "mirror")
-        out["tracks"] = {"left": (tr, "base"), "right": (mirrored, "base")}
-        out["arrivals"]["right"] = out["arrivals"]["left"]
-        out["active"] = list(SIDES)
-        out["params"]["hand"]["right"] = "mirror of left"
-    elif cell == "bimanual_rigid":
-        out.update(_rigid_object(ctx, start_b, B0, t0, frame="world"))
-    elif cell == "handover":
-        out.update(_handover(ctx, q0, B0, t0))
-    elif cell == "witness_arms":
-        sides = list(SIDES) if rng.random() < 0.6 else [str(rng.choice(SIDES))]
-        goal, dur = joint_move(ctx, q0, sides)
-        out["witness"] = (goal, t0, dur)
-        out["active"] = sides
-        out["arrivals"] = {s: t0 + dur for s in sides}
-        out["params"]["witness"] = {"sides": sides, "duration_s": dur}
-    elif cell in MOBILE:
+    elif cell == "navigation":
         bdur, bfn, binfo = base_motion(ctx, sc.base_start, sc.base_motion)
         base.add(bdur, bfn, "drive")
         out["params"]["base"] = dict(binfo, start_s=t0, duration_s=bdur)
         out["tracks"] = {s: (single(start_b[s], 0.0), "base") for s in SIDES}
-        if cell == "mobile_carry":
-            out["gripper_override"] = {s: "keep_closed" for s in SIDES}
-            if rng.random() < 0.5:  # the carried box also moves once (lift, slide, turn, tilt)
-                rigid = _rigid_object(ctx, start_b, np.eye(4), t0 + ctx.delay(bdur), frame="base")
-                out["params"].update(rigid.pop("params"))
-                out.update(rigid)
-        elif cell == "mobile_reach":
-            sides = list(SIDES) if rng.random() < 0.4 else [str(rng.choice(SIDES))]
-            B_end = planar(*bfn(np.array([1.0]))[0])
-            for s in sides:  # a world goal near the destination, reached as the base arrives
-                _, goal = goal_posture(ctx, s, q0, region[s])
-                out["tracks"][s] = (("blend", start_b[s], B_end @ goal, t0, bdur), "blend")
-                out["arrivals"][s] = t0 + bdur
-                out["active"].append(s)
-            out["params"]["hand"] = {s: {"kind": "reach_world_goal_while_driving"} for s in sides}
-        elif cell == "mobile_world_hold":  # a hand keeps (or moves along) a world pose while the base moves
-            holders = list(SIDES) if rng.random() < 0.35 else [str(rng.choice(SIDES))]
-            for s in holders:
-                P0 = B0 @ start_b[s]
-                if rng.random() < 0.5:
-                    out["tracks"][s] = (single(P0, 0.0), "world")
-                    out["params"].setdefault("hand", {})[s] = {"kind": "world_hold"}
-                else:
-                    kind = str(rng.choice(("line", "hinge")))
-                    dur, fn, info = hand_motion(ctx, s, q0, kind, region[s], B0)
-                    delay = ctx.delay(bdur)
-                    out["tracks"][s] = (single(P0, t0 + delay, (dur, fn)), "world")
-                    out["params"].setdefault("hand", {})[s] = dict(info, start_s=t0 + delay)
-                out["active"].append(s)
-                out["arrivals"][s] = t0 + bdur
-        elif cell == "mobile_free":  # base-relative hand actions while the base drives
-            sides = list(SIDES) if rng.random() < 0.5 else [str(rng.choice(SIDES))]
-            for s in sides:
-                arm_action(s, ctx.delay(bdur), np.eye(4), "base")
-        elif cell == "witness_whole_body":
-            sides = list(SIDES) if rng.random() < 0.6 else [str(rng.choice(SIDES))]
-            goal, dur = joint_move(ctx, q0, sides)
-            delay = ctx.delay(bdur)
-            out["witness"] = (goal, t0 + delay, dur)
-            out["active"] = sides
-            out["arrivals"] = {s: t0 + delay + dur for s in sides}
-            out["params"]["witness"] = {"sides": sides, "start_s": t0 + delay, "duration_s": dur}
     else:
         raise ValueError(cell)
     return out
-
-
-def _rigid_object(ctx: Context, start_b, anchor, t_start, frame):
-    """Both hands hold a virtual box (hand = object frame @ constant grasp); the box moves once:
-    a lift or lower, a slide, a turn about the vertical or a tilt."""
-    rng, sp = ctx.rng, ctx.speed
-    mid = 0.5 * (start_b["left"][:3, 3] + start_b["right"][:3, 3])
-    O0 = np.eye(4)
-    O0[:3, 3] = mid
-    O0 = anchor @ O0
-    grasp = {s: np.linalg.inv(O0) @ (anchor @ start_b[s]) for s in SIDES}
-    kind = str(rng.choice(OBJECT_MOTIONS))
-    if kind == "lift":
-        dur, fn = pr.line(O0, [0, 0, rng.choice([-1, 1])], ctx.lin() * 0.8, sp)
-    elif kind == "slide":
-        dur, fn = pr.line(O0, pr.random_unit(rng, horizontal=True), ctx.lin() * 0.7, sp)
-    elif kind == "turn":
-        dur, fn = pr.twist(O0, rng.choice([-1, 1]) * ctx.ang() * 0.5, sp)
-    else:
-        dur, fn = pr.tilt(O0, O0[:3, 3], pr.random_unit(rng, horizontal=True), ctx.ang() * 0.45, sp)
-    tracks = {}
-    for s in SIDES:
-        tracks[s] = (single(O0 @ grasp[s], t_start, (dur, (lambda u, G=grasp[s]: fn(u) @ G))), frame)
-    return {"tracks": tracks, "active": list(SIDES), "arrivals": {s: t_start + dur for s in SIDES},
-            "params": {"rigid_object": {"kind": kind, "start_s": t_start, "duration_s": dur}},
-            "gripper_override": {s: "keep_closed" for s in SIDES}}
-
-
-def _handover(ctx: Context, q0, B0, t0):
-    """Both hands move once to meet (TCPs 13-22 cm apart near the midline); at the meeting the taker
-    closes and the giver opens (one gripper action each)."""
-    rng, sp = ctx.rng, ctx.speed
-    giver = str(rng.choice(SIDES))
-    taker = "right" if giver == "left" else "left"
-    sign = 1.0 if giver == "left" else -1.0
-    q_g, P_g = goal_posture(ctx, giver, q0, "any", extra=lambda P: (sign * P[:, 1, 3] > -0.02)
-                            & (sign * P[:, 1, 3] < 0.12) & (P[:, 0, 3] > 0.3) & (P[:, 2, 3] > 0.8)
-                            & (P[:, 2, 3] < 1.25))
-    q_mid = q0.copy()
-    q_mid[_arm(giver)] = q_g[_arm(giver)]
-    near = lambda P: (np.linalg.norm(P[:, :3, 3] - P_g[:3, 3], axis=1) > 0.13) & (  # noqa: E731
-        np.linalg.norm(P[:, :3, 3] - P_g[:3, 3], axis=1) < 0.22)
-    _, P_t = goal_posture(ctx, taker, q_mid, "any", extra=near, n=512)
-    fkb = ctx.robot.fk_base(q0)
-    dg, fg = pr.reach(B0 @ fkb[f"{giver}_tcp"], B0 @ P_g, sp)
-    dt_, ft = pr.reach(B0 @ fkb[f"{taker}_tcp"], B0 @ P_t, sp)
-    delay = ctx.delay(dg)
-    meet = t0 + max(dg, delay + dt_)
-    open_l = float(rng.uniform(0.7, 1.0))
-    closed = float(gripper.angle_to_opening(gripper.width_to_angle(rng.uniform(0.01, 0.05))))
-    return {"tracks": {giver: (single(B0 @ fkb[f"{giver}_tcp"], t0, (dg, fg)), "world"),
-                       taker: (single(B0 @ fkb[f"{taker}_tcp"], t0 + delay, (dt_, ft)), "world")},
-            "active": list(SIDES), "arrivals": {giver: meet, taker: meet},
-            "gripper_override": {giver: [(0.0, closed), (meet, open_l)], taker: [(0.0, open_l), (meet, closed)]},
-            "params": {"giver": giver, "meet_s": meet}}
 
 
 # ---------------------------------------------------------------------------- assembly
@@ -918,13 +740,12 @@ def generate(sc: Scenario, attempt: Attempt = Attempt()) -> TrackingReference:
     base_track: pr.BasePath = cell["base"]
     tracks = cell["tracks"]
     witness = cell.get("witness")
-    ends = [base_track.t] + [t[0].t if isinstance(t[0], pr.Track) else t[0][3] + t[0][4] for t in tracks.values()]
+    ends = [base_track.t] + [tr.t for tr, _ in tracks.values()]
     ends += list(cell["arrivals"].values())
     if witness is not None:
         ends.append(witness[1] + witness[2])
     stage_end = max(ends + [t0 + 0.5])
-    changes = [s for i, s in enumerate(SIDES)
-               if not str(cell["gripper_override"].get(s, sc.grippers[i])).startswith("keep")]
+    changes = [s for s, action in zip(SIDES, sc.grippers) if not action.startswith("keep")]
     if changes:  # let a gripper action finish within the stage (a full stroke takes 1 / FINGER_RATE)
         stage_end = max([stage_end] + [cell["arrivals"].get(s, t0) + 1.0 / FINGER_RATE for s in changes])
     span = stage_end + float(rng.uniform(0.5, 1.0)) * attempt.time  # still end
@@ -944,16 +765,6 @@ def generate(sc: Scenario, attempt: Attempt = Attempt()) -> TrackingReference:
     else:
         tcp = {}
         for s, (tr, frame) in tracks.items():
-            if frame == "blend":  # world goal reached from the base-relative start while the base drives
-                _, X_b, goal, b0, bdur = tr
-                A = _world(base, np.broadcast_to(X_b, (T, 4, 4)))
-                u = pr.min_jerk((times - b0) / bdur)[:, None]
-                rel = np.linalg.inv(A) @ goal
-                M = np.broadcast_to(np.eye(4), (T, 4, 4)).copy()
-                M[:, :3, :3] = so3_exp(u * so3_log(rel[:, :3, :3]))
-                M[:, :3, 3] = u * rel[:, :3, 3]
-                tcp[s] = A @ M
-                continue
             X = tr.sample(times)
             tcp[s] = _world(base, X) if frame == "base" else X
     if sc.neck == "joint":  # a neck joint move: the head follows the witness
@@ -970,11 +781,9 @@ def generate(sc: Scenario, attempt: Attempt = Attempt()) -> TrackingReference:
     # grippers: at most one transition per hand, when its action ends (or within the stage)
     opening = np.zeros((T, 2))
     for i, s in enumerate(SIDES):
-        levels = cell["gripper_override"].get(s, sc.grippers[i])
-        if isinstance(levels, str):
-            # the default delay is drawn even when the hand has an arrival: the draw stream of the built datasets
-            t_change = cell["arrivals"].get(s, t0 + ctx.delay(stage_end - t0))
-            levels = gripper_levels(ctx, levels, t_change, start_rng)
+        # the default delay is drawn even when the hand has an arrival: the draw stream of the built datasets
+        t_change = cell["arrivals"].get(s, t0 + ctx.delay(stage_end - t0))
+        levels = gripper_levels(ctx, sc.grippers[i], t_change, start_rng)
         opening[:, i] = pr.gripper_profile(times, levels, FINGER_RATE)
     q_start[GRIPPERS] = gripper.opening_to_angle(opening[0])
     if wq is not None:

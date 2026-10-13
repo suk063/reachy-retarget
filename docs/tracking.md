@@ -17,7 +17,7 @@ Frames Reachy cannot follow are tier-K failures. They are never reshaped into so
 
 The package is kept apart from the manipulation pipeline:
 - It lives in its own package, `reachy_retarget/tracking/`, with its own config (`TrackingConfig`) and CLI.
-- Episodes carry `family = "tracking"` and their own datasets: `tracking/synthetic-v1` and `tracking/source/<source dataset>`.
+- Episodes carry `family = "tracking"` and their own datasets: `tracking/synthetic-v2` and `tracking/source/<source dataset>`.
 - Output goes to its own run directories (`runs/tracking/...`).
 - It reuses only embodiment-level pieces:
   - the robot model and self-collision spheres;
@@ -102,7 +102,7 @@ Both viewers accept a dataset folder copied from the PVC as `--run`: records wri
 - `grasp_object = -1`;
 - the tier-K frames;
 - `head_rot_residual`;
-- `witness_q` for witness cells.
+- `witness_q` for `joint_move` scenarios (the executed joint path).
 
 `extra["tracking"]` holds:
 - the scenario (cell, neck mode, length, speed, start, regions, grippers, base start) or the source description;
@@ -128,31 +128,56 @@ together start within the first 30 % of the stage. The stage has a 0.2–0.5 s s
 0.5–1 s still end. A test checks the rule on the references: for each arm (base-relative), the
 base, the neck and each gripper, at most one movement.
 
+The generator is version 2 (generator `tracking.synthetic/v2`, dataset `tracking/synthetic-v2`).
+Version 1, a different cell set, is retired: reachy-policy refuses `tracking/synthetic-v1` episodes
+in its splits and caches, and the code that made them is in the git history.
+
 Scenario `<namespace>/<split>/<index>` is one independent lineage seed (SHA-256 of the id, as in
-`rl_tracking/data.py`). The cell is stratified: every block of 15 consecutive indices holds each cell
-once. All other axes are sampled independently.
+`rl_tracking/data.py`), or, with `--group-size k`, a member of a sibling group (below). The cell is
+stratified: every block of 10 consecutive indices (groups) fills the 10 slots of `CELLS_V2` once.
+All other axes are sampled independently.
+
+| cell | slots of 10 | the action | everything else |
+|---|---|---|---|
+| `reach_target` | 2 | each active hand (one, or both with p = 1/3) reaches a TCP position drawn uniformly in x 0.15–0.60, outward y 0.00–0.55, z 0.55–1.30 m (base frame), through a self-clear posture within 4 cm of the draw; when 16 draws find none (about 1.5 % of hands), a joint-space step goal and `drawn_base` null | base on its path for the tracker, neck off, grippers kept |
+| `gaze_target` | 2 | one head turn to a gaze direction (head +X yaw, pitch in base_link) drawn uniformly in ±0.9 × −0.4–0.35 rad, solved to 0.02 rad; the stage lasts until the turn ends | arms still, base on its path, grippers kept |
+| `joint_move` | 1 | one or two named arm joints (or one neck joint, p = 1/4) move by 0.1–0.6 rad; the episode executes the joint path itself (`extra["exact_witness"]`: no IK), so the named joints are exact and the others hold | base on its path, grippers kept |
+| `drive_target` | 1 | the base goes straight (holonomic) to a body-frame goal dx −0.5–2.5 m, dy ±1 m, dyaw ±1.6 rad | arms hold base-relative, neck off, grippers kept |
+| `left`, `right` | 1 each | one hand motion (below) | base still |
+| `bimanual_independent` | 1 | one hand motion per hand, staggered start | base still |
+| `navigation` | 1 | one base motion (below) | arms hold base-relative, grippers kept |
+
+The other axes; the target cells override the neck and grippers as listed above:
 
 | axis | values (weights) |
 | --- | --- |
-| cell, stationary base | `gripper_only` (one gripper action), `neck_only` (one head turn), `left`, `right`, `bimanual_independent` (one action per hand, staggered start), `bimanual_symmetric` (mirrored action), `bimanual_rigid` (a held virtual box moves once: lift/lower, slide, turn, tilt), `handover` (both hands move once to meet; at the meeting the taker closes and the giver opens), `witness_arms` (one joint-space move) |
-| cell, moving base | `navigation` (one base motion, arms hold), `mobile_carry` (one base motion with a held box, which may also move once), `mobile_reach` (a hand reaches a world goal near the destination, arriving with the base), `mobile_world_hold` (a hand keeps or moves along a world pose while the base repositions ≤ 0.3 m / 0.35 rad), `mobile_free` (base-relative hand actions while the base drives), `witness_whole_body` (one base motion + one joint-space move) |
 | hand motion | `reach` .3 (to a reachable goal posture), `curved_reach` .15 (to such a goal along a bowed path), `line` .15 (push/pull/lift/lower/slide, orientation kept), `approach` .1 (along the tool axis, forward or back), `hinge` .1 (door/lid arc about an external axis), `twist` .1 (about the tool axis: exactly a wrist-yaw turn, within its range), `tilt` .1 (about a horizontal axis through the grasp center) |
 | base motion | `drive` .3 (holonomic straight, optional heading change), `strafe` .15, `turn` .15 (in place), `arc` .2, `curve` .2 (one cubic Bezier leaving along the current heading, heading on the tangent; a straight drive below 0.3 m) |
 | neck | `off` .25 (no head reference), `hold` .1, `world_hold` .1, `look_at_point` .15 (one gaze shift to a fixed point), `look_at_hand` .15 (follows the acting hand), `look_ahead` .1 (travel direction; mobile only), `shift` .15 (one turn to a new orientation). A gaze-following path that would stop and start again becomes one turn toward where the gaze ends |
 | extent | small .35 / medium .4 / large .25: goal step 0.45 / 0.75 / 1.0 × the joint step; translation 4–9 / 9–17 / 17–28 cm; rotation 0.15–0.4 / 0.4–0.75 / 0.75–1.1 rad; base travel 0.2–0.6 / 0.6–1.5 / 1.5–3 m; base turn 0.3–0.8 / 0.8–1.6 / 1.6–3.1 rad |
-| speed | slow / normal / fast: hand 0.06–0.12 / 0.12–0.25 / 0.25–0.4 m/s and 0.25–0.5 / 0.5–0.9 / 0.9–1.3 rad/s; base cruise 0.2–0.3 / 0.3–0.42 / 0.42–0.55 m/s (at or above the ~0.2 m/s start threshold measured on the real base); yaw 0.3–1.4 rad/s; witness joint speed 0.25–0.8 × the limit |
+| speed | slow / normal / fast: hand 0.06–0.12 / 0.12–0.25 / 0.25–0.4 m/s and 0.25–0.5 / 0.5–0.9 / 0.9–1.3 rad/s; base cruise 0.2–0.3 / 0.3–0.42 / 0.42–0.55 m/s (at or above the ~0.2 m/s start threshold measured on the real base); yaw 0.3–1.4 rad/s; `joint_move` joint speed 0.25–0.8 × the limit |
 | start posture | reachy-control experiment start .3, `ready` .2, `rest` .15, random clear posture .35 |
 | region per hand | goal region: any, low, mid, high, front, side, cross-midline |
-| gripper per hand | `keep_open` .25, `keep_closed` .15, `close` .25, `open` .2, `partial` .15: at most one transition, when the hand's action ends (overrides: closed for carried boxes, the handover exchange) |
+| gripper per hand | `keep_open` .25, `keep_closed` .15, `close` .25, `open` .2, `partial` .15: at most one transition, when the hand's action ends; cells that keep their grippers hold the drawn state open or closed |
 | base start | world x, y ∈ [−2, 2] m, yaw uniform |
 
+With `--group-size k` (4 for the policy data), indices `k g … k g + k − 1` are **sibling group** `g`:
+the members share the group's axes, start posture, speeds, base pose, still start and gripper
+levels (the group's seed), then each draws its own goals (its own seed). The same start state thus
+leads to different motions, which the policy can only tell apart from the instruction. Members
+share `lineage.seed` (the group id; `lineage.group`, `lineage.member`) and are not independent
+demonstrations. Parameters record the drawn and reached targets (`hand.<side>.target_base`,
+`hand.<side>.drawn_base`, `gaze_target.drawn_rad`, `joint_move.joints/goal_rad/delta_rad`,
+`base.goal_body`). `tests/test_tracking.py` regenerates built files (scenario, references, params,
+lineage) to check that later edits keep the generator's output.
+
 **Feasibility.**
-- **Reach goals** are postures one joint-space step from the start: each is reachable and self-clear
-  (≥ 25 mm) on its own, within limits − 0.12 rad.
+- **Reach goals** of the hand motions are postures one joint-space step from the start: each is
+  reachable and self-clear (≥ 25 mm) on its own, within limits − 0.12 rad.
 - **Base motions** are stretched until body-frame speeds stay below 0.85 × the limits.
-- **Witness moves** are one min-jerk joint-space move to a goal posture with self-clearance ≥ 15 mm
-  at 21 points along the path (goals redrawn otherwise, up to 40 draws; else the clearest). Their FK is the reference; the joint path is stored
-  (`witness_q`) for audit only.
+- **Joint moves** (`joint_move`) are one min-jerk move of the named joints with self-clearance ≥ 15 mm
+  at 21 points along the path (deltas redrawn otherwise, shrinking every 10 draws, up to 40 draws;
+  else the clearest). The episode is this joint path; it is stored as `witness_q`.
 - **Head references** are the rotation of a neck path within limits − 0.07 rad and 0.8 × neck speed,
   relative to the nominal base. They are reachable whenever the base follows its path.
 
@@ -168,35 +193,6 @@ once. All other axes are sampled independently.
 
 Every IK attempt is written. Earlier attempts get `episode_id` suffix `-try<k>` and `variant_of` =
 the last attempt's uid, and share its lineage seed.
-
-### Version 2: explicit targets and sibling groups
-
-`--version 2` (generator `tracking.synthetic/v2`, dataset `tracking/synthetic-v2`) builds robot-only
-cells whose goals are explicit body-relative targets, drawn for coverage instead of as a step from
-the start posture. Version 1 indices, draws and references are unchanged (a test regenerates pulled
-v1 files exactly). **Version 1 is retired:** the build command makes version 2 only, and reachy-policy
-refuses `tracking/synthetic-v1` episodes in its splits and caches; policy data is `tracking/synthetic-v2`.
-
-| cell | slots of 10 | the action | everything else |
-|---|---|---|---|
-| `reach_target` | 2 | each active hand (one, or both with p = 1/3) reaches a TCP position drawn uniformly in x 0.15–0.60, outward y 0.00–0.55, z 0.55–1.30 m (base frame), through a self-clear posture within 4 cm of the draw; when 16 draws find none (about 1.5 % of hands), a joint-space step goal and `drawn_base` null | base on its path for the tracker, neck off, grippers kept |
-| `gaze_target` | 2 | one head turn to a gaze direction (head +X yaw, pitch in base_link) drawn uniformly in ±0.9 × −0.4–0.35 rad, solved to 0.02 rad; the stage lasts until the turn ends | arms still, base on its path, grippers kept |
-| `joint_move` | 1 | one or two named arm joints (or one neck joint, p = 1/4) move by 0.1–0.6 rad; the episode executes the joint path itself (`extra["exact_witness"]`: no IK), so the named joints are exact and the others hold | base on its path, grippers kept |
-| `drive_target` | 1 | the base goes straight (holonomic) to a body-frame goal dx −0.5–2.5 m, dy ±1 m, dyaw ±1.6 rad | arms hold base-relative, neck off, grippers kept |
-| `left`, `right`, `bimanual_independent`, `navigation` | 1 each | as in version 1 | `navigation` keeps its grippers |
-
-With `--group-size k` (4 for the policy data), indices `k g … k g + k − 1` are **sibling group** `g`:
-the members share the group's axes, start posture, speeds, base pose, still start and gripper
-levels (the group's seed), then each draws its own goals (its own seed). The same start state thus
-leads to different motions, which the policy can only tell apart from the instruction. Members
-share `lineage.seed` (the group id; `lineage.group`, `lineage.member`) and are not independent
-demonstrations. Parameters record the drawn and reached targets (`hand.<side>.target_base`,
-`hand.<side>.drawn_base`, `gaze_target.drawn_rad`, `joint_move.joints/goal_rad/delta_rad`,
-`base.goal_body`). `tests/test_tracking.py` regenerates built version-1 and version-2 files (scenario,
-references, params, lineage) to check that later edits keep the generator's output.
-
-In version 1, `neck_only` head turns can outlast the stage: about a quarter end with the head still
-turning (neck speed 0.52 rad/s); `gaze_target` replaces that cell in version 2.
 
 ## Source paths (`tracking.source`)
 
@@ -236,14 +232,14 @@ For every `SourceEpisode` a family adapter yields:
 ## Building
 
 ```bash
-OPENBLAS_NUM_THREADS=1 .venv/bin/python -m reachy_retarget.tracking.build synthetic --version 2 --group-size 4 \
+OPENBLAS_NUM_THREADS=1 .venv/bin/python -m reachy_retarget.tracking.build synthetic --group-size 4 \
     --namespace tracking-v2 --split train --count 72000 --jobs 16 --out runs/tracking/v2   # [--shard k/n]
 .venv/bin/python -m reachy_retarget.tracking.build source --family robomimic \
-    --path data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5 --demos 0-199 \
+    --path data/raw/robomimic/v1.5/lift/ph/low_dim_v15.hdf5 --demos 0-199 \
     --out runs/tracking/source-robomimic
 .venv/bin/python -m reachy_retarget.tracking.build index runs/tracking/v2   # -> episodes/index.parquet
 .venv/bin/python -m reachy_retarget.tracking.report runs/tracking/v2 --md summary.md
-.venv/bin/python -m reachy_retarget.tracking.viewer --run runs/tracking/v1
+.venv/bin/python -m reachy_retarget.tracking.viewer --run runs/tracking/v2
 ```
 
 Layout:
@@ -253,29 +249,9 @@ Layout:
 
 `reachy_retarget.report` reads the same records.
 
-## Pilot results (2026-10-08)
+## Source-path pilot (2026-10-08)
 
-**Synthetic, namespace `dev`, split `pilot`, indices 0–299 (20 per cell).**
-- 298 / 300 scenarios pass tier K (99.3 %).
-  - 288 scenarios needed one IK attempt, 4 two, 8 three.
-  - 72 pre-screen regenerations.
-- Every cell passes ≥ 95 %. The two failures: a `navigation` episode at 9.87 mm self-clearance, and
-  one `right` rotation residual.
-- Episode duration: median 3.5 s, p10 2.0 s, p90 8.9 s, max 25 s.
-- Volume: 0.38 h of motion, 320 files, 0.52 MB per file, 0.10 CPU-h.
-- **One stage:** in all 298 passing references every arm, the base, the neck and each gripper moves
-  at most once.
-- **Free base drift.** The IK can still move the free base off its nominal path to help an arm. 16 of
-  179 stationary episodes drift more than 1 cm (max 14 cm); mobile episodes deviate up to 0.31 m /
-  34°, and the neck then corrects the head, so in 5 episodes the solved neck moves more than once.
-  - With the base fixed to its nominal path (`TrackingConfig(base_free=False)`), 286 / 300 pass
-    (95.3 %) and no unplanned base motion remains.
-- An earlier variant regularized the arm redundancy toward the generator's joint postures. It was
-  removed: redundancy is the IK's own.
-- An earlier generator chained several primitives per scenario (up to 65 s). It was replaced by the
-  one-stage generator.
-
-**Source paths, cut into stages.** 98 / 165 stage episodes pass tier K:
+Source paths cut into stages: 98 / 165 stage episodes pass tier K.
 
 | source | stages per demo | stage episodes passing |
 | --- | --- | --- |

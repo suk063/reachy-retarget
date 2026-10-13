@@ -4,12 +4,11 @@ Synthetic scenarios (indices ``start .. start + count``, shard ``k/n`` takes ``i
 
     python -m reachy_retarget.tracking.build synthetic --group-size 4 --namespace tracking-v2 --split pilot \\
         --count 300 --jobs 24 --out runs/tracking/pilot
-    python -m reachy_retarget.tracking.build synthetic --version 2 --group-size 4 --namespace tracking-v2 \\
-        --split train --count 72000 --jobs 16 --out runs/tracking/v2     # target cells, sibling groups
+    python -m reachy_retarget.tracking.build synthetic --group-size 4 --namespace tracking-v2 \\
+        --split train --count 72000 --jobs 16 --out runs/tracking/v2
 
-Version 1 (``tracking/synthetic-v1``) is retired: the command builds version 2 only, and reachy-policy
-refuses version-1 episodes. Its generator code stays (version 2 reuses its cells; the tests regenerate
-pulled version-1 files).
+The generator is version 2 (``tracking/synthetic-v2``); version 1 is retired and reachy-policy refuses
+its episodes.
 
 Source hand paths (one source file, shard ``k/n`` over its episodes)::
 
@@ -95,7 +94,7 @@ def failing_frames(ep, cfg: TrackingConfig) -> np.ndarray:
     return np.flatnonzero(bad)
 
 
-def run_scenario(namespace, split, index, out, cfg: TrackingConfig | None = None, version: int = 1,
+def run_scenario(namespace, split, index, out, cfg: TrackingConfig | None = None, version: int = 2,
                  group_size: int = 1) -> dict:
     """Generate, track and write one synthetic scenario (with retries); returns its record. The cells of
     synthetic.FIXED_BASE are tracked with the base on its (still) nominal path (``base_free`` False, also
@@ -184,7 +183,7 @@ def _scenario_job(args):
     return rec
 
 
-def build_synthetic(namespace, split, start, count, out, shard=(0, 1), jobs=1, version=1, group_size=1) -> dict:
+def build_synthetic(namespace, split, start, count, out, shard=(0, 1), jobs=1, version=2, group_size=1) -> dict:
     k, n = shard
     indices = [i for i in range(start, start + count) if i % n == k]
     records_dir = Path(out) / "records" / "tracking"
@@ -313,7 +312,7 @@ def main(argv=None):
     p.add_argument("--shard", default="0/1")
     p.add_argument("--jobs", type=int, default=1)
     p.add_argument("--version", type=int, default=2, choices=(2,),
-                   help="generator version (synthetic.VERSIONS; version 1 is retired)")
+                   help="generator version (synthetic.VERSIONS)")
     p.add_argument("--group-size", type=int, default=1, help="sibling group size (members share the start)")
     p.add_argument("--out", required=True)
     p = sub.add_parser("source")

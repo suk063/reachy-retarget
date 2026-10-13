@@ -180,17 +180,6 @@ def tilt(P, center, axis, angle, speed):
     return duration(r * abs(angle), abs(angle), speed), fn
 
 
-def mirror(X):
-    """Reflect poses (..., 4, 4) about the x-z plane of their frame: the right TCP at the mirrored
-    joints of a left-arm posture (signs [1, -1, -1, 1, -1, 1, -1]) is ``mirror(left TCP)`` (to the
-    URDF's ~2 um left/right asymmetry)."""
-    M = np.diag([1.0, -1.0, 1.0, 1.0])
-    return M @ X @ M
-
-
-MIRROR_SIGNS = np.array([1.0, -1.0, -1.0, 1.0, -1.0, 1.0, -1.0])
-
-
 # ---------------------------------------------------------------------------- base paths
 
 

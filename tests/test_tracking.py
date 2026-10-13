@@ -6,7 +6,7 @@ import sys
 import numpy as np
 import pytest
 
-from reachy_retarget.robot import LOWER, UPPER, Reachy
+from reachy_retarget.robot import UPPER, Reachy
 from reachy_retarget.robot.reachy import LEFT_ARM, NECK, RIGHT_ARM
 from reachy_retarget.schema.episode import DT, SIDES
 from reachy_retarget.schema.io import read_episode, write_episode
@@ -30,9 +30,9 @@ def first(cell, extent=None, start=0, limit=400):
 
 
 def test_scenarios_are_stratified_and_deterministic():
-    n = len(S.CELLS)
+    n = len(S.CELLS_V2)
     cells = [S.scenario(NS, "unit", i).cell for i in range(2 * n)]
-    assert sorted(cells[:n]) == sorted(S.CELLS) and sorted(cells[n:]) == sorted(S.CELLS)
+    assert sorted(cells[:n]) == sorted(S.CELLS_V2) and sorted(cells[n:]) == sorted(S.CELLS_V2)
     a, b = S.scenario(NS, "unit", 7), S.scenario(NS, "unit", 7)
     assert a == b and a.seed == S.seed_of(a.source_id)
     ra, rb = S.generate(a), S.generate(b)
@@ -41,7 +41,7 @@ def test_scenarios_are_stratified_and_deterministic():
     assert np.array_equal(ra.base, rb.base) and np.array_equal(ra.opening, rb.opening)
 
 
-@pytest.mark.parametrize("cell", S.CELLS)
+@pytest.mark.parametrize("cell", sorted(set(S.CELLS_V2)))
 def test_every_cell_generates_a_valid_reference(cell):
     sc = first(cell)
     ref = S.generate(sc)
@@ -52,7 +52,7 @@ def test_every_cell_generates_a_valid_reference(cell):
     # the reference starts at the robot's start state
     fk = Reachy.load().fk(ref.q_start)
     for s in SIDES:
-        assert np.allclose(fk[f"{s}_tcp"], ref.tcp[s][0], atol=1e-5)  # mirrored cells: URDF symmetric to ~2 um
+        assert np.allclose(fk[f"{s}_tcp"], ref.tcp[s][0], atol=1e-5)
     if ref.head is not None:
         assert N.rotation_error(fk["head"][:3, :3], ref.head[0]) < 1e-9
     assert ref.opening.min() >= 0 and ref.opening.max() <= 1
@@ -63,7 +63,7 @@ def test_every_cell_generates_a_valid_reference(cell):
 
 
 def test_witness_reference_passes_tier_k():
-    sc = first("witness_arms", "small")
+    sc = first("joint_move")
     ref = S.generate(sc)
     assert ref.witness is not None
     ep = track(ref).episode
@@ -123,15 +123,6 @@ def test_neck_solver_round_trip_and_limits():
     assert np.allclose(N.HEAD_TIP[:3, :3], np.eye(3))  # head_tip only translates the head frame
 
 
-def test_mirror_matches_mirrored_joints():
-    rng = np.random.default_rng(1)
-    q = np.zeros(22)
-    q[LEFT_ARM] = rng.uniform(LOWER[LEFT_ARM] + 0.2, UPPER[LEFT_ARM] - 0.2)
-    q[RIGHT_ARM] = q[LEFT_ARM] * pr.MIRROR_SIGNS
-    fk = Reachy.load().fk_base(q)
-    assert np.allclose(pr.mirror(fk["left_tcp"]), fk["right_tcp"], atol=1e-5)
-
-
 def test_track_continuity():
     P = np.eye(4)
     P[:3, 3] = [0.4, 0.2, 1.0]
@@ -149,18 +140,8 @@ def test_track_continuity():
     assert np.linalg.norm(np.diff(X[:, :3, 3], axis=0), axis=1).max() < 0.25 * DT * 1.01
 
 
-def test_ik_does_not_use_the_witness():
-    """The witness (the joint path that generated a reference) is stored for audit only."""
-    sc = first("witness_arms", "small")
-    ref = S.generate(sc)
-    a = track(ref).episode
-    ref.witness = None
-    b = track(ref).episode
-    assert np.array_equal(a.q, b.q)
-
-
 def test_run_scenario_writes_episode_record_and_index(tmp_path):
-    sc = first("gripper_only")
+    sc = first("gaze_target")
     rec = run_scenario(NS, "unit", sc.index, tmp_path)
     assert rec["K"]["passed"] and rec["P"] is None
     rows = rec["index_rows"]
@@ -174,7 +155,7 @@ def test_mjviewer_replays_a_pod_record_on_the_mujoco_model(tmp_path):
     pytest.importorskip("trimesh")
     pytest.importorskip("mujoco")
     from reachy_retarget.tracking import mjviewer, viewer
-    rec = run_scenario(NS, "unit", first("gripper_only").index, tmp_path)
+    rec = run_scenario(NS, "unit", first("gaze_target").index, tmp_path)
     rel = rec["index_rows"][-1]["file"]
     path = viewer._resolve(tmp_path, f"/tmp/rr2/jobs/j/out/episodes/{rel}")  # as written on a pod
     assert path == tmp_path / "episodes" / rel
@@ -238,7 +219,7 @@ def _runs(mask):
     return 0 if not len(st) else 1 + int(np.sum((st[1:] - en[:-1]) * DT > 0.1))
 
 
-@pytest.mark.parametrize("cell", S.CELLS)
+@pytest.mark.parametrize("cell", sorted(set(S.CELLS_V2)))
 def test_one_stage_each_part_acts_at_most_once(cell):
     """One scenario is one stage: every body part goes once from its start to one goal (or holds)."""
     from reachy_retarget.robot import planar
@@ -314,11 +295,11 @@ def test_source_demonstration_is_cut_into_single_stages():
     assert rows[0][0] == 0 and all(a[1] == b[0] for a, b in zip(rows[:-1], rows[1:]))
 
 
-# ---------------------------------------------------------------------------- version 2
+# ---------------------------------------------------------------------------- sibling groups, targets
 
 
 def first_v2(cell, start=0, group_size=4, limit=400):
-    """The first member index of a version-2 sibling group of ``cell`` in namespace ``test``."""
+    """The first member index of a sibling group of ``cell`` in namespace ``test``."""
     for g in range(start, limit):
         if S.scenario(NS, "unit", g * group_size, 2, group_size).cell == cell:
             return g * group_size
@@ -329,7 +310,6 @@ def test_version_two_cells_are_stratified_and_siblings_share_the_start():
     n = len(S.CELLS_V2)
     cells = [S.scenario(NS, "unit", 4 * g, 2, 4).cell for g in range(n)]
     assert sorted(cells) == sorted(S.CELLS_V2)
-    assert S.scenario(NS, "unit", 7) == S.scenario(NS, "unit", 7, 1, 1)  # version 1 defaults unchanged
     for cell in ("left", "reach_target", "gaze_target", "navigation"):
         i = first_v2(cell)
         members = [S.scenario(NS, "unit", i + m, 2, 4) for m in range(4)]
@@ -394,17 +374,16 @@ def test_version_two_cells_pass_tier_k_and_reach_their_targets(cell, tmp_path):
         assert np.hypot(D[0, 3] - dx, D[1, 3] - dy) < 0.05 and abs(np.arctan2(D[1, 0], D[0, 0]) - dyaw) < 0.05
 
 
-def _regenerated(root, files, version, group_size, exact):
+def _regenerated(root, files, group_size):
     """Each built episode file's scenario, references (TCP, base, head rotation, witness), params and lineage
-    come back from the generator; ``exact`` False allows the 4e-16 differences of builds on other machines."""
+    come back from the generator, bit for bit."""
     from dataclasses import asdict
-    from functools import partial
 
     import h5py
 
     from reachy_retarget.schema.rotations import pose_to_vec7
 
-    same = np.testing.assert_array_equal if exact else partial(np.testing.assert_allclose, rtol=0, atol=1e-12)
+    same = np.testing.assert_array_equal
     for file in files:
         with h5py.File(root / file) as f:
             meta = json.loads(f.attrs["metadata"])
@@ -412,8 +391,8 @@ def _regenerated(root, files, version, group_size, exact):
                                             "reference/head", "validation/witness_q") if k in f}
         tracking = meta["extra"]["tracking"]
         sc0 = tracking["scenario"]
-        sc = S.scenario(sc0["namespace"], sc0["split"], sc0["index"], version, group_size)
-        assert json.loads(json.dumps(asdict(sc))) == {"version": 1, "group": None, "member": None, **sc0}, file
+        sc = S.scenario(sc0["namespace"], sc0["split"], sc0["index"], sc0["version"], group_size)
+        assert json.loads(json.dumps(asdict(sc))) == sc0, file
         ref = S.generate(sc, S.Attempt(**tracking["params"]["attempt"]))
         assert json.loads(json.dumps(ref.extra["params"])) == tracking["params"], file
         assert ref.lineage == {k: v for k, v in meta["lineage"].items() if k != "attempt"}, file
@@ -431,18 +410,6 @@ def _regenerated(root, files, version, group_size, exact):
 
 
 ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
-
-
-def test_version_one_regenerates_the_pulled_episodes():
-    """Version 1 is unchanged by version 2 and later edits: one pulled tracking-v1 episode per cell."""
-    pd = pytest.importorskip("pandas")
-    root = ROOT / "data" / "pulled" / "tracking-v1-150k"
-    if not (root / "index.parquet").exists():
-        pytest.skip("no pulled tracking-v1 episodes")
-    index = pd.read_parquet(root / "index.parquet").sort_values("file")
-    files = index.groupby("task").head(1).file
-    assert len(files) == len(S.CELLS)
-    _regenerated(root, files, 1, 1, exact=False)
 
 
 def test_version_two_regenerates_the_built_episodes():
@@ -463,4 +430,4 @@ def test_version_two_regenerates_the_built_episodes():
             if json.loads(f.attrs["metadata"])["extra"]["tracking"]["scenario"]["neck"] == "joint":
                 files.append(file)
                 break
-    _regenerated(root, files, 2, 4, exact=True)
+    _regenerated(root, files, 4)
