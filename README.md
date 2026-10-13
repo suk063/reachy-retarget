@@ -89,9 +89,9 @@ RoboVerse (RLBench, CALVIN). Human-hand/mocap datasets and real-robot datasets w
 object state are excluded by design.
 
 Scene meshes (`reachy_retarget.sources.registry.MESHES`): robomimic, MimicGen, LIBERO,
-DexMimicGen, RoboCasa, BiGym and ManiSkill (primitive scenes) provide them and are built;
-RoboVerse and MobileManiBench are pending; BEHAVIOR (encrypted assets) and MolmoBot (no per-frame
-object poses) are excluded and refused by the build. Episodes whose scene assets cannot be
+DexMimicGen, RoboCasa, BiGym, ManiSkill (primitive scenes), RoboVerse (CALVIN; RLBench primitive
+scenes) and MobileManiBench (PartNet-Mobility groups) provide them and are built; BEHAVIOR (encrypted
+assets) and MolmoBot (no per-frame object poses) are excluded and refused by the build. Episodes whose scene assets cannot be
 resolved (kinematic-only source route) are not written.
 
 ## Usage

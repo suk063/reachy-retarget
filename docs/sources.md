@@ -175,7 +175,7 @@ observations and MimicGen `datagen_info` stay.
   robosuite-task-zoo archive above.
 * Read as zip archives, never installed or imported. The recorded MJCF references meshes
   and textures by absolute paths of the recording machine (e.g.
-  `/home/.../robosuite/models/assets/robots/panda/meshes/link0.stl`). Every `kind:
+  `/home/.../robosuite/models/assets/robots/panda/meshes/link0.stl`). Every `content:
   assets` catalog entry declares an `asset_marker`; a reference containing the marker
   resolves to the archive member after it. The robosuite wheel is chosen by the recorded
   `env_version` (marker `robosuite/models/assets/`); other archives are used when their
@@ -530,20 +530,6 @@ No SAPIEN/ManiSkill import. Per episode it reads `env_states` and the JSON:
   tier-P options, 2 s): every task's actors stay within 1 mm and 0.01 rad of their initial
   pose (measured: drift ≤ 0.009 mm, rotation ≤ 2e-6 rad, penetration ≤ 0.09 mm for a stacked
   cube; `tests/test_primitive_scene.py`).
-  Tier-P smoke (2026-10-07, floor at z = 0 and cropped table; motion planning, default
-  `RetargetConfig` and `PhysicsConfig`; tier P never welds or teleports the objects):
-
-  | episode | K | P | notes |
-  | --- | --- | --- | --- |
-  | PickCube traj_0 | fail: TCP rotation residual 0.061 rad over 11 frames | **pass** | cube lifted 0.27 m, final error 2.2 mm, grasp drift 0.7 mm |
-  | PickCube traj_1 | pass | **pass** | final error 2.7 mm |
-  | PickCube traj_2 | pass | **pass** | final error 3.4 mm (lift 0.019 m) |
-  | PickCube traj_3 | pass | **pass** | final error 3.2 mm |
-  | PickCube traj_4 | fail: TCP rotation residual 0.066 rad over 11 frames | **pass** | final error 2.7 mm |
-  | StackCube traj_0 | pass | fail: carry_contact 0.94 (< 0.95) | cubeA placed within 6.8 mm |
-  | StackCube traj_1 | pass | fail: grasp_drift 5.4 mm / 0.023 rad, carry_contact 0.93 | cubeA placed within 4.7 mm |
-  | PegInsertionSide traj_0 | fail: TCP 32 mm / 0.36 rad, hand–peg drift 22 mm / 0.49 rad | fail: hand–object 1.3 mm, l_wrist_pitch margin, TCP 0.084 m, grasp drift 38 mm / 0.40 rad, peg 0.11 m off | wrist pitch limit (±30°) |
-  | PegInsertionSide traj_1 | fail: TCP rotation 0.56 rad, hand–peg drift 30 mm / 0.47 rad | fail: l_wrist_pitch margin, arm 1.21 rad/s, TCP 0.088 m, grasp drift 63 mm / 0.99 rad, peg 0.097 m off | wrist pitch limit |
 
 * **FK cross-check**: no file records a TCP or link pose (`obs_mode=none`, env_states
   hold only root and joint states). `crosscheck=True` compares `panda_hand_tcp` and both
@@ -659,7 +645,7 @@ some configs also have `valid_traj_mask` and per-trajectory `stats`.
 
 ```python
 from reachy_retarget.acquire import fetch, load_catalog
-from reachy_retarget.sources import iter_episodes, molmobot  # import registers 'molmobot'
+from reachy_retarget.sources import iter_episodes, molmobot
 
 fetch(["molmobot/"], "data", workers=4)          # files + every usable package
 cat = load_catalog()
@@ -791,7 +777,7 @@ run| vs. the recorded `task_info.position_error` differs by 3.3 mm median (max 2
   at the pinned commit; published 2024-07-17),
   `https://github.com/chernyadev/bigym_data/releases/download/v0.9.0/demonstrations.zip`,
   123,362,114 bytes, SHA-256 `a7fd1e7f…86d2` (the release declares no digest; computed on
-  download and pinned). Catalog id `bigym/v0.9.0/demonstrations.zip`, `kind: low_dim`.
+  download and pinned). Catalog id `bigym/v0.9.0/demonstrations.zip`, `content: low_dim`.
 * Content: **40 tasks, 1,933 recordings, 3,402 files** (per-task counts and derived
   instructions in `catalog/bigym.yaml`, `tasks:`). Each file is a *lightweight*
   safetensors recording: `info_demo_action` (T × 15 or 16) at 500 Hz, termination and
@@ -1148,7 +1134,6 @@ simulator clock kept).
   route (base + relative end-effector pose, no objects) is not implemented.
 * `tar_stream` fetches stream whole tars (videos ≈ 80 % of the transfer) because MG tars put videos
   before data; human tars could stop early but the Box SHA-1 check needs the whole stream.
-* Physics validation of RoboCasa scenes is untested here (scenes compile with full assets).
 
 ### BiGym verification (2026-10-07)
 
@@ -1307,18 +1292,22 @@ the tar layout; the URDF and prompt tables from `raw/mobilemanibench/` under the
   z = 0.02 (robot floats 1 cm, gravity off); no offset applied.
 * **Objects**: only the publisher's grasp point is recorded per frame — the handle pose on the
   grasp link for articulated objects (`<group>_<id>_<handle>`, kind point, manipulated), the
-  COM pose for YCB (`<name>`, manipulated). Articulated objects also get a root track
-  (`<group>_<id>`, fixture) valid at t0 only. Goal position, initial joint positions and room
-  are in provenance. Cart (joint type `None`): the whole cart is pushed/pulled; handle track
-  only, no articulation.
-* **Articulations** (derived, labelled): qpos = q0 ± θ(t) with θ the handle's rotation about
-  (revolute) or translation along (prismatic) its dominant axis since t0, + for open, − for
-  close, q0 = largest recorded initial joint value; the hinge line is fitted from the handle
-  circle.
+  COM pose for YCB (`<name>`, manipulated). PartNet-Mobility objects also get the articulation
+  root (`<group>_<id>`, fixture): static at the recorded initial pose for fixed-base objects,
+  derived from the handle for carts. Goal position, initial joint positions and room are in
+  provenance. Cart (joint type `None`): the whole cart is pushed/pulled; no articulation.
+* **Articulations**: the grasp joint is solved at every step from the handle track through the
+  object's URDF kinematics (`partnet_scene.solve_grasp_joint`); the other joints stay at their
+  initial values. Without the scene assets the fallback is derived and labelled: qpos = q0 ± θ(t)
+  with θ the handle's rotation about (revolute) or translation along (prismatic) its dominant
+  axis since t0, + for open, − for close, q0 = largest recorded initial joint value; the hinge
+  line is fitted from the handle circle (such episodes are not written).
 * **Instruction** = the publisher's VLA prompt (`load_object_prompt`): `close microwave`, `open
   table at bottom`, `open door`, `push cart`, `pick bleach cleanser`. `task` =
   `<skill>_<group or YCB name>`. `success` = any per-frame success flag (all True by
-  construction). `scene = None` (Isaac Sim USD rooms/objects), `regime = mobile_manipulation`.
+  construction). `scene`: the PartNet-Mobility object, stage and ground (`sources.partnet_scene`,
+  see Known gaps; the USD room is omitted); UniDoor and YCB episodes have none.
+  `regime = mobile_manipulation`.
 
 ### MobileManiBench verification (2026-10-07)
 
@@ -1384,7 +1373,7 @@ All 40 catalogued episodes (5 task types × 8; 147–242 frames) adapted.
   franka_ros / mujoco_menagerie (Apache-2.0) and IsaacSim USD (NVIDIA). Catalog `license`
   strings carry both.
 * Catalog: `catalog/roboverse.yaml` (generator `acquire/generators/roboverse.py`; CALVIN
-  rows in `roboverse.calvin.tsv.gz`), 1,957 files, 1.22 GB: every RLBench task's Franka file
+  rows in `roboverse.calvin.tsv.gz`), 2,096 files, 1.24 GB: every RLBench task's Franka file
   (80) and every CALVIN annotated-window file of scenes A, B, C, D and D validation (1,855),
   plus robot/asset files (no images; the repository has none in `trajs/`). The earlier 790
   files (387.3 MB; CALVIN A and D_val only) are fetched and verified locally; the rest is
@@ -1494,8 +1483,8 @@ either). RoboVerse's LIBERO and ManiSkill folders are migrations of sources read
 
 ### RoboVerse verification (2026-10-07)
 
-All catalogued trajectories were read (no adapter errors; every episode passes the
-`SourceEpisode` checks):
+Every fetched trajectory (RLBench, CALVIN A and D_val) was read (no adapter errors; every episode
+passes the `SourceEpisode` checks):
 
 | subset | files | episodes | states | held-object rigidity (grasp frame, spread max−min) | closing-axis offset of held objects | FK cross-check |
 | --- | ---: | ---: | ---: | --- | --- | --- |
