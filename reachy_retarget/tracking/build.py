@@ -2,10 +2,14 @@
 
 Synthetic scenarios (indices ``start .. start + count``, shard ``k/n`` takes ``index % n == k``)::
 
-    python -m reachy_retarget.tracking.build synthetic --namespace tracking-v1 --split pilot \\
+    python -m reachy_retarget.tracking.build synthetic --group-size 4 --namespace tracking-v2 --split pilot \\
         --count 300 --jobs 24 --out runs/tracking/pilot
     python -m reachy_retarget.tracking.build synthetic --version 2 --group-size 4 --namespace tracking-v2 \\
         --split train --count 72000 --jobs 16 --out runs/tracking/v2     # target cells, sibling groups
+
+Version 1 (``tracking/synthetic-v1``) is retired: the command builds version 2 only, and reachy-policy
+refuses version-1 episodes. Its generator code stays (version 2 reuses its cells; the tests regenerate
+pulled version-1 files).
 
 Source hand paths (one source file, shard ``k/n`` over its episodes)::
 
@@ -302,13 +306,14 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="command", required=True)
     p = sub.add_parser("synthetic")
-    p.add_argument("--namespace", default="tracking-v1")
+    p.add_argument("--namespace", default="tracking-v2")
     p.add_argument("--split", default="train")
     p.add_argument("--start", type=int, default=0)
     p.add_argument("--count", type=int, required=True)
     p.add_argument("--shard", default="0/1")
     p.add_argument("--jobs", type=int, default=1)
-    p.add_argument("--version", type=int, default=1, choices=(1, 2), help="generator version (synthetic.VERSIONS)")
+    p.add_argument("--version", type=int, default=2, choices=(2,),
+                   help="generator version (synthetic.VERSIONS; version 1 is retired)")
     p.add_argument("--group-size", type=int, default=1, help="sibling group size (members share the start)")
     p.add_argument("--out", required=True)
     p = sub.add_parser("source")

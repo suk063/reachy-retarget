@@ -50,8 +50,8 @@ postures × gripper actions). Output uses the same `reachy-retarget-episode-v2` 
 See [docs/tracking.md](docs/tracking.md).
 
 ```bash
-OPENBLAS_NUM_THREADS=1 .venv/bin/python -m reachy_retarget.tracking.build synthetic \
-    --namespace tracking-v1 --split train --count 300 --jobs 24 --out runs/tracking/pilot
+OPENBLAS_NUM_THREADS=1 .venv/bin/python -m reachy_retarget.tracking.build synthetic --group-size 4 \
+    --namespace tracking-v2 --split pilot --count 300 --jobs 24 --out runs/tracking/pilot
 .venv/bin/python -m reachy_retarget.tracking.report runs/tracking/pilot
 uv pip install --python .venv/bin/python -e '.[viz]'
 .venv/bin/python -m reachy_retarget.tracking.viewer --run runs/tracking/pilot

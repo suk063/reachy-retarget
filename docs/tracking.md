@@ -174,7 +174,8 @@ the last attempt's uid, and share its lineage seed.
 `--version 2` (generator `tracking.synthetic/v2`, dataset `tracking/synthetic-v2`) builds robot-only
 cells whose goals are explicit body-relative targets, drawn for coverage instead of as a step from
 the start posture. Version 1 indices, draws and references are unchanged (a test regenerates pulled
-v1 files exactly).
+v1 files exactly). **Version 1 is retired:** the build command makes version 2 only, and reachy-policy
+refuses `tracking/synthetic-v1` episodes in its splits and caches; policy data is `tracking/synthetic-v2`.
 
 | cell | slots of 10 | the action | everything else |
 |---|---|---|---|
@@ -235,15 +236,13 @@ For every `SourceEpisode` a family adapter yields:
 ## Building
 
 ```bash
-OPENBLAS_NUM_THREADS=1 .venv/bin/python -m reachy_retarget.tracking.build synthetic \
-    --namespace tracking-v1 --split train --count 20000 --jobs 24 --out runs/tracking/v1   # [--shard k/n]
 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m reachy_retarget.tracking.build synthetic --version 2 --group-size 4 \
-    --namespace tracking-v2 --split train --count 72000 --jobs 16 --out runs/tracking/v2
+    --namespace tracking-v2 --split train --count 72000 --jobs 16 --out runs/tracking/v2   # [--shard k/n]
 .venv/bin/python -m reachy_retarget.tracking.build source --family robomimic \
     --path data/raw/hf__robomimic__robomimic_datasets/v1.5/lift/ph/low_dim_v15.hdf5 --demos 0-199 \
     --out runs/tracking/source-robomimic
-.venv/bin/python -m reachy_retarget.tracking.build index runs/tracking/v1   # -> episodes/index.parquet
-.venv/bin/python -m reachy_retarget.tracking.report runs/tracking/v1 --md summary.md
+.venv/bin/python -m reachy_retarget.tracking.build index runs/tracking/v2   # -> episodes/index.parquet
+.venv/bin/python -m reachy_retarget.tracking.report runs/tracking/v2 --md summary.md
 .venv/bin/python -m reachy_retarget.tracking.viewer --run runs/tracking/v1
 ```
 
